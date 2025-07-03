@@ -1,0 +1,29 @@
+# Dependencies
+node_modules
+package-lock.json
+
+# Build outputs
+dist
+build
+
+# Environment files
+*.env
+
+# Font files
+*.ttf
+*.woff
+*.woff2
+*.eot
+
+# Image files
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.svg
+*.ico
+
+# Generated files
+.vscode
+.cache
