@@ -1,3 +1,6 @@
+import type { ConsumableIndex } from '../data/consumables';
+import type { FlagIndex } from '../data/flags';
+
 export type SaveFileFormat = 'v1' | 'v2' | 'unknown';
 export type Chapter = 0 | 1 | 2 | 3 | 4;
 
@@ -38,7 +41,7 @@ export interface BattleState {
 }
 
 export interface Inventory {
-  consumables: number[];
+  consumables: ConsumableIndex[];
   keyItems: number[];
   weapons: number[];
   armors: number[];
@@ -97,7 +100,7 @@ export interface V2Save extends SaveFileBase {
   inventory: Inventory;
   lightWorld: LightWorld;
 
-  flags: number[];
+  flags: FlagIndex[];
   plot: number;
   room: number;
   time: number;

@@ -1,4 +1,4 @@
-interface BaseProperties {
+export interface BaseProperties {
   displayName: string;
   description?: string;
 }
