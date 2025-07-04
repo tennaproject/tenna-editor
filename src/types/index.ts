@@ -1,11 +1,18 @@
-export type {} from './core';
-
-export type {
-  DeltaruneSave,
-  V1Save,
-  V2Save,
-  SaveFileBase,
-  SaveFileFormat,
+export {
+  type BaseProperties,
+  type ValueType,
+  type FlagProperties,
+} from './gameTypes';
+export {
+  type SaveFileFormat,
+  type Chapter,
+  type WeaponStats,
+  type Character,
+  type BattleState,
+  type Inventory,
+  type LightWorld,
+  type SaveFileBase,
+  type V1Save,
+  type V2Save,
+  type DeltaruneSave,
 } from './saveFile';
-
-export type { FlagProperties } from './gameTypes';
