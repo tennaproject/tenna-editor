@@ -1,5 +1,10 @@
-import type { ConsumableIndex } from '../data/consumables';
-import type { FlagIndex } from '../data/flags';
+import type {
+  ArmorIndex,
+  ConsumableIndex,
+  FlagIndex,
+  KeyItemIndex,
+  WeaponIndex,
+} from '../data';
 
 export type SaveFileFormat = 'v1' | 'v2' | 'unknown';
 export type Chapter = 0 | 1 | 2 | 3 | 4;
@@ -42,10 +47,10 @@ export interface BattleState {
 
 export interface Inventory {
   consumables: ConsumableIndex[];
-  keyItems: number[];
-  weapons: number[];
-  armors: number[];
-  storage: number[];
+  keyItems: KeyItemIndex[];
+  weapons: WeaponIndex[];
+  armors: ArmorIndex[];
+  storage: ConsumableIndex[];
 }
 
 export interface LightWorld {

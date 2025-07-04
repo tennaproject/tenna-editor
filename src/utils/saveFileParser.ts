@@ -1,4 +1,11 @@
 import type { DeltaruneSave, SaveFileFormat, V1Save, V2Save } from '../types';
+import type {
+  ArmorIndex,
+  ConsumableIndex,
+  FlagIndex,
+  KeyItemIndex,
+  WeaponIndex,
+} from '../data';
 import { LineCursor } from './lineCursor';
 
 export const SAVE_META = {
@@ -115,25 +122,25 @@ function parseV2Save(cursor: LineCursor): V2Save {
 
   // Inventory stored in alternating pairs
   const inventory = {
-    consumables: [] as number[],
-    keyItems: [] as number[],
-    weapons: [] as number[],
-    armors: [] as number[],
-    storage: [] as number[],
+    consumables: [] as ConsumableIndex[],
+    keyItems: [] as KeyItemIndex[],
+    weapons: [] as WeaponIndex[],
+    armors: [] as ArmorIndex[],
+    storage: [] as ConsumableIndex[],
   };
 
   for (let i = 0; i < 13; i += 1) {
-    inventory.consumables.push(cursor.nextNumber());
-    inventory.keyItems.push(cursor.nextNumber());
+    inventory.consumables.push(cursor.nextNumber() as ConsumableIndex);
+    inventory.keyItems.push(cursor.nextNumber() as KeyItemIndex);
   }
 
   for (let i = 0; i < 48; i += 1) {
-    inventory.weapons.push(cursor.nextNumber());
-    inventory.armors.push(cursor.nextNumber());
+    inventory.weapons.push(cursor.nextNumber() as WeaponIndex);
+    inventory.armors.push(cursor.nextNumber() as ArmorIndex);
   }
 
   for (let i = 0; i < 72; i += 1) {
-    inventory.storage.push(cursor.nextNumber());
+    inventory.storage.push(cursor.nextNumber() as ConsumableIndex);
   }
 
   const tension = cursor.nextNumber();
@@ -160,9 +167,9 @@ function parseV2Save(cursor: LineCursor): V2Save {
     lightWorld.phone.push(cursor.nextNumber());
   }
 
-  const flags = [];
+  const flags: FlagIndex[] = [];
   for (let i = 0; i < 2500; i += 1) {
-    flags.push(cursor.nextNumber());
+    flags.push(cursor.nextNumber() as FlagIndex);
   }
 
   const plot = cursor.nextNumber();
