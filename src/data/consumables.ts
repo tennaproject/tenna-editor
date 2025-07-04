@@ -1,4 +1,4 @@
-import type { BaseProperties } from '../types/gameTypes';
+import type { BaseProperties } from '../types';
 
 export const CONSUMABLES = {
   EMPTY: 0,
