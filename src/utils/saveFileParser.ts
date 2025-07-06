@@ -177,10 +177,8 @@ function parseV2Save(cursor: LineCursor): V2Save {
   const time = cursor.nextNumber();
 
   return {
-    meta: {
-      format: 'v2',
-      chapter: 0,
-    },
+    format: 'v2',
+    chapter: 0,
     playerName,
     characterName,
     party: party as [number, number, number],

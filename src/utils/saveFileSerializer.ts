@@ -121,9 +121,9 @@ function serializeV2Save(save: V2Save): string {
 }
 
 export function serializeSaveFile(save: DeltaruneSave): string {
-  if (save.meta.format === 'v1') {
+  if (save.format === 'v1') {
     return serializeV1Save(save as V1Save);
-  } else if (save.meta.format === 'v2') {
+  } else if (save.format === 'v2') {
     return serializeV2Save(save as V2Save);
   } else {
     throw new Error(

@@ -70,24 +70,18 @@ export interface LightWorld {
 }
 
 export interface SaveFileBase {
-  meta: {
-    readonly format: SaveFileFormat;
-    chapter: Chapter;
-  };
+  readonly format: SaveFileFormat;
+  chapter: Chapter;
 }
 
 export interface V1Save extends SaveFileBase {
-  meta: {
-    format: 'v1';
-    chapter: Chapter;
-  };
+  format: 'v1';
+  chapter: Chapter;
 }
 
 export interface V2Save extends SaveFileBase {
-  meta: {
-    format: 'v2';
-    chapter: Chapter;
-  };
+  readonly format: 'v2';
+  chapter: Chapter;
 
   playerName: string;
   characterName: string;
