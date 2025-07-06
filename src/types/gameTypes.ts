@@ -1,6 +1,7 @@
 export interface BaseProperties {
   displayName: string;
   description?: string;
+  unused?: boolean;
 }
 
 export type ValueType = 'boolean' | 'number' | 'mapped';
