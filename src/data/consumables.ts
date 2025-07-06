@@ -1,4 +1,5 @@
 import type { BaseProperties } from '../types';
+import type { WithOverrides } from '../types/gameTypes';
 
 export const CONSUMABLES = {
   EMPTY: 0,
@@ -51,7 +52,11 @@ export const CONSUMABLES = {
 export type ConsumableIndex = (typeof CONSUMABLES)[keyof typeof CONSUMABLES];
 export type ConsumableName = keyof typeof CONSUMABLES;
 
-export const CONSUMABLES_META: Record<ConsumableIndex, BaseProperties> = {
+interface ConsumableProperties
+  extends BaseProperties,
+    WithOverrides<ConsumableProperties> {}
+
+export const CONSUMABLES_META: Record<ConsumableIndex, ConsumableProperties> = {
   [CONSUMABLES.EMPTY]: { displayName: 'Empty' },
   [CONSUMABLES.DARK_CANDY]: { displayName: 'Dark Candy' },
   [CONSUMABLES.REVIVEMINT]: { displayName: 'ReviveMint' },
@@ -70,10 +75,70 @@ export const CONSUMABLES_META: Record<ConsumableIndex, BaseProperties> = {
   [CONSUMABLES.ROUXLSROUX]: { displayName: 'RouxlsRoux' },
   [CONSUMABLES.CD_BAGEL]: { displayName: 'CD Bagel' },
   [CONSUMABLES.MANNEQUIN]: { displayName: 'Mannequin' },
-  [CONSUMABLES.KRIS_TEA]: { displayName: 'Kris Tea' },
-  [CONSUMABLES.NOELLE_TEA]: { displayName: 'Noelle Tea' },
-  [CONSUMABLES.RALSEI_TEA]: { displayName: 'Ralsei Tea' },
-  [CONSUMABLES.SUSIE_TEA]: { displayName: 'Susie Tea' },
+  [CONSUMABLES.KRIS_TEA]: {
+    displayName: 'Kris Tea',
+    getOverrides: (save) => {
+      if (save.chapter > 2) {
+        return {
+          displayName: 'Rotten Tea (Kris)',
+          description: `A tea that has deteriorated after a short while due to its poor craftsmanship. +10HP
+
+          This item used to be "Kris Tea" before reaching Chapter 3.
+          `,
+        };
+      }
+
+      return {};
+    },
+  },
+  [CONSUMABLES.NOELLE_TEA]: {
+    displayName: 'Noelle Tea',
+    getOverrides: (save) => {
+      if (save.chapter > 2) {
+        return {
+          displayName: 'Rotten Tea (Noelle)',
+          description: `A tea that has deteriorated after a short while due to its poor craftsmanship. +10HP
+
+          This item used to be "Noelle Tea" before reaching Chapter 3.
+          `,
+        };
+      }
+
+      return {};
+    },
+  },
+  [CONSUMABLES.RALSEI_TEA]: {
+    displayName: 'Ralsei Tea',
+    getOverrides: (save) => {
+      if (save.chapter > 2) {
+        return {
+          displayName: 'Rotten Tea (Ralsei)',
+          description: `A tea that has deteriorated after a short while due to its poor craftsmanship. +10HP
+
+          This item used to be "Ralsei Tea" before reaching Chapter 3.
+          `,
+        };
+      }
+
+      return {};
+    },
+  },
+  [CONSUMABLES.SUSIE_TEA]: {
+    displayName: 'Susie Tea',
+    getOverrides: (save) => {
+      if (save.chapter > 2) {
+        return {
+          displayName: 'Rotten Tea (Susie)',
+          description: `A tea that has deteriorated after a short while due to its poor craftsmanship. +10HP
+
+          This item used to be "Susie Tea" before reaching Chapter 3.
+          `,
+        };
+      }
+
+      return {};
+    },
+  },
   [CONSUMABLES.DD_BURGER]: { displayName: 'DD-Burger' },
   [CONSUMABLES.LIGHTCANDY]: { displayName: 'LightCandy' },
   [CONSUMABLES.BUTLERJUICE]: { displayName: 'ButlerJuice' },
