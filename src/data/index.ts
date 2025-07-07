@@ -7,8 +7,8 @@ export {
 } from './consumables';
 export { FLAGS, FLAGS_META, type FlagIndex, type FlagName } from './flags';
 export {
-  KEY_ITEMS,
-  KEY_ITEMS_META,
+  KEYITEMS,
+  KEYITEMS_META,
   type KeyItemIndex,
   type KeyItemName,
 } from './keyItems';

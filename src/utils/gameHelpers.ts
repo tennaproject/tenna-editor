@@ -5,8 +5,8 @@ import {
   CONSUMABLES_META,
   FLAGS,
   FLAGS_META,
-  KEY_ITEMS,
-  KEY_ITEMS_META,
+  KEYITEMS,
+  KEYITEMS_META,
   WEAPONS,
   WEAPONS_META,
 } from '../data';
@@ -17,6 +17,6 @@ export const consumableHelpers = createEntityHelpers(
   CONSUMABLES,
   CONSUMABLES_META,
 );
-export const keyItemHelpers = createEntityHelpers(KEY_ITEMS, KEY_ITEMS_META);
+export const keyItemHelpers = createEntityHelpers(KEYITEMS, KEYITEMS_META);
 export const weaponHelpers = createEntityHelpers(WEAPONS, WEAPONS_META);
 export const armorHelpers = createEntityHelpers(ARMORS, ARMORS_META);
