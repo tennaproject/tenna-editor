@@ -1,8 +1,14 @@
 import { useState, useEffect } from 'react';
 import tenna from './assets/tennahurt.webp';
-import { parseSaveFile, serializeSaveFile } from './utils';
-import { debugSave } from './assets/debugSave';
+import {
+  parseSaveFile,
+  serializeSaveFile,
+  type ChapterDetectionResult,
+} from './utils';
+import { debugSave } from './assets';
 import type { DeltaruneSave } from './types';
+import { detectChapter } from './utils';
+import { DebugLabel } from './components/DebugLabel';
 
 function App() {
   const [parseResult, setParseResult] = useState<DeltaruneSave | null>(null);
@@ -12,12 +18,22 @@ function App() {
   const [isDragOver, setIsDragOver] = useState(false);
   const [uploadedFileName, setUploadedFileName] = useState<string>('');
   const [uploadDate, setUploadDate] = useState<Date | null>(null);
+  const [chapterDetection, setChapterDetection] =
+    useState<ChapterDetectionResult | null>(null);
 
   useEffect(() => {
+    if (import.meta.env.MODE !== 'development') {
+      return;
+    }
     const result = parseSaveFile(debugSave.data);
     setParseResult(result);
     setUploadedFileName(debugSave.name);
     setUploadDate(new Date());
+
+    if (result) {
+      const detection = detectChapter(result);
+      setChapterDetection(detection);
+    }
   }, []);
 
   const handleFileLoad = (file: File) => {
@@ -34,6 +50,11 @@ function App() {
       setUploadedSaveContent(content);
       const save = parseSaveFile(content);
       setParseResult(save);
+
+      if (save) {
+        const detection = detectChapter(save);
+        setChapterDetection(detection);
+      }
     };
     reader.readAsText(file);
   };
@@ -144,7 +165,10 @@ function App() {
           </div>
           {parseResult && import.meta.env.MODE === 'development' && (
             <div className="bg-gray-900 border-gray-700 border-1 p-6 mt-4 w-full">
-              <h3 className="text-lg font-bold mb-2 uppercase">Export</h3>
+              <h3 className="text-lg font-bold mb-2 uppercase flex items-center">
+                <DebugLabel />
+                Export
+              </h3>
               <div className="flex flex-col gap-2">
                 <div className="flex gap-2 items-center justify-between">
                   <div className="flex gap-2">
@@ -172,12 +196,43 @@ function App() {
                   )}
                 </div>
               </div>
-              <h3 className="text-lg font-bold mb-2 mt-4 uppercase">
-                Parsed Data
-              </h3>
-              <pre className="text-xs overflow-auto max-h-72 bg-black p-2">
-                {JSON.stringify(parseResult, null, 2)}
-              </pre>
+
+              {chapterDetection && (
+                <div className="mt-6 border-t border-gray-700 pt-4">
+                  <h3 className="text-lg font-bold mb-2 uppercase flex items-center">
+                    <DebugLabel />
+                    Chapter Detection
+                  </h3>
+                  <div className="bg-black p-3 ">
+                    <div className="flex flex-wrap gap-2">
+                      <div className="p-2 flex-1">
+                        <h4 className="font-bold text-cyan-400">
+                          Auto Detection Result
+                        </h4>
+                        {chapterDetection.supported ? (
+                          <div className="text-2xl font-bold">
+                            <span>Chapter {chapterDetection.chapter}</span>
+                          </div>
+                        ) : (
+                          <div className="text-2xl font-bold text-gray-400">
+                            Unsupported Chapter
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <div className="mt-6 border-t border-gray-700 pt-4">
+                <h3 className="text-lg font-bold mb-2 uppercase flex items-center">
+                  <DebugLabel />
+                  Parsed Data
+                </h3>
+                <pre className="text-xs overflow-auto max-h-72 bg-black p-2">
+                  {JSON.stringify(parseResult, null, 2)}
+                </pre>
+              </div>
             </div>
           )}
         </div>
