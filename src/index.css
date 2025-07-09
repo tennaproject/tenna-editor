@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: 'Determination Mono';
-  src: url('./assets/fonts/DeterminationMonoWebRegular.ttf') format('truetype');
+  src: url('./assets/fonts/DTM-Mono.otf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -10,7 +10,7 @@
 
 @font-face {
   font-family: 'Determination Sans';
-  src: url('./assets/fonts/DeterminationSansWebRegular.ttf') format('truetype');
+  src: url('./assets/fonts/DTM-Sans.otf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
