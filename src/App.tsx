@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import tenna from './assets/tennahurt.webp';
+import tenna from './assets/placeholders/tennahear.webp';
 import {
   parseSaveFile,
   serializeSaveFile,
