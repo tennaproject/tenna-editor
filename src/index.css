@@ -1,25 +1,40 @@
 @import 'tailwindcss';
 
 @font-face {
-  font-family: 'Determination Mono';
-  src: url('./assets/fonts/DTM-Mono.otf') format('truetype');
+  font-family: 'Pixel Operator';
+  src: url('./assets/fonts/PixelOperator.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Determination Sans';
-  src: url('./assets/fonts/DTM-Sans.otf') format('truetype');
+  font-family: 'Pixel Operator';
+  src: url('./assets/fonts/PixelOperator-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pixel Operator Mono';
+  src: url('./assets/fonts/PixelOperatorMono.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Pixel Operator Mono';
+  src: url('./assets/fonts/PixelOperatorMono-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   font-family:
-    'Determination Mono',
+    'Pixel Operator Mono',
     -apple-system,
     BlinkMacSystemFont,
     'Segoe UI',
