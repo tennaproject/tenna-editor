@@ -1,8 +1,11 @@
-import LegacyDebugUI from './components/LegacyDebugUI';
+import { LegacyDebugUI, Layout } from './components';
 
 function App() {
   return (
-    <>{import.meta.env.VITE_SHOW_OLD_UI !== 'false' && <LegacyDebugUI />}</>
+    <>
+      {import.meta.env.VITE_SHOW_OLD_UI !== 'false' && <LegacyDebugUI />}
+      <Layout />
+    </>
   );
 }
 
