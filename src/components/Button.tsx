@@ -11,7 +11,7 @@ interface ButtonProps {
   loading?: boolean;
 }
 
-export function Button({
+export const Button = ({
   variant = 'primary',
   size = 'md',
   children,
@@ -21,7 +21,7 @@ export function Button({
   type = 'button',
   loading = false,
   ...props
-}: ButtonProps) {
+}: ButtonProps) => {
   const baseClasses =
     'font-medium transition-colors -none -2 -2 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center';
 
@@ -80,4 +80,4 @@ export function Button({
       {children}
     </button>
   );
-}
+};

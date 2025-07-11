@@ -17,7 +17,7 @@ function DebugLabel() {
   );
 }
 
-function LegacyDebugUI() {
+export const LegacyDebugUI = () => {
   const [parseResult, setParseResult] = useState<DeltaruneSave | null>(null);
   const [uploadedSaveContent, setUploadedSaveContent] = useState<string | null>(
     null,
@@ -249,6 +249,6 @@ function LegacyDebugUI() {
       </footer>
     </div>
   );
-}
+};
 
 export default LegacyDebugUI;

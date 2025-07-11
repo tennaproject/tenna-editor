@@ -6,7 +6,7 @@ export interface HeaderProps {
   setSidebarOpen: (open: boolean) => void;
 }
 
-export function Header({ sidebarOpen, setSidebarOpen }: HeaderProps) {
+export const Header = ({ sidebarOpen, setSidebarOpen }: HeaderProps) => {
   return (
     <header className="bg-gray-800 border-b border-gray-700 p-4 flex-shrink-0 select-none">
       <div className="flex items-center justify-between max-w-full mx-auto">
@@ -66,4 +66,4 @@ export function Header({ sidebarOpen, setSidebarOpen }: HeaderProps) {
       </div>
     </header>
   );
-}
+};

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Header } from './header';
 
-export function Layout() {
+export const Layout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -10,4 +10,4 @@ export function Layout() {
       <div className="flex-1 flex min-h-0 relative">other</div>
     </div>
   );
-}
+};
