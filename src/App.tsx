@@ -2,9 +2,7 @@ import LegacyDebugUI from './components/LegacyDebugUI';
 
 function App() {
   return (
-    <div>
-      <LegacyDebugUI />
-    </div>
+    <>{import.meta.env.VITE_SHOW_OLD_UI !== 'false' && <LegacyDebugUI />}</>
   );
 }
 
