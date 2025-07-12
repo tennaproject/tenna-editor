@@ -9,6 +9,7 @@ interface ButtonProps {
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
   loading?: boolean;
+  fullWidth?: boolean;
 }
 
 export const Button = ({
@@ -20,6 +21,7 @@ export const Button = ({
   disabled = false,
   type = 'button',
   loading = false,
+  fullWidth = false,
   ...props
 }: ButtonProps) => {
   const baseClasses =
@@ -38,10 +40,13 @@ export const Button = ({
     lg: 'px-4 py-2 text-base',
   };
 
+  const widthClasses = fullWidth ? 'w-full' : '';
+
   const finalClasses = [
     baseClasses,
     variantClasses[variant],
     sizeClasses[size],
+    widthClasses,
     className,
   ]
     .filter(Boolean)
