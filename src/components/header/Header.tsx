@@ -8,14 +8,14 @@ export interface HeaderProps {
 
 export const Header = ({ sidebarOpen, setSidebarOpen }: HeaderProps) => {
   return (
-    <header className="bg-gray-800 border-b border-gray-700 p-4 flex-shrink-0 select-none">
-      <div className="flex items-center justify-between max-w-full mx-auto">
-        <div className="flex items-center gap-3">
+    <header className="bg-gray-800 border-b border-gray-700 px-4 py-2 flex-shrink-0 select-none h-14">
+      <div className="flex items-center justify-between h-full max-w-full mx-auto">
+        <div className="flex items-center gap-3 h-full">
           <button
             onClick={() => {
               setSidebarOpen(!sidebarOpen);
             }}
-            className="lg:hidden p-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded transition-colors"
+            className="lg:hidden p-1.5 text-gray-300 hover:text-white hover:bg-gray-700 rounded transition-colors"
             aria-label="Toggle menu"
           >
             <svg
@@ -42,10 +42,12 @@ export const Header = ({ sidebarOpen, setSidebarOpen }: HeaderProps) => {
             </svg>
           </button>
 
-          <img src={tenna3} className="w-10 h-10 " alt="logo" />
+          <img src={tenna3} className="w-8 h-8" alt="logo" />
           <div className="hidden sm:block">
-            <h1 className="text-2xl font-bold text-white">TENNA EDITOR</h1>
-            <p className="text-sm text-gray-400">
+            <h1 className="text-lg font-bold text-white leading-tight">
+              TENNA EDITOR
+            </h1>
+            <p className="text-xs text-gray-400 leading-tight">
               AN UNOFFICIAL DELTARUNE SAVE EDITOR
             </p>
           </div>
