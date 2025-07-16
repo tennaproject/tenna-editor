@@ -54,16 +54,9 @@ export const Header = ({ sidebarOpen, setSidebarOpen }: HeaderProps) => {
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <Button variant="ghost" size="sm">
-            <a
-              href="https://deltarune.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              BUY DELTARUNE
-            </a>
-          </Button>
-          <Button variant="primary">LOAD ANOTHER SAVE</Button>
+          <Button variant="ghost">Select</Button>
+          <Button variant="ghost">Edit</Button>
+          <Button variant="ghost">Save</Button>
         </div>
       </div>
     </header>
