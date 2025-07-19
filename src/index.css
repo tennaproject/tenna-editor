@@ -1,5 +1,10 @@
 @import 'tailwindcss';
 
+@theme {
+  --color-container: #1d1d1d;
+  --color-showbiz: #ff245e;
+}
+
 @font-face {
   font-family: 'Pixel Operator';
   src: url('./assets/fonts/PixelOperator.woff2') format('woff2');
