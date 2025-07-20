@@ -1,6 +1,3 @@
-import tenna3 from '../../assets/placeholders/tennahear.webp';
-import { Button } from '../Button';
-
 export interface HeaderProps {
   sidebarOpen: boolean;
   setSidebarOpen: (open: boolean) => void;
@@ -8,9 +5,23 @@ export interface HeaderProps {
 
 export const Header = ({ sidebarOpen, setSidebarOpen }: HeaderProps) => {
   return (
-    <header className="bg-gray-800 border-b border-gray-700 px-4 py-2 flex-shrink-0 select-none h-14">
-      <div className="flex items-center justify-between h-full max-w-full mx-auto">
-        <div className="flex items-center gap-3 h-full">
+    <header className="w-full h-14 flex-shrink-0 bg-surface relative select-none">
+      <div className="flex items-center justify-between h-full px-4">
+        <div className="flex items-center gap-4">
+          <div className="w-8 h-8 bg-primary flex-shrink-0" />
+
+          <div className="flex flex-col">
+            <h1 className="text-main text-2xl font-bold leading-none">
+              TENNA EDITOR
+            </h1>
+            <p className="text-subtle font-bold leading-none hidden xl:block">
+              AN UNOFFICIAL DELTARUNE SAVE EDITOR
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-4">
+          {/* Mobile menu button */}
           <button
             onClick={() => {
               setSidebarOpen(!sidebarOpen);
@@ -41,22 +52,6 @@ export const Header = ({ sidebarOpen, setSidebarOpen }: HeaderProps) => {
               )}
             </svg>
           </button>
-
-          <img src={tenna3} className="w-8 h-8" alt="logo" />
-          <div className="hidden sm:block">
-            <h1 className="text-lg font-bold text-white leading-tight">
-              TENNA EDITOR
-            </h1>
-            <p className="text-xs text-gray-400 leading-tight">
-              AN UNOFFICIAL DELTARUNE SAVE EDITOR
-            </p>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-2 sm:gap-3">
-          <Button variant="ghost">Select</Button>
-          <Button variant="ghost">Edit</Button>
-          <Button variant="ghost">Save</Button>
         </div>
       </div>
     </header>

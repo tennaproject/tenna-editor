@@ -17,19 +17,19 @@ export const Sidebar = ({
     <aside
       className={`
           fixed lg:static inset-y-0 left-0 z-50 lg:z-auto
-          w-55 bg-gray-800 border-r border-gray-700 flex flex-col select-none
+          w-55 bg-surface flex flex-col select-none
         `}
     >
       <nav className="flex-1 overflow-y-auto p-2">
         <div className="space-y-2">
-          <div className="px-3 py-2">
-            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wide">
+          <div className="px-3 py-2 mt-6">
+            <h3 className="text-xs font-bold text-subtle uppercase tracking-wide">
               Save Editor
             </h3>
           </div>
 
           <SidebarItem
-            icon="📦"
+            icon=""
             title="Inventory"
             tabKey="inventory"
             activeTab={activeTab}
@@ -39,7 +39,7 @@ export const Sidebar = ({
           />
 
           <SidebarItem
-            icon="👤"
+            icon=""
             title="Party"
             tabKey="party"
             activeTab={activeTab}
@@ -49,7 +49,7 @@ export const Sidebar = ({
           />
 
           <SidebarItem
-            icon="🏠"
+            icon=""
             title="Rooms"
             tabKey="rooms"
             activeTab={activeTab}
@@ -59,7 +59,7 @@ export const Sidebar = ({
           />
 
           <SidebarItem
-            icon="📖"
+            icon=""
             title="Flags"
             tabKey="flags"
             activeTab={activeTab}
@@ -69,13 +69,13 @@ export const Sidebar = ({
           />
 
           <div className="px-3 py-2 mt-6">
-            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wide">
+            <h3 className="text-xs font-bold text-subtle uppercase tracking-wide">
               Advanced
             </h3>
           </div>
 
           <SidebarItem
-            icon="⚙️"
+            icon=""
             title="Settings"
             tabKey="settings"
             activeTab={activeTab}
@@ -85,7 +85,7 @@ export const Sidebar = ({
           />
 
           <SidebarItem
-            icon="ℹ️"
+            icon=""
             title="About"
             tabKey="about"
             activeTab={activeTab}
