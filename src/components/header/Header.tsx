@@ -5,7 +5,7 @@ export interface HeaderProps {
 
 export const Header = ({ sidebarOpen, setSidebarOpen }: HeaderProps) => {
   return (
-    <header className="w-full h-14 flex-shrink-0 bg-surface relative select-none">
+    <header className="w-full h-14 flex-shrink-0 bg-base relative select-none">
       <div className="flex items-center justify-between h-full px-4">
         <div className="flex items-center gap-4">
           <div className="w-8 h-8 bg-primary flex-shrink-0" />

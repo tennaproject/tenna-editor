@@ -17,7 +17,7 @@ export const Sidebar = ({
     <aside
       className={`
           fixed lg:static inset-y-0 left-0 z-50 lg:z-auto
-          w-55 bg-surface flex flex-col select-none
+          w-55 bg-base flex flex-col select-none
         `}
     >
       <nav className="flex-1 overflow-y-auto p-2">

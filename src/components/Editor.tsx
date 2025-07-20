@@ -54,11 +54,11 @@ export const Editor = () => {
         />
 
         {activeTab !== 'none' ? (
-          <div className="flex-1 overflow-y-auto bg-base rounded">
+          <div className="flex-1 overflow-y-auto bg-surface rounded">
             {renderMainContent()}
           </div>
         ) : (
-          <main className="flex-1 overflow-y-auto bg-base rounded">
+          <main className="flex-1 overflow-y-auto bg-surface rounded mr-3 mb-3">
             placeholder
           </main>
         )}
