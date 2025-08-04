@@ -10,7 +10,7 @@ import {
   WEAPONS,
   WEAPONS_META,
 } from '../data';
-import { createEntityHelpers } from './entityHelpers';
+import { createEntityHelpers } from './entity-helpers';
 
 export const flagHelpers = createEntityHelpers(FLAGS, FLAGS_META);
 export const consumableHelpers = createEntityHelpers(

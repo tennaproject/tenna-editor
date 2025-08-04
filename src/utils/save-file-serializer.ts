@@ -1,4 +1,4 @@
-import type { DeltaruneSave, V1Save, V2Save } from '../types';
+import type { DeltaruneSave, V1Save, V2Save } from '@types';
 
 function serializeV1Save(_save: V1Save): string {
   // TODO: Implement V1 save serialization

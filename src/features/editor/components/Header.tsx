@@ -26,7 +26,7 @@ export const Header = ({ sidebarOpen, setSidebarOpen }: HeaderProps) => {
             onClick={() => {
               setSidebarOpen(!sidebarOpen);
             }}
-            className="lg:hidden p-1.5 text-gray-300 hover:text-white hover:bg-gray-700 rounded transition-colors"
+            className="lg:hidden p-1.5 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
             aria-label="Toggle menu"
           >
             <svg

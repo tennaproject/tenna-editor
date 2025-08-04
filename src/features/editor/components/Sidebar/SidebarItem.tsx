@@ -27,16 +27,16 @@ export const SidebarItem = ({
   return (
     <button
       onClick={handleClick}
-      className={`w-full flex items-center gap-3 px-3 py-2 text-left transition-colors rounded-sm ${
+      className={`w-full flex items-center gap-3 px-3 py-2 text-left transition-colors -sm ${
         isTopLevel ? '' : 'text-sm'
       } ${
         activeTab === tabKey
           ? isTopLevel
-            ? 'bg-primary text-main'
+            ? 'bg-[#393552] text-main'
             : 'bg-cyan-600 text-main'
           : isTopLevel
-            ? 'text-main hover:bg-primary/50 hover:text-main'
-            : 'text-main hover:bg-primary/50 hover:text-main'
+            ? 'text-main hover:bg-[#393552]/50 hover:text-main'
+            : 'text-main hover:bg-[#393552]/50 hover:text-main'
       }`}
     >
       {icon && <span className="text-lg">{icon}</span>}

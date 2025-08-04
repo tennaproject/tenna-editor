@@ -4,7 +4,7 @@ import type {
   FlagIndex,
   KeyItemIndex,
   WeaponIndex,
-} from '../data';
+} from '@data';
 
 export type SaveFileFormat = 'v1' | 'v2' | 'unknown';
 export type Chapter = 0 | 1 | 2 | 3 | 4;

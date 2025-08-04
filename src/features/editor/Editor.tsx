@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { Header } from './header';
-import { Sidebar } from './sidebar';
-import { PartyCharacters } from './PartyCharacters';
+import { Header, Sidebar } from './components';
+import { PartyCharacters } from './views';
 
 export const Editor = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -11,41 +10,43 @@ export const Editor = () => {
     switch (activeTab) {
       case 'inventory':
         return (
-          <div className="p-6 text-main rounded">
-            <h1 className="text-2xl font-bold mb-4 rounded">Inventory</h1>
+          <div className="p-6 text-main ">
+            <h1 className="text-2xl font-bold mb-4 ">Inventory</h1>
           </div>
         );
       case 'rooms':
         return (
-          <div className="p-6 text-main rounded">
-            <h1 className="text-2xl font-bold mb-4 rounded">Rooms</h1>
+          <div className="p-6 text-main ">
+            <h1 className="text-2xl font-bold mb-4 ">Rooms</h1>
           </div>
         );
       case 'flags':
         return (
-          <div className="p-6 text-main rounded">
-            <h1 className="text-2xl font-bold mb-4 rounded">Flags</h1>
+          <div className="p-6 text-main ">
+            <h1 className="text-2xl font-bold mb-4 ">Flags</h1>
           </div>
         );
       case 'settings':
         return (
-          <div className="p-6 text-white rounded">
-            <h1 className="text-2xl font-bold mb-4 rounded">Settings</h1>
+          <div className="p-6 text-white ">
+            <h1 className="text-2xl font-bold mb-4 ">Settings</h1>
           </div>
         );
       case 'about':
         return (
-          <div className="p-6 text-main rounded">
-            <h1 className="text-2xl font-bold mb-4 rounded">About</h1>
+          <div className="p-6 text-main ">
+            <h1 className="text-2xl font-bold mb-4">About</h1>
           </div>
         );
+      case 'party':
+        return <PartyCharacters />;
     }
   };
 
   return (
-    <>
+    <div className="flex-1 flex flex-col">
       <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-      <div className="flex-1 flex min-h-0 relative rounded">
+      <div className="flex-grow flex">
         <Sidebar
           sidebarOpen={sidebarOpen}
           setSidebarOpen={setSidebarOpen}
@@ -54,15 +55,15 @@ export const Editor = () => {
         />
 
         {activeTab !== 'none' ? (
-          <div className="flex-1 overflow-y-auto bg-surface rounded">
+          <div className="flex-1 overflow-y-auto bg-surface">
             {renderMainContent()}
           </div>
         ) : (
-          <main className="flex-1 overflow-y-auto bg-surface rounded mr-3 mb-3">
+          <main className="flex-1 overflow-y-auto bg-surface ">
             placeholder
           </main>
         )}
       </div>
-    </>
+    </div>
   );
 };

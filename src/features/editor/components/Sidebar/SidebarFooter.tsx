@@ -1,4 +1,3 @@
-import { Button } from '../Button';
 export const SidebarFooter = () => {
   return (
     <footer className="p-3 bg-base select-none text-center text-xs text-subtle">

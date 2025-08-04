@@ -1,5 +1,5 @@
-import type { BaseProperties } from '../types';
-import type { WithOverrides } from '../types/gameTypes';
+import type { BaseProperties } from '@types';
+import type { WithOverrides } from '@types';
 
 export const CONSUMABLES = {
   EMPTY: 0,

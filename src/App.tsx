@@ -1,4 +1,4 @@
-import { LegacyDebugUI, Layout } from './components';
+import { Layout, LegacyDebugUI } from '@components';
 
 const App = () => {
   return (

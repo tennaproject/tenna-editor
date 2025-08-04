@@ -22,7 +22,7 @@ export const Sidebar = ({
     >
       <nav className="flex-1 overflow-y-auto p-2">
         <div className="space-y-2">
-          <div className="px-3 py-2 mt-6">
+          <div className="px-3 py-2 mt-3">
             <h3 className="text-xs font-bold text-subtle uppercase tracking-wide">
               Save Editor
             </h3>
