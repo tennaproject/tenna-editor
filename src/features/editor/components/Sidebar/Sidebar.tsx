@@ -1,101 +1,48 @@
+import React from 'react';
 import { SidebarFooter } from './SidebarFooter';
 import { SidebarItem } from './SidebarItem';
 
-export interface SidebarProps {
+interface SidebarContextProps {
   sidebarOpen: boolean;
   setSidebarOpen: (open: boolean) => void;
-  activeTab: string;
-  setActiveTab: (tab: string) => void;
+  activeItem: string;
+  setActiveItem: (item: string) => void;
 }
 
-export const Sidebar = ({
-  setSidebarOpen,
-  activeTab,
-  setActiveTab,
-}: SidebarProps) => {
+export const SidebarContext = React.createContext<
+  SidebarContextProps | undefined
+>(undefined);
+export interface SidebarProps {
+  children?: React.ReactNode;
+  onActiveItemChange?: (item: string) => void;
+}
+
+export const Sidebar = ({ children, onActiveItemChange }: SidebarProps) => {
+  const [sidebarOpen, setSidebarOpen] = React.useState(false);
+  const [activeItem, setActiveItem] = React.useState<string>('inventory');
+
+  const handleActiveItemChange = (item: string) => {
+    setActiveItem(item);
+    onActiveItemChange?.(item);
+  };
+
+  const value = {
+    sidebarOpen,
+    setSidebarOpen,
+    activeItem,
+    setActiveItem: handleActiveItemChange,
+  };
   return (
-    <aside
-      className={`
+    <SidebarContext.Provider value={value}>
+      <aside
+        className={`
           fixed lg:static inset-y-0 left-0 z-50 lg:z-auto
           w-55 bg-base flex flex-col select-none
         `}
-    >
-      <nav className="flex-1 overflow-y-auto p-2">
-        <div className="space-y-2">
-          <div className="px-3 py-2 mt-3">
-            <h3 className="text-xs font-bold text-subtle uppercase tracking-wide">
-              Save Editor
-            </h3>
-          </div>
-
-          <SidebarItem
-            icon=""
-            title="Inventory"
-            tabKey="inventory"
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
-            setSidebarOpen={setSidebarOpen}
-            isTopLevel
-          />
-
-          <SidebarItem
-            icon=""
-            title="Party"
-            tabKey="party"
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
-            setSidebarOpen={setSidebarOpen}
-            isTopLevel
-          />
-
-          <SidebarItem
-            icon=""
-            title="Rooms"
-            tabKey="rooms"
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
-            setSidebarOpen={setSidebarOpen}
-            isTopLevel
-          />
-
-          <SidebarItem
-            icon=""
-            title="Flags"
-            tabKey="flags"
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
-            setSidebarOpen={setSidebarOpen}
-            isTopLevel
-          />
-
-          <div className="px-3 py-2 mt-6">
-            <h3 className="text-xs font-bold text-subtle uppercase tracking-wide">
-              Advanced
-            </h3>
-          </div>
-
-          <SidebarItem
-            icon=""
-            title="Settings"
-            tabKey="settings"
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
-            setSidebarOpen={setSidebarOpen}
-            isTopLevel
-          />
-
-          <SidebarItem
-            icon=""
-            title="About"
-            tabKey="about"
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
-            setSidebarOpen={setSidebarOpen}
-            isTopLevel
-          />
-        </div>
-      </nav>
-      <SidebarFooter />
-    </aside>
+      >
+        <nav className="flex-1 overflow-y-auto p-2">{children}</nav>
+        <SidebarFooter />
+      </aside>
+    </SidebarContext.Provider>
   );
 };

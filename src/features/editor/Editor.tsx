@@ -4,10 +4,10 @@ import { PartyCharacters } from './views';
 
 export const Editor = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState<string>('none');
+  const [activeItem, setActiveItem] = useState<string>('inventory');
 
   const renderMainContent = () => {
-    switch (activeTab) {
+    switch (activeItem) {
       case 'inventory':
         return (
           <div className="p-6 text-main ">
@@ -40,6 +40,12 @@ export const Editor = () => {
         );
       case 'party':
         return <PartyCharacters />;
+      default:
+        return (
+          <main className="flex-1 overflow-y-auto bg-surface ">
+            placeholder
+          </main>
+        );
     }
   };
 
@@ -47,22 +53,21 @@ export const Editor = () => {
     <div className="flex-1 flex flex-col">
       <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <div className="flex-grow flex">
-        <Sidebar
-          sidebarOpen={sidebarOpen}
-          setSidebarOpen={setSidebarOpen}
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-        />
+        <Sidebar onActiveItemChange={setActiveItem}>
+          <Sidebar.Header>Categories</Sidebar.Header>
+          <Sidebar.Item id="inventory">Inventory</Sidebar.Item>
+          <Sidebar.Item id="rooms">Rooms</Sidebar.Item>
+          <Sidebar.Item id="flags">Flags</Sidebar.Item>
+          <Sidebar.Item id="party">Party</Sidebar.Item>
 
-        {activeTab !== 'none' ? (
-          <div className="flex-1 overflow-y-auto bg-surface">
-            {renderMainContent()}
-          </div>
-        ) : (
-          <main className="flex-1 overflow-y-auto bg-surface ">
-            placeholder
-          </main>
-        )}
+          <Sidebar.Header>App</Sidebar.Header>
+          <Sidebar.Item id="settings">Settings</Sidebar.Item>
+          <Sidebar.Item id="about">About</Sidebar.Item>
+        </Sidebar>
+
+        <div className="flex-1 overflow-y-auto bg-surface">
+          {renderMainContent()}
+        </div>
       </div>
     </div>
   );
