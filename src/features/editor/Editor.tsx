@@ -1,74 +1,132 @@
-import { useState } from 'react';
-import { Header, Sidebar } from './components';
-import { PartyCharacters } from './views';
+import { useState, createContext, useContext, type JSX } from 'react';
+import { Content, Header, Sidebar } from './components';
+import { About } from './views';
+
+export interface Group {
+  title: string;
+}
+export const EDITOR_GROUPS: Record<string, Group> = {
+  main: {
+    title: 'Editor Categories',
+  },
+  advanced: {
+    title: 'Advanced',
+  },
+} as const;
+
+export interface Subtab {
+  title: string;
+  element?: JSX.Element;
+}
+export interface Tab {
+  title: string;
+  group: string;
+  element?: JSX.Element;
+  subtabs?: Record<string, Subtab>;
+}
+
+export const EDITOR_TABS: Record<string, Tab> = {
+  inventory: {
+    title: 'Inventory',
+    group: 'main',
+    element: <h1></h1>,
+  },
+  party: {
+    title: 'Party',
+    group: 'main',
+    subtabs: {
+      default: {
+        title: 'default',
+        element: <h1>i am glooby</h1>,
+      },
+      test2: {
+        title: 'test2',
+        element: (
+          <div>
+            <h1>test subtab 2</h1>
+          </div>
+        ),
+      },
+    },
+  },
+  settings: {
+    title: 'Settings',
+    group: 'advanced',
+  },
+  about: {
+    title: 'About',
+    group: 'advanced',
+    element: <About />,
+  },
+} as const;
+
+const getTabsIdByGroup = () => {
+  return Object.entries(EDITOR_TABS).reduce(
+    (groups, [tabId, tab]) => {
+      if (!groups[tab.group]) {
+        groups[tab.group] = [];
+      }
+      groups[tab.group].push(tabId);
+      return groups;
+    },
+    {} as Record<string, string[]>,
+  );
+};
+
+interface EditorContextProps {
+  activeTabId: string;
+  setActiveTabId: (tab: string) => void;
+  isSidebarOpen: boolean;
+  setSidebarOpen: (state: boolean) => void;
+}
+export const EditorContext = createContext<EditorContextProps | undefined>(
+  undefined,
+);
+
+export const useEditor = () => {
+  const context = useContext(EditorContext);
+  if (!context) {
+    throw new Error('useEditor must be used within a EditorContext.Provider');
+  }
+  return context;
+};
 
 export const Editor = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [activeItem, setActiveItem] = useState<string>('inventory');
+  const [activeTabId, setActiveTabId] = useState('inventory');
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const tabsIdByGroup = getTabsIdByGroup();
 
-  const renderMainContent = () => {
-    switch (activeItem) {
-      case 'inventory':
-        return (
-          <div className="p-6 text-main ">
-            <h1 className="text-2xl font-bold mb-4 ">Inventory</h1>
-          </div>
-        );
-      case 'rooms':
-        return (
-          <div className="p-6 text-main ">
-            <h1 className="text-2xl font-bold mb-4 ">Rooms</h1>
-          </div>
-        );
-      case 'flags':
-        return (
-          <div className="p-6 text-main ">
-            <h1 className="text-2xl font-bold mb-4 ">Flags</h1>
-          </div>
-        );
-      case 'settings':
-        return (
-          <div className="p-6 text-white ">
-            <h1 className="text-2xl font-bold mb-4 ">Settings</h1>
-          </div>
-        );
-      case 'about':
-        return (
-          <div className="p-6 text-main ">
-            <h1 className="text-2xl font-bold mb-4">About</h1>
-          </div>
-        );
-      case 'party':
-        return <PartyCharacters />;
-      default:
-        return (
-          <main className="flex-1 overflow-y-auto bg-surface ">
-            placeholder
-          </main>
-        );
-    }
+  const contextValues: EditorContextProps = {
+    activeTabId,
+    setActiveTabId,
+    isSidebarOpen,
+    setSidebarOpen,
   };
 
   return (
-    <div className="flex-1 flex flex-col">
-      <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-      <div className="flex-grow flex">
-        <Sidebar onActiveItemChange={setActiveItem}>
-          <Sidebar.Header>Categories</Sidebar.Header>
-          <Sidebar.Item id="inventory">Inventory</Sidebar.Item>
-          <Sidebar.Item id="rooms">Rooms</Sidebar.Item>
-          <Sidebar.Item id="flags">Flags</Sidebar.Item>
-          <Sidebar.Item id="party">Party</Sidebar.Item>
+    <EditorContext.Provider value={contextValues}>
+      <div className="flex-1 flex flex-col">
+        <Header />
+        <div className="flex-grow flex">
+          <Sidebar>
+            {Object.entries(tabsIdByGroup).map(([groupId, groupTabs]) => (
+              <Sidebar.Group key={groupId} title={EDITOR_GROUPS[groupId].title}>
+                {groupTabs.map((tabId) => (
+                  <Sidebar.Item
+                    key={tabId}
+                    id={tabId}
+                    title={EDITOR_TABS[tabId].title}
+                  />
+                ))}
+              </Sidebar.Group>
+            ))}
+          </Sidebar>
 
-          <Sidebar.Header>App</Sidebar.Header>
-          <Sidebar.Item id="settings">Settings</Sidebar.Item>
-          <Sidebar.Item id="about">About</Sidebar.Item>
-        </Sidebar>
-
-        <div className="flex-1 overflow-y-auto bg-surface">
-          {renderMainContent()}
+          <div className="flex-1 overflow-y-auto bg-surface">
+            <Content />
+          </div>
         </div>
       </div>
-    </div>
+    </EditorContext.Provider>
   );
 };

@@ -1,9 +1,8 @@
-export interface HeaderProps {
-  sidebarOpen: boolean;
-  setSidebarOpen: (open: boolean) => void;
-}
+import { useEditor } from '../Editor';
 
-export const Header = ({ sidebarOpen, setSidebarOpen }: HeaderProps) => {
+export const Header = () => {
+  const { isSidebarOpen, setSidebarOpen } = useEditor();
+
   return (
     <header className="w-full h-14 flex-shrink-0 bg-base relative select-none">
       <div className="flex items-center justify-between h-full px-4">
@@ -21,10 +20,9 @@ export const Header = ({ sidebarOpen, setSidebarOpen }: HeaderProps) => {
         </div>
 
         <div className="flex items-center gap-4">
-          {/* Mobile menu button */}
           <button
             onClick={() => {
-              setSidebarOpen(!sidebarOpen);
+              setSidebarOpen(!isSidebarOpen);
             }}
             className="lg:hidden p-1.5 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
             aria-label="Toggle menu"
@@ -35,7 +33,7 @@ export const Header = ({ sidebarOpen, setSidebarOpen }: HeaderProps) => {
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
-              {sidebarOpen ? (
+              {isSidebarOpen ? (
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
