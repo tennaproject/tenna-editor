@@ -1,1 +1,1 @@
-export * from './party';
+export * from './about';
