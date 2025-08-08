@@ -105,9 +105,9 @@ export const Editor = () => {
 
   return (
     <EditorContext.Provider value={contextValues}>
-      <div className="flex-1 flex flex-col">
+      <div className="h-full flex flex-col overflow-hidden">
         <Header />
-        <div className="flex-grow flex">
+        <div className="flex-1 flex min-h-0">
           <Sidebar>
             {Object.entries(tabsIdByGroup).map(([groupId, groupTabs]) => (
               <Sidebar.Group key={groupId} title={EDITOR_GROUPS[groupId].title}>

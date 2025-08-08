@@ -6,8 +6,10 @@ export const Layout = () => {
   const [saveFile, setSaveFile] = useState<File | null>(null);
 
   return (
-    <div className="min-h-screen flex bg-base ">
-      <Editor />
+    <div className="h-full bg-base">
+      <main className="h-full">
+        <Editor></Editor>
+      </main>
     </div>
   );
 };
