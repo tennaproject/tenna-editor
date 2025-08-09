@@ -14,7 +14,7 @@ export const SidebarItem = ({ id, title, icon }: SidebarItemProps) => {
   const baseClasses =
     'w-full flex items-center gap-3 px-3 py-2 text-left text-base transition-colors';
   const activeClasses = 'bg-main/8 text-main font-bold';
-  const inactiveClasses = 'text-main hover:bg-main/5';
+  const inactiveClasses = 'text-muted hover:bg-surface/50';
 
   return (
     <button

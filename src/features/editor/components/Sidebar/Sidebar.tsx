@@ -1,20 +1,23 @@
 import React from 'react';
 import { SidebarFooter } from './SidebarFooter';
+import { useEditor } from '../..';
 
 export interface SidebarProps {
   children?: React.ReactNode;
 }
 
 export const Sidebar = ({ children }: SidebarProps) => {
+  const { isSidebarOpen } = useEditor();
+
+  const hiddenClass = isSidebarOpen ? 'flex' : 'hidden';
   return (
     <aside
       className={`
-        fixed lg:static inset-y-0 left-0 z-50 lg:z-auto
-        w-55 bg-base flex flex-col select-none overflow-y-auto
+        w-55 bg-base ${hiddenClass} lg:flex flex-col select-none overflow-y-auto
        scrollbar-none 
       `}
     >
-      <nav className="flex-1 p-2">{children}</nav>
+      <nav className="flex-1 p-2 flex flex-col justify-between">{children}</nav>
       <SidebarFooter />
     </aside>
   );

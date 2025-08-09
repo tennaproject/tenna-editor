@@ -1,1 +1,2 @@
-export * from './about';
+export * from './About';
+export * from './Placeholder';
