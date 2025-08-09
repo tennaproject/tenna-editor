@@ -1,11 +1,11 @@
-import type { BaseProperties } from '../types';
+import type { BaseProperties } from '@types';
 import { ARMORS, type ArmorIndex } from './armors';
 import { CHARACTERS, type CharacterIndex } from './characters';
 import { CONSUMABLES, type ConsumableIndex } from './consumables';
 import type { FlagIndex } from './flags';
-import { KEYITEMS, type KeyItemIndex } from './keyItems';
-import { LIGHTWORLDITEMS, type LightWorldItemIndex } from './lightWorldItems';
-import { PHONECONTACTS, type PhoneContactIndex } from './phoneContacts';
+import { KEYITEMS, type KeyItemIndex } from './key-items';
+import { LIGHTWORLDITEMS, type LightWorldItemIndex } from './light-world-items';
+import { PHONECONTACTS, type PhoneContactIndex } from './phone-contacts';
 import { ROOMS, type RoomIndex } from './rooms';
 import { SPELLS, type SpellIndex } from './spells';
 import { WEAPONS, type WeaponIndex } from './weapons';

@@ -1,4 +1,4 @@
-import type { BaseProperties } from '../types';
+import type { BaseProperties } from '@types';
 import { CHARACTERS, type CharacterIndex } from './characters';
 
 export const SPELLS = {

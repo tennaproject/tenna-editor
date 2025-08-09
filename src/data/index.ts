@@ -1,20 +1,10 @@
-export { ARMORS, ARMORS_META, type ArmorIndex, type ArmorName } from './armors';
-export {
-  CONSUMABLES,
-  CONSUMABLES_META,
-  type ConsumableIndex,
-  type ConsumableName,
-} from './consumables';
-export { FLAGS, FLAGS_META, type FlagIndex, type FlagName } from './flags';
-export {
-  KEYITEMS,
-  KEYITEMS_META,
-  type KeyItemIndex,
-  type KeyItemName,
-} from './keyItems';
-export {
-  WEAPONS,
-  WEAPONS_META,
-  type WeaponIndex,
-  type WeaponName,
-} from './weapons';
+export * from './armors';
+export * from './chapters';
+export * from './consumables';
+export * from './flags';
+export * from './key-items';
+export * from './light-world-items';
+export * from './phone-contacts';
+export * from './rooms';
+export * from './spells';
+export * from './weapons';

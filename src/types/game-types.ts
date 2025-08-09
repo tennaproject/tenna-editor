@@ -1,4 +1,4 @@
-import type { DeltaruneSave } from './saveFile';
+import type { DeltaruneSave } from './save-file';
 
 export interface BaseProperties {
   displayName: string;

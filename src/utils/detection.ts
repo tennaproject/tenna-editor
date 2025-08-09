@@ -1,5 +1,5 @@
-import type { DeltaruneSave } from '../types/saveFile';
-import type { ChapterIndex } from '../data/chapters';
+import type { DeltaruneSave } from '@types';
+import type { ChapterIndex } from '@data';
 
 export interface ChapterDetectionResult {
   chapter?: ChapterIndex;

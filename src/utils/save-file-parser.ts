@@ -1,4 +1,4 @@
-import type { DeltaruneSave, SaveFileFormat, V1Save, V2Save } from '../types';
+import type { DeltaruneSave, SaveFileFormat, V1Save, V2Save } from '@types';
 import type {
   ArmorIndex,
   ConsumableIndex,
@@ -6,7 +6,7 @@ import type {
   KeyItemIndex,
   WeaponIndex,
 } from '../data';
-import { LineCursor } from './lineCursor';
+import { LineCursor } from './line-cursor';
 
 export const SAVE_META = {
   V1: {

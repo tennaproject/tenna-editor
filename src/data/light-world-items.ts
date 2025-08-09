@@ -1,4 +1,4 @@
-import type { BaseProperties } from '../types';
+import type { BaseProperties } from '@types';
 
 export const LIGHTWORLDITEMS = {
   EMPTY: 0,

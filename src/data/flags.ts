@@ -1,4 +1,4 @@
-import type { FlagProperties } from '../types';
+import type { FlagProperties } from '@types';
 
 export const FLAGS = {
   SIMPLIFY_VFX: 8,

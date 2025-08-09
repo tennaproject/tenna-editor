@@ -1,0 +1,16 @@
+{
+  "name": "Tenna",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
+  // "features": {},
+  "forwardPorts": [4500],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "bradlc.vscode-tailwindcss",
+        "esbenp.prettier-vscode",
+        "ms-vscode-remote.remote-containers"
+      ]
+    }
+  },
+  "postCreateCommand": "bash .devcontainer/devcontainer-setup.sh"
+}
