@@ -45,7 +45,7 @@ export const Content = () => {
 
   return (
     <ContentContext.Provider value={contextValues}>
-      <div className="bg-surface h-full flex flex-col">
+      <div className="bg-surface h-full flex flex-col min-w-0 min-h-0">
         <div className="border-b border-base ">
           <div className="flex items-center gap-3 py-2 px-4 min-h-15">
             <h2 className="text-main text-xl font-bold select-none">
@@ -68,11 +68,11 @@ export const Content = () => {
             )}
           </div>
         </div>
-        <div className="h-full flex flex-col m-4 select-none">
+        <div className="flex-1 min-h-0 flex flex-col select-none overflow-auto">
           {activeTab.element ||
             (activeTab.subtabs &&
               activeSubtabId &&
-              activeTab.subtabs[activeSubtabId].element)}
+              activeTab?.subtabs[activeSubtabId]?.element)}
         </div>
       </div>
     </ContentContext.Provider>
