@@ -13,8 +13,8 @@ export const Sidebar = ({ children }: SidebarProps) => {
   return (
     <aside
       className={`
-        w-55 bg-base ${hiddenClass} lg:flex flex-col select-none overflow-y-auto
-       scrollbar-none 
+        w-55 bg-surface-1 ${hiddenClass} lg:flex flex-col select-none overflow-y-auto
+       scrollbar-none
       `}
     >
       <nav className="flex-1 p-2 flex flex-col justify-between">{children}</nav>

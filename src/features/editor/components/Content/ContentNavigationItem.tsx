@@ -17,8 +17,8 @@ export const ContentNavigationItem = ({
       onClick={() => setActiveSubtabId(id)}
       className={`px-3 py-1 font-semibold transition-colors duration-200 ${
         activeSubtabId === id
-          ? 'bg-surface text-main'
-          : 'bg-transparent text-subtle hover:text-main hover:bg-surface/50'
+          ? 'bg-surface-1-active text-text-1'
+          : 'bg-transparent text-text-2 hover:text-text-1 hover:bg-surface-1-hover'
       }`}
     >
       {title}

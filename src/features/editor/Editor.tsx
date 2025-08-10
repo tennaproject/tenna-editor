@@ -210,7 +210,7 @@ export const Editor = () => {
 
               <Sidebar.Group>
                 <button
-                  className="w-full px-3 py-2 text-left text-white/70 hover:text-white flex items-center justify-between"
+                  className="w-full px-3 py-2 text-left text-text-2 hover:bg-surface-1-hover flex items-center justify-between"
                   aria-expanded={chaptersOpen}
                   aria-controls="chapters-group"
                   onClick={() => setChaptersOpen((v) => !v)}
@@ -248,7 +248,7 @@ export const Editor = () => {
             )}
           </Sidebar>
 
-          <div className="flex-1 min-w-0 min-h-0 bg-surface">
+          <div className="flex-1 min-w-0 min-h-0 bg-surface-2">
             <Content />
           </div>
         </div>

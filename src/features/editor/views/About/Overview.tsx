@@ -7,7 +7,7 @@ export const Overview = () => {
           The source code for Tenna Editor is available on{' '}
           <a
             href="https://github.com/tennaproject/tenna-editor"
-            className="text-primary font-bold"
+            className="text-red hover:text-red-hover font-bold"
           >
             GitHub
           </a>

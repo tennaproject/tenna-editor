@@ -4,16 +4,16 @@ export const Header = () => {
   const { isSidebarOpen, setSidebarOpen } = useEditor();
 
   return (
-    <header className="w-full h-14 flex-shrink-0 bg-base relative select-none">
+    <header className="w-full h-14 flex-shrink-0 bg-surface-1 relative select-none">
       <div className="flex items-center justify-between h-full px-4">
         <div className="flex items-center gap-4">
-          <div className="w-8 h-8 bg-primary flex-shrink-0" />
+          <div className="w-8 h-8 bg-red flex-shrink-0" />
 
           <div className="flex flex-col">
-            <h1 className="text-main text-2xl font-bold leading-none">
+            <h1 className="text-text-1 text-2xl font-bold leading-none">
               TENNA EDITOR
             </h1>
-            <p className="text-subtle font-bold leading-none hidden xl:block">
+            <p className="text-text-2 font-bold leading-none hidden xl:block">
               AN UNOFFICIAL DELTARUNE SAVE EDITOR
             </p>
           </div>

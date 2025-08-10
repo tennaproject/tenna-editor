@@ -45,10 +45,10 @@ export const Content = () => {
 
   return (
     <ContentContext.Provider value={contextValues}>
-      <div className="bg-surface h-full flex flex-col min-w-0 min-h-0">
-        <div className="border-b border-base ">
+      <div className="bg-surface-2 h-full flex flex-col min-w-0 min-h-0">
+        <div className="border-b border-divider">
           <div className="flex items-center gap-3 py-2 px-4 min-h-15">
-            <h2 className="text-main text-xl font-bold select-none">
+            <h2 className="text-text-1 text-xl font-bold select-none">
               {activeTab.title}
             </h2>
             {activeTab?.subtabs ? (

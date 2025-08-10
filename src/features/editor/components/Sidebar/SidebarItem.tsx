@@ -13,8 +13,8 @@ export const SidebarItem = ({ id, title, icon }: SidebarItemProps) => {
 
   const baseClasses =
     'w-full flex items-center gap-3 px-3 py-2 text-left text-base transition-colors';
-  const activeClasses = 'bg-main/8 text-main font-bold';
-  const inactiveClasses = 'text-muted hover:bg-surface/50';
+  const activeClasses = 'bg-surface-1-active text-text-1 font-bold';
+  const inactiveClasses = 'text-text-2 hover:bg-surface-1-hover';
 
   return (
     <button

@@ -22,7 +22,7 @@ freely, subject to the following restrictions:
 export const License = () => {
   return (
     <div className="flex flex-col mx-auto max-w-5xl py-8 px-8 w-full flex-none min-w-0 gap-4 select-text">
-      <code className="bg-base/30 px-8 py-8">
+      <code className="bg-surface-3 border-border border px-8 py-8">
         <pre className="font-mono text-lg whitespace-pre-wrap">{LICENSE}</pre>
       </code>
     </div>
