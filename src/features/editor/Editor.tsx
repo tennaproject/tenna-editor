@@ -8,23 +8,26 @@ import DarkWorldIcon from '@assets/icons/moon-stars.svg';
 import RecruitsIcon from '@assets/icons/users.svg';
 import SettingsIcon from '@assets/icons/sliders.svg';
 import AboutIcon from '@assets/icons/book-open.svg';
+import { useLocation } from 'react-router-dom';
 
 export interface Subtab {
   title: string;
+  route: string;
   element?: ReactNode;
 }
 export interface Tab {
   title: string;
+  route: string;
   element?: ReactNode;
   icon?: ReactNode;
   subtabs?: Record<string, Subtab>;
   footer?: boolean;
-  chapter?: boolean;
 }
 
 export const EDITOR_TABS: Record<string, Tab> = {
   home: {
     title: 'Home',
+    route: '/home',
     icon: <HomeIcon />,
     subtabs: {
       overview: {
@@ -35,91 +38,111 @@ export const EDITOR_TABS: Record<string, Tab> = {
   },
   inventory: {
     title: 'Inventory',
+    route: '/inventory',
     icon: <InventoryIcon />,
     subtabs: {
       consumables: {
         title: 'Consumables',
+        route: '/inventory/consumables',
         element: <Placeholder />,
       },
       keyItems: {
         title: 'Key Items',
+        route: '/inventory/key-items',
         element: <Placeholder />,
       },
       weapons: {
         title: 'Weapons',
+        route: '/inventory/weapons',
         element: <Placeholder />,
       },
       armors: {
         title: 'Armors',
+        route: '/inventory/armors',
         element: <Placeholder />,
       },
     },
   },
   party: {
     title: 'Party',
+    route: '/party',
     icon: <PartyIcon />,
     subtabs: {
       overview: {
         title: 'Overview',
+        route: '/party/overview',
         element: <Placeholder />,
       },
       kris: {
         title: 'Kris',
+        route: '/party/kris',
         element: <Placeholder />,
       },
       susie: {
         title: 'Susie',
+        route: '/party/susie',
         element: <Placeholder />,
       },
       ralsei: {
         title: 'Ralsei',
+        route: '/party/ralsei',
         element: <Placeholder />,
       },
       noelle: {
         title: 'Noelle',
+        route: '/party/noelle',
         element: <Placeholder />,
       },
     },
   },
   recruits: {
     title: 'Recruits',
+    route: '/recruits',
     icon: <RecruitsIcon />,
     element: <Placeholder />,
   },
   lightWorld: {
     title: 'Light World',
+    route: '/light-world',
     icon: <LightWorldIcon />,
     element: <Placeholder />,
   },
   darkWorld: {
     title: 'Dark World',
+    route: '/dark-world',
     icon: <DarkWorldIcon />,
     element: <Placeholder />,
   },
   settings: {
     title: 'Settings',
+    route: '/settings',
     icon: <SettingsIcon />,
     footer: true,
     element: <Placeholder />,
   },
   about: {
     title: 'About',
+    route: '/about',
     icon: <AboutIcon />,
     subtabs: {
       overview: {
         title: 'Overview',
+        route: '/about/overview',
         element: <About.Overview />,
       },
       changelog: {
         title: 'Changelog',
+        route: '/about/changelog',
         element: <About.Changelog />,
       },
       license: {
         title: 'License',
+        route: '/about/license',
         element: <About.License />,
       },
       attributions: {
         title: 'Attributions',
+        route: '/about/attributions',
         element: <About.Attributions />,
       },
     },
@@ -127,9 +150,15 @@ export const EDITOR_TABS: Record<string, Tab> = {
   },
 } as const;
 
+export const tabsByRoute = Object.entries(EDITOR_TABS).reduce(
+  (acc, [tabId, tab]) => {
+    acc[tab.route] = tabId;
+    return acc;
+  },
+  {} as Record<string, string>,
+);
+
 interface EditorContextProps {
-  activeTabId: string;
-  setActiveTabId: (tab: string) => void;
   isSidebarOpen: boolean;
   setSidebarOpen: (state: boolean) => void;
   isSidebarRetracted: boolean;
@@ -148,7 +177,6 @@ export const useEditor = () => {
 };
 
 export const Editor = () => {
-  const [activeTabId, setActiveTabId] = useState('home');
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [isSidebarRetracted, setSidebarRetraction] = useState(false);
 
@@ -157,8 +185,6 @@ export const Editor = () => {
     .sort((a, b) => Number(a[0].slice(7)) - Number(b[0].slice(7)));
 
   const contextValues: EditorContextProps = {
-    activeTabId,
-    setActiveTabId,
     isSidebarOpen,
     setSidebarOpen,
     isSidebarRetracted,
@@ -174,13 +200,13 @@ export const Editor = () => {
             <div>
               <Sidebar.Group>
                 {Object.entries(EDITOR_TABS)
-                  .filter(([_, tab]) => !tab.footer && !tab.chapter)
+                  .filter(([_, tab]) => !tab.footer)
                   .map(([id, tab]) => (
                     <Sidebar.Item
                       key={id}
-                      id={id}
                       title={tab.title}
                       icon={tab.icon}
+                      to={tab.route}
                     />
                   ))}
               </Sidebar.Group>
@@ -192,9 +218,9 @@ export const Editor = () => {
                   .map(([id, tab]) => (
                     <Sidebar.Item
                       key={id}
-                      id={id}
                       title={tab.title}
                       icon={tab.icon}
+                      to={tab.route}
                     />
                   ))}
               </Sidebar.Group>

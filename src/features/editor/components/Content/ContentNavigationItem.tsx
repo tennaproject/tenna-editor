@@ -1,27 +1,26 @@
-import { useContent } from './Content';
+import { NavLink } from 'react-router-dom';
 
 export interface ContentNavigationItemProps {
-  id: string;
   title: string;
+  to: string;
 }
 
 export const ContentNavigationItem = ({
-  id,
   title,
+  to,
 }: ContentNavigationItemProps) => {
-  const { activeSubtabId, setActiveSubtabId } = useContent();
-
   return (
-    <button
-      key={id}
-      onClick={() => setActiveSubtabId(id)}
-      className={`px-3 py-0.5 font-semibold transition-colors duration-200 text-sm ${
-        activeSubtabId === id
-          ? 'bg-surface-1-active text-text-1'
-          : 'bg-transparent text-text-2 hover:text-text-1 hover:bg-surface-1-hover'
-      }`}
+    <NavLink
+      to={to}
+      className={({ isActive }) =>
+        `px-3 py-0.5 font-semibold transition-colors duration-200 text-sm ${
+          isActive
+            ? 'bg-surface-1-active text-text-1'
+            : 'bg-transparent text-text-2 hover:text-text-1 hover:bg-surface-1-hover'
+        }`
+      }
     >
       {title}
-    </button>
+    </NavLink>
   );
 };
