@@ -13,7 +13,7 @@ export const Sidebar = ({ children }: SidebarProps) => {
   return (
     <aside
       className={`
-        w-55 bg-surface-1 ${hiddenClass} lg:flex flex-col select-none overflow-y-auto
+        w-50 bg-surface-1 ${hiddenClass} lg:flex flex-col select-none overflow-y-auto
        scrollbar-none
       `}
     >

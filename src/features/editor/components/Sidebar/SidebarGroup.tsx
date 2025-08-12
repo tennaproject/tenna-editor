@@ -5,5 +5,5 @@ export interface SidebarGroupProps {
 }
 
 export const SidebarGroup: React.FC<SidebarGroupProps> = ({ children }) => {
-  return <div>{children}</div>;
+  return <div className="flex flex-col gap-2">{children}</div>;
 };

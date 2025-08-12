@@ -1,14 +1,27 @@
-import { useState, createContext, useContext, type JSX } from 'react';
+import {
+  useState,
+  createContext,
+  useContext,
+  type JSX,
+  type ReactNode,
+} from 'react';
 import { Content, Header, Sidebar } from './components';
-import { About, Placeholder } from './views';
+import HomeIcon from '@assets/icons/home.svg';
+import InventoryIcon from '@assets/icons/briefcase.svg';
+import PartyIcon from '@assets/icons/contact.svg';
+import LightWorldIcon from '@assets/icons/sun-alt.svg';
+import RecruitsIcon from '@assets/icons/users.svg';
+import SettingsIcon from '@assets/icons/sliders.svg';
+import AboutIcon from '@assets/icons/book-open.svg';
 
 export interface Subtab {
   title: string;
-  element?: JSX.Element;
+  element?: ReactNode;
 }
 export interface Tab {
   title: string;
-  element?: JSX.Element;
+  element?: ReactNode;
+  icon?: ReactNode;
   subtabs?: Record<string, Subtab>;
   footer?: boolean;
   chapter?: boolean;
@@ -17,6 +30,7 @@ export interface Tab {
 export const EDITOR_TABS: Record<string, Tab> = {
   home: {
     title: 'Home',
+    icon: <HomeIcon />,
     subtabs: {
       overview: {
         title: 'Overview',
@@ -26,6 +40,7 @@ export const EDITOR_TABS: Record<string, Tab> = {
   },
   inventory: {
     title: 'Inventory',
+    icon: <InventoryIcon />,
     subtabs: {
       consumables: {
         title: 'Consumables',
@@ -47,6 +62,7 @@ export const EDITOR_TABS: Record<string, Tab> = {
   },
   party: {
     title: 'Party',
+    icon: <PartyIcon />,
     subtabs: {
       overview: {
         title: 'Overview',
@@ -72,10 +88,12 @@ export const EDITOR_TABS: Record<string, Tab> = {
   },
   recruits: {
     title: 'Recruits',
+    icon: <RecruitsIcon />,
     element: <Placeholder />,
   },
   lightWorld: {
     title: 'Light World',
+    icon: <LightWorldIcon />,
     element: <Placeholder />,
   },
   chapter1: {
@@ -132,11 +150,13 @@ export const EDITOR_TABS: Record<string, Tab> = {
   },
   settings: {
     title: 'Settings',
+    icon: <SettingsIcon />,
     footer: true,
     element: <Placeholder />,
   },
   about: {
     title: 'About',
+    icon: <AboutIcon />,
     subtabs: {
       overview: {
         title: 'Overview',
@@ -204,7 +224,12 @@ export const Editor = () => {
                 {Object.entries(EDITOR_TABS)
                   .filter(([_, tab]) => !tab.footer && !tab.chapter)
                   .map(([id, tab]) => (
-                    <Sidebar.Item key={id} id={id} title={tab.title} />
+                    <Sidebar.Item
+                      key={id}
+                      id={id}
+                      title={tab.title}
+                      icon={tab.icon}
+                    />
                   ))}
               </Sidebar.Group>
 
@@ -242,7 +267,12 @@ export const Editor = () => {
                 {Object.entries(EDITOR_TABS)
                   .filter(([_, tab]) => tab.footer)
                   .map(([id, tab]) => (
-                    <Sidebar.Item key={id} id={id} title={tab.title} />
+                    <Sidebar.Item
+                      key={id}
+                      id={id}
+                      title={tab.title}
+                      icon={tab.icon}
+                    />
                   ))}
               </Sidebar.Group>
             )}

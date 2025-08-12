@@ -12,8 +12,8 @@ export const SidebarItem = ({ id, title, icon }: SidebarItemProps) => {
   const isActive = activeTabId === id;
 
   const baseClasses =
-    'w-full flex items-center gap-3 px-3 py-2 text-left text-base transition-colors';
-  const activeClasses = 'bg-surface-1-active text-text-1 font-bold';
+    'w-full flex items-center text-sm gap-2 px-3 py-2 leading-none text-base transition-colors';
+  const activeClasses = 'bg-surface-1-active text-text-1';
   const inactiveClasses = 'text-text-2 hover:bg-surface-1-hover';
 
   return (
@@ -21,10 +21,8 @@ export const SidebarItem = ({ id, title, icon }: SidebarItemProps) => {
       onClick={() => setActiveTabId(id)}
       className={`${baseClasses} ${isActive ? activeClasses : inactiveClasses}`}
     >
-      {icon && (
-        <span className="w-6 h-6 flex items-center justify-center">{icon}</span>
-      )}
-      <span>{title}</span>
+      {icon && <div className="w-5 h-5">{icon}</div>}
+      <div>{title}</div>
     </button>
   );
 };
