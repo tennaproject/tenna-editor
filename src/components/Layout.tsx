@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Editor } from '@features/editor';
-import { Entry } from './Entry';
+import { ToastContainer } from '@components/Toast';
 
 export const Layout = () => {
   const [saveFile, setSaveFile] = useState<File | null>(null);
@@ -8,8 +8,9 @@ export const Layout = () => {
   return (
     <div className="h-full bg-surface-1">
       <main className="h-full">
-        <Editor></Editor>
+        <Editor />
       </main>
+      <ToastContainer />
     </div>
   );
 };
