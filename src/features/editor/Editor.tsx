@@ -1,15 +1,10 @@
-import {
-  useState,
-  createContext,
-  useContext,
-  type JSX,
-  type ReactNode,
-} from 'react';
+import { useState, createContext, useContext, type ReactNode } from 'react';
 import { Content, Header, Sidebar } from './components';
 import HomeIcon from '@assets/icons/home.svg';
 import InventoryIcon from '@assets/icons/briefcase.svg';
 import PartyIcon from '@assets/icons/contact.svg';
 import LightWorldIcon from '@assets/icons/sun-alt.svg';
+import DarkWorldIcon from '@assets/icons/moon-stars.svg';
 import RecruitsIcon from '@assets/icons/users.svg';
 import SettingsIcon from '@assets/icons/sliders.svg';
 import AboutIcon from '@assets/icons/book-open.svg';
@@ -96,56 +91,9 @@ export const EDITOR_TABS: Record<string, Tab> = {
     icon: <LightWorldIcon />,
     element: <Placeholder />,
   },
-  chapter1: {
-    title: 'Chapter 1',
-    chapter: true,
-    subtabs: {
-      vessel: {
-        title: 'Vessel',
-        element: <Placeholder />,
-      },
-      trashMachine: {
-        title: 'Trash Machine',
-        element: <Placeholder />,
-      },
-      darkWorld: {
-        title: 'Dark World',
-        element: <Placeholder />,
-      },
-      lightWorld: {
-        title: 'Light World',
-        element: <Placeholder />,
-      },
-    },
-  },
-  chapter2: {
-    title: 'Chapter 2',
-    chapter: true,
-    element: <Placeholder />,
-  },
-  chapter3: {
-    title: 'Chapter 3',
-    chapter: true,
-    element: <Placeholder />,
-  },
-  chapter4: {
-    title: 'Chapter 4',
-    chapter: true,
-    element: <Placeholder />,
-  },
-  chapter5: {
-    title: 'Chapter 5',
-    chapter: true,
-    element: <Placeholder />,
-  },
-  chapter6: {
-    title: 'Chapter 6',
-    chapter: true,
-    element: <Placeholder />,
-  },
-  chapter7: {
-    title: 'Chapter 7',
-    chapter: true,
+  darkWorld: {
+    title: 'Dark World',
+    icon: <DarkWorldIcon />,
     element: <Placeholder />,
   },
   settings: {
@@ -184,6 +132,8 @@ interface EditorContextProps {
   setActiveTabId: (tab: string) => void;
   isSidebarOpen: boolean;
   setSidebarOpen: (state: boolean) => void;
+  isSidebarRetracted: boolean;
+  setSidebarRetraction: (state: boolean) => void;
 }
 export const EditorContext = createContext<EditorContextProps | undefined>(
   undefined,
@@ -198,9 +148,9 @@ export const useEditor = () => {
 };
 
 export const Editor = () => {
-  const [activeTabId, setActiveTabId] = useState('inventory');
+  const [activeTabId, setActiveTabId] = useState('home');
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const [chaptersOpen, setChaptersOpen] = useState(false);
+  const [isSidebarRetracted, setSidebarRetraction] = useState(false);
 
   const chapterEntries = Object.entries(EDITOR_TABS)
     .filter(([_, tab]) => !!tab.chapter)
@@ -211,13 +161,15 @@ export const Editor = () => {
     setActiveTabId,
     isSidebarOpen,
     setSidebarOpen,
+    isSidebarRetracted,
+    setSidebarRetraction,
   };
 
   return (
     <EditorContext.Provider value={contextValues}>
       <div className="h-full flex flex-col overflow-hidden">
         <Header />
-        <div className="flex-1 flex min-h-0">
+        <div className="flex-1 flex min-h-0 relative">
           <Sidebar>
             <div>
               <Sidebar.Group>
@@ -231,35 +183,6 @@ export const Editor = () => {
                       icon={tab.icon}
                     />
                   ))}
-              </Sidebar.Group>
-
-              <Sidebar.Group>
-                <button
-                  className="w-full px-3 py-2 text-left text-text-2 hover:bg-surface-1-hover flex items-center justify-between"
-                  aria-expanded={chaptersOpen}
-                  aria-controls="chapters-group"
-                  onClick={() => setChaptersOpen((v) => !v)}
-                >
-                  <span>Chapters</span>
-                  <svg
-                    className={
-                      'h-4 w-4 transition-transform ' +
-                      (chaptersOpen ? 'rotate-90' : '')
-                    }
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path d="M7 5l6 5-6 5V5z" />
-                  </svg>
-                </button>
-
-                {chaptersOpen && (
-                  <div id="chapters-group" className="mt-1 space-y-1 pl-3">
-                    {chapterEntries.map(([id, tab]) => (
-                      <Sidebar.Item key={id} id={id} title={tab.title} />
-                    ))}
-                  </div>
-                )}
               </Sidebar.Group>
             </div>
             {Object.values(EDITOR_TABS).some((t) => t.footer) && (
@@ -281,6 +204,15 @@ export const Editor = () => {
           <div className="flex-1 min-w-0 min-h-0 bg-surface-2">
             <Content />
           </div>
+
+          {isSidebarOpen && (
+            <button
+              type="button"
+              aria-label="Close sidebar"
+              onClick={() => setSidebarOpen(false)}
+              className="lg:hidden fixed inset-0 top-14 bg-overlay backdrop-blur-[1px] z-40"
+            />
+          )}
         </div>
       </div>
     </EditorContext.Provider>

@@ -47,22 +47,26 @@ export const Content = () => {
     <ContentContext.Provider value={contextValues}>
       <div className="bg-surface-2 h-full flex flex-col min-w-0 min-h-0">
         <div className="border-b border-divider">
-          <div className="flex items-center gap-3 py-2 px-4 min-h-15">
+          <div className="flex items-center gap-3 py-2 px-6 min-h-13">
             <h2 className="text-text-1 text-xl font-bold select-none">
               {activeTab.title}
             </h2>
             {activeTab?.subtabs ? (
-              <ContentNavigation>
-                {Object.entries(activeTab.subtabs).map(([subtabId, subtab]) => {
-                  return (
-                    <ContentNavigationItem
-                      key={subtabId}
-                      id={subtabId}
-                      title={subtab.title}
-                    />
-                  );
-                })}
-              </ContentNavigation>
+              <div className="hidden sm:block">
+                <ContentNavigation>
+                  {Object.entries(activeTab.subtabs).map(
+                    ([subtabId, subtab]) => {
+                      return (
+                        <ContentNavigationItem
+                          key={subtabId}
+                          id={subtabId}
+                          title={subtab.title}
+                        />
+                      );
+                    },
+                  )}
+                </ContentNavigation>
+              </div>
             ) : (
               <></>
             )}

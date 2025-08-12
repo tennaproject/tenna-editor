@@ -1,14 +1,47 @@
+import { Button } from '@/components';
 import { useEditor } from '../Editor';
+import SidebarVisibilityIcon from '@assets/icons/menu.svg';
+import SidebarRetractionIcon from '@assets/icons/layout-sidebar-left.svg';
 
 export const Header = () => {
-  const { isSidebarOpen, setSidebarOpen } = useEditor();
+  const {
+    isSidebarOpen,
+    setSidebarOpen,
+    isSidebarRetracted,
+    setSidebarRetraction,
+  } = useEditor();
 
   return (
     <header className="w-full h-14 flex-shrink-0 bg-surface-1 relative select-none">
-      <div className="flex items-center justify-between h-full px-4">
+      <div className="flex items-center justify-between h-full px-3">
         <div className="flex items-center gap-4">
-          <div className="w-8 h-8 bg-red flex-shrink-0" />
+          {/* sidebar visibility button */}
+          <button
+            onClick={() => {
+              setSidebarOpen(!isSidebarOpen);
+            }}
+            className="p-1.5 lg:hidden transition-colors hover:bg-surface-1-hover"
+            aria-label="Toggle sidebar"
+          >
+            <div className="w-6 h-6 text-text-2">
+              <SidebarVisibilityIcon />
+            </div>
+          </button>
 
+          {/* sidebar retraction button */}
+          <button
+            onClick={() => {
+              setSidebarRetraction(!isSidebarRetracted);
+            }}
+            className="p-1.5 hidden lg:inline transition-colors hover:bg-surface-1-hover"
+            aria-label="Toggle sidebar retraction"
+          >
+            <div className="w-6 h-6 text-text-2">
+              <SidebarRetractionIcon />
+            </div>
+          </button>
+
+          <div className="w-8 h-8 bg-red flex-shrink-0" />
           <div className="flex flex-col">
             <h1 className="text-text-1 text-2xl font-bold leading-none">
               TENNA EDITOR
@@ -19,38 +52,7 @@ export const Header = () => {
           </div>
         </div>
 
-        <div className="flex items-center gap-4">
-          <button
-            onClick={() => {
-              setSidebarOpen(!isSidebarOpen);
-            }}
-            className="lg:hidden p-1.5 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
-            aria-label="Toggle menu"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              {isSidebarOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
-          </button>
-        </div>
+        <div className="flex items-center gap-2"></div>
       </div>
     </header>
   );

@@ -1,5 +1,4 @@
 import React from 'react';
-import { SidebarFooter } from './SidebarFooter';
 import { useEditor } from '../..';
 
 export interface SidebarProps {
@@ -7,18 +6,22 @@ export interface SidebarProps {
 }
 
 export const Sidebar = ({ children }: SidebarProps) => {
-  const { isSidebarOpen } = useEditor();
+  const { isSidebarOpen, isSidebarRetracted } = useEditor();
 
-  const hiddenClass = isSidebarOpen ? 'flex' : 'hidden';
+  const hiddenClass = isSidebarOpen
+    ? 'flex fixed lg:static top-14 left-0 bottom-0 z-50'
+    : 'hidden lg:flex';
+
+  const retractedClass = isSidebarRetracted ? 'w-50 lg:w-15' : 'w-50';
   return (
     <aside
       className={`
-        w-50 bg-surface-1 ${hiddenClass} lg:flex flex-col select-none overflow-y-auto
+        ${retractedClass} bg-surface-1 ${hiddenClass} flex-col select-none overflow-y-auto
        scrollbar-none
+       pb-2
       `}
     >
       <nav className="flex-1 p-2 flex flex-col justify-between">{children}</nav>
-      <SidebarFooter />
     </aside>
   );
 };
