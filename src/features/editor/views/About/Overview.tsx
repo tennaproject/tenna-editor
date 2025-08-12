@@ -2,6 +2,16 @@ export const Overview = () => {
   return (
     <div className="flex flex-col mx-auto max-w-5xl py-8 px-8 w-full flex-none min-w-0 gap-4">
       <div>
+        <h2 className="text-2xl font-bold mb-3">Legal Info</h2>
+        <p>This is fan made project.</p>
+        <p>
+          This project is not affiliated with, endorsed by, or in any way
+          associated with Toby Fox or any related entities.
+        </p>
+        <p>DELTARUNE™ is a registered trademark of Royal Sciences, LLC</p>
+        <br />
+      </div>
+      <div>
         <h2 className="text-2xl font-bold mb-3">Source Code</h2>
         <p className="mb-2">
           The source code for Tenna Editor is available on{' '}
