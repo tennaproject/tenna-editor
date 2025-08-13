@@ -13,7 +13,7 @@ interface ButtonProps {
 }
 
 export const Button = ({
-  variant = 'primary',
+  variant = 'ghost',
   size = 'md',
   children,
   onClick,
@@ -28,10 +28,10 @@ export const Button = ({
     'font-medium transition-colors -none -2 -2 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center';
 
   const variantClasses = {
-    primary: 'bg-cyan-600 hover:bg-cyan-700 text-white ',
+    primary: 'bg-surface-2 hover:bg-cyan-700 text-white ',
     secondary: 'bg-gray-600 hover:bg-gray-700 text-white ',
     ghost:
-      'bg-transparent hover:bg-gray-700 text-gray-300 hover:text-white border border-gray-600 ',
+      'bg-transparent hover:bg-gray-700 text-gray-300 hover:text-white border border-border ',
   };
 
   const sizeClasses = {
