@@ -1,8 +1,8 @@
 import { BrowserRouter } from 'react-router-dom';
-import { ToastContainer } from './components';
-import { AppProvider, useApp } from './contexts/AppContext';
-import { Header } from './components/Header';
-import { Sidebar } from '@components/Sidebar';
+import { Suspense } from 'react';
+import { AppRouter } from './router';
+import { AppProvider } from '@contexts';
+import { Sidebar, Header, ToastContainer } from '@components';
 
 import HomeIcon from '@assets/icons/home.svg';
 import InventoryIcon from '@assets/icons/briefcase.svg';
@@ -12,8 +12,6 @@ import DarkWorldIcon from '@assets/icons/moon-stars.svg';
 import RecruitsIcon from '@assets/icons/users.svg';
 import SettingsIcon from '@assets/icons/sliders.svg';
 import AboutIcon from '@assets/icons/book-open.svg';
-import { AppRouter } from './router';
-import { Suspense } from 'react';
 
 export const App = () => {
   return (

@@ -1,4 +1,4 @@
-import { useApp } from '@/contexts/AppContext';
+import { useApp } from '@contexts';
 import { type FC, type ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
 

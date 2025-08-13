@@ -1,9 +1,9 @@
-import { useApp } from '@/contexts/AppContext';
+import { useApp } from '@contexts';
 import SidebarVisibilityIcon from '@assets/icons/menu.svg';
 import SidebarRetractionIcon from '@assets/icons/layout-sidebar-left.svg';
 import DownloadIcon from '@assets/icons/download.svg';
 import UploadIcon from '@assets/icons/upload.svg';
-import { createBackup, serializeSaveFile } from '@/utils';
+import { serializeSaveFile } from '@utils';
 
 export const Header = () => {
   const {

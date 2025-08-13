@@ -1,4 +1,4 @@
-import { Page } from '@/components/Page';
+import { Page } from '@components';
 import { Outlet } from 'react-router-dom';
 
 export const InventoryPage = () => {

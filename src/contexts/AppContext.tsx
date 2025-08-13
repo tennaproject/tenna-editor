@@ -1,5 +1,5 @@
-import { useStorageState } from '@/hooks';
-import type { DeltaruneSave } from '@/types';
+import { useStorageState } from '@hooks';
+import type { DeltaruneSave } from '@types';
 import { createContext, useContext, useMemo, useState } from 'react';
 
 interface AppContext {

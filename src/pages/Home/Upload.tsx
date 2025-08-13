@@ -1,8 +1,8 @@
 import { FileInput } from '@components';
 import { detectChapter, parseSaveFile } from '@utils';
-import type { ChapterIndex } from '@/data';
+import type { ChapterIndex } from '@data';
 import { useState } from 'react';
-import { useApp } from '@/contexts/AppContext';
+import { useApp } from '@contexts';
 
 export const Upload = () => {
   const { setSaveFile } = useApp();

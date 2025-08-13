@@ -1,4 +1,4 @@
-import { useApp } from '@/contexts/AppContext';
+import { useApp } from '@contexts';
 import React, { type FC } from 'react';
 
 export interface SidebarProps {
