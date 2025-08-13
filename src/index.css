@@ -131,8 +131,16 @@
   }
 }
 
-.scrollbar-none {
-  scrollbar-width: none;
+@layer utilities {
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+}
+
+@layer components {
+  .page {
+    @apply flex flex-col mx-auto py-8 px-8 w-full flex-none min-w-0 gap-4 max-w-5xl;
+  }
 }
 
 * {

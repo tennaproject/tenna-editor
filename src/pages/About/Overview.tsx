@@ -1,6 +1,6 @@
 export const Overview = () => {
   return (
-    <div className="flex flex-col mx-auto max-w-5xl py-8 px-8 w-full flex-none min-w-0 gap-4">
+    <div className="page">
       <div>
         <h2 className="text-2xl font-bold mb-3">Legal Info</h2>
         <p>This is fan made project.</p>

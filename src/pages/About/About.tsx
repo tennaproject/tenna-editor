@@ -12,7 +12,9 @@ export const AboutPage = () => {
           <Page.NavItem title="Attributions" to="/about/attributions" />
         </Page.Nav>
       </Page.TopBar>
-      <Outlet />
+      <Page.Content>
+        <Outlet />
+      </Page.Content>
     </Page>
   );
 };

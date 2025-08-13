@@ -41,7 +41,7 @@ export const Upload = () => {
   };
 
   return (
-    <div className="flex flex-col mx-auto max-w-5xl py-8 px-8 w-full flex-none min-w-0 gap-4">
+    <div className="page max-w-7xl">
       <div>
         <h2 className="text-2xl font-bold mb-3">Welcome</h2>
         <p>Tenna Editor is a powerful tool for editing DELTARUNE save files.</p>
@@ -66,7 +66,7 @@ export const Upload = () => {
           Your DELTARUNE save files are typically located in the following
           directories:
         </p>
-        <ul className="list-disc pl-5">
+        <ul className="list-disc pl-5 break-words">
           <li>
             Windows:{' '}
             <span className="font-mono">
