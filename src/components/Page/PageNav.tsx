@@ -6,7 +6,7 @@ export interface PageNavProps {
 
 export const PageNav: FC<PageNavProps> = ({ children }) => {
   return (
-    <nav className="flex gap-1 bg-surface-1 border-1 border-border p-1 overflow-auto">
+    <nav className="flex gap-1 bg-surface-1 border-1 border-border p-1 overflow-auto whitespace-nowrap">
       {children}
     </nav>
   );
