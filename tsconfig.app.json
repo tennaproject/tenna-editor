@@ -28,8 +28,6 @@
       "@/*": ["src/*"],
       "@components": ["src/components"],
       "@components/*": ["src/components/*"],
-      "@features": ["src/features"],
-      "@features/*": ["src/features/*"],
       "@data": ["src/data"],
       "@data/*": ["src/data/*"],
       "@utils": ["src/utils"],
@@ -37,7 +35,17 @@
       "@types": ["src/types"],
       "@types/*": ["src/types/*"],
       "@assets": ["src/assets"],
-      "@assets/*": ["src/assets/*"]
+      "@assets/*": ["src/assets/*"],
+      "@hooks": ["src/hooks"],
+      "@hooks/*": ["src/hooks/*"],
+      "@pages": ["src/pages"],
+      "@pages/*": ["src/pages/*"],
+      "@contexts": ["src/contexts"],
+      "@contexts/*": ["src/contexts/*"],
+      "@services": ["src/services"],
+      "@services/*": ["src/services/*"],
+      "@devtools": ["src/devtools"],
+      "@devtools/*": ["src/devtools/*"]
     }
   },
   "include": ["src"]
