@@ -5,3 +5,4 @@ export * from './Page';
 export * from './Sidebar';
 export * from './Header';
 export * from './Card';
+export * from './Section';
