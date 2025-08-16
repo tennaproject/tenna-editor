@@ -4,3 +4,4 @@ export * from './Toast';
 export * from './Page';
 export * from './Sidebar';
 export * from './Header';
+export * from './Card';
