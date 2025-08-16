@@ -35,9 +35,157 @@ function detectSaveFormat(count: number): SaveFileFormat {
   return 'unknown';
 }
 
-function parseV1Save(_cursor: LineCursor): V1Save {
-  // TODO: Implement V1 save parsing
-  return {} as V1Save;
+function parseV1Save(cursor: LineCursor): V1Save {
+  const playerName = cursor.nextString();
+  const characterName = cursor.nextString();
+  cursor.skip(5);
+
+  const party = [cursor.nextNumber(), cursor.nextNumber(), cursor.nextNumber()];
+  const money = cursor.nextNumber();
+
+  const xp = cursor.nextNumber();
+  const lv = cursor.nextNumber();
+  const inv = cursor.nextNumber();
+  const invc = cursor.nextNumber();
+
+  const inDarkWorld = !!cursor.nextNumber();
+
+  const characters = [];
+  for (let i = 0; i < 4; i += 1) {
+    const health = cursor.nextNumber();
+    const maxHealth = cursor.nextNumber();
+    const attack = cursor.nextNumber();
+    const defence = cursor.nextNumber();
+    const magic = cursor.nextNumber();
+    const guts = cursor.nextNumber();
+    const weapon = cursor.nextNumber();
+    const primaryArmor = cursor.nextNumber();
+    const secondaryArmor = cursor.nextNumber();
+    const weaponStyle = cursor.nextString();
+
+    const weaponStats = [];
+    for (let j = 0; j < 4; j += 1) {
+      const attack = cursor.nextNumber();
+      const defence = cursor.nextNumber();
+      const magic = cursor.nextNumber();
+      const bolts = cursor.nextNumber();
+      const grazeAmount = cursor.nextNumber();
+      const grazeSize = cursor.nextNumber();
+      const boltSpeed = cursor.nextNumber();
+      const special = cursor.nextNumber();
+
+      weaponStats.push({
+        attack,
+        defence,
+        magic,
+        bolts,
+        grazeAmount,
+        grazeSize,
+        boltSpeed,
+        special,
+      });
+    }
+
+    const spells = [];
+    for (let k = 0; k < 12; k += 1) {
+      spells.push(cursor.nextNumber());
+    }
+
+    characters.push({
+      health,
+      maxHealth,
+      attack,
+      defence,
+      magic,
+      guts,
+      weapon,
+      primaryArmor,
+      secondaryArmor,
+      weaponStyle,
+      weaponStats,
+      spells,
+    });
+  }
+
+  const boltSpeed = cursor.nextNumber();
+  const grazeAmount = cursor.nextNumber();
+  const grazeSize = cursor.nextNumber();
+
+  // Inventory stored in alternating pairs
+  const inventory = {
+    consumables: [] as ConsumableIndex[],
+    keyItems: [] as KeyItemIndex[],
+    weapons: [] as WeaponIndex[],
+    armors: [] as ArmorIndex[],
+  };
+
+  for (let i = 0; i < 13; i += 1) {
+    inventory.consumables.push(cursor.nextNumber() as ConsumableIndex);
+    inventory.keyItems.push(cursor.nextNumber() as KeyItemIndex);
+    inventory.weapons.push(cursor.nextNumber() as WeaponIndex);
+    inventory.armors.push(cursor.nextNumber() as ArmorIndex);
+  }
+
+  const tension = cursor.nextNumber();
+  const maxTension = cursor.nextNumber();
+
+  const lightWorld = {
+    weapon: cursor.nextNumber(),
+    armor: cursor.nextNumber(),
+    experience: cursor.nextNumber(),
+    level: cursor.nextNumber(),
+    money: cursor.nextNumber(),
+    health: cursor.nextNumber(),
+    maxHealth: cursor.nextNumber(),
+    attack: cursor.nextNumber(),
+    defence: cursor.nextNumber(),
+    weaponStrength: cursor.nextNumber(),
+    armorDefence: cursor.nextNumber(),
+    items: [] as number[],
+    phone: [] as number[],
+  };
+
+  for (let i = 0; i < 8; i += 1) {
+    lightWorld.items.push(cursor.nextNumber());
+    lightWorld.phone.push(cursor.nextNumber());
+  }
+
+  const flags: FlagIndex[] = [];
+  for (let i = 0; i < 9999; i += 1) {
+    flags.push(cursor.nextNumber() as FlagIndex);
+  }
+
+  const plot = cursor.nextNumber();
+  const room = cursor.nextNumber();
+  const time = cursor.nextNumber();
+
+  return {
+    format: 'v1',
+    chapter: 0,
+    playerName,
+    characterName,
+    party: party as [number, number, number],
+    money,
+    xp,
+    lv,
+    inv,
+    invc,
+    inDarkWorld,
+    characters,
+    battle: {
+      boltSpeed,
+      grazeAmount,
+      grazeSize,
+      tension,
+      maxTension,
+    },
+    inventory,
+    lightWorld,
+    flags,
+    plot,
+    room,
+    time,
+  };
 }
 
 function parseV2Save(cursor: LineCursor): V2Save {

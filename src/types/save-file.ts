@@ -18,6 +18,9 @@ export interface WeaponStats {
   grazeSize: number;
   boltSpeed: number;
   special: number;
+}
+
+export interface WeaponStatsV2 extends WeaponStats {
   element: number;
   elementAmount: number;
 }
@@ -32,9 +35,13 @@ export interface Character {
   weapon: number;
   primaryArmor: number;
   secondaryArmor: number;
-  weaponStyle: number;
+  weaponStyle: number | string;
   weaponStats: WeaponStats[];
   spells: number[];
+}
+
+export interface CharacterV2 extends Character {
+  weaponStats: WeaponStatsV2[];
 }
 
 export interface BattleState {
@@ -50,6 +57,9 @@ export interface Inventory {
   keyItems: KeyItemIndex[];
   weapons: WeaponIndex[];
   armors: ArmorIndex[];
+}
+
+export interface InventoryV2 extends Inventory {
   storage: ConsumableIndex[];
 }
 
@@ -77,6 +87,27 @@ export interface SaveFileBase {
 export interface V1Save extends SaveFileBase {
   format: 'v1';
   chapter: Chapter;
+
+  playerName: string;
+  characterName: string;
+
+  party: [number, number, number];
+  money: number;
+  xp: number;
+  lv: number;
+  inv: number;
+  invc: number;
+  inDarkWorld: boolean;
+
+  characters: Character[];
+  battle: BattleState;
+  inventory: Inventory;
+  lightWorld: LightWorld;
+
+  flags: FlagIndex[];
+  plot: number;
+  room: number;
+  time: number;
 }
 
 export interface V2Save extends SaveFileBase {
@@ -94,9 +125,9 @@ export interface V2Save extends SaveFileBase {
   invc: number;
   inDarkWorld: boolean;
 
-  characters: Character[];
+  characters: CharacterV2[];
   battle: BattleState;
-  inventory: Inventory;
+  inventory: InventoryV2;
   lightWorld: LightWorld;
 
   flags: FlagIndex[];
