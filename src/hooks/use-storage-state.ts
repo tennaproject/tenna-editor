@@ -11,7 +11,11 @@ export const useStorageState = <T extends StorageKey>(
   key: T,
 ): [
   (typeof STORAGE_SCHEMA)[T],
-  (value: (typeof STORAGE_SCHEMA)[T]) => void,
+  (
+    value:
+      | (typeof STORAGE_SCHEMA)[T]
+      | ((prev: (typeof STORAGE_SCHEMA)[T]) => (typeof STORAGE_SCHEMA)[T]),
+  ) => void,
 ] => {
   const [state, setState] = useState<(typeof STORAGE_SCHEMA)[T]>(() =>
     getStorage(key),
@@ -30,9 +34,23 @@ export const useStorageState = <T extends StorageKey>(
     };
   }, [key]);
 
-  const updateStorage = (value: (typeof STORAGE_SCHEMA)[T]) => {
-    setState(value);
-    setStorage(key, value);
+  const updateStorage = (
+    valueOrUpdater:
+      | (typeof STORAGE_SCHEMA)[T]
+      | ((prev: (typeof STORAGE_SCHEMA)[T]) => (typeof STORAGE_SCHEMA)[T]),
+  ) => {
+    setState((prev) => {
+      const next =
+        typeof valueOrUpdater === 'function'
+          ? (
+              valueOrUpdater as (
+                prev: (typeof STORAGE_SCHEMA)[T],
+              ) => (typeof STORAGE_SCHEMA)[T]
+            )(prev)
+          : valueOrUpdater;
+      setStorage(key, next);
+      return next;
+    });
   };
 
   return [state, updateStorage];
