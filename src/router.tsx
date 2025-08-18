@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import {
   AboutPage,
@@ -10,6 +11,30 @@ import {
   DarkWorldPage,
   SettingsPage,
 } from './pages';
+import { useApp } from '@contexts';
+import { toast } from '@components';
+import type { ReactElement } from 'react';
+
+const RequireSave = ({ children }: { children: ReactElement }) => {
+  const { saveFile } = useApp();
+  const shownRef = useRef(false);
+
+  useEffect(() => {
+    if (!saveFile && !shownRef.current) {
+      toast('There is no save loaded', 'error');
+      shownRef.current = true;
+    }
+
+    if (saveFile) {
+      shownRef.current = false;
+    }
+  }, [saveFile]);
+
+  if (!saveFile) {
+    return <Navigate to="/home" replace />;
+  }
+  return children;
+};
 
 export const AppRouter = () => {
   const location = useLocation();
@@ -39,7 +64,14 @@ export const AppRouter = () => {
             element={<AboutPage.Attributions />}
           ></Route>
         </Route>
-        <Route path="/inventory" element={<InventoryPage />}>
+        <Route
+          path="/inventory"
+          element={
+            <RequireSave>
+              <InventoryPage />
+            </RequireSave>
+          }
+        >
           <Route index element={<Navigate to="consumables" replace />} />
           <Route
             path="consumables"
@@ -49,7 +81,14 @@ export const AppRouter = () => {
           <Route path="weapons" element={<InventoryPage.Weapons />}></Route>
           <Route path="armors" element={<InventoryPage.Armors />}></Route>
         </Route>
-        <Route path="/party" element={<PartyPage />}>
+        <Route
+          path="/party"
+          element={
+            <RequireSave>
+              <PartyPage />
+            </RequireSave>
+          }
+        >
           <Route index element={<Navigate to="overview" replace />} />
           <Route path="overview" element={<PartyPage.Overview />}></Route>
           <Route path="kris" element={<PartyPage.Kris />}></Route>
@@ -57,9 +96,30 @@ export const AppRouter = () => {
           <Route path="ralsei" element={<PartyPage.Ralsei />}></Route>
           <Route path="noelle" element={<PartyPage.Noelle />}></Route>
         </Route>
-        <Route path="/recruits" element={<RecruitsPage />}></Route>
-        <Route path="/light-world" element={<LightWorldPage />}></Route>
-        <Route path="/dark-world" element={<DarkWorldPage />}></Route>
+        <Route
+          path="/recruits"
+          element={
+            <RequireSave>
+              <RecruitsPage />
+            </RequireSave>
+          }
+        ></Route>
+        <Route
+          path="/light-world"
+          element={
+            <RequireSave>
+              <LightWorldPage />
+            </RequireSave>
+          }
+        ></Route>
+        <Route
+          path="/dark-world"
+          element={
+            <RequireSave>
+              <DarkWorldPage />
+            </RequireSave>
+          }
+        ></Route>
         <Route path="/settings" element={<SettingsPage />}></Route>
         <Route path="*" element={<Navigate to="/home" replace />} />
       </Routes>

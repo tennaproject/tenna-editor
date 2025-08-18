@@ -17,6 +17,7 @@ export const App = () => {
   return (
     <BrowserRouter>
       <AppProvider>
+        <ToastContainer />
         <div className="h-full bg-surface-1">
           <main className="h-full flex flex-col overflow-hidden">
             <Header />
@@ -28,26 +29,31 @@ export const App = () => {
                     title="Inventory"
                     icon={<InventoryIcon />}
                     to="/inventory"
+                    requireSave
                   />
                   <Sidebar.Item
                     title="Party"
                     icon={<PartyIcon />}
                     to="/party"
+                    requireSave
                   />
                   <Sidebar.Item
                     title="Light World"
                     icon={<LightWorldIcon />}
                     to="/light-world"
+                    requireSave
                   />
                   <Sidebar.Item
                     title="Dark World"
                     icon={<DarkWorldIcon />}
                     to="/dark-world"
+                    requireSave
                   />
                   <Sidebar.Item
                     title="Recruits"
                     icon={<RecruitsIcon />}
                     to="/recruits"
+                    requireSave
                   />
                 </Sidebar.Group>
                 <Sidebar.Group>
@@ -73,7 +79,6 @@ export const App = () => {
               <Sidebar.Overlay />
             </div>
           </main>
-          <ToastContainer />
         </div>
       </AppProvider>
     </BrowserRouter>

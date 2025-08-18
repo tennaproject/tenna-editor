@@ -6,30 +6,60 @@ export interface SidebarItemProps {
   title: string;
   icon?: ReactNode;
   to: string;
+  requireSave?: boolean;
 }
 
-export const SidebarItem: FC<SidebarItemProps> = ({ title, icon, to }) => {
-  const { isSidebarRetracted } = useApp();
+export const SidebarItem: FC<SidebarItemProps> = ({
+  title,
+  icon,
+  to,
+  requireSave,
+}) => {
+  const { isSidebarRetracted, saveFile } = useApp();
 
   const baseClasses =
-    'w-full flex items-center text-sm gap-2 px-3 py-2 leading-none text-base transition-all duration-300 ease-in-out';
+    'w-full flex items-center text-sm px-0 h-12 leading-none transition-all duration-200 ease-in-out';
   const activeClasses = 'bg-surface-1-active text-text-1';
   const inactiveClasses = 'text-text-2 hover:bg-surface-1-hover';
+  const disabledClasses = 'opacity-20 pointer-events-none';
+  const isDisabled = requireSave && !saveFile;
 
   const titleClasses = isSidebarRetracted
-    ? 'lg:opacity-0 lg:scale-95 lg:pointer-events-none transition-all duration-300 ease-in-out'
-    : 'transition-all duration-300 ease-in-out';
+    ? 'lg:opacity-0 lg:pointer-events-none lg:w-0 lg:max-w-0 lg:m-0 lg:p-0 lg:overflow-hidden transition-all duration-200 ease-in-out'
+    : 'transition-all duration-200 ease-in-out';
 
   return (
     <NavLink
       to={to}
+      aria-label={title}
+      onClick={(e) => {
+        if (isDisabled) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }}
+      tabIndex={isDisabled ? -1 : 0}
+      aria-disabled={isDisabled}
       className={({ isActive }) =>
-        `${baseClasses} ${isActive ? activeClasses : inactiveClasses}`
+        `${baseClasses} ${
+          isDisabled
+            ? disabledClasses
+            : isActive
+              ? activeClasses
+              : inactiveClasses
+        }`
       }
     >
-      {icon && <div className="w-5 h-5 flex-shrink-0">{icon}</div>}
-      <div className={`${titleClasses} whitespace-nowrap overflow-hidden`}>
-        {title}
+      <div className="flex w-full items-center h-full">
+        <div className="w-12 h-full flex items-center justify-center">
+          {icon && <div className="w-5 h-5">{icon}</div>}
+        </div>
+        <div
+          className={`flex-1 ${titleClasses} whitespace-nowrap overflow-hidden`}
+          aria-hidden={isSidebarRetracted}
+        >
+          {title}
+        </div>
       </div>
     </NavLink>
   );

@@ -17,53 +17,42 @@ export const Sidebar: FC<SidebarProps> = ({ children }) => {
     return false;
   });
 
-  const [isTransitioning, setIsTransitioning] = useState(false);
-
   useEffect(() => {
     const mediaQuery = window.matchMedia('(min-width: 1024px)');
 
-    // Listen for changes
     const handleChange = (e: MediaQueryListEvent) => {
-      setIsTransitioning(true);
       setIsLargeScreen(e.matches);
-
-      // Reset transition state after a brief delay
-      setTimeout(() => setIsTransitioning(false), 100);
     };
     mediaQuery.addEventListener('change', handleChange);
 
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
-  const springTransition = {
-    type: 'spring',
-    stiffness: 300,
-    damping: 30,
-  } as const;
-
-  const instantTransition = {
-    duration: 0,
+  const tweenTransition = {
+    type: 'tween',
+    duration: 0.2,
+    ease: 'easeInOut',
   } as const;
 
   const sidebarVariants: Variants = {
     closed: {
       x: '-100%',
-      transition: isTransitioning ? instantTransition : springTransition,
+      transition: tweenTransition,
     },
     expanded: {
       x: 0,
       width: 200,
-      transition: isTransitioning ? instantTransition : springTransition,
+      transition: tweenTransition,
     },
     retracted: {
       x: 0,
-      width: 60,
-      transition: isTransitioning ? instantTransition : springTransition,
+      width: 70,
+      transition: tweenTransition,
     },
   };
 
   const baseClass =
-    'bg-surface-1 flex flex-col select-none overflow-y-auto scrollbar-none pb-2';
+    'bg-surface-1 flex flex-col select-none overflow-y-auto scrollbar-none p-2';
 
   const animationState = useMemo(() => {
     if (isLargeScreen) {
@@ -82,7 +71,7 @@ export const Sidebar: FC<SidebarProps> = ({ children }) => {
       <motion.nav
         animate={{ opacity: isLargeScreen || isSidebarOpen ? 1 : 0 }}
         transition={{ duration: 0.2 }}
-        className="flex-1 p-2 flex flex-col justify-between"
+        className="flex-1 py-2 flex flex-col justify-between"
       >
         {children}
       </motion.nav>
