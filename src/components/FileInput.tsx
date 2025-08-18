@@ -6,11 +6,11 @@ import {
   type KeyboardEvent,
 } from 'react';
 
-export const FileInput = ({
-  onFileSelect,
-}: {
+interface FileInputProps {
   onFileSelect?: (file: File) => void;
-}) => {
+}
+
+export function FileInput({ onFileSelect }: FileInputProps) {
   const [isDragActive, setIsDragActive] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -89,4 +89,4 @@ export const FileInput = ({
       </div>
     </div>
   );
-};
+}

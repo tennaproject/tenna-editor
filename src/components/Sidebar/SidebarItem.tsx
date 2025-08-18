@@ -1,5 +1,5 @@
 import { useApp } from '@contexts';
-import { type FC, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
 
 export interface SidebarItemProps {
@@ -9,12 +9,12 @@ export interface SidebarItemProps {
   requireSave?: boolean;
 }
 
-export const SidebarItem: FC<SidebarItemProps> = ({
+export function SidebarItem({
   title,
   icon,
   to,
   requireSave,
-}) => {
+}: SidebarItemProps) {
   const { isSidebarRetracted, saveFile } = useApp();
 
   const baseClasses =
@@ -63,4 +63,4 @@ export const SidebarItem: FC<SidebarItemProps> = ({
       </div>
     </NavLink>
   );
-};
+}

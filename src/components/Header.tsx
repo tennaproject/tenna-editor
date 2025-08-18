@@ -5,7 +5,7 @@ import DownloadIcon from '@assets/icons/download.svg';
 import UploadIcon from '@assets/icons/upload.svg';
 import { serializeSaveFile } from '@utils';
 
-export const Header = () => {
+export function Header() {
   const {
     isSidebarOpen,
     setSidebarOpen,
@@ -92,4 +92,4 @@ export const Header = () => {
       </div>
     </header>
   );
-};
+}

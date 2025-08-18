@@ -13,7 +13,7 @@ import RecruitsIcon from '@assets/icons/users.svg';
 import SettingsIcon from '@assets/icons/sliders.svg';
 import AboutIcon from '@assets/icons/book-open.svg';
 
-export const App = () => {
+export function App() {
   return (
     <BrowserRouter>
       <AppProvider>
@@ -83,4 +83,4 @@ export const App = () => {
       </AppProvider>
     </BrowserRouter>
   );
-};
+}

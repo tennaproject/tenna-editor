@@ -15,7 +15,11 @@ import { useApp } from '@contexts';
 import { toast } from '@components';
 import type { ReactElement } from 'react';
 
-const RequireSave = ({ children }: { children: ReactElement }) => {
+interface RequireSaveProps {
+  children: ReactElement;
+}
+
+function RequireSave({ children }: RequireSaveProps) {
   const { saveFile } = useApp();
   const shownRef = useRef(false);
 
@@ -34,9 +38,9 @@ const RequireSave = ({ children }: { children: ReactElement }) => {
     return <Navigate to="/home" replace />;
   }
   return children;
-};
+}
 
-export const AppRouter = () => {
+export function AppRouter() {
   const location = useLocation();
 
   return (
@@ -125,4 +129,4 @@ export const AppRouter = () => {
       </Routes>
     </AnimatePresence>
   );
-};
+}

@@ -1,8 +1,7 @@
 import { useApp } from '@contexts';
-import type { FC } from 'react';
 import { motion } from 'framer-motion';
 
-export const SidebarOverlay: FC = () => {
+export function SidebarOverlay() {
   const { isSidebarOpen, setSidebarOpen } = useApp();
 
   return (
@@ -17,4 +16,4 @@ export const SidebarOverlay: FC = () => {
       />
     </>
   );
-};
+}

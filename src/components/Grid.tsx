@@ -1,4 +1,4 @@
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 interface GridProps {
   children: ReactNode;
@@ -6,7 +6,7 @@ interface GridProps {
   className?: string;
 }
 
-export const Grid: FC<GridProps> = ({ children, cols = 2, className = '' }) => {
+export function Grid({ children, cols = 2, className = '' }: GridProps) {
   const colsClass = {
     1: 'grid-cols-1',
     2: 'grid-cols-1 lg:grid-cols-2',
@@ -19,4 +19,4 @@ export const Grid: FC<GridProps> = ({ children, cols = 2, className = '' }) => {
   return (
     <div className={`grid ${colsClass[cols]} ${className}`}>{children}</div>
   );
-};
+}

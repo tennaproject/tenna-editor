@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 
 export interface PageNavItemProps {
@@ -6,7 +5,7 @@ export interface PageNavItemProps {
   to: string;
 }
 
-export const PageNavItem: FC<PageNavItemProps> = ({ title, to }) => {
+export function PageNavItem({ title, to }: PageNavItemProps) {
   return (
     <NavLink
       to={to}
@@ -21,4 +20,4 @@ export const PageNavItem: FC<PageNavItemProps> = ({ title, to }) => {
       {title}
     </NavLink>
   );
-};
+}

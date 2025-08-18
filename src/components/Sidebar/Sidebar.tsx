@@ -1,12 +1,12 @@
 import { useApp } from '@contexts';
-import React, { type FC, useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { motion, type Variants } from 'framer-motion';
 
 export interface SidebarProps {
   children?: React.ReactNode;
 }
 
-export const Sidebar: FC<SidebarProps> = ({ children }) => {
+export function Sidebar({ children }: SidebarProps) {
   const { isSidebarOpen, isSidebarRetracted } = useApp();
 
   const [isLargeScreen, setIsLargeScreen] = useState(() => {
@@ -77,4 +77,4 @@ export const Sidebar: FC<SidebarProps> = ({ children }) => {
       </motion.nav>
     </motion.aside>
   );
-};
+}

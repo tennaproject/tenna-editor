@@ -13,15 +13,15 @@ export type ToastOptions = [
 let pushToast: (...args: ToastOptions) => void;
 const buffer: ToastOptions[] = [];
 
-export const toast = (...args: ToastOptions) => {
+export function toast(...args: ToastOptions) {
   if (!pushToast) {
     buffer.push(args);
     return;
   }
   pushToast(...args);
-};
+}
 
-export const ToastContainer = () => {
+export function ToastContainer() {
   const [toasts, setToasts] = useState<
     {
       id: string;
@@ -89,4 +89,4 @@ export const ToastContainer = () => {
       ))}
     </div>
   );
-};
+}

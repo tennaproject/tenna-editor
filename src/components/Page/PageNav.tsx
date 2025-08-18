@@ -1,13 +1,13 @@
-import { type FC, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 export interface PageNavProps {
   children: ReactNode;
 }
 
-export const PageNav: FC<PageNavProps> = ({ children }) => {
+export function PageNav({ children }: PageNavProps) {
   return (
     <nav className="flex gap-1 bg-surface-1 border-1 border-border p-1 overflow-auto whitespace-nowrap">
       {children}
     </nav>
   );
-};
+}
