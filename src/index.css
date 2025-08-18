@@ -26,7 +26,7 @@
   --color-surface-3-hover: var(--color-tenna-650);
   --color-surface-3-active: var(--color-tenna-550);
 
-  --color-border: var(--color-tenna-750);
+  --color-border: var(--color-tenna-700);
   --color-divider: #343145;
   --color-overlay: #0d0d12ab; /* 67% alpha */
 
@@ -131,6 +131,17 @@
   }
 }
 
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
 @layer utilities {
   .scrollbar-none {
     scrollbar-width: none;
@@ -139,7 +150,7 @@
 
 @layer components {
   .page {
-    @apply flex flex-col mx-auto p-6 w-full flex-none min-w-0 gap-4 max-w-5xl;
+    @apply flex flex-col mx-auto p-6 w-full flex-none min-w-0 gap-4 max-w-7xl;
   }
 }
 
