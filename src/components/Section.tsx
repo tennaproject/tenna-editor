@@ -1,15 +1,16 @@
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 interface SectionProps {
-  title: string;
+  id?: string;
+  className?: string;
   children?: ReactNode;
 }
 
-export const Section: FC<SectionProps> = ({ title, children }) => {
+export function Section({ id, className, children }: SectionProps) {
+  const customClass = className ? ` ${className}` : '';
   return (
-    <section>
-      <h1 className="text-2xl font-bold mb-4">{title}</h1>
-      <div>{children}</div>
+    <section id={id} className={`w-full${customClass}`}>
+      {children}
     </section>
   );
-};
+}

@@ -1,10 +1,31 @@
 import { motion } from 'framer-motion';
-import type { FC, ReactNode } from 'react';
+import { useEffect, type ReactNode } from 'react';
+import { useLocation } from 'react-router-dom';
 
 interface PageProps {
   children?: ReactNode;
 }
-export const Page: FC<PageProps> = ({ children }) => {
+export function Page({ children }: PageProps) {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace('#', '');
+      const element = document.getElementById(id) as HTMLElement | null;
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+
+        element.animate(
+          [
+            { boxShadow: '0 0 0 8px var(--color-blue)' },
+            { boxShadow: '0 0 0 0 var(--color-blue)' },
+          ],
+          { duration: 1500, easing: 'ease-out' },
+        );
+      }
+    }
+  }, [location]);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -16,4 +37,4 @@ export const Page: FC<PageProps> = ({ children }) => {
       {children}
     </motion.div>
   );
-};
+}
