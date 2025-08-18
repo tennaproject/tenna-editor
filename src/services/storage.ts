@@ -1,7 +1,11 @@
+import type { DeltaruneSave } from '@types';
+
 export const STORAGE_NAMESPACE = 'tenna:v1:';
 
 export const STORAGE_SCHEMA = {
   sidebarRetracted: false,
+  saveFile: null as DeltaruneSave | null,
+  originalSaveFile: null as DeltaruneSave | null,
 };
 
 export type StorageKey = keyof typeof STORAGE_SCHEMA;
