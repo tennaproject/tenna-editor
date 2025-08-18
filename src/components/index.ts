@@ -7,5 +7,6 @@ export * from './Header';
 export * from './Card';
 export * from './Section';
 export * from './TextInput';
+export * from './NumberInput';
 export * from './Grid';
 export * from './Heading';
