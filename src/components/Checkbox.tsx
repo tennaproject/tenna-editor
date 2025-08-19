@@ -38,30 +38,41 @@ export function Checkbox({
 
   return (
     <div
-      className={`flex items-center gap-2 select-none ${disabled ? 'opacity-40 cursor-not-allowed' : ''} ${className}`}
+      className={`flex items-center gap-3 select-none ${disabled ? 'opacity-50' : ''} ${className}`}
     >
-      <span className="relative inline-flex items-center justify-center">
+      <span className="relative inline-flex items-center justify-center group">
         <input
           type="checkbox"
-          className="absolute inset-0 m-0 w-5 h-5 opacity-0 cursor-pointer"
+          className={`absolute inset-0 m-0 w-5 h-5 opacity-0 ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'} peer z-10`}
           checked={currentChecked}
           onChange={handleChange}
           disabled={disabled}
           aria-checked={currentChecked}
         />
         <span
-          className={`w-5 h-5  borderborder-border flex items-center justify-center transition-colors duration-150
-            ${currentChecked ? ' bg-red ' : 'bg-surface-3'}
-            ${disabled ? 'pointer-events-none' : 'peer-focus-visible:outline-none peer-focus-visible:ring-1 '}
+          className={`w-5 h-5 border border-border transition-all duration-200 ease-in-out
+            shadow-sm hover:shadow-md pointer-events-none z-0
+            flex items-center justify-center
+            ${
+              currentChecked
+                ? 'bg-red border-red shadow-red/20 hover:bg-red/90 hover:shadow-red/30'
+                : 'bg-surface-3 hover:bg-surface-2 hover:border-border/60'
+            }
+            ${
+              disabled
+                ? 'shadow-none'
+                : 'peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-red/30 peer-focus-visible:ring-offset-1'
+            }
           `}
           aria-hidden
         >
           {currentChecked ? (
             <svg
               viewBox="0 0 24 24"
-              className="w-4 h-4 stroke-current opacity-100 transition-opacity duration-150 text-text-1"
+              className="w-3 h-3 stroke-current opacity-100 transition-all duration-200 ease-in-out text-white drop-shadow-sm"
               fill="none"
-              strokeWidth={3}
+              strokeWidth={3.5}
+              strokeLinecap="square"
             >
               <path d="M5 13l4 4 10-10" />
             </svg>
@@ -71,7 +82,9 @@ export function Checkbox({
 
       <span className="leading-none">
         {label && (
-          <span className="text-sm text-text-2 leading-none">{label}</span>
+          <span className="text-sm text-text-2 leading-none transition-colors duration-150 group-hover:text-text-1">
+            {label}
+          </span>
         )}
       </span>
     </div>
