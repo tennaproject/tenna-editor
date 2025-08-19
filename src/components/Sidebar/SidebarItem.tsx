@@ -1,5 +1,5 @@
 import { useUi, useSave } from '@contexts';
-import { useMemo, memo, type ReactNode } from 'react';
+import { useMemo, useCallback, memo, type ReactNode } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
 export interface SidebarItemProps {
@@ -34,25 +34,27 @@ export const SidebarItem = memo(function SidebarItem({
     ? 'lg:opacity-0 lg:pointer-events-none lg:w-0 lg:max-w-0 lg:m-0 lg:p-0 lg:overflow-hidden transition-all duration-200 ease-in-out'
     : 'transition-all duration-200 ease-in-out';
 
+  const blockNavigation = useMemo(() => {
+    const currentRoot = location.pathname.split('/').filter(Boolean)[0] ?? '';
+    const targetRoot = to.split('/').filter(Boolean)[0] ?? '';
+    return currentRoot === targetRoot;
+  }, [location.pathname, to]);
+
+  const handleClick = useCallback(
+    (e: React.MouseEvent) => {
+      if (isDisabled || blockNavigation) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    },
+    [isDisabled, blockNavigation],
+  );
+
   return !isHidden ? (
     <NavLink
       to={to}
       aria-label={title}
-      onClick={(e) => {
-        if (isDisabled) {
-          e.preventDefault();
-          e.stopPropagation();
-        } else {
-          // Prevent navigation if we are in the same space
-          const slices = location.pathname.split('/').filter(Boolean);
-          const toSlices = to.split('/').filter(Boolean);
-
-          if (slices[0] === toSlices[0]) {
-            e.preventDefault();
-            e.stopPropagation();
-          }
-        }
-      }}
+      onClick={handleClick}
       tabIndex={isDisabled ? -1 : 0}
       aria-disabled={isDisabled}
       className={({ isActive }) =>
