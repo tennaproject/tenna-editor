@@ -4,6 +4,9 @@ import { createContext, useContext, useMemo, useState } from 'react';
 import { deepEqual } from '@utils';
 
 interface AppContext {
+  devmode: boolean;
+  setDevmode: (state: boolean) => void;
+
   isSidebarOpen: boolean;
   setSidebarOpen: (state: boolean) => void;
   isSidebarRetracted: boolean;
@@ -33,6 +36,8 @@ interface AppProviderProps {
 }
 
 export const AppProvider = ({ children }: AppProviderProps) => {
+  const [devmode, setDevmode] = useStorageState('devmode');
+
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [isSidebarRetracted, setSidebarRetraction] =
     useStorageState('sidebarRetracted');
@@ -105,6 +110,9 @@ export const AppProvider = ({ children }: AppProviderProps) => {
 
   const value = useMemo<AppContext>(
     () => ({
+      devmode,
+      setDevmode,
+
       isSidebarOpen,
       setSidebarOpen,
       isSidebarRetracted,
@@ -123,7 +131,14 @@ export const AppProvider = ({ children }: AppProviderProps) => {
       revertSave,
       isDirty,
     }),
-    [isSidebarOpen, isSidebarRetracted, saveFile, originalSaveFile, isDirty],
+    [
+      devmode,
+      isSidebarOpen,
+      isSidebarRetracted,
+      saveFile,
+      originalSaveFile,
+      isDirty,
+    ],
   );
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

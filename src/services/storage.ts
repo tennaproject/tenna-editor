@@ -3,6 +3,8 @@ import type { DeltaruneSave } from '@types';
 export const STORAGE_NAMESPACE = 'tenna:v1:';
 
 export const STORAGE_SCHEMA = {
+  devmode: false,
+
   sidebarRetracted: false,
   saveFile: null as DeltaruneSave | null,
   originalSaveFile: null as DeltaruneSave | null,

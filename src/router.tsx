@@ -14,6 +14,33 @@ import {
 import { useApp } from '@contexts';
 import { toast } from '@components';
 import type { ReactElement } from 'react';
+import { DevtoolsPage } from '@devtools';
+
+interface RequireDevmodeProps {
+  children: ReactElement;
+}
+
+function RequireDevmode({ children }: RequireDevmodeProps) {
+  const { devmode } = useApp();
+  const shownRef = useRef(false);
+
+  useEffect(() => {
+    if (!devmode && !shownRef.current) {
+      toast('Developer mode is not enabled', 'error');
+      shownRef.current = true;
+    }
+
+    if (devmode) {
+      shownRef.current = false;
+    }
+  }, [devmode]);
+
+  if (!devmode) {
+    return <Navigate to="/home" replace />;
+  }
+
+  return children;
+}
 
 interface RequireSaveProps {
   children: ReactElement;
@@ -124,6 +151,17 @@ export function AppRouter() {
             </RequireSave>
           }
         ></Route>
+        <Route
+          path="/devtools"
+          element={
+            <RequireDevmode>
+              <DevtoolsPage />
+            </RequireDevmode>
+          }
+        >
+          <Route index element={<Navigate to="colors" replace />} />
+          <Route path="colors" element={<DevtoolsPage.Colors />} />
+        </Route>
         <Route path="/settings" element={<SettingsPage />}></Route>
         <Route path="*" element={<Navigate to="/home" replace />} />
       </Routes>

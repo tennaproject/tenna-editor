@@ -12,6 +12,7 @@ import DarkWorldIcon from '@assets/icons/moon-stars.svg';
 import RecruitsIcon from '@assets/icons/users.svg';
 import SettingsIcon from '@assets/icons/sliders.svg';
 import AboutIcon from '@assets/icons/book-open.svg';
+import DevtoolsIcon from '@assets/icons/code.svg';
 
 export function App() {
   return (
@@ -57,6 +58,12 @@ export function App() {
                   />
                 </Sidebar.Group>
                 <Sidebar.Group>
+                  <Sidebar.Item
+                    title="Devtools"
+                    icon={<DevtoolsIcon />}
+                    to="/devtools"
+                    requireDevmode
+                  />
                   <Sidebar.Item
                     title="Settings"
                     icon={<SettingsIcon />}

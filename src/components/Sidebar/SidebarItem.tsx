@@ -7,6 +7,7 @@ export interface SidebarItemProps {
   icon?: ReactNode;
   to: string;
   requireSave?: boolean;
+  requireDevmode?: boolean;
 }
 
 export function SidebarItem({
@@ -14,8 +15,9 @@ export function SidebarItem({
   icon,
   to,
   requireSave,
+  requireDevmode,
 }: SidebarItemProps) {
-  const { isSidebarRetracted, saveFile } = useApp();
+  const { isSidebarRetracted, saveFile, devmode } = useApp();
 
   const baseClasses =
     'w-full flex items-center text-sm px-0 h-12 leading-none transition-all duration-200 ease-in-out';
@@ -24,11 +26,13 @@ export function SidebarItem({
   const disabledClasses = 'opacity-20 pointer-events-none';
   const isDisabled = requireSave && !saveFile;
 
+  const isHidden = requireDevmode && !devmode;
+
   const titleClasses = isSidebarRetracted
     ? 'lg:opacity-0 lg:pointer-events-none lg:w-0 lg:max-w-0 lg:m-0 lg:p-0 lg:overflow-hidden transition-all duration-200 ease-in-out'
     : 'transition-all duration-200 ease-in-out';
 
-  return (
+  return !isHidden ? (
     <NavLink
       to={to}
       aria-label={title}
@@ -62,5 +66,5 @@ export function SidebarItem({
         </div>
       </div>
     </NavLink>
-  );
+  ) : null;
 }
