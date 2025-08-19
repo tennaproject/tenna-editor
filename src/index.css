@@ -1,39 +1,83 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-tenna-950: #1b1924;
-  --color-tenna-900: #1f1e2a;
-  --color-tenna-850: #242230;
-  --color-tenna-800: #282636;
-  --color-tenna-750: #2d2a3c;
-  --color-tenna-700: #312f42;
-  --color-tenna-650: #363348;
-  --color-tenna-600: #3a374e;
-  --color-tenna-550: #3f3b54;
-  --color-tenna-500: #433f5a;
+  --color-tenna: oklch(24.169% 0.02276 288.39);
+  --color-tenna-50: oklch(46.914% 0.05537 297.73);
+  --color-tenna-100: oklch(45.65% 0.0524 297.19);
+  --color-tenna-200: oklch(43.144% 0.04797 295.39);
+  --color-tenna-300: oklch(40.524% 0.04707 295.7);
+  --color-tenna-400: oklch(37.94% 0.04254 293.44);
+  --color-tenna-500: oklch(35.414% 0.03805 292.68);
+  --color-tenna-600: oklch(32.502% 0.03528 291.18);
+  --color-tenna-700: oklch(29.873% 0.0306 289.8);
+  --color-tenna-800: oklch(26.931% 0.02772 290.52);
+  --color-tenna-900: oklch(24.169% 0.02276 288.39);
+  --color-tenna-950: oklch(22.84% 0.02116 288.77);
 
   --color-surface-1: var(--color-tenna-900); /* main content / panels */
   --color-surface-2: var(--color-tenna-800); /* containers */
   --color-surface-3: var(--color-tenna-700); /* raised containers */
   --color-surface-4: var(--color-tenna-600); /* highest neutral layer */
 
-  --color-surface-1-hover: var(--color-tenna-850);
-  --color-surface-1-active: var(--color-tenna-750);
+  --surface-hover-mix: 50%;
+  --surface-active-mix: 30%;
 
-  --color-surface-2-hover: var(--color-tenna-750);
-  --color-surface-2-active: var(--color-tenna-650);
+  --color-surface-1-hover: color-mix(
+    in oklch,
+    var(--color-tenna-900) var(--surface-hover-mix),
+    var(--color-tenna-800)
+  );
+  --color-surface-1-active: color-mix(
+    in oklch,
+    var(--color-tenna-900) var(--surface-active-mix),
+    var(--color-tenna-700)
+  ); /* jump two steps */
+  --color-surface-2-hover: color-mix(
+    in oklch,
+    var(--color-tenna-800) var(--surface-hover-mix),
+    var(--color-tenna-700)
+  );
+  --color-surface-2-active: color-mix(
+    in oklch,
+    var(--color-tenna-800) var(--surface-active-mix),
+    var(--color-tenna-600)
+  );
+  --color-surface-3-hover: color-mix(
+    in oklch,
+    var(--color-tenna-700) var(--surface-hover-mix),
+    var(--color-tenna-600)
+  );
+  --color-surface-3-active: color-mix(
+    in oklch,
+    var(--color-tenna-700) var(--surface-active-mix),
+    var(--color-tenna-500)
+  );
+  --color-surface-4-hover: color-mix(
+    in oklch,
+    var(--color-tenna-600) var(--surface-hover-mix),
+    var(--color-tenna-500)
+  );
+  --color-surface-4-active: color-mix(
+    in oklch,
+    var(--color-tenna-600) var(--surface-active-mix),
+    var(--color-tenna-400)
+  );
 
-  --color-surface-3-hover: var(--color-tenna-650);
-  --color-surface-3-active: var(--color-tenna-550);
+  --color-border: color-mix(
+    in oklch,
+    var(--color-tenna-700) 65%,
+    var(--color-tenna-600)
+  );
+  --color-divider: color-mix(
+    in oklch,
+    var(--color-tenna-700) 65%,
+    var(--color-tenna-500)
+  );
+  --color-overlay: oklch(0% 0 0 / 0.5);
 
-  --color-border: var(--color-tenna-700);
-  --color-divider: #343145;
-  --color-overlay: #0d0d12ab; /* 67% alpha */
-
-  --color-text-1: #f5f5f5; /* primary on dark */
-  --color-text-2: #a2a2a9; /* secondary */
-  --color-text-3: #6e6e77; /* muted/disabled */
-  --color-text-inverse: #0a0a0a;
+  --color-text-1: oklch(95% 0 0); /* primary */
+  --color-text-2: oklch(75% 0.004 260); /* secondary */
+  --color-text-3: oklch(52% 0.004 260); /* muted/disabled */
 
   --color-red: #e53170; /* tenna */
   --color-red-hover: #e7437d;
@@ -142,6 +186,75 @@ input[type='number'] {
   appearance: textfield;
 }
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-tenna-600) var(--color-tenna-800);
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-tenna-800);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-tenna-600);
+  border-radius: 6px;
+  border: 2px solid var(--color-tenna-800);
+  transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-tenna-500);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: var(--color-tenna-400);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--color-tenna-800);
+}
+
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  border-width: 1px;
+}
+
+.scrollbar-auto {
+  scrollbar-width: auto;
+}
+
+.scrollbar-auto::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.scrollbar-auto::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-auto::-webkit-scrollbar-thumb {
+  background: color-mix(in oklch, var(--color-tenna-600) 70%, transparent);
+  border: none;
+}
+
+.scrollbar-auto::-webkit-scrollbar-thumb:hover {
+  background: var(--color-tenna-600);
+}
+
 @layer utilities {
   .scrollbar-none {
     scrollbar-width: none;
@@ -152,30 +265,4 @@ input[type='number'] {
   .page {
     @apply flex flex-col mx-auto p-6 w-full flex-none min-w-0 gap-4 max-w-7xl;
   }
-}
-
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #56526e #1f1d2b;
-}
-
-*::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-*::-webkit-scrollbar-track {
-  background: #1f1d2b;
-}
-
-*::-webkit-scrollbar-thumb {
-  background: #56526e;
-}
-
-*::-webkit-scrollbar-thumb:hover {
-  background: #908caa;
-}
-
-*::-webkit-scrollbar-corner {
-  background: #1f1d2b;
 }
