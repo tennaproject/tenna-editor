@@ -40,6 +40,15 @@ export function SidebarItem({
         if (isDisabled) {
           e.preventDefault();
           e.stopPropagation();
+        } else {
+          // Prevent navigation if we are in the same space
+          const slices = location.pathname.split('/').filter(Boolean);
+          const toSlices = to.split('/').filter(Boolean);
+
+          if (slices[0] === toSlices[0]) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
         }
       }}
       tabIndex={isDisabled ? -1 : 0}
