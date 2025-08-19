@@ -4,16 +4,6 @@ import { AppRouter } from './router';
 import { AppProvider } from '@contexts';
 import { Sidebar, Header, ToastContainer } from '@components';
 
-import HomeIcon from '@assets/icons/home.svg';
-import InventoryIcon from '@assets/icons/briefcase.svg';
-import PartyIcon from '@assets/icons/contact.svg';
-import LightWorldIcon from '@assets/icons/sun-alt.svg';
-import DarkWorldIcon from '@assets/icons/moon-stars.svg';
-import RecruitsIcon from '@assets/icons/users.svg';
-import SettingsIcon from '@assets/icons/sliders.svg';
-import AboutIcon from '@assets/icons/book-open.svg';
-import DevtoolsIcon from '@assets/icons/code.svg';
-
 export function App() {
   return (
     <BrowserRouter>
@@ -24,57 +14,7 @@ export function App() {
             <Header />
             <div className="flex-1 flex min-h-0 relative">
               <Sidebar>
-                <Sidebar.Group>
-                  <Sidebar.Item title="Home" icon={<HomeIcon />} to="/home" />
-                  <Sidebar.Item
-                    title="Inventory"
-                    icon={<InventoryIcon />}
-                    to="/inventory"
-                    requireSave
-                  />
-                  <Sidebar.Item
-                    title="Party"
-                    icon={<PartyIcon />}
-                    to="/party"
-                    requireSave
-                  />
-                  <Sidebar.Item
-                    title="Light World"
-                    icon={<LightWorldIcon />}
-                    to="/light-world"
-                    requireSave
-                  />
-                  <Sidebar.Item
-                    title="Dark World"
-                    icon={<DarkWorldIcon />}
-                    to="/dark-world"
-                    requireSave
-                  />
-                  <Sidebar.Item
-                    title="Recruits"
-                    icon={<RecruitsIcon />}
-                    to="/recruits"
-                    requireSave
-                  />
-                </Sidebar.Group>
-                <Sidebar.Group>
-                  <Sidebar.Item
-                    title="Devtools"
-                    icon={<DevtoolsIcon />}
-                    to="/devtools"
-                    requireDevmode
-                  />
-                  <Sidebar.Item
-                    title="Settings"
-                    icon={<SettingsIcon />}
-                    to="/settings"
-                  />
-                  <Sidebar.Item
-                    title="About"
-                    icon={<AboutIcon />}
-                    to="/about"
-                  />
-                </Sidebar.Group>
+                <Sidebar.Menu />
               </Sidebar>
 
               <div className="flex-1 min-h-0 min-w-0 bg-surface-2">
