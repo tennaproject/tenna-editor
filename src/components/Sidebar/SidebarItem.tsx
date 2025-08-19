@@ -1,6 +1,6 @@
-import { useApp } from '@contexts';
-import { type ReactNode } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useUi, useSave } from '@contexts';
+import { useMemo, memo, type ReactNode } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 
 export interface SidebarItemProps {
   title: string;
@@ -10,14 +10,16 @@ export interface SidebarItemProps {
   requireDevmode?: boolean;
 }
 
-export function SidebarItem({
+export const SidebarItem = memo(function SidebarItem({
   title,
   icon,
   to,
   requireSave,
   requireDevmode,
 }: SidebarItemProps) {
-  const { isSidebarRetracted, saveFile, devmode } = useApp();
+  const { isSidebarRetracted, devmode } = useUi();
+  const { saveFile } = useSave();
+  const location = useLocation();
 
   const baseClasses =
     'w-full flex items-center text-sm px-0 h-12 leading-none transition-all duration-200 ease-in-out';
@@ -76,4 +78,4 @@ export function SidebarItem({
       </div>
     </NavLink>
   ) : null;
-}
+});

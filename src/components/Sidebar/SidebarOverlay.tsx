@@ -1,8 +1,8 @@
-import { useApp } from '@contexts';
+import { useUi } from '@contexts';
 import { motion } from 'framer-motion';
 
 export function SidebarOverlay() {
-  const { isSidebarOpen, setSidebarOpen } = useApp();
+  const { isSidebarOpen, setSidebarOpen } = useUi();
 
   return (
     <>
