@@ -53,6 +53,7 @@ export default tseslint.config([
 
     rules: {
       'valid-jsdoc': 'off',
+      'require-jsdoc': 'off',
     },
   },
 ]);
