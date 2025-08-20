@@ -20,7 +20,7 @@ export function Heading({ level, className, children }: HeadingProps) {
 
   const Tag = `h${level}` as keyof JSX.IntrinsicElements;
   return (
-    <Tag className={`${headingClass}${customClass} mb-4 font-bold`}>
+    <Tag className={`${headingClass}${customClass} font-bold leading-none`}>
       {children}
     </Tag>
   );
