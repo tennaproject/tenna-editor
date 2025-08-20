@@ -1,25 +1,10 @@
 import { useEffect, useState, type JSX } from 'react';
 import { ToastItem } from './ToastItem';
-
-export type ToastType = 'info' | 'error' | 'success' | 'warning';
-
-export type ToastOptions = [
-  message: string | JSX.Element,
-  type?: ToastType,
-  duration?: number,
-  onClose?: () => void,
-];
-
-let pushToast: (...args: ToastOptions) => void;
-const buffer: ToastOptions[] = [];
-
-export function toast(...args: ToastOptions) {
-  if (!pushToast) {
-    buffer.push(args);
-    return;
-  }
-  pushToast(...args);
-}
+import {
+  registerToastDispatcher,
+  unregisterToastDispatcher,
+  type ToastType,
+} from '@services';
 
 export function ToastContainer() {
   const [toasts, setToasts] = useState<
@@ -38,13 +23,13 @@ export function ToastContainer() {
     const recent = new Map<string, number>();
     const DEDUPE_WINDOW = 1000; // ms
 
-    pushToast = (message, type, duration, onClose) => {
+    registerToastDispatcher((message, type, duration, onClose) => {
       const id = crypto.randomUUID();
-      type = type ?? 'info';
-      duration = duration ?? 5000;
+      const resolvedType: ToastType = type ?? 'info';
+      const resolvedDuration = duration ?? 5000;
 
       if (typeof message === 'string') {
-        const key = `${type}:${message}`;
+        const key = `${resolvedType}:${message}`;
         const now = performance.now();
         const last = recent.get(key);
         if (last && now - last < DEDUPE_WINDOW) {
@@ -59,16 +44,20 @@ export function ToastContainer() {
 
       setToasts((prev) => [
         ...prev,
-        { id, message, type, duration, createdAt: performance.now(), onClose },
+        {
+          id,
+          message,
+          type: resolvedType,
+          duration: resolvedDuration,
+          createdAt: performance.now(),
+          onClose,
+        },
       ]);
-    };
+    });
 
-    if (buffer.length) {
-      buffer.forEach((args) => {
-        pushToast(...args);
-      });
-      buffer.length = 0;
-    }
+    return () => {
+      unregisterToastDispatcher();
+    };
   }, []);
 
   return (

@@ -1,5 +1,11 @@
-import { memo, useEffect, useRef, type JSX } from 'react';
-import type { ToastType } from './ToastContainer';
+import {
+  memo,
+  useEffect,
+  useRef,
+  type JSX,
+  type PointerEvent as ReactPointerEvent,
+} from 'react';
+import type { ToastType } from '@services';
 import InfoIcon from '@assets/icons/info-box.svg';
 import ErrorIcon from '@assets/icons/alert.svg';
 import SuccessIcon from '@assets/icons/radio-on.svg';
@@ -54,7 +60,9 @@ export const ToastItem = memo(
       const elapsed = Math.max(0, Math.min(duration, now - createdAt));
       try {
         anim.currentTime = elapsed;
-      } catch {}
+      } catch {
+        console.error('Toast animation error');
+      }
 
       if (elapsed >= duration) {
         onCloseRef.current?.();
@@ -73,7 +81,7 @@ export const ToastItem = memo(
       };
     }, [duration, createdAt]);
 
-    const handlePointerDown = (e: any) => {
+    const handlePointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
       draggingRef.current = true;
       startXRef.current = e.clientX ?? 0;
       dragXRef.current = 0;
@@ -84,7 +92,7 @@ export const ToastItem = memo(
       e.preventDefault?.();
     };
 
-    const handlePointerMove = (e: any) => {
+    const handlePointerMove = (e: ReactPointerEvent<HTMLDivElement>) => {
       if (!draggingRef.current) return;
       const delta = (e.clientX ?? 0) - startXRef.current;
       const clamped = Math.max(0, Math.min(240, delta));

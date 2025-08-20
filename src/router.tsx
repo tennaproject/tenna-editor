@@ -12,7 +12,7 @@ import {
   SettingsPage,
 } from './pages';
 import { useSave, useUi } from '@contexts';
-import { toast } from '@components';
+import { toast } from '@services';
 import type { ReactElement } from 'react';
 import { DevtoolsPage } from '@devtools';
 
