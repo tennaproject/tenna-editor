@@ -5,7 +5,7 @@ import {
   type StorageKey,
   getStorage,
   setStorage,
-} from '@/services';
+} from '@services';
 
 export const useStorageState = <T extends StorageKey>(
   key: T,

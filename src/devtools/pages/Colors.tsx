@@ -1,4 +1,4 @@
-import { Section, Card, Heading } from '@/components';
+import { Section, Card, Heading } from '@components';
 
 interface SwatchProps {
   label: string;
