@@ -7,6 +7,8 @@ import {
   Card,
   Heading,
   Checkbox,
+  HelpTip,
+  InlineGroup,
 } from '@components';
 import { useSave } from '@contexts';
 
@@ -29,11 +31,19 @@ export function Overview() {
     <div className="page">
       <Heading level={3}>Save Overview</Heading>
       <Grid cols={2} className="gap-4">
-        <Section id="basic-options">
+        <Section id="base">
           <Card className="space-y-4">
-            <Heading level={4}>Basic save options</Heading>
-            <Section id="basic-options-player-name">
-              <TextLabel>Player Name</TextLabel>
+            <Section id="player-name" className="space-y-2">
+              <InlineGroup>
+                <TextLabel>Player Name</TextLabel>
+                <HelpTip title="Player Name">
+                  <p>
+                    This name is chosen at the beginning of the game. It is
+                    reffered as "creator name."
+                  </p>
+                  <p>It's displayed in main menu and save point interface.</p>
+                </HelpTip>
+              </InlineGroup>
               <TextInput
                 value={saveFile.playerName}
                 placeholder="Enter player name..."
@@ -44,8 +54,8 @@ export function Overview() {
                 }}
               />
             </Section>
-            <Section id="basic-options-money">
-              <TextLabel>Money</TextLabel>
+            <Section id="money" className="space-y-2">
+              <TextLabel>Money (Dark Dollars)</TextLabel>
               <NumberInput
                 value={saveFile.money}
                 placeholder="Enter money amount..."
@@ -54,13 +64,25 @@ export function Overview() {
                 }}
               />
             </Section>
-            <Checkbox
-              label="Currently in Dark World"
-              checked={saveFile.inDarkWorld}
-              onChange={(state) => {
-                setSaveFileField('inDarkWorld', state);
-              }}
-            />
+
+            <Section id="in-dark-world">
+              <InlineGroup>
+                <Checkbox
+                  label="Currently in Dark World"
+                  checked={saveFile.inDarkWorld}
+                  onChange={(state) => {
+                    setSaveFileField('inDarkWorld', state);
+                  }}
+                />
+                <HelpTip title="Currently in Dark World">
+                  <p>
+                    This internal flag is set to "true" when you are in the Dark
+                    World.
+                  </p>
+                  <p>For example, it changes how menus are rendered.</p>
+                </HelpTip>
+              </InlineGroup>
+            </Section>
           </Card>
         </Section>
       </Grid>

@@ -8,7 +8,7 @@ interface TextLabelProps {
 export function TextLabel({ children, className = '' }: TextLabelProps) {
   const customClass = className ? ` ${className}` : '';
   return (
-    <label className={`block text-sm text-text-2 mb-2${customClass}`}>
+    <label className={`block leading-none text-sm text-text-2${customClass}`}>
       {children}
     </label>
   );
