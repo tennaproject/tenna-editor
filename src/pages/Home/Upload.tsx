@@ -1,11 +1,10 @@
 import { FileInput } from '@components';
-import { detectChapter, parseSaveFile } from '@utils';
-import type { ChapterIndex } from '@data';
+import { detectChapter, parseSaveFile, serializeSaveFile } from '@utils';
 import { useState } from 'react';
-import { useApp } from '@contexts';
+import { useSave } from '@contexts';
 
 export const Upload = () => {
-  const { setSaveFile } = useApp();
+  const { setSaveFile } = useSave();
   const [uploadStatus, setUploadStatus] = useState<
     'idle' | 'success' | 'error'
   >('idle');
@@ -32,9 +31,19 @@ export const Upload = () => {
           return;
         }
 
-        save.chapter = detection.chapter as ChapterIndex;
+        save.chapter = detection.chapter!;
+        console.log(save);
         setUploadStatus('success');
         setSaveFile(save);
+        const blob = new Blob([serializeSaveFile(save)], {
+          type: 'text/plain',
+        });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'deltarune_save.txt';
+        a.click();
+        URL.revokeObjectURL(url);
       }
     };
     reader.readAsText(file);

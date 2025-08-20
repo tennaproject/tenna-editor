@@ -6,6 +6,7 @@ export const HomePage = () => {
     <Page>
       <Page.TopBar title="Home">
         <Page.Nav>
+          <Page.NavItem title="Overview" to="/home/overview" />
           <Page.NavItem title="Upload" to="/home/upload" />
           <Page.NavItem title="Download" to="/home/download" />
           <Page.NavItem title="Saves List" to="/home/saves-list" />
