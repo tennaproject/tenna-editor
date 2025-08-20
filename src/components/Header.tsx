@@ -4,6 +4,7 @@ import SidebarRetractionIcon from '@assets/icons/layout-sidebar-left.svg';
 import DownloadIcon from '@assets/icons/download.svg';
 import UploadIcon from '@assets/icons/upload.svg';
 import { serializeSaveFile } from '@utils';
+import { useNavigate } from 'react-router-dom';
 
 export function Header() {
   const {
@@ -14,10 +15,11 @@ export function Header() {
   } = useUi();
 
   const { saveFile } = useSave();
+  const navigate = useNavigate();
 
   return (
     <header className="w-full h-14 flex-shrink-0 bg-surface-1 relative select-none">
-      <div className="flex items-center justify-between h-full px-3">
+      <div className="flex items-center justify-between h-full px-2">
         <div className="flex items-center gap-4">
           {/* sidebar visibility button */}
           <button
@@ -27,9 +29,11 @@ export function Header() {
             className="p-1.5 lg:hidden transition-colors hover:bg-surface-1-hover"
             aria-label="Toggle sidebar"
           >
-            <div className="w-6 h-6 text-text-2">
-              <SidebarVisibilityIcon />
-            </div>
+            <div className="h-9 w-9 flex leading none justify-center items-center">
+              <div className="w-6 h-6 text-text-2">
+                <SidebarVisibilityIcon />
+              </div>
+            </div>{' '}
           </button>
 
           {/* sidebar retraction button */}
@@ -40,8 +44,10 @@ export function Header() {
             className="p-1.5 hidden lg:inline transition-colors hover:bg-surface-1-hover"
             aria-label="Toggle sidebar retraction"
           >
-            <div className="w-6 h-6 text-text-2">
-              <SidebarRetractionIcon />
+            <div className="h-9 w-9 flex leading none justify-center items-center">
+              <div className="w-6 h-6 text-text-2">
+                <SidebarRetractionIcon />
+              </div>
             </div>
           </button>
 
@@ -84,7 +90,10 @@ export function Header() {
               <DownloadIcon />
             </div>
           </button>
-          <button className="text-blue bg-surface-3 hover:bg-surface-4-hover transition-colors p-2 cursor-pointer">
+          <button
+            className="text-blue bg-surface-3 hover:bg-surface-3-hover transition-colors p-2 cursor-pointer"
+            onClick={() => navigate('/home/upload')}
+          >
             <div className="w-6 h-6">
               <UploadIcon />
             </div>
