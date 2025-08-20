@@ -30,12 +30,19 @@ export function UiProvider({ children }: { children: React.ReactNode }) {
       isSidebarRetracted,
       setSidebarRetraction,
     }),
-    [devmode, isSidebarOpen, isSidebarRetracted],
+    [
+      devmode,
+      isSidebarOpen,
+      isSidebarRetracted,
+      setDevmode,
+      setSidebarRetraction,
+    ],
   );
 
   return <UiContext.Provider value={value}>{children}</UiContext.Provider>;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useUi = () => {
   const context = useContext(UiContext);
   if (!context) throw new Error('useUi must be used within an UiProvider');

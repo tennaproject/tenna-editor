@@ -1,8 +1,5 @@
 import { BrowserRouter } from 'react-router-dom';
-import {
-  Suspense,
-  type PropsWithChildren,
-} from 'react';
+import { Suspense, type PropsWithChildren } from 'react';
 
 import { AppRouter } from './router';
 import { Sidebar, Header, ToastContainer } from '@components';
@@ -18,9 +15,7 @@ export type AppContext = UiContextValue & SaveContextValue;
 export function AppProvider({ children }: PropsWithChildren) {
   return (
     <UiProvider>
-      <SaveProvider>
-        {children}
-      </SaveProvider>
+      <SaveProvider>{children}</SaveProvider>
     </UiProvider>
   );
 }

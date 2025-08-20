@@ -219,12 +219,10 @@ function serializeV2Save(save: V2Save): string {
 
 export function serializeSaveFile(save: DeltaruneSave): string {
   if (save.format === 'v1') {
-    return serializeV1Save(save as V1Save);
+    return serializeV1Save(save);
   } else if (save.format === 'v2') {
-    return serializeV2Save(save as V2Save);
+    return serializeV2Save(save);
   } else {
-    throw new Error(
-      `Unsupported save format: ${(save as any).meta?.format || 'unknown'}`,
-    );
+    throw new Error('Unsupported save format');
   }
 }

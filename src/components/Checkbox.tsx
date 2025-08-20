@@ -24,7 +24,7 @@ export function Checkbox({
   const [internalChecked, setInternalChecked] = useState(checked ?? false);
 
   useEffect(() => {
-    if (isControlled) setInternalChecked(checked!);
+    if (isControlled) setInternalChecked(checked);
   }, [checked, isControlled]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +34,7 @@ export function Checkbox({
     onChange?.(next);
   };
 
-  const currentChecked = isControlled ? checked! : internalChecked;
+  const currentChecked = isControlled ? checked : internalChecked;
 
   return (
     <div

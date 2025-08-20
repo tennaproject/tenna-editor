@@ -19,9 +19,9 @@ export const SAVE_META = {
   },
 } as const;
 
-export const SUPPORTED_FORMATS = Object.keys(SAVE_META) as Array<
-  keyof typeof SAVE_META
->;
+export const SUPPORTED_FORMATS = Object.keys(
+  SAVE_META,
+) as (keyof typeof SAVE_META)[];
 
 function detectSaveFormat(count: number): SaveFileFormat {
   if (count == SAVE_META.V1.TOTAL_LINES) {

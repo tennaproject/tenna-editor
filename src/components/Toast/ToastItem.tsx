@@ -63,7 +63,9 @@ export const ToastItem = memo(
         };
       }
 
-      const onFinish = () => onCloseRef.current?.();
+      const onFinish = () => {
+        onCloseRef.current?.();
+      };
       anim.addEventListener('finish', onFinish);
       return () => {
         anim.removeEventListener('finish', onFinish);

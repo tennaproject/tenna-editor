@@ -12,7 +12,9 @@ export function SidebarOverlay() {
         transition={{ duration: 0.2 }}
         className="lg:hidden fixed inset-0 top-14 bg-overlay backdrop-blur-[1px] z-30"
         style={{ pointerEvents: isSidebarOpen ? 'auto' : 'none' }}
-        onClick={() => setSidebarOpen(false)}
+        onClick={() => {
+          setSidebarOpen(false);
+        }}
       />
     </>
   );

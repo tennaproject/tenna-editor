@@ -64,7 +64,9 @@ export function ToastContainer() {
     };
 
     if (buffer.length) {
-      buffer.forEach((args) => pushToast(...args));
+      buffer.forEach((args) => {
+        pushToast(...args);
+      });
       buffer.length = 0;
     }
   }, []);
@@ -78,13 +80,13 @@ export function ToastContainer() {
           type={type}
           duration={duration}
           createdAt={createdAt}
-          onClose={() =>
+          onClose={() => {
             setToasts((prev) => {
               const item = prev.find((t) => t.id === id);
               item?.onClose?.();
               return prev.filter((t) => t.id !== id);
-            })
-          }
+            });
+          }}
         />
       ))}
     </div>

@@ -71,7 +71,9 @@ export function NumberInput({
         <button
           type="button"
           aria-label="Increase value"
-          onClick={() => changeBy(1)}
+          onClick={() => {
+            changeBy(1);
+          }}
           disabled={!canIncrement || disabled}
           className={`
             w-8 h-6 flex items-center justify-center border border-border
@@ -100,7 +102,9 @@ export function NumberInput({
         <button
           type="button"
           aria-label="Decrease value"
-          onClick={() => changeBy(-1)}
+          onClick={() => {
+            changeBy(-1);
+          }}
           disabled={!canDecrement || disabled}
           className={`
             w-8 h-6 flex items-center justify-center border border-border

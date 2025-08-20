@@ -114,7 +114,9 @@ export function SaveProvider({ children }: { children: React.ReactNode }) {
     }),
     [
       saveFile,
+      setSaveFile,
       originalSaveFile,
+      setOriginalSaveFile,
       setSaveFileField,
       patchSave,
       updateSave,
@@ -127,6 +129,7 @@ export function SaveProvider({ children }: { children: React.ReactNode }) {
   return <SaveContext.Provider value={value}>{children}</SaveContext.Provider>;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useSave = () => {
   const context = useContext(SaveContext);
   if (!context) throw new Error('useSave must be used within a SaveProvider');

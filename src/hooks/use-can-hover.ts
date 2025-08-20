@@ -1,4 +1,4 @@
-import { useMediaQuery } from "./use-media-query";
+import { useMediaQuery } from './use-media-query';
 
 export function useCanHover() {
   return useMediaQuery('(hover: hover) and (pointer: fine)');
