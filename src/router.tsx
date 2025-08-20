@@ -11,7 +11,7 @@ import {
   DarkWorldPage,
   SettingsPage,
 } from './pages';
-import { useApp } from '@contexts';
+import { useSave, useUi } from '@contexts';
 import { toast } from '@components';
 import type { ReactElement } from 'react';
 import { DevtoolsPage } from '@devtools';
@@ -21,7 +21,7 @@ interface RequireDevmodeProps {
 }
 
 function RequireDevmode({ children }: RequireDevmodeProps) {
-  const { devmode } = useApp();
+  const { devmode } = useUi();
   const shownRef = useRef(false);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ interface RequireSaveProps {
 }
 
 function RequireSave({ children }: RequireSaveProps) {
-  const { saveFile } = useApp();
+  const { saveFile } = useSave();
   const shownRef = useRef(false);
 
   useEffect(() => {

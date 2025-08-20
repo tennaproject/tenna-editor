@@ -1,4 +1,4 @@
-import { useApp } from '@contexts';
+import { useUi, useSave } from '@contexts';
 import SidebarVisibilityIcon from '@assets/icons/menu.svg';
 import SidebarRetractionIcon from '@assets/icons/layout-sidebar-left.svg';
 import DownloadIcon from '@assets/icons/download.svg';
@@ -11,8 +11,9 @@ export function Header() {
     setSidebarOpen,
     isSidebarRetracted,
     setSidebarRetraction,
-    saveFile,
-  } = useApp();
+  } = useUi();
+
+  const { saveFile } = useSave();
 
   return (
     <header className="w-full h-14 flex-shrink-0 bg-surface-1 relative select-none">
@@ -83,7 +84,7 @@ export function Header() {
               <DownloadIcon />
             </div>
           </button>
-          <button className="text-blue bg-surface-3 hover:bg-surface-3-hover transition-colors p-2 cursor-pointer">
+          <button className="text-blue bg-surface-3 hover:bg-surface-4-hover transition-colors p-2 cursor-pointer">
             <div className="w-6 h-6">
               <UploadIcon />
             </div>
