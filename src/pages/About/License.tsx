@@ -1,3 +1,5 @@
+import { Section, Card, Heading } from '@components';
+
 const LICENSE = `zlib License
 
 Copyright (c) 2025 jjezewski
@@ -22,9 +24,16 @@ freely, subject to the following restrictions:
 export const License = () => {
   return (
     <div className="page">
-      <code className="bg-surface-3 border-border border px-8 py-8">
-        <pre className="font-mono text-lg whitespace-pre-wrap">{LICENSE}</pre>
-      </code>
+      <Section>
+        <Card>
+          <Heading level={4}>License</Heading>
+          <code className="px-6 py-6 block">
+            <pre className="font-mono whitespace-pre-wrap text-text-2">
+              {LICENSE}
+            </pre>
+          </code>
+        </Card>
+      </Section>
     </div>
   );
 };

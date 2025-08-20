@@ -1,7 +1,7 @@
 import { Page } from '@components';
 import { Outlet } from 'react-router-dom';
 
-export const AboutPage = () => {
+export function AboutPage() {
   return (
     <Page>
       <Page.TopBar title="About">
@@ -17,4 +17,4 @@ export const AboutPage = () => {
       </Page.Content>
     </Page>
   );
-};
+}
