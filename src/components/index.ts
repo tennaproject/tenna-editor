@@ -12,3 +12,4 @@ export * from './Grid';
 export * from './Heading';
 export * from './TextLabel';
 export * from './Checkbox';
+export * from './InlineGroup';
