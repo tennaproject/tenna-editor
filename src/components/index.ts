@@ -13,3 +13,4 @@ export * from './Heading';
 export * from './TextLabel';
 export * from './Checkbox';
 export * from './InlineGroup';
+export * from './HelpTip';
