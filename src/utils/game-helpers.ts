@@ -9,7 +9,9 @@ import {
   KEYITEMS_META,
   WEAPONS,
   WEAPONS_META,
-} from '../data';
+  CHARACTERS,
+  CHARACTERS_META,
+} from '@data';
 import { createEntityHelpers } from './entity-helpers';
 
 export const flagHelpers = createEntityHelpers(FLAGS, FLAGS_META);
@@ -20,3 +22,7 @@ export const consumableHelpers = createEntityHelpers(
 export const keyItemHelpers = createEntityHelpers(KEYITEMS, KEYITEMS_META);
 export const weaponHelpers = createEntityHelpers(WEAPONS, WEAPONS_META);
 export const armorHelpers = createEntityHelpers(ARMORS, ARMORS_META);
+export const characterHelpers = createEntityHelpers(
+  CHARACTERS,
+  CHARACTERS_META,
+);

@@ -8,6 +8,7 @@ export const STORAGE_SCHEMA = {
   sidebarRetracted: false,
   saveFile: null as DeltaruneSave | null,
   originalSaveFile: null as DeltaruneSave | null,
+  allowNonStandardParty: false,
 };
 
 export type StorageKey = keyof typeof STORAGE_SCHEMA;
