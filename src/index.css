@@ -186,73 +186,75 @@ input[type='number'] {
   appearance: textfield;
 }
 
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-tenna-600) var(--color-tenna-800);
-}
+@layer base {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-tenna-600) var(--color-tenna-800);
+  }
 
-::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
-}
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
 
-::-webkit-scrollbar-track {
-  background: var(--color-tenna-800);
-  border-radius: 6px;
-}
+  ::-webkit-scrollbar-track {
+    background: var(--color-tenna-800);
+    border-radius: 6px;
+  }
 
-::-webkit-scrollbar-thumb {
-  background: var(--color-tenna-600);
-  border-radius: 6px;
-  border: 2px solid var(--color-tenna-800);
-  transition: background-color 0.2s ease;
-}
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-tenna-600);
+    border-radius: 6px;
+    border: 2px solid var(--color-tenna-800);
+    transition: background-color 0.2s ease;
+  }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-tenna-500);
-}
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-tenna-500);
+  }
 
-::-webkit-scrollbar-thumb:active {
-  background: var(--color-tenna-400);
-}
+  ::-webkit-scrollbar-thumb:active {
+    background: var(--color-tenna-400);
+  }
 
-::-webkit-scrollbar-corner {
-  background: var(--color-tenna-800);
-}
+  ::-webkit-scrollbar-corner {
+    background: var(--color-tenna-800);
+  }
 
-.scrollbar-thin {
-  scrollbar-width: thin;
-}
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
 
-.scrollbar-thin::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
 
-.scrollbar-thin::-webkit-scrollbar-thumb {
-  border-width: 1px;
-}
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    border-width: 1px;
+  }
 
-.scrollbar-auto {
-  scrollbar-width: auto;
-}
+  .scrollbar-auto {
+    scrollbar-width: auto;
+  }
 
-.scrollbar-auto::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
+  .scrollbar-auto::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
 
-.scrollbar-auto::-webkit-scrollbar-track {
-  background: transparent;
-}
+  .scrollbar-auto::-webkit-scrollbar-track {
+    background: transparent;
+  }
 
-.scrollbar-auto::-webkit-scrollbar-thumb {
-  background: color-mix(in oklch, var(--color-tenna-600) 70%, transparent);
-  border: none;
-}
+  .scrollbar-auto::-webkit-scrollbar-thumb {
+    background: color-mix(in oklch, var(--color-tenna-600) 70%, transparent);
+    border: none;
+  }
 
-.scrollbar-auto::-webkit-scrollbar-thumb:hover {
-  background: var(--color-tenna-600);
+  .scrollbar-auto::-webkit-scrollbar-thumb:hover {
+    background: var(--color-tenna-600);
+  }
 }
 
 @layer utilities {
