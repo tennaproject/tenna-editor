@@ -11,17 +11,18 @@ import {
   DarkWorldPage,
   SettingsPage,
 } from './pages';
-import { useSave, useUi } from '@contexts';
+import { useSave } from '@contexts';
 import { toast } from '@services';
 import type { ReactElement } from 'react';
 import { DevtoolsPage } from '@devtools';
+import { useUi } from '@store';
 
 interface RequireDevmodeProps {
   children: ReactElement;
 }
 
 function RequireDevmode({ children }: RequireDevmodeProps) {
-  const { devmode } = useUi();
+  const devmode = useUi((s) => s.devmode);
   const shownRef = useRef(false);
 
   useEffect(() => {

@@ -1,18 +1,18 @@
-import { useUi, useSave } from '@contexts';
+import { useSave } from '@contexts';
+import { useUi } from '@store';
 import SidebarVisibilityIcon from '@assets/icons/menu.svg';
 import SidebarRetractionIcon from '@assets/icons/layout-sidebar-left.svg';
 import DownloadIcon from '@assets/icons/download.svg';
 import UploadIcon from '@assets/icons/upload.svg';
 import { serializeSaveFile } from '@utils';
 import { useNavigate } from 'react-router-dom';
+import { memo } from 'react';
 
-export function Header() {
-  const {
-    isSidebarOpen,
-    setSidebarOpen,
-    isSidebarRetracted,
-    setSidebarRetraction,
-  } = useUi();
+export const Header = memo(function Header() {
+  const isSidebarOpen = useUi((s) => s.isSidebarOpen);
+  const setSidebarOpen = useUi((s) => s.setSidebarOpen);
+  const isSidebarRetracted = useUi((s) => s.isSidebarRetracted);
+  const setSidebarRetraction = useUi((s) => s.setSidebarRetraction);
 
   const { saveFile } = useSave();
   const navigate = useNavigate();
@@ -29,11 +29,11 @@ export function Header() {
             className="p-1.5 lg:hidden transition-colors hover:bg-surface-1-hover"
             aria-label="Toggle sidebar"
           >
-            <div className="h-9 w-9 flex leading none justify-center items-center">
+            <div className="h-9 w-9 flex leading-none justify-center items-center">
               <div className="w-6 h-6 text-text-2">
                 <SidebarVisibilityIcon />
               </div>
-            </div>{' '}
+            </div>
           </button>
 
           {/* sidebar retraction button */}
@@ -44,7 +44,7 @@ export function Header() {
             className="p-1.5 hidden lg:inline transition-colors hover:bg-surface-1-hover"
             aria-label="Toggle sidebar retraction"
           >
-            <div className="h-9 w-9 flex leading none justify-center items-center">
+            <div className="h-9 w-9 flex leading-none justify-center items-center">
               <div className="w-6 h-6 text-text-2">
                 <SidebarRetractionIcon />
               </div>
@@ -102,4 +102,4 @@ export function Header() {
       </div>
     </header>
   );
-}
+});

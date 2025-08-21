@@ -1,4 +1,4 @@
-import { useUi } from '@contexts';
+import { useUi } from '@store';
 import React, { useEffect, useState, useMemo, memo } from 'react';
 import { motion, type Variants } from 'framer-motion';
 
@@ -30,7 +30,8 @@ export interface SidebarProps {
 
 export const Sidebar = memo(
   function Sidebar({ children }: SidebarProps) {
-    const { isSidebarOpen, isSidebarRetracted } = useUi();
+    const isSidebarOpen = useUi((s) => s.isSidebarOpen);
+    const isSidebarRetracted = useUi((s) => s.isSidebarRetracted);
 
     const [isLargeScreen, setIsLargeScreen] = useState(() => {
       // Set correct initial state to prevent animation on load

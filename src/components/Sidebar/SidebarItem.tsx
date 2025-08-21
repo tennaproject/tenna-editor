@@ -1,4 +1,5 @@
-import { useUi, useSave } from '@contexts';
+import { useSave } from '@contexts';
+import { useUi } from '@store';
 import { useMemo, useCallback, memo, type ReactNode } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
@@ -17,7 +18,9 @@ export const SidebarItem = memo(function SidebarItem({
   requireSave,
   requireDevmode,
 }: SidebarItemProps) {
-  const { isSidebarRetracted, devmode } = useUi();
+  const isSidebarRetracted = useUi((s) => s.isSidebarRetracted);
+  const devmode = useUi((s) => s.devmode);
+
   const { saveFile } = useSave();
   const location = useLocation();
 

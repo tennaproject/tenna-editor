@@ -1,8 +1,10 @@
-import { useUi } from '@contexts';
+import { useUi } from '@store';
 import { Checkbox, Page } from '@components';
 
 export const SettingsPage = () => {
-  const { devmode, setDevmode } = useUi();
+  const devmode = useUi((s) => s.devmode);
+  const setDevmode = useUi((s) => s.setDevmode);
+
   return (
     <Page>
       <Page.TopBar title="Settings" />

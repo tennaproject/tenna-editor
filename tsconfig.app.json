@@ -44,7 +44,9 @@
       "@services": ["src/services"],
       "@services/*": ["src/services/*"],
       "@devtools": ["src/devtools"],
-      "@devtools/*": ["src/devtools/*"]
+      "@devtools/*": ["src/devtools/*"],
+      "@store": ["src/store"],
+      "@store/*": ["src/store/*"]
     }
   },
   "include": ["src"]

@@ -3,21 +3,12 @@ import { Suspense, type PropsWithChildren } from 'react';
 
 import { AppRouter } from './router';
 import { Sidebar, Header, ToastContainer } from '@components';
-import {
-  type UiContextValue,
-  type SaveContextValue,
-  UiProvider,
-  SaveProvider,
-} from '@contexts';
+import { type SaveContextValue, SaveProvider } from '@contexts';
 
-export type AppContext = UiContextValue & SaveContextValue;
+export type AppContext = SaveContextValue;
 
 export function AppProvider({ children }: PropsWithChildren) {
-  return (
-    <UiProvider>
-      <SaveProvider>{children}</SaveProvider>
-    </UiProvider>
-  );
+  return <SaveProvider>{children}</SaveProvider>;
 }
 
 export function App() {
