@@ -7,15 +7,13 @@ import {
   InlineGroup,
   Section,
 } from '@components';
-import { useSave } from '@contexts';
-import { useStorageState } from '@hooks';
+import { useSave, useUi } from '@store';
 import { characterHelpers } from '@utils';
 
 export const Overview = () => {
-  const { saveFile } = useSave();
-  const [allowNonStandardParty, setAllowNonStandardParty] = useStorageState(
-    'allowNonStandardParty',
-  );
+  const saveFile = useSave((s) => s.saveFile);
+  const allowNonStandardParty = useUi((s) => s.allowNonStandardParty);
+  const setAllowNonStandardParty = useUi((s) => s.setAllowNonStandardParty);
 
   return (
     <div className="page">

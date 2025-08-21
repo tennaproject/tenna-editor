@@ -1,5 +1,4 @@
-import { useSave } from '@contexts';
-import { useUi } from '@store';
+import { useSave, useUi } from '@store';
 import SidebarVisibilityIcon from '@assets/icons/menu.svg';
 import SidebarRetractionIcon from '@assets/icons/layout-sidebar-left.svg';
 import DownloadIcon from '@assets/icons/download.svg';
@@ -14,7 +13,8 @@ export const Header = memo(function Header() {
   const isSidebarRetracted = useUi((s) => s.isSidebarRetracted);
   const setSidebarRetraction = useUi((s) => s.setSidebarRetraction);
 
-  const { saveFile } = useSave();
+  const saveFile = useSave((s) => s.saveFile);
+  const isSaveFilePresent = useSave((s) => !!s.saveFile);
   const navigate = useNavigate();
 
   return (
@@ -66,7 +66,7 @@ export const Header = memo(function Header() {
           <button
             className="text-green bg-surface-3 hover:bg-surface-3-hover transition-colors p-2 cursor-pointer"
             onClick={() => {
-              if (!saveFile) {
+              if (!isSaveFilePresent || !saveFile) {
                 console.warn('No save file to download');
                 return;
               }

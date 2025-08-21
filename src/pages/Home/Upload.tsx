@@ -1,10 +1,10 @@
 import { FileInput } from '@components';
 import { detectChapter, parseSaveFile } from '@utils';
 import { useState } from 'react';
-import { useSave } from '@contexts';
+import { useSave } from '@store';
 
 export const Upload = () => {
-  const { setSaveFile } = useSave();
+  const setSaveFile = useSave((s) => s.setSaveFile);
   const [uploadStatus, setUploadStatus] = useState<
     'idle' | 'success' | 'error'
   >('idle');

@@ -10,17 +10,27 @@ import {
   HelpTip,
   InlineGroup,
 } from '@components';
-import { useSave } from '@contexts';
+import { useSave } from '@store';
+import { memo } from 'react';
 
-export function Overview() {
-  const { saveFile, setSaveFileField, updateSave } = useSave();
+export const Overview = memo(function Overview() {
+  const isSaveFilePresent = useSave((s) => !!s.saveFile);
 
-  if (!saveFile) {
+  const playerName = useSave((s) => s.saveFile?.playerName) ?? 'ERROR';
+  const money = useSave((s) => s.saveFile?.money) ?? 0;
+  const inDarkWorld = useSave((s) => s.saveFile?.inDarkWorld);
+
+  const setSaveFileField = useSave((s) => s.setSaveFileField);
+  const updateSave = useSave((s) => s.updateSave);
+
+  if (!isSaveFilePresent) {
     return (
       <div className="page">
         <Section>
           <div className="flex items-center justify-center h-32 text-text-2">
-            {!saveFile ? 'No save file loaded' : 'Unsupported save file format'}
+            {!isSaveFilePresent
+              ? 'No save file loaded'
+              : 'Unsupported save file format'}
           </div>
         </Section>
       </div>
@@ -45,7 +55,7 @@ export function Overview() {
                 </HelpTip>
               </InlineGroup>
               <TextInput
-                value={saveFile.playerName}
+                value={playerName}
                 placeholder="Enter player name..."
                 onChange={(value) => {
                   updateSave((d) => {
@@ -57,8 +67,9 @@ export function Overview() {
             <Section id="money" className="space-y-2">
               <TextLabel>Money (Dark Dollars)</TextLabel>
               <NumberInput
-                value={saveFile.money}
+                value={money}
                 placeholder="Enter money amount..."
+                suffix="D$"
                 onChange={(value) => {
                   setSaveFileField('money', value);
                 }}
@@ -69,7 +80,7 @@ export function Overview() {
               <InlineGroup>
                 <Checkbox
                   label="Currently in Dark World"
-                  checked={saveFile.inDarkWorld}
+                  checked={inDarkWorld}
                   onChange={(state) => {
                     setSaveFileField('inDarkWorld', state);
                   }}

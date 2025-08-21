@@ -11,11 +11,10 @@ import {
   DarkWorldPage,
   SettingsPage,
 } from './pages';
-import { useSave } from '@contexts';
 import { toast } from '@services';
 import type { ReactElement } from 'react';
 import { DevtoolsPage } from '@devtools';
-import { useUi } from '@store';
+import { useSave, useUi } from '@store';
 
 interface RequireDevmodeProps {
   children: ReactElement;
@@ -48,7 +47,7 @@ interface RequireSaveProps {
 }
 
 function RequireSave({ children }: RequireSaveProps) {
-  const { saveFile } = useSave();
+  const saveFile = useSave((s) => s.saveFile);
   const shownRef = useRef(false);
 
   useEffect(() => {

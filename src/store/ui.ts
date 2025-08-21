@@ -10,6 +10,8 @@ interface UiState {
   setDevmode: (devmode: boolean) => void;
   setSidebarOpen: (isOpen: boolean) => void;
   setSidebarRetraction: (isRetracted: boolean) => void;
+  allowNonStandardParty: boolean;
+  setAllowNonStandardParty: (allowNonStandardParty: boolean) => void;
 }
 
 export const useUi = create<UiState>()(
@@ -30,6 +32,11 @@ export const useUi = create<UiState>()(
         set((state) => {
           state.isSidebarRetracted = isRetracted;
         }),
+      allowNonStandardParty: false,
+      setAllowNonStandardParty: (allowNonStandardParty: boolean) =>
+        set((state) => {
+          state.allowNonStandardParty = allowNonStandardParty;
+        }),
     })),
     {
       name: `${STORE_NAMESPACE}-ui-v1`,
@@ -37,6 +44,7 @@ export const useUi = create<UiState>()(
       partialize: (state) => ({
         devmode: state.devmode,
         isSidebarRetracted: state.isSidebarRetracted,
+        allowNonStandardParty: state.allowNonStandardParty,
       }),
       version: 1,
     },

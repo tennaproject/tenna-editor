@@ -1,5 +1,4 @@
-import { useSave } from '@contexts';
-import { useUi } from '@store';
+import { useSave, useUi } from '@store';
 import { useMemo, useCallback, memo, type ReactNode } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
@@ -21,7 +20,7 @@ export const SidebarItem = memo(function SidebarItem({
   const isSidebarRetracted = useUi((s) => s.isSidebarRetracted);
   const devmode = useUi((s) => s.devmode);
 
-  const { saveFile } = useSave();
+  const isSaveFilePresent = useSave((s) => !!s.saveFile);
   const location = useLocation();
 
   const baseClasses =
@@ -29,7 +28,7 @@ export const SidebarItem = memo(function SidebarItem({
   const activeClasses = 'bg-surface-1-active text-text-1';
   const inactiveClasses = 'text-text-2 hover:bg-surface-1-hover';
   const disabledClasses = 'opacity-20 pointer-events-none';
-  const isDisabled = requireSave && !saveFile;
+  const isDisabled = requireSave && !isSaveFilePresent;
 
   const isHidden = requireDevmode && !devmode;
 
