@@ -1,2 +1,2 @@
 export * from './schema';
-export * from './use-ui';
+export * from './ui';
