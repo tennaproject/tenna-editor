@@ -8,13 +8,6 @@ import { useNavigate } from 'react-router-dom';
 import { memo } from 'react';
 
 export const Header = memo(function Header() {
-  const isSidebarOpen = useUi((s) => s.isSidebarOpen);
-  const setSidebarOpen = useUi((s) => s.setSidebarOpen);
-  const isSidebarRetracted = useUi((s) => s.isSidebarRetracted);
-  const setSidebarRetraction = useUi((s) => s.setSidebarRetraction);
-
-  const saveFile = useSave((s) => s.saveFile);
-  const isSaveFilePresent = useSave((s) => !!s.saveFile);
   const navigate = useNavigate();
 
   return (
@@ -24,6 +17,7 @@ export const Header = memo(function Header() {
           {/* sidebar visibility button */}
           <button
             onClick={() => {
+              const { isSidebarOpen, setSidebarOpen } = useUi.getState();
               setSidebarOpen(!isSidebarOpen);
             }}
             className="p-1.5 lg:hidden transition-colors hover:bg-surface-1-hover"
@@ -39,6 +33,8 @@ export const Header = memo(function Header() {
           {/* sidebar retraction button */}
           <button
             onClick={() => {
+              const { isSidebarRetracted, setSidebarRetraction } =
+                useUi.getState();
               setSidebarRetraction(!isSidebarRetracted);
             }}
             className="p-1.5 hidden lg:inline transition-colors hover:bg-surface-1-hover"
@@ -66,12 +62,13 @@ export const Header = memo(function Header() {
           <button
             className="text-green bg-surface-3 hover:bg-surface-3-hover transition-colors p-2 cursor-pointer"
             onClick={() => {
-              if (!isSaveFilePresent || !saveFile) {
+              const save = useSave.getState().saveFile;
+              if (!save) {
                 console.warn('No save file to download');
                 return;
               }
 
-              const serializedSaveFile = serializeSaveFile(saveFile);
+              const serializedSaveFile = serializeSaveFile(save);
               const blob = new Blob([serializedSaveFile], {
                 type: 'application/octet-stream',
               });
