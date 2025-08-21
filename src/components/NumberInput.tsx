@@ -84,7 +84,7 @@ export function NumberInput({
           disabled={!canIncrement || disabled}
           className={`
             w-8 h-4 flex items-center justify-center border border-border
-            bg-surface-2 text-text-2 hover:bg-surface-2-hover transition-colors
+            bg-surface-2 text-text-2 hover:bg-surface-2-hover hover:text-text-1 transition-colors
             ${!canIncrement || disabled ? 'opacity-40 cursor-not-allowed' : ''}
           `}
           title="Increase"
@@ -103,7 +103,7 @@ export function NumberInput({
           disabled={!canDecrement || disabled}
           className={`
             w-8 h-4 flex items-center justify-center border border-border
-            bg-surface-2 text-text-2 hover:bg-surface-2-hover transition-colors
+            bg-surface-2 text-text-2 hover:bg-surface-2-hover hover:text-text-1 transition-colors
             ${!canDecrement || disabled ? 'opacity-40 cursor-not-allowed' : ''}
           `}
           title="Decrease"
