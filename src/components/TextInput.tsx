@@ -5,6 +5,7 @@ interface TextInputProps {
   disabled?: boolean;
   suffix?: string;
   className?: string;
+  fullWidth?: boolean;
 }
 
 export function TextInput({
@@ -14,9 +15,11 @@ export function TextInput({
   disabled = false,
   suffix,
   className = '',
+  fullWidth = false,
 }: TextInputProps) {
+  const widthClass = fullWidth ? 'w-full' : 'w-50';
   return (
-    <div className={`relative ${className}`}>
+    <div className={`relative ${widthClass} ${className}`}>
       <input
         type="text"
         value={value}
@@ -24,7 +27,7 @@ export function TextInput({
         disabled={disabled}
         placeholder={placeholder}
         className={`
-          w-full px-3 py-2 ${disabled ? 'bg-surface-2 border border-border text-text-2 opacity-40 cursor-not-allowed select-none' : 'bg-surface-3 border border-border text-text-1'}
+          w-full h-11 px-3 py-2 leading-none ${disabled ? 'bg-surface-2 border border-border text-text-2 opacity-40 cursor-not-allowed select-none' : 'bg-surface-3 border border-border text-text-1'}
           ${disabled ? '' : 'focus:outline-none focus:ring-1 transition-colors focus:ring-text-3'}
         `}
       />

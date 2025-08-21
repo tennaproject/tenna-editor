@@ -1,3 +1,6 @@
+import ArrowUpIcon from '@assets/icons/chevron-up.svg';
+import ArrowDownIcon from '@assets/icons/chevron-down.svg';
+
 interface NumberInputProps {
   value: number;
   onChange?: (value: number) => void;
@@ -7,6 +10,7 @@ interface NumberInputProps {
   min?: number;
   max?: number;
   className?: string;
+  fullWidth?: boolean;
 }
 
 export function NumberInput({
@@ -18,6 +22,7 @@ export function NumberInput({
   min,
   max,
   className = '',
+  fullWidth = false,
 }: NumberInputProps) {
   const clamp = (v: number) => {
     let next = v;
@@ -35,8 +40,10 @@ export function NumberInput({
   const canDecrement = typeof min !== 'number' ? true : value > min;
   const canIncrement = typeof max !== 'number' ? true : value < max;
 
+  const widthClass = fullWidth ? 'w-full' : 'w-50';
+
   return (
-    <div className={`relative group ${className}`}>
+    <div className={`relative group ${widthClass} ${className}`}>
       <input
         type="number"
         value={value}
@@ -46,7 +53,7 @@ export function NumberInput({
         min={min}
         max={max}
         className={`
-          w-full px-3 py-2 pr-14 ${disabled ? 'bg-surface-2 border border-border text-text-2 opacity-40 cursor-not-allowed select-none' : 'bg-surface-3 border border-border text-text-1'}
+          w-full h-11 px-3 py-2 leading-none ${disabled ? 'bg-surface-2 border border-border text-text-2 opacity-40 cursor-not-allowed select-none' : 'bg-surface-3 border border-border text-text-1'}
           ${disabled ? '' : 'focus:outline-none focus:ring-1 transition-colors focus:ring-text-3'}
           appearance-none
         `}
@@ -55,17 +62,17 @@ export function NumberInput({
       />
 
       {suffix && (
-        <div className="absolute inset-y-0 right-10 flex items-center pr-3 pointer-events-none">
+        <div className="absolute inset-y-0 right-1 flex items-center pr-3 pointer-events-none group-focus-within:opacity-0 transition-all duration-200">
           <span className="text-xs text-text-3">{suffix}</span>
         </div>
       )}
 
       <div
         className={`
-          absolute right-1 top-1 bottom-1 flex flex-col items-center justify-center gap-1
-          opacity-0 pointer-events-none transform translate-y-0 scale-95
-          transition-all duration-150
-          group-focus-within:opacity-100 group-focus-within:pointer-events-auto group-focus-within:scale-100
+          absolute right-1 top-1 bottom-1 flex flex-col justify-between 
+          opacity-0 pointer-events-none transform
+          transition-all duration-200
+          group-focus-within:opacity-100 group-focus-within:pointer-events-auto 
         `}
       >
         <button
@@ -76,27 +83,15 @@ export function NumberInput({
           }}
           disabled={!canIncrement || disabled}
           className={`
-            w-8 h-6 flex items-center justify-center border border-border
+            w-8 h-4 flex items-center justify-center border border-border
             bg-surface-2 text-text-2 hover:bg-surface-2-hover transition-colors
             ${!canIncrement || disabled ? 'opacity-40 cursor-not-allowed' : ''}
           `}
           title="Increase"
         >
-          <svg
-            width="10"
-            height="10"
-            viewBox="0 0 24 24"
-            fill="none"
-            aria-hidden
-          >
-            <path
-              d="M6 15l6-6 6 6"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <span className="w-3 h-3">
+            <ArrowUpIcon />
+          </span>
         </button>
 
         <button
@@ -107,27 +102,15 @@ export function NumberInput({
           }}
           disabled={!canDecrement || disabled}
           className={`
-            w-8 h-6 flex items-center justify-center border border-border
+            w-8 h-4 flex items-center justify-center border border-border
             bg-surface-2 text-text-2 hover:bg-surface-2-hover transition-colors
             ${!canDecrement || disabled ? 'opacity-40 cursor-not-allowed' : ''}
           `}
           title="Decrease"
         >
-          <svg
-            width="10"
-            height="10"
-            viewBox="0 0 24 24"
-            fill="none"
-            aria-hidden
-          >
-            <path
-              d="M6 9l6 6 6-6"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <span className="w-3 h-3">
+            <ArrowDownIcon />
+          </span>
         </button>
       </div>
     </div>
