@@ -1,5 +1,5 @@
 import { useSave, useUi } from '@store';
-import { useMemo, useCallback, memo, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
 export interface SidebarItemProps {
@@ -10,7 +10,7 @@ export interface SidebarItemProps {
   requireDevmode?: boolean;
 }
 
-export const SidebarItem = memo(function SidebarItem({
+export function SidebarItem({
   title,
   icon,
   to,
@@ -36,27 +36,22 @@ export const SidebarItem = memo(function SidebarItem({
     ? 'lg:opacity-0 lg:pointer-events-none lg:w-0 lg:max-w-0 lg:m-0 lg:p-0 lg:overflow-hidden transition-all duration-200 ease-in-out'
     : 'transition-all duration-200 ease-in-out';
 
-  const blockNavigation = useMemo(() => {
-    const currentRoot = location.pathname.split('/').filter(Boolean)[0] ?? '';
-    const targetRoot = to.split('/').filter(Boolean)[0] ?? '';
-    return currentRoot === targetRoot;
-  }, [location.pathname, to]);
+  const currentRoot = location.pathname.split('/').filter(Boolean)[0] ?? '';
+  const targetRoot = to.split('/').filter(Boolean)[0] ?? '';
+  const blockNavigation = currentRoot === targetRoot;
 
-  const handleClick = useCallback(
-    (e: React.MouseEvent) => {
-      if (isDisabled || blockNavigation) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-    },
-    [isDisabled, blockNavigation],
-  );
+  function onClick(e: React.MouseEvent) {
+    if (isDisabled || blockNavigation) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  }
 
   return !isHidden ? (
     <NavLink
       to={to}
       aria-label={title}
-      onClick={handleClick}
+      onClick={onClick}
       tabIndex={isDisabled ? -1 : 0}
       aria-disabled={isDisabled}
       className={({ isActive }) =>
@@ -82,4 +77,4 @@ export const SidebarItem = memo(function SidebarItem({
       </div>
     </NavLink>
   ) : null;
-});
+}

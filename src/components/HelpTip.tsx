@@ -1,4 +1,4 @@
-import { memo, useRef, useState, useEffect, type ReactNode } from 'react';
+import { useRef, useState, useEffect, type ReactNode } from 'react';
 import { Heading } from './Heading';
 import { motion, AnimatePresence } from 'framer-motion';
 import LightbulbIcon from '@assets/icons/lightbulb-on.svg';
@@ -15,10 +15,7 @@ interface HelpTipProps {
   children?: ReactNode;
 }
 
-export const HelpTip = memo(function HelpTip({
-  title,
-  children,
-}: HelpTipProps) {
+export function HelpTip({ title, children }: HelpTipProps) {
   const [isOpen, setOpen] = useState(false);
   const dialogRef = useRef<HTMLDivElement | null>(null);
 
@@ -138,4 +135,4 @@ export const HelpTip = memo(function HelpTip({
       </AnimatePresence>
     </div>
   );
-});
+}

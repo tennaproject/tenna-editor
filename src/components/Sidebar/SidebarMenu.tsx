@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import { Sidebar } from '.';
 
 import HomeIcon from '@assets/icons/home.svg';
@@ -11,7 +10,7 @@ import SettingsIcon from '@assets/icons/sliders.svg';
 import AboutIcon from '@assets/icons/book-open.svg';
 import DevtoolsIcon from '@assets/icons/code.svg';
 
-export const SidebarMenu = memo(function SidebarMenu() {
+export function SidebarMenu() {
   return (
     <>
       <Sidebar.Group>
@@ -60,4 +59,4 @@ export const SidebarMenu = memo(function SidebarMenu() {
       </Sidebar.Group>
     </>
   );
-});
+}

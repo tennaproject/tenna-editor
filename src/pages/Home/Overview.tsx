@@ -11,17 +11,14 @@ import {
   InlineGroup,
 } from '@components';
 import { useSave } from '@store';
-import { memo, useCallback } from 'react';
-import type { ChangeEvent } from 'react';
-export const PlayerNameField = memo(function PlayerNameField() {
+
+export function PlayerNameField() {
   const value = useSave((s) => s.saveFile?.playerName) ?? '';
   const setField = useSave((s) => s.setSaveFileField);
-  const onChange = useCallback(
-    (v: string) => {
-      setField('playerName', v);
-    },
-    [setField],
-  );
+
+  function onChange(v: string) {
+    setField('playerName', v);
+  }
 
   return (
     <Section id="player-name" className="space-y-2">
@@ -42,17 +39,15 @@ export const PlayerNameField = memo(function PlayerNameField() {
       />
     </Section>
   );
-});
+}
 
-export const MoneyField = memo(function MoneyField() {
+export function MoneyField() {
   const value = useSave((s) => s.saveFile?.money) ?? 0;
   const setField = useSave((s) => s.setSaveFileField);
-  const onChange = useCallback(
-    (v: number) => {
-      setField('money', v);
-    },
-    [setField],
-  );
+
+  function onChange(v: number) {
+    setField('money', v);
+  }
 
   return (
     <Section id="money" className="space-y-2">
@@ -67,15 +62,13 @@ export const MoneyField = memo(function MoneyField() {
   );
 });
 
-export const InDarkWorldField = memo(function InDarkWorldField() {
+export function InDarkWorldField() {
   const checked = useSave((s) => s.saveFile?.inDarkWorld) ?? false;
   const setField = useSave((s) => s.setSaveFileField);
-  const onChange = useCallback(
-    (state: boolean) => {
-      setField('inDarkWorld', state);
-    },
-    [setField],
-  );
+
+  function onChange(state: boolean) {
+    setField('inDarkWorld', state);
+  }
 
   return (
     <Section id="in-dark-world">

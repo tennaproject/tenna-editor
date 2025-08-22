@@ -5,9 +5,8 @@ import DownloadIcon from '@assets/icons/download.svg';
 import UploadIcon from '@assets/icons/upload.svg';
 import { serializeSaveFile } from '@utils';
 import { useNavigate } from 'react-router-dom';
-import { memo } from 'react';
 
-export const Header = memo(function Header() {
+export function Header() {
   const navigate = useNavigate();
 
   return (
@@ -99,4 +98,4 @@ export const Header = memo(function Header() {
       </div>
     </header>
   );
-});
+}
