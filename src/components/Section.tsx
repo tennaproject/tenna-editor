@@ -1,3 +1,4 @@
+import { mergeClass } from '@utils';
 import type { ReactNode } from 'react';
 
 interface SectionProps {
@@ -7,9 +8,8 @@ interface SectionProps {
 }
 
 export function Section({ id, className, children }: SectionProps) {
-  const customClass = className ? ` ${className}` : '';
   return (
-    <section id={id} className={`w-full${customClass}`}>
+    <section id={id} className={mergeClass('w-full', className)}>
       {children}
     </section>
   );

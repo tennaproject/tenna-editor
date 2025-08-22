@@ -1,3 +1,4 @@
+import { mergeClass } from '@utils';
 import type { ReactNode } from 'react';
 import { useState, useEffect } from 'react';
 
@@ -17,7 +18,7 @@ export function Checkbox({
   onChange,
   disabled = false,
   label,
-  className = '',
+  className,
 }: CheckboxProps) {
   // Support controlled & uncontrolled usage
   const isControlled = checked !== undefined;
@@ -38,7 +39,11 @@ export function Checkbox({
 
   return (
     <div
-      className={`flex items-center gap-3 select-none ${disabled ? 'opacity-50' : ''} ${className}`}
+      className={mergeClass(
+        'flex items-center gap-3 select-none',
+        disabled ? 'opacity-50' : '',
+        className,
+      )}
     >
       <span className="relative inline-flex items-center justify-center group">
         <input

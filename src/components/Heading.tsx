@@ -1,3 +1,4 @@
+import { mergeClass } from '@utils';
 import { type JSX, type ReactNode } from 'react';
 
 interface HeadingProps {
@@ -16,11 +17,11 @@ export function Heading({ level, className, children }: HeadingProps) {
     6: 'text-base',
   }[level];
 
-  const customClass = className ? ` ${className}` : '';
-
   const Tag = `h${level}` as keyof JSX.IntrinsicElements;
   return (
-    <Tag className={`${headingClass}${customClass} font-bold leading-none`}>
+    <Tag
+      className={mergeClass('font-bold leading-none', headingClass, className)}
+    >
       {children}
     </Tag>
   );

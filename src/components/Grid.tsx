@@ -1,3 +1,4 @@
+import { mergeClass } from '@utils';
 import type { ReactNode } from 'react';
 
 interface GridProps {
@@ -6,7 +7,7 @@ interface GridProps {
   className?: string;
 }
 
-export function Grid({ children, cols = 2, className = '' }: GridProps) {
+export function Grid({ children, cols = 2, className }: GridProps) {
   const colsClass = {
     1: 'grid-cols-1',
     2: 'grid-cols-1 lg:grid-cols-2',
@@ -17,6 +18,8 @@ export function Grid({ children, cols = 2, className = '' }: GridProps) {
   };
 
   return (
-    <div className={`grid ${colsClass[cols]} ${className}`}>{children}</div>
+    <div className={mergeClass('grid', colsClass[cols], className)}>
+      {children}
+    </div>
   );
 }

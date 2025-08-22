@@ -1,3 +1,4 @@
+import { mergeClass } from '@utils';
 import type { ReactNode } from 'react';
 
 interface TextLabelProps {
@@ -5,10 +6,14 @@ interface TextLabelProps {
   children?: ReactNode;
 }
 
-export function TextLabel({ children, className = '' }: TextLabelProps) {
-  const customClass = className ? ` ${className}` : '';
+export function TextLabel({ children, className }: TextLabelProps) {
   return (
-    <span className={`block leading-none text-sm text-text-2${customClass}`}>
+    <span
+      className={mergeClass(
+        'block leading-none text-sm text-text-2',
+        className,
+      )}
+    >
       {children}
     </span>
   );

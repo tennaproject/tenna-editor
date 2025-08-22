@@ -1,3 +1,4 @@
+import { mergeClass } from '@utils';
 import type { ReactNode } from 'react';
 
 interface CardProps {
@@ -5,10 +6,13 @@ interface CardProps {
   className?: string;
 }
 
-export function Card({ children, className = '' }: CardProps) {
+export function Card({ children, className }: CardProps) {
   return (
     <div
-      className={`p-6 border border-border shadow shadow-surface-1/50 ${className}`}
+      className={mergeClass(
+        'p-6 border border-border shadow shadow-surface-1/50',
+        className,
+      )}
     >
       {children}
     </div>

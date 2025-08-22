@@ -1,3 +1,5 @@
+import { mergeClass } from '@utils';
+
 interface TextInputProps {
   value: string;
   onChange?: (value: string) => void;
@@ -14,12 +16,12 @@ export function TextInput({
   placeholder,
   disabled = false,
   suffix,
-  className = '',
+  className,
   fullWidth = false,
 }: TextInputProps) {
   const widthClass = fullWidth ? 'w-full' : 'w-50';
   return (
-    <div className={`relative ${widthClass} ${className}`}>
+    <div className={mergeClass('relative', widthClass, className)}>
       <input
         type="text"
         value={value}

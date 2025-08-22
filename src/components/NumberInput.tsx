@@ -1,5 +1,6 @@
 import ArrowUpIcon from '@assets/icons/chevron-up.svg';
 import ArrowDownIcon from '@assets/icons/chevron-down.svg';
+import { mergeClass } from '@utils';
 
 interface NumberInputProps {
   value: number;
@@ -21,7 +22,7 @@ export function NumberInput({
   suffix,
   min,
   max,
-  className = '',
+  className,
   fullWidth = false,
 }: NumberInputProps) {
   const clamp = (v: number) => {
@@ -43,7 +44,7 @@ export function NumberInput({
   const widthClass = fullWidth ? 'w-full' : 'w-50';
 
   return (
-    <div className={`relative group ${widthClass} ${className}`}>
+    <div className={mergeClass('relative group', widthClass, className)}>
       <input
         type="number"
         value={value}
