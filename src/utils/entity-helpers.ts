@@ -7,10 +7,10 @@ export function createEntityHelpers<
     getIndex: (name: TName): TIndex => registry[name],
     getById: (id: TIndex): TProperties => definitions[id],
     getByName: (name: TName): TProperties => definitions[registry[name]],
-    getName: (id: TIndex): TName | undefined => {
+    getName: (id: TIndex): TName => {
       return Object.entries(registry).find(
         ([_, value]) => value === id,
-      )?.[0] as TName | undefined;
+      )?.[0] as TName;
     },
     getAllNames: (): TName[] => Object.keys(registry) as TName[],
     getAll: (): (TProperties & { id: TIndex })[] => {

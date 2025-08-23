@@ -13,7 +13,11 @@ import {
   CHARACTERS_META,
   CHAPTERS,
   CHAPTERS_META,
+  ROOMS,
+  ROOMS_META,
 } from '@data';
+import type { BaseProperties } from '@types';
+import type { RoomIndex } from '../data/rooms';
 import { createEntityHelpers } from './entity-helpers';
 
 export const flagHelpers = createEntityHelpers(FLAGS, FLAGS_META);
@@ -29,3 +33,7 @@ export const characterHelpers = createEntityHelpers(
   CHARACTERS_META,
 );
 export const chapterHelpers = createEntityHelpers(CHAPTERS, CHAPTERS_META);
+export const roomHelpers = createEntityHelpers(
+  ROOMS,
+  ROOMS_META as Record<RoomIndex, BaseProperties>,
+);
