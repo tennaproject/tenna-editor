@@ -1,6 +1,6 @@
 import { useCombobox } from 'downshift';
 import ChevronDownIcon from '@assets/icons/chevron-down.svg';
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { mergeClass } from '@utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -34,51 +34,70 @@ export function Select({
   const containerRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const [highlightedIndex, setHighlightedIndex] = useState<number | null>(null);
+  const [inputValue, setInputValue] = useState(
+    defaultSelectedItem ? defaultSelectedItem.label : '',
+  );
+  const [hasTyped, setHasTyped] = useState(false);
 
   useEffect(() => {
     setInputItems(items);
   }, [items]);
 
+  useEffect(() => {
+    // sync when default selection changes
+    if (defaultSelectedItem) {
+      setInputValue(defaultSelectedItem.label);
+      setHasTyped(false);
+      setInputItems(items);
+    }
+  }, [defaultSelectedItem, items]);
+
   const {
     isOpen,
     selectedItem,
+    highlightedIndex: highlightedIndex,
     getToggleButtonProps,
     getLabelProps,
     getMenuProps,
     getInputProps,
     getItemProps,
   } = useCombobox({
-    highlightedIndex: highlightedIndex ?? undefined,
+    inputValue: inputValue,
     items: inputItems,
     initialSelectedItem: defaultSelectedItem || undefined,
     itemToString: (item) => item?.label || '',
     onSelectedItemChange: ({ selectedItem }) => {
       if (selectedItem) {
         onSelectionChange?.(selectedItem);
-        // delay blur to ensure touch/click handlers complete on mobile
-        setTimeout(() => inputRef.current?.blur(), 50);
+        setInputValue(selectedItem.label);
+        setInputItems(items);
+        setHasTyped(false);
+        setTimeout(() => {
+          if (inputRef.current && document.activeElement === inputRef.current) {
+            inputRef.current.blur();
+          }
+        }, 120);
       } else {
         onSelectionChange?.(null);
       }
     },
     onInputValueChange: ({ inputValue }) => {
-      if (!inputValue) {
+      // keep the controlled inputValue in sync
+      const val = inputValue ?? '';
+      setInputValue(val);
+      // track whether the user has typed anything
+      setHasTyped(val !== '');
+
+      if (!val) {
         setInputItems(items);
-        setHighlightedIndex(null);
         return;
       }
 
-      const lower = inputValue.toLowerCase();
+      const lower = val.toLowerCase();
       const filtered = items.filter((it) =>
         it.label.toLowerCase().includes(lower),
       );
       setInputItems(filtered);
-      if (filtered.length > 0) setHighlightedIndex(0);
-      else setHighlightedIndex(null);
-    },
-    onHighlightedIndexChange: ({ highlightedIndex }) => {
-      setHighlightedIndex(highlightedIndex ?? null);
     },
     stateReducer: (
       state: { selectedItem: SelectItem | null; inputValue?: string },
@@ -111,9 +130,7 @@ export function Select({
         );
         if (!exact) {
           const pickIndex =
-            (changes.highlightedIndex as number | undefined) ??
-            highlightedIndex ??
-            0;
+            (changes.highlightedIndex as number | undefined) ?? 0;
           const pick = inputItems[pickIndex];
           if (pick) {
             return {
@@ -140,6 +157,13 @@ export function Select({
     },
   });
 
+  useEffect(() => {
+    if (isOpen) {
+      setHasTyped(false);
+      setInputItems(items);
+    }
+  }, [isOpen, items]);
+
   function computePosition() {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
@@ -147,6 +171,8 @@ export function Select({
     const spaceAbove = rect.top;
     setShouldOpenUp(spaceBelow < 225 && spaceAbove > spaceBelow);
   }
+
+  const displayItems = hasTyped ? inputItems : items;
 
   return (
     <div
@@ -160,12 +186,23 @@ export function Select({
       )}
       <div className="relative w-full h-11 bg-surface-3 hover:bg-surface-3-hover transition-all duration-200 border border-border">
         <input
-          {...getInputProps({ ref: inputRef })}
+          {...getInputProps({
+            ref: inputRef,
+            onFocus: () => {
+              computePosition();
+              if (!hasTyped) setInputItems(items);
+            },
+          })}
           className="w-full h-full px-3 pr-10 bg-transparent border-none outline-none text-text-1 placeholder:text-text-2 focus:outline-none focus:ring-1 transition-colors focus:ring-text-3"
           placeholder={placeholder}
         />
         <button
-          {...getToggleButtonProps({ onClick: () => computePosition() })}
+          {...getToggleButtonProps({
+            onClick: () => {
+              computePosition();
+              if (!hasTyped) setInputItems(items);
+            },
+          })}
           className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center text-text-2 "
           type="button"
         >
@@ -199,12 +236,12 @@ export function Select({
               minWidth: containerRef.current?.offsetWidth,
             }}
           >
-            {inputItems.length === 0 ? (
+            {displayItems.length === 0 ? (
               <li className="px-3 py-2 text-text-2 text-sm">
                 No options found
               </li>
             ) : (
-              inputItems.map((item, index) => {
+              displayItems.map((item, index) => {
                 const chosen = selectedItem?.id === item.id;
                 const highlighted = index === highlightedIndex;
                 const itemProps = getItemProps({
@@ -222,7 +259,6 @@ export function Select({
                     {...itemProps}
                     onPointerDown={(e) => {
                       itemProps.onPointerDown?.(e);
-                      itemProps.onClick?.(e);
                     }}
                     className={`cursor-pointer text-sm select-none leading-none text-text-1 transition-colors`}
                     aria-selected={chosen}
