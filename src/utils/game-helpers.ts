@@ -11,6 +11,8 @@ import {
   WEAPONS_META,
   CHARACTERS,
   CHARACTERS_META,
+  CHAPTERS,
+  CHAPTERS_META,
 } from '@data';
 import { createEntityHelpers } from './entity-helpers';
 
@@ -26,3 +28,4 @@ export const characterHelpers = createEntityHelpers(
   CHARACTERS,
   CHARACTERS_META,
 );
+export const chapterHelpers = createEntityHelpers(CHAPTERS, CHAPTERS_META);
