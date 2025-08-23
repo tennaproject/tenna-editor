@@ -34,6 +34,7 @@ export function Select({
   const containerRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [highlightedIndex, setHighlightedIndex] = useState<number | null>(null);
 
   useEffect(() => {
     setInputItems(items);
@@ -48,6 +49,7 @@ export function Select({
     getInputProps,
     getItemProps,
   } = useCombobox({
+    highlightedIndex: highlightedIndex ?? undefined,
     items: inputItems,
     initialSelectedItem: defaultSelectedItem || undefined,
     itemToString: (item) => item?.label || '',
@@ -63,13 +65,20 @@ export function Select({
     onInputValueChange: ({ inputValue }) => {
       if (!inputValue) {
         setInputItems(items);
+        setHighlightedIndex(null);
         return;
       }
 
       const lower = inputValue.toLowerCase();
-      setInputItems(
-        items.filter((it) => it.label.toLowerCase().includes(lower)),
+      const filtered = items.filter((it) =>
+        it.label.toLowerCase().includes(lower),
       );
+      setInputItems(filtered);
+      if (filtered.length > 0) setHighlightedIndex(0);
+      else setHighlightedIndex(null);
+    },
+    onHighlightedIndexChange: ({ highlightedIndex }) => {
+      setHighlightedIndex(highlightedIndex ?? null);
     },
     stateReducer: (
       state: { selectedItem: SelectItem | null; inputValue?: string },
@@ -101,6 +110,19 @@ export function Select({
           (it) => it.label.toLowerCase() === currentInput.toLowerCase(),
         );
         if (!exact) {
+          const pickIndex =
+            (changes.highlightedIndex as number | undefined) ??
+            highlightedIndex ??
+            0;
+          const pick = inputItems[pickIndex];
+          if (pick) {
+            return {
+              ...changes,
+              selectedItem: pick,
+              inputValue: pick.label,
+            };
+          }
+
           return {
             ...changes,
             selectedItem: state.selectedItem,
@@ -184,6 +206,7 @@ export function Select({
             ) : (
               inputItems.map((item, index) => {
                 const chosen = selectedItem?.id === item.id;
+                const highlighted = index === highlightedIndex;
                 const itemProps = getItemProps({
                   item,
                   index,
@@ -209,7 +232,9 @@ export function Select({
                         'px-2 py-2 leading-none my-1',
                         chosen
                           ? 'bg-surface-4-active'
-                          : 'bg-surface-4 hover:bg-surface-4-hover',
+                          : highlighted
+                            ? 'bg-surface-4-hover ring-1 ring-text-3'
+                            : 'bg-surface-4 hover:bg-surface-4-hover',
                       )}
                     >
                       {item.label}
