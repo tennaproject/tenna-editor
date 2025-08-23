@@ -9,8 +9,10 @@ import {
   Checkbox,
   HelpTip,
   InlineGroup,
+  Select,
 } from '@components';
 import { useSave } from '@store';
+import { ROOMS } from '@data';
 
 export function PlayerNameField() {
   const value = useSave((s) => s.saveFile?.playerName) ?? '';
@@ -60,7 +62,7 @@ export function MoneyField() {
       />
     </Section>
   );
-});
+}
 
 export function InDarkWorldField() {
   const checked = useSave((s) => s.saveFile?.inDarkWorld) ?? false;
@@ -87,9 +89,59 @@ export function InDarkWorldField() {
       </InlineGroup>
     </Section>
   );
-});
+}
 
-export const Overview = memo(function Overview() {
+export function RoomField() {
+  const room = useSave((s) => s.saveFile?.room) ?? 0;
+  const setField = useSave((s) => s.setSaveFileField);
+
+  function onChange(
+    item: { id: string; label: string; value?: unknown } | null,
+  ) {
+    if (item?.value) {
+      const roomId = parseInt(item.value as string, 10);
+      setField('room', roomId);
+    }
+  }
+
+  const entries = Object.entries(ROOMS).filter(([_name, id]) => id < 20000) as [
+    string,
+    number,
+  ][];
+
+  const items = entries.map(([name, id]) => ({
+    id: id.toString(),
+    label: name,
+    value: id.toString(),
+  }));
+
+  const selectedItem =
+    items.find((item) => item.value === room.toString()) || null;
+
+  return (
+    <Section id="room" className="space-y-2">
+      <InlineGroup>
+        <TextLabel>Current Room</TextLabel>
+        <HelpTip title="Current Room">
+          <p>
+            This sets which room the player is currently in when the save is
+            loaded.
+          </p>
+        </HelpTip>
+      </InlineGroup>
+      <Select
+        items={items}
+        placeholder="Select a room..."
+        label="tea tratsfds"
+        defaultSelectedItem={selectedItem}
+        onSelectionChange={onChange}
+        className="w-60"
+      />
+    </Section>
+  );
+}
+
+export function Overview() {
   const isSaveFilePresent = useSave((s) => !!s.saveFile);
 
   if (!isSaveFilePresent) {
@@ -113,6 +165,7 @@ export const Overview = memo(function Overview() {
             <PlayerNameField />
             <MoneyField />
             <InDarkWorldField />
+            <RoomField />
           </Card>
         </Section>
       </Grid>

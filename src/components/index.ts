@@ -14,3 +14,4 @@ export * from './TextLabel';
 export * from './Checkbox';
 export * from './InlineGroup';
 export * from './HelpTip';
+export * from './Select';
