@@ -11,8 +11,25 @@ import {
   InlineGroup,
   Select,
 } from '@components';
+import { type RoomIndex } from '@data';
 import { useSave } from '@store';
-import { ROOMS } from '@data';
+import { chapterHelpers, roomHelpers } from '@utils';
+
+export function ChapterField() {
+  const value = useSave((s) => s.saveFile?.chapter) || 1;
+
+  return (
+    <Section id="chapter" className="space-y-2">
+      <TextLabel>Chapter</TextLabel>
+      <InlineGroup className="leading-none">
+        <div className="w-8 h-8 bg-surface-3 flex justify-center items-center font-bold">
+          <p>{value}</p>
+        </div>
+        <p>{chapterHelpers.getById(value).displayName}</p>
+      </InlineGroup>
+    </Section>
+  );
+}
 
 export function PlayerNameField() {
   const value = useSave((s) => s.saveFile?.playerName) ?? '';
@@ -93,6 +110,7 @@ export function InDarkWorldField() {
 
 export function RoomField() {
   const room = useSave((s) => s.saveFile?.room) ?? 0;
+  const chapter = useSave((s) => s.saveFile?.chapter) || 1;
   const setField = useSave((s) => s.setSaveFileField);
 
   function onChange(
@@ -103,11 +121,16 @@ export function RoomField() {
       setField('room', roomId);
     }
   }
-
-  const entries = Object.entries(ROOMS).filter(([_name, id]) => id < 20000) as [
-    string,
-    number,
-  ][];
+  const roomsSource = chapterHelpers.getById(chapter).content
+    .rooms as Set<RoomIndex>;
+  const entries: Array<[string, number]> = Array.from(roomsSource).map(
+    (rid) => {
+      const id = Number(rid) as number;
+      const meta = roomHelpers.getById(id as RoomIndex);
+      const name = meta?.displayName || roomHelpers.getName(rid);
+      return [name, id];
+    },
+  );
 
   const items = entries.map(([name, id]) => ({
     id: id.toString(),
@@ -162,6 +185,7 @@ export function Overview() {
       <Grid cols={2} className="gap-4">
         <Section id="base">
           <Card className="space-y-4">
+            <ChapterField />
             <PlayerNameField />
             <MoneyField />
             <InDarkWorldField />
