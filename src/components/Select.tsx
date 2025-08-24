@@ -1,13 +1,15 @@
 import { useCombobox } from 'downshift';
 import ChevronDownIcon from '@assets/icons/chevron-down.svg';
+import WarningIcon from '@assets/icons/alert.svg';
 import { useState, useEffect, useRef } from 'react';
 import { mergeClass } from '@utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
-interface SelectItem {
+export interface SelectItem {
   id: string;
   label: string;
   value?: unknown;
+  invalid?: boolean;
 }
 
 interface SelectProps {
@@ -196,6 +198,17 @@ export function Select({
           className="w-full h-full px-3 pr-10 bg-transparent border-none outline-none text-text-1 placeholder:text-text-2 focus:outline-none focus:ring-1 transition-colors focus:ring-text-3"
           placeholder={placeholder}
         />
+        <div
+          className="absolute right-9 top-1/2 -translate-y-1/2 text-xs text-red font-bold flex items-center gap-1 pointer-events-none"
+          aria-hidden={!selectedItem?.invalid}
+        >
+          {selectedItem?.invalid ? (
+            <span className="h-5 w-5">
+              <WarningIcon />
+            </span>
+          ) : null}
+          {selectedItem?.invalid ? 'Invalid' : ''}
+        </div>
         <button
           {...getToggleButtonProps({
             onClick: () => {
@@ -265,7 +278,7 @@ export function Select({
                   >
                     <div
                       className={mergeClass(
-                        'px-2 py-2 leading-none my-1',
+                        'px-2 py-2 leading-none my-1 flex gap-1 justify-between items-center',
                         chosen
                           ? 'bg-surface-4-active'
                           : highlighted
@@ -274,6 +287,17 @@ export function Select({
                       )}
                     >
                       {item.label}
+                      <div
+                        className="ml-2 text-xs text-red flex items-center gap-1 font-bold"
+                        aria-hidden={!item.invalid}
+                      >
+                        {item.invalid ? (
+                          <span className="h-5 w-5">
+                            <WarningIcon />
+                          </span>
+                        ) : null}
+                        {item.invalid ? 'Invalid' : ''}
+                      </div>
                     </div>
                   </li>
                 );
