@@ -117,7 +117,7 @@ export function RoomField() {
     item: { id: string; label: string; value?: unknown } | null,
   ) {
     if (item?.value) {
-      const roomId = parseInt(item.value as string, 10);
+      const roomId = parseInt(item.value as string, 10) as RoomIndex;
       setField('room', roomId);
     }
   }
