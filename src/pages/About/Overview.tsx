@@ -36,7 +36,7 @@ export const Overview = () => {
         <Card className="space-y-4">
           <Heading level={3}>Build Info</Heading>
           <div className="space-y-2">
-            <TextLabel>Version: 0.2.0-alpha</TextLabel>
+            <TextLabel>Version: 0.3.0-alpha</TextLabel>
           </div>
         </Card>
       </Section>
