@@ -6,17 +6,247 @@ import {
   HelpTip,
   InlineGroup,
   Section,
+  Select,
+  type SelectItem,
 } from '@components';
+import {
+  FLAGS,
+  KEYITEMS,
+  ROOMS,
+  type CharacterIndex,
+  type WeaponIndex,
+} from '@data';
+import { useSaveFlag } from '@hooks';
 import { useSave, useUi } from '@store';
-import { characterHelpers } from '@utils';
+import { chapterHelpers, characterHelpers, mergeClass } from '@utils';
 
-export const Overview = () => {
-  const saveFile = useSave((s) => s.saveFile);
+interface GlowBarProps {
+  bg: string;
+  shadow: string;
+}
+
+function GlowBar({ bg = 'bg-red', shadow = 'shadow-red' }: GlowBarProps) {
+  return (
+    <div className="w-full relative">
+      <div
+        className={mergeClass(
+          'w-full h-1 shadow-2xl relative z-10',
+          bg,
+          shadow,
+        )}
+      />
+      <div
+        className="absolute left-0 right-0 h-1 pointer-events-none"
+        style={{ filter: 'blur(8px)', opacity: 0.6 }}
+      >
+        <div className={mergeClass('w-full h-1', bg)} />
+      </div>
+    </div>
+  );
+}
+
+const colors: Record<CharacterIndex, { bg: string; shadow: string }> = {
+  0: { bg: 'bg-surface-1', shadow: 'shadow-surface-1' },
+  1: { bg: 'bg-blue', shadow: 'shadow-blue' },
+  2: { bg: 'bg-pink', shadow: 'shadow-pink' },
+  3: { bg: 'bg-green', shadow: 'shadow-green' },
+  4: { bg: 'bg-yellow', shadow: 'shadow-yellow' },
+};
+
+interface CharacterCardProps {
+  slot: number;
+  character: CharacterIndex;
+  allowNonStandardParty: boolean;
+}
+
+function CharacterCard({
+  slot,
+  character,
+  allowNonStandardParty,
+}: CharacterCardProps) {
+  const party = useSave((s) => s.saveFile?.party) as
+    | CharacterIndex[]
+    | undefined;
+  const setField = useSave((s) => s.setSaveFileField);
+  const chapter = useSave((s) => s.saveFile?.chapter) || 1;
+  const plot = useSave((s) => s.saveFile?.plot) || 0;
+
+  // Flags for overrides
+  const flags = {
+    inspectedBedsCh1: !!useSaveFlag(FLAGS.INSPECTED_BEDS_CH1),
+    inspectedBedKris: !!useSaveFlag(FLAGS.INSPECTED_BED_KRIS),
+    inspectedBedSusie: !!useSaveFlag(FLAGS.INSPECTED_BED_SUSIE),
+    inspectedBedLancer: !!useSaveFlag(FLAGS.INSPECTED_BED_LANCER),
+    inspectedBedClover: !!useSaveFlag(FLAGS.INSPECTED_BED_CLOVER),
+    inspectedBedNoelle: !!useSaveFlag(FLAGS.INSPECTED_BED_NOELLE),
+    inspectedBedsCh2: !!useSaveFlag(FLAGS.INSPECTED_BEDS_CH2),
+    weirdRouteProgressCh2: useSaveFlag(FLAGS.WEIRDROUTE_PROGRESS_CH2) as number,
+    weirdRouteFailed: !!useSaveFlag(FLAGS.WEIRDROUTE_FAILED),
+    swordProgress: useSaveFlag(FLAGS.SWORD_PROGRESS) as number,
+    gotMossCh1: !!useSaveFlag(FLAGS.GOT_MOSS_CH1),
+    gotMossCh2: !!useSaveFlag(FLAGS.GOT_MOSS_CH2),
+    gotMossCh3: !!useSaveFlag(FLAGS.GOT_MOSS_CH3),
+    gotMossCh4: !!useSaveFlag(FLAGS.GOT_MOSS_CH4),
+    gotMossWithSusie: !!useSaveFlag(FLAGS.GOT_MOSS_WITH_SUSIE),
+    axeOfJusticeProgress: useSaveFlag(FLAGS.AXE_OF_JUSTICE_PROGRESS) as number,
+    ralseiPhotoStatus: useSaveFlag(FLAGS.RALSEI_PHOTO_STATUS) as number,
+    ralseiHorse: !!useSaveFlag(FLAGS.RALSEI_HORSE),
+    gotMossWithNoelle: !!useSaveFlag(FLAGS.GOT_MOSS_WITH_NOELLE),
+    noelleIceShockCount: useSaveFlag(FLAGS.NOELLE_ICE_SHOCK_COUNT) as number,
+  };
+
+  // Chapter 3 Egg check
+  const keyItems = useSave((s) => s.saveFile?.inventory.keyItems);
+  const hasEgg = !!keyItems?.includes(KEYITEMS.EGG);
+
+  // Weapon for Ralsei and Noelle title
+  const weapon =
+    useSave((s) => s.saveFile?.characters[character].weapon) ||
+    (0 as WeaponIndex);
+
+  // Room for Ralsei's title
+  const room = useSave((s) => s.saveFile?.room) || ROOMS.PLACE_DOG;
+
+  if (!party) return null;
+
+  const chapterCharacters = chapterHelpers.getById(chapter).content
+    .characters as Set<CharacterIndex>;
+  let characterMeta = characterHelpers.getById(character);
+
+  const isExisting = !!characterMeta;
+  const isInChapter = chapterCharacters.has(character);
+  const isValid = isExisting && isInChapter;
+
+  // If doesn't exist
+  if (!isExisting) {
+    characterMeta = {
+      allowedSlots: [],
+      displayName: 'Unknown',
+      title: {
+        name: 'Unknown',
+        description: 'This is unkown character',
+      },
+      lv: 0,
+    };
+  } else {
+    // Apply overrides
+    const overrides = characterMeta?.getOverrides?.({
+      chapter,
+      plot,
+      flags,
+      hasEgg,
+      weapon,
+      room,
+    });
+
+    characterMeta = {
+      ...characterMeta,
+      ...(overrides ?? {}),
+    };
+  }
+
+  let availableCharacters: CharacterIndex[] = [];
+  for (const character of chapterCharacters.keys()) {
+    const meta = characterHelpers.getById(character);
+    for (const s of meta.allowedSlots) {
+      if (slot === s) {
+        availableCharacters.push(character as CharacterIndex);
+      }
+    }
+  }
+
+  if (allowNonStandardParty) {
+    availableCharacters = Array.from(chapterCharacters);
+  } else {
+    const usedInOtherSlots = new Set(
+      party.filter((character, i) => {
+        if (character === 0) return false;
+        return i !== slot;
+      }),
+    );
+    availableCharacters = availableCharacters.filter(
+      (c) => c === character || !usedInOtherSlots.has(c),
+    );
+  }
+
+  availableCharacters.sort();
+
+  const selectItems: SelectItem[] = availableCharacters.map((c) => ({
+    id: `${c}`,
+    label: characterHelpers.getById(c).displayName,
+    value: c,
+  }));
+
+  if (!isValid) {
+    selectItems.push({
+      id: `${character}`,
+      label: characterMeta.displayName,
+      value: character,
+      invalid: true,
+    });
+  }
+
+  const selectedItem =
+    selectItems.find((it) => parseInt(it.id, 10) === party[slot]) ?? null;
+
+  return (
+    <Section id={`slot${slot}`} className="lg:h-[95%] h-[450px]">
+      <Card className="flex flex-col justify-between items-center gap-2 h-full lg:py-10">
+        <div className="flex flex-col justify-center items-center gap-1">
+          <Heading level={1}>{slot + 1}</Heading>
+          <Heading level={5}>MEMBER</Heading>
+          <Heading level={3} className="uppercase">
+            {characterMeta.displayName}
+          </Heading>
+        </div>
+        <div className="flex flex-col justify-between items-center">
+          <Heading
+            level={4}
+            className={mergeClass(!character || !isExisting ? 'opacity-0' : '')}
+          >
+            LV{characterMeta.lv} {characterMeta.title.name}
+          </Heading>
+          <p className="text-text-2 text-sm">
+            {characterMeta.title.description}
+          </p>
+        </div>
+
+        <Select
+          label={`Slot ${slot}`}
+          items={selectItems}
+          defaultSelectedItem={selectedItem}
+          onSelectionChange={(item) => {
+            if (!item) return;
+            const newCharacter = item.value as CharacterIndex;
+            const newParty: [number, number, number] = [
+              party[0],
+              party[1],
+              party[2],
+            ];
+            newParty[slot] = newCharacter;
+            setField('party', newParty);
+          }}
+        />
+      </Card>
+      <GlowBar
+        bg={colors[character].bg || colors[0].bg}
+        shadow={colors[character].shadow || colors[0].shadow}
+      />
+    </Section>
+  );
+}
+
+export function Overview() {
+  const party = useSave((s) => s.saveFile?.party) as
+    | CharacterIndex[]
+    | undefined;
   const allowNonStandardParty = useUi((s) => s.allowNonStandardParty);
   const setAllowNonStandardParty = useUi((s) => s.setAllowNonStandardParty);
 
+  if (!party) return null;
+
   return (
-    <div className="page">
+    <div className="page h-full">
       <InlineGroup>
         <Checkbox
           label="Allow non-standard party combinations"
@@ -31,65 +261,29 @@ export const Overview = () => {
           </p>
         </HelpTip>
       </InlineGroup>
-      <Grid cols={3} className="gap-4">
-        <Section id="slot1">
-          <Card className="flex flex-col justify-center items-center gap-2">
-            <div className="flex flex-col justify-center items-center gap-1">
-              <Heading level={1}>1</Heading>
-              <Heading level={5}>MEMBER</Heading>
-            </div>
-            <div>
-              <Heading level={3} className="uppercase">
-                {saveFile?.party?.[0] != null
-                  ? characterHelpers.getById(
-                      saveFile.party[0] as Parameters<
-                        typeof characterHelpers.getById
-                      >[0],
-                    ).displayName
-                  : 'None'}
-              </Heading>
-            </div>
-          </Card>
-        </Section>
-        <Section id="slot2">
-          <Card className="flex flex-col justify-center items-center gap-2">
-            <div className="flex flex-col justify-center items-center gap-1">
-              <Heading level={1}>2</Heading>
-              <Heading level={5}>MEMBER</Heading>
-            </div>
-            <div>
-              <Heading level={3} className="uppercase">
-                {saveFile?.party?.[0] != null
-                  ? characterHelpers.getById(
-                      saveFile.party[1] as Parameters<
-                        typeof characterHelpers.getById
-                      >[0],
-                    ).displayName
-                  : 'None'}
-              </Heading>
-            </div>
-          </Card>
-        </Section>
-        <Section id="slot3">
-          <Card className="flex flex-col justify-center items-center gap-2">
-            <div className="flex flex-col justify-center items-center gap-2">
-              <Heading level={1}>3</Heading>
-              <Heading level={5}>MEMBER</Heading>
-            </div>
-            <div>
-              <Heading level={3} className="uppercase">
-                {saveFile?.party?.[2] != null
-                  ? characterHelpers.getById(
-                      saveFile.party[2] as Parameters<
-                        typeof characterHelpers.getById
-                      >[0],
-                    ).displayName
-                  : 'None'}
-              </Heading>
-            </div>
-          </Card>
-        </Section>
+      <Grid container spacing={3} className="h-full">
+        <Grid size={4} item>
+          <CharacterCard
+            slot={0}
+            character={party[0]}
+            allowNonStandardParty={allowNonStandardParty}
+          />
+        </Grid>
+        <Grid size={4} item>
+          <CharacterCard
+            slot={1}
+            character={party[1]}
+            allowNonStandardParty={allowNonStandardParty}
+          />
+        </Grid>
+        <Grid size={4} item>
+          <CharacterCard
+            slot={2}
+            character={party[2]}
+            allowNonStandardParty={allowNonStandardParty}
+          />
+        </Grid>
       </Grid>
     </div>
   );
-};
+}

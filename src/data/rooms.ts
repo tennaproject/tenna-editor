@@ -597,6 +597,7 @@ export const ROOMS = {
   DW_CASTLE_DUNGEON_CH4: 40071,
   DW_CASTLE_ROOMS_KRIS_CH4: 40072,
   DW_CASTLE_ROOMS_SUSIE_CH4: 40073,
+  DW_CHURCH_BOOKCASE: 40176,
 } as const;
 
 export type RoomIndex = (typeof ROOMS)[keyof typeof ROOMS];

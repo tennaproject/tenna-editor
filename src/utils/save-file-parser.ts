@@ -3,6 +3,7 @@ import type {
   ArmorIndex,
   ConsumableIndex,
   KeyItemIndex,
+  RoomIndex,
   WeaponIndex,
 } from '../data';
 import { LineCursor } from './line-cursor';
@@ -57,7 +58,7 @@ function parseV1Save(cursor: LineCursor): V1Save {
     const defence = cursor.nextNumber();
     const magic = cursor.nextNumber();
     const guts = cursor.nextNumber();
-    const weapon = cursor.nextNumber();
+    const weapon = cursor.nextNumber() as WeaponIndex;
     const primaryArmor = cursor.nextNumber();
     const secondaryArmor = cursor.nextNumber();
     const weaponStyle = cursor.nextString();
@@ -155,7 +156,7 @@ function parseV1Save(cursor: LineCursor): V1Save {
   }
 
   const plot = cursor.nextNumber();
-  const room = cursor.nextNumber();
+  const room = cursor.nextNumber() as RoomIndex;
   const time = cursor.nextNumber();
 
   return {
@@ -210,7 +211,7 @@ function parseV2Save(cursor: LineCursor): V2Save {
     const defence = cursor.nextNumber();
     const magic = cursor.nextNumber();
     const guts = cursor.nextNumber();
-    const weapon = cursor.nextNumber();
+    const weapon = cursor.nextNumber() as WeaponIndex;
     const primaryArmor = cursor.nextNumber();
     const secondaryArmor = cursor.nextNumber();
     const weaponStyle = cursor.nextNumber();
@@ -320,7 +321,7 @@ function parseV2Save(cursor: LineCursor): V2Save {
   }
 
   const plot = cursor.nextNumber();
-  const room = cursor.nextNumber();
+  const room = cursor.nextNumber() as RoomIndex;
   const time = cursor.nextNumber();
 
   return {

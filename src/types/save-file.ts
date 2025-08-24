@@ -2,6 +2,7 @@ import type {
   ArmorIndex,
   ConsumableIndex,
   KeyItemIndex,
+  RoomIndex,
   WeaponIndex,
 } from '@data';
 
@@ -31,7 +32,7 @@ export interface Character {
   defence: number;
   magic: number;
   guts: number;
-  weapon: number;
+  weapon: WeaponIndex;
   primaryArmor: number;
   secondaryArmor: number;
   weaponStyle: number | string;
@@ -105,7 +106,7 @@ export interface V1Save extends SaveFileBase {
 
   flags: unknown[];
   plot: number;
-  room: number;
+  room: RoomIndex;
   time: number;
 }
 
@@ -131,7 +132,7 @@ export interface V2Save extends SaveFileBase {
 
   flags: unknown[];
   plot: number;
-  room: number;
+  room: RoomIndex;
   time: number;
 }
 
