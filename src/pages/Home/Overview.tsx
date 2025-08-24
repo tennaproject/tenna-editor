@@ -182,16 +182,18 @@ export function Overview() {
   return (
     <div className="page">
       <Heading level={3}>Save Overview</Heading>
-      <Grid cols={2} className="gap-4">
-        <Section id="base">
-          <Card className="space-y-4">
-            <ChapterField />
-            <PlayerNameField />
-            <MoneyField />
-            <InDarkWorldField />
-            <RoomField />
-          </Card>
-        </Section>
+      <Grid container spacing={2}>
+        <Grid size={6}>
+          <Section id="base">
+            <Card className="space-y-4">
+              <ChapterField />
+              <PlayerNameField />
+              <MoneyField />
+              <InDarkWorldField />
+              <RoomField />
+            </Card>
+          </Section>
+        </Grid>
       </Grid>
     </div>
   );
