@@ -1,6 +1,6 @@
 export class LineCursor {
   private lines: string[];
-  private position: number = 0;
+  private position = 0;
 
   constructor(content: string) {
     this.lines = content.trim().split(/\r?\n/);

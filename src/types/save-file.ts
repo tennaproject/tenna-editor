@@ -1,8 +1,8 @@
 import type {
   ArmorIndex,
   ConsumableIndex,
-  FlagIndex,
   KeyItemIndex,
+  RoomIndex,
   WeaponIndex,
 } from '@data';
 
@@ -18,6 +18,9 @@ export interface WeaponStats {
   grazeSize: number;
   boltSpeed: number;
   special: number;
+}
+
+export interface WeaponStatsV2 extends WeaponStats {
   element: number;
   elementAmount: number;
 }
@@ -29,12 +32,16 @@ export interface Character {
   defence: number;
   magic: number;
   guts: number;
-  weapon: number;
+  weapon: WeaponIndex;
   primaryArmor: number;
   secondaryArmor: number;
-  weaponStyle: number;
+  weaponStyle: number | string;
   weaponStats: WeaponStats[];
   spells: number[];
+}
+
+export interface CharacterV2 extends Character {
+  weaponStats: WeaponStatsV2[];
 }
 
 export interface BattleState {
@@ -50,6 +57,9 @@ export interface Inventory {
   keyItems: KeyItemIndex[];
   weapons: WeaponIndex[];
   armors: ArmorIndex[];
+}
+
+export interface InventoryV2 extends Inventory {
   storage: ConsumableIndex[];
 }
 
@@ -77,11 +87,6 @@ export interface SaveFileBase {
 export interface V1Save extends SaveFileBase {
   format: 'v1';
   chapter: Chapter;
-}
-
-export interface V2Save extends SaveFileBase {
-  readonly format: 'v2';
-  chapter: Chapter;
 
   playerName: string;
   characterName: string;
@@ -99,9 +104,35 @@ export interface V2Save extends SaveFileBase {
   inventory: Inventory;
   lightWorld: LightWorld;
 
-  flags: FlagIndex[];
+  flags: unknown[];
   plot: number;
-  room: number;
+  room: RoomIndex;
+  time: number;
+}
+
+export interface V2Save extends SaveFileBase {
+  readonly format: 'v2';
+  chapter: Chapter;
+
+  playerName: string;
+  characterName: string;
+
+  party: [number, number, number];
+  money: number;
+  xp: number;
+  lv: number;
+  inv: number;
+  invc: number;
+  inDarkWorld: boolean;
+
+  characters: CharacterV2[];
+  battle: BattleState;
+  inventory: InventoryV2;
+  lightWorld: LightWorld;
+
+  flags: unknown[];
+  plot: number;
+  room: RoomIndex;
   time: number;
 }
 

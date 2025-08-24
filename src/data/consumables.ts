@@ -1,5 +1,6 @@
 import type { BaseProperties } from '@types';
 import type { WithOverrides } from '@types';
+import type { ChapterIndex } from './chapters';
 
 export const CONSUMABLES = {
   EMPTY: 0,
@@ -53,7 +54,7 @@ export type ConsumableName = keyof typeof CONSUMABLES;
 
 interface ConsumableProperties
   extends BaseProperties,
-    WithOverrides<ConsumableProperties> {}
+    WithOverrides<ConsumableProperties, { chapter: ChapterIndex }> {}
 
 export const CONSUMABLES_META: Record<ConsumableIndex, ConsumableProperties> = {
   [CONSUMABLES.EMPTY]: { displayName: 'Empty' },
@@ -76,8 +77,8 @@ export const CONSUMABLES_META: Record<ConsumableIndex, ConsumableProperties> = {
   [CONSUMABLES.MANNEQUIN]: { displayName: 'Mannequin' },
   [CONSUMABLES.KRIS_TEA]: {
     displayName: 'Kris Tea',
-    getOverrides: (save) => {
-      if (save.chapter > 2) {
+    getOverrides: ({ chapter }) => {
+      if (chapter > 2) {
         return {
           displayName: 'Rotten Tea (Kris)',
           description: `A tea that has deteriorated after a short while due to its poor craftsmanship. +10HP
@@ -92,8 +93,8 @@ export const CONSUMABLES_META: Record<ConsumableIndex, ConsumableProperties> = {
   },
   [CONSUMABLES.NOELLE_TEA]: {
     displayName: 'Noelle Tea',
-    getOverrides: (save) => {
-      if (save.chapter > 2) {
+    getOverrides: ({ chapter }) => {
+      if (chapter > 2) {
         return {
           displayName: 'Rotten Tea (Noelle)',
           description: `A tea that has deteriorated after a short while due to its poor craftsmanship. +10HP
@@ -108,8 +109,8 @@ export const CONSUMABLES_META: Record<ConsumableIndex, ConsumableProperties> = {
   },
   [CONSUMABLES.RALSEI_TEA]: {
     displayName: 'Ralsei Tea',
-    getOverrides: (save) => {
-      if (save.chapter > 2) {
+    getOverrides: ({ chapter }) => {
+      if (chapter > 2) {
         return {
           displayName: 'Rotten Tea (Ralsei)',
           description: `A tea that has deteriorated after a short while due to its poor craftsmanship. +10HP
@@ -124,8 +125,8 @@ export const CONSUMABLES_META: Record<ConsumableIndex, ConsumableProperties> = {
   },
   [CONSUMABLES.SUSIE_TEA]: {
     displayName: 'Susie Tea',
-    getOverrides: (save) => {
-      if (save.chapter > 2) {
+    getOverrides: ({ chapter }) => {
+      if (chapter > 2) {
         return {
           displayName: 'Rotten Tea (Susie)',
           description: `A tea that has deteriorated after a short while due to its poor craftsmanship. +10HP
