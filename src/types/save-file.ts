@@ -1,7 +1,6 @@
 import type {
   ArmorIndex,
   ConsumableIndex,
-  FlagIndex,
   KeyItemIndex,
   WeaponIndex,
 } from '@data';
@@ -104,7 +103,7 @@ export interface V1Save extends SaveFileBase {
   inventory: Inventory;
   lightWorld: LightWorld;
 
-  flags: FlagIndex[];
+  flags: unknown[];
   plot: number;
   room: number;
   time: number;
@@ -130,7 +129,7 @@ export interface V2Save extends SaveFileBase {
   inventory: InventoryV2;
   lightWorld: LightWorld;
 
-  flags: FlagIndex[];
+  flags: unknown[];
   plot: number;
   room: number;
   time: number;

@@ -1,4 +1,4 @@
-import type { FlagProperties } from '@types';
+import type { BaseProperties } from '@types';
 
 export const FLAGS = {
   SIMPLIFY_VFX: 8,
@@ -9,6 +9,19 @@ export const FLAGS = {
 
 export type FlagIndex = (typeof FLAGS)[keyof typeof FLAGS];
 export type FlagName = keyof typeof FLAGS;
+
+export type ValueType = 'boolean' | 'number' | 'mapped';
+
+export interface FlagProperties extends BaseProperties {
+  valueType?: ValueType;
+  valueMap?: Record<number, string>;
+
+  constraints?: {
+    min?: number;
+    max?: number;
+    allowedValues?: number[];
+  };
+}
 
 // temp
 const letterMap = {

@@ -2,7 +2,6 @@ import type { DeltaruneSave, SaveFileFormat, V1Save, V2Save } from '@types';
 import type {
   ArmorIndex,
   ConsumableIndex,
-  FlagIndex,
   KeyItemIndex,
   WeaponIndex,
 } from '../data';
@@ -150,9 +149,9 @@ function parseV1Save(cursor: LineCursor): V1Save {
     lightWorld.phone.push(cursor.nextNumber());
   }
 
-  const flags: FlagIndex[] = [];
+  const flags: unknown[] = [];
   for (let i = 0; i < 9999; i += 1) {
-    flags.push(cursor.nextNumber() as FlagIndex);
+    flags.push(cursor.nextNumber() as unknown);
   }
 
   const plot = cursor.nextNumber();
@@ -315,9 +314,9 @@ function parseV2Save(cursor: LineCursor): V2Save {
     lightWorld.phone.push(cursor.nextNumber());
   }
 
-  const flags: FlagIndex[] = [];
+  const flags: unknown[] = [];
   for (let i = 0; i < 2500; i += 1) {
-    flags.push(cursor.nextNumber() as FlagIndex);
+    flags.push(cursor.nextNumber());
   }
 
   const plot = cursor.nextNumber();
