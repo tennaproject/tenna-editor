@@ -15,3 +15,4 @@ export * from './Checkbox';
 export * from './InlineGroup';
 export * from './HelpTip';
 export * from './Select';
+export * from './GlowBar';
