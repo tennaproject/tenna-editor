@@ -4,6 +4,7 @@ import type {
   ConsumableIndex,
   KeyItemIndex,
   RoomIndex,
+  SpellIndex,
   WeaponIndex,
 } from '../data';
 import { LineCursor } from './line-cursor';
@@ -59,8 +60,8 @@ function parseV1Save(cursor: LineCursor): V1Save {
     const magic = cursor.nextNumber();
     const guts = cursor.nextNumber();
     const weapon = cursor.nextNumber() as WeaponIndex;
-    const primaryArmor = cursor.nextNumber();
-    const secondaryArmor = cursor.nextNumber();
+    const primaryArmor = cursor.nextNumber() as ArmorIndex;
+    const secondaryArmor = cursor.nextNumber() as ArmorIndex;
     const weaponStyle = cursor.nextString();
 
     const weaponStats = [];
@@ -86,9 +87,9 @@ function parseV1Save(cursor: LineCursor): V1Save {
       });
     }
 
-    const spells = [];
+    const spells: SpellIndex[] = [];
     for (let k = 0; k < 12; k += 1) {
-      spells.push(cursor.nextNumber());
+      spells.push(cursor.nextNumber() as SpellIndex);
     }
 
     characters.push({
@@ -212,8 +213,8 @@ function parseV2Save(cursor: LineCursor): V2Save {
     const magic = cursor.nextNumber();
     const guts = cursor.nextNumber();
     const weapon = cursor.nextNumber() as WeaponIndex;
-    const primaryArmor = cursor.nextNumber();
-    const secondaryArmor = cursor.nextNumber();
+    const primaryArmor = cursor.nextNumber() as ArmorIndex;
+    const secondaryArmor = cursor.nextNumber() as ArmorIndex;
     const weaponStyle = cursor.nextNumber();
 
     const weaponStats = [];
@@ -243,9 +244,9 @@ function parseV2Save(cursor: LineCursor): V2Save {
       });
     }
 
-    const spells = [];
+    const spells: SpellIndex[] = [];
     for (let k = 0; k < 12; k += 1) {
-      spells.push(cursor.nextNumber());
+      spells.push(cursor.nextNumber() as SpellIndex);
     }
 
     characters.push({

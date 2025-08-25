@@ -12,6 +12,14 @@ interface UiState {
   setSidebarRetraction: (isRetracted: boolean) => void;
   allowNonStandardParty: boolean;
   setAllowNonStandardParty: (allowNonStandardParty: boolean) => void;
+  allowKrisAllElements: boolean;
+  setAllowKrisAllElements: (status: boolean) => void;
+  allowSusieAllElements: boolean;
+  setAllowSusieAllElements: (status: boolean) => void;
+  allowRalseiAllElements: boolean;
+  setAllowRalseiAllElements: (status: boolean) => void;
+  allowNoelleAllElements: boolean;
+  setAllowNoelleAllElements: (status: boolean) => void;
 }
 
 export const useUi = create<UiState>()(
@@ -37,6 +45,26 @@ export const useUi = create<UiState>()(
         set((state) => {
           state.allowNonStandardParty = allowNonStandardParty;
         }),
+      allowKrisAllElements: false,
+      setAllowKrisAllElements: (status: boolean) =>
+        set((state) => {
+          state.allowKrisAllElements = status;
+        }),
+      allowSusieAllElements: false,
+      setAllowSusieAllElements: (status: boolean) =>
+        set((state) => {
+          state.allowSusieAllElements = status;
+        }),
+      allowRalseiAllElements: false,
+      setAllowRalseiAllElements: (status: boolean) =>
+        set((state) => {
+          state.allowRalseiAllElements = status;
+        }),
+      allowNoelleAllElements: false,
+      setAllowNoelleAllElements: (status: boolean) =>
+        set((state) => {
+          state.allowNoelleAllElements = status;
+        }),
     })),
     {
       name: `${STORE_NAMESPACE}-ui-v1`,
@@ -45,6 +73,10 @@ export const useUi = create<UiState>()(
         devmode: state.devmode,
         isSidebarRetracted: state.isSidebarRetracted,
         allowNonStandardParty: state.allowNonStandardParty,
+        allowKrisAllElements: state.allowKrisAllElements,
+        allowSusieAllElements: state.allowSusieAllElements,
+        allowRalseiAllElements: state.allowRalseiAllElements,
+        allowNoelleAllElements: state.allowNoelleAllElements,
       }),
       version: 1,
     },

@@ -3,6 +3,7 @@ import type {
   ConsumableIndex,
   KeyItemIndex,
   RoomIndex,
+  SpellIndex,
   WeaponIndex,
 } from '@data';
 
@@ -33,11 +34,11 @@ export interface Character {
   magic: number;
   guts: number;
   weapon: WeaponIndex;
-  primaryArmor: number;
-  secondaryArmor: number;
+  primaryArmor: ArmorIndex;
+  secondaryArmor: ArmorIndex;
   weaponStyle: number | string;
   weaponStats: WeaponStats[];
-  spells: number[];
+  spells: SpellIndex[];
 }
 
 export interface CharacterV2 extends Character {
