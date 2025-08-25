@@ -185,7 +185,7 @@ export function Overview() {
       <Grid container spacing={2}>
         <Grid size={6}>
           <Section id="base">
-            <Card className="space-y-4">
+            <Card className="space-y-4 p-6">
               <ChapterField />
               <PlayerNameField />
               <MoneyField />

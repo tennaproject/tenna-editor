@@ -81,7 +81,7 @@ export function HelpTip({ title, children }: HelpTipProps) {
       </button>
 
       {!isOpen && !isSupressed && (
-        <div className="absolute left-1/2 -translate-x-1/2 -top-8 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-in-out pointer-events-none z-[70]">
+        <div className="hidden lg:inline absolute left-1/2 -translate-x-1/2 -top-8 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-in-out pointer-events-none z-[70]">
           <div className="border border-border bg-surface-3 px-2 py-1 shadow-lg whitespace-nowrap text-text-1 text-xs">
             Click to show description
           </div>

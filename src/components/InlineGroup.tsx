@@ -8,7 +8,7 @@ interface InlineGroupProps {
 
 export function InlineGroup({ children, className = '' }: InlineGroupProps) {
   return (
-    <div className={mergeClass('flex items-center gap-2', className)}>
+    <div className={mergeClass('flex items-center gap-2 min-h-6', className)}>
       {children}
     </div>
   );

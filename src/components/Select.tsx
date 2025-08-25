@@ -18,6 +18,7 @@ interface SelectProps {
   label?: string;
   onSelectionChange?: (item: SelectItem | null) => void;
   defaultSelectedItem?: SelectItem | null;
+  selectedItem?: SelectItem | null;
   className?: string;
   strict?: boolean;
 }
@@ -28,6 +29,7 @@ export function Select({
   label = '',
   onSelectionChange,
   defaultSelectedItem = null,
+  selectedItem = null,
   className = '',
   strict = true,
 }: SelectProps) {
@@ -56,7 +58,6 @@ export function Select({
 
   const {
     isOpen,
-    selectedItem,
     highlightedIndex: highlightedIndex,
     getToggleButtonProps,
     getLabelProps,
@@ -64,6 +65,7 @@ export function Select({
     getInputProps,
     getItemProps,
   } = useCombobox({
+    selectedItem,
     inputValue: inputValue,
     items: inputItems,
     initialSelectedItem: defaultSelectedItem || undefined,
@@ -171,7 +173,7 @@ export function Select({
     const rect = containerRef.current.getBoundingClientRect();
     const spaceBelow = window.innerHeight - rect.bottom;
     const spaceAbove = rect.top;
-    setShouldOpenUp(spaceBelow < 225 && spaceAbove > spaceBelow);
+    setShouldOpenUp(spaceBelow < 250 && spaceAbove > spaceBelow);
   }
 
   const displayItems = hasTyped ? inputItems : items;

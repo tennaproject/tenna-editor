@@ -92,7 +92,7 @@ export const Attributions = () => {
   return (
     <div className="page">
       <Section id="fonts">
-        <Card className="space-y-4">
+        <Card className="space-y-4 p-6">
           <Heading level={5}>Fonts</Heading>
           <ul className="list-disc pl-6 space-y-1">
             <li className="text-text-2">
@@ -107,7 +107,7 @@ export const Attributions = () => {
         </Card>
       </Section>
       <Section id="icons">
-        <Card className="space-y-4">
+        <Card className="space-y-4 p-6">
           <Heading level={5}>Icons</Heading>
           <ul className="list-disc pl-6 space-y-1">
             <li className="text-text-2">
@@ -122,7 +122,7 @@ export const Attributions = () => {
         </Card>
       </Section>
       <Section id="dependencies">
-        <Card className="space-y-4">
+        <Card className="space-y-4 p-6">
           <Heading level={5}>Dependencies</Heading>
           <div className="space-y-2">
             <div>

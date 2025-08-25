@@ -9,7 +9,7 @@ interface SectionProps {
 
 export function Section({ id, className, children }: SectionProps) {
   return (
-    <section id={id} className={mergeClass('w-full', className)}>
+    <section id={id} className={mergeClass(className)}>
       {children}
     </section>
   );

@@ -20,7 +20,12 @@ export function Heading({ level, className, children }: HeadingProps) {
   const Tag = `h${level}` as keyof JSX.IntrinsicElements;
   return (
     <Tag
-      className={mergeClass('font-bold leading-none', headingClass, className)}
+      className={mergeClass(
+        'font-bold',
+        headingClass,
+        'leading-none',
+        className,
+      )}
     >
       {children}
     </Tag>

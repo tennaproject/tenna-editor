@@ -25,7 +25,7 @@ export const License = () => {
   return (
     <div className="page">
       <Section>
-        <Card>
+        <Card className="p-6">
           <Heading level={4}>License</Heading>
           <code className="px-6 py-6 block">
             <pre className="font-mono whitespace-pre-wrap text-text-2">

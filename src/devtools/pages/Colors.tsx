@@ -152,7 +152,7 @@ export function Colors() {
   return (
     <div className="page">
       <Section>
-        <Card className="flex flex-col gap-4">
+        <Card className="flex flex-col gap-4 p-6">
           <Heading level={4}>Surface Colors</Heading>
           <div className="flex flex-col gap-4">
             <div className="flex gap-4">
@@ -180,7 +180,7 @@ export function Colors() {
       </Section>
 
       <Section>
-        <Card className="flex flex-col gap-4">
+        <Card className="flex flex-col gap-4 p-6">
           <Heading level={4}>Accent Colors</Heading>
           <div className="flex flex-wrap gap-6">
             {accentColors.map((color) => (
@@ -196,7 +196,7 @@ export function Colors() {
       </Section>
 
       <Section>
-        <Card className="flex flex-col gap-4">
+        <Card className="flex flex-col gap-4 p-6">
           <Heading level={4}>Tenna Scale</Heading>
           <div className="flex flex-wrap gap-6">
             {tennaLevels.map((v) => {
@@ -208,7 +208,7 @@ export function Colors() {
       </Section>
 
       <Section>
-        <Card className="flex flex-col gap-4">
+        <Card className="flex flex-col gap-4 p-6">
           <Heading level={4}>Text</Heading>
           <div className="p-3 bg-surface-1 border border-border flex justify-between">
             <div>
@@ -236,7 +236,7 @@ export function Colors() {
       </Section>
 
       <Section>
-        <Card className="flex flex-col gap-4">
+        <Card className="flex flex-col gap-4 p-6">
           <Heading level={4}>Border, Divider & Overlay</Heading>
           <div className="flex flex-col gap-3">
             <div className="p-3 bg-surface-1">

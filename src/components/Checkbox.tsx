@@ -40,12 +40,12 @@ export function Checkbox({
   return (
     <div
       className={mergeClass(
-        'flex items-center gap-3 select-none',
+        'flex items-center gap-3 select-none shrink',
         disabled ? 'opacity-50' : '',
         className,
       )}
     >
-      <span className="relative inline-flex items-center justify-center group">
+      <span className="relative inline-flex items-center justify-center group shrink">
         <input
           type="checkbox"
           className={`absolute inset-0 m-0 w-5 h-5 opacity-0 ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'} peer z-10`}
@@ -85,7 +85,7 @@ export function Checkbox({
         </span>
       </span>
 
-      <span className="leading-none">
+      <span className="leading-none wrap-anywhere">
         {label && (
           <span className="text-sm text-text-2 leading-none transition-colors duration-150 group-hover:text-text-1">
             {label}

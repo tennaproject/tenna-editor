@@ -10,7 +10,7 @@ export function Card({ children, className }: CardProps) {
   return (
     <div
       className={mergeClass(
-        'p-6 border border-border shadow shadow-surface-1/50',
+        'border border-border shadow shadow-surface-1/50',
         className,
       )}
     >
