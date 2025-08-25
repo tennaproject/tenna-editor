@@ -47,7 +47,7 @@ interface RequireSaveProps {
 }
 
 function RequireSave({ children }: RequireSaveProps) {
-  const saveFile = useSave((s) => s.saveFile);
+  const saveFile = useSave.getState().saveFile;
   const shownRef = useRef(false);
 
   useEffect(() => {
