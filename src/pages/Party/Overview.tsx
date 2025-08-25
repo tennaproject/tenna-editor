@@ -9,6 +9,7 @@ import {
   type SelectItem,
 } from '@components';
 import {
+  CHARACTERS,
   FLAGS,
   KEYITEMS,
   ROOMS,
@@ -170,6 +171,10 @@ function CharacterCard({
 
   availableCharacters.sort();
 
+  if (party[2] !== CHARACTERS.EMPTY && !allowNonStandardParty && slot === 1) {
+    availableCharacters.shift();
+  }
+
   const selectItems: SelectItem[] = availableCharacters.map((c) => ({
     id: `${c}`,
     label: characterHelpers.getById(c).displayName,
@@ -221,6 +226,7 @@ function CharacterCard({
             label={`Slot ${slot}`}
             items={selectItems}
             defaultSelectedItem={selectedItem}
+            selectedItem={selectedItem}
             onSelectionChange={(item) => {
               if (!item) return;
               const newCharacter = item.value as CharacterIndex;
