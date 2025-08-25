@@ -6,3 +6,4 @@ export * from './save-file-parser';
 export * from './save-file-serializer';
 export * from './deep-equal';
 export * from './merge-class';
+export * from './get-character-color';
