@@ -1,5 +1,4 @@
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import {
   AboutPage,
@@ -11,62 +10,8 @@ import {
   DarkWorldPage,
   SettingsPage,
 } from './pages';
-import { toast } from '@services';
-import type { ReactElement } from 'react';
 import { DevtoolsPage } from '@devtools';
-import { useSave, useUi } from '@store';
-import { RequireChapter } from '@guards';
-
-interface RequireDevmodeProps {
-  children: ReactElement;
-}
-
-function RequireDevmode({ children }: RequireDevmodeProps) {
-  const devmode = useUi((s) => s.devmode);
-  const shownRef = useRef(false);
-
-  useEffect(() => {
-    if (!devmode && !shownRef.current) {
-      toast('Developer mode is not enabled', 'error');
-      shownRef.current = true;
-    }
-
-    if (devmode) {
-      shownRef.current = false;
-    }
-  }, [devmode]);
-
-  if (!devmode) {
-    return <Navigate to="/home" replace />;
-  }
-
-  return children;
-}
-
-interface RequireSaveProps {
-  children: ReactElement;
-}
-
-function RequireSave({ children }: RequireSaveProps) {
-  const saveFile = useSave.getState().saveFile;
-  const shownRef = useRef(false);
-
-  useEffect(() => {
-    if (!saveFile && !shownRef.current) {
-      toast('There is no save loaded', 'error');
-      shownRef.current = true;
-    }
-
-    if (saveFile) {
-      shownRef.current = false;
-    }
-  }, [saveFile]);
-
-  if (!saveFile) {
-    return <Navigate to="/home" replace />;
-  }
-  return children;
-}
+import { RequireChapter, RequireDevmode, RequireSave } from '@guards';
 
 export function AppRouter() {
   const location = useLocation();
