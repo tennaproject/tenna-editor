@@ -15,6 +15,7 @@ import { toast } from '@services';
 import type { ReactElement } from 'react';
 import { DevtoolsPage } from '@devtools';
 import { useSave, useUi } from '@store';
+import { RequireChapter } from '@guards';
 
 interface RequireDevmodeProps {
   children: ReactElement;
@@ -125,7 +126,14 @@ export function AppRouter() {
           <Route path="kris" element={<PartyPage.Kris />}></Route>
           <Route path="susie" element={<PartyPage.Susie />}></Route>
           <Route path="ralsei" element={<PartyPage.Ralsei />}></Route>
-          <Route path="noelle" element={<PartyPage.Noelle />}></Route>
+          <Route
+            path="noelle"
+            element={
+              <RequireChapter requiredChapter={2}>
+                <PartyPage.Noelle />
+              </RequireChapter>
+            }
+          ></Route>
         </Route>
         <Route
           path="/recruits"

@@ -46,7 +46,9 @@
       "@devtools": ["src/devtools"],
       "@devtools/*": ["src/devtools/*"],
       "@store": ["src/store"],
-      "@store/*": ["src/store/*"]
+      "@store/*": ["src/store/*"],
+      "@guards": ["src/guards"],
+      "@guards/*": ["src/guards/*"]
     }
   },
   "include": ["src"]
