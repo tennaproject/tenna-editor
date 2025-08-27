@@ -97,9 +97,12 @@ function CharacterCard({
   const hasEgg = !!keyItems?.includes(KEYITEMS.EGG);
 
   // Weapon for Ralsei and Noelle title
-  const weapon =
-    useSave((s) => s.saveFile?.characters[character].weapon) ||
-    (0 as WeaponIndex);
+  const characters = useSave((s) => s.saveFile?.characters) || [];
+  let weapon = 0 as WeaponIndex;
+  // This is not pretty but fixes the edge case when there is a Chapter 1 save loaded with Noelle selected in whatever slot
+  if (characters[character]) {
+    weapon = characters[character].weapon;
+  }
 
   // Room for Ralsei's title
   const room = useSave((s) => s.saveFile?.room) || ROOMS.PLACE_DOG;
