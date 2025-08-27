@@ -2,6 +2,7 @@ import type { BaseProperties } from '@types';
 
 export const FLAGS = {
   SIMPLIFY_VFX: 8,
+  STORAGE_SIZE: 64,
   GOT_MOSS_CH1: 106,
   INSPECTED_BEDS_CH1: 252,
   RALSEI_PHOTO_STATUS: 325,
@@ -79,6 +80,12 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
     displayName: 'Simplify VFX',
     description: `
      As the name suggests it turning this on simplifies some of the VFX in game.`,
+  },
+  [FLAGS.STORAGE_SIZE]: {
+    displayName: 'Storage size',
+    description: `
+    The number of slots in the storage.
+    `,
   },
   [FLAGS.GOT_MOSS_CH1]: {
     displayName: 'Got Moss in Chapter 1',

@@ -37,9 +37,23 @@ interface ChapterContent {
   };
   rooms: Set<RoomIndex>;
   flags: Set<FlagIndex>;
+  meta: {
+    consumablesSize: number;
+    storagesSize: number;
+    keyItemsSize: number;
+    weaponsSize: number;
+    armorsSize: number;
+  };
 }
 
 const CH1_CONTENT: ChapterContent = {
+  meta: {
+    consumablesSize: 12,
+    storagesSize: 0,
+    keyItemsSize: 12,
+    weaponsSize: 12,
+    armorsSize: 12,
+  },
   characters: new Set<CharacterIndex>([
     CHARACTERS.EMPTY,
     CHARACTERS.KRIS,
@@ -73,6 +87,7 @@ const CH1_CONTENT: ChapterContent = {
     KEYITEMS.DOOR_KEY,
     KEYITEMS.BROKEN_KEY_B,
     KEYITEMS.BROKEN_KEY_C,
+    KEYITEMS.SHADOW_CRYSTAL,
   ]),
   spells: new Set<SpellIndex>([
     SPELLS.EMPTY,
@@ -263,6 +278,13 @@ const CH1_CONTENT: ChapterContent = {
 };
 
 const CH2_CONTENT: ChapterContent = {
+  meta: {
+    consumablesSize: 12,
+    storagesSize: 24,
+    keyItemsSize: 12,
+    weaponsSize: 48,
+    armorsSize: 48,
+  },
   characters: new Set<CharacterIndex>([
     ...CH1_CONTENT.characters,
     CHARACTERS.NOELLE,
@@ -425,6 +447,13 @@ const CH2_CONTENT: ChapterContent = {
 };
 
 const CH3_CONTENT: ChapterContent = {
+  meta: {
+    consumablesSize: 12,
+    storagesSize: 24,
+    keyItemsSize: 12,
+    weaponsSize: 48,
+    armorsSize: 48,
+  },
   characters: new Set<CharacterIndex>([...CH2_CONTENT.characters]),
   consumables: new Set([
     ...CH2_CONTENT.consumables,
@@ -665,6 +694,13 @@ const CH3_CONTENT: ChapterContent = {
 };
 
 const CH4_CONTENT: ChapterContent = {
+  meta: {
+    consumablesSize: 12,
+    storagesSize: 36,
+    keyItemsSize: 12,
+    weaponsSize: 48,
+    armorsSize: 48,
+  },
   characters: new Set<CharacterIndex>([...CH3_CONTENT.characters]),
   consumables: new Set([
     ...CH3_CONTENT.consumables,
