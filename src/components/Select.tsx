@@ -3,7 +3,6 @@ import ChevronDownIcon from '@assets/icons/chevron-down.svg';
 import WarningIcon from '@assets/icons/alert.svg';
 import { useState, useEffect, useRef } from 'react';
 import { mergeClass } from '@utils';
-import { motion, AnimatePresence } from 'framer-motion';
 
 export interface SelectItem {
   id: string;
@@ -42,6 +41,8 @@ export function Select({
     defaultSelectedItem ? defaultSelectedItem.label : '',
   );
   const [hasTyped, setHasTyped] = useState(false);
+  const [menuMounted, setMenuMounted] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(false);
 
   useEffect(() => {
     setInputItems(items);
@@ -168,6 +169,32 @@ export function Select({
     }
   }, [isOpen, items]);
 
+  // Control mounted vs visible to avoid an empty bar before items render
+  useEffect(() => {
+    let rafId: number | null = null;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+    const fadeDurationMs = 120;
+
+    if (isOpen) {
+      setMenuMounted(true);
+      // next frame: make it visible so content is already rendered
+      rafId = requestAnimationFrame(() => {
+        setMenuVisible(true);
+      });
+    } else {
+      setMenuVisible(false);
+      // after fade-out completes, unmount to save work
+      timeoutId = setTimeout(() => {
+        setMenuMounted(false);
+      }, fadeDurationMs);
+    }
+
+    return () => {
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [isOpen]);
+
   function computePosition() {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
@@ -225,89 +252,80 @@ export function Select({
         </button>
       </div>
 
-      {!isOpen && (
-        <ul
-          {...getMenuProps({}, { suppressRefError: true })}
-          style={{ display: 'none' }}
-          aria-hidden
-        />
-      )}
-
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.ul
-            {...getMenuProps({}, { suppressRefError: false })}
-            ref={listRef}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
-            className={`absolute left-0 z-50 bg-surface-4 border border-border shadow-lg pt-1 px-1 pb-1 max-h-60 overflow-auto duration-100 ${
-              shouldOpenUp
-                ? 'bottom-full mb-1 origin-bottom'
-                : 'top-full mt-1 origin-top'
-            }`}
-            style={{
-              minWidth: containerRef.current?.offsetWidth,
-            }}
-          >
-            {displayItems.length === 0 ? (
-              <li className="px-3 py-2 text-text-2 text-sm">
-                No options found
-              </li>
-            ) : (
-              displayItems.map((item, index) => {
-                const chosen = selectedItem?.id === item.id;
-                const highlighted = index === highlightedIndex;
-                const itemProps = getItemProps({
-                  item,
-                  index,
-                }) as React.LiHTMLAttributes<HTMLLIElement> & {
-                  onClick?: (e: React.MouseEvent<HTMLLIElement>) => void;
-                  onPointerDown?: (
-                    e: React.PointerEvent<HTMLLIElement>,
-                  ) => void;
-                };
-                return (
-                  <li
-                    key={item.id}
-                    {...itemProps}
-                    onPointerDown={(e) => {
-                      itemProps.onPointerDown?.(e);
-                    }}
-                    className={`cursor-pointer text-sm select-none leading-none text-text-1 transition-colors`}
-                    aria-selected={chosen}
-                  >
-                    <div
-                      className={mergeClass(
-                        'px-2 py-2 leading-none my-1 flex gap-1 justify-between items-center',
-                        chosen
-                          ? 'bg-surface-4-active'
-                          : highlighted
-                            ? 'bg-surface-4-hover ring-1 ring-text-3'
-                            : 'bg-surface-4 hover:bg-surface-4-hover',
-                      )}
-                    >
-                      {item.label}
-                      <div
-                        className="ml-2 text-xs text-red flex items-center gap-1 font-bold"
-                        aria-hidden={!item.invalid}
-                      >
-                        {item.invalid ? (
-                          <span className="h-5 w-5">
-                            <WarningIcon />
-                          </span>
-                        ) : null}
-                        {item.invalid ? 'Invalid' : ''}
-                      </div>
-                    </div>
-                  </li>
-                );
-              })
-            )}
-          </motion.ul>
+      <ul
+        {...getMenuProps({}, { suppressRefError: true })}
+        ref={listRef}
+        className={mergeClass(
+          `absolute left-0 z-50 bg-surface-4 border border-border shadow-lg pt-1 px-1 pb-1 max-h-60 overflow-auto duration-100 transform-gpu pl-[10px]`,
+          shouldOpenUp
+            ? 'bottom-full mb-1 origin-bottom'
+            : 'top-full mt-1 origin-top',
         )}
-      </AnimatePresence>
+        style={{
+          minWidth: containerRef.current?.offsetWidth,
+          opacity: menuVisible ? 1 : 0,
+          transition: 'opacity 120ms ease-out',
+          willChange: 'opacity',
+          backfaceVisibility: 'hidden',
+          pointerEvents: menuVisible ? 'auto' : 'none',
+          overflowY: isOpen ? 'auto' : 'hidden',
+          scrollbarGutter: 'stable',
+        }}
+        aria-hidden={!menuVisible}
+      >
+        {menuMounted ? (
+          displayItems.length === 0 ? (
+            <li className="px-3 py-2 text-text-2 text-sm">No options found</li>
+          ) : (
+            displayItems.map((item, index) => {
+              const chosen = selectedItem?.id === item.id;
+              const highlighted = index === highlightedIndex;
+              const itemProps = getItemProps({
+                item,
+                index,
+              }) as React.LiHTMLAttributes<HTMLLIElement> & {
+                onClick?: (e: React.MouseEvent<HTMLLIElement>) => void;
+                onPointerDown?: (e: React.PointerEvent<HTMLLIElement>) => void;
+              };
+              return (
+                <li
+                  key={item.id}
+                  {...itemProps}
+                  onPointerDown={(e) => {
+                    itemProps.onPointerDown?.(e);
+                  }}
+                  className={`cursor-pointer text-sm select-none leading-none text-text-1 transition-colors`}
+                  aria-selected={chosen}
+                >
+                  <div
+                    className={mergeClass(
+                      'px-2 py-2 leading-none my-1 flex gap-1 justify-between items-center',
+                      chosen
+                        ? 'bg-surface-4-active'
+                        : highlighted
+                          ? 'bg-surface-4-hover ring-1 ring-text-3'
+                          : 'bg-surface-4 hover:bg-surface-4-hover',
+                    )}
+                  >
+                    {item.label}
+                    <div
+                      className="ml-2 text-xs text-red flex items-center gap-1 font-bold"
+                      aria-hidden={!item.invalid}
+                    >
+                      {item.invalid ? (
+                        <span className="h-5 w-5">
+                          <WarningIcon />
+                        </span>
+                      ) : null}
+                      {item.invalid ? 'Invalid' : ''}
+                    </div>
+                  </div>
+                </li>
+              );
+            })
+          )
+        ) : null}
+      </ul>
     </div>
   );
 }
