@@ -10,11 +10,11 @@ import { useSaveFlag } from '@hooks';
 import { useSave } from '@store';
 import { characterHelpers, getCharacterColor, mergeClass } from '@utils';
 
-interface TitleFieldProps {
+interface CharacterHeaderProps {
   character: CharacterIndex;
 }
 
-export function TitleField({ character }: TitleFieldProps) {
+export function CharacterHeader({ character }: CharacterHeaderProps) {
   const chapter = useSave((s) => s.saveFile?.chapter) || 1;
   const plot = useSave((s) => s.saveFile?.plot) || 0;
 
