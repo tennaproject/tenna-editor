@@ -26,25 +26,38 @@ export type LightWorldItemIndex =
   (typeof LIGHTWORLDITEMS)[keyof typeof LIGHTWORLDITEMS];
 export type LightWorldItemName = keyof typeof LIGHTWORLDITEMS;
 
-export const LIGHTWORLDITEMS_META: Record<LightWorldItemIndex, BaseProperties> =
-  {
-    [LIGHTWORLDITEMS.EMPTY]: { displayName: 'Empty' },
-    [LIGHTWORLDITEMS.HOT_CHOCOLATE]: { displayName: 'Hot Chocolate' },
-    [LIGHTWORLDITEMS.PENCIL]: { displayName: 'Pencil' },
-    [LIGHTWORLDITEMS.BANDAGE]: { displayName: 'Bandage' },
-    [LIGHTWORLDITEMS.BOUQUET]: { displayName: 'Bouquet' },
-    [LIGHTWORLDITEMS.BALL_OF_JUNK]: { displayName: 'Ball of Junk' },
-    [LIGHTWORLDITEMS.HALLOWEEN_PENCIL]: { displayName: 'Halloween Pencil' },
-    [LIGHTWORLDITEMS.LUCKY_PENCIL]: { displayName: 'Lucky Pencil' },
-    [LIGHTWORLDITEMS.EGG]: { displayName: 'Egg' },
-    [LIGHTWORLDITEMS.CARDS]: { displayName: 'Cards' },
-    [LIGHTWORLDITEMS.BOX_OF_HEART_CANDY]: { displayName: 'Box of Heart Candy' },
-    [LIGHTWORLDITEMS.GLASS]: { displayName: 'Glass' },
-    [LIGHTWORLDITEMS.ERASER]: { displayName: 'Eraser' },
-    [LIGHTWORLDITEMS.MECH_PENCIL]: { displayName: 'Mech. Pencil' },
-    [LIGHTWORLDITEMS.WRISTWATCH]: { displayName: 'Wristwatch' },
-    [LIGHTWORLDITEMS.HOLIDAY_PENCIL]: { displayName: 'Holiday Pencil' },
-    [LIGHTWORLDITEMS.CACTUSNEEDLE]: { displayName: 'CactusNeedle' },
-    [LIGHTWORLDITEMS.BLACKSHARD]: { displayName: 'BlackShard' },
-    [LIGHTWORLDITEMS.QUILLPEN]: { displayName: 'QuillPen' },
-  };
+interface LightWorldItemProperties extends BaseProperties {
+  weapon?: boolean;
+  armor?: boolean;
+}
+
+export const LIGHTWORLDITEMS_META: Record<
+  LightWorldItemIndex,
+  LightWorldItemProperties
+> = {
+  [LIGHTWORLDITEMS.EMPTY]: { displayName: 'Empty', weapon: true, armor: true },
+  [LIGHTWORLDITEMS.HOT_CHOCOLATE]: { displayName: 'Hot Chocolate' },
+  [LIGHTWORLDITEMS.PENCIL]: { displayName: 'Pencil', weapon: true },
+  [LIGHTWORLDITEMS.BANDAGE]: { displayName: 'Bandage', armor: true },
+  [LIGHTWORLDITEMS.BOUQUET]: { displayName: 'Bouquet' },
+  [LIGHTWORLDITEMS.BALL_OF_JUNK]: { displayName: 'Ball of Junk' },
+  [LIGHTWORLDITEMS.HALLOWEEN_PENCIL]: {
+    displayName: 'Halloween Pencil',
+    weapon: true,
+  },
+  [LIGHTWORLDITEMS.LUCKY_PENCIL]: { displayName: 'Lucky Pencil', weapon: true },
+  [LIGHTWORLDITEMS.EGG]: { displayName: 'Egg' },
+  [LIGHTWORLDITEMS.CARDS]: { displayName: 'Cards' },
+  [LIGHTWORLDITEMS.BOX_OF_HEART_CANDY]: { displayName: 'Box of Heart Candy' },
+  [LIGHTWORLDITEMS.GLASS]: { displayName: 'Glass' },
+  [LIGHTWORLDITEMS.ERASER]: { displayName: 'Eraser', weapon: true },
+  [LIGHTWORLDITEMS.MECH_PENCIL]: { displayName: 'Mech. Pencil', weapon: true },
+  [LIGHTWORLDITEMS.WRISTWATCH]: { displayName: 'Wristwatch', armor: true },
+  [LIGHTWORLDITEMS.HOLIDAY_PENCIL]: {
+    displayName: 'Holiday Pencil',
+    weapon: true,
+  },
+  [LIGHTWORLDITEMS.CACTUSNEEDLE]: { displayName: 'CactusNeedle', weapon: true },
+  [LIGHTWORLDITEMS.BLACKSHARD]: { displayName: 'BlackShard', weapon: true },
+  [LIGHTWORLDITEMS.QUILLPEN]: { displayName: 'QuillPen', weapon: true },
+};

@@ -2,6 +2,8 @@ import type {
   ArmorIndex,
   ConsumableIndex,
   KeyItemIndex,
+  LightWorldItemIndex,
+  PhoneContactIndex,
   RoomIndex,
   SpellIndex,
   WeaponIndex,
@@ -76,8 +78,8 @@ export interface LightWorld {
   defence: number;
   weaponStrength: number;
   armorDefence: number;
-  items: number[];
-  phone: number[];
+  items: LightWorldItemIndex[];
+  phone: PhoneContactIndex[];
 }
 
 export interface SaveFileBase {
