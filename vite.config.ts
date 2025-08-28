@@ -39,7 +39,6 @@ export default defineConfig({
         assetFileNames: 'assets/[name]-[hash][extname]',
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            if (id.includes('react')) return 'vendor-react';
             return 'vendor';
           }
           if (id.includes('/src/')) return 'tenna';
