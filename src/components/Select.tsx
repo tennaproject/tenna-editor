@@ -73,9 +73,9 @@ export function Select({
     itemToString: (item) => item?.label || '',
     onSelectedItemChange: ({ selectedItem }) => {
       if (selectedItem) {
+        setMenuMounted(false);
         onSelectionChange?.(selectedItem);
         setInputValue(selectedItem.label);
-        setInputItems(items);
         setHasTyped(false);
         setTimeout(() => {
           if (inputRef.current && document.activeElement === inputRef.current) {
@@ -256,19 +256,15 @@ export function Select({
         {...getMenuProps({}, { suppressRefError: true })}
         ref={listRef}
         className={mergeClass(
-          `absolute left-0 z-50 bg-surface-4 border border-border shadow-lg pt-1 px-1 pb-1 max-h-60 overflow-auto duration-100 transform-gpu pl-[10px]`,
+          `absolute left-0 z-50 bg-surface-4 border border-border shadow-lg pt-1 px-1 pb-1 max-h-60 overflow-auto duration-200 transition-all transform-gpu lg:pl-[10px]`,
           shouldOpenUp
             ? 'bottom-full mb-1 origin-bottom'
             : 'top-full mt-1 origin-top',
+          isOpen ? 'auto' : 'hidden',
+          menuVisible ? 'opacity-100' : 'opacity-0',
         )}
         style={{
           minWidth: containerRef.current?.offsetWidth,
-          opacity: menuVisible ? 1 : 0,
-          transition: 'opacity 120ms ease-out',
-          willChange: 'opacity',
-          backfaceVisibility: 'hidden',
-          pointerEvents: menuVisible ? 'auto' : 'none',
-          overflowY: isOpen ? 'auto' : 'hidden',
           scrollbarGutter: 'stable',
         }}
         aria-hidden={!menuVisible}
