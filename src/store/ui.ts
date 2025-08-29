@@ -20,6 +20,8 @@ interface UiState {
   setAllowRalseiAllElements: (status: boolean) => void;
   allowNoelleAllElements: boolean;
   setAllowNoelleAllElements: (status: boolean) => void;
+  showNonRecruitableEnemies: boolean;
+  setShowNonRecruitableEnemies: (status: boolean) => void;
 }
 
 export const useUi = create<UiState>()(
@@ -65,6 +67,11 @@ export const useUi = create<UiState>()(
         set((state) => {
           state.allowNoelleAllElements = status;
         }),
+      showNonRecruitableEnemies: false,
+      setShowNonRecruitableEnemies: (status: boolean) =>
+        set((state) => {
+          state.showNonRecruitableEnemies = status;
+        }),
     })),
     {
       name: `${STORE_NAMESPACE}-ui-v1`,
@@ -77,6 +84,7 @@ export const useUi = create<UiState>()(
         allowSusieAllElements: state.allowSusieAllElements,
         allowRalseiAllElements: state.allowRalseiAllElements,
         allowNoelleAllElements: state.allowNoelleAllElements,
+        showNonRecruitableEnemies: state.showNonRecruitableEnemies,
       }),
       version: 1,
     },
