@@ -21,6 +21,8 @@ import {
   LIGHTWORLDITEMS_META,
   PHONECONTACTS,
   PHONECONTACTS_META,
+  ENEMIES,
+  ENEMIES_META,
 } from '@data';
 import type { BaseProperties } from '@types';
 import type { RoomIndex } from '../data/rooms';
@@ -60,6 +62,7 @@ export const roomHelpers = createDataHelpers(
 // Characters
 export const characterHelpers = createDataHelpers(CHARACTERS, CHARACTERS_META);
 export const spellHelpers = createDataHelpers(SPELLS, SPELLS_META);
+export const enemyHelpers = createDataHelpers(ENEMIES, ENEMIES_META);
 
 // Inventory
 export const consumableHelpers = createDataHelpers(

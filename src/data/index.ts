@@ -9,3 +9,4 @@ export * from './rooms';
 export * from './spells';
 export * from './weapons';
 export * from './characters';
+export * from './enemies';
