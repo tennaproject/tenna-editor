@@ -209,7 +209,9 @@ export function AppRouter() {
             path="/recruits"
             element={
               <RequireSave>
-                <RecruitsPage />
+                <RequireChapter requiredChapter={2}>
+                  <RecruitsPage />
+                </RequireChapter>
               </RequireSave>
             }
           ></Route>
