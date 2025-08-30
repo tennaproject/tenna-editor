@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useRef, type ReactNode } from 'react';
 import CloseIcon from '@assets/icons/close.svg';
+import { createPortal } from 'react-dom';
 
 const transition = {
   type: 'tween',
@@ -35,7 +36,7 @@ export function Modal({ children, isOpen, setOpen, onClose }: ModalProps) {
     }
   }, [isOpen]);
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <>
@@ -64,7 +65,7 @@ export function Modal({ children, isOpen, setOpen, onClose }: ModalProps) {
             aria-modal="true"
             aria-hidden={!isOpen}
           >
-            <div className="pointer-events-auto relative max-w-3xl w-full border border-border bg-surface-2 p-6  overflow-y-auto">
+            <div className="pointer-events-auto relative max-w-3xl w-full border border-border bg-surface-2 p-6 overflow-y-auto">
               <button
                 type="button"
                 aria-label="Close"
@@ -83,6 +84,7 @@ export function Modal({ children, isOpen, setOpen, onClose }: ModalProps) {
           </motion.div>
         </>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 }
