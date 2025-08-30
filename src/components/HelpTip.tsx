@@ -1,14 +1,7 @@
 import { useRef, useState, useEffect, type ReactNode } from 'react';
 import { Heading } from './Heading';
-import { motion, AnimatePresence } from 'framer-motion';
 import LightbulbIcon from '@assets/icons/lightbulb-on.svg';
-import CloseIcon from '@assets/icons/close.svg';
-
-const transition = {
-  type: 'tween',
-  duration: 0.2,
-  ease: 'easeInOut',
-} as const;
+import { Modal } from './Modal';
 
 interface HelpTipProps {
   title?: string;
@@ -17,27 +10,8 @@ interface HelpTipProps {
 
 export function HelpTip({ title, children }: HelpTipProps) {
   const [isOpen, setOpen] = useState(false);
-  const dialogRef = useRef<HTMLDivElement | null>(null);
-
   const [isSupressed, setSuppression] = useState(false);
   const tipTimerRef = useRef<number | null>(null);
-
-  // Prevent background scroll
-  useEffect(() => {
-    if (isOpen) {
-      const prevOverflow = document.body.style.overflow;
-      document.body.style.overflow = 'hidden';
-      return () => {
-        document.body.style.overflow = prevOverflow;
-      };
-    }
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (isOpen) {
-      dialogRef.current?.focus();
-    }
-  }, [isOpen]);
 
   useEffect(() => {
     return () => {
@@ -47,8 +21,7 @@ export function HelpTip({ title, children }: HelpTipProps) {
     };
   }, []);
 
-  function closeModal() {
-    setOpen(false);
+  function onClose() {
     setSuppression(true);
     if (tipTimerRef.current) window.clearTimeout(tipTimerRef.current);
     tipTimerRef.current = window.setTimeout(() => setSuppression(false), 500);
@@ -64,13 +37,7 @@ export function HelpTip({ title, children }: HelpTipProps) {
       <button
         aria-expanded={isOpen}
         aria-haspopup="dialog"
-        onClick={() => {
-          if (isOpen) {
-            closeModal();
-          } else {
-            setOpen(true);
-          }
-        }}
+        onClick={() => setOpen(true)}
         className="inline-flex w-6 h-6 select-none leading-none justify-center items-center"
       >
         <span
@@ -88,51 +55,12 @@ export function HelpTip({ title, children }: HelpTipProps) {
         </div>
       )}
 
-      <AnimatePresence>
-        {isOpen && (
-          <>
-            <motion.div
-              className="fixed inset-0 bg-overlay backdrop-blur-[1px] z-40"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={transition}
-              style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
-              onClick={closeModal}
-            />
-
-            <motion.div
-              ref={dialogRef}
-              tabIndex={-1}
-              className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none"
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.98 }}
-              transition={transition}
-              role="dialog"
-              aria-modal="true"
-              aria-hidden={!isOpen}
-            >
-              <div className="pointer-events-auto relative max-w-3xl w-full border border-border bg-surface-2 p-6  overflow-y-auto">
-                <button
-                  type="button"
-                  aria-label="Close"
-                  className="absolute top-2 right-2 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 text-text-2 hover:text-text-1"
-                  onClick={closeModal}
-                >
-                  <span className="w-4 h-4">
-                    <CloseIcon />
-                  </span>
-                </button>
-                <div className="flex flex-col gap-3">
-                  <Heading level={6}>{title}</Heading>
-                  <div className="text-text-2">{children}</div>
-                </div>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+      <Modal isOpen={isOpen} setOpen={setOpen} onClose={onClose}>
+        <div className="flex flex-col gap-3">
+          <Heading level={6}>{title}</Heading>
+          <div className="text-text-2">{children}</div>
+        </div>
+      </Modal>
     </div>
   );
 }

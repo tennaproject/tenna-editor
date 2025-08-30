@@ -13,6 +13,7 @@ export * from './Heading';
 export * from './TextLabel';
 export * from './Checkbox';
 export * from './InlineGroup';
+export * from './Modal';
 export * from './HelpTip';
 export * from './Select';
 export * from './GlowBar';
