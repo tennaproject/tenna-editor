@@ -4,10 +4,12 @@ import SidebarRetractionIcon from '@assets/icons/layout-sidebar-left.svg';
 import DownloadIcon from '@assets/icons/download.svg';
 import UploadIcon from '@assets/icons/upload.svg';
 import { serializeSaveFile } from '@utils';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Upload } from './Upload';
 
 export function Header() {
-  const navigate = useNavigate();
+  const [isUploadOpen, setUploadOpen] = useState(false);
+  const [isDownloadOpen, setDownloadOpen] = useState(false);
 
   return (
     <header className="w-full h-14 flex-shrink-0 bg-surface-1 relative select-none">
@@ -88,12 +90,15 @@ export function Header() {
           </button>
           <button
             className="text-blue bg-surface-3 hover:bg-surface-3-hover transition-colors p-2 cursor-pointer"
-            onClick={() => navigate('/home/upload')}
+            onClick={() => setUploadOpen(true)}
           >
             <div className="w-6 h-6">
               <UploadIcon />
             </div>
           </button>
+          {isUploadOpen && (
+            <Upload isOpen={isUploadOpen} setOpen={setUploadOpen} />
+          )}
         </div>
       </div>
     </header>

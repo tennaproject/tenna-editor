@@ -11,6 +11,7 @@ import type {
 
 export type SaveFileFormat = 'v1' | 'v2' | 'unknown';
 export type Chapter = 0 | 1 | 2 | 3 | 4;
+export type SaveSlot = 0 | 1 | 2;
 
 export interface WeaponStats {
   attack: number;
@@ -85,6 +86,9 @@ export interface LightWorld {
 export interface SaveFileBase {
   readonly format: SaveFileFormat;
   chapter: Chapter;
+  slot: SaveSlot;
+  isCompletionSave: boolean;
+  name: string;
 }
 
 export interface V1Save extends SaveFileBase {
