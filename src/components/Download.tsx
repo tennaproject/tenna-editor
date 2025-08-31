@@ -2,7 +2,6 @@ import { useSave } from '@store';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
-  TextInput,
   TextLabel,
   Checkbox,
   Button,
@@ -33,11 +32,6 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
   const [isCompletionSave, setIsCompletionSave] = useState(false);
   const [fileName, setFileName] = useState('');
 
-  if (!save) {
-    toast('There is no save file loaded currently', 'error');
-    return;
-  }
-
   function onSlotSelection(item: SelectItem | null) {
     if (item) {
       setSelectedSlot((parseInt(item.id, 10) - 1) as SaveSlot);
@@ -67,7 +61,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
       setSelectedSlot(save.slot);
       setIsCompletionSave(save.isCompletionSave);
     }
-  }, [isOpen]);
+  }, [isOpen, save]);
 
   useEffect(() => {
     if (!save) return;
@@ -75,7 +69,12 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
     setFileName(
       `filech${save.chapter}_${isCompletionSave ? selectedSlot + 3 : selectedSlot}`,
     );
-  }, [selectedSlot, isCompletionSave]);
+  }, [selectedSlot, isCompletionSave, save]);
+
+  if (!save) {
+    toast('There is no save file loaded currently', 'error');
+    return;
+  }
 
   return (
     <Modal isOpen={isOpen} setOpen={setOpen}>

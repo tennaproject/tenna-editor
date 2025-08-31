@@ -163,6 +163,9 @@ function parseV1Save(cursor: LineCursor): V1Save {
   return {
     format: 'v1',
     chapter: 0,
+    slot: 0,
+    isCompletionSave: false,
+    name: '',
     playerName,
     characterName,
     party: party as [number, number, number],
@@ -328,6 +331,9 @@ function parseV2Save(cursor: LineCursor): V2Save {
   return {
     format: 'v2',
     chapter: 0,
+    slot: 0,
+    isCompletionSave: false,
+    name: '',
     playerName,
     characterName,
     party: party as [number, number, number],

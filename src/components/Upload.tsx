@@ -1,8 +1,8 @@
 import { useSave } from '@store';
 import { detectChapter, parseSaveFile } from '@utils';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import type { Chapter, DeltaruneSave, SaveSlot } from '@types';
+import type { DeltaruneSave, SaveSlot } from '@types';
 import { toast } from '@services';
 import {
   TextInput,
@@ -50,21 +50,17 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
   const [isCompletionSave, setIsCompletionSave] = useState(false);
   const [saveName, setSaveName] = useState<string>('');
 
-  useEffect(() => {
-    changeStage('idle');
-  }, [isOpen]);
-
   // I know these +3/-1 are ugly but hey it works
   function onChapterSelection(item: SelectItem | null) {
     if (item) {
-      setSelectedChapter(parseInt(item.id, 10) + 3 as ChapterIndex);
+      setSelectedChapter((parseInt(item.id, 10) + 3) as ChapterIndex);
     }
   }
 
   function onSlotSelection(item: SelectItem | null) {
     if (item) {
       setSelectedSlot((parseInt(item.id, 10) - 1) as SaveSlot);
-    } 
+    }
   }
 
   function onFileSelect(file: File) {
@@ -130,36 +126,51 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
     reader.readAsText(file);
   }
 
-  function changeStage(stage: UploadStage) {
-    const currentStage = uploadStage;
+  const changeStage = useCallback(
+    (stage: UploadStage) => {
+      const currentStage = uploadStage;
 
-    switch (stage) {
-      case 'idle':
-        setParsedSave(null);
-        setSelectedChapter(1);
-        setSelectedSlot(0);
-        setIsCompletionSave(false);
-        setSaveName('');
-        break;
-      case 'success':
-        if (!parsedSave) break;
-        parsedSave.chapter = selectedChapter;
-        parsedSave.slot = selectedSlot;
-        parsedSave.isCompletionSave = isCompletionSave;
-        parsedSave.name = saveName;
+      switch (stage) {
+        case 'idle':
+          setParsedSave(null);
+          setSelectedChapter(1);
+          setSelectedSlot(0);
+          setIsCompletionSave(false);
+          setSaveName('');
+          break;
+        case 'success':
+          if (!parsedSave) break;
+          parsedSave.chapter = selectedChapter;
+          parsedSave.slot = selectedSlot;
+          parsedSave.isCompletionSave = isCompletionSave;
+          parsedSave.name = saveName;
 
-        setSaveFile(parsedSave);
-        setParsedSave(null);
-        setSelectedSlot(0);
-        setIsCompletionSave(false);
+          setSaveFile(parsedSave);
+          setParsedSave(null);
+          setSelectedSlot(0);
+          setIsCompletionSave(false);
 
-        toast('Save uploaded successfully', 'success');
-        setOpen(false);
-    }
+          toast('Save uploaded successfully', 'success');
+          setOpen(false);
+      }
 
-    setUploadStage(stage);
-    setPreviousUploadStage(currentStage);
-  }
+      setUploadStage(stage);
+      setPreviousUploadStage(currentStage);
+    },
+    [
+      uploadStage,
+      isCompletionSave,
+      parsedSave,
+      saveName,
+      selectedChapter,
+      selectedSlot,
+      setSaveFile,
+      setOpen,
+    ],
+  );
+  useEffect(() => {
+    changeStage('idle');
+  }, [isOpen, changeStage]);
 
   return (
     <Modal isOpen={isOpen} setOpen={setOpen}>
@@ -274,10 +285,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
           )}
           {uploadStage === 'settings' && (
             <>
-              <Button
-                onClick={() => changeStage('success')}
-                variant="primary"
-              >
+              <Button onClick={() => changeStage('success')} variant="primary">
                 Confirm
               </Button>
               <Button

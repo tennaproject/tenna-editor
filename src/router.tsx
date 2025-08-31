@@ -6,7 +6,9 @@ import { Loading } from '@components';
 
 // Home
 const HomeRoot = React.lazy(() =>
-  import('./pages/Home/Root').then((module) => ({ default: module.HomeRootPage })),
+  import('./pages/Home/Root').then((module) => ({
+    default: module.HomeRootPage,
+  })),
 );
 const HomeOverview = React.lazy(() =>
   import('./pages/Home/Overview').then((module) => ({
@@ -14,7 +16,9 @@ const HomeOverview = React.lazy(() =>
   })),
 );
 const HomeWelcome = React.lazy(() =>
-  import('./pages/Home/Welcome').then((module) => ({ default: module.HomeWelcomePage })),
+  import('./pages/Home/Welcome').then((module) => ({
+    default: module.HomeWelcomePage,
+  })),
 );
 const HomeSavesList = React.lazy(() =>
   import('./pages/Home/SavesList').then((module) => ({

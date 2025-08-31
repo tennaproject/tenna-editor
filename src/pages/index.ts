@@ -1,6 +1,5 @@
 export * from './About';
 export * from './Placeholder';
-export * from './Home';
 export * from './Inventory';
 export * from './Party';
 export * from './Recruits';

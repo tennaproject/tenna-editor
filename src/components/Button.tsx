@@ -21,7 +21,6 @@ interface ButtonProps {
   className?: string;
   disabled?: boolean;
   loading?: boolean;
-  fullWidth?: boolean;
 }
 
 export function Button({
@@ -31,7 +30,6 @@ export function Button({
   onClick,
   className = '',
   disabled = false,
-  fullWidth = false,
   ...props
 }: ButtonProps) {
   return (
