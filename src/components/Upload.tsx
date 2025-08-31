@@ -1,6 +1,6 @@
 import { useSave } from '@store';
 import { detectChapter, parseSaveFile } from '@utils';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import type { DeltaruneSave, SaveSlot } from '@types';
 import { toast } from '@services';
@@ -126,51 +126,42 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
     reader.readAsText(file);
   }
 
-  const changeStage = useCallback(
-    (stage: UploadStage) => {
-      const currentStage = uploadStage;
+  function changeStage(stage: UploadStage) {
+    const currentStage = uploadStage;
 
-      switch (stage) {
-        case 'idle':
-          setParsedSave(null);
-          setSelectedChapter(1);
-          setSelectedSlot(0);
-          setIsCompletionSave(false);
-          setSaveName('');
-          break;
-        case 'success':
-          if (!parsedSave) break;
-          parsedSave.chapter = selectedChapter;
-          parsedSave.slot = selectedSlot;
-          parsedSave.isCompletionSave = isCompletionSave;
-          parsedSave.name = saveName;
+    switch (stage) {
+      case 'idle':
+        setParsedSave(null);
+        setSelectedChapter(1);
+        setSelectedSlot(0);
+        setIsCompletionSave(false);
+        setSaveName('');
+        break;
+      case 'success':
+        if (!parsedSave) break;
+        parsedSave.chapter = selectedChapter;
+        parsedSave.slot = selectedSlot;
+        parsedSave.isCompletionSave = isCompletionSave;
+        parsedSave.name = saveName;
 
-          setSaveFile(parsedSave);
-          setParsedSave(null);
-          setSelectedSlot(0);
-          setIsCompletionSave(false);
+        setSaveFile(parsedSave);
+        setParsedSave(null);
+        setSelectedSlot(0);
+        setIsCompletionSave(false);
 
-          toast('Save uploaded successfully', 'success');
-          setOpen(false);
-      }
+        toast('Save uploaded successfully', 'success');
+        setOpen(false);
+    }
 
-      setUploadStage(stage);
-      setPreviousUploadStage(currentStage);
-    },
-    [
-      uploadStage,
-      isCompletionSave,
-      parsedSave,
-      saveName,
-      selectedChapter,
-      selectedSlot,
-      setSaveFile,
-      setOpen,
-    ],
-  );
+    setUploadStage(stage);
+    setPreviousUploadStage(currentStage);
+  }
+
   useEffect(() => {
     changeStage('idle');
-  }, [isOpen, changeStage]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
 
   return (
     <Modal isOpen={isOpen} setOpen={setOpen}>
