@@ -1,7 +1,8 @@
 import { create } from 'zustand';
-import { createJSONStorage, persist } from 'zustand/middleware';
+import { persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 import { STORE_NAMESPACE } from './schema';
+import { createDebouncedJSONStorage } from 'zustand-debounce';
 
 interface UiState {
   devmode: boolean;
@@ -75,7 +76,9 @@ export const useUi = create<UiState>()(
     })),
     {
       name: `${STORE_NAMESPACE}-ui-v1`,
-      storage: createJSONStorage(() => localStorage),
+      storage: createDebouncedJSONStorage('localStorage', {
+        debounceTime: 2000,
+      }),
       partialize: (state) => ({
         devmode: state.devmode,
         isSidebarRetracted: state.isSidebarRetracted,

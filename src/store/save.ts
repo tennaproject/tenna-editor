@@ -1,9 +1,10 @@
 import { create } from 'zustand';
-import { createJSONStorage, persist } from 'zustand/middleware';
+import { persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 import { STORE_NAMESPACE } from './schema';
 import type { DeltaruneSave } from '@types';
 import { deepEqual } from '@utils';
+import { createDebouncedJSONStorage } from 'zustand-debounce';
 
 interface SaveState {
   saveFile: DeltaruneSave | null;
@@ -129,7 +130,9 @@ export const useSave = create<SaveState>()(
     }),
     {
       name: `${STORE_NAMESPACE}-save-v1`,
-      storage: createJSONStorage(() => localStorage),
+      storage: createDebouncedJSONStorage('localStorage', {
+        debounceTime: 2000,
+      }),
       partialize: (state) => ({
         saveFile: state.saveFile,
         originalSaveFile: state.originalSaveFile,
