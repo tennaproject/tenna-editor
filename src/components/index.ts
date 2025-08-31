@@ -19,3 +19,4 @@ export * from './Select';
 export * from './GlowBar';
 export * from './Loading';
 export * from './Upload';
+export * from './Download';

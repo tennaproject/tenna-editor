@@ -2,7 +2,7 @@ import { useSave } from '@store';
 import { detectChapter, parseSaveFile } from '@utils';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import type { SaveSlot } from '@types';
+import type { Chapter, DeltaruneSave, SaveSlot } from '@types';
 import { toast } from '@services';
 import {
   TextInput,
@@ -15,14 +15,15 @@ import {
   FileInput,
   Modal,
 } from '@components';
+import type { ChapterIndex } from '@data';
 
-const chapterOptions: SelectItem[] = [
+const CHAPTER_OPTIONS: SelectItem[] = [
   { id: '2', label: `Chapter 2 (A Cyber's World)` },
   { id: '3', label: 'Chapter 3 (Late Night)' },
   { id: '4', label: 'Chapter 4 (Prophecy)' },
 ];
 
-const slotOptions: SelectItem[] = [
+const SLOT_OPTIONS: SelectItem[] = [
   { id: '1', label: 'Slot 1' },
   { id: '2', label: 'Slot 2' },
   { id: '3', label: 'Slot 3' },
@@ -43,9 +44,9 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
     useState<UploadStage>('idle');
   const [uploadError, setUploadError] = useState<string | null>(null);
 
-  const [selectedChapter, setSelectedChapter] = useState<number | null>(null);
-  const [parsedSave, setParsedSave] = useState<any>(null);
-  const [selectedSlot, setSelectedSlot] = useState<number | null>(null);
+  const [selectedChapter, setSelectedChapter] = useState<ChapterIndex>(1);
+  const [parsedSave, setParsedSave] = useState<DeltaruneSave | null>(null);
+  const [selectedSlot, setSelectedSlot] = useState<SaveSlot>(0);
   const [isCompletionSave, setIsCompletionSave] = useState(false);
   const [saveName, setSaveName] = useState<string>('');
 
@@ -53,21 +54,18 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
     changeStage('idle');
   }, [isOpen]);
 
+  // I know these +3/-1 are ugly but hey it works
   function onChapterSelection(item: SelectItem | null) {
-    setSelectedChapter(item ? parseInt(item.id) : null);
+    if (item) {
+      setSelectedChapter(parseInt(item.id, 10) + 3 as ChapterIndex);
+    }
   }
-
-  const selectedChapterOption = selectedChapter
-    ? chapterOptions.find((item) => item.id === selectedChapter.toString())
-    : null;
 
   function onSlotSelection(item: SelectItem | null) {
-    setSelectedSlot(item ? parseInt(item.id) : null);
+    if (item) {
+      setSelectedSlot((parseInt(item.id, 10) - 1) as SaveSlot);
+    } 
   }
-
-  const selectedSlotOption = selectedSlot
-    ? slotOptions.find((item) => item.id === selectedSlot.toString())
-    : null;
 
   function onFileSelect(file: File) {
     const reader = new FileReader();
@@ -138,12 +136,13 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
     switch (stage) {
       case 'idle':
         setParsedSave(null);
-        setSelectedChapter(null);
-        setSelectedSlot(null);
+        setSelectedChapter(1);
+        setSelectedSlot(0);
         setIsCompletionSave(false);
         setSaveName('');
         break;
       case 'success':
+        if (!parsedSave) break;
         parsedSave.chapter = selectedChapter;
         parsedSave.slot = selectedSlot;
         parsedSave.isCompletionSave = isCompletionSave;
@@ -151,7 +150,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
 
         setSaveFile(parsedSave);
         setParsedSave(null);
-        setSelectedSlot(null);
+        setSelectedSlot(0);
         setIsCompletionSave(false);
 
         toast('Save uploaded successfully', 'success');
@@ -175,7 +174,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
               transition={{ duration: 0.2 }}
               className="flex flex-col flex-1 gap-4"
             >
-              <Heading level={3}>Upload Save File</Heading>
+              <Heading level={3}>Upload Save</Heading>
               <div className="flex-1 flex justify-center items-center">
                 <FileInput onFileSelect={onFileSelect} />
               </div>
@@ -195,10 +194,11 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
               <div className="flex-1 flex flex-col gap-2">
                 <p className="text-text-2">Is this the correct chapter?</p>
                 <Select
-                  items={chapterOptions}
+                  items={CHAPTER_OPTIONS}
                   placeholder="Select chapter"
                   className="w-full"
-                  selectedItem={selectedChapterOption}
+                  selectedItem={CHAPTER_OPTIONS[selectedChapter - 2]}
+                  defaultSelectedItem={CHAPTER_OPTIONS[selectedChapter - 2]}
                   onSelectionChange={onChapterSelection}
                 />
               </div>
@@ -225,10 +225,11 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
                   <div>
                     <TextLabel>In-game slot</TextLabel>
                     <Select
-                      items={slotOptions}
+                      items={SLOT_OPTIONS}
                       placeholder="Select slot"
                       className="w-full"
-                      selectedItem={selectedSlotOption}
+                      selectedItem={SLOT_OPTIONS[selectedSlot]}
+                      defaultSelectedItem={SLOT_OPTIONS[selectedSlot]}
                       onSelectionChange={onSlotSelection}
                     />
                   </div>
@@ -276,7 +277,6 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
               <Button
                 onClick={() => changeStage('success')}
                 variant="primary"
-                disabled={!selectedSlot}
               >
                 Confirm
               </Button>

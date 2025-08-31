@@ -1,11 +1,11 @@
-import { useSave, useUi } from '@store';
+import { useUi } from '@store';
 import SidebarVisibilityIcon from '@assets/icons/menu.svg';
 import SidebarRetractionIcon from '@assets/icons/layout-sidebar-left.svg';
 import DownloadIcon from '@assets/icons/download.svg';
 import UploadIcon from '@assets/icons/upload.svg';
-import { serializeSaveFile } from '@utils';
 import { useState } from 'react';
 import { Upload } from './Upload';
+import { Download } from './Download';
 
 export function Header() {
   const [isUploadOpen, setUploadOpen] = useState(false);
@@ -63,31 +63,14 @@ export function Header() {
           <button
             className="text-green bg-surface-3 hover:bg-surface-3-hover transition-colors p-2 cursor-pointer"
             onClick={() => {
-              const save = useSave.getState().saveFile;
-              if (!save) {
-                console.warn('No save file to download');
-                return;
-              }
-
-              const serializedSaveFile = serializeSaveFile(save);
-              const blob = new Blob([serializedSaveFile], {
-                type: 'application/octet-stream',
-              });
-
-              const url = URL.createObjectURL(blob);
-              const a = document.createElement('a');
-              a.href = url;
-              a.download = `filech3_4`;
-              document.body.appendChild(a);
-              a.click();
-              document.body.removeChild(a);
-              URL.revokeObjectURL(url);
+              setDownloadOpen(true);
             }}
           >
             <div className="w-6 h-6">
               <DownloadIcon />
             </div>
           </button>
+          <Download isOpen={isDownloadOpen} setOpen={setDownloadOpen} />
           <button
             className="text-blue bg-surface-3 hover:bg-surface-3-hover transition-colors p-2 cursor-pointer"
             onClick={() => setUploadOpen(true)}
@@ -96,7 +79,7 @@ export function Header() {
               <UploadIcon />
             </div>
           </button>
-            <Upload isOpen={isUploadOpen} setOpen={setUploadOpen} />
+          <Upload isOpen={isUploadOpen} setOpen={setUploadOpen} />
         </div>
       </div>
     </header>

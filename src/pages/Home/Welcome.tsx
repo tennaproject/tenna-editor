@@ -3,7 +3,7 @@ import { detectChapter, parseSaveFile } from '@utils';
 import { useState } from 'react';
 import { useSave } from '@store';
 
-export const Upload = () => {
+export function HomeWelcomePage() {
   const setSaveFile = useSave((s) => s.setSaveFile);
   const [uploadStatus, setUploadStatus] = useState<
     'idle' | 'success' | 'error'
@@ -105,4 +105,4 @@ export const Upload = () => {
       </div>
     </div>
   );
-};
+}

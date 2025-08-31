@@ -5,21 +5,16 @@ import { RequireChapter, RequireDevmode, RequireSave } from '@guards';
 import { Loading } from '@components';
 
 // Home
-const HomePage = React.lazy(() =>
-  import('./pages/Home').then((module) => ({ default: module.HomePage })),
+const HomeRoot = React.lazy(() =>
+  import('./pages/Home/Root').then((module) => ({ default: module.HomeRootPage })),
 );
 const HomeOverview = React.lazy(() =>
   import('./pages/Home/Overview').then((module) => ({
     default: module.Overview,
   })),
 );
-const HomeUpload = React.lazy(() =>
-  import('./pages/Home/Upload').then((module) => ({ default: module.Upload })),
-);
-const HomeDownload = React.lazy(() =>
-  import('./pages/Home/Download').then((module) => ({
-    default: module.Download,
-  })),
+const HomeWelcome = React.lazy(() =>
+  import('./pages/Home/Welcome').then((module) => ({ default: module.HomeWelcomePage })),
 );
 const HomeSavesList = React.lazy(() =>
   import('./pages/Home/SavesList').then((module) => ({
@@ -151,11 +146,10 @@ export function AppRouter() {
           key={location.pathname.split('/')[1] || 'root'}
         >
           <Route path="/" element={<Navigate to="/home" replace />}></Route>
-          <Route path="/home" element={<HomePage />}>
+          <Route path="/home" element={<HomeRoot />}>
             <Route index element={<Navigate to="overview" replace />} />
             <Route path="overview" element={<HomeOverview />}></Route>
-            <Route path="upload" element={<HomeUpload />}></Route>
-            <Route path="download" element={<HomeDownload />}></Route>
+            <Route path="welcome" element={<HomeWelcome />}></Route>
             <Route path="saves-list" element={<HomeSavesList />}></Route>
             <Route path="*" element={<Navigate to="overview" replace />} />
           </Route>
