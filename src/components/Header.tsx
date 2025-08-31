@@ -96,9 +96,7 @@ export function Header() {
               <UploadIcon />
             </div>
           </button>
-          {isUploadOpen && (
             <Upload isOpen={isUploadOpen} setOpen={setUploadOpen} />
-          )}
         </div>
       </div>
     </header>

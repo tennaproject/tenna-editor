@@ -1,18 +1,20 @@
 import { useSave } from '@store';
 import { detectChapter, parseSaveFile } from '@utils';
-import { useState } from 'react';
-import { Modal } from './Modal';
-import { FileInput } from './FileInput';
-import { Heading } from './Heading';
-import { Select } from './Select';
-import type { SelectItem } from './Select';
-import { Button } from './Button';
-import { Checkbox } from './Checkbox';
+import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import type { SaveSlot } from '@types';
-import { TextLabel } from './TextLabel';
 import { toast } from '@services';
-import { TextInput } from './TextInput';
+import {
+  TextInput,
+  TextLabel,
+  Checkbox,
+  Button,
+  type SelectItem,
+  Select,
+  Heading,
+  FileInput,
+  Modal,
+} from '@components';
 
 const chapterOptions: SelectItem[] = [
   { id: '2', label: `Chapter 2 (A Cyber's World)` },
@@ -47,23 +49,27 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
   const [isCompletionSave, setIsCompletionSave] = useState(false);
   const [saveName, setSaveName] = useState<string>('');
 
-  const onChapterSelection = (item: SelectItem | null) => {
+  useEffect(() => {
+    changeStage('idle');
+  }, [isOpen]);
+
+  function onChapterSelection(item: SelectItem | null) {
     setSelectedChapter(item ? parseInt(item.id) : null);
-  };
+  }
 
   const selectedChapterOption = selectedChapter
     ? chapterOptions.find((item) => item.id === selectedChapter.toString())
     : null;
 
-  const onSlotSelection = (item: SelectItem | null) => {
+  function onSlotSelection(item: SelectItem | null) {
     setSelectedSlot(item ? parseInt(item.id) : null);
-  };
+  }
 
   const selectedSlotOption = selectedSlot
     ? slotOptions.find((item) => item.id === selectedSlot.toString())
     : null;
 
-  const onFileSelect = (file: File) => {
+  function onFileSelect(file: File) {
     const reader = new FileReader();
     reader.onload = () => {
       const content = reader.result as string;
@@ -124,7 +130,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
       }
     };
     reader.readAsText(file);
-  };
+  }
 
   function changeStage(stage: UploadStage) {
     const currentStage = uploadStage;
@@ -187,16 +193,14 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
             >
               <Heading level={3}>Confirm Chapter</Heading>
               <div className="flex-1 flex flex-col gap-2">
-                  <p className="text-text-2">
-                    Is this the correct chapter?
-                  </p>
-                  <Select
-                    items={chapterOptions}
-                    placeholder="Select chapter"
-                    className="w-full"
-                    selectedItem={selectedChapterOption}
-                    onSelectionChange={onChapterSelection}
-                  />
+                <p className="text-text-2">Is this the correct chapter?</p>
+                <Select
+                  items={chapterOptions}
+                  placeholder="Select chapter"
+                  className="w-full"
+                  selectedItem={selectedChapterOption}
+                  onSelectionChange={onChapterSelection}
+                />
               </div>
             </motion.div>
           )}
