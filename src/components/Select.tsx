@@ -285,7 +285,11 @@ export function Select({
                 <li
                   key={item.id}
                   {...itemProps}
-                  onTouchStart={(e) => itemProps.onClick?.(e as unknown as React.MouseEvent<HTMLLIElement>)}
+                  onTouchStart={(e) =>
+                    itemProps.onClick?.(
+                      e as unknown as React.MouseEvent<HTMLLIElement>,
+                    )
+                  }
                   className={`cursor-pointer text-sm select-none leading-none text-text-1 transition-colors`}
                   aria-selected={chosen}
                 >
