@@ -91,6 +91,8 @@ export interface SaveFile<
   meta: {
     readonly id: UUID;
     readonly format: Format;
+    readonly createdAt: Date;
+    modifiedAt: Date;
     chapter: Chapter;
     slot: SaveSlot;
     isCompletionSave: boolean;
@@ -122,15 +124,6 @@ export interface V1Save extends SaveFile<'v1', 1> {
 }
 
 export interface V2Save extends SaveFile<'v2', 2 | 3 | 4> {
-  meta: {
-    readonly id: UUID;
-    readonly format: 'v2';
-    chapter: 2 | 3 | 4;
-    slot: SaveSlot;
-    isCompletionSave: boolean;
-    name: string;
-  };
-
   playerName: string;
   characterName: string;
 

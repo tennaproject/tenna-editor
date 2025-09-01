@@ -160,10 +160,13 @@ function parseV1Save(cursor: LineCursor): V1Save {
   const room = cursor.nextNumber() as RoomIndex;
   const time = cursor.nextNumber();
 
+  const now = new Date();
   return {
     meta: {
       id: crypto.randomUUID(),
       format: 'v1',
+      createdAt: now,
+      modifiedAt: now,
       chapter: 1,
       slot: 0,
       isCompletionSave: false,
@@ -331,10 +334,13 @@ function parseV2Save(cursor: LineCursor): V2Save {
   const room = cursor.nextNumber() as RoomIndex;
   const time = cursor.nextNumber();
 
+  const now = new Date();
   return {
     meta: {
       id: crypto.randomUUID(),
       format: 'v2',
+      createdAt: now,
+      modifiedAt: now,
       chapter: 2,
       slot: 0,
       isCompletionSave: false,
