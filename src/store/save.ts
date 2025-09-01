@@ -47,9 +47,13 @@ export const useSave = create<SaveState>()(
           const save = get().save;
 
           if (!save) return;
-          updater(save);
+          const draft: DeltaruneSave =
+            typeof structuredClone === 'function'
+              ? (structuredClone(save) as DeltaruneSave)
+              : JSON.parse(JSON.stringify(save));
+          updater(draft);
           set((state) => {
-            state.save = save;
+            state.save = draft;
             state.save.meta.modifiedAt = new Date();
           });
         },
