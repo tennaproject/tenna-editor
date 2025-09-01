@@ -20,11 +20,6 @@ const HomeWelcome = React.lazy(() =>
     default: module.HomeWelcome,
   })),
 );
-const HomeSavesList = React.lazy(() =>
-  import('./pages/Home/SavesList').then((module) => ({
-    default: module.HomeSavesList,
-  })),
-);
 
 // Inventory
 const InventoryRoot = React.lazy(() =>
@@ -168,7 +163,6 @@ export function AppRouter() {
             <Route index element={<Navigate to="overview" replace />} />
             <Route path="overview" element={<HomeOverview />}></Route>
             <Route path="welcome" element={<HomeWelcome />}></Route>
-            <Route path="saves-list" element={<HomeSavesList />}></Route>
             <Route path="*" element={<Navigate to="overview" replace />} />
           </Route>
           <Route path="/about" element={<AboutPage />}>

@@ -16,6 +16,13 @@ import {
   Modal,
 } from '@components';
 import type { ChapterIndex } from '@data';
+import {
+  adjectives,
+  animals,
+  colors,
+  NumberDictionary,
+  uniqueNamesGenerator,
+} from 'unique-names-generator';
 
 const CHAPTER_OPTIONS: SelectItem[] = [
   { id: '2', label: `Chapter 2 (A Cyber's World)` },
@@ -117,7 +124,22 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
       setSelectedChapter(detection.chapter ?? 1);
       setSelectedSlot(slot);
       setIsCompletionSave(isCompletionSave);
-      setSaveName(file.name);
+
+      if (!slotMatch) {
+        setSaveName(file.name);
+      } else {
+        setSaveName(
+          uniqueNamesGenerator({
+            dictionaries: [
+              adjectives,
+              colors,
+              NumberDictionary.generate({ min: 1, max: 99 }),
+            ],
+            separator: '',
+            style: 'capital',
+          }),
+        );
+      }
 
       if (detection.chapter === 1) {
         changeStage('settings');

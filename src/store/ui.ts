@@ -77,7 +77,7 @@ export const useUi = create<UiState>()(
     {
       name: `${STORE_NAMESPACE}-ui`,
       storage: createDebouncedJSONStorage('localStorage', {
-        debounceTime: 2000,
+        debounceTime: 1000,
       }),
       partialize: (state) => ({
         devmode: state.devmode,

@@ -8,7 +8,6 @@ export function HomeRoot() {
         <Page.Nav>
           <Page.NavItem title="Overview" to="/home/overview" />
           <Page.NavItem title="Welcome" to="/home/welcome" />
-          <Page.NavItem title="Saves List" to="/home/saves-list" />
         </Page.Nav>
       </Page.TopBar>
       <Page.Content>

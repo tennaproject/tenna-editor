@@ -62,7 +62,7 @@ export const useSave = create<SaveState>()(
     {
       name: `${STORE_NAMESPACE}-save`,
       storage: createDebouncedJSONStorage('localStorage', {
-        debounceTime: 2000,
+        debounceTime: 1000,
       }),
       partialize: (state) => ({
         save: state.save,
