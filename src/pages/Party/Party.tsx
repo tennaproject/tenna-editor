@@ -4,7 +4,7 @@ import { useSave } from '@store';
 import { Outlet } from 'react-router-dom';
 
 export const PartyPage = () => {
-  const chapter = useSave((s) => s.saveFile?.chapter) || (1 as ChapterIndex);
+  const chapter = useSave((s) => s.save?.meta.chapter) || (1 as ChapterIndex);
 
   return (
     <Page>

@@ -15,7 +15,7 @@ export function RequireChapter({
   requiredChapter,
   navigateTo = '/home',
 }: RequireChapterProps) {
-  const chapter = useSave((s) => s.saveFile?.chapter) || 0;
+  const chapter = useSave((s) => s.save?.meta.chapter) || 0;
   const shownRef = useRef(false);
 
   const pass = chapter >= requiredChapter;

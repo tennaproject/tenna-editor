@@ -1,5 +1,6 @@
 import type {
   ArmorIndex,
+  ChapterIndex,
   ConsumableIndex,
   KeyItemIndex,
   LightWorldItemIndex,
@@ -8,9 +9,9 @@ import type {
   SpellIndex,
   WeaponIndex,
 } from '@data';
+import type { UUID } from 'crypto';
 
-export type SaveFileFormat = 'v1' | 'v2' | 'unknown';
-export type Chapter = 0 | 1 | 2 | 3 | 4;
+export type SaveFormat = 'v1' | 'v2';
 export type SaveSlot = 0 | 1 | 2;
 
 export interface WeaponStats {
@@ -83,18 +84,21 @@ export interface LightWorld {
   phone: PhoneContactIndex[];
 }
 
-export interface SaveFileBase {
-  readonly format: SaveFileFormat;
-  chapter: Chapter;
-  slot: SaveSlot;
-  isCompletionSave: boolean;
-  name: string;
+export interface SaveFile<
+  Format extends SaveFormat,
+  Chapter extends ChapterIndex,
+> {
+  meta: {
+    readonly id: UUID;
+    readonly format: Format;
+    chapter: Chapter;
+    slot: SaveSlot;
+    isCompletionSave: boolean;
+    name: string;
+  };
 }
 
-export interface V1Save extends SaveFileBase {
-  format: 'v1';
-  chapter: Chapter;
-
+export interface V1Save extends SaveFile<'v1', 1> {
   playerName: string;
   characterName: string;
 
@@ -117,9 +121,15 @@ export interface V1Save extends SaveFileBase {
   time: number;
 }
 
-export interface V2Save extends SaveFileBase {
-  readonly format: 'v2';
-  chapter: Chapter;
+export interface V2Save extends SaveFile<'v2', 2 | 3 | 4> {
+  meta: {
+    readonly id: UUID;
+    readonly format: 'v2';
+    chapter: 2 | 3 | 4;
+    slot: SaveSlot;
+    isCompletionSave: boolean;
+    name: string;
+  };
 
   playerName: string;
   characterName: string;

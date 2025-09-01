@@ -32,8 +32,8 @@ interface ItemFieldProps {
 }
 
 export function ItemField({ kind, slot, label }: ItemFieldProps) {
-  const saveFile = useSave((s) => s.saveFile);
-  const chapter = saveFile?.chapter || 1;
+  const save = useSave((s) => s.save);
+  const chapter = save?.meta.chapter || 1;
   const updateSave = useSave((s) => s.updateSave);
 
   let currentValue: number = 0;
@@ -44,25 +44,24 @@ export function ItemField({ kind, slot, label }: ItemFieldProps) {
 
   if (kind === 'consumable') {
     currentValue =
-      saveFile?.inventory.consumables[slot] ??
+      save?.inventory.consumables[slot] ??
       (CONSUMABLES.EMPTY as ConsumableIndex);
     placeholder = 'Select a consumable...';
   } else if (kind === 'keyItem') {
     currentValue =
-      saveFile?.inventory.keyItems[slot] ?? (KEYITEMS.EMPTY as KeyItemIndex);
+      save?.inventory.keyItems[slot] ?? (KEYITEMS.EMPTY as KeyItemIndex);
     placeholder = 'Select a key item...';
   } else if (kind === 'weapon') {
     currentValue =
-      saveFile?.inventory.weapons[slot] ?? (WEAPONS.EMPTY as WeaponIndex);
+      save?.inventory.weapons[slot] ?? (WEAPONS.EMPTY as WeaponIndex);
     placeholder = 'Select a weapon...';
   } else if (kind === 'armor') {
-    currentValue =
-      saveFile?.inventory.armors[slot] ?? (ARMORS.EMPTY as ArmorIndex);
+    currentValue = save?.inventory.armors[slot] ?? (ARMORS.EMPTY as ArmorIndex);
     placeholder = 'Select an armor...';
   } else if (kind === 'storage') {
     const storage =
-      saveFile && 'inventory' in saveFile && 'storage' in saveFile.inventory
-        ? (saveFile.inventory as { storage: ConsumableIndex[] }).storage
+      save && 'inventory' in save && 'storage' in save.inventory
+        ? (save.inventory as { storage: ConsumableIndex[] }).storage
         : [];
     currentValue = storage?.[slot] ?? (CONSUMABLES.EMPTY as ConsumableIndex);
     placeholder = 'Select a storage item...';

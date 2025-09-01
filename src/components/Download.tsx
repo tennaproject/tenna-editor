@@ -27,7 +27,7 @@ interface DownloadProps {
 }
 
 export function Download({ isOpen, setOpen }: DownloadProps) {
-  const save = useSave((s) => s.saveFile);
+  const save = useSave((s) => s.save);
   const [selectedSlot, setSelectedSlot] = useState<SaveSlot>(1);
   const [isCompletionSave, setIsCompletionSave] = useState(false);
   const [fileName, setFileName] = useState('');
@@ -57,24 +57,24 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
   }
 
   useEffect(() => {
+    if (isOpen !== true) return;
     if (save) {
-      setSelectedSlot(save.slot);
-      setIsCompletionSave(save.isCompletionSave);
+      setSelectedSlot(save.meta.slot);
+      setIsCompletionSave(save.meta.isCompletionSave);
+    } else {
+      setOpen(false);
+      toast('There is no save file loaded currently', 'error');
+      return;
     }
-  }, [isOpen, save]);
+  }, [isOpen, save, setOpen]);
 
   useEffect(() => {
     if (!save) return;
 
     setFileName(
-      `filech${save.chapter}_${isCompletionSave ? selectedSlot + 3 : selectedSlot}`,
+      `filech${save.meta.chapter}_${isCompletionSave ? selectedSlot + 3 : selectedSlot}`,
     );
   }, [selectedSlot, isCompletionSave, save]);
-
-  if (!save) {
-    toast('There is no save file loaded currently', 'error');
-    return;
-  }
 
   return (
     <Modal isOpen={isOpen} setOpen={setOpen}>

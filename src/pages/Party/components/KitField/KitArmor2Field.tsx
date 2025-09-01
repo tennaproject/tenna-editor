@@ -12,9 +12,9 @@ export function KitArmor2Field({
   character,
   allowAllElements,
 }: KitArmor2FieldProps) {
-  const chapter = useSave((s) => s.saveFile?.chapter) || 1;
+  const chapter = useSave((s) => s.save?.meta.chapter) || 1;
   const secondaryArmor =
-    useSave((s) => s.saveFile?.characters[character].secondaryArmor) ||
+    useSave((s) => s.save?.characters[character].secondaryArmor) ||
     ARMORS.EMPTY;
   const updateSave = useSave((s) => s.updateSave);
 

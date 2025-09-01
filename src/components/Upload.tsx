@@ -1,4 +1,4 @@
-import { useSave } from '@store';
+import { useSave, useSaveStorage } from '@store';
 import { detectChapter, parseSaveFile } from '@utils';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -37,7 +37,9 @@ interface UploadProps {
 type UploadStage = 'idle' | 'success' | 'error' | 'chapter' | 'settings';
 
 export function Upload({ isOpen, setOpen }: UploadProps) {
-  const setSaveFile = useSave((s) => s.setSaveFile);
+  const setSave = useSave((s) => s.setSave);
+  const save = useSave((s) => s.save);
+  const { setStorageSave } = useSaveStorage();
 
   const [uploadStage, setUploadStage] = useState<UploadStage>('idle');
   const [previousUploadStage, setPreviousUploadStage] =
@@ -139,12 +141,18 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
         break;
       case 'success':
         if (!parsedSave) break;
-        parsedSave.chapter = selectedChapter;
-        parsedSave.slot = selectedSlot;
-        parsedSave.isCompletionSave = isCompletionSave;
-        parsedSave.name = saveName;
+        parsedSave.meta.chapter = selectedChapter;
+        parsedSave.meta.slot = selectedSlot;
+        parsedSave.meta.isCompletionSave = isCompletionSave;
+        parsedSave.meta.name = saveName;
 
-        setSaveFile(parsedSave);
+        // when there is already save loaded - put it into storage
+        if (save) {
+          setStorageSave(save.meta.id, save);
+        }
+
+        setSave(parsedSave);
+
         setParsedSave(null);
         setSelectedSlot(0);
         setIsCompletionSave(false);

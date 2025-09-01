@@ -10,9 +10,9 @@ interface SpellFieldProp {
 }
 
 export function SpellField({ slot, character, allowAllItems }: SpellFieldProp) {
-  const chapter = useSave((s) => s.saveFile?.chapter) || 1;
+  const chapter = useSave((s) => s.save?.meta.chapter) || 1;
   const currentSpell =
-    useSave((s) => s.saveFile?.characters[character].spells?.[slot]) ||
+    useSave((s) => s.save?.characters[character].spells?.[slot]) ||
     SPELLS.EMPTY;
   const updateSave = useSave((s) => s.updateSave);
 

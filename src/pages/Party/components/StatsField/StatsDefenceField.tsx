@@ -7,8 +7,7 @@ interface StatsDefenceFieldProps {
 }
 
 export function StatsDefenceField({ character }: StatsDefenceFieldProps) {
-  const defence =
-    useSave((s) => s.saveFile?.characters[character].defence) || 0;
+  const defence = useSave((s) => s.save?.characters[character].defence) || 0;
   const updateSave = useSave((s) => s.updateSave);
 
   function onChange(value: number) {

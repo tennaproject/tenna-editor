@@ -8,7 +8,7 @@ interface HpMaxFieldProps {
 
 export function HpMaxField({ character }: HpMaxFieldProps) {
   const maxHealth =
-    useSave((s) => s.saveFile?.characters[character].maxHealth) || 0;
+    useSave((s) => s.save?.characters[character].maxHealth) || 0;
   const updateSave = useSave((s) => s.updateSave);
 
   function onChange(value: number) {

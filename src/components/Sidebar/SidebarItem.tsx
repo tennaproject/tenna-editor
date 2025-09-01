@@ -22,8 +22,8 @@ export function SidebarItem({
   const isSidebarRetracted = useUi((s) => s.isSidebarRetracted);
   const devmode = useUi((s) => s.devmode);
 
-  const isSaveFilePresent = useSave.getState().saveFile;
-  const chapter = useSave((s) => s.saveFile?.chapter) || 1;
+  const isSavePresent = useSave.getState().save;
+  const chapter = useSave((s) => s.save?.meta.chapter) || 1;
   const location = useLocation();
 
   const baseClasses =
@@ -32,7 +32,7 @@ export function SidebarItem({
   const inactiveClasses = 'text-text-2 hover:bg-surface-1-hover';
   const disabledClasses = 'opacity-20 pointer-events-none';
   const isDisabled =
-    (requireSave && !isSaveFilePresent) ||
+    (requireSave && !isSavePresent) ||
     (requireChapter && chapter < requireChapter);
 
   const isHidden = requireDevmode && !devmode;

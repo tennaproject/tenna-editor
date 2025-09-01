@@ -7,7 +7,7 @@ interface HpCurrentFieldProps {
 }
 
 export function HpCurrentField({ character }: HpCurrentFieldProps) {
-  const health = useSave((s) => s.saveFile?.characters[character].health) || 0;
+  const health = useSave((s) => s.save?.characters[character].health) || 0;
   const updateSave = useSave((s) => s.updateSave);
 
   function onChange(value: number) {

@@ -16,7 +16,7 @@ import { useSave } from '@store';
 import { chapterHelpers, roomHelpers } from '@utils';
 
 export function ChapterField() {
-  const value = useSave((s) => s.saveFile?.chapter) || 1;
+  const value = useSave((s) => s.save?.meta.chapter) || 1;
 
   return (
     <Section id="chapter" className="space-y-2">
@@ -32,8 +32,8 @@ export function ChapterField() {
 }
 
 export function PlayerNameField() {
-  const value = useSave((s) => s.saveFile?.playerName) ?? '';
-  const setField = useSave((s) => s.setSaveFileField);
+  const value = useSave((s) => s.save?.playerName) ?? '';
+  const setField = useSave((s) => s.setSaveField);
 
   function onChange(v: string) {
     setField('playerName', v);
@@ -61,8 +61,8 @@ export function PlayerNameField() {
 }
 
 export function MoneyField() {
-  const value = useSave((s) => s.saveFile?.money) ?? 0;
-  const setField = useSave((s) => s.setSaveFileField);
+  const value = useSave((s) => s.save?.money) ?? 0;
+  const setField = useSave((s) => s.setSaveField);
 
   function onChange(v: number) {
     setField('money', v);
@@ -82,8 +82,8 @@ export function MoneyField() {
 }
 
 export function InDarkWorldField() {
-  const checked = useSave((s) => s.saveFile?.inDarkWorld) ?? false;
-  const setField = useSave((s) => s.setSaveFileField);
+  const checked = useSave((s) => s.save?.inDarkWorld) ?? false;
+  const setField = useSave((s) => s.setSaveField);
 
   function onChange(state: boolean) {
     setField('inDarkWorld', state);
@@ -109,9 +109,9 @@ export function InDarkWorldField() {
 }
 
 export function RoomField() {
-  const room = useSave((s) => s.saveFile?.room) ?? 0;
-  const chapter = useSave((s) => s.saveFile?.chapter) || 1;
-  const setField = useSave((s) => s.setSaveFileField);
+  const room = useSave((s) => s.save?.room) ?? 0;
+  const chapter = useSave((s) => s.save?.meta.chapter) || 1;
+  const setField = useSave((s) => s.setSaveField);
 
   function onChange(
     item: { id: string; label: string; value?: unknown } | null,
@@ -165,9 +165,9 @@ export function RoomField() {
 }
 
 export function Overview() {
-  const isSaveFilePresent = useSave((s) => !!s.saveFile);
+  const isSavePresent = useSave((s) => !!s.save);
 
-  if (!isSaveFilePresent) {
+  if (!isSavePresent) {
     return (
       <div className="page">
         <Section>

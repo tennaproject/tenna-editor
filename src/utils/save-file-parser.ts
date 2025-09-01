@@ -1,4 +1,4 @@
-import type { DeltaruneSave, SaveFileFormat, V1Save, V2Save } from '@types';
+import type { DeltaruneSave, SaveFormat, V1Save, V2Save } from '@types';
 import type {
   ArmorIndex,
   ConsumableIndex,
@@ -24,7 +24,7 @@ export const SUPPORTED_FORMATS = Object.keys(
   SAVE_META,
 ) as (keyof typeof SAVE_META)[];
 
-function detectSaveFormat(count: number): SaveFileFormat {
+function detectSaveFormat(count: number): SaveFormat | null {
   if (count == SAVE_META.V1.TOTAL_LINES) {
     return 'v1';
   }
@@ -33,7 +33,7 @@ function detectSaveFormat(count: number): SaveFileFormat {
     return 'v2';
   }
 
-  return 'unknown';
+  return null;
 }
 
 function parseV1Save(cursor: LineCursor): V1Save {
@@ -161,11 +161,14 @@ function parseV1Save(cursor: LineCursor): V1Save {
   const time = cursor.nextNumber();
 
   return {
-    format: 'v1',
-    chapter: 0,
-    slot: 0,
-    isCompletionSave: false,
-    name: '',
+    meta: {
+      id: crypto.randomUUID(),
+      format: 'v1',
+      chapter: 1,
+      slot: 0,
+      isCompletionSave: false,
+      name: '',
+    },
     playerName,
     characterName,
     party: party as [number, number, number],
@@ -329,11 +332,14 @@ function parseV2Save(cursor: LineCursor): V2Save {
   const time = cursor.nextNumber();
 
   return {
-    format: 'v2',
-    chapter: 0,
-    slot: 0,
-    isCompletionSave: false,
-    name: '',
+    meta: {
+      id: crypto.randomUUID(),
+      format: 'v2',
+      chapter: 2,
+      slot: 0,
+      isCompletionSave: false,
+      name: 'Cool save',
+    },
     playerName,
     characterName,
     party: party as [number, number, number],

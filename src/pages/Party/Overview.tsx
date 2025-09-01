@@ -61,12 +61,10 @@ function CharacterCard({
   character,
   allowNonStandardParty,
 }: CharacterCardProps) {
-  const party = useSave((s) => s.saveFile?.party) as
-    | CharacterIndex[]
-    | undefined;
-  const setField = useSave((s) => s.setSaveFileField);
-  const chapter = useSave((s) => s.saveFile?.chapter) || 1;
-  const plot = useSave((s) => s.saveFile?.plot) || 0;
+  const party = useSave((s) => s.save?.party) as CharacterIndex[] | undefined;
+  const setField = useSave((s) => s.setSaveField);
+  const chapter = useSave((s) => s.save?.meta.chapter) || 1;
+  const plot = useSave((s) => s.save?.plot) || 0;
 
   // Flags for overrides
   const flags = {
@@ -93,11 +91,11 @@ function CharacterCard({
   };
 
   // Chapter 3 Egg check
-  const keyItems = useSave((s) => s.saveFile?.inventory.keyItems);
+  const keyItems = useSave((s) => s.save?.inventory.keyItems);
   const hasEgg = !!keyItems?.includes(KEYITEMS.EGG);
 
   // Weapon for Ralsei and Noelle title
-  const characters = useSave((s) => s.saveFile?.characters) || [];
+  const characters = useSave((s) => s.save?.characters) || [];
   let weapon = 0 as WeaponIndex;
   // This is not pretty but fixes the edge case when there is a Chapter 1 save loaded with Noelle selected in whatever slot
   if (characters[character]) {
@@ -105,7 +103,7 @@ function CharacterCard({
   }
 
   // Room for Ralsei's title
-  const room = useSave((s) => s.saveFile?.room) || ROOMS.PLACE_DOG;
+  const room = useSave((s) => s.save?.room) || ROOMS.PLACE_DOG;
 
   if (!party) return null;
 
@@ -250,9 +248,7 @@ function CharacterCard({
 }
 
 export function Overview() {
-  const party = useSave((s) => s.saveFile?.party) as
-    | CharacterIndex[]
-    | undefined;
+  const party = useSave((s) => s.save?.party) as CharacterIndex[] | undefined;
   const allowNonStandardParty = useUi((s) => s.allowNonStandardParty);
   const setAllowNonStandardParty = useUi((s) => s.setAllowNonStandardParty);
 

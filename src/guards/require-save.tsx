@@ -12,21 +12,21 @@ export function RequireSave({
   children,
   navigateTo = '/home',
 }: RequireSaveProps) {
-  const saveFile = useSave.getState().saveFile;
+  const save = useSave.getState().save;
   const shownRef = useRef(false);
 
   useEffect(() => {
-    if (!saveFile && !shownRef.current) {
+    if (!save && !shownRef.current) {
       toast('There is no save loaded', 'error');
       shownRef.current = true;
     }
 
-    if (saveFile) {
+    if (save) {
       shownRef.current = false;
     }
-  }, [saveFile]);
+  }, [save]);
 
-  if (!saveFile) {
+  if (!save) {
     return <Navigate to={navigateTo} replace />;
   }
   return children;

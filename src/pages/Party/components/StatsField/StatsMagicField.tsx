@@ -7,7 +7,7 @@ interface StatsMagicFieldProps {
 }
 
 export function StatsMagicField({ character }: StatsMagicFieldProps) {
-  const magic = useSave((s) => s.saveFile?.characters[character].magic) || 0;
+  const magic = useSave((s) => s.save?.characters[character].magic) || 0;
   const updateSave = useSave((s) => s.updateSave);
 
   function onChange(value: number) {

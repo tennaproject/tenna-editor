@@ -3,7 +3,7 @@ import { useSave } from '@store';
 import { chapterHelpers } from '@utils';
 
 export const Weapons = () => {
-  const chapter = useSave((s) => s.saveFile?.chapter) || 1;
+  const chapter = useSave((s) => s.save?.meta.chapter) || 1;
   const meta = chapterHelpers.getById(chapter).content.meta;
   const slots = meta.weaponsSize;
 

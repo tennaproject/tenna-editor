@@ -17,7 +17,7 @@ interface StatsAttackFieldProps {
 }
 
 export function StatField({ kind, label, id }: StatsAttackFieldProps) {
-  const lightWorld = useSave((s) => s.saveFile?.lightWorld) as LightWorld;
+  const lightWorld = useSave((s) => s.save?.lightWorld) as LightWorld;
   const updateSave = useSave((s) => s.updateSave);
 
   function onChange(value: number) {

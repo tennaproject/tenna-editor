@@ -15,8 +15,8 @@ interface CharacterHeaderProps {
 }
 
 export function CharacterHeader({ character }: CharacterHeaderProps) {
-  const chapter = useSave((s) => s.saveFile?.chapter) || 1;
-  const plot = useSave((s) => s.saveFile?.plot) || 0;
+  const chapter = useSave((s) => s.save?.meta.chapter) || 1;
+  const plot = useSave((s) => s.save?.plot) || 0;
 
   // Flags for overrides
   const flags = {
@@ -43,16 +43,15 @@ export function CharacterHeader({ character }: CharacterHeaderProps) {
   };
 
   // Chapter 3 Egg check
-  const keyItems = useSave((s) => s.saveFile?.inventory.keyItems);
+  const keyItems = useSave((s) => s.save?.inventory.keyItems);
   const hasEgg = !!keyItems?.includes(KEYITEMS.EGG);
 
   // Weapon for Ralsei and Noelle title
   const weapon =
-    useSave((s) => s.saveFile?.characters[character].weapon) ||
-    (0 as WeaponIndex);
+    useSave((s) => s.save?.characters[character].weapon) || (0 as WeaponIndex);
 
   // Room for Ralsei's title
-  const room = useSave((s) => s.saveFile?.room) || ROOMS.PLACE_DOG;
+  const room = useSave((s) => s.save?.room) || ROOMS.PLACE_DOG;
   let characterMeta = characterHelpers.getById(character);
 
   // Apply overrides

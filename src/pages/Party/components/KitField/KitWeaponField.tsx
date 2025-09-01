@@ -12,9 +12,9 @@ export function KitWeaponField({
   character,
   allowAllElements,
 }: KitWeaponFieldProps) {
-  const chapter = useSave((s) => s.saveFile?.chapter) || 1;
+  const chapter = useSave((s) => s.save?.meta.chapter) || 1;
   const weapon =
-    useSave((s) => s.saveFile?.characters[character].weapon) || WEAPONS.EMPTY;
+    useSave((s) => s.save?.characters[character].weapon) || WEAPONS.EMPTY;
   const updateSave = useSave((s) => s.updateSave);
 
   const chapterWeapons = chapterHelpers.getById(chapter).content.weapons;

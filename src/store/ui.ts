@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
-import { STORE_NAMESPACE } from './schema';
+import { STORE_NAMESPACE, STORE_VERSION } from './schema';
 import { createDebouncedJSONStorage } from 'zustand-debounce';
 
 interface UiState {
@@ -75,7 +75,7 @@ export const useUi = create<UiState>()(
         }),
     })),
     {
-      name: `${STORE_NAMESPACE}-ui-v1`,
+      name: `${STORE_NAMESPACE}-ui`,
       storage: createDebouncedJSONStorage('localStorage', {
         debounceTime: 2000,
       }),
@@ -89,7 +89,7 @@ export const useUi = create<UiState>()(
         allowNoelleAllElements: state.allowNoelleAllElements,
         showNonRecruitableEnemies: state.showNonRecruitableEnemies,
       }),
-      version: 1,
+      version: STORE_VERSION,
     },
   ),
 );

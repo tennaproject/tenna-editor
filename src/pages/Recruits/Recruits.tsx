@@ -17,7 +17,7 @@ export const RecruitsPage = () => {
   const setShowNonRecruitableEnemies = useUi(
     (s) => s.setShowNonRecruitableEnemies,
   );
-  const chapter = useSave((s) => s.saveFile?.chapter) as ChapterIndex;
+  const chapter = useSave((s) => s.save?.meta.chapter) as ChapterIndex;
   const enemies = chapterHelpers.getById(chapter).content.enemies;
 
   let recruitableEnemies = Array.from(enemies).filter(

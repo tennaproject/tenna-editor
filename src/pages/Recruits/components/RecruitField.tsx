@@ -18,9 +18,8 @@ export function RecruitField({ id, enemy }: RecruitFieldProps) {
   const updateSave = useSave((s) => s.updateSave);
   const meta = enemyHelpers.getById(enemy);
   const flag =
-    (useSave(
-      (s) => s.saveFile?.flags[meta.recruitFlag as FlagIndex],
-    ) as number) ?? (0 as number);
+    (useSave((s) => s.save?.flags[meta.recruitFlag as FlagIndex]) as number) ??
+    (0 as number);
 
   /* Flag values:
     -1 for lost,

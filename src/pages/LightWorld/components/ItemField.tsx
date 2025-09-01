@@ -22,8 +22,8 @@ interface ItemFieldProps {
 }
 
 export function ItemField({ kind, slot, label, id }: ItemFieldProps) {
-  const saveFile = useSave((s) => s.saveFile);
-  const chapter = saveFile?.chapter || 1;
+  const save = useSave((s) => s.save);
+  const chapter = save?.meta.chapter || 1;
   const updateSave = useSave((s) => s.updateSave);
 
   let currentValue: number = 0;
@@ -34,12 +34,12 @@ export function ItemField({ kind, slot, label, id }: ItemFieldProps) {
 
   if (kind === 'item') {
     currentValue =
-      saveFile?.lightWorld.items[slot] ??
+      save?.lightWorld.items[slot] ??
       (LIGHTWORLDITEMS.EMPTY as LightWorldItemIndex);
     placeholder = 'Select a item...';
   } else if (kind === 'phoneContact') {
     currentValue =
-      saveFile?.lightWorld.phone[slot] ??
+      save?.lightWorld.phone[slot] ??
       (PHONECONTACTS.EMPTY as PhoneContactIndex);
     placeholder = 'Select a phone contact...';
   }

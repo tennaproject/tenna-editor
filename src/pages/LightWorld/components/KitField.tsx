@@ -12,8 +12,8 @@ interface KitFieldProps {
 }
 
 export function KitField({ kind, label, id }: KitFieldProps) {
-  const saveFile = useSave((s) => s.saveFile);
-  const chapter = saveFile?.chapter || 1;
+  const save = useSave((s) => s.save);
+  const chapter = save?.meta.chapter || 1;
   const updateSave = useSave((s) => s.updateSave);
 
   let currentValue: number = 0;
@@ -24,13 +24,11 @@ export function KitField({ kind, label, id }: KitFieldProps) {
 
   if (kind === 'weapon') {
     currentValue =
-      saveFile?.lightWorld.weapon ??
-      (LIGHTWORLDITEMS.EMPTY as LightWorldItemIndex);
+      save?.lightWorld.weapon ?? (LIGHTWORLDITEMS.EMPTY as LightWorldItemIndex);
     placeholder = 'Select a weapon...';
   } else if (kind === 'armor') {
     currentValue =
-      saveFile?.lightWorld.armor ??
-      (LIGHTWORLDITEMS.EMPTY as LightWorldItemIndex);
+      save?.lightWorld.armor ?? (LIGHTWORLDITEMS.EMPTY as LightWorldItemIndex);
     placeholder = 'Select an armor...';
   }
 

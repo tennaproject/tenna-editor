@@ -8,7 +8,7 @@ export interface ChapterDetectionResult {
 }
 
 export function detectChapter(save: DeltaruneSave): ChapterDetectionResult {
-  if (save.format === 'v1') {
+  if (save.meta.format === 'v1') {
     return {
       chapter: 1,
       reason: 'format',

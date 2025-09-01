@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useSave } from '@store';
 
 export function HomeWelcomePage() {
-  const setSaveFile = useSave((s) => s.setSaveFile);
+  const setSave = useSave((s) => s.setSave);
   const [uploadStatus, setUploadStatus] = useState<
     'idle' | 'success' | 'error'
   >('idle');
@@ -31,9 +31,9 @@ export function HomeWelcomePage() {
           return;
         }
 
-        save.chapter = detection.chapter!;
+        save.meta.chapter = detection.chapter!;
         setUploadStatus('success');
-        setSaveFile(save);
+        setSave(save);
       }
     };
     reader.readAsText(file);

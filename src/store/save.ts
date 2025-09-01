@@ -1,19 +1,18 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
-import { STORE_NAMESPACE } from './schema';
+import { STORE_NAMESPACE, STORE_VERSION } from './schema';
 import type { DeltaruneSave } from '@types';
 import { deepEqual } from '@utils';
 import { createDebouncedJSONStorage } from 'zustand-debounce';
 
 interface SaveState {
-  saveFile: DeltaruneSave | null;
-  originalSaveFile: DeltaruneSave | null;
+  save: DeltaruneSave | null;
+  originalSave: DeltaruneSave | null;
 
-  setSaveFile: (file: DeltaruneSave | null) => void;
-  setOriginalSaveFile: (file: DeltaruneSave | null) => void;
+  setSave: (save: DeltaruneSave | null) => void;
 
-  setSaveFileField: <K extends keyof DeltaruneSave>(
+  setSaveField: <K extends keyof DeltaruneSave>(
     key: K,
     value: DeltaruneSave[K],
   ) => void;
@@ -29,60 +28,39 @@ export const useSave = create<SaveState>()(
   persist(
     immer((set, get) => {
       const computeIsDirty = (
-        saveFile: DeltaruneSave | null,
+        save: DeltaruneSave | null,
         original: DeltaruneSave | null,
-      ) => !deepEqual(saveFile, original);
+      ) => !deepEqual(save, original);
 
       return {
-        saveFile: null,
-        originalSaveFile: null,
+        save: null,
+        originalSave: null,
         isDirty: false,
 
-        setSaveFile: (file: DeltaruneSave | null) =>
+        setSave: (file: DeltaruneSave | null) =>
           set((state) => {
-            state.saveFile = file;
-            state.isDirty = computeIsDirty(
-              state.saveFile,
-              state.originalSaveFile,
-            );
+            state.save = file;
+            state.originalSave = file;
+            state.isDirty = computeIsDirty(state.save, state.originalSave);
           }),
 
-        setOriginalSaveFile: (file: DeltaruneSave | null) =>
+        setSaveField: (key, value) =>
           set((state) => {
-            state.originalSaveFile = file
-              ? typeof structuredClone === 'function'
-                ? (structuredClone(file) as DeltaruneSave)
-                : JSON.parse(JSON.stringify(file))
-              : null;
-            state.isDirty = computeIsDirty(
-              state.saveFile,
-              state.originalSaveFile,
-            );
-          }),
-
-        setSaveFileField: (key, value) =>
-          set((state) => {
-            if (!state.saveFile) return;
-            if (!(key in state.saveFile)) return;
-            (state.saveFile as DeltaruneSave)[key] = value;
-            state.isDirty = computeIsDirty(
-              state.saveFile,
-              state.originalSaveFile,
-            );
+            if (!state.save) return;
+            if (!(key in state.save)) return;
+            (state.save as DeltaruneSave)[key] = value;
+            state.isDirty = computeIsDirty(state.save, state.originalSave);
           }),
 
         patchSave: (partial) =>
           set((state) => {
-            if (!state.saveFile) return;
-            Object.assign(state.saveFile as DeltaruneSave, partial);
-            state.isDirty = computeIsDirty(
-              state.saveFile,
-              state.originalSaveFile,
-            );
+            if (!state.save) return;
+            Object.assign(state.save as DeltaruneSave, partial);
+            state.isDirty = computeIsDirty(state.save, state.originalSave);
           }),
 
         updateSave: (updater) => {
-          const prev = get().saveFile;
+          const prev = get().save;
           if (!prev) return;
           const draft: DeltaruneSave =
             typeof structuredClone === 'function'
@@ -91,53 +69,44 @@ export const useSave = create<SaveState>()(
           updater(draft);
           if (deepEqual(prev, draft)) return;
           set((state) => {
-            state.saveFile = draft;
-            state.isDirty = computeIsDirty(
-              state.saveFile,
-              state.originalSaveFile,
-            );
+            state.save = draft;
+            state.isDirty = computeIsDirty(state.save, state.originalSave);
           });
         },
 
         replaceSave: (next) => {
           set((state) => {
-            state.saveFile = next;
-            state.originalSaveFile = next
+            state.save = next;
+            state.originalSave = next
               ? typeof structuredClone === 'function'
                 ? (structuredClone(next) as DeltaruneSave)
                 : JSON.parse(JSON.stringify(next))
               : null;
-            state.isDirty = computeIsDirty(
-              state.saveFile,
-              state.originalSaveFile,
-            );
+            state.isDirty = computeIsDirty(state.save, state.originalSave);
           });
         },
 
         revertSave: () =>
           set((state) => {
-            if (!state.originalSaveFile) return;
-            state.saveFile =
+            if (!state.originalSave) return;
+            state.save =
               typeof structuredClone === 'function'
-                ? (structuredClone(state.originalSaveFile) as DeltaruneSave)
-                : JSON.parse(JSON.stringify(state.originalSaveFile));
-            state.isDirty = computeIsDirty(
-              state.saveFile,
-              state.originalSaveFile,
-            );
+                ? (structuredClone(state.originalSave) as DeltaruneSave)
+                : JSON.parse(JSON.stringify(state.originalSave));
+            state.isDirty = computeIsDirty(state.save, state.originalSave);
           }),
       };
     }),
     {
-      name: `${STORE_NAMESPACE}-save-v1`,
+      name: `${STORE_NAMESPACE}-save`,
       storage: createDebouncedJSONStorage('localStorage', {
         debounceTime: 2000,
       }),
       partialize: (state) => ({
-        saveFile: state.saveFile,
-        originalSaveFile: state.originalSaveFile,
+        save: state.save,
+        originalSave: state.originalSave,
       }),
-      version: 1,
+      version: STORE_VERSION,
     },
   ),
 );
