@@ -256,7 +256,7 @@ export function Select({
         {...getMenuProps({}, { suppressRefError: true })}
         ref={listRef}
         className={mergeClass(
-          `absolute left-0 z-50 bg-surface-4 border border-border shadow-lg pt-1 px-1 pb-1 max-h-60 overflow-auto duration-200 transition-all transform-gpu lg:pl-[10px]`,
+          `absolute left-0 z-50 bg-surface-4 border border-border shadow-lg py-1 px-1 max-h-60 overflow-auto duration-200 transition-all transform-gpu`,
           shouldOpenUp
             ? 'bottom-full mb-1 origin-bottom'
             : 'top-full mt-1 origin-top',
@@ -265,7 +265,6 @@ export function Select({
         )}
         style={{
           minWidth: containerRef.current?.offsetWidth,
-          scrollbarGutter: 'stable',
         }}
         aria-hidden={!menuVisible}
       >
@@ -281,15 +280,12 @@ export function Select({
                 index,
               }) as React.LiHTMLAttributes<HTMLLIElement> & {
                 onClick?: (e: React.MouseEvent<HTMLLIElement>) => void;
-                onPointerDown?: (e: React.PointerEvent<HTMLLIElement>) => void;
               };
               return (
                 <li
                   key={item.id}
                   {...itemProps}
-                  onPointerDown={(e) => {
-                    itemProps.onPointerDown?.(e);
-                  }}
+                  onTouchStart={(e) => itemProps.onClick?.(e as unknown as React.MouseEvent<HTMLLIElement>)}
                   className={`cursor-pointer text-sm select-none leading-none text-text-1 transition-colors`}
                   aria-selected={chosen}
                 >
