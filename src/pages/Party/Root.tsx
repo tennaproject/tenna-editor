@@ -3,7 +3,7 @@ import type { ChapterIndex } from '@data';
 import { useSave } from '@store';
 import { Outlet } from 'react-router-dom';
 
-export const PartyPage = () => {
+export function PartyRoot() {
   const chapter = useSave((s) => s.save?.meta.chapter) || (1 as ChapterIndex);
 
   return (
@@ -22,4 +22,4 @@ export const PartyPage = () => {
       </Page.Content>
     </Page>
   );
-};
+}

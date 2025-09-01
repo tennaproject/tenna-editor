@@ -247,7 +247,7 @@ function CharacterCard({
   );
 }
 
-export function Overview() {
+export function PartyOverview() {
   const party = useSave((s) => s.save?.party) as CharacterIndex[] | undefined;
   const allowNonStandardParty = useUi((s) => s.allowNonStandardParty);
   const setAllowNonStandardParty = useUi((s) => s.setAllowNonStandardParty);

@@ -17,7 +17,7 @@ import {
   StatsField,
 } from './components';
 
-export const Noelle = () => {
+export function PartyNoelle() {
   const allowNoelleAllElements = useUi((s) => s.allowNoelleAllElements);
   const setAllowNoelleAllElements = useUi((s) => s.setAllowNoelleAllElements);
 
@@ -83,4 +83,4 @@ export const Noelle = () => {
       </div>
     </div>
   );
-};
+}

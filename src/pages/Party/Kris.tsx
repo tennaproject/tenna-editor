@@ -17,7 +17,7 @@ import {
   SpellField,
 } from './components';
 
-export const Kris = () => {
+export function PartyKris() {
   const allowKrisAllElements = useUi((s) => s.allowKrisAllElements);
   const setAllowKrisAllElements = useUi((s) => s.setAllowKrisAllElements);
 
@@ -84,4 +84,4 @@ export const Kris = () => {
       </div>
     </div>
   );
-};
+}

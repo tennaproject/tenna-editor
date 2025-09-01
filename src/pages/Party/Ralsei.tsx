@@ -17,7 +17,7 @@ import {
   StatsField,
 } from './components';
 
-export const Ralsei = () => {
+export function PartyRalsei() {
   const allowRalseiAllElements = useUi((s) => s.allowRalseiAllElements);
   const setAllowRalseiAllElements = useUi((s) => s.setAllowRalseiAllElements);
 
@@ -84,4 +84,4 @@ export const Ralsei = () => {
       </div>
     </div>
   );
-};
+}

@@ -1,7 +1,7 @@
 import { Page } from '@components';
 import { Outlet } from 'react-router-dom';
 
-export const DevtoolsPage = () => {
+export function DevtoolsRoot() {
   return (
     <Page>
       <Page.TopBar title="Devtools">
@@ -14,4 +14,4 @@ export const DevtoolsPage = () => {
       </Page.Content>
     </Page>
   );
-};
+}

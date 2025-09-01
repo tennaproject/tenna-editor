@@ -17,7 +17,7 @@ import {
   StatsField,
 } from './components';
 
-export const Susie = () => {
+export function PartySusie() {
   const allowSusieAllElements = useUi((s) => s.allowSusieAllElements);
   const setAllowSusieAllElements = useUi((s) => s.setAllowSusieAllElements);
 
@@ -83,4 +83,4 @@ export const Susie = () => {
       </div>
     </div>
   );
-};
+}

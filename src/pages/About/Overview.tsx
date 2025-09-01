@@ -1,6 +1,6 @@
 import { Section, Card, Heading, TextLabel } from '@components';
 
-export const Overview = () => {
+export function AboutOverview() {
   return (
     <div className="page">
       <Section>
@@ -42,4 +42,4 @@ export const Overview = () => {
       </Section>
     </div>
   );
-};
+}

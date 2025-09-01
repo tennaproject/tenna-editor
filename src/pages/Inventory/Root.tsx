@@ -1,7 +1,7 @@
 import { Page } from '@components';
 import { Outlet } from 'react-router-dom';
 
-export const InventoryPage = () => {
+export function InventoryRoot() {
   return (
     <Page>
       <Page.TopBar title="Inventory">
@@ -17,4 +17,4 @@ export const InventoryPage = () => {
       </Page.Content>
     </Page>
   );
-};
+}

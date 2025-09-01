@@ -1,5 +1,5 @@
 import { Placeholder } from '../Placeholder';
 
-export const SavesList = () => {
+export function HomeSavesList() {
   return <Placeholder />;
-};
+}

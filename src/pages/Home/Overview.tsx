@@ -164,7 +164,7 @@ export function RoomField() {
   );
 }
 
-export function Overview() {
+export function HomeOverview() {
   const isSavePresent = useSave((s) => !!s.save);
 
   if (!isSavePresent) {

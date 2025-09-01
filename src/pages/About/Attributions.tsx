@@ -1,13 +1,18 @@
 import { Section, Card, Heading } from '@components';
 import type { ReactNode } from 'react';
 
-const Link = ({ href, children }: { href: string; children: ReactNode }) => (
-  <a href={href} className="text-red hover:text-red-hover underline font-bold">
-    {children}
-  </a>
-);
+function Link({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <a
+      href={href}
+      className="text-red hover:text-red-hover underline font-bold"
+    >
+      {children}
+    </a>
+  );
+}
 
-export const Attributions = () => {
+export function AboutAttributions() {
   const runtimeDeps = [
     { name: 'React', url: 'https://react.dev', license: 'MIT' },
     { name: 'react-dom', url: 'https://react.dev', license: 'MIT' },
@@ -154,4 +159,4 @@ export const Attributions = () => {
       </Section>
     </div>
   );
-};
+}

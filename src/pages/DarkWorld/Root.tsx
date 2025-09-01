@@ -1,7 +1,7 @@
 import { Page } from '@components';
 import { Placeholder } from '../Placeholder';
 
-export const DarkWorldPage = () => {
+export function DarkWorldRoot() {
   return (
     <Page>
       <Page.TopBar title="Dark World" />
@@ -10,4 +10,4 @@ export const DarkWorldPage = () => {
       </Page.Content>
     </Page>
   );
-};
+}

@@ -21,7 +21,7 @@ freely, subject to the following restrictions:
 3. This notice may not be removed or altered from any source distribution.
 ` as const;
 
-export const License = () => {
+export function AboutLicense() {
   return (
     <div className="page">
       <Section>
@@ -36,4 +36,4 @@ export const License = () => {
       </Section>
     </div>
   );
-};
+}

@@ -12,7 +12,7 @@ import type { ChapterIndex } from '@data';
 import { chapterHelpers, enemyHelpers } from '@utils';
 import { RecruitField } from './components';
 
-export const RecruitsPage = () => {
+export function RecruitsRoot() {
   const showNonRecruitableEnemies = useUi((s) => s.showNonRecruitableEnemies);
   const setShowNonRecruitableEnemies = useUi(
     (s) => s.setShowNonRecruitableEnemies,
@@ -74,4 +74,4 @@ export const RecruitsPage = () => {
       </Page.Content>
     </Page>
   );
-};
+}

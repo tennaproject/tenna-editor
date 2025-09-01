@@ -1,7 +1,7 @@
 import { useUi } from '@store';
 import { Checkbox, Page } from '@components';
 
-export const SettingsPage = () => {
+export function SettingsRoot() {
   const devmode = useUi((s) => s.devmode);
   const setDevmode = useUi((s) => s.setDevmode);
 
@@ -19,4 +19,4 @@ export const SettingsPage = () => {
       </Page.Content>
     </Page>
   );
-};
+}

@@ -1,7 +1,7 @@
 import { Page } from '@components';
 import { Outlet } from 'react-router-dom';
 
-export function AboutPage() {
+export function AboutRoot() {
   return (
     <Page>
       <Page.TopBar title="About">

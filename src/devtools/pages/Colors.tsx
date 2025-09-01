@@ -148,7 +148,7 @@ const tennaLevels = [
   950, 900, 800, 700, 600, 500, 400, 300, 200, 100, 50,
 ] as const;
 
-export function Colors() {
+export function DevtoolsColors() {
   return (
     <div className="page">
       <Section>

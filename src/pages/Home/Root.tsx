@@ -1,7 +1,7 @@
 import { Page } from '@components';
 import { Outlet } from 'react-router-dom';
 
-export const HomeRootPage = () => {
+export function HomeRoot() {
   return (
     <Page>
       <Page.TopBar title="Home">
@@ -16,4 +16,4 @@ export const HomeRootPage = () => {
       </Page.Content>
     </Page>
   );
-};
+}

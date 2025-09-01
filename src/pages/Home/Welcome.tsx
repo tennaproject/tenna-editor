@@ -3,7 +3,7 @@ import { detectChapter, parseSaveFile } from '@utils';
 import { useState } from 'react';
 import { useSave } from '@store';
 
-export function HomeWelcomePage() {
+export function HomeWelcome() {
   const setSave = useSave((s) => s.setSave);
   const [uploadStatus, setUploadStatus] = useState<
     'idle' | 'success' | 'error'

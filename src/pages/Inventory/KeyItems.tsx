@@ -2,7 +2,7 @@ import { InventorySection, ItemGrid, ItemField } from './components';
 import { useSave } from '@store';
 import { chapterHelpers } from '@utils';
 
-export const KeyItems = () => {
+export function InventoryKeyItems() {
   const chapter = useSave((s) => s.save?.meta.chapter) || 1;
   const meta = chapterHelpers.getById(chapter).content.meta;
   const slots = meta.keyItemsSize;
@@ -18,4 +18,4 @@ export const KeyItems = () => {
       </InventorySection>
     </div>
   );
-};
+}

@@ -1,1 +1,0 @@
-export { RecruitsPage } from './Recruits';

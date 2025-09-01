@@ -7,135 +7,149 @@ import { Loading } from '@components';
 // Home
 const HomeRoot = React.lazy(() =>
   import('./pages/Home/Root').then((module) => ({
-    default: module.HomeRootPage,
+    default: module.HomeRoot,
   })),
 );
 const HomeOverview = React.lazy(() =>
   import('./pages/Home/Overview').then((module) => ({
-    default: module.Overview,
+    default: module.HomeOverview,
   })),
 );
 const HomeWelcome = React.lazy(() =>
   import('./pages/Home/Welcome').then((module) => ({
-    default: module.HomeWelcomePage,
+    default: module.HomeWelcome,
   })),
 );
 const HomeSavesList = React.lazy(() =>
   import('./pages/Home/SavesList').then((module) => ({
-    default: module.SavesList,
+    default: module.HomeSavesList,
   })),
 );
 
 // Inventory
-const InventoryPage = React.lazy(() =>
-  import('./pages/Inventory').then((module) => ({
-    default: module.InventoryPage,
+const InventoryRoot = React.lazy(() =>
+  import('./pages/Inventory/Root').then((module) => ({
+    default: module.InventoryRoot,
   })),
 );
 const InventoryConsumables = React.lazy(() =>
   import('./pages/Inventory/Consumables').then((module) => ({
-    default: module.Consumables,
+    default: module.InventoryConsumables,
   })),
 );
 const InventoryKeyItems = React.lazy(() =>
   import('./pages/Inventory/KeyItems').then((module) => ({
-    default: module.KeyItems,
+    default: module.InventoryKeyItems,
   })),
 );
 const InventoryWeapons = React.lazy(() =>
   import('./pages/Inventory/Weapons').then((module) => ({
-    default: module.Weapons,
+    default: module.InventoryWeapons,
   })),
 );
 const InventoryArmors = React.lazy(() =>
   import('./pages/Inventory/Armors').then((module) => ({
-    default: module.Armors,
+    default: module.InventoryArmors,
   })),
 );
 
 // Party
-const PartyPage = React.lazy(() =>
-  import('./pages/Party').then((module) => ({ default: module.PartyPage })),
+const PartyRoot = React.lazy(() =>
+  import('./pages/Party/Root').then((module) => ({
+    default: module.PartyRoot,
+  })),
 );
 const PartyOverview = React.lazy(() =>
   import('./pages/Party/Overview').then((module) => ({
-    default: module.Overview,
+    default: module.PartyOverview,
   })),
 );
 const PartyKris = React.lazy(() =>
-  import('./pages/Party/Kris').then((module) => ({ default: module.Kris })),
+  import('./pages/Party/Kris').then((module) => ({
+    default: module.PartyKris,
+  })),
 );
 const PartySusie = React.lazy(() =>
-  import('./pages/Party/Susie').then((module) => ({ default: module.Susie })),
+  import('./pages/Party/Susie').then((module) => ({
+    default: module.PartySusie,
+  })),
 );
 const PartyRalsei = React.lazy(() =>
-  import('./pages/Party/Ralsei').then((module) => ({ default: module.Ralsei })),
+  import('./pages/Party/Ralsei').then((module) => ({
+    default: module.PartyRalsei,
+  })),
 );
 const PartyNoelle = React.lazy(() =>
-  import('./pages/Party/Noelle').then((module) => ({ default: module.Noelle })),
+  import('./pages/Party/Noelle').then((module) => ({
+    default: module.PartyNoelle,
+  })),
 );
 
 // Light World
-const LightWorldPage = React.lazy(() =>
-  import('./pages/LightWorld').then((module) => ({
-    default: module.LightWorldPage,
+const LightWorldRoot = React.lazy(() =>
+  import('./pages/LightWorld/Root').then((module) => ({
+    default: module.LightWorldRoot,
   })),
 );
 
 // Dark World
-const DarkWorldPage = React.lazy(() =>
-  import('./pages/DarkWorld').then((module) => ({
-    default: module.DarkWorldPage,
+const DarkWorldRoot = React.lazy(() =>
+  import('./pages/DarkWorld/Root').then((module) => ({
+    default: module.DarkWorldRoot,
   })),
 );
 
 // Recruits
-const RecruitsPage = React.lazy(() =>
-  import('./pages/Recruits').then((module) => ({
-    default: module.RecruitsPage,
+const RecruitsRoot = React.lazy(() =>
+  import('./pages/Recruits/Root').then((module) => ({
+    default: module.RecruitsRoot,
   })),
 );
 
 // Devtools
-const DevtoolsPage = React.lazy(() =>
-  import('@devtools').then((module) => ({ default: module.DevtoolsPage })),
+const DevtoolsRoot = React.lazy(() =>
+  import('@devtools/pages/Root').then((module) => ({
+    default: module.DevtoolsRoot,
+  })),
 );
 
 const DevtoolsColors = React.lazy(() =>
   import('@devtools/pages/Colors').then((module) => ({
-    default: module.Colors,
+    default: module.DevtoolsColors,
   })),
 );
 
 // Settings
 const SettingsPage = React.lazy(() =>
-  import('./pages/Settings').then((module) => ({
-    default: module.SettingsPage,
+  import('./pages/Settings/Root').then((module) => ({
+    default: module.SettingsRoot,
   })),
 );
 
 // About
 const AboutPage = React.lazy(() =>
-  import('./pages/About').then((module) => ({ default: module.AboutPage })),
+  import('./pages/About/Root').then((module) => ({
+    default: module.AboutRoot,
+  })),
 );
 const AboutOverview = React.lazy(() =>
   import('./pages/About/Overview').then((module) => ({
-    default: module.Overview,
+    default: module.AboutOverview,
   })),
 );
 const AboutChangelog = React.lazy(() =>
   import('./pages/About/Changelog').then((module) => ({
-    default: module.Changelog,
+    default: module.AboutChangelog,
   })),
 );
 const AboutLicense = React.lazy(() =>
   import('./pages/About/License').then((module) => ({
-    default: module.License,
+    default: module.AboutLicense,
   })),
 );
 const AboutAttributions = React.lazy(() =>
   import('./pages/About/Attributions').then((module) => ({
-    default: module.Attributions,
+    default: module.AboutAttributions,
   })),
 );
 
@@ -168,7 +182,7 @@ export function AppRouter() {
             path="/inventory"
             element={
               <RequireSave>
-                <InventoryPage />
+                <InventoryRoot />
               </RequireSave>
             }
           >
@@ -185,7 +199,7 @@ export function AppRouter() {
             path="/party"
             element={
               <RequireSave>
-                <PartyPage />
+                <PartyRoot />
               </RequireSave>
             }
           >
@@ -208,7 +222,7 @@ export function AppRouter() {
             element={
               <RequireSave>
                 <RequireChapter requiredChapter={2}>
-                  <RecruitsPage />
+                  <RecruitsRoot />
                 </RequireChapter>
               </RequireSave>
             }
@@ -217,7 +231,7 @@ export function AppRouter() {
             path="/light-world"
             element={
               <RequireSave>
-                <LightWorldPage />
+                <LightWorldRoot />
               </RequireSave>
             }
           ></Route>
@@ -225,7 +239,7 @@ export function AppRouter() {
             path="/dark-world"
             element={
               <RequireSave>
-                <DarkWorldPage />
+                <DarkWorldRoot />
               </RequireSave>
             }
           ></Route>
@@ -233,7 +247,7 @@ export function AppRouter() {
             path="/devtools"
             element={
               <RequireDevmode>
-                <DevtoolsPage />
+                <DevtoolsRoot />
               </RequireDevmode>
             }
           >

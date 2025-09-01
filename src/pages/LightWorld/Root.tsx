@@ -9,7 +9,7 @@ const THEME = {
   text: 'text-[#a6ab2f]',
 } as const;
 
-export const LightWorldPage = () => {
+export function LightWorldRoot() {
   return (
     <Page>
       <Page.TopBar title="Light World" />
@@ -132,4 +132,4 @@ export const LightWorldPage = () => {
       </Page.Content>
     </Page>
   );
-};
+}

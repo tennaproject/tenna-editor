@@ -2,7 +2,7 @@ import { InventorySection, ItemGrid, ItemField } from './components';
 import { useSave } from '@store';
 import { chapterHelpers } from '@utils';
 
-export const Weapons = () => {
+export function InventoryWeapons() {
   const chapter = useSave((s) => s.save?.meta.chapter) || 1;
   const meta = chapterHelpers.getById(chapter).content.meta;
   const slots = meta.weaponsSize;
@@ -18,4 +18,4 @@ export const Weapons = () => {
       </InventorySection>
     </div>
   );
-};
+}

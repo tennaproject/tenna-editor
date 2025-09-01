@@ -2,7 +2,7 @@ import { useSave } from '@store';
 import { chapterHelpers } from '@utils';
 import { ItemField, InventorySection, ItemGrid } from './components';
 
-export const Consumables = () => {
+export function InventoryConsumables() {
   const chapter = useSave((s) => s.save?.meta.chapter) || 1;
   const meta = chapterHelpers.getById(chapter).content.meta;
   const consumableSlots = meta.consumablesSize;
@@ -29,4 +29,4 @@ export const Consumables = () => {
       )}
     </div>
   );
-};
+}
