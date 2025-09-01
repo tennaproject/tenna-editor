@@ -1,6 +1,8 @@
 import { useUi } from '@store';
-import React, { useEffect, useState } from 'react';
+import { type ReactNode } from 'react';
 import { motion, type Variants } from 'framer-motion';
+import { useMediaQuery } from '@hooks';
+import { mergeClass } from '@utils';
 
 const tweenTransition = {
   type: 'tween',
@@ -11,6 +13,7 @@ const tweenTransition = {
 const sidebarVariants: Variants = {
   closed: {
     x: '-100%',
+    width: 0,
     transition: tweenTransition,
   },
   expanded: {
@@ -25,33 +28,13 @@ const sidebarVariants: Variants = {
   },
 };
 export interface SidebarProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
 }
 
 export function Sidebar({ children }: SidebarProps) {
   const isSidebarOpen = useUi((s) => s.isSidebarOpen);
   const isSidebarRetracted = useUi((s) => s.isSidebarRetracted);
-
-  const [isLargeScreen, setIsLargeScreen] = useState(() => {
-    // Set correct initial state to prevent animation on load
-    if (typeof window !== 'undefined') {
-      return window.matchMedia('(min-width: 1024px)').matches;
-    }
-    return false;
-  });
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(min-width: 1024px)');
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      setIsLargeScreen(e.matches);
-    };
-    mediaQuery.addEventListener('change', handleChange);
-
-    return () => {
-      mediaQuery.removeEventListener('change', handleChange);
-    };
-  }, []);
+  const isLargeScreen = useMediaQuery('(min-width: 1024px)');
 
   const baseClass =
     'bg-surface-1 flex flex-col select-none overflow-y-auto scrollbar-none p-2';
@@ -69,7 +52,10 @@ export function Sidebar({ children }: SidebarProps) {
       initial={animationState}
       animate={animationState}
       variants={sidebarVariants}
-      className={`${baseClass} fixed top-14 left-0 bottom-0 z-40 lg:static lg:top-auto lg:left-auto lg:bottom-auto`}
+      className={mergeClass(
+        baseClass,
+        'fixed top-14 left-0 bottom-0 z-40 lg:static lg:top-auto lg:left-auto lg:bottom-auto',
+      )}
     >
       <motion.nav
         animate={{ opacity: isLargeScreen || isSidebarOpen ? 1 : 0 }}
