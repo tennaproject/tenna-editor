@@ -8,13 +8,14 @@ import { Upload } from './Upload';
 import { Download } from './Download';
 import { InlineGroup } from './InlineGroup';
 import { SaveSelector } from './SaveSelector';
+import Tenna from '@assets/tenna.svg';
 
 export function Header() {
   const [isUploadOpen, setUploadOpen] = useState(false);
   const [isDownloadOpen, setDownloadOpen] = useState(false);
 
   return (
-    <header className="w-full h-14 flex-shrink-0 bg-surface-1 relative select-none">
+    <header className="w-full h-15 flex-shrink-0 bg-surface-1 relative select-none">
       <div className="flex items-center justify-between h-full px-2">
         <div className="flex items-center gap-2 sm:gap-4">
           {/* sidebar visibility button */}
@@ -50,15 +51,22 @@ export function Header() {
             </div>
           </button>
 
-          <div className="w-8 h-8 bg-red flex-shrink-0" />
-          <div className="flex flex-col">
-            <h1 className="text-text-1 text-2xl font-bold leading-none hidden sm:block text-nowrap">
-              TENNA EDITOR
-            </h1>
-            <p className="text-text-2 font-bold leading-none hidden lg:block text-nowrap">
-              AN UNOFFICIAL DELTARUNE SAVE EDITOR
-            </p>
-          </div>
+          {/* <div className="w-8 h-8 bg-red flex-shrink-0" /> */}
+          <InlineGroup>
+            <div className="flex leading-none justify-center items-center">
+              <div className="w-12 h-12 text-text-2">
+                <Tenna />
+              </div>
+            </div>
+            <div className="flex flex-col">
+              <h1 className="text-text-1 text-2xl font-bold leading-none hidden sm:block text-nowrap">
+                TENNA EDITOR
+              </h1>
+              <p className="text-text-2 font-bold leading-none hidden lg:block text-nowrap">
+                AN UNOFFICIAL DELTARUNE SAVE EDITOR
+              </p>
+            </div>
+          </InlineGroup>
         </div>
 
         <InlineGroup className="w-full flex justify-end">

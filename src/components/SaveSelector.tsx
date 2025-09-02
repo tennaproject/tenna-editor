@@ -69,7 +69,7 @@ export function SaveSelector() {
 
   return (
     <Select
-      className="h-10 w-[100%] max-w-50"
+      className="h-10 mr-[0.11rem] w-[100%] max-w-50"
       placeholder="No saves..."
       items={saveSelectOptions}
       selectedItem={selectedItem}
