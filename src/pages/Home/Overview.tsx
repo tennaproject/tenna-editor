@@ -3,13 +3,13 @@ import {
   TextLabel,
   TextInput,
   NumberInput,
-  Grid,
   Card,
   Heading,
   Checkbox,
   HelpTip,
   InlineGroup,
   Select,
+  Button,
 } from '@components';
 import { type RoomIndex } from '@data';
 import { useSave } from '@store';
@@ -181,20 +181,22 @@ export function HomeOverview() {
 
   return (
     <div className="page">
-      <Heading level={3}>Save Overview</Heading>
-      <Grid container spacing={2}>
-        <Grid size={6}>
-          <Section id="base">
-            <Card className="space-y-4 p-6">
-              <ChapterField />
-              <PlayerNameField />
-              <MoneyField />
-              <InDarkWorldField />
-              <RoomField />
-            </Card>
-          </Section>
-        </Grid>
-      </Grid>
+      <Section id="base">
+        <Card className="space-y-4 p-6">
+          <ChapterField />
+          <PlayerNameField />
+          <MoneyField />
+          <InDarkWorldField />
+          <RoomField />
+        </Card>
+      </Section>
+      <Section id="base">
+        <Card className="space-y-4 p-6">
+          <Heading level={4}>Editor Save Settings</Heading>
+          <p className="text-text-2">These settings are editor only.</p>
+          <Button variant="primary">Delete Save</Button>
+        </Card>
+      </Section>
     </div>
   );
 }

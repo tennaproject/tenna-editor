@@ -18,7 +18,6 @@ import {
 import type { ChapterIndex } from '@data';
 import {
   adjectives,
-  animals,
   colors,
   NumberDictionary,
   uniqueNamesGenerator,
@@ -173,6 +172,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
           setStorageSave(save.meta.id, save);
         }
 
+        setStorageSave(parsedSave.meta.id, parsedSave);
         setSave(parsedSave);
 
         setParsedSave(null);
@@ -220,7 +220,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="flex flex-col  flex-1 gap-4"
+              className="flex flex-col flex-1 gap-4 justify-evenly"
             >
               <Heading level={3}>Confirm Chapter</Heading>
               <div className="flex-1 flex flex-col gap-2">
@@ -233,6 +233,10 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
                   defaultSelectedItem={CHAPTER_OPTIONS[selectedChapter - 2]}
                   onSelectionChange={onChapterSelection}
                 />
+
+                <p className="text-text-2">
+                  NOTE: This cannot be changed once save is fully uploaded.
+                </p>
               </div>
             </motion.div>
           )}

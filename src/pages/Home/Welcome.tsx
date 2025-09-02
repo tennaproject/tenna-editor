@@ -1,43 +1,8 @@
-import { FileInput } from '@components';
-import { detectChapter, parseSaveFile } from '@utils';
+import { Upload } from '@components';
 import { useState } from 'react';
-import { useSave } from '@store';
 
 export function HomeWelcome() {
-  const setSave = useSave((s) => s.setSave);
-  const [uploadStatus, setUploadStatus] = useState<
-    'idle' | 'success' | 'error'
-  >('idle');
-  const [uploadError, setUploadError] = useState<string | null>(null);
-
-  const handleFileSelect = (file: File) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const content = reader.result as string;
-      if (!content) {
-        return;
-      }
-
-      const save = parseSaveFile(content);
-
-      if (save) {
-        const detection = detectChapter(save);
-        if (!detection.supported) {
-          console.error('Unsupported chapter detected');
-          setUploadError(
-            `Unsupported chapter. Please upload a save file from Chapter 1-4.`,
-          );
-          setUploadStatus('error');
-          return;
-        }
-
-        save.meta.chapter = detection.chapter!;
-        setUploadStatus('success');
-        setSave(save);
-      }
-    };
-    reader.readAsText(file);
-  };
+  const [isUploadOpen, setUploadOpen] = useState(false);
 
   return (
     <div className="page max-w-7xl">
@@ -45,19 +10,26 @@ export function HomeWelcome() {
         <h2 className="text-2xl font-bold mb-3">Welcome</h2>
         <p>Tenna Editor is a powerful tool for editing DELTARUNE save files.</p>
         <p>
-          To get started, simply drag and drop your save file into the area
-          below or click to select a file from your device.
+          To get started, click the area below or click the upload button in far
+          right corner.
         </p>
       </div>
 
       <div>
-        <FileInput onFileSelect={handleFileSelect} />
-        {uploadStatus === 'success' && (
-          <p className="text-sm text-green">Upload successful!</p>
-        )}
-        {uploadStatus === 'error' && uploadError && (
-          <p className="text-sm text-red">{uploadError}</p>
-        )}
+        <button
+          className="h-45 w-full border-border bg-surface-3 hover:bg-surface-3-hover transition-colors duration-200"
+          onClick={() => setUploadOpen(true)}
+        >
+          <div className="flex flex-col justify-center items-center">
+            <h1 className="font-bold text-lg md:text-xl">
+              Click here to upload save
+            </h1>
+            <p className="text-text-2">
+              or click upload button in right corner
+            </p>
+          </div>
+        </button>
+        <Upload isOpen={isUploadOpen} setOpen={setUploadOpen} />
       </div>
       <div>
         <h2 className="text-2xl font-bold mb-3">Where to find saves?</h2>
