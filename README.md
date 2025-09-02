@@ -1,4 +1,5 @@
 ![Tenna Editor - An unofficial Deltarune Save Editor](/public/banner.svg)
+
 ## Installation
 
 Ensure Node.js >=22.16.0 and npm >=10.9.2. A Node version manager like [nvm](https://github.com/nvm-sh/nvm) can use the version specified in `.nvmrc`.
