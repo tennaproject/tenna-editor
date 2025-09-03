@@ -1,7 +1,8 @@
 import { create } from 'zustand';
-import { createJSONStorage, persist } from 'zustand/middleware';
+import { persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
-import { STORE_NAMESPACE } from './schema';
+import { STORE_NAMESPACE, STORE_VERSION } from './schema';
+import { createDebouncedJSONStorage } from 'zustand-debounce';
 
 interface UiState {
   devmode: boolean;
@@ -12,6 +13,16 @@ interface UiState {
   setSidebarRetraction: (isRetracted: boolean) => void;
   allowNonStandardParty: boolean;
   setAllowNonStandardParty: (allowNonStandardParty: boolean) => void;
+  allowKrisAllElements: boolean;
+  setAllowKrisAllElements: (status: boolean) => void;
+  allowSusieAllElements: boolean;
+  setAllowSusieAllElements: (status: boolean) => void;
+  allowRalseiAllElements: boolean;
+  setAllowRalseiAllElements: (status: boolean) => void;
+  allowNoelleAllElements: boolean;
+  setAllowNoelleAllElements: (status: boolean) => void;
+  showNonRecruitableEnemies: boolean;
+  setShowNonRecruitableEnemies: (status: boolean) => void;
 }
 
 export const useUi = create<UiState>()(
@@ -37,16 +48,48 @@ export const useUi = create<UiState>()(
         set((state) => {
           state.allowNonStandardParty = allowNonStandardParty;
         }),
+      allowKrisAllElements: false,
+      setAllowKrisAllElements: (status: boolean) =>
+        set((state) => {
+          state.allowKrisAllElements = status;
+        }),
+      allowSusieAllElements: false,
+      setAllowSusieAllElements: (status: boolean) =>
+        set((state) => {
+          state.allowSusieAllElements = status;
+        }),
+      allowRalseiAllElements: false,
+      setAllowRalseiAllElements: (status: boolean) =>
+        set((state) => {
+          state.allowRalseiAllElements = status;
+        }),
+      allowNoelleAllElements: false,
+      setAllowNoelleAllElements: (status: boolean) =>
+        set((state) => {
+          state.allowNoelleAllElements = status;
+        }),
+      showNonRecruitableEnemies: false,
+      setShowNonRecruitableEnemies: (status: boolean) =>
+        set((state) => {
+          state.showNonRecruitableEnemies = status;
+        }),
     })),
     {
-      name: `${STORE_NAMESPACE}-ui-v1`,
-      storage: createJSONStorage(() => localStorage),
+      name: `${STORE_NAMESPACE}-ui`,
+      storage: createDebouncedJSONStorage('localStorage', {
+        debounceTime: 1000,
+      }),
       partialize: (state) => ({
         devmode: state.devmode,
         isSidebarRetracted: state.isSidebarRetracted,
         allowNonStandardParty: state.allowNonStandardParty,
+        allowKrisAllElements: state.allowKrisAllElements,
+        allowSusieAllElements: state.allowSusieAllElements,
+        allowRalseiAllElements: state.allowRalseiAllElements,
+        allowNoelleAllElements: state.allowNoelleAllElements,
+        showNonRecruitableEnemies: state.showNonRecruitableEnemies,
       }),
-      version: 1,
+      version: STORE_VERSION,
     },
   ),
 );

@@ -1,9 +1,10 @@
-import type { DeltaruneSave, SaveFileFormat, V1Save, V2Save } from '@types';
+import type { DeltaruneSave, SaveFormat, V1Save, V2Save } from '@types';
 import type {
   ArmorIndex,
   ConsumableIndex,
   KeyItemIndex,
   RoomIndex,
+  SpellIndex,
   WeaponIndex,
 } from '../data';
 import { LineCursor } from './line-cursor';
@@ -23,7 +24,7 @@ export const SUPPORTED_FORMATS = Object.keys(
   SAVE_META,
 ) as (keyof typeof SAVE_META)[];
 
-function detectSaveFormat(count: number): SaveFileFormat {
+function detectSaveFormat(count: number): SaveFormat | null {
   if (count == SAVE_META.V1.TOTAL_LINES) {
     return 'v1';
   }
@@ -32,7 +33,7 @@ function detectSaveFormat(count: number): SaveFileFormat {
     return 'v2';
   }
 
-  return 'unknown';
+  return null;
 }
 
 function parseV1Save(cursor: LineCursor): V1Save {
@@ -59,8 +60,8 @@ function parseV1Save(cursor: LineCursor): V1Save {
     const magic = cursor.nextNumber();
     const guts = cursor.nextNumber();
     const weapon = cursor.nextNumber() as WeaponIndex;
-    const primaryArmor = cursor.nextNumber();
-    const secondaryArmor = cursor.nextNumber();
+    const primaryArmor = cursor.nextNumber() as ArmorIndex;
+    const secondaryArmor = cursor.nextNumber() as ArmorIndex;
     const weaponStyle = cursor.nextString();
 
     const weaponStats = [];
@@ -86,9 +87,9 @@ function parseV1Save(cursor: LineCursor): V1Save {
       });
     }
 
-    const spells = [];
+    const spells: SpellIndex[] = [];
     for (let k = 0; k < 12; k += 1) {
-      spells.push(cursor.nextNumber());
+      spells.push(cursor.nextNumber() as SpellIndex);
     }
 
     characters.push({
@@ -159,9 +160,18 @@ function parseV1Save(cursor: LineCursor): V1Save {
   const room = cursor.nextNumber() as RoomIndex;
   const time = cursor.nextNumber();
 
+  const now = new Date();
   return {
-    format: 'v1',
-    chapter: 0,
+    meta: {
+      id: crypto.randomUUID(),
+      format: 'v1',
+      createdAt: now,
+      modifiedAt: now,
+      chapter: 1,
+      slot: 0,
+      isCompletionSave: false,
+      name: '',
+    },
     playerName,
     characterName,
     party: party as [number, number, number],
@@ -212,8 +222,8 @@ function parseV2Save(cursor: LineCursor): V2Save {
     const magic = cursor.nextNumber();
     const guts = cursor.nextNumber();
     const weapon = cursor.nextNumber() as WeaponIndex;
-    const primaryArmor = cursor.nextNumber();
-    const secondaryArmor = cursor.nextNumber();
+    const primaryArmor = cursor.nextNumber() as ArmorIndex;
+    const secondaryArmor = cursor.nextNumber() as ArmorIndex;
     const weaponStyle = cursor.nextNumber();
 
     const weaponStats = [];
@@ -243,9 +253,9 @@ function parseV2Save(cursor: LineCursor): V2Save {
       });
     }
 
-    const spells = [];
+    const spells: SpellIndex[] = [];
     for (let k = 0; k < 12; k += 1) {
-      spells.push(cursor.nextNumber());
+      spells.push(cursor.nextNumber() as SpellIndex);
     }
 
     characters.push({
@@ -324,9 +334,18 @@ function parseV2Save(cursor: LineCursor): V2Save {
   const room = cursor.nextNumber() as RoomIndex;
   const time = cursor.nextNumber();
 
+  const now = new Date();
   return {
-    format: 'v2',
-    chapter: 0,
+    meta: {
+      id: crypto.randomUUID(),
+      format: 'v2',
+      createdAt: now,
+      modifiedAt: now,
+      chapter: 2,
+      slot: 0,
+      isCompletionSave: false,
+      name: 'Cool save',
+    },
     playerName,
     characterName,
     party: party as [number, number, number],

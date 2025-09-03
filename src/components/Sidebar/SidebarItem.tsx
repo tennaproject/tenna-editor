@@ -8,6 +8,7 @@ export interface SidebarItemProps {
   to: string;
   requireSave?: boolean;
   requireDevmode?: boolean;
+  requireChapter?: number;
 }
 
 export function SidebarItem({
@@ -16,11 +17,13 @@ export function SidebarItem({
   to,
   requireSave,
   requireDevmode,
+  requireChapter,
 }: SidebarItemProps) {
   const isSidebarRetracted = useUi((s) => s.isSidebarRetracted);
   const devmode = useUi((s) => s.devmode);
 
-  const isSaveFilePresent = useSave((s) => !!s.saveFile);
+  const isSavePresent = useSave.getState().save;
+  const chapter = useSave((s) => s.save?.meta.chapter) || 1;
   const location = useLocation();
 
   const baseClasses =
@@ -28,7 +31,9 @@ export function SidebarItem({
   const activeClasses = 'bg-surface-1-active text-text-1';
   const inactiveClasses = 'text-text-2 hover:bg-surface-1-hover';
   const disabledClasses = 'opacity-20 pointer-events-none';
-  const isDisabled = requireSave && !isSaveFilePresent;
+  const isDisabled =
+    (requireSave && !isSavePresent) ||
+    (requireChapter && chapter < requireChapter);
 
   const isHidden = requireDevmode && !devmode;
 
@@ -53,7 +58,7 @@ export function SidebarItem({
       aria-label={title}
       onClick={onClick}
       tabIndex={isDisabled ? -1 : 0}
-      aria-disabled={isDisabled}
+      aria-disabled={isDisabled ? true : false}
       className={({ isActive }) =>
         `${baseClasses} ${
           isDisabled

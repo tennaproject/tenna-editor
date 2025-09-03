@@ -1,6 +1,4 @@
-# Tenna Editor
-
-An unofficial save file editor for Deltarune, built with React and TypeScript.
+![Tenna Editor - An unofficial Deltarune Save Editor](/public/banner.svg)
 
 ## Installation
 

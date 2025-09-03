@@ -1,0 +1,20 @@
+import { Page } from '@components';
+import { Outlet } from 'react-router-dom';
+
+export function AboutRoot() {
+  return (
+    <Page>
+      <Page.TopBar title="About">
+        <Page.Nav>
+          <Page.NavItem title="Overview" to="/about/overview" />
+          <Page.NavItem title="Changelog" to="/about/changelog" />
+          <Page.NavItem title="License" to="/about/license" />
+          <Page.NavItem title="Attributions" to="/about/attributions" />
+        </Page.Nav>
+      </Page.TopBar>
+      <Page.Content>
+        <Outlet />
+      </Page.Content>
+    </Page>
+  );
+}

@@ -58,7 +58,7 @@ export function NumberInput({
           ${disabled ? '' : 'focus:outline-none focus:ring-1 transition-colors focus:ring-text-3'}
           appearance-none
         `}
-        style={{ MozAppearance: 'textfield', WebkitAppearance: 'none' }}
+        style={{ MozAppearance: 'textfield' }}
         aria-label={placeholder || 'Number input'}
       />
 

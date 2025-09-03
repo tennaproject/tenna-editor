@@ -1,5 +1,5 @@
 import { Placeholder } from '../Placeholder';
 
-export const Changelog = () => {
+export function AboutChangelog() {
   return <Placeholder />;
-};
+}

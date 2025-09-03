@@ -31,4 +31,19 @@ export default defineConfig({
     host: '127.0.0.1',
     port: 4545,
   },
+  build: {
+    rollupOptions: {
+      output: {
+        chunkFileNames: 'assets/chunk-[name]-[hash].js',
+        entryFileNames: 'assets/entry-[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash][extname]',
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          }
+          if (id.includes('/src/')) return 'tenna';
+        },
+      },
+    },
+  },
 });

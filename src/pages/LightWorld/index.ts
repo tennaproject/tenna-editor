@@ -1,1 +1,0 @@
-export { LightWorldPage } from './LightWorld';

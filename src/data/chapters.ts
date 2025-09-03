@@ -9,6 +9,7 @@ import { PHONECONTACTS, type PhoneContactIndex } from './phone-contacts';
 import { ROOMS, type RoomIndex } from './rooms';
 import { SPELLS, type SpellIndex } from './spells';
 import { WEAPONS, type WeaponIndex } from './weapons';
+import { ENEMIES, type EnemyIndex } from './enemies';
 
 export const CHAPTERS = {
   CH1: 1,
@@ -37,9 +38,24 @@ interface ChapterContent {
   };
   rooms: Set<RoomIndex>;
   flags: Set<FlagIndex>;
+  enemies: Set<EnemyIndex>;
+  meta: {
+    consumablesSize: number;
+    storagesSize: number;
+    keyItemsSize: number;
+    weaponsSize: number;
+    armorsSize: number;
+  };
 }
 
 const CH1_CONTENT: ChapterContent = {
+  meta: {
+    consumablesSize: 12,
+    storagesSize: 0,
+    keyItemsSize: 12,
+    weaponsSize: 12,
+    armorsSize: 12,
+  },
   characters: new Set<CharacterIndex>([
     CHARACTERS.EMPTY,
     CHARACTERS.KRIS,
@@ -73,6 +89,7 @@ const CH1_CONTENT: ChapterContent = {
     KEYITEMS.DOOR_KEY,
     KEYITEMS.BROKEN_KEY_B,
     KEYITEMS.BROKEN_KEY_C,
+    KEYITEMS.SHADOW_CRYSTAL,
   ]),
   spells: new Set<SpellIndex>([
     SPELLS.EMPTY,
@@ -103,7 +120,7 @@ const CH1_CONTENT: ChapterContent = {
     ARMORS.DICE_BRACE,
     ARMORS.PINK_RIBBON,
     ARMORS.WHITE_RIBBON,
-    ARMORS.IRONSHACKLE,
+    ARMORS.IRON_SHACKLE,
     ARMORS.MOUSE_TOKEN,
     ARMORS.JEVILSTAIL,
     ARMORS.SILVER_CARD,
@@ -260,9 +277,41 @@ const CH1_CONTENT: ChapterContent = {
     ROOMS.MAN,
   ]),
   flags: new Set<FlagIndex>([]),
+  enemies: new Set<EnemyIndex>([
+    ENEMIES.DEBUG,
+    ENEMIES.LANCER_1,
+    ENEMIES.DUMMY,
+    ENEMIES.RALSEI_TUTORIAL,
+    ENEMIES.RUDINN,
+    ENEMIES.HATHY,
+    ENEMIES.CLOVER_1,
+    ENEMIES.C_ROUND,
+    ENEMIES.K_ROUND_1,
+    ENEMIES.PONMAN,
+    ENEMIES.LANCER_2,
+    ENEMIES.RABBICK,
+    ENEMIES.BLOXER,
+    ENEMIES.JIGSAWRY,
+    ENEMIES.CLOVER_2,
+    ENEMIES.DOOMTANK,
+    ENEMIES.LANCER_3,
+    ENEMIES.SUSIE_AND_LANCER,
+    ENEMIES.JEVIL,
+    ENEMIES.K_ROUND_2,
+    ENEMIES.RUDINN_RANGER,
+    ENEMIES.HEAD_HATHY,
+    ENEMIES.KING,
+  ]),
 };
 
 const CH2_CONTENT: ChapterContent = {
+  meta: {
+    consumablesSize: 12,
+    storagesSize: 24,
+    keyItemsSize: 12,
+    weaponsSize: 48,
+    armorsSize: 48,
+  },
   characters: new Set<CharacterIndex>([
     ...CH1_CONTENT.characters,
     CHARACTERS.NOELLE,
@@ -422,9 +471,43 @@ const CH2_CONTENT: ChapterContent = {
     ROOMS.DW_CASTLE_WEST_CLIFF_OLD,
   ]),
   flags: new Set<FlagIndex>([...CH1_CONTENT.flags]),
+  enemies: new Set<EnemyIndex>([
+    ...CH1_CONTENT.enemies,
+    ENEMIES.AMBYU_LANCE,
+    ENEMIES.POPPUP,
+    ENEMIES.TASQUE,
+    ENEMIES.WEREWIRE,
+    ENEMIES.MAUS,
+    ENEMIES.VIROVIROKUN,
+    ENEMIES.SWATCHLING,
+    ENEMIES.CAPN,
+    ENEMIES.K_K,
+    ENEMIES.SWEET,
+    ENEMIES.WEREWEREWIRE,
+    ENEMIES.GRAZETEST,
+    ENEMIES.TASQUE_MANAGER,
+    ENEMIES.BERDLY_1,
+    ENEMIES.MAUSWHEEL,
+    ENEMIES.ROUXLS_1,
+    ENEMIES.BERDLY_2,
+    ENEMIES.CLOVER_DOJO,
+    ENEMIES.QUEEN,
+    ENEMIES.SPAMTON,
+    ENEMIES.SPAMTON_NEO,
+    ENEMIES.GIGA_QUEEN,
+    ENEMIES.JIGSAW_JOE_DOJO,
+    ENEMIES.PIPIS,
+  ]),
 };
 
 const CH3_CONTENT: ChapterContent = {
+  meta: {
+    consumablesSize: 12,
+    storagesSize: 24,
+    keyItemsSize: 12,
+    weaponsSize: 48,
+    armorsSize: 48,
+  },
   characters: new Set<CharacterIndex>([...CH2_CONTENT.characters]),
   consumables: new Set([
     ...CH2_CONTENT.consumables,
@@ -662,9 +745,33 @@ const CH3_CONTENT: ChapterContent = {
     ROOMS.CC_FOUNTAIN_CH2,
   ]),
   flags: new Set<FlagIndex>([...CH2_CONTENT.flags]),
+  enemies: new Set<EnemyIndex>([
+    ...CH2_CONTENT.enemies,
+    ENEMIES.SHADOWGUY,
+    ENEMIES.SHUTTAH,
+    ENEMIES.ZAPPER,
+    ENEMIES.RIBBICK,
+    ENEMIES.WATERCOOLER,
+    ENEMIES.PIPPINS,
+    ENEMIES.ELNINA,
+    ENEMIES.LANINO,
+    ENEMIES.BOSS_2,
+    ENEMIES.BOSS_3,
+    ENEMIES.BOSS_4,
+    ENEMIES.BOSS_5,
+    ENEMIES.BOSS_6,
+    ENEMIES.BOSS_7,
+  ]),
 };
 
 const CH4_CONTENT: ChapterContent = {
+  meta: {
+    consumablesSize: 12,
+    storagesSize: 36,
+    keyItemsSize: 12,
+    weaponsSize: 48,
+    armorsSize: 48,
+  },
   characters: new Set<CharacterIndex>([...CH3_CONTENT.characters]),
   consumables: new Set([
     ...CH3_CONTENT.consumables,
@@ -689,7 +796,7 @@ const CH4_CONTENT: ChapterContent = {
   ]),
   armors: new Set<ArmorIndex>([
     ...CH3_CONTENT.armors,
-    ARMORS.WATERGUARD,
+    ARMORS.WAFERGUARD,
     ARMORS.MYSTIC_BAND,
     ARMORS.POWER_BAND,
     ARMORS.PRINCESS_RBN,
@@ -709,6 +816,21 @@ const CH4_CONTENT: ChapterContent = {
   },
   rooms: new Set<RoomIndex>([]),
   flags: new Set<FlagIndex>([...CH3_CONTENT.flags]),
+  enemies: new Set<EnemyIndex>([
+    ...CH3_CONTENT.enemies,
+    ENEMIES.GUEI,
+    ENEMIES.BALTHIZARD,
+    ENEMIES.BIBLIOX,
+    ENEMIES.MIZZLE,
+    ENEMIES.WICABEL,
+    ENEMIES.WINGLADE,
+    ENEMIES.ORGANIKK,
+    ENEMIES.MISS_MIZZLE,
+    ENEMIES.BOSS_8,
+    ENEMIES.BOSS_9,
+    ENEMIES.BOSS_10,
+    ENEMIES.BOSS_11,
+  ]),
 };
 
 export const CHAPTERS_META: Record<ChapterIndex, ChapterProperties> = {

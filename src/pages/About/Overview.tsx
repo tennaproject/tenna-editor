@@ -1,10 +1,10 @@
 import { Section, Card, Heading, TextLabel } from '@components';
 
-export const Overview = () => {
+export function AboutOverview() {
   return (
     <div className="page">
       <Section>
-        <Card className="space-y-4">
+        <Card className="space-y-4 p-6">
           <Heading level={4}>Legal Info</Heading>
           <div className="space-y-2 text-text-2">
             <p>This is fan made project.</p>
@@ -18,7 +18,7 @@ export const Overview = () => {
       </Section>
 
       <Section>
-        <Card className="space-y-4">
+        <Card className="space-y-4 p-6">
           <Heading level={4}>Source Code</Heading>
           <p className="mb-2 text-text-2">
             The source code for Tenna Editor is available on{' '}
@@ -33,13 +33,13 @@ export const Overview = () => {
       </Section>
 
       <Section>
-        <Card className="space-y-4">
+        <Card className="space-y-4 p-6">
           <Heading level={3}>Build Info</Heading>
           <div className="space-y-2">
-            <TextLabel>Version: 0.3.0-alpha</TextLabel>
+            <TextLabel>Version: 0.4.0-alpha</TextLabel>
           </div>
         </Card>
       </Section>
     </div>
   );
-};
+}

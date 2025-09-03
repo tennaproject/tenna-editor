@@ -1,7 +1,6 @@
 import {
   Card,
   Checkbox,
-  Grid,
   Heading,
   HelpTip,
   InlineGroup,
@@ -10,6 +9,7 @@ import {
   type SelectItem,
 } from '@components';
 import {
+  CHARACTERS,
   FLAGS,
   KEYITEMS,
   ROOMS,
@@ -18,7 +18,12 @@ import {
 } from '@data';
 import { useSaveFlag } from '@hooks';
 import { useSave, useUi } from '@store';
-import { chapterHelpers, characterHelpers, mergeClass } from '@utils';
+import {
+  chapterHelpers,
+  characterHelpers,
+  mergeClass,
+  getCharacterColor,
+} from '@utils';
 
 interface GlowBarProps {
   bg: string;
@@ -45,14 +50,6 @@ function GlowBar({ bg = 'bg-red', shadow = 'shadow-red' }: GlowBarProps) {
   );
 }
 
-const colors: Record<CharacterIndex, { bg: string; shadow: string }> = {
-  0: { bg: 'bg-surface-1', shadow: 'shadow-surface-1' },
-  1: { bg: 'bg-blue', shadow: 'shadow-blue' },
-  2: { bg: 'bg-pink', shadow: 'shadow-pink' },
-  3: { bg: 'bg-green', shadow: 'shadow-green' },
-  4: { bg: 'bg-yellow', shadow: 'shadow-yellow' },
-};
-
 interface CharacterCardProps {
   slot: number;
   character: CharacterIndex;
@@ -64,12 +61,10 @@ function CharacterCard({
   character,
   allowNonStandardParty,
 }: CharacterCardProps) {
-  const party = useSave((s) => s.saveFile?.party) as
-    | CharacterIndex[]
-    | undefined;
-  const setField = useSave((s) => s.setSaveFileField);
-  const chapter = useSave((s) => s.saveFile?.chapter) || 1;
-  const plot = useSave((s) => s.saveFile?.plot) || 0;
+  const party = useSave((s) => s.save?.party) as CharacterIndex[] | undefined;
+  const setField = useSave((s) => s.setSaveField);
+  const chapter = useSave((s) => s.save?.meta.chapter) || 1;
+  const plot = useSave((s) => s.save?.plot) || 0;
 
   // Flags for overrides
   const flags = {
@@ -96,16 +91,19 @@ function CharacterCard({
   };
 
   // Chapter 3 Egg check
-  const keyItems = useSave((s) => s.saveFile?.inventory.keyItems);
+  const keyItems = useSave((s) => s.save?.inventory.keyItems);
   const hasEgg = !!keyItems?.includes(KEYITEMS.EGG);
 
   // Weapon for Ralsei and Noelle title
-  const weapon =
-    useSave((s) => s.saveFile?.characters[character].weapon) ||
-    (0 as WeaponIndex);
+  const characters = useSave((s) => s.save?.characters) || [];
+  let weapon = 0 as WeaponIndex;
+  // This is not pretty but fixes the edge case when there is a Chapter 1 save loaded with Noelle selected in whatever slot
+  if (characters[character]) {
+    weapon = characters[character].weapon;
+  }
 
   // Room for Ralsei's title
-  const room = useSave((s) => s.saveFile?.room) || ROOMS.PLACE_DOG;
+  const room = useSave((s) => s.save?.room) || ROOMS.PLACE_DOG;
 
   if (!party) return null;
 
@@ -127,6 +125,9 @@ function CharacterCard({
         description: 'This is unkown character',
       },
       lv: 0,
+      allowedArmors: new Set([]),
+      allowedWeapons: new Set([]),
+      allowedSpells: new Set([]),
     };
   } else {
     // Apply overrides
@@ -171,6 +172,10 @@ function CharacterCard({
 
   availableCharacters.sort();
 
+  if (party[2] !== CHARACTERS.EMPTY && !allowNonStandardParty && slot === 1) {
+    availableCharacters.shift();
+  }
+
   const selectItems: SelectItem[] = availableCharacters.map((c) => ({
     id: `${c}`,
     label: characterHelpers.getById(c).displayName,
@@ -189,64 +194,68 @@ function CharacterCard({
   const selectedItem =
     selectItems.find((it) => parseInt(it.id, 10) === party[slot]) ?? null;
 
+  const color = getCharacterColor(character);
   return (
-    <Section id={`slot${slot}`} className="lg:h-[95%] h-[450px]">
-      <Card className="flex flex-col justify-between items-center gap-2 h-full lg:py-10">
-        <div className="flex flex-col justify-center items-center gap-1">
-          <Heading level={1}>{slot + 1}</Heading>
-          <Heading level={5}>MEMBER</Heading>
-          <Heading level={3} className="uppercase">
-            {characterMeta.displayName}
-          </Heading>
-        </div>
-        <div className="flex flex-col justify-between items-center">
-          <Heading
-            level={4}
-            className={mergeClass(!character || !isExisting ? 'opacity-0' : '')}
-          >
-            LV{characterMeta.lv} {characterMeta.title.name}
-          </Heading>
-          <p className="text-text-2 text-sm">
-            {characterMeta.title.description}
-          </p>
-        </div>
+    <Section
+      id={`slot${slot}`}
+      className="flex flex-col h-[450px] lg:h-full min-h-[450px] max-h-[900px] w-full"
+    >
+      <Card className="flex flex-col flex-1">
+        <div className="flex flex-col flex-1 py-6 lg:py-10 justify-between items-center">
+          <div className="flex flex-col justify-center items-center gap-1">
+            <Heading level={1}>{slot + 1}</Heading>
+            <Heading level={5}>MEMBER</Heading>
+            <Heading level={3} className={mergeClass('uppercase', color.text)}>
+              {characterMeta.displayName}
+            </Heading>
+          </div>
+          <div className="flex flex-col justify-between items-center">
+            <Heading
+              level={4}
+              className={mergeClass(
+                !character || !isExisting ? 'opacity-0' : '',
+              )}
+            >
+              LV{characterMeta.lv} {characterMeta.title.name}
+            </Heading>
+            <p className="text-text-2 text-sm">
+              {characterMeta.title.description}
+            </p>
+          </div>
 
-        <Select
-          label={`Slot ${slot}`}
-          items={selectItems}
-          defaultSelectedItem={selectedItem}
-          onSelectionChange={(item) => {
-            if (!item) return;
-            const newCharacter = item.value as CharacterIndex;
-            const newParty: [number, number, number] = [
-              party[0],
-              party[1],
-              party[2],
-            ];
-            newParty[slot] = newCharacter;
-            setField('party', newParty);
-          }}
-        />
+          <Select
+            label={`Slot ${slot}`}
+            items={selectItems}
+            defaultSelectedItem={selectedItem}
+            selectedItem={selectedItem}
+            onSelectionChange={(item) => {
+              if (!item) return;
+              const newCharacter = item.value as CharacterIndex;
+              const newParty: [number, number, number] = [
+                party[0],
+                party[1],
+                party[2],
+              ];
+              newParty[slot] = newCharacter;
+              setField('party', newParty);
+            }}
+          />
+        </div>
+        <GlowBar bg={color.bg} shadow={color.shadow} />
       </Card>
-      <GlowBar
-        bg={colors[character].bg || colors[0].bg}
-        shadow={colors[character].shadow || colors[0].shadow}
-      />
     </Section>
   );
 }
 
-export function Overview() {
-  const party = useSave((s) => s.saveFile?.party) as
-    | CharacterIndex[]
-    | undefined;
+export function PartyOverview() {
+  const party = useSave((s) => s.save?.party) as CharacterIndex[] | undefined;
   const allowNonStandardParty = useUi((s) => s.allowNonStandardParty);
   const setAllowNonStandardParty = useUi((s) => s.setAllowNonStandardParty);
 
   if (!party) return null;
 
   return (
-    <div className="page h-full">
+    <div className="page lg:h-full">
       <InlineGroup>
         <Checkbox
           label="Allow non-standard party combinations"
@@ -261,29 +270,23 @@ export function Overview() {
           </p>
         </HelpTip>
       </InlineGroup>
-      <Grid container spacing={3} className="h-full">
-        <Grid size={4} item>
-          <CharacterCard
-            slot={0}
-            character={party[0]}
-            allowNonStandardParty={allowNonStandardParty}
-          />
-        </Grid>
-        <Grid size={4} item>
-          <CharacterCard
-            slot={1}
-            character={party[1]}
-            allowNonStandardParty={allowNonStandardParty}
-          />
-        </Grid>
-        <Grid size={4} item>
-          <CharacterCard
-            slot={2}
-            character={party[2]}
-            allowNonStandardParty={allowNonStandardParty}
-          />
-        </Grid>
-      </Grid>
+      <div className="flex flex-col lg:flex-row gap-3 lg:h-[90%]">
+        <CharacterCard
+          slot={0}
+          character={party[0]}
+          allowNonStandardParty={allowNonStandardParty}
+        />
+        <CharacterCard
+          slot={1}
+          character={party[1]}
+          allowNonStandardParty={allowNonStandardParty}
+        />
+        <CharacterCard
+          slot={2}
+          character={party[2]}
+          allowNonStandardParty={allowNonStandardParty}
+        />
+      </div>
     </div>
   );
 }

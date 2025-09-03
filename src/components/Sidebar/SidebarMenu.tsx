@@ -44,6 +44,7 @@ export function SidebarMenu() {
           icon={<RecruitsIcon />}
           to="/recruits"
           requireSave
+          requireChapter={2}
         />
       </Sidebar.Group>
 
