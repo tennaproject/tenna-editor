@@ -18,7 +18,6 @@ export function setupPWA() {
       if (previousVersion && previousVersion !== currentBuildTimestamp) {
         toast('Editor was updated', 'info');
         await doUpdate();
-        return;
       }
 
       localStorage.setItem(storageKey, currentBuildTimestamp);
