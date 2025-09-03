@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import svgr from 'vite-plugin-svgr';
+import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
   plugins: [
@@ -21,6 +22,39 @@ export default defineConfig({
         titleProp: true,
       },
       include: '**/*.svg',
+    }),
+    VitePWA({
+      includeAssets: ['favicon.ico', 'maskable-icon-512x512.png', 'apple-touch-icon-180x180'],
+      manifest: {
+        name: 'Tenna Editor',
+        short_name: 'TennaEditor',
+        description: 'An unofficial Deltarune Save Editor',
+        theme_color: '#e53170',
+        background_color: '#1f1e2a',
+        icons: [
+          {
+            src: 'pwa-64x64.png',
+            sizes: '64x64',
+            type: 'image/png',
+          },
+          {
+            src: 'pwa-192x192.png',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: 'pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+          {
+            src: 'maskable-icon-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable',
+          },
+        ],
+      },
     }),
   ],
   server: {

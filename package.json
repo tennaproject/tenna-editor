@@ -14,7 +14,8 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate-pwa-assets": "pwa-assets-generator"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
@@ -29,6 +30,7 @@
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.11",
     "unique-names-generator": "^4.7.1",
+    "vite-plugin-pwa": "^1.0.3",
     "zustand": "^5.0.8",
     "zustand-debounce": "^2.2.0"
   },
@@ -37,6 +39,7 @@
     "@types/node": "^24.3.0",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
+    "@vite-pwa/assets-generator": "^1.0.0",
     "@vitejs/plugin-react": "^5.0.1",
     "babel-plugin-react-compiler": "^19.1.0-rc.2",
     "eslint": "^9.33.0",
