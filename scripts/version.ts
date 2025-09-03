@@ -28,6 +28,10 @@ function getCommitHash() {
 }
 
 function getBranch() {
+  if (process.env.CF_PAGES_BRANCH) {
+    return process.env.CF_PAGES_BRANCH;
+  }
+
   try {
     const branch = execSync('git rev-parse --abbrev-ref HEAD')
       .toString()
