@@ -21,6 +21,7 @@
     "@tailwindcss/vite": "^4.1.11",
     "clsx": "^2.1.1",
     "downshift": "^9.0.10",
+    "fast-glob": "^3.3.3",
     "framer-motion": "^12.23.12",
     "idb": "^8.0.3",
     "immer": "^10.1.1",

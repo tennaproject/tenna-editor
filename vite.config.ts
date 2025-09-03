@@ -4,6 +4,8 @@ import tailwindcss from '@tailwindcss/vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import svgr from 'vite-plugin-svgr';
 import { VitePWA } from 'vite-plugin-pwa';
+import fg from 'fast-glob';
+import { resolve } from 'path';
 
 export default defineConfig({
   plugins: [
@@ -24,7 +26,7 @@ export default defineConfig({
       include: '**/*.svg',
     }),
     VitePWA({
-      includeAssets: ['favicon.ico', 'maskable-icon-512x512.png', 'apple-touch-icon-180x180'],
+      includeAssets: fg.sync('**/*.{png,svg,ico,txt,woff,woff2}', { cwd: resolve(__dirname, 'public') }), 
       manifest: {
         name: 'Tenna Editor',
         short_name: 'TennaEditor',
