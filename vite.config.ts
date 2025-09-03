@@ -92,5 +92,5 @@ export default defineConfig({
     __VERSION__: JSON.stringify(packageVersion) ?? 'error',
     __BRANCH__: JSON.stringify(branch) ?? 'error',
     __COMMIT_HASH__: JSON.stringify(commitHash) ?? 'error',
-  }
+  },
 });

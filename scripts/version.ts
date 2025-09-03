@@ -12,6 +12,7 @@ async function getPackageVersion() {
 
     return version;
   } catch (error) {
+    console.error(error);
     throw error;
   }
 }
@@ -21,15 +22,19 @@ function getCommitHash() {
     const commitHash = execSync('git rev-parse --short HEAD').toString().trim();
     return commitHash;
   } catch (error) {
+    console.error(error);
     throw error;
   }
 }
 
 function getBranch() {
   try {
-    const branch = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
+    const branch = execSync('git rev-parse --abbrev-ref HEAD')
+      .toString()
+      .trim();
     return branch;
   } catch (error) {
+    console.error(error);
     throw error;
   }
 }
@@ -38,10 +43,10 @@ export async function getVersion() {
   const commitHash = getCommitHash();
   const branch = getBranch();
   const packageVersion = await getPackageVersion();
-  
+
   return {
     commitHash,
     branch,
     packageVersion,
-  }
+  };
 }

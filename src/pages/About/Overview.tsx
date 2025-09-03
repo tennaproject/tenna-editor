@@ -1,4 +1,4 @@
-import { Section, Card, Heading, TextLabel } from '@components';
+import { Section, Card, Heading } from '@components';
 
 export function AboutOverview() {
   return (
