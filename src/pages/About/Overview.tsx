@@ -5,7 +5,7 @@ export function AboutOverview() {
     <div className="page">
       <Section>
         <Card className="space-y-4 p-6">
-          <Heading level={4}>Legal Info</Heading>
+          <Heading level={3}>Legal Info</Heading>
           <div className="space-y-2 text-text-2">
             <p>This is fan made project.</p>
             <p>
@@ -19,7 +19,7 @@ export function AboutOverview() {
 
       <Section>
         <Card className="space-y-4 p-6">
-          <Heading level={4}>Source Code</Heading>
+          <Heading level={3}>Source Code</Heading>
           <p className="mb-2 text-text-2">
             The source code for Tenna Editor is available on{' '}
             <a
@@ -35,8 +35,10 @@ export function AboutOverview() {
       <Section>
         <Card className="space-y-4 p-6">
           <Heading level={3}>Build Info</Heading>
-          <div className="space-y-2">
-            <TextLabel>Version: 0.4.0-alpha</TextLabel>
+          <div className="text-text-2">
+            <p>ID: {__COMMIT_HASH__}</p>
+            <p>Version: {__VERSION__}</p>
+            <p>Type: {__BRANCH__}</p>
           </div>
         </Card>
       </Section>

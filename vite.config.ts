@@ -6,6 +6,9 @@ import svgr from 'vite-plugin-svgr';
 import { VitePWA } from 'vite-plugin-pwa';
 import fg from 'fast-glob';
 import { resolve } from 'path';
+import { getVersion } from './scripts/version';
+
+const { packageVersion, commitHash, branch } = await getVersion();
 
 export default defineConfig({
   plugins: [
@@ -26,7 +29,9 @@ export default defineConfig({
       include: '**/*.svg',
     }),
     VitePWA({
-      includeAssets: fg.sync('**/*.{png,svg,ico,txt,woff,woff2}', { cwd: resolve(__dirname, 'public') }), 
+      includeAssets: fg.sync('**/*.{png,svg,ico,txt,woff,woff2}', {
+        cwd: resolve(__dirname, 'public'),
+      }),
       registerType: 'autoUpdate',
       manifest: {
         name: 'Tenna Editor',
@@ -83,4 +88,9 @@ export default defineConfig({
       },
     },
   },
+  define: {
+    __VERSION__: JSON.stringify(packageVersion) ?? 'error',
+    __BRANCH__: JSON.stringify(branch) ?? 'error',
+    __COMMIT_HASH__: JSON.stringify(commitHash) ?? 'error',
+  }
 });
