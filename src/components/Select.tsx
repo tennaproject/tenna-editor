@@ -265,6 +265,7 @@ export function Select({
         )}
         style={{
           minWidth: containerRef.current?.offsetWidth,
+          maxWidth: containerRef.current?.offsetWidth,
         }}
         aria-hidden={!menuVisible}
       >
@@ -303,7 +304,9 @@ export function Select({
                           : 'bg-surface-4 hover:bg-surface-4-hover',
                     )}
                   >
-                    {item.label}
+                    <span className="break-words flex-1 min-w-0">
+                      {item.label}
+                    </span>
                     <div
                       className="ml-2 text-xs text-red flex items-center gap-1 font-bold"
                       aria-hidden={!item.invalid}

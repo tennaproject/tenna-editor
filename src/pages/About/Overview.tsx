@@ -36,7 +36,7 @@ export function AboutOverview() {
         <Card className="space-y-4 p-6">
           <Heading level={3}>Build Info</Heading>
           <div className="space-y-2">
-            <TextLabel>Version: 0.3.0-alpha</TextLabel>
+            <TextLabel>Version: 0.4.0-alpha</TextLabel>
           </div>
         </Card>
       </Section>

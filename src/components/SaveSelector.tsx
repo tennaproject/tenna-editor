@@ -8,11 +8,11 @@ export function SaveSelector() {
   const [saveSelectOptions, setSaveSelectOptions] = useState<SelectItem[]>([]);
   const save = useSave((s) => s.save);
   const saveId = useSave((s) => s.save?.meta.id);
+  const saveName = useSave((s) => s.save?.meta.name);
   const setSave = useSave((s) => s.setSave);
   const { getStorageKeys, getStorageSave, setStorageSave } = useSaveStorage();
 
   async function updateSelectOptions() {
-    if (!save) return;
     const keys = await getStorageKeys();
 
     const storedSaves: DeltaruneSave[] = [];
@@ -36,6 +36,7 @@ export function SaveSelector() {
         label: storedSaves[i].meta.name,
       });
     }
+
     setSaveSelectOptions(selectOptions);
   }
 
@@ -57,6 +58,7 @@ export function SaveSelector() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     saveId,
+    saveName,
     getStorageKeys,
     getStorageSave,
     setStorageSave,
