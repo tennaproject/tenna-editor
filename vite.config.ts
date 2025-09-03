@@ -33,6 +33,7 @@ export default defineConfig({
         cwd: resolve(__dirname, 'public'),
       }),
       registerType: 'autoUpdate',
+      devOptions: { enabled: true },
       manifest: {
         name: 'Tenna Editor',
         short_name: 'TennaEditor',
@@ -92,5 +93,6 @@ export default defineConfig({
     __VERSION__: JSON.stringify(packageVersion) ?? 'error',
     __BRANCH__: JSON.stringify(branch) ?? 'error',
     __COMMIT_HASH__: JSON.stringify(commitHash) ?? 'error',
+    __BUILD_TIMESTAMP__: new Date(),
   },
 });
