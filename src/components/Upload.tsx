@@ -1,4 +1,4 @@
-import { useSave, useSaveStorage } from '@store';
+import { useSave, useSaveStorage, useUi } from '@store';
 import { detectChapter, parseSaveFile } from '@utils';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -16,12 +16,6 @@ import {
   Modal,
 } from '@components';
 import type { ChapterIndex } from '@data';
-import {
-  adjectives,
-  colors,
-  NumberDictionary,
-  uniqueNamesGenerator,
-} from 'unique-names-generator';
 
 const CHAPTER_OPTIONS: SelectItem[] = [
   { id: '2', label: `Chapter 2 (A Cyber's World)` },
@@ -46,6 +40,9 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
   const setSave = useSave((s) => s.setSave);
   const save = useSave((s) => s.save);
   const { setStorageSave } = useSaveStorage();
+
+  const totalUploaded = useUi((s) => s.totalUploaded);
+  const increaseTotalUploaded = useUi((s) => s.increaseTotalUploaded);
 
   const [uploadStage, setUploadStage] = useState<UploadStage>('idle');
   const [previousUploadStage, setPreviousUploadStage] =
@@ -123,20 +120,13 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
       setSelectedChapter(detection.chapter ?? 1);
       setSelectedSlot(slot);
       setIsCompletionSave(isCompletionSave);
+      increaseTotalUploaded();
 
       if (!slotMatch) {
         setSaveName(file.name);
       } else {
         setSaveName(
-          uniqueNamesGenerator({
-            dictionaries: [
-              adjectives,
-              colors,
-              NumberDictionary.generate({ min: 1, max: 99 }),
-            ],
-            separator: '',
-            style: 'capital',
-          }),
+         `Save${totalUploaded}` 
         );
       }
 

@@ -23,6 +23,8 @@ interface UiState {
   setAllowNoelleAllElements: (status: boolean) => void;
   showNonRecruitableEnemies: boolean;
   setShowNonRecruitableEnemies: (status: boolean) => void;
+  totalUploaded: number;
+  increaseTotalUploaded: () => void;
 }
 
 export const useUi = create<UiState>()(
@@ -73,6 +75,12 @@ export const useUi = create<UiState>()(
         set((state) => {
           state.showNonRecruitableEnemies = status;
         }),
+      totalUploaded: 1,
+      increaseTotalUploaded: () => {
+        set((state) => {
+          state.totalUploaded += 1;
+        });
+      },
     })),
     {
       name: `${STORE_NAMESPACE}-ui`,
@@ -88,6 +96,7 @@ export const useUi = create<UiState>()(
         allowRalseiAllElements: state.allowRalseiAllElements,
         allowNoelleAllElements: state.allowNoelleAllElements,
         showNonRecruitableEnemies: state.showNonRecruitableEnemies,
+        totalUploaded: state.totalUploaded,
       }),
       version: STORE_VERSION,
     },
