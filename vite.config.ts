@@ -27,6 +27,7 @@ export default defineConfig({
     }),
     VitePWA({
       includeAssets: fg.sync('**/*.{png,svg,ico,txt,woff,woff2}', { cwd: resolve(__dirname, 'public') }), 
+      registerType: 'autoUpdate',
       manifest: {
         name: 'Tenna Editor',
         short_name: 'TennaEditor',
