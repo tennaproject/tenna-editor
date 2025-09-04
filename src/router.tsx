@@ -95,6 +95,30 @@ const StoryRoot = React.lazy(() =>
   })),
 );
 
+const StoryChapter1 = React.lazy(() =>
+  import('./pages/Story/Chapter1').then((module) => ({
+    default: module.StoryChapter1,
+  })),
+);
+
+const StoryChapter2 = React.lazy(() =>
+  import('./pages/Story/Chapter2').then((module) => ({
+    default: module.StoryChapter2,
+  })),
+);
+
+const StoryChapter3 = React.lazy(() =>
+  import('./pages/Story/Chapter3').then((module) => ({
+    default: module.StoryChapter3,
+  })),
+);
+
+const StoryChapter4 = React.lazy(() =>
+  import('./pages/Story/Chapter4').then((module) => ({
+    default: module.StoryChapter4,
+  })),
+);
+
 // Recruits
 const RecruitsRoot = React.lazy(() =>
   import('./pages/Recruits/Root').then((module) => ({
@@ -247,7 +271,41 @@ export function AppRouter() {
                 <StoryRoot />
               </RequireSave>
             }
-          ></Route>
+          >
+            <Route index element={<Navigate to="chapter1" replace />} />
+            <Route
+              path="chapter1"
+              element={
+                <RequireChapter requiredChapter={1}>
+                  <StoryChapter1 />
+                </RequireChapter>
+              }
+            ></Route>
+            <Route
+              path="chapter2"
+              element={
+                <RequireChapter requiredChapter={2}>
+                  <StoryChapter2 />
+                </RequireChapter>
+              }
+            ></Route>
+            <Route
+              path="chapter3"
+              element={
+                <RequireChapter requiredChapter={3}>
+                  <StoryChapter3 />
+                </RequireChapter>
+              }
+            ></Route>
+            <Route
+              path="chapter4"
+              element={
+                <RequireChapter requiredChapter={4}>
+                  <StoryChapter4 />
+                </RequireChapter>
+              }
+            ></Route>
+          </Route>
           <Route
             path="/devtools"
             element={
