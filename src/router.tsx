@@ -88,10 +88,10 @@ const LightWorldRoot = React.lazy(() =>
   })),
 );
 
-// Dark World
-const DarkWorldRoot = React.lazy(() =>
-  import('./pages/DarkWorld/Root').then((module) => ({
-    default: module.DarkWorldRoot,
+// Story
+const StoryRoot = React.lazy(() =>
+  import('./pages/Story/Root').then((module) => ({
+    default: module.StoryRoot,
   })),
 );
 
@@ -241,10 +241,10 @@ export function AppRouter() {
             }
           ></Route>
           <Route
-            path="/dark-world"
+            path="/story"
             element={
               <RequireSave>
-                <DarkWorldRoot />
+                <StoryRoot />
               </RequireSave>
             }
           ></Route>
