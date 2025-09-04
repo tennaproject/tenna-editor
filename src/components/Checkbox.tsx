@@ -10,6 +10,7 @@ interface CheckboxProps {
   description?: ReactNode;
   variant?: 'blue' | 'red' | 'green' | 'pink' | 'yellow';
   className?: string;
+  fixedHeight?: boolean;
   id?: string;
 }
 
@@ -19,6 +20,7 @@ export function Checkbox({
   disabled = false,
   label,
   className,
+  fixedHeight = false,
 }: CheckboxProps) {
   // Support controlled & uncontrolled usage
   const isControlled = checked !== undefined;
@@ -42,6 +44,7 @@ export function Checkbox({
       className={mergeClass(
         'flex items-center gap-3 select-none shrink',
         disabled ? 'opacity-50' : '',
+        fixedHeight ? 'h-19' : '',
         className,
       )}
     >

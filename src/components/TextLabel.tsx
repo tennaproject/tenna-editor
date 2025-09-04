@@ -8,7 +8,12 @@ interface TextLabelProps {
 
 export function TextLabel({ children, className }: TextLabelProps) {
   return (
-    <span className={mergeClass('leading-none text-sm text-text-2', className)}>
+    <span
+      className={mergeClass(
+        'leading-none text-sm text-text-2 min-h-6',
+        className,
+      )}
+    >
       {children}
     </span>
   );
