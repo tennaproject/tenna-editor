@@ -4,8 +4,8 @@ import HomeIcon from '@assets/icons/home.svg';
 import InventoryIcon from '@assets/icons/briefcase.svg';
 import PartyIcon from '@assets/icons/contact.svg';
 import LightWorldIcon from '@assets/icons/sun-alt.svg';
-import DarkWorldIcon from '@assets/icons/moon-stars.svg';
-import RecruitsIcon from '@assets/icons/users.svg';
+import StoryIcon from '@assets/icons/script-text.svg';
+import RecruitsIcon from '@assets/icons/user-plus.svg';
 import SettingsIcon from '@assets/icons/sliders.svg';
 import AboutIcon from '@assets/icons/book-open.svg';
 import DevtoolsIcon from '@assets/icons/code.svg';
@@ -34,9 +34,9 @@ export function SidebarMenu() {
           requireSave
         />
         <Sidebar.Item
-          title="Dark World"
-          icon={<DarkWorldIcon />}
-          to="/dark-world"
+          title="Story"
+          icon={<StoryIcon />}
+          to="/story"
           requireSave
         />
         <Sidebar.Item

@@ -2,7 +2,7 @@ import type { BaseProperties } from '@types';
 import { ARMORS, type ArmorIndex } from './armors';
 import { CHARACTERS, type CharacterIndex } from './characters';
 import { CONSUMABLES, type ConsumableIndex } from './consumables';
-import type { FlagIndex } from './flags';
+import { FLAGS, type FlagIndex } from './flags';
 import { KEYITEMS, type KeyItemIndex } from './key-items';
 import { LIGHTWORLDITEMS, type LightWorldItemIndex } from './light-world-items';
 import { PHONECONTACTS, type PhoneContactIndex } from './phone-contacts';
@@ -470,7 +470,7 @@ const CH2_CONTENT: ChapterContent = {
     ROOMS.CASTLE_TUTORIAL_CH2,
     ROOMS.DW_CASTLE_WEST_CLIFF_OLD,
   ]),
-  flags: new Set<FlagIndex>([...CH1_CONTENT.flags]),
+  flags: new Set<FlagIndex>([...CH1_CONTENT.flags, FLAGS.SINCE_CHAPTER]),
   enemies: new Set<EnemyIndex>([
     ...CH1_CONTENT.enemies,
     ENEMIES.AMBYU_LANCE,
@@ -744,7 +744,7 @@ const CH3_CONTENT: ChapterContent = {
     ROOMS.CC_CLOVER_CH2,
     ROOMS.CC_FOUNTAIN_CH2,
   ]),
-  flags: new Set<FlagIndex>([...CH2_CONTENT.flags]),
+  flags: new Set<FlagIndex>([...CH2_CONTENT.flags, FLAGS.CH3_POINTS]),
   enemies: new Set<EnemyIndex>([
     ...CH2_CONTENT.enemies,
     ENEMIES.SHADOWGUY,

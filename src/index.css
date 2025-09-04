@@ -126,7 +126,7 @@
 
 @font-face {
   font-family: 'Pixel Operator';
-  src: url('./assets/fonts/PixelOperator.woff2') format('woff2');
+  src: url('/fonts/PixelOperator.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -134,7 +134,7 @@
 
 @font-face {
   font-family: 'Pixel Operator';
-  src: url('./assets/fonts/PixelOperator-Bold.woff2') format('woff2');
+  src: url('/fonts/PixelOperator-Bold.woff2') format('woff2');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -142,7 +142,7 @@
 
 @font-face {
   font-family: 'Pixel Operator Mono';
-  src: url('./assets/fonts/PixelOperatorMono.woff2') format('woff2');
+  src: url('/fonts/PixelOperatorMono.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -150,7 +150,7 @@
 
 @font-face {
   font-family: 'Pixel Operator Mono';
-  src: url('./assets/fonts/PixelOperatorMono-Bold.woff2') format('woff2');
+  src: url('/fonts/PixelOperatorMono-Bold.woff2') format('woff2');
   font-weight: bold;
   font-style: normal;
   font-display: swap;

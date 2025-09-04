@@ -79,6 +79,7 @@ export const FLAGS = {
   RECRUIT_MISS_MIZZLE: 669,
 
   AXE_OF_JUSTICE_PROGRESS: 852,
+  SINCE_CHAPTER: 914,
   WEIRDROUTE_PROGRESS_CH2: 915,
   WEIRDROUTE_FAILED: 916,
   GOT_MOSS_CH2: 920,
@@ -88,6 +89,7 @@ export const FLAGS = {
   GAMESHOW_LETTER_FIRST: 1012,
   GAMESHOW_LETTER_SECOND: 1013,
   GAMESHOW_LETTER_THIRD: 1014,
+  CH3_POINTS: 1044,
   SWORD_PROGRESS: 1055,
   GOT_MOSS_CH3: 1078,
   RALSEI_HORSE: 1152,
@@ -97,16 +99,15 @@ export const FLAGS = {
 export type FlagIndex = (typeof FLAGS)[keyof typeof FLAGS];
 export type FlagName = keyof typeof FLAGS;
 
-export type ValueType = 'boolean' | 'number' | 'mapped';
+export type FlagValueType = 'boolean' | 'number' | 'map';
 
 export interface FlagProperties extends BaseProperties {
-  valueType?: ValueType;
-  valueMap?: Record<number, string>;
-
-  constraints?: {
+  valueType?: FlagValueType;
+  valueRules?: {
     min?: number;
     max?: number;
     allowedValues?: number[];
+    map?: Record<number, string>;
   };
 }
 
@@ -251,6 +252,19 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
   [FLAGS.AXE_OF_JUSTICE_PROGRESS]: {
     displayName: 'Axe of Justice progress',
   },
+  [FLAGS.SINCE_CHAPTER]: {
+    displayName: 'Starting Chapter',
+    description: 'Number of chapter that you started this save file from.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        1: 'Chapter 1',
+        2: 'Chapter 2',
+        3: 'Chapter 3',
+        4: 'Chapter 4',
+      },
+    },
+  },
   [FLAGS.WEIRDROUTE_PROGRESS_CH2]: {
     displayName: 'Weird route progression in Chapter 2',
   },
@@ -270,19 +284,34 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
     displayName: 'Tracks how many times Noelle uses Ice Shock spell',
   },
   [FLAGS.GAMESHOW_LETTER_FIRST]: {
-    valueType: 'mapped',
-    valueMap: letterMap,
+    valueType: 'map',
+    valueRules: {
+      map: letterMap,
+    },
     displayName: "First letter of Kris's name at Tenna's game show",
   },
   [FLAGS.GAMESHOW_LETTER_SECOND]: {
-    valueType: 'mapped',
-    valueMap: letterMap,
+    valueType: 'map',
+    valueRules: {
+      map: letterMap,
+    },
     displayName: "Second letter of Kris's name at Tenna's game show",
   },
   [FLAGS.GAMESHOW_LETTER_THIRD]: {
-    valueType: 'mapped',
-    valueMap: letterMap,
+    valueType: 'map',
+    valueRules: {
+      map: letterMap,
+    },
     displayName: "Third letter of Kris's name at Tenna's game show",
+  },
+  [FLAGS.CH3_POINTS]: {
+    displayName: 'Points (PTs)',
+    description: 'Currency used in Chapter 3',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+      max: 99999,
+    },
   },
   [FLAGS.SWORD_PROGRESS]: {
     displayName: 'Sword game progress',

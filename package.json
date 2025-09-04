@@ -1,7 +1,7 @@
 {
   "name": "tenna-editor",
   "private": true,
-  "version": "0.4.0-alpha",
+  "version": "0.5.0-beta",
   "type": "module",
   "engines": {
     "node": ">=22.16.0",
@@ -14,12 +14,14 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate-pwa-assets": "pwa-assets-generator"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
     "clsx": "^2.1.1",
     "downshift": "^9.0.10",
+    "fast-glob": "^3.3.3",
     "framer-motion": "^12.23.12",
     "idb": "^8.0.3",
     "immer": "^10.1.1",
@@ -28,7 +30,7 @@
     "react-router-dom": "^7.8.0",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.11",
-    "unique-names-generator": "^4.7.1",
+    "vite-plugin-pwa": "^1.0.3",
     "zustand": "^5.0.8",
     "zustand-debounce": "^2.2.0"
   },
@@ -37,6 +39,7 @@
     "@types/node": "^24.3.0",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
+    "@vite-pwa/assets-generator": "^1.0.0",
     "@vitejs/plugin-react": "^5.0.1",
     "babel-plugin-react-compiler": "^19.1.0-rc.2",
     "eslint": "^9.33.0",
