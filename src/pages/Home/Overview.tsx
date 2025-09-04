@@ -13,8 +13,10 @@ import {
   Button,
   type SelectItem,
   Modal,
+  FlagField,
+  TimeField,
 } from '@components';
-import { type RoomIndex } from '@data';
+import { FLAGS, type RoomIndex } from '@data';
 import { useSave, useSaveStorage } from '@store';
 import type { SaveSlot } from '@types';
 import { chapterHelpers, roomHelpers } from '@utils';
@@ -24,7 +26,7 @@ export function ChapterField() {
   const value = useSave((s) => s.save?.meta.chapter) || 1;
 
   return (
-    <Section id="chapter" className="space-y-2">
+    <Section id="chapter" className="flex flex-col justify-center h-19 gap-2">
       <TextLabel>Chapter</TextLabel>
       <InlineGroup className="leading-none">
         <div className="w-8 h-8 bg-surface-3 flex justify-center items-center font-bold">
@@ -74,7 +76,7 @@ export function MoneyField() {
   }
 
   return (
-    <Section id="money" className="space-y-2">
+    <Section id="money" className="flex flex-col gap-2">
       <TextLabel>Money (Dark Dollars)</TextLabel>
       <NumberInput
         value={value}
@@ -101,6 +103,7 @@ export function InDarkWorldField() {
           label="Currently in Dark World"
           checked={checked}
           onChange={onChange}
+          fixedHeight
         />
         <HelpTip title="Currently in Dark World">
           <p>
@@ -164,7 +167,6 @@ export function RoomField() {
         defaultSelectedItem={selectedItem}
         selectedItem={selectedItem}
         onSelectionChange={onChange}
-        className="w-60"
       />
     </Section>
   );
@@ -228,7 +230,6 @@ function SlotField() {
       <Select
         items={SLOT_OPTIONS}
         placeholder="Select slot"
-        className="w-50"
         selectedItem={SLOT_OPTIONS[slot]}
         defaultSelectedItem={SLOT_OPTIONS[slot]}
         onSelectionChange={onSelectionChange}
@@ -356,35 +357,49 @@ export function HomeOverview() {
   }
 
   return (
-    <div className="page flex flex-col lg:flex-row">
-      <Section id="general" className="flex-1">
-        <Card className="space-y-4 p-6 h-full">
+    <article className="page flex flex-col">
+      <Section id="general">
+        <Card className="flex flex-col gap-3 p-6">
           <Heading level={3}>General</Heading>
-          <ChapterField />
-          <PlayerNameField />
-          <MoneyField />
-          <InDarkWorldField />
-          <RoomField />
+          <div className="flex flex-col md:flex-row gap-3">
+            <div className="flex-1 flex flex-col gap-3">
+              <ChapterField />
+              <FlagField flag={FLAGS.SINCE_CHAPTER} />
+              <PlayerNameField />
+            </div>
+            <div className="flex-1 flex flex-col gap-3">
+              <MoneyField />
+              <FlagField flag={FLAGS.CH3_POINTS} />
+              <TimeField />
+            </div>
+            <div className="flex-1 flex flex-col gap-3">
+              <RoomField />
+              <InDarkWorldField />
+            </div>
+          </div>
         </Card>
       </Section>
-      <Section id="meta" className="flex-1">
-        <Card className="space-y-4 p-6 h-full flex flex-col justify-between">
-          <div className="flex flex-col gap-4">
-            <div>
-              <Heading level={3}>Meta</Heading>
+      <Section id="meta">
+        <Card className="flex flex-col gap-3 p-6 justify-between">
+          <Heading level={3}>Meta</Heading>
+          <div className="flex flex-col lg:flex-row gap-3">
+            <div className="flex-1 flex flex-col gap-3">
+              <NameField />
+              <SlotField />
+              <CompletionSaveField />
+            </div>
+            <div className="flex-1 flex flex-col gap-3">
+              <Section>
+                <IdField />
+                <TimestampField />
+              </Section>
             </div>
 
-            <NameField />
-            <SlotField />
-            <CompletionSaveField />
-            <Section>
-              <IdField />
-              <TimestampField />
-            </Section>
+            <div className="flex-1 flex flex-col gap-3"></div>
           </div>
           <DeleteSaveField />
         </Card>
       </Section>
-    </div>
+    </article>
   );
 }
