@@ -3,7 +3,6 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { RequireChapter, RequireDevmode, RequireSave } from '@guards';
 import { Loading } from '@components';
-import { useSave } from '@store';
 
 // Home
 const HomeRoot = React.lazy(() =>
@@ -175,7 +174,6 @@ const AboutAttributions = React.lazy(() =>
 
 export function AppRouter() {
   const location = useLocation();
-  const save = useSave.getState().save;
 
   return (
     <AnimatePresence mode="wait">
@@ -184,21 +182,10 @@ export function AppRouter() {
           location={location}
           key={location.pathname.split('/')[1] || 'root'}
         >
-          <Route path="/" element={<Navigate to="/home" replace />}></Route>
-          <Route path="/home" element={<HomeRoot />}>
-            <Route
-              index
-              element={
-                save ? (
-                  <Navigate to="overview" replace />
-                ) : (
-                  <Navigate to="welcome" replace />
-                )
-              }
-            />
-            <Route path="overview" element={<HomeOverview />}></Route>
+          <Route path="/" element={<HomeRoot />}>
+            <Route index element={<HomeOverview />} />
             <Route path="welcome" element={<HomeWelcome />}></Route>
-            <Route path="*" element={<Navigate to="overview" replace />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
           <Route path="/about" element={<AboutPage />}>
             <Route index element={<Navigate to="overview" replace />} />
