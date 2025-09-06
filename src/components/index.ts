@@ -22,3 +22,4 @@ export * from './Upload';
 export * from './Download';
 export * from './SaveSelector';
 export * from './Fields';
+export * from './Vessel';
