@@ -43,7 +43,6 @@ export function FlagField({ flag, id, className }: FlagFieldProps) {
                 save.flags[flag] = value ? 1 : 0;
               });
             }}
-            fixedHeight
           />
           {description && (
             <HelpTip title={displayName}>

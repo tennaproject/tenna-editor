@@ -4,6 +4,16 @@ export const FLAGS = {
   SIMPLIFY_VFX: 8,
   STORAGE_SIZE: 64,
   GOT_MOSS_CH1: 106,
+
+  // Thrash Machine
+  THRASH_MACHINE_HEAD: 220,
+  THRASH_MACHINE_BODY: 221,
+  THRASH_MACHINE_SHOE: 222,
+  THRASH_MACHINE_HEAD_COLOR: 223,
+  THRASH_MACHINE_BODY_COLOR: 224,
+  THRASH_MACHINE_SHOE_COLOR: 225,
+
+  STARWALKER: 254,
   INSPECTED_BEDS_CH1: 252,
   RALSEI_PHOTO_STATUS: 325,
   INSPECTED_BED_KRIS: 409,
@@ -79,6 +89,21 @@ export const FLAGS = {
   RECRUIT_MISS_MIZZLE: 669,
 
   AXE_OF_JUSTICE_PROGRESS: 852,
+
+  // Vessel
+  VESSEL_HEAD: 900,
+  VESSEL_BODY: 901,
+  VESSEL_LEGS: 902,
+  VESSEL_FOOD: 903,
+  VESSEL_BLOOD_TYPE: 904,
+  VESSEL_COLOR: 905,
+  VESSEL_FEELING: 906,
+  VESSEL_HONESTY: 907,
+  VESSEL_PAIN_SEIZURE: 908,
+  VESSEL_GIFT: 909,
+
+  EGG_ROOM_CH1: 910,
+  EGG_CH1: 911,
   SINCE_CHAPTER: 914,
   WEIRDROUTE_PROGRESS_CH2: 915,
   WEIRDROUTE_FAILED: 916,
@@ -155,15 +180,73 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
     `,
   },
   [FLAGS.GOT_MOSS_CH1]: {
-    displayName: 'Got Moss in Chapter 1',
+    displayName: 'Got moss in Jail',
+    valueType: 'boolean',
+  },
+  // Thrash Machine
+  [FLAGS.THRASH_MACHINE_HEAD]: {
+    displayName: 'Head',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        '-1': 'None',
+        0: 'Laser',
+        1: 'Sword',
+        2: 'Flame',
+        3: 'Duck',
+      },
+    },
+  },
+  [FLAGS.THRASH_MACHINE_BODY]: {
+    displayName: 'Body',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        '-1': 'None',
+        0: 'Plain',
+        1: 'Wheel',
+        2: 'Tank',
+        3: 'Duck',
+      },
+    },
+  },
+  [FLAGS.THRASH_MACHINE_SHOE]: {
+    displayName: 'Shoe',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        '-1': 'None',
+        0: 'Sneak',
+        1: 'Attractive Wheels',
+        2: 'Tread',
+        3: 'Duck',
+      },
+    },
+  },
+  [FLAGS.THRASH_MACHINE_HEAD_COLOR]: {
+    displayName: 'Head Color',
+    valueType: 'color',
+  },
+  [FLAGS.THRASH_MACHINE_BODY_COLOR]: {
+    displayName: 'Body Color',
+    valueType: 'color',
+  },
+  [FLAGS.THRASH_MACHINE_SHOE_COLOR]: {
+    displayName: 'Shoe Color',
+    valueType: 'color',
+  },
+  // End
+  [FLAGS.INSPECTED_BEDS_CH1]: {
+    valueType: 'boolean',
+    displayName: 'Inspected beds in Card Castle',
+  },
+  [FLAGS.STARWALKER]: {
+    displayName: 'Talked to original &ensp;*Starwalker*',
+    valueType: 'boolean',
   },
   [FLAGS.RALSEI_PHOTO_STATUS]: {
     displayName:
       'Action taken when taking photo with Ralsei at end of Acid Tunnel',
-  },
-  [FLAGS.INSPECTED_BEDS_CH1]: {
-    valueType: 'boolean',
-    displayName: 'Inspected beds in Chapter 1',
   },
   [FLAGS.INSPECTED_BED_KRIS]: {
     displayName: `Inspected Kris's bed in Chapter 2`,
@@ -183,7 +266,6 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
   [FLAGS.INSPECTED_BEDS_CH2]: {
     displayName: 'Inspected beds in Chapter 2',
   },
-
   // Recruits
   [FLAGS.RECRUIT_DEBUG]: { displayName: 'RECRUIT_DEBUG' },
   [FLAGS.RECRUIT_LANCER_1]: { displayName: 'RECRUIT_LANCER_1' },
@@ -248,10 +330,138 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
   [FLAGS.RECRUIT_WINGLADE]: { displayName: 'RECRUIT_WINGLADE' },
   [FLAGS.RECRUIT_ORGANIKK]: { displayName: 'RECRUIT_ORGANIKK' },
   [FLAGS.RECRUIT_MISS_MIZZLE]: { displayName: 'RECRUIT_MISS_MIZZLE' },
-
+  // End
   [FLAGS.AXE_OF_JUSTICE_PROGRESS]: {
     displayName: 'Axe of Justice progress',
   },
+  // Vessel
+  [FLAGS.VESSEL_HEAD]: {
+    displayName: 'Head',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Head 1',
+        1: 'Head 2',
+        2: 'Head 3',
+        3: 'Head 4',
+        4: 'Head 5',
+        5: 'Head 6',
+        6: 'Head 7',
+        7: 'Head 8',
+      },
+    },
+  },
+  [FLAGS.VESSEL_BODY]: {
+    displayName: 'Body',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Body 1',
+        1: 'Body 2',
+        2: 'Body 3',
+        3: 'Body 4',
+        4: 'Body 5',
+        5: 'Body 6',
+      },
+    },
+  },
+  [FLAGS.VESSEL_LEGS]: {
+    displayName: 'Legs',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Legs 1',
+        1: 'Legs 2',
+        2: 'Legs 3',
+        3: 'Legs 4',
+      },
+    },
+  },
+  [FLAGS.VESSEL_FOOD]: {
+    displayName: 'What is its favorite food?',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Sweet',
+        1: 'Soft',
+        2: 'Sour',
+        3: 'Salty',
+        4: 'Pain',
+        5: 'Cold',
+      },
+    },
+  },
+  [FLAGS.VESSEL_BLOOD_TYPE]: {
+    displayName: 'Your favorite blood type?',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'A',
+        1: 'AB',
+        2: 'B',
+        3: 'C',
+        4: 'D',
+      },
+    },
+  },
+  [FLAGS.VESSEL_COLOR]: {
+    displayName: 'What color does it like most?',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Red',
+        1: 'Blue',
+        2: 'Green',
+        3: 'Yellow',
+      },
+    },
+  },
+  [FLAGS.VESSEL_GIFT]: {
+    displayName: 'Please give it a gift',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Kindness',
+        1: 'Mind',
+        2: 'Ambition',
+        3: 'Integrity',
+        4: 'Voice',
+      },
+    },
+  },
+  [FLAGS.VESSEL_FEELING]: {
+    displayName: 'How do you feel about your creation? (It will not hear.)',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Love',
+        1: 'Hope',
+        2: 'Disgust',
+        3: 'Fear',
+      },
+    },
+  },
+  [FLAGS.VESSEL_HONESTY]: {
+    displayName: 'Have you answered honestly?',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'No',
+        1: 'Yes',
+      },
+    },
+  },
+  [FLAGS.VESSEL_PAIN_SEIZURE]: {
+    displayName: 'You acknowledge the possibility of pain and seizure.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Yes',
+        1: 'No',
+      },
+    },
+  },
+  // End
   [FLAGS.SINCE_CHAPTER]: {
     displayName: 'Starting Chapter',
     description: 'Number of chapter that you started this save file from.',
