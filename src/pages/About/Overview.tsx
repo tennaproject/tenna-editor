@@ -14,9 +14,10 @@ export function AboutOverview() {
             </p>
             <p>DELTARUNE™ is a registered trademark of Royal Sciences, LLC</p>
             <p>
-              The assets used in this project from the DELTARUNE are copyrighted
-              by Toby Fox and included under the fair use for non-commercial,
-              transformative purposes. No endorsement is implied.
+              The assets used in this project from the DELTARUNE™ are
+              copyrighted by Toby Fox and included under the fair use for
+              non-commercial, transformative purposes. No endorsement is
+              implied.
             </p>
           </div>
         </Card>
