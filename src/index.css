@@ -256,6 +256,14 @@
   .scrollbar-auto::-webkit-scrollbar-thumb:hover {
     background: var(--color-tenna-600);
   }
+
+  em {
+    @apply tracking-widest;
+  }
+
+  b {
+    @apply font-bold;
+  }
 }
 
 @layer utilities {
