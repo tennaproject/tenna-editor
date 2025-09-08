@@ -1,30 +1,23 @@
-import ThrashMachineHead0 from '@assets/deltarune/thrash-machine-head-0.svg?react';
-import ThrashMachineHead1 from '@assets/deltarune/thrash-machine-head-1.svg?react';
-import ThrashMachineHead2 from '@assets/deltarune/thrash-machine-head-2.svg?react';
-import ThrashMachineHead3 from '@assets/deltarune/thrash-machine-head-3.svg?react';
-import ThrashMachineBody0 from '@assets/deltarune/thrash-machine-body-0.svg?react';
-import ThrashMachineBody1 from '@assets/deltarune/thrash-machine-body-1.svg?react';
-import ThrashMachineBody2 from '@assets/deltarune/thrash-machine-body-2.svg?react';
-import ThrashMachineBody3 from '@assets/deltarune/thrash-machine-body-3.svg?react';
-import ThrashMachineShoe0 from '@assets/deltarune/thrash-machine-shoe-0.svg?react';
-import ThrashMachineShoe1 from '@assets/deltarune/thrash-machine-shoe-1.svg?react';
-import ThrashMachineShoe2 from '@assets/deltarune/thrash-machine-shoe-2.svg?react';
-import ThrashMachineShoe3 from '@assets/deltarune/thrash-machine-shoe-3.svg?react';
-import ThrashMachineShoe4 from '@assets/deltarune/thrash-machine-shoe-4.svg?react';
+import ThrashMachineHead0 from '@assets/deltarune/thrash-machine/thrash-machine-head-0.svg?react';
+import ThrashMachineHead1 from '@assets/deltarune/thrash-machine/thrash-machine-head-1.svg?react';
+import ThrashMachineHead2 from '@assets/deltarune/thrash-machine/thrash-machine-head-2.svg?react';
+import ThrashMachineHead3 from '@assets/deltarune/thrash-machine/thrash-machine-head-3.svg?react';
+import ThrashMachineBody0 from '@assets/deltarune/thrash-machine/thrash-machine-body-0.svg?react';
+import ThrashMachineBody1 from '@assets/deltarune/thrash-machine/thrash-machine-body-1.svg?react';
+import ThrashMachineBody2 from '@assets/deltarune/thrash-machine/thrash-machine-body-2.svg?react';
+import ThrashMachineBody3 from '@assets/deltarune/thrash-machine/thrash-machine-body-3.svg?react';
+import ThrashMachineShoe0 from '@assets/deltarune/thrash-machine/thrash-machine-shoe-0.svg?react';
+import ThrashMachineShoe1 from '@assets/deltarune/thrash-machine/thrash-machine-shoe-1.svg?react';
+import ThrashMachineShoe2 from '@assets/deltarune/thrash-machine/thrash-machine-shoe-2.svg?react';
+import ThrashMachineShoe3 from '@assets/deltarune/thrash-machine/thrash-machine-shoe-3.svg?react';
+import ThrashMachineShoe4 from '@assets/deltarune/thrash-machine/thrash-machine-shoe-4.svg?react';
 
 import { Section } from '@components';
-import { mergeClass } from '@utils';
-import convert from 'color-convert';
+import { getGameColor, mergeClass } from '@utils';
 
-function getThrashColor(color: number) {
-  // GameMaker uses 8-bit HSV values https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Drawing/Colour_And_Alpha/make_colour_hsv.htm
-  const raw = convert.hsv.hex([(color * 8 * 360) / 255, 100, 100]);
-  return `#${raw}`;
-}
-
-export type ThrashMachineHeadIndex = 0 | 1 | 2 | 3;
-export type ThrashMachineBodyIndex = 0 | 1 | 2 | 3;
-export type ThrashMachineShoeIndex = 0 | 1 | 2 | 3;
+export type ThrashMachineHeadIndex = -1 | 0 | 1 | 2 | 3;
+export type ThrashMachineBodyIndex = -1 | 0 | 1 | 2 | 3;
+export type ThrashMachineShoeIndex = -1 | 0 | 1 | 2 | 3;
 
 interface ThrashMachineHeadProps {
   index: ThrashMachineHeadIndex;
@@ -33,7 +26,7 @@ interface ThrashMachineHeadProps {
 
 function ThrashMachineHead({ index, colorIndex }: ThrashMachineHeadProps) {
   const baseClasses = 'absolute z-30';
-  const color = getThrashColor(colorIndex);
+  const color = getGameColor(colorIndex);
   return (
     <>
       {index === 0 && (
@@ -71,7 +64,7 @@ interface ThrashMachineBodyProps {
 
 function ThrashMachineBody({ index, colorIndex }: ThrashMachineBodyProps) {
   const baseClasses = 'absolute z-20 w-53';
-  const color = getThrashColor(colorIndex);
+  const color = getGameColor(colorIndex);
   return (
     <>
       {index === 0 && (
@@ -109,7 +102,7 @@ interface ThrashMachineShoeProps {
 
 function ThrashMachineShoe({ index, colorIndex }: ThrashMachineShoeProps) {
   const baseClasses = 'absolute w-43';
-  const color = getThrashColor(colorIndex);
+  const color = getGameColor(colorIndex);
   return (
     <>
       {index === 0 && (
