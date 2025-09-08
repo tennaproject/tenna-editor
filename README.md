@@ -48,3 +48,7 @@ npm run format:check
 ## License
 
 This project is licensed under the zlib License. See the [LICENSE](./LICENSE) file for details.
+
+### DELTARUNE™ Assets Notice
+
+The assets under `src/assets/deltarune/` are from DELTARUNE™ and copyrighted by Toby Fox. They are used under fair use for this non-commercial, transformative project. No endorsement is implied. See [NOTICE.md](src/assets/deltarune/NOTICE.md) for full details.
