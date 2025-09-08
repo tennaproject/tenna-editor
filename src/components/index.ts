@@ -23,3 +23,4 @@ export * from './Download';
 export * from './SaveSelector';
 export * from './Fields';
 export * from './Vessel';
+export * from './ThrashMachine';
