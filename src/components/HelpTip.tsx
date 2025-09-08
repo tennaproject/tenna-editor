@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect, type ReactNode } from 'react';
 import { Heading } from './Heading';
-import LightbulbIcon from '@assets/icons/lightbulb-on.svg';
+import LightbulbIcon from '@assets/icons/lightbulb-on.svg?react';
 import { Modal } from './Modal';
 
 interface HelpTipProps {

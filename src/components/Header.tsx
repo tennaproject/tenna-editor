@@ -1,14 +1,14 @@
 import { useUi } from '@store';
-import SidebarVisibilityIcon from '@assets/icons/menu.svg';
-import SidebarRetractionIcon from '@assets/icons/layout-sidebar-left.svg';
-import DownloadIcon from '@assets/icons/download.svg';
-import UploadIcon from '@assets/icons/upload.svg';
+import SidebarVisibilityIcon from '@assets/icons/menu.svg?react';
+import SidebarRetractionIcon from '@assets/icons/layout-sidebar-left.svg?react';
+import DownloadIcon from '@assets/icons/download.svg?react';
+import UploadIcon from '@assets/icons/upload.svg?react';
 import { useState } from 'react';
 import { Upload } from './Upload';
 import { Download } from './Download';
 import { InlineGroup } from './InlineGroup';
 import { SaveSelector } from './SaveSelector';
-import Tenna from '@assets/tenna.svg';
+import Tenna from '@assets/tenna.svg?react';
 
 export function Header() {
   const [isUploadOpen, setUploadOpen] = useState(false);

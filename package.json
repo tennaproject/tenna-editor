@@ -20,6 +20,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
     "clsx": "^2.1.1",
+    "color-convert": "^3.1.0",
     "downshift": "^9.0.10",
     "fast-glob": "^3.3.3",
     "framer-motion": "^12.23.12",
@@ -36,6 +37,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
+    "@svgr/plugin-jsx": "^8.1.0",
+    "@svgr/plugin-svgo": "^8.1.0",
     "@types/node": "^24.3.0",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",

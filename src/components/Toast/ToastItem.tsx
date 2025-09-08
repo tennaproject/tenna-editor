@@ -5,10 +5,10 @@ import {
   type PointerEvent as ReactPointerEvent,
 } from 'react';
 import type { ToastType } from '@services';
-import InfoIcon from '@assets/icons/info-box.svg';
-import ErrorIcon from '@assets/icons/alert.svg';
-import SuccessIcon from '@assets/icons/radio-on.svg';
-import WarningIcon from '@assets/icons/warning-box.svg';
+import InfoIcon from '@assets/icons/info-box.svg?react';
+import ErrorIcon from '@assets/icons/alert.svg?react';
+import SuccessIcon from '@assets/icons/radio-on.svg?react';
+import WarningIcon from '@assets/icons/warning-box.svg?react';
 
 const colors: Record<ToastType, { background: string; text: string }> = {
   info: { background: 'bg-blue', text: 'text-blue' },

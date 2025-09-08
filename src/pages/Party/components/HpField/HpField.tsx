@@ -1,5 +1,5 @@
 import { Section } from '@components';
-import DividerIcon from '@assets/icons/minus.svg';
+import DividerIcon from '@assets/icons/minus.svg?react';
 import { HpCurrentField } from './HpCurrentField';
 import { HpMaxField } from './HpMaxField';
 import type { CharacterIndex } from '@data';

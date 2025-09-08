@@ -1,5 +1,5 @@
-import ArrowUpIcon from '@assets/icons/chevron-up.svg';
-import ArrowDownIcon from '@assets/icons/chevron-down.svg';
+import ArrowUpIcon from '@assets/icons/chevron-up.svg?react';
+import ArrowDownIcon from '@assets/icons/chevron-down.svg?react';
 import { mergeClass } from '@utils';
 
 interface NumberInputProps {

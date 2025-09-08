@@ -21,12 +21,24 @@ export default defineConfig({
     tsconfigPaths(),
     svgr({
       svgrOptions: {
-        exportType: 'default',
-        ref: true,
-        svgo: false,
+        plugins: ['@svgr/plugin-svgo', '@svgr/plugin-jsx'],
+        svgo: true,
+        svgoConfig: {
+          plugins: [
+            {
+              name: 'preset-default',
+              params: {
+                overrides: {
+                  removeMetadata: false,
+                },
+              },
+            },
+            { name: 'prefixIds', params: { prefix: true } },
+          ],
+        },
         titleProp: true,
       },
-      include: '**/*.svg',
+      include: '**/*.svg?react',
     }),
     VitePWA({
       includeAssets: fg.sync('**/*.{png,svg,ico,txt,woff,woff2}', {
