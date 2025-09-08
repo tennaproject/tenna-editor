@@ -1,7 +1,8 @@
 import type { FlagIndex } from '@data';
 import { useSaveFlag } from '@hooks';
 import { useSave } from '@store';
-import { chapterHelpers, flagHelpers, mergeClass } from '@utils';
+import { chapterHelpers, flagHelpers, getGameColor, mergeClass } from '@utils';
+import Markdown from 'react-markdown';
 import {
   Checkbox,
   HelpTip,
@@ -35,7 +36,7 @@ export function FlagField({ flag, id, className }: FlagFieldProps) {
       <Section id={id} className={className}>
         <InlineGroup>
           <Checkbox
-            label={displayName}
+            label={<Markdown>{displayName}</Markdown>}
             checked={!!currentValue}
             onChange={(value: boolean) => {
               updateSave((save) => {
@@ -56,7 +57,9 @@ export function FlagField({ flag, id, className }: FlagFieldProps) {
     return (
       <Section id={id} className={mergeClass('flex flex-col gap-2', className)}>
         <InlineGroup>
-          <TextLabel>{displayName}</TextLabel>
+          <TextLabel>
+            <Markdown>{displayName}</Markdown>
+          </TextLabel>
           {description && (
             <HelpTip title={displayName}>
               <p>{description}</p>
@@ -95,7 +98,9 @@ export function FlagField({ flag, id, className }: FlagFieldProps) {
           className={mergeClass('flex flex-col gap-2', className)}
         >
           <InlineGroup>
-            <TextLabel>{displayName}</TextLabel>
+            <TextLabel>
+              <Markdown>{displayName}</Markdown>
+            </TextLabel>
             {description && (
               <HelpTip title={displayName}>
                 <p>{description}</p>
@@ -120,6 +125,38 @@ export function FlagField({ flag, id, className }: FlagFieldProps) {
         </Section>
       );
     }
+  } else if (valueType === 'color') {
+    return (
+      <Section id={id} className={mergeClass('flex flex-col gap-3', className)}>
+        <InlineGroup>
+          <TextLabel>
+            <Markdown>{displayName}</Markdown>
+          </TextLabel>
+          {description && (
+            <HelpTip title={displayName}>
+              <p>{description}</p>
+            </HelpTip>
+          )}
+        </InlineGroup>
+        <div className="flex flex-wrap">
+          {[...Array(32)].map((_, i) => (
+            <div
+              key={i}
+              className={mergeClass(
+                'w-8 h-8 cursor-pointer border-2',
+                i === currentValue ? 'border-text-1' : 'border-border',
+              )}
+              style={{ backgroundColor: getGameColor(i) }}
+              onClick={() => {
+                updateSave((save) => {
+                  save.flags[flag] = i;
+                });
+              }}
+            />
+          ))}
+        </div>
+      </Section>
+    );
   }
 
   return;

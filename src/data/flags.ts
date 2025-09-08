@@ -99,7 +99,7 @@ export const FLAGS = {
 export type FlagIndex = (typeof FLAGS)[keyof typeof FLAGS];
 export type FlagName = keyof typeof FLAGS;
 
-export type FlagValueType = 'boolean' | 'number' | 'map';
+export type FlagValueType = 'boolean' | 'number' | 'map' | 'color';
 
 export interface FlagProperties extends BaseProperties {
   valueType?: FlagValueType;
