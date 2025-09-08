@@ -23,6 +23,9 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
     "types": [
+      "@types/node",
+      "@types/react",
+      "@types/react-dom",
       "vite/client",
       "vite-plugin-svgr/client",
       "./src/types/globals.d.ts"
