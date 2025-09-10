@@ -48,7 +48,7 @@ export default defineConfig({
       devOptions: { enabled: true },
       manifest: {
         name: 'Tenna Editor',
-        short_name: 'TennaEditor',
+        short_name: 'Tenna Editor',
         description: 'An unofficial Deltarune Save Editor',
         theme_color: '#e53170',
         background_color: '#1f1e2a',
