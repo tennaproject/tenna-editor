@@ -116,6 +116,98 @@ function ThrashMachineSection() {
   );
 }
 
+function OnionSection() {
+  return (
+    <Section id="onion" className="flex-1 flex">
+      <Card className="flex-1 flex flex-col gap-3 p-6">
+        <Heading level={3}>Onion</Heading>
+        <div className="flex flex-col md:flex-row gap-3">
+          <div className="flex-1 flex flex-col gap-3">
+            <FlagField id="onion-progress" flag={FLAGS.ONION_CH1} />
+            <FlagField id="onion-your-name" flag={FLAGS.ONION_YOUR_NAME} />
+            <FlagField id="onion-name" flag={FLAGS.ONION_NAME} />
+          </div>
+          <div className="flex-1 flex flex-col gap-3"></div>
+        </div>
+      </Card>
+    </Section>
+  );
+}
+
+function DarkWorldSection() {
+  return (
+    <Section id="dark-world" className="flex-1 flex">
+      <Card className="flex-1 flex flex-col gap-3 p-6">
+        <Heading level={3}>Dark World</Heading>
+        <div className="flex flex-col md:flex-row gap-3">
+          <div className="flex-1 flex flex-col gap-3">
+            <FlagField id="running-tutorial" flag={FLAGS.RUNNING_TUTORIAL} />
+            <FlagField id="got-moss" flag={FLAGS.GOT_MOSS_CH1} />
+            <FlagField id="starwalker" flag={FLAGS.STARWALKER} />
+            <FlagField id="inspected-beds" flag={FLAGS.INSPECTED_BEDS_CH1} />
+            <FlagField id="got-spincake" flag={FLAGS.GOT_SPINCAKE} />
+            <FlagField id="violent-king" flag={FLAGS.VIOLENT_KING} />
+            <FlagField id="violent-ending" flag={FLAGS.VIOLENT_ENDING_CH1} />
+          </div>
+          <div className="flex-1 flex flex-col gap-3">
+            <FlagField id="jevil-progress" flag={FLAGS.JEVIL_PROGRESS} />
+            <FlagField id="egg-room" flag={FLAGS.EGG_ROOM_CH1} />
+            <FlagField id="manual-status" flag={FLAGS.MANUAL_STATUS} />
+          </div>
+        </div>
+      </Card>
+    </Section>
+  );
+}
+
+function LightWorldSection() {
+  return (
+    <Section id="light-world" className="flex-1 flex">
+      <Card className="flex-1 flex flex-col gap-3 p-6">
+        <Heading level={3}>Light World</Heading>
+        <div className="flex flex-col md:flex-row gap-3">
+          <div className="flex-1 flex flex-col gap-3">
+            <FlagField
+              id="picnic-table-fingers"
+              flag={FLAGS.PICNIC_TABLE_FINGERS}
+            />
+            <FlagField id="talked-berdly" flag={FLAGS.TALKED_BERDLY_CH1} />
+            <FlagField id="talked-catty" flag={FLAGS.TALKED_CATTY} />
+            <FlagField id="talked-alphys" flag={FLAGS.TALKED_ALPHYS} />
+            <FlagField id="talked-undyne" flag={FLAGS.TALKED_UNDYNE} />
+            <FlagField id="used-rudy-sink" flag={FLAGS.USED_RUDY_SINK} />
+          </div>
+          <div className="flex-1 flex flex-col gap-3">
+            <FlagField id="talked-rudy" flag={FLAGS.TALKED_RUDY} />
+            <FlagField id="talked-qc" flag={FLAGS.TALKED_QC} />
+            <FlagField
+              id="talked-burgerpants"
+              flag={FLAGS.TALKED_BURGERPANTS}
+            />
+
+            <FlagField id="talked-sans" flag={FLAGS.TALKED_SANS} />
+          </div>
+          <div className="flex-1 flex flex-col gap-3">
+            <FlagField id="got-sans-phone" flag={FLAGS.GOT_SANS_PHONE} />
+            <FlagField id="talked-noelle" flag={FLAGS.TALKED_NOELLE} />
+            <FlagField
+              id="asgore-flowers-progress"
+              flag={FLAGS.ASGORE_FLOWERS_PROGRESS}
+            />
+          </div>
+          <div className="flex-1 flex flex-col gap-3">
+            <FlagField id="egg-fridge" flag={FLAGS.EGG_FRIDGE} />
+            <FlagField
+              id="entered-home-count"
+              flag={FLAGS.ENTERED_HOME_COUNT}
+            />
+          </div>
+        </div>
+      </Card>
+    </Section>
+  );
+}
+
 export function StoryChapter1() {
   return (
     <article className="page flex flex-col gap-3">
@@ -123,18 +215,12 @@ export function StoryChapter1() {
         <VesselSection />
         <ThrashMachineSection />
       </Section>
-      <Section>
-        <Card className="flex-1 flex flex-col gap-3 p-6">
-          <Heading level={3}>Progress</Heading>
-          <div className="flex flex-col md:flex-row gap-3">
-            <div className="flex-1 flex flex-col gap-3">
-              <FlagField id="got-moss" flag={FLAGS.GOT_MOSS_CH1} />
-              <FlagField id="starwalker" flag={FLAGS.STARWALKER} />
-              <FlagField id="inspected-beds" flag={FLAGS.INSPECTED_BEDS_CH1} />
-            </div>
-            <div className="flex-1 flex flex-col gap-3"></div>
-          </div>
-        </Card>
+      <Section id="progress" className="flex flex-col gap-3">
+        <div className="flex flex-col lg:flex-row gap-3">
+          <DarkWorldSection />
+          <OnionSection />
+        </div>
+        <LightWorldSection />
       </Section>
     </article>
   );

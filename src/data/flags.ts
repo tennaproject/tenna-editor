@@ -4,17 +4,38 @@ export const FLAGS = {
   SIMPLIFY_VFX: 8,
   STORAGE_SIZE: 64,
   GOT_MOSS_CH1: 106,
-
-  // Thrash Machine
   THRASH_MACHINE_HEAD: 220,
   THRASH_MACHINE_BODY: 221,
   THRASH_MACHINE_SHOE: 222,
   THRASH_MACHINE_HEAD_COLOR: 223,
   THRASH_MACHINE_BODY_COLOR: 224,
   THRASH_MACHINE_SHOE_COLOR: 225,
-
-  STARWALKER: 254,
+  RUNNING_TUTORIAL: 206,
+  MANUAL_STATUS: 207,
+  JEVIL_PROGRESS: 241,
+  VIOLENT_KING: 247,
+  VIOLENT_ENDING_CH1: 248,
   INSPECTED_BEDS_CH1: 252,
+  TALKED_BERDLY_CH1: 256,
+  GOT_SPINCAKE: 253,
+  STARWALKER: 254,
+  TALKED_RUDY: 255,
+  PICNIC_TABLE_FINGERS: 257,
+  ONION_CH1: 258,
+  ONION_YOUR_NAME: 259,
+  ONION_NAME: 260,
+  TALKED_QC: 261,
+  ASGORE_FLOWERS_PROGRESS: 262,
+  EGG_FRIDGE: 263,
+  TALKED_CATTY: 265,
+  TALKED_ALPHYS: 269,
+  TALKED_UNDYNE: 270,
+  TALKED_BURGERPANTS: 271,
+  TALKED_SANS: 273,
+  GOT_SANS_PHONE: 274,
+  TALKED_NOELLE: 276,
+  ENTERED_HOME_COUNT: 277,
+  USED_RUDY_SINK: 278,
   RALSEI_PHOTO_STATUS: 325,
   INSPECTED_BED_KRIS: 409,
   INSPECTED_BED_SUSIE: 410,
@@ -22,8 +43,6 @@ export const FLAGS = {
   INSPECTED_BED_CLOVER: 412,
   INSPECTED_BED_NOELLE: 413,
   INSPECTED_BEDS_CH2: 414,
-
-  // Recruits
   RECRUIT_DEBUG: 601,
   RECRUIT_LANCER_1: 602,
   RECRUIT_DUMMY: 603,
@@ -87,10 +106,7 @@ export const FLAGS = {
   RECRUIT_WINGLADE: 667,
   RECRUIT_ORGANIKK: 668,
   RECRUIT_MISS_MIZZLE: 669,
-
   AXE_OF_JUSTICE_PROGRESS: 852,
-
-  // Vessel
   VESSEL_HEAD: 900,
   VESSEL_BODY: 901,
   VESSEL_LEGS: 902,
@@ -101,7 +117,6 @@ export const FLAGS = {
   VESSEL_HONESTY: 907,
   VESSEL_PAIN_SEIZURE: 908,
   VESSEL_GIFT: 909,
-
   EGG_ROOM_CH1: 910,
   EGG_CH1: 911,
   SINCE_CHAPTER: 914,
@@ -183,7 +198,6 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
     displayName: 'Got moss in Jail',
     valueType: 'boolean',
   },
-  // Thrash Machine
   [FLAGS.THRASH_MACHINE_HEAD]: {
     displayName: 'Head',
     valueType: 'map',
@@ -235,13 +249,210 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
     displayName: 'Shoe Color',
     valueType: 'color',
   },
-  // End
-  [FLAGS.INSPECTED_BEDS_CH1]: {
+  [FLAGS.RUNNING_TUTORIAL]: {
+    displayName: 'Learned to run',
     valueType: 'boolean',
+  },
+  [FLAGS.MANUAL_STATUS]: {
+    displayName: 'Manual Status',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not dropped',
+        1: 'Dropped once',
+        3: 'Dropped twice',
+      },
+    },
+  },
+  [FLAGS.JEVIL_PROGRESS]: {
+    displayName: 'Jevil Progress',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Talked',
+        5: 'Opened door',
+        6: 'Defeated violently',
+        7: 'Defeated peacefully',
+      },
+    },
+  },
+  [FLAGS.VIOLENT_KING]: {
+    displayName: 'Defeated King Violently',
+    valueType: 'boolean',
+  },
+  [FLAGS.VIOLENT_ENDING_CH1]: {
+    displayName: 'Got Violent Ending',
+    valueType: 'boolean',
+  },
+  [FLAGS.INSPECTED_BEDS_CH1]: {
     displayName: 'Inspected beds in Card Castle',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_SPINCAKE]: {
+    displayName: 'Got SpinCake',
+    valueType: 'boolean',
   },
   [FLAGS.STARWALKER]: {
     displayName: 'Talked to original &ensp;*Starwalker*',
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_RUDY]: {
+    displayName: 'Talked to Rudy',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'No',
+        1: 'Noelle left',
+        2: 'Talked',
+      },
+    },
+  },
+  [FLAGS.TALKED_BERDLY_CH1]: {
+    displayName: 'Talked to Berdly',
+    valueType: 'boolean',
+  },
+  [FLAGS.PICNIC_TABLE_FINGERS]: {
+    displayName: 'You put your fingers in the picnic table',
+    valueType: 'boolean',
+  },
+  [FLAGS.ONION_CH1]: {
+    displayName: 'Status',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not interacted',
+        1: 'Talk in progress',
+        2: 'Befriended',
+        3: 'Refused friendship',
+      },
+    },
+  },
+  [FLAGS.ONION_YOUR_NAME]: {
+    displayName: 'Your Name',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Kris',
+        2: 'Hippopotamus',
+      },
+    },
+  },
+  [FLAGS.ONION_NAME]: {
+    displayName: 'Onion Name',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Onion',
+        2: 'Beauty',
+        3: 'Asriel II',
+        4: 'Disgusting',
+      },
+    },
+  },
+  [FLAGS.TALKED_QC]: {
+    displayName: 'Talked to QC',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'No',
+        1: 'Got chocolate',
+        2: 'Full inventory',
+      },
+    },
+  },
+  [FLAGS.ASGORE_FLOWERS_PROGRESS]: {
+    displayName: 'Asgore Flowers Progress',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: `In Asgore's shop`,
+        2: 'Got flowers',
+        3: 'Gave flowers to Toriel',
+        4: 'Flowers thrown out',
+      },
+    },
+  },
+  [FLAGS.EGG_FRIDGE]: {
+    displayName: 'Egg Fridge',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Interacted with no Egg',
+        2: 'Egg inside',
+      },
+    },
+  },
+  [FLAGS.TALKED_CATTY]: {
+    displayName: 'Talked to Catty',
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_ALPHYS]: {
+    displayName: 'Talked to Alphys',
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_UNDYNE]: {
+    displayName: 'Talked to Undyne',
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_BURGERPANTS]: {
+    displayName: 'Talked to Burgerpants',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'No',
+        1: 'Unmasked',
+        2: 'Talked',
+      },
+    },
+  },
+  [FLAGS.TALKED_SANS]: {
+    displayName: 'Talked to Sans',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'No',
+        1: 'Talked',
+        2: 'Talked about brother',
+      },
+    },
+  },
+  [FLAGS.GOT_SANS_PHONE]: {
+    displayName: 'Talked to Burgerpants',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'No',
+        1: 'Got number',
+        2: 'Called',
+      },
+    },
+  },
+  [FLAGS.TALKED_NOELLE]: {
+    displayName: 'Talked to Burgerpants',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'No',
+        1: 'Talked',
+        2: 'Talked about Susie',
+      },
+    },
+  },
+  [FLAGS.ENTERED_HOME_COUNT]: {
+    displayName: 'Times you entered home',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+      max: 8,
+    },
+  },
+  [FLAGS.USED_RUDY_SINK]: {
+    displayName: `Used Rudy's sink in hospital`,
     valueType: 'boolean',
   },
   [FLAGS.RALSEI_PHOTO_STATUS]: {
@@ -266,7 +477,6 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
   [FLAGS.INSPECTED_BEDS_CH2]: {
     displayName: 'Inspected beds in Chapter 2',
   },
-  // Recruits
   [FLAGS.RECRUIT_DEBUG]: { displayName: 'RECRUIT_DEBUG' },
   [FLAGS.RECRUIT_LANCER_1]: { displayName: 'RECRUIT_LANCER_1' },
   [FLAGS.RECRUIT_DUMMY]: { displayName: 'RECRUIT_DUMMY' },
@@ -330,11 +540,9 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
   [FLAGS.RECRUIT_WINGLADE]: { displayName: 'RECRUIT_WINGLADE' },
   [FLAGS.RECRUIT_ORGANIKK]: { displayName: 'RECRUIT_ORGANIKK' },
   [FLAGS.RECRUIT_MISS_MIZZLE]: { displayName: 'RECRUIT_MISS_MIZZLE' },
-  // End
   [FLAGS.AXE_OF_JUSTICE_PROGRESS]: {
     displayName: 'Axe of Justice progress',
   },
-  // Vessel
   [FLAGS.VESSEL_HEAD]: {
     displayName: 'Head',
     valueType: 'map',
@@ -461,7 +669,21 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
       },
     },
   },
-  // End
+  [FLAGS.EGG_ROOM_CH1]: {
+    displayName: 'Egg Room',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not found',
+        1: 'Found',
+        2: 'Talked to Man',
+      },
+    },
+  },
+  [FLAGS.EGG_CH1]: {
+    displayName: 'Got Egg in Chapter 1',
+    valueType: 'boolean',
+  },
   [FLAGS.SINCE_CHAPTER]: {
     displayName: 'Starting Chapter',
     description: 'Number of chapter that you started this save file from.',
