@@ -2,6 +2,7 @@ import type { BaseProperties } from '@types';
 
 export const FLAGS = {
   SIMPLIFY_VFX: 8,
+  CAN_PARTY_ACT: 34,
   STORAGE_SIZE: 64,
   GOT_MOSS_CH1: 106,
   THRASH_MACHINE_HEAD: 220,
@@ -36,13 +37,23 @@ export const FLAGS = {
   TALKED_NOELLE: 276,
   ENTERED_HOME_COUNT: 277,
   USED_RUDY_SINK: 278,
+  HUGGED_DUMMY: 300,
+  CARNIVAL_GIFT: 307,
+  SPAMTON_PROGRESS: 309,
   RALSEI_PHOTO_STATUS: 325,
+  RECRUITED_HACKER: 357,
   INSPECTED_BED_KRIS: 409,
   INSPECTED_BED_SUSIE: 410,
   INSPECTED_BED_LANCER: 411,
   INSPECTED_BED_CLOVER: 412,
   INSPECTED_BED_NOELLE: 413,
   INSPECTED_BEDS_CH2: 414,
+  TALKED_METTATON: 422,
+  ONION_CH2: 424,
+  ONION_MISSED: 425,
+  TOOK_ASRIEL_MONEY: 430,
+  BERDLY_BROKEN_ARM: 457,
+  CARS_HIT_COUNT: 462,
   RECRUIT_DEBUG: 601,
   RECRUIT_LANCER_1: 602,
   RECRUIT_DUMMY: 603,
@@ -122,6 +133,7 @@ export const FLAGS = {
   SINCE_CHAPTER: 914,
   WEIRDROUTE_PROGRESS_CH2: 915,
   WEIRDROUTE_FAILED: 916,
+  EGG_ROOM_CH2: 917,
   GOT_MOSS_CH2: 920,
   GOT_MOSS_WITH_NOELLE: 921,
   GOT_MOSS_WITH_SUSIE: 922,
@@ -148,6 +160,7 @@ export interface FlagProperties extends BaseProperties {
     max?: number;
     allowedValues?: number[];
     map?: Record<number, string>;
+    invertedBoolean?: boolean;
   };
 }
 
@@ -187,6 +200,13 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
     displayName: 'Simplify VFX',
     description: `
      As the name suggests it turning this on simplifies some of the VFX in game.`,
+  },
+  [FLAGS.CAN_PARTY_ACT]: {
+    displayName: 'Party Members can ACT',
+    valueType: 'boolean',
+    valueRules: {
+      invertedBoolean: true,
+    },
   },
   [FLAGS.STORAGE_SIZE]: {
     displayName: 'Storage size',
@@ -455,27 +475,113 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
     displayName: `Used Rudy's sink in hospital`,
     valueType: 'boolean',
   },
+  [FLAGS.HUGGED_DUMMY]: {
+    displayName: 'Hugged Dummy',
+    valueType: 'boolean',
+  },
+  [FLAGS.CARNIVAL_GIFT]: {
+    displayName: 'Carnival Gift Recipient',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Ralsei',
+        2: 'Susie',
+        3: 'Noelle',
+        4: 'Berdly',
+      },
+    },
+  },
+  [FLAGS.SPAMTON_PROGRESS]: {
+    displayName: 'Spamton Progress',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Spared',
+        3: 'Got KeyGen',
+        4: 'Used KeyGen',
+        5: 'Entered basement',
+        7: 'Loaded disk',
+        8: 'Inserted disk',
+        9: 'Defeated NEO',
+      },
+    },
+  },
   [FLAGS.RALSEI_PHOTO_STATUS]: {
-    displayName:
-      'Action taken when taking photo with Ralsei at end of Acid Tunnel',
+    displayName: `Ralsei's Photo Type`,
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Hug',
+        2: 'Pose',
+        3: 'Rude',
+        4: 'Blank',
+      },
+    },
+  },
+  [FLAGS.RECRUITED_HACKER]: {
+    displayName: 'Recruited Hacker',
+    valueType: 'boolean',
   },
   [FLAGS.INSPECTED_BED_KRIS]: {
-    displayName: `Inspected Kris's bed in Chapter 2`,
+    displayName: `Inspected Kris's Bed`,
+    valueType: 'boolean',
   },
   [FLAGS.INSPECTED_BED_SUSIE]: {
-    displayName: `Inspected Susie's bed in Chapter 2`,
+    displayName: `Inspected Susie's Bed`,
+    valueType: 'boolean',
   },
   [FLAGS.INSPECTED_BED_LANCER]: {
-    displayName: `Inspected Lancer's bed in Chapter 2`,
+    displayName: `Inspected Lancer's Bed`,
+    valueType: 'boolean',
   },
   [FLAGS.INSPECTED_BED_CLOVER]: {
-    displayName: `Inspected Clover's bed in Chapter 2`,
+    displayName: `Inspected Clover's Bed`,
+    valueType: 'boolean',
   },
   [FLAGS.INSPECTED_BED_NOELLE]: {
-    displayName: `Inspected Noelle's bed in Chapter 2`,
+    displayName: `Inspected Noelle's Bed`,
+    valueType: 'boolean',
   },
   [FLAGS.INSPECTED_BEDS_CH2]: {
-    displayName: 'Inspected beds in Chapter 2',
+    displayName: 'Got Bed Inspector Title',
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_METTATON]: {
+    displayName: `Took Asriel's money`,
+    valueType: 'boolean',
+  },
+  [FLAGS.ONION_CH2]: {
+    displayName: 'Talked to Onion',
+    valueType: 'boolean',
+  },
+  [FLAGS.ONION_MISSED]: {
+    displayName: 'Did you miss Onion?',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Yes',
+        2: 'No',
+      },
+    },
+  },
+  [FLAGS.TOOK_ASRIEL_MONEY]: {
+    displayName: `Took Asriel's money`,
+    valueType: 'boolean',
+  },
+  [FLAGS.BERDLY_BROKEN_ARM]: {
+    displayName: `Berdly's Arm Broken`,
+    valueType: 'boolean',
+  },
+  [FLAGS.CARS_HIT_COUNT]: {
+    displayName: 'Cars Hit Count',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
   },
   [FLAGS.RECRUIT_DEBUG]: { displayName: 'RECRUIT_DEBUG' },
   [FLAGS.RECRUIT_LANCER_1]: { displayName: 'RECRUIT_LANCER_1' },
@@ -698,22 +804,54 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
     },
   },
   [FLAGS.WEIRDROUTE_PROGRESS_CH2]: {
-    displayName: 'Weird route progression in Chapter 2',
+    displayName: 'Weird Route Progress',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Froze monsters',
+        2: 'Can get Freeze Ring',
+        3: 'Got Freeze Ring',
+        4: 'Passed force field',
+        5: 'Passed mouse puzzle',
+        6: 'Used Snowgrave',
+      },
+    },
   },
   [FLAGS.WEIRDROUTE_FAILED]: {
-    displayName: 'True if weird route was abandoned at some point',
+    displayName: 'Weird Route Failed',
+    valueType: 'boolean',
+  },
+  [FLAGS.EGG_ROOM_CH2]: {
+    displayName: 'Egg Room',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not found',
+        1: 'Encountered Annoying Dog',
+        2: 'Found',
+        3: 'Talked to Man',
+      },
+    },
   },
   [FLAGS.GOT_MOSS_CH2]: {
-    displayName: 'Got Moss in Chapter 2',
+    displayName: 'Got moss',
+    valueType: 'boolean',
   },
   [FLAGS.GOT_MOSS_WITH_NOELLE]: {
-    displayName: 'Eat moss with Noelle in party in Chapter 2',
+    displayName: 'Ate moss with Noelle in party',
+    valueType: 'boolean',
   },
   [FLAGS.GOT_MOSS_WITH_SUSIE]: {
-    displayName: 'Eat moss with Susie in party in Chapter 2',
+    displayName: 'Ate moss with Susie in party',
+    valueType: 'boolean',
   },
   [FLAGS.NOELLE_ICE_SHOCK_COUNT]: {
-    displayName: 'Tracks how many times Noelle uses Ice Shock spell',
+    displayName: 'Noelle Ice Shock spell count',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
   },
   [FLAGS.GAMESHOW_LETTER_FIRST]: {
     valueType: 'map',

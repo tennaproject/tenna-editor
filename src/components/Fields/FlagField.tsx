@@ -37,10 +37,16 @@ export function FlagField({ flag, id, className }: FlagFieldProps) {
         <InlineGroup>
           <Checkbox
             label={<Markdown>{displayName}</Markdown>}
-            checked={!!currentValue}
+            checked={
+              valueRules?.invertedBoolean ? !currentValue : !!currentValue
+            }
             onChange={(value: boolean) => {
               updateSave((save) => {
-                save.flags[flag] = value ? 1 : 0;
+                if (valueRules?.invertedBoolean) {
+                  save.flags[flag] = value ? 0 : 1;
+                } else {
+                  save.flags[flag] = value ? 1 : 0;
+                }
               });
             }}
           />
