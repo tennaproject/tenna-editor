@@ -14,7 +14,7 @@ export function SidebarMenu() {
   return (
     <>
       <Sidebar.Group>
-        <Sidebar.Item title="Home" icon={<HomeIcon />} to="/home" />
+        <Sidebar.Item title="Home" icon={<HomeIcon />} to="/" />
         <Sidebar.Item
           title="Inventory"
           icon={<InventoryIcon />}
@@ -49,13 +49,21 @@ export function SidebarMenu() {
       </Sidebar.Group>
 
       <Sidebar.Group>
-        <Sidebar.Item
-          title="Devtools"
-          icon={<DevtoolsIcon />}
-          to="/devtools"
-          requireDevmode
-        />
-        <Sidebar.Item title="Settings" icon={<SettingsIcon />} to="/settings" />
+        {import.meta.env.VITE_DEVTOOLS_TAB === 'true' && (
+          <Sidebar.Item
+            title="Devtools"
+            icon={<DevtoolsIcon />}
+            to="/devtools"
+            requireDevmode
+          />
+        )}
+        {import.meta.env.VITE_SETTINGS_TAB === 'true' && (
+          <Sidebar.Item
+            title="Settings"
+            icon={<SettingsIcon />}
+            to="/settings"
+          />
+        )}
         <Sidebar.Item title="About" icon={<AboutIcon />} to="/about" />
       </Sidebar.Group>
     </>
