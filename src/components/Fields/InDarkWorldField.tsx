@@ -22,7 +22,6 @@ export function InDarkWorldField({ id, className }: InDarkWorldFieldProps) {
           label="Currently in Dark World"
           checked={checked}
           onChange={onChange}
-          fixedHeight
         />
         <HelpTip title="Currently in Dark World">
           <p>
