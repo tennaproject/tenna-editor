@@ -94,6 +94,19 @@ export default defineConfig({
         assetFileNames: 'assets/[name]-[hash][extname]',
         manualChunks(id) {
           if (id.includes('node_modules')) {
+            if (id.includes('zustand')) {
+              return 'zustand';
+            }
+            if (id.includes('tailwind')) {
+              return 'tailwind';
+            }
+            if (
+              id.includes('react') ||
+              id.includes('framer-motion') ||
+              id.includes('downshift')
+            ) {
+              return 'react';
+            }
             return 'vendor';
           }
           if (id.includes('/src/')) return 'tenna';
