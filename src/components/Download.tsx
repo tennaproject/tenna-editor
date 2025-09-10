@@ -78,7 +78,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
 
   return (
     <Modal isOpen={isOpen} setOpen={setOpen}>
-      <div className="h-96 lg:h-64 flex flex-col select-none relative lg:p-4 p-2">
+      <div className="h-96 flex flex-col select-none relative lg:p-4 p-2">
         <AnimatePresence mode="wait">
           <motion.div
             initial={{ opacity: 0 }}
