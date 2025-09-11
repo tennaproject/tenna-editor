@@ -1284,7 +1284,15 @@ const CH4_CONTENT: ChapterContent = {
     ROOMS.DW_CHURCH_RIPPLEPUZZLE_POSTGERS,
     ROOMS.DW_CHURCH_TALLBOOKCASES_BACKUP,
   ]),
-  flags: new Set<FlagIndex>([...CH3_CONTENT.flags]),
+  flags: new Set<FlagIndex>([
+    ...CH3_CONTENT.flags,
+    FLAGS.GOT_SUSIE_PRIZE,
+    FLAGS.AXE_OF_JUSTICE_PROGRESS,
+    FLAGS.DONATION_FOUNTAIN_COUNT,
+    FLAGS.EGG_CH4,
+    FLAGS.GAVE_TENNA,
+    FLAGS.GOT_MOSS_CH4,
+  ]),
   enemies: new Set<EnemyIndex>([
     ...CH3_CONTENT.enemies,
     ENEMIES.GUEI,

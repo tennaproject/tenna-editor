@@ -156,7 +156,9 @@ export const FLAGS = {
   RECRUIT_WINGLADE: 667,
   RECRUIT_ORGANIKK: 668,
   RECRUIT_MISS_MIZZLE: 669,
+  GOT_SUSIE_PRIZE: 747,
   AXE_OF_JUSTICE_PROGRESS: 852,
+  DONATION_FOUNTAIN_COUNT: 898,
   VESSEL_HEAD: 900,
   VESSEL_BODY: 901,
   VESSEL_LEGS: 902,
@@ -178,6 +180,7 @@ export const FLAGS = {
   GOT_MOSS_WITH_SUSIE: 922,
   NOELLE_ICE_SHOCK_COUNT: 925,
   EGG_CH3: 930,
+  EGG_CH4: 931,
   GAMESHOW_LETTER_FIRST: 1012,
   GAMESHOW_LETTER_SECOND: 1013,
   GAMESHOW_LETTER_THIRD: 1014,
@@ -201,6 +204,7 @@ export const FLAGS = {
   GOT_GOLDEN_TENNA: 1222,
   ENTERED_1225_ROOM: 1226,
   STARWALKER_CH3: 1240,
+  GAVE_TENNA: 1575,
   GOT_MOSS_CH4: 1592,
 } as const;
 
@@ -672,8 +676,17 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
   [FLAGS.RECRUIT_WINGLADE]: { displayName: 'RECRUIT_WINGLADE' },
   [FLAGS.RECRUIT_ORGANIKK]: { displayName: 'RECRUIT_ORGANIKK' },
   [FLAGS.RECRUIT_MISS_MIZZLE]: { displayName: 'RECRUIT_MISS_MIZZLE' },
+  [FLAGS.GOT_SUSIE_PRIZE]: {
+    displayName: `Got Susie's prize`,
+    valueType: 'boolean',
+  },
   [FLAGS.AXE_OF_JUSTICE_PROGRESS]: {
-    displayName: 'Axe of Justice progress',
+    displayName: 'Defeated Hammer of Justice',
+    valueType: 'boolean',
+  },
+  [FLAGS.DONATION_FOUNTAIN_COUNT]: {
+    displayName: 'Money In Donation Fountain',
+    valueType: 'number',
   },
   [FLAGS.VESSEL_HEAD]: {
     displayName: 'Head',
@@ -883,6 +896,10 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
     displayName: 'Got Egg',
     valueType: 'boolean',
   },
+  [FLAGS.EGG_CH4]: {
+    displayName: 'Got Egg',
+    valueType: 'boolean',
+  },
   [FLAGS.GAMESHOW_LETTER_FIRST]: {
     valueType: 'map',
     valueRules: {
@@ -1034,6 +1051,10 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
   },
   [FLAGS.STARWALKER_CH3]: {
     displayName: 'Talked to original &ensp;*Starwalker*',
+    valueType: 'boolean',
+  },
+  [FLAGS.GAVE_TENNA]: {
+    displayName: 'Gave Tenna away',
     valueType: 'boolean',
   },
   [FLAGS.GOT_MOSS_CH4]: {
