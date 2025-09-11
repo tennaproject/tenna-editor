@@ -7,3 +7,4 @@ export * from './deep-equal';
 export * from './merge-class';
 export * from './get-character-color';
 export * from './time';
+export * from './get-game-color';

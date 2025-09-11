@@ -1,19 +1,98 @@
 import type { BaseProperties } from '@types';
 
+const ALPHABET = {
+  0: 'A',
+  1: 'B',
+  2: 'C',
+  3: 'D',
+  4: 'E',
+  5: 'F',
+  6: 'G',
+  7: 'H',
+  8: 'I',
+  9: 'J',
+  10: 'K',
+  11: 'L',
+  12: 'M',
+  13: 'N',
+  14: 'O',
+  15: 'P',
+  16: 'Q',
+  17: 'R',
+  18: 'S',
+  19: 'T',
+  20: 'U',
+  21: 'V',
+  22: 'W',
+  23: 'X',
+  24: 'Y',
+  25: 'Z',
+} as const;
+
+const GAMESHOW_RANKS = {
+  '-1': 'None',
+  0: 'Z',
+  1: 'C',
+  2: 'B',
+  3: 'A',
+  4: 'S',
+  5: 'T',
+} as const;
+
 export const FLAGS = {
   SIMPLIFY_VFX: 8,
+  CAN_PARTY_ACT: 34,
   STORAGE_SIZE: 64,
   GOT_MOSS_CH1: 106,
+  THRASH_MACHINE_HEAD: 220,
+  THRASH_MACHINE_BODY: 221,
+  THRASH_MACHINE_SHOE: 222,
+  THRASH_MACHINE_HEAD_COLOR: 223,
+  THRASH_MACHINE_BODY_COLOR: 224,
+  THRASH_MACHINE_SHOE_COLOR: 225,
+  RUNNING_TUTORIAL: 206,
+  MANUAL_STATUS: 207,
+  JEVIL_PROGRESS: 241,
+  VIOLENT_KING: 247,
+  VIOLENT_ENDING_CH1: 248,
   INSPECTED_BEDS_CH1: 252,
+  TALKED_BERDLY_CH1: 256,
+  GOT_SPINCAKE: 253,
+  STARWALKER: 254,
+  TALKED_RUDY: 255,
+  PICNIC_TABLE_FINGERS: 257,
+  ONION_CH1: 258,
+  ONION_YOUR_NAME: 259,
+  ONION_NAME: 260,
+  TALKED_QC: 261,
+  ASGORE_FLOWERS_PROGRESS: 262,
+  EGG_FRIDGE: 263,
+  TALKED_CATTY: 265,
+  TALKED_ALPHYS: 269,
+  TALKED_UNDYNE: 270,
+  TALKED_BURGERPANTS: 271,
+  TALKED_SANS: 273,
+  GOT_SANS_PHONE: 274,
+  TALKED_NOELLE: 276,
+  ENTERED_HOME_COUNT: 277,
+  USED_RUDY_SINK: 278,
+  HUGGED_DUMMY: 300,
+  CARNIVAL_GIFT: 307,
+  SPAMTON_PROGRESS: 309,
   RALSEI_PHOTO_STATUS: 325,
+  RECRUITED_HACKER: 357,
   INSPECTED_BED_KRIS: 409,
   INSPECTED_BED_SUSIE: 410,
   INSPECTED_BED_LANCER: 411,
   INSPECTED_BED_CLOVER: 412,
   INSPECTED_BED_NOELLE: 413,
   INSPECTED_BEDS_CH2: 414,
-
-  // Recruits
+  TALKED_METTATON: 422,
+  ONION_CH2: 424,
+  ONION_MISSED: 425,
+  TOOK_ASRIEL_MONEY: 430,
+  BERDLY_BROKEN_ARM: 457,
+  CARS_HIT_COUNT: 462,
   RECRUIT_DEBUG: 601,
   RECRUIT_LANCER_1: 602,
   RECRUIT_DUMMY: 603,
@@ -77,29 +156,62 @@ export const FLAGS = {
   RECRUIT_WINGLADE: 667,
   RECRUIT_ORGANIKK: 668,
   RECRUIT_MISS_MIZZLE: 669,
-
+  GOT_SUSIE_PRIZE: 747,
   AXE_OF_JUSTICE_PROGRESS: 852,
+  DONATION_FOUNTAIN_COUNT: 898,
+  VESSEL_HEAD: 900,
+  VESSEL_BODY: 901,
+  VESSEL_LEGS: 902,
+  VESSEL_FOOD: 903,
+  VESSEL_BLOOD_TYPE: 904,
+  VESSEL_COLOR: 905,
+  VESSEL_FEELING: 906,
+  VESSEL_HONESTY: 907,
+  VESSEL_PAIN_SEIZURE: 908,
+  VESSEL_GIFT: 909,
+  EGG_ROOM_CH1: 910,
+  EGG_CH1: 911,
   SINCE_CHAPTER: 914,
   WEIRDROUTE_PROGRESS_CH2: 915,
   WEIRDROUTE_FAILED: 916,
+  EGG_ROOM_CH2: 917,
   GOT_MOSS_CH2: 920,
   GOT_MOSS_WITH_NOELLE: 921,
   GOT_MOSS_WITH_SUSIE: 922,
   NOELLE_ICE_SHOCK_COUNT: 925,
+  EGG_CH3: 930,
+  EGG_CH4: 931,
   GAMESHOW_LETTER_FIRST: 1012,
   GAMESHOW_LETTER_SECOND: 1013,
   GAMESHOW_LETTER_THIRD: 1014,
   CH3_POINTS: 1044,
+  SUSIE_HEAL_COUNT: 1045,
+  KNIGHT_FIGHT: 1047,
   SWORD_PROGRESS: 1055,
+  SKIPPED_INTRO_CH3: 1071,
   GOT_MOSS_CH3: 1078,
+  BIBLIOX_PROGRESS: 1092,
   RALSEI_HORSE: 1152,
+  RANK_BOARD_1: 1173,
+  RANK_BOARD_2: 1174,
+  UNLOCKED_SUSIEZILLA: 1189,
+  SCORE_COOKING: 1193,
+  RANK_COOKING: 1194,
+  SCORE_LIGHTNERS_LIVE: 1195,
+  RANK_LIGHTNERS_LIVE: 1196,
+  SCORE_SUSIEZILLA: 1197,
+  RANK_SUSIEZILLA: 1198,
+  GOT_GOLDEN_TENNA: 1222,
+  ENTERED_1225_ROOM: 1226,
+  STARWALKER_CH3: 1240,
+  GAVE_TENNA: 1575,
   GOT_MOSS_CH4: 1592,
 } as const;
 
 export type FlagIndex = (typeof FLAGS)[keyof typeof FLAGS];
 export type FlagName = keyof typeof FLAGS;
 
-export type FlagValueType = 'boolean' | 'number' | 'map';
+export type FlagValueType = 'boolean' | 'number' | 'map' | 'color';
 
 export interface FlagProperties extends BaseProperties {
   valueType?: FlagValueType;
@@ -108,38 +220,9 @@ export interface FlagProperties extends BaseProperties {
     max?: number;
     allowedValues?: number[];
     map?: Record<number, string>;
+    invertedBoolean?: boolean;
   };
 }
-
-// temp
-const letterMap = {
-  0: 'A',
-  1: 'B',
-  2: 'C',
-  3: 'D',
-  4: 'E',
-  5: 'F',
-  6: 'G',
-  7: 'H',
-  8: 'I',
-  9: 'J',
-  10: 'K',
-  11: 'L',
-  12: 'M',
-  13: 'N',
-  14: 'O',
-  15: 'P',
-  16: 'Q',
-  17: 'R',
-  18: 'S',
-  19: 'T',
-  20: 'U',
-  21: 'V',
-  22: 'W',
-  23: 'X',
-  24: 'Y',
-  25: 'Z',
-};
 
 export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
   [FLAGS.SIMPLIFY_VFX]: {
@@ -148,6 +231,13 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
     description: `
      As the name suggests it turning this on simplifies some of the VFX in game.`,
   },
+  [FLAGS.CAN_PARTY_ACT]: {
+    displayName: 'Party Members can ACT',
+    valueType: 'boolean',
+    valueRules: {
+      invertedBoolean: true,
+    },
+  },
   [FLAGS.STORAGE_SIZE]: {
     displayName: 'Storage size',
     description: `
@@ -155,36 +245,374 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
     `,
   },
   [FLAGS.GOT_MOSS_CH1]: {
-    displayName: 'Got Moss in Chapter 1',
+    displayName: 'Got moss in Jail',
+    valueType: 'boolean',
   },
-  [FLAGS.RALSEI_PHOTO_STATUS]: {
-    displayName:
-      'Action taken when taking photo with Ralsei at end of Acid Tunnel',
+  [FLAGS.THRASH_MACHINE_HEAD]: {
+    displayName: 'Head',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        '-1': 'None',
+        0: 'Laser',
+        1: 'Sword',
+        2: 'Flame',
+        3: 'Duck',
+      },
+    },
+  },
+  [FLAGS.THRASH_MACHINE_BODY]: {
+    displayName: 'Body',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        '-1': 'None',
+        0: 'Plain',
+        1: 'Wheel',
+        2: 'Tank',
+        3: 'Duck',
+      },
+    },
+  },
+  [FLAGS.THRASH_MACHINE_SHOE]: {
+    displayName: 'Shoe',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        '-1': 'None',
+        0: 'Sneak',
+        1: 'Attractive Wheels',
+        2: 'Tread',
+        3: 'Duck',
+      },
+    },
+  },
+  [FLAGS.THRASH_MACHINE_HEAD_COLOR]: {
+    displayName: 'Head Color',
+    valueType: 'color',
+  },
+  [FLAGS.THRASH_MACHINE_BODY_COLOR]: {
+    displayName: 'Body Color',
+    valueType: 'color',
+  },
+  [FLAGS.THRASH_MACHINE_SHOE_COLOR]: {
+    displayName: 'Shoe Color',
+    valueType: 'color',
+  },
+  [FLAGS.RUNNING_TUTORIAL]: {
+    displayName: 'Learned to run',
+    valueType: 'boolean',
+  },
+  [FLAGS.MANUAL_STATUS]: {
+    displayName: 'Manual Status',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not dropped',
+        1: 'Dropped once',
+        3: 'Dropped twice',
+      },
+    },
+  },
+  [FLAGS.JEVIL_PROGRESS]: {
+    displayName: 'Jevil Progress',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Talked',
+        5: 'Opened door',
+        6: 'Defeated violently',
+        7: 'Defeated peacefully',
+      },
+    },
+  },
+  [FLAGS.VIOLENT_KING]: {
+    displayName: 'Defeated King Violently',
+    valueType: 'boolean',
+  },
+  [FLAGS.VIOLENT_ENDING_CH1]: {
+    displayName: 'Got Violent Ending',
+    valueType: 'boolean',
   },
   [FLAGS.INSPECTED_BEDS_CH1]: {
+    displayName: 'Inspected beds in Card Castle',
     valueType: 'boolean',
-    displayName: 'Inspected beds in Chapter 1',
+  },
+  [FLAGS.GOT_SPINCAKE]: {
+    displayName: 'Got SpinCake',
+    valueType: 'boolean',
+  },
+  [FLAGS.STARWALKER]: {
+    displayName: 'Talked to original &ensp;*Starwalker*',
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_RUDY]: {
+    displayName: 'Talked to Rudy',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'No',
+        1: 'Noelle left',
+        2: 'Talked',
+      },
+    },
+  },
+  [FLAGS.TALKED_BERDLY_CH1]: {
+    displayName: 'Talked to Berdly',
+    valueType: 'boolean',
+  },
+  [FLAGS.PICNIC_TABLE_FINGERS]: {
+    displayName: 'You put your fingers in the picnic table',
+    valueType: 'boolean',
+  },
+  [FLAGS.ONION_CH1]: {
+    displayName: 'Status',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not interacted',
+        1: 'Talk in progress',
+        2: 'Befriended',
+        3: 'Refused friendship',
+      },
+    },
+  },
+  [FLAGS.ONION_YOUR_NAME]: {
+    displayName: 'Your Name',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Kris',
+        2: 'Hippopotamus',
+      },
+    },
+  },
+  [FLAGS.ONION_NAME]: {
+    displayName: 'Onion Name',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Onion',
+        2: 'Beauty',
+        3: 'Asriel II',
+        4: 'Disgusting',
+      },
+    },
+  },
+  [FLAGS.TALKED_QC]: {
+    displayName: 'Talked to QC',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'No',
+        1: 'Got chocolate',
+        2: 'Full inventory',
+      },
+    },
+  },
+  [FLAGS.ASGORE_FLOWERS_PROGRESS]: {
+    displayName: 'Asgore Flowers Progress',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: `In Asgore's shop`,
+        2: 'Got flowers',
+        3: 'Gave flowers to Toriel',
+        4: 'Flowers thrown out',
+      },
+    },
+  },
+  [FLAGS.EGG_FRIDGE]: {
+    displayName: 'Egg Fridge',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Interacted with no Egg',
+        2: 'Egg inside',
+      },
+    },
+  },
+  [FLAGS.TALKED_CATTY]: {
+    displayName: 'Talked to Catty',
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_ALPHYS]: {
+    displayName: 'Talked to Alphys',
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_UNDYNE]: {
+    displayName: 'Talked to Undyne',
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_BURGERPANTS]: {
+    displayName: 'Talked to Burgerpants',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'No',
+        1: 'Unmasked',
+        2: 'Talked',
+      },
+    },
+  },
+  [FLAGS.TALKED_SANS]: {
+    displayName: 'Talked to Sans',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'No',
+        1: 'Talked',
+        2: 'Talked about brother',
+      },
+    },
+  },
+  [FLAGS.GOT_SANS_PHONE]: {
+    displayName: 'Talked to Burgerpants',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'No',
+        1: 'Got number',
+        2: 'Called',
+      },
+    },
+  },
+  [FLAGS.TALKED_NOELLE]: {
+    displayName: 'Talked to Burgerpants',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'No',
+        1: 'Talked',
+        2: 'Talked about Susie',
+      },
+    },
+  },
+  [FLAGS.ENTERED_HOME_COUNT]: {
+    displayName: 'Times you entered home',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+      max: 8,
+    },
+  },
+  [FLAGS.USED_RUDY_SINK]: {
+    displayName: `Used Rudy's sink in hospital`,
+    valueType: 'boolean',
+  },
+  [FLAGS.HUGGED_DUMMY]: {
+    displayName: 'Hugged Dummy',
+    valueType: 'boolean',
+  },
+  [FLAGS.CARNIVAL_GIFT]: {
+    displayName: 'Carnival Gift Recipient',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Ralsei',
+        2: 'Susie',
+        3: 'Noelle',
+        4: 'Berdly',
+      },
+    },
+  },
+  [FLAGS.SPAMTON_PROGRESS]: {
+    displayName: 'Spamton Progress',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Spared',
+        3: 'Got KeyGen',
+        4: 'Used KeyGen',
+        5: 'Entered basement',
+        7: 'Loaded disk',
+        8: 'Inserted disk',
+        9: 'Defeated NEO',
+      },
+    },
+  },
+  [FLAGS.RALSEI_PHOTO_STATUS]: {
+    displayName: `Ralsei's Photo Type`,
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Hug',
+        2: 'Pose',
+        3: 'Rude',
+        4: 'Blank',
+      },
+    },
+  },
+  [FLAGS.RECRUITED_HACKER]: {
+    displayName: 'Recruited Hacker',
+    valueType: 'boolean',
   },
   [FLAGS.INSPECTED_BED_KRIS]: {
-    displayName: `Inspected Kris's bed in Chapter 2`,
+    displayName: `Inspected Kris's Bed`,
+    valueType: 'boolean',
   },
   [FLAGS.INSPECTED_BED_SUSIE]: {
-    displayName: `Inspected Susie's bed in Chapter 2`,
+    displayName: `Inspected Susie's Bed`,
+    valueType: 'boolean',
   },
   [FLAGS.INSPECTED_BED_LANCER]: {
-    displayName: `Inspected Lancer's bed in Chapter 2`,
+    displayName: `Inspected Lancer's Bed`,
+    valueType: 'boolean',
   },
   [FLAGS.INSPECTED_BED_CLOVER]: {
-    displayName: `Inspected Clover's bed in Chapter 2`,
+    displayName: `Inspected Clover's Bed`,
+    valueType: 'boolean',
   },
   [FLAGS.INSPECTED_BED_NOELLE]: {
-    displayName: `Inspected Noelle's bed in Chapter 2`,
+    displayName: `Inspected Noelle's Bed`,
+    valueType: 'boolean',
   },
   [FLAGS.INSPECTED_BEDS_CH2]: {
-    displayName: 'Inspected beds in Chapter 2',
+    displayName: 'Got Bed Inspector Title',
+    valueType: 'boolean',
   },
-
-  // Recruits
+  [FLAGS.TALKED_METTATON]: {
+    displayName: 'Talked to Mettaton',
+    valueType: 'boolean',
+  },
+  [FLAGS.ONION_CH2]: {
+    displayName: 'Talked to Onion',
+    valueType: 'boolean',
+  },
+  [FLAGS.ONION_MISSED]: {
+    displayName: 'Did you miss Onion?',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Yes',
+        2: 'No',
+      },
+    },
+  },
+  [FLAGS.TOOK_ASRIEL_MONEY]: {
+    displayName: `Took Asriel's money`,
+    valueType: 'boolean',
+  },
+  [FLAGS.BERDLY_BROKEN_ARM]: {
+    displayName: `Berdly's Arm Broken`,
+    valueType: 'boolean',
+  },
+  [FLAGS.CARS_HIT_COUNT]: {
+    displayName: 'Cars Hit Count',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
+  },
   [FLAGS.RECRUIT_DEBUG]: { displayName: 'RECRUIT_DEBUG' },
   [FLAGS.RECRUIT_LANCER_1]: { displayName: 'RECRUIT_LANCER_1' },
   [FLAGS.RECRUIT_DUMMY]: { displayName: 'RECRUIT_DUMMY' },
@@ -248,9 +676,158 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
   [FLAGS.RECRUIT_WINGLADE]: { displayName: 'RECRUIT_WINGLADE' },
   [FLAGS.RECRUIT_ORGANIKK]: { displayName: 'RECRUIT_ORGANIKK' },
   [FLAGS.RECRUIT_MISS_MIZZLE]: { displayName: 'RECRUIT_MISS_MIZZLE' },
-
+  [FLAGS.GOT_SUSIE_PRIZE]: {
+    displayName: `Got Susie's prize`,
+    valueType: 'boolean',
+  },
   [FLAGS.AXE_OF_JUSTICE_PROGRESS]: {
-    displayName: 'Axe of Justice progress',
+    displayName: 'Defeated Hammer of Justice',
+    valueType: 'boolean',
+  },
+  [FLAGS.DONATION_FOUNTAIN_COUNT]: {
+    displayName: 'Money In Donation Fountain',
+    valueType: 'number',
+  },
+  [FLAGS.VESSEL_HEAD]: {
+    displayName: 'Head',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Head 1',
+        1: 'Head 2',
+        2: 'Head 3',
+        3: 'Head 4',
+        4: 'Head 5',
+        5: 'Head 6',
+        6: 'Head 7',
+        7: 'Head 8',
+      },
+    },
+  },
+  [FLAGS.VESSEL_BODY]: {
+    displayName: 'Body',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Body 1',
+        1: 'Body 2',
+        2: 'Body 3',
+        3: 'Body 4',
+        4: 'Body 5',
+        5: 'Body 6',
+      },
+    },
+  },
+  [FLAGS.VESSEL_LEGS]: {
+    displayName: 'Legs',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Legs 1',
+        1: 'Legs 2',
+        2: 'Legs 3',
+        3: 'Legs 4',
+      },
+    },
+  },
+  [FLAGS.VESSEL_FOOD]: {
+    displayName: 'What is its favorite food?',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Sweet',
+        1: 'Soft',
+        2: 'Sour',
+        3: 'Salty',
+        4: 'Pain',
+        5: 'Cold',
+      },
+    },
+  },
+  [FLAGS.VESSEL_BLOOD_TYPE]: {
+    displayName: 'Your favorite blood type?',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'A',
+        1: 'AB',
+        2: 'B',
+        3: 'C',
+        4: 'D',
+      },
+    },
+  },
+  [FLAGS.VESSEL_COLOR]: {
+    displayName: 'What color does it like most?',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Red',
+        1: 'Blue',
+        2: 'Green',
+        3: 'Yellow',
+      },
+    },
+  },
+  [FLAGS.VESSEL_GIFT]: {
+    displayName: 'Please give it a gift',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Kindness',
+        1: 'Mind',
+        2: 'Ambition',
+        3: 'Integrity',
+        4: 'Voice',
+      },
+    },
+  },
+  [FLAGS.VESSEL_FEELING]: {
+    displayName: 'How do you feel about your creation? (It will not hear.)',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Love',
+        1: 'Hope',
+        2: 'Disgust',
+        3: 'Fear',
+      },
+    },
+  },
+  [FLAGS.VESSEL_HONESTY]: {
+    displayName: 'Have you answered honestly?',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'No',
+        1: 'Yes',
+      },
+    },
+  },
+  [FLAGS.VESSEL_PAIN_SEIZURE]: {
+    displayName: 'You acknowledge the possibility of pain and seizure.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Yes',
+        1: 'No',
+      },
+    },
+  },
+  [FLAGS.EGG_ROOM_CH1]: {
+    displayName: 'Egg Room',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not found',
+        1: 'Found',
+        2: 'Talked to Man',
+      },
+    },
+  },
+  [FLAGS.EGG_CH1]: {
+    displayName: 'Got Egg in Chapter 1',
+    valueType: 'boolean',
   },
   [FLAGS.SINCE_CHAPTER]: {
     displayName: 'Starting Chapter',
@@ -266,43 +843,83 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
     },
   },
   [FLAGS.WEIRDROUTE_PROGRESS_CH2]: {
-    displayName: 'Weird route progression in Chapter 2',
+    displayName: 'Weird Route Progress',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Froze monsters',
+        2: 'Can get Freeze Ring',
+        3: 'Got Freeze Ring',
+        4: 'Passed force field',
+        5: 'Passed mouse puzzle',
+        6: 'Used Snowgrave',
+      },
+    },
   },
   [FLAGS.WEIRDROUTE_FAILED]: {
-    displayName: 'True if weird route was abandoned at some point',
+    displayName: 'Weird Route Failed',
+    valueType: 'boolean',
+  },
+  [FLAGS.EGG_ROOM_CH2]: {
+    displayName: 'Egg Room',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not found',
+        1: 'Encountered Annoying Dog',
+        2: 'Found',
+        3: 'Talked to Man',
+      },
+    },
   },
   [FLAGS.GOT_MOSS_CH2]: {
-    displayName: 'Got Moss in Chapter 2',
+    displayName: 'Got moss',
+    valueType: 'boolean',
   },
   [FLAGS.GOT_MOSS_WITH_NOELLE]: {
-    displayName: 'Eat moss with Noelle in party in Chapter 2',
+    displayName: 'Ate moss with Noelle in party',
+    valueType: 'boolean',
   },
   [FLAGS.GOT_MOSS_WITH_SUSIE]: {
-    displayName: 'Eat moss with Susie in party in Chapter 2',
+    displayName: 'Ate moss with Susie in party',
+    valueType: 'boolean',
   },
   [FLAGS.NOELLE_ICE_SHOCK_COUNT]: {
-    displayName: 'Tracks how many times Noelle uses Ice Shock spell',
+    displayName: 'Noelle Ice Shock spell count',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
+  },
+  [FLAGS.EGG_CH3]: {
+    displayName: 'Got Egg',
+    valueType: 'boolean',
+  },
+  [FLAGS.EGG_CH4]: {
+    displayName: 'Got Egg',
+    valueType: 'boolean',
   },
   [FLAGS.GAMESHOW_LETTER_FIRST]: {
     valueType: 'map',
     valueRules: {
-      map: letterMap,
+      map: ALPHABET,
     },
-    displayName: "First letter of Kris's name at Tenna's game show",
+    displayName: 'First letter',
   },
   [FLAGS.GAMESHOW_LETTER_SECOND]: {
     valueType: 'map',
     valueRules: {
-      map: letterMap,
+      map: ALPHABET,
     },
-    displayName: "Second letter of Kris's name at Tenna's game show",
+    displayName: 'Second letter',
   },
   [FLAGS.GAMESHOW_LETTER_THIRD]: {
     valueType: 'map',
     valueRules: {
-      map: letterMap,
+      map: ALPHABET,
     },
-    displayName: "Third letter of Kris's name at Tenna's game show",
+    displayName: 'Third letter',
   },
   [FLAGS.CH3_POINTS]: {
     displayName: 'Points (PTs)',
@@ -313,16 +930,135 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
       max: 99999,
     },
   },
+  [FLAGS.SUSIE_HEAL_COUNT]: {
+    displayName: `Susie's Heal Count`,
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+      max: 15,
+    },
+  },
+  [FLAGS.KNIGHT_FIGHT]: {
+    displayName: 'Knight Fight Status',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Deafeated',
+        2: 'Lost',
+      },
+    },
+  },
   [FLAGS.SWORD_PROGRESS]: {
-    displayName: 'Sword game progress',
+    displayName: 'Sword Progress',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Got Ice Key',
+        '1.5': 'Entered Ice Palace',
+        2: 'Finished Ice Palace',
+        3: 'Got Shelter Key',
+        4: 'Entered sewers',
+        5: 'Entered Shelter',
+        6: 'Defeated ERAM',
+      },
+    },
+  },
+  [FLAGS.SKIPPED_INTRO_CH3]: {
+    displayName: 'Slept through Tenna introduction',
+    valueType: 'boolean',
   },
   [FLAGS.GOT_MOSS_CH3]: {
     displayName: 'Got Moss in Chapter 3',
+    valueType: 'boolean',
+  },
+  [FLAGS.BIBLIOX_PROGRESS]: {
+    displayName: 'Bibliox Progress (Egg Room)',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Talked about wardrobe',
+        2: 'Wardrobe appeared',
+        3: 'Checked Wardrobe',
+        4: 'Got TripTicket',
+        6: 'Got TripTicket after SWORD route',
+      },
+    },
   },
   [FLAGS.RALSEI_HORSE]: {
     displayName: 'Tracks Ralsei being horse',
   },
+  [FLAGS.RANK_BOARD_1]: {
+    displayName: 'Board 1 Rank',
+    valueType: 'map',
+    valueRules: {
+      map: GAMESHOW_RANKS,
+    },
+  },
+  [FLAGS.RANK_BOARD_2]: {
+    displayName: 'Board 2 Rank',
+    valueType: 'map',
+    valueRules: {
+      map: GAMESHOW_RANKS,
+    },
+  },
+  [FLAGS.UNLOCKED_SUSIEZILLA]: {
+    displayName: 'Unlocked Susiezilla',
+    valueType: 'boolean',
+  },
+  [FLAGS.SCORE_COOKING]: {
+    displayName: 'Cooking Score',
+    valueType: 'number',
+  },
+  [FLAGS.RANK_COOKING]: {
+    displayName: 'Cooking Rank',
+    valueType: 'map',
+    valueRules: {
+      map: GAMESHOW_RANKS,
+    },
+  },
+  [FLAGS.SCORE_LIGHTNERS_LIVE]: {
+    displayName: 'Lightners Live Score',
+    valueType: 'number',
+  },
+  [FLAGS.RANK_LIGHTNERS_LIVE]: {
+    displayName: 'Lightners Live Rank',
+    valueType: 'map',
+    valueRules: {
+      map: GAMESHOW_RANKS,
+    },
+  },
+  [FLAGS.SCORE_SUSIEZILLA]: {
+    displayName: 'Susiezilla Score',
+    valueType: 'number',
+  },
+  [FLAGS.RANK_SUSIEZILLA]: {
+    displayName: 'Susiezilla Rank',
+    valueType: 'map',
+    valueRules: {
+      map: GAMESHOW_RANKS,
+    },
+  },
+  [FLAGS.GOT_GOLDEN_TENNA]: {
+    displayName: 'Got Golden Tenna Statue',
+    valueType: 'boolean',
+  },
+  [FLAGS.ENTERED_1225_ROOM]: {
+    displayName: 'Entered 1225 Gacha Machine Room',
+    valueType: 'boolean',
+  },
+  [FLAGS.STARWALKER_CH3]: {
+    displayName: 'Talked to original &ensp;*Starwalker*',
+    valueType: 'boolean',
+  },
+  [FLAGS.GAVE_TENNA]: {
+    displayName: 'Gave Tenna away',
+    valueType: 'boolean',
+  },
   [FLAGS.GOT_MOSS_CH4]: {
     displayName: 'Got Moss in Chapter 4',
+    valueType: 'boolean',
   },
 };

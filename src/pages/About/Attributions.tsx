@@ -3,10 +3,7 @@ import type { ReactNode } from 'react';
 
 function Link({ href, children }: { href: string; children: ReactNode }) {
   return (
-    <a
-      href={href}
-      className="text-red hover:text-red-hover underline font-bold"
-    >
+    <a href={href} className="text-red hover:text-red-hover underline">
       {children}
     </a>
   );
@@ -32,73 +29,92 @@ export function AboutAttributions() {
       url: 'https://www.npmjs.com/package/@tailwindcss/vite',
       license: 'MIT',
     },
-  ] as const;
-  const devDeps = [
-    { name: 'Vite', url: 'https://vitejs.dev', license: 'MIT' },
+    { name: 'clsx', url: 'https://github.com/lukeed/clsx', license: 'MIT' },
     {
-      name: '@vitejs/plugin-react-swc',
-      url: 'https://www.npmjs.com/package/@vitejs/plugin-react-swc',
+      name: 'color-convert',
+      url: 'https://github.com/Qix-/color-convert',
       license: 'MIT',
     },
     {
-      name: 'TypeScript',
-      url: 'https://www.typescriptlang.org',
-      license: 'Apache-2.0',
-    },
-    { name: 'ESLint', url: 'https://eslint.org', license: 'MIT' },
-    {
-      name: '@eslint/js',
-      url: 'https://www.npmjs.com/package/@eslint/js',
+      name: 'downshift',
+      url: 'https://github.com/downshift-js/downshift',
       license: 'MIT',
     },
     {
-      name: 'eslint-config-prettier',
-      url: 'https://github.com/prettier/eslint-config-prettier',
+      name: 'fast-glob',
+      url: 'https://github.com/mrmlnc/fast-glob',
       license: 'MIT',
     },
     {
-      name: 'eslint-plugin-react',
-      url: 'https://github.com/jsx-eslint/eslint-plugin-react',
+      name: 'idb',
+      url: 'https://github.com/jakearchibald/idb',
+      license: 'ISC',
+    },
+    { name: 'immer', url: 'https://github.com/immerjs/immer', license: 'MIT' },
+    {
+      name: 'react-markdown',
+      url: 'https://github.com/remarkjs/react-markdown',
       license: 'MIT',
     },
     {
-      name: 'eslint-plugin-react-hooks',
-      url: 'https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-hooks',
+      name: 'tailwind-merge',
+      url: 'https://github.com/dcastil/tailwind-merge',
       license: 'MIT',
     },
     {
-      name: 'eslint-plugin-react-refresh',
-      url: 'https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-refresh',
+      name: 'vite-plugin-pwa',
+      url: 'https://github.com/vite-pwa/vite-plugin-pwa',
       license: 'MIT',
     },
     {
-      name: 'globals',
-      url: 'https://github.com/sindresorhus/globals',
-      license: 'MIT',
-    },
-    { name: 'Prettier', url: 'https://prettier.io', license: 'MIT' },
-    {
-      name: 'typescript-eslint',
-      url: 'https://typescript-eslint.io',
+      name: 'zustand',
+      url: 'https://github.com/pmndrs/zustand',
       license: 'MIT',
     },
     {
-      name: 'vite-plugin-svgr',
-      url: 'https://github.com/pd4d10/vite-plugin-svgr',
-      license: 'MIT',
-    },
-    {
-      name: 'vite-tsconfig-paths',
-      url: 'https://github.com/aleclarson/vite-tsconfig-paths',
+      name: 'zustand-debounce',
+      url: 'https://github.com/AbianS/zustand-debounce',
       license: 'MIT',
     },
   ] as const;
 
   return (
     <div className="page">
+      <Section id="special-thanks">
+        <Card className="space-y-4 p-6">
+          <Heading level={3}>Special Thanks</Heading>
+          <ul className="list-disc pl-6 space-y-1 text-text-2">
+            <li>
+              Toby Fox and whole Team behind Deltarune - for creating the game.
+            </li>
+            <li>
+              <Link href="https://saveeditor.spamton.com">Spamton Editor</Link>{' '}
+              - for being direct inspiration.
+            </li>
+            <li>
+              <Link href="https://crumblingstatue.github.i">
+                Flowey's Time Machine
+              </Link>{' '}
+              - for being another inspiration.
+            </li>
+            <li>
+              <Link href="https://deltarune.wiki">Deltarune Wiki</Link> - for
+              much useful information that sped up the process of building this
+              project significantly.
+            </li>
+            <li>
+              <Link href="https://github.com/UnderminersTeam/UndertaleModTool">
+                Undertale Mod
+              </Link>{' '}
+              - for allowing me to mine through the game code and assets to
+              understand how things work.
+            </li>
+          </ul>
+        </Card>
+      </Section>
       <Section id="fonts">
         <Card className="space-y-4 p-6">
-          <Heading level={5}>Fonts</Heading>
+          <Heading level={3}>Fonts</Heading>
           <ul className="list-disc pl-6 space-y-1">
             <li className="text-text-2">
               Pixel Operator and Pixel Operator Mono — License: SIL Open Font
@@ -113,7 +129,7 @@ export function AboutAttributions() {
       </Section>
       <Section id="icons">
         <Card className="space-y-4 p-6">
-          <Heading level={5}>Icons</Heading>
+          <Heading level={3}>Icons</Heading>
           <ul className="list-disc pl-6 space-y-1">
             <li className="text-text-2">
               Pixelarticons by Gerrit Halfmann — License:{' '}
@@ -128,26 +144,11 @@ export function AboutAttributions() {
       </Section>
       <Section id="dependencies">
         <Card className="space-y-4 p-6">
-          <Heading level={5}>Dependencies</Heading>
+          <Heading level={3}>Dependencies</Heading>
           <div className="space-y-2">
             <div>
-              <p className="font-semibold text-text-1 mb-2">
-                Runtime Dependencies
-              </p>
               <ul className="list-disc pl-6 space-y-1">
                 {runtimeDeps.map((d) => (
-                  <li key={d.name} className="text-text-2">
-                    <Link href={d.url}>{d.name}</Link> — License: {d.license}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <p className="font-semibold text-text-1 mb-2">
-                Development Dependencies
-              </p>
-              <ul className="list-disc pl-6 space-y-1">
-                {devDeps.map((d) => (
                   <li key={d.name} className="text-text-2">
                     <Link href={d.url}>{d.name}</Link> — License: {d.license}
                   </li>

@@ -17,6 +17,9 @@ export function HomeWelcome() {
               To get started, click the area below or click the upload button in
               far right corner.
             </p>
+            <p className="text-red font-bold">
+              Remember to always back up your saves before editing them!
+            </p>
           </div>
         </Section>
 

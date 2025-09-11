@@ -15,6 +15,7 @@ import {
   InDarkWorldField,
   SaveIsCompletionSaveField,
   RoomField,
+  PlotField,
 } from '@components';
 import { FLAGS } from '@data';
 import { useSave, useSaveStorage } from '@store';
@@ -149,6 +150,7 @@ export function HomeOverview() {
             </div>
             <div className="flex-1 flex flex-col gap-3">
               <RoomField id="room" />
+              <PlotField id="plot" />
               <InDarkWorldField id="in-dark-world" />
             </div>
           </div>

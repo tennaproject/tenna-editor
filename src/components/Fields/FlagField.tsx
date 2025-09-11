@@ -1,7 +1,8 @@
 import type { FlagIndex } from '@data';
 import { useSaveFlag } from '@hooks';
 import { useSave } from '@store';
-import { chapterHelpers, flagHelpers, mergeClass } from '@utils';
+import { chapterHelpers, flagHelpers, getGameColor, mergeClass } from '@utils';
+import Markdown from 'react-markdown';
 import {
   Checkbox,
   HelpTip,
@@ -35,14 +36,19 @@ export function FlagField({ flag, id, className }: FlagFieldProps) {
       <Section id={id} className={className}>
         <InlineGroup>
           <Checkbox
-            label={displayName}
-            checked={!!currentValue}
+            label={<Markdown>{displayName}</Markdown>}
+            checked={
+              valueRules?.invertedBoolean ? !currentValue : !!currentValue
+            }
             onChange={(value: boolean) => {
               updateSave((save) => {
-                save.flags[flag] = value ? 1 : 0;
+                if (valueRules?.invertedBoolean) {
+                  save.flags[flag] = value ? 0 : 1;
+                } else {
+                  save.flags[flag] = value ? 1 : 0;
+                }
               });
             }}
-            fixedHeight
           />
           {description && (
             <HelpTip title={displayName}>
@@ -56,7 +62,9 @@ export function FlagField({ flag, id, className }: FlagFieldProps) {
     return (
       <Section id={id} className={mergeClass('flex flex-col gap-2', className)}>
         <InlineGroup>
-          <TextLabel>{displayName}</TextLabel>
+          <TextLabel>
+            <Markdown>{displayName}</Markdown>
+          </TextLabel>
           {description && (
             <HelpTip title={displayName}>
               <p>{description}</p>
@@ -82,11 +90,17 @@ export function FlagField({ flag, id, className }: FlagFieldProps) {
         selectItems.push({
           id: `${value}`,
           label,
+          value,
         });
       });
 
+      selectItems.sort(
+        (itemA, itemB) =>
+          parseInt(String(itemA.value), 10) - parseInt(String(itemB.value), 10),
+      );
+
       const selectedItem = selectItems.find(
-        (item) => parseInt(item.id, 10) === currentValue,
+        (item) => parseInt(String(item.value), 10) === currentValue,
       );
 
       return (
@@ -95,7 +109,9 @@ export function FlagField({ flag, id, className }: FlagFieldProps) {
           className={mergeClass('flex flex-col gap-2', className)}
         >
           <InlineGroup>
-            <TextLabel>{displayName}</TextLabel>
+            <TextLabel>
+              <Markdown>{displayName}</Markdown>
+            </TextLabel>
             {description && (
               <HelpTip title={displayName}>
                 <p>{description}</p>
@@ -120,6 +136,38 @@ export function FlagField({ flag, id, className }: FlagFieldProps) {
         </Section>
       );
     }
+  } else if (valueType === 'color') {
+    return (
+      <Section id={id} className={mergeClass('flex flex-col gap-3', className)}>
+        <InlineGroup>
+          <TextLabel>
+            <Markdown>{displayName}</Markdown>
+          </TextLabel>
+          {description && (
+            <HelpTip title={displayName}>
+              <p>{description}</p>
+            </HelpTip>
+          )}
+        </InlineGroup>
+        <div className="flex flex-wrap">
+          {[...Array(32)].map((_, i) => (
+            <div
+              key={i}
+              className={mergeClass(
+                'w-8 h-8 cursor-pointer border-2',
+                i === currentValue ? 'border-text-1' : 'border-border',
+              )}
+              style={{ backgroundColor: getGameColor(i) }}
+              onClick={() => {
+                updateSave((save) => {
+                  save.flags[flag] = i;
+                });
+              }}
+            />
+          ))}
+        </div>
+      </Section>
+    );
   }
 
   return;

@@ -21,12 +21,24 @@ export default defineConfig({
     tsconfigPaths(),
     svgr({
       svgrOptions: {
-        exportType: 'default',
-        ref: true,
-        svgo: false,
+        plugins: ['@svgr/plugin-svgo', '@svgr/plugin-jsx'],
+        svgo: true,
+        svgoConfig: {
+          plugins: [
+            {
+              name: 'preset-default',
+              params: {
+                overrides: {
+                  removeMetadata: false,
+                },
+              },
+            },
+            { name: 'prefixIds', params: { prefix: true } },
+          ],
+        },
         titleProp: true,
       },
-      include: '**/*.svg',
+      include: '**/*.svg?react',
     }),
     VitePWA({
       includeAssets: fg.sync('**/*.{png,svg,ico,txt,woff,woff2}', {
@@ -36,7 +48,7 @@ export default defineConfig({
       devOptions: { enabled: true },
       manifest: {
         name: 'Tenna Editor',
-        short_name: 'TennaEditor',
+        short_name: 'Tenna Editor',
         description: 'An unofficial Deltarune Save Editor',
         theme_color: '#e53170',
         background_color: '#1f1e2a',
@@ -82,6 +94,19 @@ export default defineConfig({
         assetFileNames: 'assets/[name]-[hash][extname]',
         manualChunks(id) {
           if (id.includes('node_modules')) {
+            if (id.includes('zustand')) {
+              return 'zustand';
+            }
+            if (id.includes('tailwind')) {
+              return 'tailwind';
+            }
+            if (
+              id.includes('react') ||
+              id.includes('framer-motion') ||
+              id.includes('downshift')
+            ) {
+              return 'react';
+            }
             return 'vendor';
           }
           if (id.includes('/src/')) return 'tenna';

@@ -1,7 +1,7 @@
 import { Card, GlowBar, Heading, Page, Section } from '@components';
 import { mergeClass } from '@utils';
 import { ItemField, KitField, StatField } from './components';
-import DividerIcon from '@assets/icons/minus.svg';
+import DividerIcon from '@assets/icons/minus.svg?react';
 
 const THEME = {
   bg: 'bg-[#a6ab2f]',

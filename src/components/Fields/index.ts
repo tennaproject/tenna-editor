@@ -7,3 +7,4 @@ export * from './InDarkWorldField';
 export * from './SaveSlotField';
 export * from './SaveNameField';
 export * from './SaveIsCompletionSaveField';
+export * from './PlotField';

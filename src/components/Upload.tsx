@@ -125,9 +125,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
       if (!slotMatch) {
         setSaveName(file.name);
       } else {
-        setSaveName(
-         `Save${totalUploaded}` 
-        );
+        setSaveName(`Save${totalUploaded}`);
       }
 
       if (detection.chapter === 1) {
@@ -185,7 +183,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
 
   return (
     <Modal isOpen={isOpen} setOpen={setOpen}>
-      <div className="h-96 lg:h-64 flex flex-col select-none relative lg:p-4 p-2">
+      <div className="h-96 flex-1 flex flex-col justify-between select-none relative lg:p-4 p-2">
         <AnimatePresence mode="wait">
           {uploadStage === 'idle' && (
             <motion.div
@@ -287,7 +285,15 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
             </motion.div>
           )}
         </AnimatePresence>
-        <div className="mt-4 flex gap-2 justify-end">
+
+        <div className="flex gap-2 justify-end">
+          {uploadStage === 'idle' && (
+            <>
+              <Button onClick={() => setOpen(false)} variant="secondary">
+                Cancel
+              </Button>
+            </>
+          )}
           {uploadStage === 'chapter' && (
             <>
               <Button onClick={() => changeStage('settings')} variant="primary">

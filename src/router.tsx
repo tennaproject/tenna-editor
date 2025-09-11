@@ -1,9 +1,8 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, type JSX } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { RequireChapter, RequireDevmode, RequireSave } from '@guards';
 import { Loading } from '@components';
-import { useSave } from '@store';
 
 // Home
 const HomeRoot = React.lazy(() =>
@@ -127,24 +126,31 @@ const RecruitsRoot = React.lazy(() =>
 );
 
 // Devtools
-const DevtoolsRoot = React.lazy(() =>
-  import('@devtools/pages/Root').then((module) => ({
-    default: module.DevtoolsRoot,
-  })),
-);
+let DevtoolsRoot: React.LazyExoticComponent<() => JSX.Element> | null = null;
+let DevtoolsColors: React.LazyExoticComponent<() => JSX.Element> | null = null;
+if (import.meta.env.VITE_DEVTOOLS_TAB === 'true') {
+  DevtoolsRoot = React.lazy(() =>
+    import('@devtools/pages/Root').then((module) => ({
+      default: module.DevtoolsRoot,
+    })),
+  );
 
-const DevtoolsColors = React.lazy(() =>
-  import('@devtools/pages/Colors').then((module) => ({
-    default: module.DevtoolsColors,
-  })),
-);
+  DevtoolsColors = React.lazy(() =>
+    import('@devtools/pages/Colors').then((module) => ({
+      default: module.DevtoolsColors,
+    })),
+  );
+}
 
 // Settings
-const SettingsPage = React.lazy(() =>
-  import('./pages/Settings/Root').then((module) => ({
-    default: module.SettingsRoot,
-  })),
-);
+let SettingsRoot: React.LazyExoticComponent<() => JSX.Element> | null = null;
+if (import.meta.env.VITE_SETTINGS_TAB === 'true') {
+  SettingsRoot = React.lazy(() =>
+    import('./pages/Settings/Root').then((module) => ({
+      default: module.SettingsRoot,
+    })),
+  );
+}
 
 // About
 const AboutPage = React.lazy(() =>
@@ -175,7 +181,6 @@ const AboutAttributions = React.lazy(() =>
 
 export function AppRouter() {
   const location = useLocation();
-  const save = useSave.getState().save;
 
   return (
     <AnimatePresence mode="wait">
@@ -184,21 +189,10 @@ export function AppRouter() {
           location={location}
           key={location.pathname.split('/')[1] || 'root'}
         >
-          <Route path="/" element={<Navigate to="/home" replace />}></Route>
-          <Route path="/home" element={<HomeRoot />}>
-            <Route
-              index
-              element={
-                save ? (
-                  <Navigate to="overview" replace />
-                ) : (
-                  <Navigate to="welcome" replace />
-                )
-              }
-            />
-            <Route path="overview" element={<HomeOverview />}></Route>
+          <Route path="/" element={<HomeRoot />}>
+            <Route index element={<HomeOverview />} />
             <Route path="welcome" element={<HomeWelcome />}></Route>
-            <Route path="*" element={<Navigate to="overview" replace />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
           <Route path="/about" element={<AboutPage />}>
             <Route index element={<Navigate to="overview" replace />} />
@@ -306,18 +300,24 @@ export function AppRouter() {
               }
             ></Route>
           </Route>
-          <Route
-            path="/devtools"
-            element={
-              <RequireDevmode>
-                <DevtoolsRoot />
-              </RequireDevmode>
-            }
-          >
-            <Route index element={<Navigate to="colors" replace />} />
-            <Route path="colors" element={<DevtoolsColors />} />
-          </Route>
-          <Route path="/settings" element={<SettingsPage />}></Route>
+          {import.meta.env.VITE_DEVTOOLS_TAB === 'true' &&
+            DevtoolsRoot &&
+            DevtoolsColors && (
+              <Route
+                path="/devtools"
+                element={
+                  <RequireDevmode>
+                    <DevtoolsRoot />
+                  </RequireDevmode>
+                }
+              >
+                <Route index element={<Navigate to="colors" replace />} />
+                <Route path="colors" element={<DevtoolsColors />} />
+              </Route>
+            )}
+          {import.meta.env.VITE_SETTINGS_TAB === 'true' && SettingsRoot && (
+            <Route path="/settings" element={<SettingsRoot />}></Route>
+          )}
           <Route path="*" element={<Navigate to="/home" replace />} />
         </Routes>
       </Suspense>

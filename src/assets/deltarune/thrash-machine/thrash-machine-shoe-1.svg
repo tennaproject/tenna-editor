@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -0.5 34 11" shape-rendering="crispEdges">
+  <metadata>tenna-editor (https://github.com/tennaproject/tenna-editor)</metadata>
+  <defs>
+    <filter id="blend" color-interpolation-filters="sRGB">
+      <feFlood flood-color="currentColor" result="blend"/>
+      <feComposite in="blend" in2="SourceAlpha" operator="in" result="blendMasked"/>
+      <feComposite in="SourceGraphic" in2="blendMasked" operator="arithmetic" k1="0" k2="1" k3="0.4" k4="0"/>
+    </filter>
+  </defs>
+
+  <path filter="url(#blend)" stroke="#535353" d="M3 0h4M2 1h1M7 1h1M1 2h1M8 2h1M0 3h1M9 3h1M0 4h1M9 4h1M0 5h1M9 5h1M0 6h1M9 6h1M1 7h1M8 7h1M2 8h1M7 8h1M3 9h4" />
+  <path filter="url(#blend)" stroke="#c3c3c3" d="M4 3h2M3 4h4M3 5h4M4 6h2" />
+
+  <path stroke="#000000" d="M3 1h4M2 2h6M1 3h3M6 3h3M1 4h2M7 4h2M1 5h2M7 5h2M1 6h3M6 6h3M2 7h6M3 8h4" />
+</svg>

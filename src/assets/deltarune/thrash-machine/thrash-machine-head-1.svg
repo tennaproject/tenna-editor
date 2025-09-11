@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -0.5 27 14" shape-rendering="crispEdges">
+  <metadata>tenna-editor (https://github.com/tennaproject/tenna-editor)</metadata>
+  <defs>
+    <filter id="blend" color-interpolation-filters="sRGB">
+      <feFlood flood-color="currentColor" result="blend"/>
+      <feComposite in="blend" in2="SourceAlpha" operator="in" result="blendMasked"/>
+      <feComposite in="SourceGraphic" in2="blendMasked" operator="arithmetic" k1="0" k2="1" k3="0.4" k4="0"/>
+    </filter>
+  </defs>
+
+  <path filter="url(#blend)" stroke="#7f7f7f" d="M16 1h2M16 2h1M16 5h1M18 5h5M16 6h1M18 6h6M16 7h1M18 7h7M16 8h1M21 8h3M16 9h1M22 9h2M16 12h2" />
+  <path filter="url(#blend)" stroke="#535353" d="M16 3h1M16 4h1M11 6h3M18 8h3M24 8h1M21 9h1M24 9h1M16 10h1M22 10h2M16 11h1" />
+  <path filter="url(#blend)" stroke="#c3c3c3" d="M4 9h11" />
+
+  <path stroke="#000000" d="M15 0h4M15 1h1M18 1h1M4 2h2M8 2h3M15 2h1M17 2h2M3 3h1M6 3h2M11 3h5M17 3h1M2 4h1M5 4h1M9 4h1M15 4h1M17 4h6M1 5h1M15 5h1M17 5h1M23 5h2M0 6h1M2 6h9M15 6h1M17 6h1M24 6h2M1 7h1M15 7h1M17 7h1M25 7h1M2 8h1M15 8h1M17 8h1M25 8h1M3 9h1M15 9h1M17 9h4M25 9h1M4 10h12M17 10h1M19 10h3M24 10h2M15 11h1M17 11h1M19 11h6M15 12h1M18 12h1M20 12h4M15 13h4" />
+  <path stroke="#ffffff" d="M4 3h2M8 3h3M3 4h2M6 4h3M10 4h5M2 5h13M1 6h1M14 6h1M2 7h13M3 8h12" />
+</svg>

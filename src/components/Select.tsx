@@ -1,6 +1,6 @@
 import { useCombobox } from 'downshift';
-import ChevronDownIcon from '@assets/icons/chevron-down.svg';
-import WarningIcon from '@assets/icons/alert.svg';
+import ChevronDownIcon from '@assets/icons/chevron-down.svg?react';
+import WarningIcon from '@assets/icons/alert.svg?react';
 import { useState, useEffect, useRef } from 'react';
 import { mergeClass } from '@utils';
 
