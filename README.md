@@ -74,6 +74,7 @@ I put a lot of effort into making the layout look distinct and directly inspired
 - [Spamton Editor](https://saveeditor.spamton.com) - for being direct inspiration.
 - [Flowey's Time Machine](https://crumblingstatue.github.io) - for being another inspiration.
 - [Deltarune Wiki](https://deltarune.wiki) - for much useful information that sped up the process of building this project significantly.
+- [Undertale Mod Tool](https://github.com/UnderminersTeam/UndertaleModTool) - for allowing me to mine through the game code and assets to understand how things work.
 
 ## Development
 
