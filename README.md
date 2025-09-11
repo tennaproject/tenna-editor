@@ -73,7 +73,7 @@ I put a lot of effort into making the layout look distinct and directly inspired
 - Toby Fox and whole Team behind Deltarune - for creating the game.
 - [Spamton Editor](https://saveeditor.spamton.com) - for being direct inspiration.
 - [Flowey's Time Machine](https://crumblingstatue.github.io) - for being another inspiration.
-- [Deltarune Wiki][https://deltarune.wiki] - for much useful information that sped up the process of building this project significantly.
+- [Deltarune Wiki](https://deltarune.wiki) - for much useful information that sped up the process of building this project significantly.
 
 ## Development
 
