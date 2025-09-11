@@ -1,5 +1,44 @@
 import type { BaseProperties } from '@types';
 
+const ALPHABET = {
+  0: 'A',
+  1: 'B',
+  2: 'C',
+  3: 'D',
+  4: 'E',
+  5: 'F',
+  6: 'G',
+  7: 'H',
+  8: 'I',
+  9: 'J',
+  10: 'K',
+  11: 'L',
+  12: 'M',
+  13: 'N',
+  14: 'O',
+  15: 'P',
+  16: 'Q',
+  17: 'R',
+  18: 'S',
+  19: 'T',
+  20: 'U',
+  21: 'V',
+  22: 'W',
+  23: 'X',
+  24: 'Y',
+  25: 'Z',
+} as const;
+
+const GAMESHOW_RANKS = {
+  '-1': 'None',
+  0: 'Z',
+  1: 'C',
+  2: 'B',
+  3: 'A',
+  4: 'S',
+  5: 'T',
+} as const;
+
 export const FLAGS = {
   SIMPLIFY_VFX: 8,
   CAN_PARTY_ACT: 34,
@@ -138,13 +177,30 @@ export const FLAGS = {
   GOT_MOSS_WITH_NOELLE: 921,
   GOT_MOSS_WITH_SUSIE: 922,
   NOELLE_ICE_SHOCK_COUNT: 925,
+  EGG_CH3: 930,
   GAMESHOW_LETTER_FIRST: 1012,
   GAMESHOW_LETTER_SECOND: 1013,
   GAMESHOW_LETTER_THIRD: 1014,
   CH3_POINTS: 1044,
+  SUSIE_HEAL_COUNT: 1045,
+  KNIGHT_FIGHT: 1047,
   SWORD_PROGRESS: 1055,
+  SKIPPED_INTRO_CH3: 1071,
   GOT_MOSS_CH3: 1078,
+  BIBLIOX_PROGRESS: 1092,
   RALSEI_HORSE: 1152,
+  RANK_BOARD_1: 1173,
+  RANK_BOARD_2: 1174,
+  UNLOCKED_SUSIEZILLA: 1189,
+  SCORE_COOKING: 1193,
+  RANK_COOKING: 1194,
+  SCORE_LIGHTNERS_LIVE: 1195,
+  RANK_LIGHTNERS_LIVE: 1196,
+  SCORE_SUSIEZILLA: 1197,
+  RANK_SUSIEZILLA: 1198,
+  GOT_GOLDEN_TENNA: 1222,
+  ENTERED_1225_ROOM: 1226,
+  STARWALKER_CH3: 1240,
   GOT_MOSS_CH4: 1592,
 } as const;
 
@@ -163,36 +219,6 @@ export interface FlagProperties extends BaseProperties {
     invertedBoolean?: boolean;
   };
 }
-
-// temp
-const letterMap = {
-  0: 'A',
-  1: 'B',
-  2: 'C',
-  3: 'D',
-  4: 'E',
-  5: 'F',
-  6: 'G',
-  7: 'H',
-  8: 'I',
-  9: 'J',
-  10: 'K',
-  11: 'L',
-  12: 'M',
-  13: 'N',
-  14: 'O',
-  15: 'P',
-  16: 'Q',
-  17: 'R',
-  18: 'S',
-  19: 'T',
-  20: 'U',
-  21: 'V',
-  22: 'W',
-  23: 'X',
-  24: 'Y',
-  25: 'Z',
-};
 
 export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
   [FLAGS.SIMPLIFY_VFX]: {
@@ -550,7 +576,7 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
     valueType: 'boolean',
   },
   [FLAGS.TALKED_METTATON]: {
-    displayName: `Took Asriel's money`,
+    displayName: 'Talked to Mettaton',
     valueType: 'boolean',
   },
   [FLAGS.ONION_CH2]: {
@@ -853,26 +879,30 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
       min: 0,
     },
   },
+  [FLAGS.EGG_CH3]: {
+    displayName: 'Got Egg',
+    valueType: 'boolean',
+  },
   [FLAGS.GAMESHOW_LETTER_FIRST]: {
     valueType: 'map',
     valueRules: {
-      map: letterMap,
+      map: ALPHABET,
     },
-    displayName: "First letter of Kris's name at Tenna's game show",
+    displayName: 'First letter',
   },
   [FLAGS.GAMESHOW_LETTER_SECOND]: {
     valueType: 'map',
     valueRules: {
-      map: letterMap,
+      map: ALPHABET,
     },
-    displayName: "Second letter of Kris's name at Tenna's game show",
+    displayName: 'Second letter',
   },
   [FLAGS.GAMESHOW_LETTER_THIRD]: {
     valueType: 'map',
     valueRules: {
-      map: letterMap,
+      map: ALPHABET,
     },
-    displayName: "Third letter of Kris's name at Tenna's game show",
+    displayName: 'Third letter',
   },
   [FLAGS.CH3_POINTS]: {
     displayName: 'Points (PTs)',
@@ -883,16 +913,131 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
       max: 99999,
     },
   },
+  [FLAGS.SUSIE_HEAL_COUNT]: {
+    displayName: `Susie's Heal Count`,
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+      max: 15,
+    },
+  },
+  [FLAGS.KNIGHT_FIGHT]: {
+    displayName: 'Knight Fight Status',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Deafeated',
+        2: 'Lost',
+      },
+    },
+  },
   [FLAGS.SWORD_PROGRESS]: {
-    displayName: 'Sword game progress',
+    displayName: 'Sword Progress',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Got Ice Key',
+        '1.5': 'Entered Ice Palace',
+        2: 'Finished Ice Palace',
+        3: 'Got Shelter Key',
+        4: 'Entered sewers',
+        5: 'Entered Shelter',
+        6: 'Defeated ERAM',
+      },
+    },
+  },
+  [FLAGS.SKIPPED_INTRO_CH3]: {
+    displayName: 'Slept through Tenna introduction',
+    valueType: 'boolean',
   },
   [FLAGS.GOT_MOSS_CH3]: {
     displayName: 'Got Moss in Chapter 3',
+    valueType: 'boolean',
+  },
+  [FLAGS.BIBLIOX_PROGRESS]: {
+    displayName: 'Bibliox Progress (Egg Room)',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Talked about wardrobe',
+        2: 'Wardrobe appeared',
+        3: 'Checked Wardrobe',
+        4: 'Got TripTicket',
+        6: 'Got TripTicket after SWORD route',
+      },
+    },
   },
   [FLAGS.RALSEI_HORSE]: {
     displayName: 'Tracks Ralsei being horse',
   },
+  [FLAGS.RANK_BOARD_1]: {
+    displayName: 'Board 1 Rank',
+    valueType: 'map',
+    valueRules: {
+      map: GAMESHOW_RANKS,
+    },
+  },
+  [FLAGS.RANK_BOARD_2]: {
+    displayName: 'Board 2 Rank',
+    valueType: 'map',
+    valueRules: {
+      map: GAMESHOW_RANKS,
+    },
+  },
+  [FLAGS.UNLOCKED_SUSIEZILLA]: {
+    displayName: 'Unlocked Susiezilla',
+    valueType: 'boolean',
+  },
+  [FLAGS.SCORE_COOKING]: {
+    displayName: 'Cooking Score',
+    valueType: 'number',
+  },
+  [FLAGS.RANK_COOKING]: {
+    displayName: 'Cooking Rank',
+    valueType: 'map',
+    valueRules: {
+      map: GAMESHOW_RANKS,
+    },
+  },
+  [FLAGS.SCORE_LIGHTNERS_LIVE]: {
+    displayName: 'Lightners Live Score',
+    valueType: 'number',
+  },
+  [FLAGS.RANK_LIGHTNERS_LIVE]: {
+    displayName: 'Lightners Live Rank',
+    valueType: 'map',
+    valueRules: {
+      map: GAMESHOW_RANKS,
+    },
+  },
+  [FLAGS.SCORE_SUSIEZILLA]: {
+    displayName: 'Susiezilla Score',
+    valueType: 'number',
+  },
+  [FLAGS.RANK_SUSIEZILLA]: {
+    displayName: 'Susiezilla Rank',
+    valueType: 'map',
+    valueRules: {
+      map: GAMESHOW_RANKS,
+    },
+  },
+  [FLAGS.GOT_GOLDEN_TENNA]: {
+    displayName: 'Got Golden Tenna Statue',
+    valueType: 'boolean',
+  },
+  [FLAGS.ENTERED_1225_ROOM]: {
+    displayName: 'Entered 1225 Gacha Machine Room',
+    valueType: 'boolean',
+  },
+  [FLAGS.STARWALKER_CH3]: {
+    displayName: 'Talked to original &ensp;*Starwalker*',
+    valueType: 'boolean',
+  },
   [FLAGS.GOT_MOSS_CH4]: {
     displayName: 'Got Moss in Chapter 4',
+    valueType: 'boolean',
   },
 };
