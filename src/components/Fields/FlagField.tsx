@@ -90,11 +90,17 @@ export function FlagField({ flag, id, className }: FlagFieldProps) {
         selectItems.push({
           id: `${value}`,
           label,
+          value,
         });
       });
 
+      selectItems.sort(
+        (itemA, itemB) =>
+          parseInt(String(itemA.value), 10) - parseInt(String(itemB.value), 10),
+      );
+
       const selectedItem = selectItems.find(
-        (item) => parseInt(item.id, 10) === currentValue,
+        (item) => parseInt(String(item.value), 10) === currentValue,
       );
 
       return (
