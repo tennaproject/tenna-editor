@@ -82,7 +82,7 @@ export function HomeWelcome() {
               <li>Linux (through Steam Proton)</li>
             </ul>
             <p>
-              Console and demo versions{' '}
+              Console versions{' '}
               <strong className="text-text-1">are not supported</strong> at the
               moment.
             </p>
