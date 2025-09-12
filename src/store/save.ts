@@ -19,7 +19,7 @@ interface SaveState {
 
 export const useSave = create<SaveState>()(
   persist(
-    immer((set, get) => {
+    immer((set) => {
       return {
         save: null,
 
@@ -43,20 +43,13 @@ export const useSave = create<SaveState>()(
             Object.assign(state.save as DeltaruneSave, partial);
           }),
 
-        updateSave: (updater) => {
-          const save = get().save;
-
-          if (!save) return;
-          const draft: DeltaruneSave =
-            typeof structuredClone === 'function'
-              ? (structuredClone(save) as DeltaruneSave)
-              : JSON.parse(JSON.stringify(save));
-          updater(draft);
+        updateSave: (updater) =>
           set((state) => {
-            state.save = draft;
+            if (!state.save) return;
+
+            updater(state.save as DeltaruneSave);
             state.save.meta.modifiedAt = new Date();
-          });
-        },
+          }),
       };
     }),
     {
