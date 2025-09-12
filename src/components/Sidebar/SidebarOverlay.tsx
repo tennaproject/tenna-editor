@@ -2,8 +2,12 @@ import { useUi } from '@store';
 import { motion } from 'framer-motion';
 
 export function SidebarOverlay() {
-  const isSidebarOpen = useUi((s) => s.isSidebarOpen);
-  const setSidebarOpen = useUi((s) => s.setSidebarOpen);
+  const isSidebarOpen = useUi((s) => s.ui.sidebar.open);
+  const updateUi = useUi((s) => s.updateUi);
+
+  function setSidebarOpen(state: boolean) {
+    updateUi((ui) => (ui.sidebar.open = state));
+  }
 
   return (
     <>

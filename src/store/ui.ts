@@ -1,86 +1,75 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
-import { STORE_NAMESPACE, STORE_VERSION } from './schema';
+import { STORE_NAMESPACE } from './schema';
 import { createDebouncedJSONStorage } from 'zustand-debounce';
 
-interface UiState {
+interface Ui {
   devmode: boolean;
-  isSidebarOpen: boolean;
-  isSidebarRetracted: boolean;
-  setDevmode: (devmode: boolean) => void;
-  setSidebarOpen: (isOpen: boolean) => void;
-  setSidebarRetraction: (isRetracted: boolean) => void;
-  allowNonStandardParty: boolean;
-  setAllowNonStandardParty: (allowNonStandardParty: boolean) => void;
-  allowKrisAllElements: boolean;
-  setAllowKrisAllElements: (status: boolean) => void;
-  allowSusieAllElements: boolean;
-  setAllowSusieAllElements: (status: boolean) => void;
-  allowRalseiAllElements: boolean;
-  setAllowRalseiAllElements: (status: boolean) => void;
-  allowNoelleAllElements: boolean;
-  setAllowNoelleAllElements: (status: boolean) => void;
-  showNonRecruitableEnemies: boolean;
-  setShowNonRecruitableEnemies: (status: boolean) => void;
-  totalUploaded: number;
-  increaseTotalUploaded: () => void;
+  uploadedSaves: number;
+  sidebar: {
+    open: boolean;
+    retracted: boolean;
+  };
+  party: {
+    allowNonStandardParty: boolean;
+    kris: {
+      allowAllElements: boolean;
+    };
+    susie: {
+      allowAllElements: boolean;
+    };
+    ralsei: {
+      allowAllElements: boolean;
+    };
+    noelle: {
+      allowAllElements: boolean;
+    };
+  };
+  recruits: {
+    showNonRecruitableEnemies: boolean;
+  };
+}
+
+interface UiState {
+  ui: Ui;
+  updateUi: (updater: (draft: Ui) => void) => void;
 }
 
 export const useUi = create<UiState>()(
   persist(
-    immer((set, _get) => ({
-      devmode: false,
-      isSidebarOpen: false,
-      isSidebarRetracted: false,
-      setDevmode: (devmode: boolean) =>
-        set((state) => {
-          state.devmode = devmode;
-        }),
-      setSidebarOpen: (isOpen: boolean) =>
-        set((state) => {
-          state.isSidebarOpen = isOpen;
-        }),
-      setSidebarRetraction: (isRetracted: boolean) =>
-        set((state) => {
-          state.isSidebarRetracted = isRetracted;
-        }),
-      allowNonStandardParty: false,
-      setAllowNonStandardParty: (allowNonStandardParty: boolean) =>
-        set((state) => {
-          state.allowNonStandardParty = allowNonStandardParty;
-        }),
-      allowKrisAllElements: false,
-      setAllowKrisAllElements: (status: boolean) =>
-        set((state) => {
-          state.allowKrisAllElements = status;
-        }),
-      allowSusieAllElements: false,
-      setAllowSusieAllElements: (status: boolean) =>
-        set((state) => {
-          state.allowSusieAllElements = status;
-        }),
-      allowRalseiAllElements: false,
-      setAllowRalseiAllElements: (status: boolean) =>
-        set((state) => {
-          state.allowRalseiAllElements = status;
-        }),
-      allowNoelleAllElements: false,
-      setAllowNoelleAllElements: (status: boolean) =>
-        set((state) => {
-          state.allowNoelleAllElements = status;
-        }),
-      showNonRecruitableEnemies: false,
-      setShowNonRecruitableEnemies: (status: boolean) =>
-        set((state) => {
-          state.showNonRecruitableEnemies = status;
-        }),
-      totalUploaded: 1,
-      increaseTotalUploaded: () => {
-        set((state) => {
-          state.totalUploaded += 1;
-        });
+    immer((set) => ({
+      ui: {
+        devmode: false,
+        uploadedSaves: 1,
+        sidebar: {
+          open: false,
+          retracted: false,
+        },
+        party: {
+          allowNonStandardParty: false,
+          kris: {
+            allowAllElements: false,
+          },
+          susie: {
+            allowAllElements: false,
+          },
+          ralsei: {
+            allowAllElements: false,
+          },
+          noelle: {
+            allowAllElements: false,
+          },
+        },
+        recruits: {
+          showNonRecruitableEnemies: false,
+        },
       },
+
+      updateUi: (updater: (draft: Ui) => void) =>
+        set((state) => {
+          updater(state.ui);
+        }),
     })),
     {
       name: `${STORE_NAMESPACE}-ui`,
@@ -88,17 +77,67 @@ export const useUi = create<UiState>()(
         debounceTime: 1000,
       }),
       partialize: (state) => ({
-        devmode: state.devmode,
-        isSidebarRetracted: state.isSidebarRetracted,
-        allowNonStandardParty: state.allowNonStandardParty,
-        allowKrisAllElements: state.allowKrisAllElements,
-        allowSusieAllElements: state.allowSusieAllElements,
-        allowRalseiAllElements: state.allowRalseiAllElements,
-        allowNoelleAllElements: state.allowNoelleAllElements,
-        showNonRecruitableEnemies: state.showNonRecruitableEnemies,
-        totalUploaded: state.totalUploaded,
+        ui: state.ui,
       }),
-      version: STORE_VERSION,
+      version: 2,
+      migrate: (state, version) => {
+        if (version === 1) {
+          interface UiV1 {
+            isSidebarRetracted?: boolean;
+            allowKrisAllElements?: boolean;
+            allowSusieAllElements?: boolean;
+            allowRalseiAllElements?: boolean;
+            allowNoelleAllElements?: boolean;
+            devmode?: boolean;
+            allowNonStandardParty?: boolean;
+            showNonRecruitableEnemies?: boolean;
+            totalUploaded?: number;
+          }
+
+          const {
+            isSidebarRetracted,
+            allowKrisAllElements,
+            allowSusieAllElements,
+            allowRalseiAllElements,
+            allowNoelleAllElements,
+            devmode,
+            allowNonStandardParty,
+            showNonRecruitableEnemies,
+            totalUploaded,
+          } = state as UiV1;
+
+          const v2State = {
+            ui: {
+              devmode: devmode ?? false,
+              uploadedSaves: totalUploaded ?? 1,
+              sidebar: {
+                open: false,
+                retracted: isSidebarRetracted ?? false,
+              },
+              party: {
+                allowNonStandardParty: allowNonStandardParty ?? false,
+                kris: {
+                  allowAllElements: allowKrisAllElements ?? false,
+                },
+                susie: {
+                  allowAllElements: allowSusieAllElements ?? false,
+                },
+                ralsei: {
+                  allowAllElements: allowRalseiAllElements ?? false,
+                },
+                noelle: {
+                  allowAllElements: allowNoelleAllElements ?? false,
+                },
+              },
+              recruits: {
+                showNonRecruitableEnemies: showNonRecruitableEnemies ?? false,
+              },
+            },
+          };
+
+          return v2State;
+        }
+      },
     },
   ),
 );

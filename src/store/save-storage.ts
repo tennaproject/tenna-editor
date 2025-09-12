@@ -1,11 +1,11 @@
-import { STORE_NAMESPACE, STORE_VERSION } from './schema';
+import { STORE_NAMESPACE } from './schema';
 import { openDB } from 'idb';
 import type { DeltaruneSave } from '@types';
 import type { UUID } from 'crypto';
 
 const STORE_NAME = 'saves';
 
-const DATABASE = openDB(STORE_NAMESPACE, STORE_VERSION, {
+const DATABASE = openDB(STORE_NAMESPACE, 1, {
   upgrade(db) {
     db.createObjectStore(STORE_NAME);
   },

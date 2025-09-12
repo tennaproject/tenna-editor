@@ -19,8 +19,8 @@ export function SidebarItem({
   requireDevmode,
   requireChapter,
 }: SidebarItemProps) {
-  const isSidebarRetracted = useUi((s) => s.isSidebarRetracted);
-  const devmode = useUi((s) => s.devmode);
+  const isSidebarRetracted = useUi((s) => s.ui.sidebar.retracted);
+  const devmode = useUi((s) => s.ui.devmode);
 
   const isSavePresent = useSave.getState().save;
   const chapter = useSave((s) => s.save?.meta.chapter) || 1;

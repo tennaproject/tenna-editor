@@ -41,8 +41,8 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
   const save = useSave((s) => s.save);
   const { setStorageSave } = useSaveStorage();
 
-  const totalUploaded = useUi((s) => s.totalUploaded);
-  const increaseTotalUploaded = useUi((s) => s.increaseTotalUploaded);
+  const uploadedSaves = useUi((s) => s.ui.uploadedSaves);
+  const updateUi = useUi((s) => s.updateUi);
 
   const [uploadStage, setUploadStage] = useState<UploadStage>('idle');
   const [previousUploadStage, setPreviousUploadStage] =
@@ -120,12 +120,12 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
       setSelectedChapter(detection.chapter ?? 1);
       setSelectedSlot(slot);
       setIsCompletionSave(isCompletionSave);
-      increaseTotalUploaded();
+      updateUi((ui) => (ui.uploadedSaves += 1));
 
       if (!slotMatch) {
         setSaveName(file.name);
       } else {
-        setSaveName(`Save${totalUploaded}`);
+        setSaveName(`Save${uploadedSaves}`);
       }
 
       if (detection.chapter === 1) {

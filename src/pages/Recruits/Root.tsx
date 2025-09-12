@@ -13,10 +13,11 @@ import { chapterHelpers, enemyHelpers } from '@utils';
 import { RecruitField } from './components';
 
 export function RecruitsRoot() {
-  const showNonRecruitableEnemies = useUi((s) => s.showNonRecruitableEnemies);
-  const setShowNonRecruitableEnemies = useUi(
-    (s) => s.setShowNonRecruitableEnemies,
+  const showNonRecruitableEnemies = useUi(
+    (s) => s.ui.recruits.showNonRecruitableEnemies,
   );
+  const updateUi = useUi((s) => s.updateUi);
+
   const chapter = useSave((s) => s.save?.meta.chapter) as ChapterIndex;
   const enemies = chapterHelpers.getById(chapter).content.enemies;
 
@@ -38,7 +39,11 @@ export function RecruitsRoot() {
           <div className="flex flex-col gap-2 lg:flex-row lg:gap-5 ">
             <InlineGroup>
               <Checkbox
-                onChange={setShowNonRecruitableEnemies}
+                onChange={(state) =>
+                  updateUi(
+                    (ui) => (ui.recruits.showNonRecruitableEnemies = state),
+                  )
+                }
                 checked={showNonRecruitableEnemies}
                 label="Show non-recruitable enemies"
               />

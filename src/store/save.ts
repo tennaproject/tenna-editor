@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
-import { STORE_NAMESPACE, STORE_VERSION } from './schema';
+import { STORE_NAMESPACE } from './schema';
 import type { DeltaruneSave } from '@types';
 import { createDebouncedJSONStorage } from 'zustand-debounce';
 
@@ -60,7 +60,7 @@ export const useSave = create<SaveState>()(
       partialize: (state) => ({
         save: state.save,
       }),
-      version: STORE_VERSION,
+      version: 1,
     },
   ),
 );
