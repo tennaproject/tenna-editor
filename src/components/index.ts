@@ -24,3 +24,5 @@ export * from './SaveSelector';
 export * from './Fields';
 export * from './Vessel';
 export * from './ThrashMachine';
+export * from './CharacterHeader';
+export * from './CharacterPage';
