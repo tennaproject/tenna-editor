@@ -82,7 +82,7 @@ export const useUi = create<UiState>()(
       version: 2,
       migrate: (state, version) => {
         if (version === 1) {
-          interface UiV1 {
+          interface UiStoreV1 {
             isSidebarRetracted?: boolean;
             allowKrisAllElements?: boolean;
             allowSusieAllElements?: boolean;
@@ -104,9 +104,9 @@ export const useUi = create<UiState>()(
             allowNonStandardParty,
             showNonRecruitableEnemies,
             totalUploaded,
-          } = state as UiV1;
+          } = state as UiStoreV1;
 
-          const v2State = {
+          const stateV2 = {
             ui: {
               devmode: devmode ?? false,
               uploadedSaves: totalUploaded ?? 1,
@@ -135,7 +135,7 @@ export const useUi = create<UiState>()(
             },
           };
 
-          return v2State;
+          return stateV2;
         }
       },
     },

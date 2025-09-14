@@ -1,4 +1,4 @@
-import type { DeltaruneSave } from '@types';
+import type { Save } from '@types';
 import type { ChapterIndex } from '@data';
 
 export interface ChapterDetectionResult {
@@ -7,8 +7,8 @@ export interface ChapterDetectionResult {
   supported: boolean;
 }
 
-export function detectChapter(save: DeltaruneSave): ChapterDetectionResult {
-  if (save.meta.format === 'v1') {
+export function detectChapter(save: Save): ChapterDetectionResult {
+  if (save.meta.format === 1) {
     return {
       chapter: 1,
       reason: 'format',

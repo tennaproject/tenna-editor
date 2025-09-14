@@ -18,9 +18,9 @@ import {
   PlotField,
 } from '@components';
 import { FLAGS } from '@data';
-import { useSave, useSaveStorage } from '@store';
+import { useSave } from '@store';
 import { chapterHelpers } from '@utils';
-import { toast } from '@services';
+import { saveStorage, toast } from '@services';
 import { PlayerNameField } from '@components/Fields/PlayerNameField';
 
 function Chapter() {
@@ -61,23 +61,22 @@ function SaveTimestamp() {
 
 function DeleteSave() {
   const [isOpen, setIsOpen] = useState(false);
-  const id = useSave((s) => s.save?.meta.id);
+  const activeSaveId = useSave((s) => s.activeSaveId);
   const setSave = useSave((s) => s.setSave);
-  const { getStorageKeys, getStorageSave, removeStorageSave } =
-    useSaveStorage();
+  const switchSave = useSave((s) => s.switchSave);
 
   async function onDelete() {
-    if (!id) return;
-    await removeStorageSave(id);
+    if (!activeSaveId) return;
+    await saveStorage.remove(activeSaveId);
 
-    const storageKeys = await getStorageKeys();
+    const storageKeys = await saveStorage.getKeys();
     // If it was the only save
     if (storageKeys.length === 0) {
       setSave(null);
     } else {
-      const nextSave = await getStorageSave(storageKeys[0]);
+      const nextSave = await saveStorage.get(storageKeys[0]);
       if (nextSave) {
-        setSave(nextSave);
+        switchSave(nextSave.meta.id);
       } else {
         setSave(null);
       }

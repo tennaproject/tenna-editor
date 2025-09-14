@@ -1,6 +1,6 @@
 import {
   Card,
-  CharacterNameField,
+  VesselNameField,
   FlagField,
   Heading,
   Section,
@@ -27,7 +27,7 @@ function VesselSection() {
         <Heading level={3}>Vessel</Heading>
         <div className="flex flex-col md:flex-row gap-3">
           <div className="flex-1 flex flex-col gap-3">
-            <CharacterNameField id="vessel-name" />
+            <VesselNameField id="vessel-name" />
             <div className="flex items-center justify-center w-50 pt-1">
               <Vessel
                 id="vessel-preview"

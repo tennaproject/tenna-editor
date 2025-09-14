@@ -207,11 +207,8 @@ function CharacterCard({
             onSelectionChange={(item) => {
               if (!item) return;
               const newCharacter = item.value as CharacterIndex;
-              const newParty: [number, number, number] = [
-                party[0],
-                party[1],
-                party[2],
-              ];
+              const newParty: [CharacterIndex, CharacterIndex, CharacterIndex] =
+                [party[0], party[1], party[2]];
               newParty[slot] = newCharacter;
               setField('party', newParty);
             }}

@@ -1,27 +1,17 @@
-import { toast } from '@services';
-import { useSave, useSaveStorage } from '@store';
-import type { DeltaruneSave } from '@types';
+import { saveStorage } from '@services';
+import type { Save } from '@types';
 import { useState, useEffect } from 'react';
 import { type SelectItem, Select } from './Select';
+import { useSave } from '@store';
 
 export function SaveSelector() {
   const [saveSelectOptions, setSaveSelectOptions] = useState<SelectItem[]>([]);
-  const save = useSave((s) => s.save);
-  const saveId = useSave((s) => s.save?.meta.id);
+  const activeSaveId = useSave((s) => s.activeSaveId);
   const saveName = useSave((s) => s.save?.meta.name);
-  const setSave = useSave((s) => s.setSave);
-  const { getStorageKeys, getStorageSave, setStorageSave } = useSaveStorage();
+  const switchSave = useSave((s) => s.switchSave);
 
   async function updateSelectOptions() {
-    const keys = await getStorageKeys();
-
-    const storedSaves: DeltaruneSave[] = [];
-    for (let i = 0; i < keys.length; i += 1) {
-      const storedSave = await getStorageSave(keys[i]);
-      if (storedSave) {
-        storedSaves.push(storedSave);
-      }
-    }
+    const storedSaves: Save[] = await saveStorage.getAll();
 
     storedSaves.sort(
       (a, b) =>
@@ -34,39 +24,19 @@ export function SaveSelector() {
       selectOptions.push({
         id: storedSaves[i].meta.id,
         label: storedSaves[i].meta.name,
+        value: storedSaves[i].meta.id,
       });
     }
 
     setSaveSelectOptions(selectOptions);
   }
 
-  async function switchSave(id: string) {
-    // Save current save to storage
-    if (!save) return;
-    await setStorageSave(save.meta.id, save);
-
-    // Switch to other save
-    const newSave = await getStorageSave(id);
-    if (newSave) {
-      setSave(newSave);
-      toast(`Switched to save "${newSave.meta.name}"`, 'success');
-    }
-  }
-
   useEffect(() => {
     updateSelectOptions();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    saveId,
-    saveName,
-    getStorageKeys,
-    getStorageSave,
-    setStorageSave,
-    setSaveSelectOptions,
-  ]);
+  }, [activeSaveId, saveName, setSaveSelectOptions]);
 
   const selectedItem = saveSelectOptions.find(
-    (item) => item.id === save?.meta.id,
+    (item) => item.value === activeSaveId,
   );
 
   return (
@@ -77,7 +47,7 @@ export function SaveSelector() {
       selectedItem={selectedItem}
       onSelectionChange={(item) => {
         if (item) {
-          switchSave(item.id);
+          switchSave(item.value as string);
         }
       }}
     ></Select>

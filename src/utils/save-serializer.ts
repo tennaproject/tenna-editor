@@ -1,4 +1,4 @@
-import type { DeltaruneSave, V1Save, V2Save } from '@types';
+import type { Save, SaveV1, SaveV2 } from '@types';
 
 export function serializeSaveTime(time: number): string {
   if (time >= 1e6) {
@@ -8,11 +8,11 @@ export function serializeSaveTime(time: number): string {
   return String(time);
 }
 
-function serializeV1Save(save: V1Save): string {
+function serializeSaveV1(save: SaveV1): string {
   const lines: string[] = [];
 
   lines.push(save.playerName);
-  lines.push(save.characterName);
+  lines.push(save.vesselName);
 
   for (let i = 0; i < 5; i += 1) {
     lines.push('');
@@ -108,11 +108,11 @@ function serializeV1Save(save: V1Save): string {
   return linesWithSpaces.join('\n');
 }
 
-function serializeV2Save(save: V2Save): string {
+function serializeSaveV2(save: SaveV2): string {
   const lines: string[] = [];
 
   lines.push(save.playerName);
-  lines.push(save.characterName);
+  lines.push(save.vesselName);
 
   for (let i = 0; i < 5; i += 1) {
     lines.push('');
@@ -217,11 +217,11 @@ function serializeV2Save(save: V2Save): string {
   return linesWithSpaces.join('\n');
 }
 
-export function serializeSaveFile(save: DeltaruneSave): string {
-  if (save.meta.format === 'v1') {
-    return serializeV1Save(save as V1Save);
-  } else if (save.meta.format === 'v2') {
-    return serializeV2Save(save as V2Save);
+export function serializeSave(save: Save): string {
+  if (save.meta.format === 1) {
+    return serializeSaveV1(save as SaveV1);
+  } else if (save.meta.format === 2) {
+    return serializeSaveV2(save as SaveV2);
   } else {
     throw new Error('Unsupported save format');
   }

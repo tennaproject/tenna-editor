@@ -831,7 +831,7 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
   },
   [FLAGS.SINCE_CHAPTER]: {
     displayName: 'Starting Chapter',
-    description: 'Number of chapter that you started this save file from.',
+    description: 'Number of chapter that you started this save from.',
     valueType: 'map',
     valueRules: {
       map: {
