@@ -4,7 +4,9 @@ import { immer } from 'zustand/middleware/immer';
 import { STORE_NAMESPACE } from './schema';
 import { createDebouncedJSONStorage } from 'zustand-debounce';
 
-interface Ui {
+export const UI_VERSION = 2;
+
+export interface Ui {
   devmode: boolean;
   uploadedSaves: number;
   sidebar: {
@@ -79,7 +81,7 @@ export const useUi = create<UiState>()(
       partialize: (state) => ({
         ui: state.ui,
       }),
-      version: 2,
+      version: UI_VERSION,
       migrate: (state, version) => {
         if (version === 1) {
           interface UiStoreV1 {

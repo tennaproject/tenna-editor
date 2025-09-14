@@ -7,3 +7,4 @@ export * from './merge-class';
 export * from './get-character-color';
 export * from './time';
 export * from './get-game-color';
+export * from './appdata';

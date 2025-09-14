@@ -16,6 +16,8 @@ function sync() {
   }, SYNC_DELAY);
 }
 
+export const SAVE_VERSION = 2;
+
 interface SaveState {
   save: Save | null;
   activeSaveId: string | null;
@@ -111,7 +113,7 @@ export const useSave = create<SaveState>()(
       onRehydrateStorage: (state) => () => {
         void state.initializeSave();
       },
-      version: 2,
+      version: SAVE_VERSION,
       migrate: async (state, version) => {
         if (version < 2) {
           interface SaveSchemaV1 {
