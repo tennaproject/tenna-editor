@@ -10,3 +10,4 @@ export * from './PlotField';
 export * from './VesselNameField';
 export * from './SpellField';
 export * from './StatsField';
+export * from './LoadoutField';

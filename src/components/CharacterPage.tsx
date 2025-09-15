@@ -1,5 +1,4 @@
 import { type CharacterIndex } from '@data';
-import { KitField } from '@pages/Party/components';
 import DividerIcon from '@assets/icons/minus.svg?react';
 import { characterHelpers, getCharacterColor } from '@utils';
 import {
@@ -12,6 +11,7 @@ import {
   CharacterHeader,
   SpellField,
   StatsField,
+  LoadoutField,
 } from '@components';
 
 interface CharacterPageProps {
@@ -87,10 +87,26 @@ export function CharacterPage({
                     type="magic"
                   />
                 </Section>
-                <KitField
-                  character={character}
-                  allowAllElements={allowAllElements}
-                />
+                <Section id="loadout" className="flex flex-col gap-3">
+                  <LoadoutField
+                    id="weapon"
+                    character={character}
+                    allowAllElements={allowAllElements}
+                    type="weapon"
+                  />
+                  <LoadoutField
+                    id="primary-armor"
+                    character={character}
+                    allowAllElements={allowAllElements}
+                    type="primaryArmor"
+                  />
+                  <LoadoutField
+                    id="secondary-armor"
+                    character={character}
+                    allowAllElements={allowAllElements}
+                    type="secondaryArmor"
+                  />
+                </Section>
               </div>
             </div>
 
@@ -114,6 +130,7 @@ export function CharacterPage({
             <div className="w-full grid lg:grid-cols-2 gap-4 lg:px-6 mt-8">
               {Array.from({ length: 6 }).map((_, i) => (
                 <SpellField
+                  id={`spell-slot${i}`}
                   key={i}
                   slot={i}
                   character={character}
