@@ -26,3 +26,4 @@ export * from './Vessel';
 export * from './ThrashMachine';
 export * from './CharacterHeader';
 export * from './CharacterPage';
+export * from './FieldWrapper';

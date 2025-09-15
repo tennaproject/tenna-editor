@@ -1,4 +1,4 @@
-import { CHARACTERS, type CharacterIndex } from '@data';
+import { type CharacterIndex } from '@data';
 import {
   HpField,
   StatsField,

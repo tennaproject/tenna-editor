@@ -1,11 +1,4 @@
-import {
-  HelpTip,
-  InlineGroup,
-  Section,
-  Select,
-  TextLabel,
-  type SelectItem,
-} from '@components';
+import { FieldWrapper, Select, type SelectItem } from '@components';
 import type { RoomIndex } from '@data';
 import { useSave } from '@store';
 import { chapterHelpers, mergeClass, roomHelpers } from '@utils';
@@ -44,17 +37,19 @@ export function RoomField({ id, className }: RoomFieldProps) {
   }));
 
   const selectedItem = items.find((item) => item.value === room) ?? null;
+
+  const description = `
+  This sets which room the player is currently in when the save is loaded.
+  `;
+
   return (
-    <Section id={id} className={mergeClass('flex flex-col gap-2', className)}>
-      <InlineGroup>
-        <TextLabel>Current Room</TextLabel>
-        <HelpTip title="Current Room">
-          <p>
-            This sets which room the player is currently in when the save is
-            loaded.
-          </p>
-        </HelpTip>
-      </InlineGroup>
+    <FieldWrapper
+      id={id}
+      className={mergeClass('flex flex-col gap-2', className)}
+      title="Current Room"
+      description={description}
+      label
+    >
       <Select
         items={items}
         placeholder="Select a room..."
@@ -63,6 +58,6 @@ export function RoomField({ id, className }: RoomFieldProps) {
         selectedItem={selectedItem}
         onSelectionChange={onChange}
       />
-    </Section>
+    </FieldWrapper>
   );
 }

@@ -1,4 +1,4 @@
-import { InlineGroup, Section, TextInput, TextLabel } from '@components';
+import { FieldWrapper, TextInput } from '@components';
 import { useSave } from '@store';
 import { mergeClass } from '@utils';
 
@@ -16,15 +16,17 @@ export function VesselNameField({ id, className }: VesselNameFieldProps) {
   }
 
   return (
-    <Section id={id} className={mergeClass('flex flex-col gap-2', className)}>
-      <InlineGroup>
-        <TextLabel>Name</TextLabel>
-      </InlineGroup>
+    <FieldWrapper
+      id={id}
+      className={mergeClass('flex flex-col gap-2', className)}
+      title="Name"
+      label
+    >
       <TextInput
         value={vesselName}
         placeholder="Enter vessel name..."
         onChange={onChange}
       />
-    </Section>
+    </FieldWrapper>
   );
 }

@@ -1,4 +1,4 @@
-import { NumberInput, Section, TextLabel } from '@components';
+import { FieldWrapper, NumberInput } from '@components';
 import { useSave } from '@store';
 import { mergeClass } from '@utils';
 
@@ -16,13 +16,17 @@ export function PlotField({ id, className }: PlotFieldProps) {
   }
 
   return (
-    <Section id={id} className={mergeClass('flex flex-col gap-2', className)}>
-      <TextLabel>Plot ID</TextLabel>
+    <FieldWrapper
+      id={id}
+      className={mergeClass('flex flex-col gap-2', className)}
+      title="Plot ID"
+      label
+    >
       <NumberInput
         value={plot}
         placeholder="Enter plot ID..."
         onChange={onChange}
       />
-    </Section>
+    </FieldWrapper>
   );
 }

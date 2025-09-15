@@ -1,4 +1,4 @@
-import { Checkbox, Section } from '@components';
+import { Checkbox, FieldWrapper } from '@components';
 import { useSave } from '@store';
 import { mergeClass } from '@utils';
 
@@ -23,12 +23,16 @@ export function SaveIsCompletionSaveField({
   }
 
   return (
-    <Section id={id} className={mergeClass('flex flex-col gap-2', className)}>
+    <FieldWrapper
+      id={id}
+      className={mergeClass('flex flex-col gap-2', className)}
+      inline
+    >
       <Checkbox
         label="Completion save"
         checked={isCompletionSave}
         onChange={onChange}
       />
-    </Section>
+    </FieldWrapper>
   );
 }
