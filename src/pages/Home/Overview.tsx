@@ -124,7 +124,7 @@ export function HomeOverview() {
       <div className="page">
         <Section>
           <div className="flex items-center justify-center h-32 text-text-2">
-            No save file loaded
+            No save loaded
           </div>
         </Section>
       </div>

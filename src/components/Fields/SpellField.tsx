@@ -1,4 +1,4 @@
-import { Section, TextLabel, Select, type SelectItem } from '@components';
+import { Select, type SelectItem, FieldWrapper } from '@components';
 import { SPELLS, type SpellIndex, type CharacterIndex } from '@data';
 import { useSave } from '@store';
 import { chapterHelpers, characterHelpers, spellHelpers } from '@utils';
@@ -58,8 +58,12 @@ export function SpellField({ slot, character, allowAllItems }: SpellFieldProp) {
     selectItems.find((item) => item.value === currentSpell) ?? null;
 
   return (
-    <Section id={`spells-slot${slot}`} className="flex-1">
-      <TextLabel>Spell {slot + 1}</TextLabel>
+    <FieldWrapper
+      id={`spells-slot${slot}`}
+      className="flex-1"
+      title={`Spell ${slot + 1}`}
+      label
+    >
       <Select
         placeholder="Select a spell..."
         label={`Spell ${slot + 1}`}
@@ -77,6 +81,6 @@ export function SpellField({ slot, character, allowAllItems }: SpellFieldProp) {
         items={selectItems}
         className="w-full"
       />
-    </Section>
+    </FieldWrapper>
   );
 }

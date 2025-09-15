@@ -1,10 +1,6 @@
 import { type CharacterIndex } from '@data';
-import {
-  HpField,
-  StatsField,
-  KitField,
-  SpellField,
-} from '@pages/Party/components';
+import { KitField } from '@pages/Party/components';
+import DividerIcon from '@assets/icons/minus.svg?react';
 import { characterHelpers, getCharacterColor } from '@utils';
 import {
   Card,
@@ -14,6 +10,8 @@ import {
   InlineGroup,
   Section,
   CharacterHeader,
+  SpellField,
+  StatsField,
 } from '@components';
 
 interface CharacterPageProps {
@@ -51,8 +49,44 @@ export function CharacterPage({
             <div className="flex flex-col">
               <CharacterHeader character={character} />
               <div className="flex flex-col gap-6 px-6 py-6">
-                <HpField character={character} />
-                <StatsField character={character} />
+                <Section
+                  id="health"
+                  className="flex justify-between items-end w-full"
+                >
+                  <StatsField
+                    id="current-health"
+                    character={character}
+                    type="health"
+                  />
+                  <span className="h-5 w-5 mb-3 mx-3 text-text-2">
+                    <DividerIcon />
+                  </span>
+                  <StatsField
+                    id="max-health"
+                    character={character}
+                    type="maxHealth"
+                  />
+                </Section>
+                <Section
+                  id="stats"
+                  className="flex justify-between items-end w-full gap-3"
+                >
+                  <StatsField
+                    id={'stats-attack'}
+                    character={character}
+                    type="attack"
+                  />
+                  <StatsField
+                    id={'stats-defence'}
+                    character={character}
+                    type="defence"
+                  />
+                  <StatsField
+                    id={'stats-magic'}
+                    character={character}
+                    type="magic"
+                  />
+                </Section>
                 <KitField
                   character={character}
                   allowAllElements={allowAllElements}

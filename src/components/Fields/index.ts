@@ -8,3 +8,5 @@ export * from './SaveNameField';
 export * from './SaveIsCompletionSaveField';
 export * from './PlotField';
 export * from './VesselNameField';
+export * from './SpellField';
+export * from './StatsField';
