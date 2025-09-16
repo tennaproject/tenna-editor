@@ -8,10 +8,7 @@ interface RequireSaveProps {
   navigateTo?: string;
 }
 
-export function RequireSave({
-  children,
-  navigateTo = '/home',
-}: RequireSaveProps) {
+export function RequireSave({ children, navigateTo = '/' }: RequireSaveProps) {
   const save = useSave.getState().save;
   const shownRef = useRef(false);
 

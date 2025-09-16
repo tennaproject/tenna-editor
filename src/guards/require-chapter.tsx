@@ -13,7 +13,7 @@ interface RequireChapterProps {
 export function RequireChapter({
   children,
   requiredChapter,
-  navigateTo = '/home',
+  navigateTo = '/',
 }: RequireChapterProps) {
   const chapter = useSave((s) => s.save?.meta.chapter) || 0;
   const shownRef = useRef(false);
