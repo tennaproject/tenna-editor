@@ -1,4 +1,4 @@
-import { InventorySection, ItemGrid, ItemField } from './components';
+import { InventoryPage } from '@components';
 import { useSave } from '@store';
 import { chapterHelpers } from '@utils';
 
@@ -9,13 +9,13 @@ export function InventoryWeapons() {
 
   return (
     <div className="page flex-auto">
-      <InventorySection id="weapons" title="Weapons">
-        <ItemGrid colsLg={3}>
-          {Array.from({ length: slots }).map((_, i) => (
-            <ItemField key={i} kind="weapon" slot={i} />
-          ))}
-        </ItemGrid>
-      </InventorySection>
+      <InventoryPage
+        slots={slots}
+        id="weapons"
+        title="Weapons"
+        type="weapon"
+        cols={3}
+      />
     </div>
   );
 }
