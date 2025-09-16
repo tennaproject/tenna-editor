@@ -14,3 +14,4 @@ export * from './StatsField';
 export * from './LoadoutField';
 export * from './LightWorldStatsField';
 export * from './LightWorldLoadoutField';
+export * from './RecruitField';

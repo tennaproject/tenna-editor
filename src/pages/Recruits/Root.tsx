@@ -5,12 +5,12 @@ import {
   HelpTip,
   InlineGroup,
   Page,
+  RecruitField,
   Section,
 } from '@components';
 import { useSave, useUi } from '@store';
 import type { ChapterIndex } from '@data';
 import { chapterHelpers, enemyHelpers } from '@utils';
-import { RecruitField } from './components';
 
 export function RecruitsRoot() {
   const showNonRecruitableEnemies = useUi(
