@@ -19,6 +19,7 @@ function sync() {
 export const SAVE_VERSION = 2;
 
 interface SaveState {
+  hasInitialized: boolean;
   save: Save | null;
   activeSaveId: string | null;
   setSave: (save: Save | null) => void;
@@ -36,6 +37,7 @@ export const useSave = create<SaveState>()(
   persist(
     immer((set, get) => {
       return {
+        hasInitialized: false,
         save: null,
         activeSaveId: null,
 
@@ -94,11 +96,17 @@ export const useSave = create<SaveState>()(
 
         initializeSave: async () => {
           const id = get().activeSaveId;
-          if (!id) return;
-          const save = await saveStorage.get(id);
-          set((state) => {
-            state.save = save ?? null;
-          });
+          if (!id) {
+            set((state) => {
+              state.hasInitialized = true;
+            });
+          } else {
+            const save = await saveStorage.get(id);
+            set((state) => {
+              state.save = save ?? null;
+              state.hasInitialized = true;
+            });
+          }
         },
       };
     }),
@@ -110,8 +118,8 @@ export const useSave = create<SaveState>()(
       partialize: (state) => ({
         activeSaveId: state.activeSaveId,
       }),
-      onRehydrateStorage: (state) => () => {
-        void state.initializeSave();
+      onRehydrateStorage: (state) => async () => {
+        void (await state.initializeSave());
       },
       version: SAVE_VERSION,
       migrate: async (state, version) => {
