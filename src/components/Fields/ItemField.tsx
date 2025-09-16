@@ -3,10 +3,14 @@ import {
   ARMORS,
   CONSUMABLES,
   KEYITEMS,
+  LIGHTWORLDITEMS,
+  PHONECONTACTS,
   WEAPONS,
   type ArmorIndex,
   type ConsumableIndex,
   type KeyItemIndex,
+  type LightWorldItemIndex,
+  type PhoneContactIndex,
   type WeaponIndex,
 } from '@data';
 import { useSave } from '@store';
@@ -16,6 +20,8 @@ import {
   weaponHelpers,
   consumableHelpers,
   keyItemHelpers,
+  lightWorldItemHelpers,
+  phoneContactHelpers,
 } from '@utils';
 
 export type ItemType =
@@ -67,6 +73,16 @@ export function ItemField({ type, slot, label }: ItemFieldProps) {
         : [];
     currentValue = storage?.[slot] ?? (CONSUMABLES.EMPTY as ConsumableIndex);
     placeholder = 'Select a storage item...';
+  } else if (type === 'lightWorldItem') {
+    currentValue =
+      save?.lightWorld.items[slot] ??
+      (LIGHTWORLDITEMS.EMPTY as LightWorldItemIndex);
+    placeholder = 'Select an item...';
+  } else if (type === 'phoneContact') {
+    currentValue =
+      save?.lightWorld.phone[slot] ??
+      (PHONECONTACTS.EMPTY as PhoneContactIndex);
+    placeholder = 'Select an item...';
   }
 
   let availableSet: Set<number> = new Set<number>();
@@ -90,6 +106,20 @@ export function ItemField({ type, slot, label }: ItemFieldProps) {
     availableSet = new Set<number>(chapterContent.armors as Set<number>);
     getDisplayName = (id: number) =>
       armorHelpers.getById(id as ArmorIndex)?.displayName ?? 'Unknown';
+  } else if (type === 'lightWorldItem') {
+    availableSet = new Set<number>(
+      chapterContent.lightWorld.items as Set<number>,
+    );
+    getDisplayName = (id: number) =>
+      lightWorldItemHelpers.getById(id as LightWorldItemIndex)?.displayName ??
+      'Unknown';
+  } else if (type === 'phoneContact') {
+    availableSet = new Set<number>(
+      chapterContent.lightWorld.phoneContacts as Set<number>,
+    );
+    getDisplayName = (id: number) =>
+      phoneContactHelpers.getById(id as PhoneContactIndex)?.displayName ??
+      'Unknown';
   }
 
   const metaDisplay = getDisplayName(currentValue);
@@ -142,6 +172,10 @@ export function ItemField({ type, slot, label }: ItemFieldProps) {
                   slot
                 ] = item.value as ConsumableIndex;
               }
+            } else if (type === 'lightWorldItem') {
+              save.lightWorld.items[slot] = item.value as LightWorldItemIndex;
+            } else if (type === 'phoneContact') {
+              save.lightWorld.phone[slot] = item.value as PhoneContactIndex;
             }
           });
         }}

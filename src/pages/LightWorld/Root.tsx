@@ -1,6 +1,14 @@
-import { Card, GlowBar, Heading, Page, Section } from '@components';
+import {
+  Card,
+  GlowBar,
+  Heading,
+  ItemField,
+  LightWorldLoadoutField,
+  LightWorldStatsField,
+  Page,
+  Section,
+} from '@components';
 import { mergeClass } from '@utils';
-import { ItemField, KitField, StatField } from './components';
 import DividerIcon from '@assets/icons/minus.svg?react';
 
 const THEME = {
@@ -38,49 +46,25 @@ export function LightWorldRoot() {
                   </Section>
                   <div className="flex flex-col gap-12 px-6 py-6">
                     <Section
-                      id="main-hp"
+                      id="health"
                       className="flex justify-between items-end w-full"
                     >
-                      <StatField
-                        kind="health"
-                        label="Current HP"
-                        id="main-hp-current"
-                      />
+                      <LightWorldStatsField type="health" id="current-health" />
                       <span className="h-5 w-5 mb-3 mx-3 text-text-2">
                         <DividerIcon />
                       </span>
-                      <StatField
-                        kind="maxHealth"
-                        label="Max HP"
-                        id="main-hp-max"
-                      />
+                      <LightWorldStatsField type="maxHealth" id="max-health" />
                     </Section>
-                    <div className="grid grid-cols-2 gap-4">
-                      <StatField
-                        kind="level"
-                        label="Level"
-                        id="main-stats-level"
-                      />
-                      <StatField
-                        kind="experience"
-                        label="Experience"
-                        id="main-stats-experience"
-                      />
-                      <StatField
-                        kind="attack"
-                        label="Attack"
-                        id="main-stats-attack"
-                      />
-                      <StatField
-                        kind="defence"
-                        label="Defence"
-                        id="main-stats-defence"
-                      />
-                    </div>
+                    <Section id="stats" className="grid grid-cols-2 gap-4">
+                      <LightWorldStatsField type="level" id="level" />
+                      <LightWorldStatsField type="experience" id="experience" />
+                      <LightWorldStatsField type="attack" id="attack" />
+                      <LightWorldStatsField type="defence" id="defence" />
+                    </Section>
 
                     <div className="flex flex-col gap-4">
-                      <KitField kind="weapon" label="Weapon" id="main-weapon" />
-                      <KitField kind="armor" label="Armor" id="main-armor" />
+                      <LightWorldLoadoutField type="weapon" id="weapon" />
+                      <LightWorldLoadoutField type="armor" id="armor" />
                     </div>
                   </div>
                 </div>
@@ -98,12 +82,7 @@ export function LightWorldRoot() {
 
                     <div className="w-full grid lg:grid-cols-4 gap-4 mt-8">
                       {Array.from({ length: 8 }).map((_, i) => (
-                        <ItemField
-                          key={i}
-                          slot={i}
-                          kind="item"
-                          id={`items-slot${i}`}
-                        />
+                        <ItemField key={i} slot={i} type="lightWorldItem" />
                       ))}
                     </div>
                   </Section>
@@ -115,12 +94,7 @@ export function LightWorldRoot() {
                     <Heading level={4}>Phone Contacts</Heading>
                     <div className="w-full grid lg:grid-cols-4 gap-4 mt-8">
                       {Array.from({ length: 8 }).map((_, i) => (
-                        <ItemField
-                          key={i}
-                          slot={i}
-                          kind="phoneContact"
-                          id={`phoneContacts-slot${i}`}
-                        />
+                        <ItemField key={i} slot={i} type="phoneContact" />
                       ))}
                     </div>
                   </Section>

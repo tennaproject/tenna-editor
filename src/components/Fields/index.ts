@@ -12,3 +12,5 @@ export * from './VesselNameField';
 export * from './SpellField';
 export * from './StatsField';
 export * from './LoadoutField';
+export * from './LightWorldStatsField';
+export * from './LightWorldLoadoutField';

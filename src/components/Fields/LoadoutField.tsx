@@ -67,7 +67,7 @@ export function LoadoutField({
         : armorHelpers.getById(value as ArmorIndex);
     return {
       id: `${value}`,
-      label: (meta as { displayName: string }).displayName,
+      label: meta.displayName,
       value,
     };
   });
@@ -75,9 +75,7 @@ export function LoadoutField({
   if (!isValid || !availableElements.has(current as number)) {
     selectItems.push({
       id: `${current}`,
-      label: isExisting
-        ? (elementMeta as { displayName: string }).displayName
-        : 'Unknown',
+      label: isExisting ? elementMeta.displayName : 'Unknown',
       value: current as number,
       invalid: true,
     });

@@ -1,35 +1,40 @@
 import { FieldWrapper, NumberInput } from '@components';
-import type { CharacterIndex } from '@data';
 import { useSave } from '@store';
 
-type StatsType = 'attack' | 'defence' | 'magic' | 'health' | 'maxHealth';
+type LightWorldStatsType =
+  | 'attack'
+  | 'defence'
+  | 'experience'
+  | 'health'
+  | 'maxHealth'
+  | 'level';
 
-const STATS_TITLES: Record<StatsType, string> = {
+const STATS_TITLES: Record<LightWorldStatsType, string> = {
   attack: 'Attack',
   defence: 'Defence',
-  magic: 'Magic',
+  experience: 'Experience',
   health: 'Current HP',
   maxHealth: 'Max HP',
+  level: 'Level',
 } as const;
 
-interface StatFieldProps {
+interface LightWorldStatsFieldProps {
   id?: string;
-  type: StatsType;
-  character: CharacterIndex;
+  type: LightWorldStatsType;
 }
 
-export function StatsField({ id, type, character }: StatFieldProps) {
+export function LightWorldStatsField({ id, type }: LightWorldStatsFieldProps) {
   const current =
     useSave((s) => {
       if (s.save) {
-        return s.save.characters[character][type];
+        return s.save.lightWorld[type];
       }
     }) ?? 0;
   const updateSave = useSave((s) => s.updateSave);
 
   function onChange(value: number) {
     updateSave((save) => {
-      save.characters[character][type] = value;
+      save.lightWorld[type] = value;
     });
   }
 
