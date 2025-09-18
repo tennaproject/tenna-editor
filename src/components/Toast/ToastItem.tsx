@@ -9,26 +9,37 @@ import InfoIcon from '@assets/icons/info-box.svg?react';
 import ErrorIcon from '@assets/icons/alert.svg?react';
 import SuccessIcon from '@assets/icons/radio-on.svg?react';
 import WarningIcon from '@assets/icons/warning-box.svg?react';
+import Markdown from 'react-markdown';
+import { stripIdentation } from '@utils';
 
-const colors: Record<ToastType, { background: string; text: string }> = {
+const COLORS: Record<ToastType, { background: string; text: string }> = {
   info: { background: 'bg-blue', text: 'text-blue' },
   error: { background: 'bg-red', text: 'text-red' },
   success: { background: 'bg-green', text: 'text-green' },
   warning: { background: 'bg-yellow', text: 'text-yellow' },
-};
+} as const;
 
-const icons: Record<ToastType, JSX.Element> = {
+const TEXT_SIZES = {
+  xs: 'text-xs',
+  sm: 'text-sm',
+  md: 'text-md',
+  lg: 'text-lg',
+  xl: 'text-xl',
+} as const;
+
+const ICONS: Record<ToastType, JSX.Element> = {
   info: <InfoIcon />,
   error: <ErrorIcon />,
   success: <SuccessIcon />,
   warning: <WarningIcon />,
-};
+} as const;
 
 interface ToastItemProps {
   message: string | JSX.Element;
   type: ToastType;
   duration: number;
   createdAt: number;
+  size?: keyof typeof TEXT_SIZES;
   onClose: () => void;
 }
 
@@ -37,6 +48,7 @@ export function ToastItem({
   type,
   duration,
   createdAt,
+  size = 'lg',
   onClose,
 }: ToastItemProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -93,7 +105,6 @@ export function ToastItem({
     if (el) el.style.transition = 'none';
     animationRef.current?.pause();
     e.currentTarget?.setPointerCapture?.(e.pointerId);
-    e.preventDefault?.();
   };
 
   const handlePointerMove = (e: ReactPointerEvent<HTMLDivElement>) => {
@@ -136,26 +147,21 @@ export function ToastItem({
       onPointerCancel={endDrag}
       style={{ willChange: 'transform, opacity', touchAction: 'pan-y' }}
     >
-      <div className="bg-surface-3 border-b-0 border border-border text-text-1 p-3 w-64">
-        <div>
-          <button
-            className="absolute top-2 right-2 text-text-2 hover:text-text-1"
-            onClick={(e) => {
-              e.stopPropagation?.();
-              onCloseRef.current?.();
-            }}
-          >
-            &times;
-          </button>
-        </div>
+      <div className="bg-surface-3 border-b-0 border border-border text-text-1 p-3 w-80">
         <div className="flex items-center gap-2">
-          <div className={`w-8 h-8 ${colors[type].text}`}>{icons[type]}</div>
-          <div className="text-lg">{message}</div>
+          <div className={`w-8 h-8 ${COLORS[type].text}`}>{ICONS[type]}</div>
+          <div className={TEXT_SIZES[size]}>
+            {typeof message === 'string' ? (
+              <Markdown>{stripIdentation(message)}</Markdown>
+            ) : (
+              message
+            )}
+          </div>
         </div>
       </div>
       <div
         ref={progressRef}
-        className={`h-1 rounded border-b-1 border-border ${colors[type].background}`}
+        className={`h-1 rounded border-b-1 border-border ${COLORS[type].background}`}
         style={{ transformOrigin: 'left' }}
       />
     </div>
