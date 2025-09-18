@@ -7,8 +7,10 @@ import { VitePWA } from 'vite-plugin-pwa';
 import fg from 'fast-glob';
 import { resolve } from 'path';
 import { getVersion } from './scripts/version';
+import { getChangelog } from './scripts/changelog';
 
 const { packageVersion, commitHash, branch } = await getVersion();
+const changelog = await getChangelog();
 
 export default defineConfig({
   plugins: [
@@ -119,5 +121,6 @@ export default defineConfig({
     __BRANCH__: JSON.stringify(branch) ?? 'error',
     __COMMIT_HASH__: JSON.stringify(commitHash) ?? 'error',
     __BUILD_TIMESTAMP__: new Date(),
+    __CHANGELOG__: changelog,
   },
 });

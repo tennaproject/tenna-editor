@@ -6,6 +6,7 @@ export type ToastOptions = [
   message: string | JSX.Element,
   type?: ToastType,
   duration?: number,
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl',
   onClose?: () => void,
 ];
 

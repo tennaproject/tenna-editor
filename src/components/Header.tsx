@@ -14,6 +14,10 @@ export function Header() {
   const [isUploadOpen, setUploadOpen] = useState(false);
   const [isDownloadOpen, setDownloadOpen] = useState(false);
 
+  const isSidebarOpen = useUi((s) => s.ui.sidebar.open);
+  const isSidebarRetracted = useUi((s) => s.ui.sidebar.retracted);
+  const updateUi = useUi((s) => s.updateUi);
+
   return (
     <header className="w-full h-15 flex-shrink-0 bg-surface-1 relative select-none">
       <div className="flex items-center justify-between h-full px-2">
@@ -21,8 +25,7 @@ export function Header() {
           {/* sidebar visibility button */}
           <button
             onClick={() => {
-              const { isSidebarOpen, setSidebarOpen } = useUi.getState();
-              setSidebarOpen(!isSidebarOpen);
+              updateUi((ui) => (ui.sidebar.open = !isSidebarOpen));
             }}
             className="p-1 sm:p-1.5 lg:hidden transition-colors hover:bg-surface-1-hover"
             aria-label="Toggle sidebar"
@@ -37,9 +40,7 @@ export function Header() {
           {/* sidebar retraction button */}
           <button
             onClick={() => {
-              const { isSidebarRetracted, setSidebarRetraction } =
-                useUi.getState();
-              setSidebarRetraction(!isSidebarRetracted);
+              updateUi((ui) => (ui.sidebar.retracted = !isSidebarRetracted));
             }}
             className="p-1.5 hidden lg:inline transition-colors hover:bg-surface-1-hover"
             aria-label="Toggle sidebar retraction"

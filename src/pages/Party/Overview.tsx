@@ -6,6 +6,7 @@ import {
   InlineGroup,
   Section,
   Select,
+  GlowBar,
   type SelectItem,
 } from '@components';
 import {
@@ -24,31 +25,6 @@ import {
   mergeClass,
   getCharacterColor,
 } from '@utils';
-
-interface GlowBarProps {
-  bg: string;
-  shadow: string;
-}
-
-function GlowBar({ bg = 'bg-red', shadow = 'shadow-red' }: GlowBarProps) {
-  return (
-    <div className="w-full relative">
-      <div
-        className={mergeClass(
-          'w-full h-1 shadow-2xl relative z-10',
-          bg,
-          shadow,
-        )}
-      />
-      <div
-        className="absolute left-0 right-0 h-1 pointer-events-none"
-        style={{ filter: 'blur(8px)', opacity: 0.6 }}
-      >
-        <div className={mergeClass('w-full h-1', bg)} />
-      </div>
-    </div>
-  );
-}
 
 interface CharacterCardProps {
   slot: number;
@@ -231,11 +207,8 @@ function CharacterCard({
             onSelectionChange={(item) => {
               if (!item) return;
               const newCharacter = item.value as CharacterIndex;
-              const newParty: [number, number, number] = [
-                party[0],
-                party[1],
-                party[2],
-              ];
+              const newParty: [CharacterIndex, CharacterIndex, CharacterIndex] =
+                [party[0], party[1], party[2]];
               newParty[slot] = newCharacter;
               setField('party', newParty);
             }}
@@ -249,8 +222,8 @@ function CharacterCard({
 
 export function PartyOverview() {
   const party = useSave((s) => s.save?.party) as CharacterIndex[] | undefined;
-  const allowNonStandardParty = useUi((s) => s.allowNonStandardParty);
-  const setAllowNonStandardParty = useUi((s) => s.setAllowNonStandardParty);
+  const allowNonStandardParty = useUi((s) => s.ui.party.allowNonStandardParty);
+  const updateUi = useUi((s) => s.updateUi);
 
   if (!party) return null;
 
@@ -260,7 +233,9 @@ export function PartyOverview() {
         <Checkbox
           label="Allow non-standard party combinations"
           checked={allowNonStandardParty}
-          onChange={(state) => setAllowNonStandardParty(state)}
+          onChange={(state) =>
+            updateUi((ui) => (ui.party.allowNonStandardParty = state))
+          }
         />
         <HelpTip title="Allow non-standard party combinations">
           <p>Enabling this allows you to set every character at every slot.</p>

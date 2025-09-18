@@ -10,9 +10,9 @@ interface RequireDevmodeProps {
 
 export function RequireDevmode({
   children,
-  navigateTo = '/home',
+  navigateTo = '/',
 }: RequireDevmodeProps) {
-  const devmode = useUi((s) => s.devmode);
+  const devmode = useUi((s) => s.ui.devmode);
   const shownRef = useRef(false);
 
   useEffect(() => {

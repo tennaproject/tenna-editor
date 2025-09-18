@@ -14,7 +14,12 @@ export function SidebarMenu() {
   return (
     <>
       <Sidebar.Group>
-        <Sidebar.Item title="Home" icon={<HomeIcon />} to="/" />
+        <Sidebar.Item
+          title="Home"
+          icon={<HomeIcon />}
+          to="/"
+          activePaths={['/welcome']}
+        />
         <Sidebar.Item
           title="Inventory"
           icon={<InventoryIcon />}

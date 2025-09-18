@@ -1,6 +1,13 @@
-import type { DeltaruneSave, SaveFormat, V1Save, V2Save } from '@types';
+import {
+  SAVE_SCHEMA,
+  type Save,
+  type SaveFormat,
+  type SaveV1,
+  type SaveV2,
+} from '@types';
 import type {
   ArmorIndex,
+  CharacterIndex,
   ConsumableIndex,
   KeyItemIndex,
   RoomIndex,
@@ -26,19 +33,19 @@ export const SUPPORTED_FORMATS = Object.keys(
 
 function detectSaveFormat(count: number): SaveFormat | null {
   if (count == SAVE_META.V1.TOTAL_LINES) {
-    return 'v1';
+    return 1;
   }
 
   if (count == SAVE_META.V2.TOTAL_LINES) {
-    return 'v2';
+    return 2;
   }
 
   return null;
 }
 
-function parseV1Save(cursor: LineCursor): V1Save {
+function parseSaveV1(cursor: LineCursor): SaveV1 {
   const playerName = cursor.nextString();
-  const characterName = cursor.nextString();
+  const vesselName = cursor.nextString();
   cursor.skip(5);
 
   const party = [cursor.nextNumber(), cursor.nextNumber(), cursor.nextNumber()];
@@ -164,17 +171,18 @@ function parseV1Save(cursor: LineCursor): V1Save {
   return {
     meta: {
       id: crypto.randomUUID(),
-      format: 'v1',
+      format: 1,
       createdAt: now,
       modifiedAt: now,
+      schema: SAVE_SCHEMA,
       chapter: 1,
       slot: 0,
       isCompletionSave: false,
       name: '',
     },
     playerName,
-    characterName,
-    party: party as [number, number, number],
+    vesselName,
+    party: party as [CharacterIndex, CharacterIndex, CharacterIndex],
     money,
     xp,
     lv,
@@ -198,9 +206,9 @@ function parseV1Save(cursor: LineCursor): V1Save {
   };
 }
 
-function parseV2Save(cursor: LineCursor): V2Save {
+function parseSaveV2(cursor: LineCursor): SaveV2 {
   const playerName = cursor.nextString();
-  const characterName = cursor.nextString();
+  const vesselName = cursor.nextString();
   cursor.skip(5);
 
   const party = [cursor.nextNumber(), cursor.nextNumber(), cursor.nextNumber()];
@@ -338,17 +346,18 @@ function parseV2Save(cursor: LineCursor): V2Save {
   return {
     meta: {
       id: crypto.randomUUID(),
-      format: 'v2',
+      format: 2,
       createdAt: now,
       modifiedAt: now,
+      schema: SAVE_SCHEMA,
       chapter: 2,
       slot: 0,
       isCompletionSave: false,
       name: 'Cool save',
     },
     playerName,
-    characterName,
-    party: party as [number, number, number],
+    vesselName,
+    party: party as [CharacterIndex, CharacterIndex, CharacterIndex],
     money,
     xp,
     lv,
@@ -372,14 +381,14 @@ function parseV2Save(cursor: LineCursor): V2Save {
   };
 }
 
-export function parseSaveFile(content: string): DeltaruneSave | null {
+export function parseSave(content: string): Save | null {
   const cursor = new LineCursor(content);
 
   const format = detectSaveFormat(cursor.totalLines);
-  if (format == 'v1') {
-    return parseV1Save(cursor);
-  } else if (format == 'v2') {
-    return parseV2Save(cursor);
+  if (format == 1) {
+    return parseSaveV1(cursor);
+  } else if (format == 2) {
+    return parseSaveV2(cursor);
   } else {
     return null;
   }

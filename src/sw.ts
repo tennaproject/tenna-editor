@@ -6,21 +6,58 @@ import { toast } from '@services';
 import { registerSW } from 'virtual:pwa-register';
 
 export function setupPWA() {
-  const storageKey = 'tenna-timestamp';
-  const currentBuildTimestamp = JSON.stringify(__BUILD_TIMESTAMP__);
+  const storageisUpdatingKey = 'tenna-isupdating';
+  let hasRefreshed = false;
 
-  const doUpdate = registerSW({
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (hasRefreshed) return;
+      if (localStorage.getItem(storageisUpdatingKey) === 'true') {
+        hasRefreshed = true;
+        window.location.reload();
+      }
+    });
+  }
+
+  registerSW({
     immediate: true,
-    onRegisteredSW: async (_url, registration) => {
-      await registration?.update().catch(() => {});
-      const previousVersion = localStorage.getItem(storageKey);
 
-      if (previousVersion && previousVersion !== currentBuildTimestamp) {
-        toast('Editor is updating...', 'info');
-        await doUpdate();
+    onRegistered(registration) {
+      registration?.update().catch(() => {});
+
+      if (registration) {
+        registration.addEventListener('updatefound', () => {
+          const installing = registration.installing;
+          if (!installing) return;
+          installing.addEventListener('statechange', () => {
+            if (
+              installing.state === 'installed' &&
+              navigator.serviceWorker.controller
+            ) {
+              toast('Editor is updating...', 'info');
+              localStorage.setItem(storageisUpdatingKey, 'true');
+            }
+          });
+        });
       }
 
-      localStorage.setItem(storageKey, currentBuildTimestamp);
+      const isUpdating = JSON.parse(
+        localStorage.getItem(storageisUpdatingKey) ?? 'false',
+      );
+      if (isUpdating) {
+        const message = `
+        Editor was updated to version ${__VERSION__}
+
+        Check out changelog in the About page
+        `;
+        toast(message, 'success', undefined, 'sm');
+        localStorage.removeItem(storageisUpdatingKey);
+      }
+    },
+
+    onRegisterError(error) {
+      console.error('Service worker registration error', error);
+      toast('Failed to register service worker', 'error');
     },
   });
 }

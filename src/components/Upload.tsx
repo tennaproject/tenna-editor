@@ -1,9 +1,9 @@
-import { useSave, useSaveStorage, useUi } from '@store';
-import { detectChapter, parseSaveFile } from '@utils';
+import { useSave, useUi } from '@store';
+import { detectChapter, parseSave } from '@utils';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import type { DeltaruneSave, SaveSlot } from '@types';
-import { toast } from '@services';
+import type { Save, SaveSlot } from '@types';
+import { saveStorage, toast } from '@services';
 import {
   TextInput,
   TextLabel,
@@ -37,12 +37,9 @@ interface UploadProps {
 type UploadStage = 'idle' | 'success' | 'error' | 'chapter' | 'settings';
 
 export function Upload({ isOpen, setOpen }: UploadProps) {
-  const setSave = useSave((s) => s.setSave);
-  const save = useSave((s) => s.save);
-  const { setStorageSave } = useSaveStorage();
-
-  const totalUploaded = useUi((s) => s.totalUploaded);
-  const increaseTotalUploaded = useUi((s) => s.increaseTotalUploaded);
+  const switchSave = useSave((s) => s.switchSave);
+  const uploadedSaves = useUi((s) => s.ui.uploadedSaves);
+  const updateUi = useUi((s) => s.updateUi);
 
   const [uploadStage, setUploadStage] = useState<UploadStage>('idle');
   const [previousUploadStage, setPreviousUploadStage] =
@@ -50,7 +47,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
   const [uploadError, setUploadError] = useState<string | null>(null);
 
   const [selectedChapter, setSelectedChapter] = useState<ChapterIndex>(1);
-  const [parsedSave, setParsedSave] = useState<DeltaruneSave | null>(null);
+  const [parsedSave, setParsedSave] = useState<Save | null>(null);
   const [selectedSlot, setSelectedSlot] = useState<SaveSlot>(0);
   const [isCompletionSave, setIsCompletionSave] = useState(false);
   const [saveName, setSaveName] = useState<string>('');
@@ -80,7 +77,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
         return;
       }
 
-      const save = parseSaveFile(content);
+      const save = parseSave(content);
 
       if (!save) {
         setUploadError(
@@ -120,12 +117,12 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
       setSelectedChapter(detection.chapter ?? 1);
       setSelectedSlot(slot);
       setIsCompletionSave(isCompletionSave);
-      increaseTotalUploaded();
+      updateUi((ui) => (ui.uploadedSaves += 1));
 
       if (!slotMatch) {
         setSaveName(file.name);
       } else {
-        setSaveName(`Save${totalUploaded}`);
+        setSaveName(`Save${uploadedSaves}`);
       }
 
       if (detection.chapter === 1) {
@@ -137,7 +134,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
     reader.readAsText(file);
   }
 
-  function changeStage(stage: UploadStage) {
+  async function changeStage(stage: UploadStage) {
     const currentStage = uploadStage;
 
     switch (stage) {
@@ -155,13 +152,8 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
         parsedSave.meta.isCompletionSave = isCompletionSave;
         parsedSave.meta.name = saveName;
 
-        // when there is already save loaded - put it into storage
-        if (save) {
-          setStorageSave(save.meta.id, save);
-        }
-
-        setStorageSave(parsedSave.meta.id, parsedSave);
-        setSave(parsedSave);
+        await saveStorage.set(parsedSave.meta.id, parsedSave);
+        switchSave(parsedSave.meta.id);
 
         setParsedSave(null);
         setSelectedSlot(0);

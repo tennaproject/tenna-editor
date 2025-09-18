@@ -1,7 +1,7 @@
 {
   "name": "tenna-editor",
   "private": true,
-  "version": "0.6.0-beta",
+  "version": "0.7.0-beta",
   "type": "module",
   "engines": {
     "node": ">=22.16.0",

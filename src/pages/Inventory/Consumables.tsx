@@ -1,6 +1,6 @@
 import { useSave } from '@store';
 import { chapterHelpers } from '@utils';
-import { ItemField, InventorySection, ItemGrid } from './components';
+import { InventoryPage } from '@components';
 
 export function InventoryConsumables() {
   const chapter = useSave((s) => s.save?.meta.chapter) || 1;
@@ -10,22 +10,21 @@ export function InventoryConsumables() {
 
   return (
     <div className="page flex-auto">
-      <InventorySection id="consumables" title="Consumables">
-        <ItemGrid colsLg={3}>
-          {Array.from({ length: consumableSlots }).map((_, i) => (
-            <ItemField key={i} kind="consumable" slot={i} />
-          ))}
-        </ItemGrid>
-      </InventorySection>
-
+      <InventoryPage
+        slots={consumableSlots}
+        id="consumables"
+        title="Consumables"
+        type="consumable"
+        cols={3}
+      />
       {storageSlots > 0 && (
-        <InventorySection id="storage" title="Storage">
-          <ItemGrid colsLg={3}>
-            {Array.from({ length: storageSlots }).map((_, i) => (
-              <ItemField key={i} kind="storage" slot={i} />
-            ))}
-          </ItemGrid>
-        </InventorySection>
+        <InventoryPage
+          slots={storageSlots}
+          id="storage"
+          title="Storage"
+          type="storage"
+          cols={3}
+        />
       )}
     </div>
   );

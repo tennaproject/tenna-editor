@@ -1,6 +1,7 @@
 import { useSave, useUi } from '@store';
+import { mergeClass } from '@utils';
 import { type ReactNode } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, matchPath } from 'react-router-dom';
 
 export interface SidebarItemProps {
   title: string;
@@ -9,6 +10,7 @@ export interface SidebarItemProps {
   requireSave?: boolean;
   requireDevmode?: boolean;
   requireChapter?: number;
+  activePaths?: string[];
 }
 
 export function SidebarItem({
@@ -18,9 +20,10 @@ export function SidebarItem({
   requireSave,
   requireDevmode,
   requireChapter,
+  activePaths,
 }: SidebarItemProps) {
-  const isSidebarRetracted = useUi((s) => s.isSidebarRetracted);
-  const devmode = useUi((s) => s.devmode);
+  const isSidebarRetracted = useUi((s) => s.ui.sidebar.retracted);
+  const devmode = useUi((s) => s.ui.devmode);
 
   const isSavePresent = useSave.getState().save;
   const chapter = useSave((s) => s.save?.meta.chapter) || 1;
@@ -52,6 +55,11 @@ export function SidebarItem({
     }
   }
 
+  const isActiveCustom =
+    activePaths?.some((p) =>
+      matchPath({ path: p, end: !p.endsWith('*') }, location.pathname),
+    ) ?? false;
+
   return !isHidden ? (
     <NavLink
       to={to}
@@ -60,13 +68,14 @@ export function SidebarItem({
       tabIndex={isDisabled ? -1 : 0}
       aria-disabled={isDisabled ? true : false}
       className={({ isActive }) =>
-        `${baseClasses} ${
+        mergeClass(
+          baseClasses,
           isDisabled
             ? disabledClasses
-            : isActive
+            : isActive || isActiveCustom
               ? activeClasses
-              : inactiveClasses
-        }`
+              : inactiveClasses,
+        )
       }
     >
       <div className="flex w-full items-center h-full">

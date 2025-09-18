@@ -12,7 +12,7 @@ import {
   InlineGroup,
 } from '@components';
 import { toast } from '@services';
-import { serializeSaveFile } from '@utils';
+import { serializeSave } from '@utils';
 import type { SaveSlot } from '@types';
 
 const SLOT_OPTIONS: SelectItem[] = [
@@ -41,8 +41,8 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
   function downloadSave() {
     if (!save) return;
 
-    const serializedSaveFile = serializeSaveFile(save);
-    const blob = new Blob([serializedSaveFile], {
+    const serializedSave = serializeSave(save);
+    const blob = new Blob([serializedSave], {
       type: 'application/octet-stream',
     });
 
@@ -63,7 +63,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
       setIsCompletionSave(save.meta.isCompletionSave);
     } else {
       setOpen(false);
-      toast('There is no save file loaded currently', 'error');
+      toast('There is no save loaded currently', 'error');
       return;
     }
   }, [isOpen, save, setOpen]);

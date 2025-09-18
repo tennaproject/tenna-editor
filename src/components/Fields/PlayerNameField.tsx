@@ -1,10 +1,4 @@
-import {
-  InlineGroup,
-  Section,
-  TextInput,
-  TextLabel,
-  HelpTip,
-} from '@components';
+import { TextInput, FieldWrapper } from '@components';
 import { useSave } from '@store';
 import { mergeClass } from '@utils';
 
@@ -21,23 +15,25 @@ export function PlayerNameField({ id, className }: PlayerNameFieldProps) {
     updateSave((save) => (save.playerName = value));
   }
 
+  const description = `
+  This name is chosen at the beginning of the game. It is referred to as "creator name."
+
+  It's displayed in main menu and save point interface.
+  `;
+
   return (
-    <Section id={id} className={mergeClass('flex flex-col gap-2', className)}>
-      <InlineGroup>
-        <TextLabel>Player Name</TextLabel>
-        <HelpTip title="Player Name">
-          <p>
-            This name is chosen at the beginning of the game. It is referred to
-            as "creator name."
-          </p>
-          <p>It's displayed in main menu and save point interface.</p>
-        </HelpTip>
-      </InlineGroup>
+    <FieldWrapper
+      id={id}
+      className={mergeClass('flex flex-col gap-2', className)}
+      title="Player Name"
+      description={description}
+      label
+    >
       <TextInput
         value={playerName}
         placeholder="Enter player name..."
         onChange={onChange}
       />
-    </Section>
+    </FieldWrapper>
   );
 }

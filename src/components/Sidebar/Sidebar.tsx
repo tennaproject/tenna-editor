@@ -32,8 +32,8 @@ export interface SidebarProps {
 }
 
 export function Sidebar({ children }: SidebarProps) {
-  const isSidebarOpen = useUi((s) => s.isSidebarOpen);
-  const isSidebarRetracted = useUi((s) => s.isSidebarRetracted);
+  const isSidebarOpen = useUi((s) => s.ui.sidebar.open);
+  const isSidebarRetracted = useUi((s) => s.ui.sidebar.retracted);
   const isLargeScreen = useMediaQuery('(min-width: 1024px)');
 
   const baseClass =

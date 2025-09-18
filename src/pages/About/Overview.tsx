@@ -1,4 +1,4 @@
-import { Section, Card, Heading } from '@components';
+import { Section, Card, Heading, Link } from '@components';
 
 export function AboutOverview() {
   return (
@@ -36,14 +36,10 @@ export function AboutOverview() {
                 Tenna Editor is hosted on Cloudflare, which may collect some of
                 your personal data.
               </p>
-              <a
-                href="https://www.cloudflare.com/trust-hub/privacy-and-data-protection"
-                className="text-red hover:text-red-hover underline"
-                target="_blank"
-              >
+              <Link href="https://www.cloudflare.com/trust-hub/privacy-and-data-protection">
                 Click here to read Cloudflare's privacy policy and GDPR/HIPAA
                 compliance info.
-              </a>
+              </Link>
             </div>
           </div>
         </Card>
@@ -54,13 +50,9 @@ export function AboutOverview() {
           <Heading level={3}>Source Code</Heading>
           <p className="text-text-2">
             The source code of Tenna Editor is available on{' '}
-            <a
-              href="https://github.com/tennaproject/tenna-editor"
-              className="text-red hover:text-red-hover underline "
-              target="_blank"
-            >
+            <Link href="https://github.com/tennaproject/tenna-editor">
               GitHub
-            </a>
+            </Link>
           </p>
         </Card>
       </Section>

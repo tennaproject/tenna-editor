@@ -1,4 +1,4 @@
-import { Checkbox, HelpTip, InlineGroup, Section } from '@components';
+import { Checkbox, FieldWrapper } from '@components';
 import { useSave } from '@store';
 import { mergeClass } from '@utils';
 
@@ -15,21 +15,24 @@ export function InDarkWorldField({ id, className }: InDarkWorldFieldProps) {
     setField('inDarkWorld', state);
   }
 
+  const description = `
+  This internal flag is set to "true" when you are in the Dark World.
+
+  For example, it changes how menus are rendered.
+  `;
   return (
-    <Section id={id} className={mergeClass('flex flex-col gap-2', className)}>
-      <InlineGroup>
-        <Checkbox
-          label="Currently in Dark World"
-          checked={checked}
-          onChange={onChange}
-        />
-        <HelpTip title="Currently in Dark World">
-          <p>
-            This internal flag is set to "true" when you are in the Dark World.
-          </p>
-          <p>For example, it changes how menus are rendered.</p>
-        </HelpTip>
-      </InlineGroup>
-    </Section>
+    <FieldWrapper
+      id={id}
+      className={mergeClass('flex flex-col gap-2', className)}
+      title={'Currently in Dark World'}
+      description={description}
+      inline
+    >
+      <Checkbox
+        label="Currently in Dark World"
+        checked={checked}
+        onChange={onChange}
+      />
+    </FieldWrapper>
   );
 }

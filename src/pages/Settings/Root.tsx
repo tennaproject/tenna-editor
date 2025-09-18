@@ -2,8 +2,8 @@ import { useUi } from '@store';
 import { Checkbox, Page } from '@components';
 
 export function SettingsRoot() {
-  const devmode = useUi((s) => s.devmode);
-  const setDevmode = useUi((s) => s.setDevmode);
+  const devmode = useUi((s) => s.ui.devmode);
+  const updateUi = useUi((s) => s.updateUi);
 
   return (
     <Page>
@@ -13,7 +13,7 @@ export function SettingsRoot() {
           <Checkbox
             label="Enable developer mode"
             checked={devmode}
-            onChange={setDevmode}
+            onChange={(state) => updateUi((ui) => (ui.devmode = state))}
           />
         </div>
       </Page.Content>

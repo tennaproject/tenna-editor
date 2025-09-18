@@ -1,6 +1,7 @@
 import type {
   ArmorIndex,
   ChapterIndex,
+  CharacterIndex,
   ConsumableIndex,
   KeyItemIndex,
   LightWorldItemIndex,
@@ -11,7 +12,8 @@ import type {
 } from '@data';
 import type { UUID } from 'crypto';
 
-export type SaveFormat = 'v1' | 'v2';
+export const SAVE_SCHEMA = 2;
+export type SaveFormat = 1 | 2;
 export type SaveSlot = 0 | 1 | 2;
 
 export interface WeaponStats {
@@ -30,7 +32,7 @@ export interface WeaponStatsV2 extends WeaponStats {
   elementAmount: number;
 }
 
-export interface Character {
+export interface CharacterV1 {
   health: number;
   maxHealth: number;
   attack: number;
@@ -45,11 +47,11 @@ export interface Character {
   spells: SpellIndex[];
 }
 
-export interface CharacterV2 extends Character {
+export interface CharacterV2 extends CharacterV1 {
   weaponStats: WeaponStatsV2[];
 }
 
-export interface BattleState {
+export interface Battle {
   boltSpeed: number;
   grazeAmount: number;
   grazeSize: number;
@@ -57,14 +59,14 @@ export interface BattleState {
   maxTension: number;
 }
 
-export interface Inventory {
+export interface InventoryV1 {
   consumables: ConsumableIndex[];
   keyItems: KeyItemIndex[];
   weapons: WeaponIndex[];
   armors: ArmorIndex[];
 }
 
-export interface InventoryV2 extends Inventory {
+export interface InventoryV2 extends InventoryV1 {
   storage: ConsumableIndex[];
 }
 
@@ -84,27 +86,27 @@ export interface LightWorld {
   phone: PhoneContactIndex[];
 }
 
-export interface SaveFile<
+export interface SaveData<
   Format extends SaveFormat,
   Chapter extends ChapterIndex,
+  Character,
+  Inventory,
 > {
   meta: {
     readonly id: UUID;
     readonly format: Format;
     readonly createdAt: Date;
     modifiedAt: Date;
+    schema: number;
     chapter: Chapter;
     slot: SaveSlot;
     isCompletionSave: boolean;
     name: string;
   };
-}
-
-export interface V1Save extends SaveFile<'v1', 1> {
   playerName: string;
-  characterName: string;
+  vesselName: string;
 
-  party: [number, number, number];
+  party: [CharacterIndex, CharacterIndex, CharacterIndex];
   money: number;
   xp: number;
   lv: number;
@@ -113,37 +115,17 @@ export interface V1Save extends SaveFile<'v1', 1> {
   inDarkWorld: boolean;
 
   characters: Character[];
-  battle: BattleState;
+  battle: Battle;
   inventory: Inventory;
   lightWorld: LightWorld;
-
   flags: unknown[];
+
   plot: number;
   room: RoomIndex;
   time: number;
 }
 
-export interface V2Save extends SaveFile<'v2', 2 | 3 | 4> {
-  playerName: string;
-  characterName: string;
+export type SaveV1 = SaveData<1, 1, CharacterV1, InventoryV1>;
+export type SaveV2 = SaveData<2, 2 | 3 | 4, CharacterV2, InventoryV2>;
 
-  party: [number, number, number];
-  money: number;
-  xp: number;
-  lv: number;
-  inv: number;
-  invc: number;
-  inDarkWorld: boolean;
-
-  characters: CharacterV2[];
-  battle: BattleState;
-  inventory: InventoryV2;
-  lightWorld: LightWorld;
-
-  flags: unknown[];
-  plot: number;
-  room: RoomIndex;
-  time: number;
-}
-
-export type DeltaruneSave = V1Save | V2Save;
+export type Save = SaveV1 | SaveV2;

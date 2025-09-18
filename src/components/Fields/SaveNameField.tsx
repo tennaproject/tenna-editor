@@ -1,5 +1,5 @@
 import { Section, TextInput, TextLabel } from '@components';
-import { useSave, useSaveStorage } from '@store';
+import { useSave } from '@store';
 import { mergeClass } from '@utils';
 import { useState, useRef, useEffect } from 'react';
 
@@ -11,7 +11,6 @@ interface SaveNameFieldProps {
 export function SaveNameField({ id, className }: SaveNameFieldProps) {
   const name = useSave((s) => s.save?.meta.name) || 'Cool save';
   const updateSave = useSave((s) => s.updateSave);
-  const { setStorageSave } = useSaveStorage();
   const [localValue, setLocalValue] = useState(name);
   const debounceTimer = useRef<NodeJS.Timeout | null>(null);
 
@@ -28,7 +27,6 @@ export function SaveNameField({ id, className }: SaveNameFieldProps) {
       if (!value.trim()) return;
       updateSave((save) => {
         save.meta.name = value.trim();
-        setStorageSave(save.meta.id, save);
       });
     }, 1000);
   }

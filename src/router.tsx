@@ -1,5 +1,5 @@
 import React, { Suspense, type JSX } from 'react';
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { RequireChapter, RequireDevmode, RequireSave } from '@guards';
 import { Loading } from '@components';
@@ -180,19 +180,13 @@ const AboutAttributions = React.lazy(() =>
 );
 
 export function AppRouter() {
-  const location = useLocation();
-
   return (
     <AnimatePresence mode="wait">
       <Suspense fallback={<Loading />}>
-        <Routes
-          location={location}
-          key={location.pathname.split('/')[1] || 'root'}
-        >
+        <Routes>
           <Route path="/" element={<HomeRoot />}>
             <Route index element={<HomeOverview />} />
             <Route path="welcome" element={<HomeWelcome />}></Route>
-            <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
           <Route path="/about" element={<AboutPage />}>
             <Route index element={<Navigate to="overview" replace />} />
@@ -318,7 +312,6 @@ export function AppRouter() {
           {import.meta.env.VITE_SETTINGS_TAB === 'true' && SettingsRoot && (
             <Route path="/settings" element={<SettingsRoot />}></Route>
           )}
-          <Route path="*" element={<Navigate to="/home" replace />} />
         </Routes>
       </Suspense>
     </AnimatePresence>

@@ -1,4 +1,4 @@
-import { Section, Select, TextLabel, type SelectItem } from '@components';
+import { FieldWrapper, Select, type SelectItem } from '@components';
 import { useSave } from '@store';
 import type { SaveSlot } from '@types';
 import { mergeClass } from '@utils';
@@ -28,8 +28,12 @@ export function SaveSlotField({ id, className }: SaveSlotFieldProps) {
   }
 
   return (
-    <Section id={id} className={mergeClass('flex flex-col gap-2', className)}>
-      <TextLabel>In-game slot</TextLabel>
+    <FieldWrapper
+      id={id}
+      className={mergeClass('flex flex-col gap-2', className)}
+      title="In-game slot"
+      label
+    >
       <Select
         items={SLOT_OPTIONS}
         placeholder="Select slot"
@@ -37,6 +41,6 @@ export function SaveSlotField({ id, className }: SaveSlotFieldProps) {
         defaultSelectedItem={SLOT_OPTIONS[slot]}
         onSelectionChange={onSelectionChange}
       />
-    </Section>
+    </FieldWrapper>
   );
 }

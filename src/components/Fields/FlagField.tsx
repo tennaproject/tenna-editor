@@ -5,13 +5,10 @@ import { chapterHelpers, flagHelpers, getGameColor, mergeClass } from '@utils';
 import Markdown from 'react-markdown';
 import {
   Checkbox,
-  HelpTip,
-  Section,
-  InlineGroup,
   NumberInput,
-  TextLabel,
   type SelectItem,
   Select,
+  FieldWrapper,
 } from '@components';
 
 interface FlagFieldProps {
@@ -33,44 +30,36 @@ export function FlagField({ flag, id, className }: FlagFieldProps) {
 
   if (valueType === 'boolean') {
     return (
-      <Section id={id} className={className}>
-        <InlineGroup>
-          <Checkbox
-            label={<Markdown>{displayName}</Markdown>}
-            checked={
-              valueRules?.invertedBoolean ? !currentValue : !!currentValue
-            }
-            onChange={(value: boolean) => {
-              updateSave((save) => {
-                if (valueRules?.invertedBoolean) {
-                  save.flags[flag] = value ? 0 : 1;
-                } else {
-                  save.flags[flag] = value ? 1 : 0;
-                }
-              });
-            }}
-          />
-          {description && (
-            <HelpTip title={displayName}>
-              <p>{description}</p>
-            </HelpTip>
-          )}
-        </InlineGroup>
-      </Section>
+      <FieldWrapper
+        id={id}
+        className={className}
+        description={description}
+        inline
+      >
+        <Checkbox
+          label={<Markdown>{displayName}</Markdown>}
+          checked={valueRules?.invertedBoolean ? !currentValue : !!currentValue}
+          onChange={(value: boolean) => {
+            updateSave((save) => {
+              if (valueRules?.invertedBoolean) {
+                save.flags[flag] = value ? 0 : 1;
+              } else {
+                save.flags[flag] = value ? 1 : 0;
+              }
+            });
+          }}
+        />
+      </FieldWrapper>
     );
   } else if (valueType === 'number') {
     return (
-      <Section id={id} className={mergeClass('flex flex-col gap-2', className)}>
-        <InlineGroup>
-          <TextLabel>
-            <Markdown>{displayName}</Markdown>
-          </TextLabel>
-          {description && (
-            <HelpTip title={displayName}>
-              <p>{description}</p>
-            </HelpTip>
-          )}
-        </InlineGroup>
+      <FieldWrapper
+        id={id}
+        className={mergeClass('flex flex-col gap-2', className)}
+        description={description}
+        title={displayName}
+        label
+      >
         <NumberInput
           value={(currentValue as number) ?? 0}
           placeholder="Enter number..."
@@ -80,7 +69,7 @@ export function FlagField({ flag, id, className }: FlagFieldProps) {
             updateSave((save) => (save.flags[flag] = value));
           }}
         />
-      </Section>
+      </FieldWrapper>
     );
   } else if (valueType === 'map') {
     if (valueRules?.map) {
@@ -104,20 +93,13 @@ export function FlagField({ flag, id, className }: FlagFieldProps) {
       );
 
       return (
-        <Section
+        <FieldWrapper
           id={id}
           className={mergeClass('flex flex-col gap-2', className)}
+          description={description}
+          title={displayName}
+          label
         >
-          <InlineGroup>
-            <TextLabel>
-              <Markdown>{displayName}</Markdown>
-            </TextLabel>
-            {description && (
-              <HelpTip title={displayName}>
-                <p>{description}</p>
-              </HelpTip>
-            )}
-          </InlineGroup>
           <Select
             items={selectItems}
             placeholder="Select value..."
@@ -133,22 +115,18 @@ export function FlagField({ flag, id, className }: FlagFieldProps) {
               }
             }}
           />
-        </Section>
+        </FieldWrapper>
       );
     }
   } else if (valueType === 'color') {
     return (
-      <Section id={id} className={mergeClass('flex flex-col gap-3', className)}>
-        <InlineGroup>
-          <TextLabel>
-            <Markdown>{displayName}</Markdown>
-          </TextLabel>
-          {description && (
-            <HelpTip title={displayName}>
-              <p>{description}</p>
-            </HelpTip>
-          )}
-        </InlineGroup>
+      <FieldWrapper
+        id={id}
+        className={mergeClass('flex flex-col gap-3', className)}
+        description={description}
+        title={displayName}
+        label
+      >
         <div className="flex flex-wrap">
           {[...Array(32)].map((_, i) => (
             <div
@@ -166,9 +144,8 @@ export function FlagField({ flag, id, className }: FlagFieldProps) {
             />
           ))}
         </div>
-      </Section>
+      </FieldWrapper>
     );
   }
-
   return;
 }

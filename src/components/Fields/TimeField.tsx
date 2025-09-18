@@ -1,4 +1,4 @@
-import { Section, TextInput, TextLabel } from '@components';
+import { FieldWrapper, TextInput } from '@components';
 import { useSave } from '@store';
 import { mergeClass } from '@utils';
 import { formatTime, parseTime } from '@utils/time';
@@ -46,13 +46,17 @@ export function TimeField({ id, className }: TimeFieldProps) {
   }, []);
 
   return (
-    <Section id={id} className={mergeClass('flex flex-col gap-2', className)}>
-      <TextLabel>Playtime</TextLabel>
+    <FieldWrapper
+      id={id}
+      className={mergeClass('flex flex-col gap-2', className)}
+      title="Playtime"
+      label
+    >
       <TextInput
         value={internalValue}
         placeholder="00:00:00"
         onChange={onChange}
       />
-    </Section>
+    </FieldWrapper>
   );
 }

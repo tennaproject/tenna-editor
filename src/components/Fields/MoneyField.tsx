@@ -1,4 +1,4 @@
-import { NumberInput, Section, TextLabel } from '@components';
+import { FieldWrapper, NumberInput } from '@components';
 import { useSave } from '@store';
 import { mergeClass } from '@utils';
 
@@ -16,13 +16,17 @@ export function MoneyField({ id, className }: MoneyFieldProps) {
   }
 
   return (
-    <Section id={id} className={mergeClass('flex flex-col gap-2', className)}>
-      <TextLabel>Money (D$)</TextLabel>
+    <FieldWrapper
+      id={id}
+      className={mergeClass('flex flex-col gap-2', className)}
+      title="Money (D$)"
+      label
+    >
       <NumberInput
         value={money}
         placeholder="Enter money amount..."
         onChange={onChange}
       />
-    </Section>
+    </FieldWrapper>
   );
 }

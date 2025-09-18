@@ -14,6 +14,7 @@ export function ToastContainer() {
       message: string | JSX.Element;
       duration: number;
       createdAt: number;
+      size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
       onClose?: () => void;
     }[]
   >([]);
@@ -23,10 +24,11 @@ export function ToastContainer() {
     const recent = new Map<string, number>();
     const DEDUPE_WINDOW = 1000; // ms
 
-    registerToastDispatcher((message, type, duration, onClose) => {
+    registerToastDispatcher((message, type, duration, size, onClose) => {
       const id = crypto.randomUUID();
       const resolvedType: ToastType = type ?? 'info';
       const resolvedDuration = duration ?? 5000;
+      const resolvedSize = size ?? 'lg';
 
       if (typeof message === 'string') {
         const key = `${resolvedType}:${message}`;
@@ -50,6 +52,7 @@ export function ToastContainer() {
           type: resolvedType,
           duration: resolvedDuration,
           createdAt: performance.now(),
+          size: resolvedSize,
           onClose,
         },
       ]);
@@ -62,13 +65,14 @@ export function ToastContainer() {
 
   return (
     <div className="fixed top-16 right-3 z-50 flex flex-col gap-2">
-      {toasts.map(({ id, message, type, duration, createdAt }) => (
+      {toasts.map(({ id, message, type, duration, createdAt, size }) => (
         <ToastItem
           key={id}
           message={message}
           type={type}
           duration={duration}
           createdAt={createdAt}
+          size={size}
           onClose={() => {
             setToasts((prev) => {
               const item = prev.find((t) => t.id === id);

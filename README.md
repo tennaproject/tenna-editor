@@ -37,7 +37,7 @@ For example, in the Party tab, each character has their own subtab for managing 
 Tenna Editor automatically detects your save file Chapter when you upload it.
 It is currently compatible with all saves from Chapters 1 to 4.
 
-_NOTE: Demo and Console versions are currently unsupported._
+_NOTE: Console versions are currently unsupported._
 
 All the saves you make are saved in the memory of your browser.
 You can use custom names to easily identify and switch between them seamlessly.
