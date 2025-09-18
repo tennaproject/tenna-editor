@@ -472,7 +472,7 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
     },
   },
   [FLAGS.GOT_SANS_PHONE]: {
-    displayName: 'Talked to Burgerpants',
+    displayName: `Got Sans's phone number`,
     valueType: 'map',
     valueRules: {
       map: {
@@ -483,7 +483,7 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
     },
   },
   [FLAGS.TALKED_NOELLE]: {
-    displayName: 'Talked to Burgerpants',
+    displayName: 'Talked to Noelle',
     valueType: 'map',
     valueRules: {
       map: {

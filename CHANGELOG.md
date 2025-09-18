@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Changelog page was added to about tab.
+- Changelog page was added to the About tab.
 - Demo save files are now considered supported.
 
 ### Changed
@@ -22,3 +22,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Home icon on sidebar is now highlighted while being on the Welcome page.
 - Changing from the Overview to the Welcome page is no longer causing reload of the whole content.
+- There are no 3 "Talked to Burgerpants" labeled flags in Chapter 1 anymore. Thanks [ticktockdoomapproaches](https://steamcommunity.com/profiles/76561199782178857) for reporting!
