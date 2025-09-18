@@ -24,4 +24,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Home icon on sidebar is now highlighted while being on the Welcome page.
 - Changing from the Overview to the Welcome page is no longer causing reload of the whole content.
-- There are no 3 "Talked to Burgerpants" labeled flags in Chapter 1 anymore. Thanks [ticktockdoomapproaches](https://steamcommunity.com/profiles/76561199782178857) for reporting!
+- There are no 3 "Talked to Burgerpants" labeled flags in Chapter 1 anymore. Thanks [XtronXI](https://github.com/XtronXI) and [ticktockdoomapproaches](https://steamcommunity.com/profiles/76561199782178857) for reporting! ([Issue #6](https://github.com/tennaproject/tenna-editor/issues/6))
+- Replaced duplicate "Carnival Gift Recipient" flag with "Weirdroute Progress" flag in Chapter 2. Thanks [XtronXI](https://github.com/XtronXI) for reporting! ([Issue #6](https://github.com/tennaproject/tenna-editor/issues/6))

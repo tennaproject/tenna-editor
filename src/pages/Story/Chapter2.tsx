@@ -59,7 +59,10 @@ function DarkWorldSection() {
             <FlagField id="egg-room" flag={FLAGS.EGG_ROOM_CH2} />
           </div>
           <div className="flex-1 flex flex-col gap-3">
-            <FlagField id="weirdroute-progress" flag={FLAGS.CARNIVAL_GIFT} />
+            <FlagField
+              id="weirdroute-progress"
+              flag={FLAGS.WEIRDROUTE_PROGRESS_CH2}
+            />
             <FlagField
               id="noelle-ice-shock-count"
               flag={FLAGS.NOELLE_ICE_SHOCK_COUNT}
