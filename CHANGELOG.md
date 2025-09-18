@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changelog page was added to the About tab.
 - Demo save files are now considered supported.
 - New version notification was added.
+- Added 10 new flags to Chapter 4.
 
 ### Changed
 
@@ -19,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Many components were refactored to simplify the code.
 - Codebase was cleaned up, and some dead code was removed.
 - Toast component was improved with better styling and formatting.
+- "Gave Tenna away" flag was incorrect and was replaced with "Talked with Mettaton about Tenna" flag which is the correct one.
 
 ### Fixed
 

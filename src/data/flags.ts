@@ -156,7 +156,13 @@ export const FLAGS = {
   RECRUIT_WINGLADE: 667,
   RECRUIT_ORGANIKK: 668,
   RECRUIT_MISS_MIZZLE: 669,
+  SHOWED_FAMILY_PHOTO_TO_SUSIE: 744,
+  SHOWED_ASRIEL_PHOTO_TO_SUSIE: 745,
   GOT_SUSIE_PRIZE: 747,
+  CLEANED_UP_BLOOD_STAIN: 748,
+  TALKED_METTATON_TENNA: 779,
+  TALKED_KING_KNIGHT: 789,
+  SAW_TENNA_KING_SCENE: 790,
   AXE_OF_JUSTICE_PROGRESS: 852,
   DONATION_FOUNTAIN_COUNT: 898,
   VESSEL_HEAD: 900,
@@ -204,8 +210,13 @@ export const FLAGS = {
   GOT_GOLDEN_TENNA: 1222,
   ENTERED_1225_ROOM: 1226,
   STARWALKER_CH3: 1240,
-  GAVE_TENNA: 1575,
+  TALKED_NAPSTABLOOK_UNDYNE: 1552,
+  TALKED_NAPSTABLOOK_SHELTER: 1553,
+  TALKED_ASGORE_OUTFIT: 1565,
+  TALKED_ASGORE_WELLBEING: 1566,
   GOT_MOSS_CH4: 1592,
+  INSPECTED_GLASS_WITH_NOELLE: 1623,
+  WEIRDROUTE_FAILED_CH4: 1656,
 } as const;
 
 export type FlagIndex = (typeof FLAGS)[keyof typeof FLAGS];
@@ -676,8 +687,39 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
   [FLAGS.RECRUIT_WINGLADE]: { displayName: 'RECRUIT_WINGLADE' },
   [FLAGS.RECRUIT_ORGANIKK]: { displayName: 'RECRUIT_ORGANIKK' },
   [FLAGS.RECRUIT_MISS_MIZZLE]: { displayName: 'RECRUIT_MISS_MIZZLE' },
+  [FLAGS.SHOWED_FAMILY_PHOTO_TO_SUSIE]: {
+    displayName: 'Showed family photo to Susie',
+    valueType: 'boolean',
+  },
+  [FLAGS.SHOWED_ASRIEL_PHOTO_TO_SUSIE]: {
+    displayName: 'Showed Asriel photo to Susie',
+    valueType: 'boolean',
+  },
   [FLAGS.GOT_SUSIE_PRIZE]: {
     displayName: `Got Susie's prize`,
+    valueType: 'boolean',
+  },
+  [FLAGS.CLEANED_UP_BLOOD_STAIN]: {
+    displayName: 'Cleaned up blood stain',
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_METTATON_TENNA]: {
+    displayName: 'Talked to Mettaton about Tenna',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'No',
+        1: 'Did not gave Tenna',
+        2: 'Gave Tenna',
+      },
+    },
+  },
+  [FLAGS.TALKED_KING_KNIGHT]: {
+    displayName: 'Talked with King about Knight',
+    valueType: 'boolean',
+  },
+  [FLAGS.SAW_TENNA_KING_SCENE]: {
+    displayName: 'Saw scene with King and Tenna in Castle Town',
     valueType: 'boolean',
   },
   [FLAGS.AXE_OF_JUSTICE_PROGRESS]: {
@@ -1053,12 +1095,32 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
     displayName: 'Talked to original &ensp;*Starwalker*',
     valueType: 'boolean',
   },
-  [FLAGS.GAVE_TENNA]: {
-    displayName: 'Gave Tenna away',
+  [FLAGS.TALKED_NAPSTABLOOK_UNDYNE]: {
+    displayName: 'Talked to Napstablook about Undyne',
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_NAPSTABLOOK_SHELTER]: {
+    displayName: 'Talked to Napstablook about shelter',
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_ASGORE_OUTFIT]: {
+    displayName: 'Talked to Asgore about his outfit',
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_ASGORE_WELLBEING]: {
+    displayName: 'Talked to Asgore about his well-being',
     valueType: 'boolean',
   },
   [FLAGS.GOT_MOSS_CH4]: {
     displayName: 'Got Moss in Chapter 4',
+    valueType: 'boolean',
+  },
+  [FLAGS.INSPECTED_GLASS_WITH_NOELLE]: {
+    displayName: `Inspected Glass in Noelle's house`,
+    valueType: 'boolean',
+  },
+  [FLAGS.WEIRDROUTE_FAILED_CH4]: {
+    displayName: 'Weird Route failed',
     valueType: 'boolean',
   },
 };
