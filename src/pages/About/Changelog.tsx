@@ -1,4 +1,5 @@
-import { Card, Heading, Section } from '@components';
+import { Card, Heading, Link, Section } from '@components';
+import Markdown from 'react-markdown';
 
 type ChangelogScope = 'added' | 'changed' | 'fixed' | 'removed';
 
@@ -31,13 +32,24 @@ export function AboutChangelog() {
                   ([scope, elements], index) => {
                     if (elements.length <= 0) return;
                     return (
-                      <Section key={index} id={`${entry.version}-${scope}`}>
+                      <Section
+                        key={index}
+                        id={`${entry.version}-${scope}`}
+                        className="flex flex-col gap-2"
+                      >
                         <Heading level={5}>
                           {scope.at(0)?.toUpperCase() + scope.slice(1)}
                         </Heading>
                         <div className="text-text-2">
                           {elements.map((element, index) => {
-                            return <p key={index}>- {element}</p>;
+                            return (
+                              <div key={index} className="flex gap-1">
+                                -{' '}
+                                <Markdown components={{ a: Link }}>
+                                  {element}
+                                </Markdown>
+                              </div>
+                            );
                           })}
                         </div>
                       </Section>

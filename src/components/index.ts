@@ -28,3 +28,4 @@ export * from './CharacterHeader';
 export * from './CharacterPage';
 export * from './FieldWrapper';
 export * from './InventoryPage';
+export * from './Link';

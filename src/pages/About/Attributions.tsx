@@ -1,13 +1,4 @@
-import { Section, Card, Heading } from '@components';
-import type { ReactNode } from 'react';
-
-function Link({ href, children }: { href: string; children: ReactNode }) {
-  return (
-    <a href={href} className="text-red hover:text-red-hover underline">
-      {children}
-    </a>
-  );
-}
+import { Section, Card, Heading, Link } from '@components';
 
 export function AboutAttributions() {
   const runtimeDeps = [

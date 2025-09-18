@@ -32,7 +32,7 @@ export function AboutLicense() {
     <div className="page">
       <Section>
         <Card className="p-6">
-          <Heading level={4}>License</Heading>
+          <Heading level={3}>License</Heading>
           <code className="px-6 py-6 block">
             <pre className="font-mono whitespace-pre-wrap text-text-2">
               {LICENSE}
