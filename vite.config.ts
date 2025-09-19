@@ -6,11 +6,17 @@ import svgr from 'vite-plugin-svgr';
 import { VitePWA } from 'vite-plugin-pwa';
 import fg from 'fast-glob';
 import { resolve } from 'path';
-import { getVersion } from './scripts/version';
-import { getChangelog } from './scripts/changelog';
+import {
+  getVersion,
+  getChangelog,
+  generateSitemap,
+  generateRobots,
+} from './scripts';
 
 const { packageVersion, commitHash, branch } = await getVersion();
 const changelog = await getChangelog();
+await generateSitemap();
+await generateRobots(branch);
 
 export default defineConfig({
   plugins: [
