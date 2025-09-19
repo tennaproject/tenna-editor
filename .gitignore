@@ -31,3 +31,6 @@ src/assets/placeholders
 .env
 .env.*
 !.env.example
+
+public/sitemap.xml
+public/robots.txt
