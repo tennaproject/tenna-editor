@@ -1,4 +1,4 @@
-![Tenna Editor - An unofficial Deltarune Save Editor](/public/banner.svg)
+![Tenna Editor - An unofficial Deltarune Save Editor](/docs/images/banner.svg)
 
 ## Motivation
 
@@ -6,7 +6,7 @@ Harsh progression in Chapter 3 motivated me to look for a tool for editing saves
 There is a very popular Spamton Editor out there, which at the time when I wanted to use it, was unavailable. And after it got back online, it didn't have the features I needed.
 I decided to work on an alternative that works like a modern web app that doesn't rely on external servers to function.
 
-![Welcome Tab](/public/promo/promo-1.png)
+![Welcome Tab](/docs/images/promo-1.png)
 
 ## Features
 
@@ -26,11 +26,11 @@ There are five main tabs:
 Some of them have their own subtabs.
 For example, in the Party tab, each character has their own subtab for managing their stats and equipment.
 
-![Story Tab](/public/promo/promo-2.png)
+![Story Tab](/docs/images/promo-2.png)
 
-![Party Tab](/public/promo/promo-3.png)
+![Party Tab](/docs/images/promo-3.png)
 
-![Recruits Tab](/public/promo/promo-4.png)
+![Recruits Tab](/docs/images/promo-4.png)
 
 ## One Editor To Edit Everything
 
@@ -43,7 +43,7 @@ All the saves you make are saved in the memory of your browser.
 You can use custom names to easily identify and switch between them seamlessly.
 Editor adapts to your save, displaying only values and tabs that apply to the current chapter.
 
-![Saves Selector](/public/promo/promo-multiple-saves.png)
+![Saves Selector](/docs/images/promo-multiple-saves.png)
 
 ## All Inside Your Browser
 
@@ -51,13 +51,13 @@ Tenna Editor operates entirely within your browser. All data processing occurs o
 
 You can also choose to install Tenna Editor as a Progressive Web App (PWA) on compatible devices and browsers. This allows it to function like a traditional desktop or mobile app, complete with its own shortcut and offline access.
 
-![PWA Window](/public/promo/promo-pwa.png)
+![PWA Window](/docs/images/promo-pwa.png)
 
 ## Works Everywhere (almost)
 
 Although primarily designed for widescreen use, Tenna Editor functions well on mobile devices, offering full feature support.
 
-![Tenna Editor on mobile](/public/promo/promo-mobile.png)
+![Tenna Editor on mobile](/docs/images/promo-mobile.png)
 
 ## Name And Design
 
