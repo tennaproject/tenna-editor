@@ -312,6 +312,7 @@ export function AppRouter() {
           {import.meta.env.VITE_SETTINGS_TAB === 'true' && SettingsRoot && (
             <Route path="/settings" element={<SettingsRoot />}></Route>
           )}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
     </AnimatePresence>
