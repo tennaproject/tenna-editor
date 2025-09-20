@@ -25,7 +25,7 @@ export function HomeWelcome() {
 
         <Section id="upload">
           <button
-            className="h-45 w-full border-border bg-surface-3 hover:bg-surface-3-hover transition-colors duration-200"
+            className="h-45 w-full border-border bg-surface-3 hover:bg-surface-3-hover motion-reduce:transition-none transition-colors duration-200"
             onClick={() => setUploadOpen(true)}
           >
             <div className="flex flex-col justify-center items-center">

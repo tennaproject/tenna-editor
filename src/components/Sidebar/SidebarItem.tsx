@@ -30,7 +30,7 @@ export function SidebarItem({
   const location = useLocation();
 
   const baseClasses =
-    'w-full flex items-center text-sm px-0 h-12 leading-none transition-all duration-200 ease-in-out';
+    'w-full flex items-center text-sm px-0 h-12 leading-none motion-reduce:transition-none transition-all duration-200 ease-in-out';
   const activeClasses = 'bg-surface-1-active text-text-1';
   const inactiveClasses = 'text-text-2 hover:bg-surface-1-hover';
   const disabledClasses = 'opacity-20 pointer-events-none';
@@ -41,8 +41,8 @@ export function SidebarItem({
   const isHidden = requireDevmode && !devmode;
 
   const titleClasses = isSidebarRetracted
-    ? 'lg:opacity-0 lg:pointer-events-none lg:w-0 lg:max-w-0 lg:m-0 lg:p-0 lg:overflow-hidden transition-all duration-200 ease-in-out'
-    : 'transition-all duration-200 ease-in-out';
+    ? 'lg:opacity-0 lg:pointer-events-none lg:w-0 lg:max-w-0 lg:m-0 lg:p-0 lg:overflow-hidden motion-reduce:transition-none transition-all duration-200 ease-in-out'
+    : 'motion-reduce:transition-none transition-all duration-200 ease-in-out';
 
   const currentRoot = location.pathname.split('/').filter(Boolean)[0] ?? '';
   const targetRoot = to.split('/').filter(Boolean)[0] ?? '';

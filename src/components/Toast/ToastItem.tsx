@@ -11,6 +11,7 @@ import SuccessIcon from '@assets/icons/radio-on.svg?react';
 import WarningIcon from '@assets/icons/warning-box.svg?react';
 import Markdown from 'react-markdown';
 import { stripIdentation } from '@utils';
+import { useReducedMotion } from 'framer-motion';
 
 const COLORS: Record<ToastType, { background: string; text: string }> = {
   info: { background: 'bg-blue', text: 'text-blue' },
@@ -59,6 +60,8 @@ export function ToastItem({
   const dragXRef = useRef(0);
   const draggingRef = useRef(false);
 
+  const reducedMotion = useReducedMotion();
+
   useEffect(() => {
     onCloseRef.current = onClose;
   }, [onClose]);
@@ -66,9 +69,12 @@ export function ToastItem({
   useEffect(() => {
     const el = progressRef.current;
     if (!el) return;
+    const animOptions: KeyframeAnimationOptions = reducedMotion
+      ? { duration, easing: 'steps(10)', fill: 'forwards' as FillMode }
+      : { duration, easing: 'linear', fill: 'forwards' as FillMode };
     const anim = el.animate(
       [{ transform: 'scaleX(1)' }, { transform: 'scaleX(0)' }],
-      { duration, easing: 'linear', fill: 'forwards' },
+      animOptions,
     );
     animationRef.current = anim;
 
@@ -90,12 +96,13 @@ export function ToastItem({
     const onFinish = () => {
       onCloseRef.current?.();
     };
+
     anim.addEventListener('finish', onFinish);
     return () => {
       anim.removeEventListener('finish', onFinish);
       anim.cancel();
     };
-  }, [duration, createdAt]);
+  }, [duration, createdAt, reducedMotion]);
 
   const handlePointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
     draggingRef.current = true;
@@ -131,7 +138,10 @@ export function ToastItem({
     }
     animationRef.current?.play();
     if (el) {
-      el.style.transition = 'transform 200ms ease, opacity 200ms ease';
+      const transition = reducedMotion
+        ? 'none'
+        : 'transform 200ms ease, opacity 200ms ease';
+      el.style.transition = transition;
       el.style.transform = 'translateX(0px)';
       el.style.opacity = '1';
     }

@@ -1,7 +1,7 @@
 import { useSave, useUi } from '@store';
 import { detectChapter, parseSave } from '@utils';
 import { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import type { Save, SaveSlot } from '@types';
 import { saveStorage, toast } from '@services';
 import {
@@ -37,6 +37,8 @@ interface UploadProps {
 type UploadStage = 'idle' | 'success' | 'error' | 'chapter' | 'settings';
 
 export function Upload({ isOpen, setOpen }: UploadProps) {
+  const reducedMotion = useReducedMotion();
+
   const switchSave = useSave((s) => s.switchSave);
   const uploadedSaves = useUi((s) => s.ui.uploadedSaves);
   const updateUi = useUi((s) => s.updateUi);
@@ -173,6 +175,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
+  const transition = { duration: reducedMotion ? 0 : 0.2 };
   return (
     <Modal isOpen={isOpen} setOpen={setOpen}>
       <div className="h-96 flex-1 flex flex-col justify-between select-none relative lg:p-4 p-2">
@@ -183,7 +186,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={transition}
               className="flex flex-col flex-1 gap-4"
             >
               <Heading level={3}>Upload Save</Heading>
@@ -199,7 +202,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={transition}
               className="flex flex-col flex-1 gap-4 justify-evenly"
             >
               <Heading level={3}>Confirm Chapter</Heading>
@@ -227,7 +230,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={transition}
               className="flex flex-col flex-1 gap-4"
             >
               <Heading level={3}>Save Settings</Heading>
@@ -267,7 +270,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={transition}
               className="flex flex-col h-full  gap-4"
             >
               <Heading level={3}>Upload Failed</Heading>

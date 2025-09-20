@@ -1,6 +1,6 @@
 import { useSave } from '@store';
 import { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import {
   TextLabel,
   Checkbox,
@@ -27,6 +27,8 @@ interface DownloadProps {
 }
 
 export function Download({ isOpen, setOpen }: DownloadProps) {
+  const reducedMotion = useReducedMotion();
+
   const save = useSave((s) => s.save);
   const [selectedSlot, setSelectedSlot] = useState<SaveSlot>(1);
   const [isCompletionSave, setIsCompletionSave] = useState(false);
@@ -84,7 +86,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: reducedMotion ? 0 : 0.2 }}
             className="flex flex-col flex-1 gap-4"
           >
             <Heading level={3}>Download Save</Heading>

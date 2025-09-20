@@ -58,7 +58,7 @@ export function Checkbox({
           aria-checked={currentChecked}
         />
         <span
-          className={`w-5 h-5 border border-border transition-all duration-200 ease-in-out
+          className={`w-5 h-5 border border-border motion-reduce:transition-none transition-all duration-200 ease-in-out
             shadow-sm hover:shadow-md pointer-events-none z-0
             flex items-center justify-center
             ${
@@ -77,7 +77,7 @@ export function Checkbox({
           {currentChecked ? (
             <svg
               viewBox="0 0 24 24"
-              className="w-3 h-3 stroke-current opacity-100 transition-all duration-200 ease-in-out text-white drop-shadow-sm"
+              className="w-3 h-3 stroke-current opacity-100 motion-reduce:transition-none transition-all duration-200 ease-in-out text-white drop-shadow-sm"
               fill="none"
               strokeWidth={3.5}
               strokeLinecap="square"
