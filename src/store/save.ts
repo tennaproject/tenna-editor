@@ -80,7 +80,11 @@ export const useSave = create<SaveState>()(
         },
 
         switchSave: async (id: string) => {
-          await get().saveNow();
+          // Prevent re-adding saves after they are deleted
+          if (await saveStorage.get(get().activeSaveId ?? '')) {
+            await get().saveNow();
+          }
+
           const newSave = await saveStorage.get(id);
           if (newSave) {
             set((state) => {
