@@ -6,9 +6,10 @@ import { chapterHelpers, mergeClass, roomHelpers } from '@utils';
 interface RoomFieldProps {
   id?: string;
   className?: string;
+  allowAllElements?: boolean;
 }
 
-export function RoomField({ id, className }: RoomFieldProps) {
+export function RoomField({ id, className, allowAllElements }: RoomFieldProps) {
   const room = useSave((s) => s.save?.room) ?? 0;
   const chapter = useSave((s) => s.save?.meta.chapter) || 1;
   const updateSave = useSave((s) => s.updateSave);
@@ -21,7 +22,7 @@ export function RoomField({ id, className }: RoomFieldProps) {
 
   const roomsSource = chapterHelpers.getById(chapter).content
     .rooms as Set<RoomIndex>;
-  const entries: Array<[string, number]> = Array.from(roomsSource).map(
+  let entries: Array<[string, number]> = Array.from(roomsSource).map(
     (roomId) => {
       const id = roomId;
       const meta = roomHelpers.getById(id as RoomIndex);
@@ -29,6 +30,12 @@ export function RoomField({ id, className }: RoomFieldProps) {
       return [name, id];
     },
   );
+
+  if (!allowAllElements) {
+    entries = entries.filter(
+      ([_, roomId]) => roomHelpers.getById(roomId as RoomIndex)?.hasSavePoint,
+    );
+  }
 
   const items = entries.map(([name, id]) => ({
     id: id.toString(),

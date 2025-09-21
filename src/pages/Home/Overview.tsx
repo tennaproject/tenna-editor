@@ -16,9 +16,11 @@ import {
   SaveIsCompletionSaveField,
   RoomField,
   PlotField,
+  Checkbox,
+  HelpTip,
 } from '@components';
 import { FLAGS } from '@data';
-import { useSave } from '@store';
+import { useSave, useUi } from '@store';
 import { chapterHelpers } from '@utils';
 import { saveStorage, toast } from '@services';
 import { PlayerNameField } from '@components/Fields/PlayerNameField';
@@ -118,6 +120,8 @@ function DeleteSave() {
 
 export function HomeOverview() {
   const isSavePresent = useSave((s) => !!s.save);
+  const allowAllSaves = useUi((s) => s.ui.home.allowAllSaves);
+  const updateUi = useUi((s) => s.updateUi);
 
   if (!isSavePresent) {
     return (
@@ -133,6 +137,24 @@ export function HomeOverview() {
 
   return (
     <article className="page flex flex-col">
+      <div className="flex flex-col gap-2 lg:flex-row lg:gap-5">
+        <InlineGroup>
+          <Checkbox
+            onChange={(checked) =>
+              updateUi((ui) => (ui.home.allowAllSaves = checked))
+            }
+            checked={allowAllSaves}
+            label={'Show rooms without save point'}
+          />
+          <HelpTip title="Show rooms without save point">
+            <p>
+              Rooms without a save point are not expected to be the starting
+              point after loading save (or even being accessed at all), so
+              issues may occur.
+            </p>
+          </HelpTip>
+        </InlineGroup>
+      </div>
       <Section id="general">
         <Card className="flex flex-col gap-3 p-6">
           <Heading level={3}>General</Heading>
@@ -148,7 +170,7 @@ export function HomeOverview() {
               <TimeField />
             </div>
             <div className="flex-1 flex flex-col gap-3">
-              <RoomField id="room" />
+              <RoomField id="room" allowAllElements={allowAllSaves} />
               <PlotField id="plot" />
               <InDarkWorldField id="in-dark-world" />
             </div>

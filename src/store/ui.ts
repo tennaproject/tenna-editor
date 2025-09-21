@@ -4,7 +4,7 @@ import { immer } from 'zustand/middleware/immer';
 import { STORE_NAMESPACE } from './schema';
 import { createDebouncedJSONStorage } from 'zustand-debounce';
 
-export const UI_VERSION = 2;
+export const UI_VERSION = 3;
 
 export interface Ui {
   devmode: boolean;
@@ -12,6 +12,9 @@ export interface Ui {
   sidebar: {
     open: boolean;
     retracted: boolean;
+  };
+  home: {
+    allowAllSaves: boolean;
   };
   party: {
     allowNonStandardParty: boolean;
@@ -47,6 +50,9 @@ export const useUi = create<UiState>()(
         sidebar: {
           open: false,
           retracted: false,
+        },
+        home: {
+          allowAllSaves: false,
         },
         party: {
           allowNonStandardParty: false,

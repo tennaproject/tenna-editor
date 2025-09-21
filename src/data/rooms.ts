@@ -785,4 +785,265 @@ export const ROOMS = {
 export type RoomIndex = (typeof ROOMS)[keyof typeof ROOMS];
 export type RoomName = keyof typeof ROOMS;
 
-export const ROOMS_META: Partial<Record<RoomIndex, BaseProperties>> = {};
+export interface RoomProperties extends BaseProperties {
+  hasSavePoint: boolean;
+}
+
+export const ROOMS_META: Partial<Record<RoomIndex, RoomProperties>> = {
+  [ROOMS.DARK1A]: {
+    displayName: `?????? (Dark World)`,
+    hasSavePoint: true,
+  },
+  [ROOMS.DARK_EYEPUZZLE]: {
+    displayName: 'Eye Puzzle',
+    hasSavePoint: true,
+  },
+  [ROOMS.CASTLE_TOWN]: {
+    displayName: 'Castle Town',
+    hasSavePoint: true,
+  },
+  [ROOMS.FIELD_START]: {
+    displayName: 'Field - Great Door',
+    hasSavePoint: true,
+  },
+  [ROOMS.FIELD_MAZE]: {
+    displayName: 'Field - Maze of Death',
+    hasSavePoint: true,
+  },
+  [ROOMS.FIELD_SHOP1]: {
+    displayName: "Field - Seam's Shop",
+    hasSavePoint: true,
+  },
+  [ROOMS.FIELD_CHECKERS3]: {
+    displayName: 'Field - Great Board',
+    hasSavePoint: true,
+  },
+  [ROOMS.FIELD_CHECKERS7]: {
+    displayName: 'Field - Great Board 2',
+    hasSavePoint: true,
+  },
+  [ROOMS.FOREST_SAVEPOINT1]: {
+    displayName: 'Forest - Entrance',
+    hasSavePoint: true,
+  },
+  [ROOMS.FOREST_SAVEPOINT2]: {
+    displayName: 'Forest - Bake Sale',
+    hasSavePoint: true,
+  },
+  [ROOMS.FOREST_SAVEPOINT_RELAX]: {
+    displayName: 'Forest - Before Maze',
+    hasSavePoint: true,
+  },
+  [ROOMS.FOREST_SAVEPOINT3]: {
+    displayName: 'Forest - After Maze',
+    hasSavePoint: true,
+  },
+  [ROOMS.FOREST_FIGHTSUSIE]: {
+    displayName: 'Forest - Thrashing Room',
+    hasSavePoint: true,
+  },
+  [ROOMS.CC_PRISON_TO_ELEVATOR]: {
+    displayName: 'Card Castle - Prison',
+    hasSavePoint: true,
+  },
+  [ROOMS.CC_PRISON_PREJOKER]: {
+    displayName: 'Card Castle - ??? (Basement)',
+    hasSavePoint: true,
+  },
+  [ROOMS.CC_1F]: {
+    displayName: 'Card Castle - 1F',
+    hasSavePoint: true,
+  },
+  [ROOMS.CC_5F]: {
+    displayName: 'Card Castle - 5F',
+    hasSavePoint: true,
+  },
+  [ROOMS.CC_THRONEROOM]: {
+    displayName: 'Card Castle - Throne',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_MANSION_FOUNTAIN]: {
+    displayName: "Queen's Mansion - Rooftop",
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_CASTLE_AREA_2_TRANSFORMED]: {
+    displayName: 'My Castle Town',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_CYBER_INTRO_1]: {
+    displayName: 'Dark World',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_CYBER_RHYTHM_SLIDE]: {
+    displayName: 'Cyber Field - Entrance',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_CYBER_TASQUE_BATTLE]: {
+    displayName: 'Cyber Field - Arcade Machine',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_CYBER_MUSIC_FINAL]: {
+    displayName: 'Cyber Field - Music Shop',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_CITY_SPLIT]: {
+    displayName: 'Cyber City - Entrance',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_CITY_ROADBLOCK]: {
+    displayName: 'Cyber City - First Alleyway',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_CITY_QUEEN_DRUNK]: {
+    displayName: 'Cyber City - Music Shop',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_CITY_CHEESEMAZE]: {
+    displayName: 'Cyber City - Mouse Alley',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_CITY_POPPUP]: {
+    displayName: 'Cyber City - Second Alleyway',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_CITY_BASEBALL]: {
+    displayName: 'Cyber City - Heights',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_MANSION_SUSIEROOM]: {
+    displayName: "Queen's Mansion - Mess Hall",
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_MANSION_DINING_A]: {
+    displayName: "Queen's Mansion - Entrance",
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_MANSION_B_STAIRS]: {
+    displayName: "Queen's Mansion - Basement",
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_MANSION_EAST_2F_D]: {
+    displayName: "Queen's Mansion - 3F",
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_MANSION_ACID_TUNNEL_LOOP_ROUXLS]: {
+    displayName: "Queen's Mansion - Acid Tunnel",
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_MANSION_EAST_4F_C]: {
+    displayName: "Queen's Mansion - 4F",
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_COUCH_OVERWORLD_INTRO]: {
+    displayName: 'Dark World',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_SNOW_ZONE]: {
+    displayName: 'Cold Place',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_GREEN_ROOM]: {
+    displayName: 'Green Room',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_B3BS_JAIL1]: {
+    displayName: 'Goulden Sam',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_TV_CURTAIN]: {
+    displayName: 'TV World - Before the Show',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_TEEVIE_INTRO]: {
+    displayName: 'TV World - Entrance',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_TEEVIE_RHYTHM]: {
+    displayName: 'TV World - Concert',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_TEEVIE_CHEF]: {
+    displayName: 'TV World - Cooking Show',
+    hasSavePoint: true,
+  },
+  [ROOMS.KRISROOM_CH4]: {
+    displayName: "Kris's Room",
+    hasSavePoint: true,
+  },
+  [ROOMS.TOWN_MID_CH4]: {
+    displayName: 'Hometown',
+    hasSavePoint: true,
+  },
+  [ROOMS.LW_NOELLEHOUSE_KITCHEN]: {
+    displayName: "Noelle's House",
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_CASTLE_TOWN_CH4]: {
+    displayName: 'Castle Town',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_RALSEI_CASTLE_FRONT_CH4]: {
+    displayName: 'My Castle Town',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_CHURCH_INTRO1]: {
+    displayName: 'Dark Sanctuary - Atrium',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_CHURCH_GERSONSTUDY]: {
+    displayName: 'Dark Sanctuary - Study',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_CHURCH_SAVEPOINT]: {
+    displayName: 'Dark Sanctuary - Lower Left',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_CHURCHB_SAVEPOINT]: {
+    displayName: '2nd Sanctuary - Floor',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_CHURCHC_SAVEPOINT]: {
+    displayName: '3rd Sanctuary - Stairs',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_CHURCH_PIANOPUZZLE]: {
+    displayName: 'Dark Sanctuary - Small Piano',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_CHURCH_NWCONNECT]: {
+    displayName: 'Dark Sanctuary - Library',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_CHURCH_RIPPLEPUZZLE_POSTGERS]: {
+    displayName: 'Dark Sanctuary - Lower Right',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_CHURCHB_STAIRCASEINTRO]: {
+    displayName: '2nd Sanctuary - Atrium',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_CHURCHB_GERSONSTUDY]: {
+    displayName: '2nd Sanctuary - Study',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_CHURCHC_SUPERPROPHECIES]: {
+    displayName: '3rd Sanctuary',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_CHURCHC_PREPRETITAN]: {
+    displayName: '3rd Sanctuary - Last Chamber',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_CASTLE_TV]: {
+    displayName: 'Castle Town - TV Building',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_CHURCHB_DARKCLIMB]: {
+    displayName: '2nd Sanctuary - Study (Climbing Area)',
+    hasSavePoint: true,
+  },
+  [ROOMS.DW_CASTLE_TV_ZONE_2]: {
+    displayName: 'MIKE ZONE',
+    hasSavePoint: true,
+  },
+};
