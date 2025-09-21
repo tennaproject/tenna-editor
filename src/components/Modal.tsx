@@ -1,13 +1,7 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useEffect, useRef, type ReactNode } from 'react';
 import CloseIcon from '@assets/icons/close.svg?react';
 import { createPortal } from 'react-dom';
-
-const transition = {
-  type: 'tween',
-  duration: 0.2,
-  ease: 'easeInOut',
-} as const;
 
 interface ModalProps {
   children: ReactNode;
@@ -18,6 +12,13 @@ interface ModalProps {
 
 export function Modal({ children, isOpen, setOpen, onClose }: ModalProps) {
   const dialogRef = useRef<HTMLDivElement | null>(null);
+  const reducedMotion = useReducedMotion();
+
+  const transition = {
+    type: 'tween',
+    duration: reducedMotion ? 0 : 0.2,
+    ease: 'easeInOut',
+  } as const;
 
   // Prevent background scroll
   useEffect(() => {
@@ -69,7 +70,7 @@ export function Modal({ children, isOpen, setOpen, onClose }: ModalProps) {
               <button
                 type="button"
                 aria-label="Close"
-                className="absolute top-2 right-2 inline-flex items-center justify-center w-6 h-6 transition-all duration-200 text-text-2 hover:text-text-1"
+                className="absolute top-2 right-2 inline-flex items-center justify-center w-6 h-6 motion-reduce:transition-none transition-all duration-200 text-text-2 hover:text-text-1"
                 onClick={() => {
                   if (onClose) onClose();
                   setOpen(false);

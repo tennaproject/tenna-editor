@@ -63,7 +63,7 @@ export function NumberInput({
       />
 
       {suffix && (
-        <div className="absolute inset-y-0 right-1 flex items-center pr-3 pointer-events-none group-focus-within:opacity-0 transition-all duration-200">
+        <div className="absolute inset-y-0 right-1 flex items-center pr-3 pointer-events-none group-focus-within:opacity-0 motion-reduce:transition-none transition-all duration-200">
           <span className="text-xs text-text-3">{suffix}</span>
         </div>
       )}
@@ -72,7 +72,7 @@ export function NumberInput({
         className={`
           absolute right-1 top-1 bottom-1 flex flex-col justify-between 
           opacity-0 pointer-events-none transform
-          transition-all duration-200
+          motion-reduce:transition-none transition-all duration-200
           group-focus-within:opacity-100 group-focus-within:pointer-events-auto 
         `}
       >
@@ -85,7 +85,7 @@ export function NumberInput({
           disabled={!canIncrement || disabled}
           className={`
             w-8 h-4 flex items-center justify-center border border-border
-            bg-surface-2 text-text-2 hover:bg-surface-2-hover hover:text-text-1 transition-colors
+            bg-surface-2 text-text-2 hover:bg-surface-2-hover hover:text-text-1 motion-reduce:transition-none transition-colors
             ${!canIncrement || disabled ? 'opacity-40 cursor-not-allowed' : ''}
           `}
           title="Increase"
@@ -104,7 +104,7 @@ export function NumberInput({
           disabled={!canDecrement || disabled}
           className={`
             w-8 h-4 flex items-center justify-center border border-border
-            bg-surface-2 text-text-2 hover:bg-surface-2-hover hover:text-text-1 transition-colors
+            bg-surface-2 text-text-2 hover:bg-surface-2-hover hover:text-text-1 motion-reduce:transition-none transition-colors
             ${!canDecrement || disabled ? 'opacity-40 cursor-not-allowed' : ''}
           `}
           title="Decrease"

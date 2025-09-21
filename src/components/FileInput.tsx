@@ -65,7 +65,7 @@ export function FileInput({ onFileSelect, className }: FileInputProps) {
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       className={mergeClass(
-        'w-full mx-auto h-40 sm:h-44 flex flex-col items-center justify-center border-2 transition-all duration-200 select-none cursor-pointer outline-none focus:ring-2 focus:ring-surface-3-active text-text-1 px-6 py-4',
+        'w-full mx-auto h-40 sm:h-44 flex flex-col items-center justify-center border-2 motion-reduce:transition-none transition-all duration-200 select-none cursor-pointer outline-none focus:ring-2 focus:ring-surface-3-active text-text-1 px-6 py-4',
         isDragActive
           ? 'border-border bg-surface-3'
           : 'border-dashed border-border bg-surface-3 hover:bg-surface-3-hover',

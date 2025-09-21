@@ -36,7 +36,7 @@ export function Button({
     <button
       type="button"
       className={mergeClass(
-        'transition-colors disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center',
+        'motion-reduce:transition-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center',
         variantClass[variant],
         sizeClass[size],
         className,

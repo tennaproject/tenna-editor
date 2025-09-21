@@ -215,7 +215,7 @@ export function Select({
           {label}
         </label>
       )}
-      <div className="relative w-full h-11 bg-surface-3 hover:bg-surface-3-hover transition-all duration-200 border border-border">
+      <div className="relative w-full h-11 bg-surface-3 hover:bg-surface-3-hover motion-reduce:transition-none transition-all duration-200 border border-border">
         <input
           {...getInputProps({
             ref: inputRef,
@@ -256,7 +256,7 @@ export function Select({
         {...getMenuProps({}, { suppressRefError: true })}
         ref={listRef}
         className={mergeClass(
-          `absolute left-0 z-50 bg-surface-4 border border-border shadow-lg py-1 px-1 max-h-60 overflow-auto duration-200 transition-all transform-gpu`,
+          `absolute left-0 z-50 bg-surface-4 border border-border shadow-lg py-1 px-1 max-h-60 overflow-auto duration-200 motion-reduce:transition-none transition-all transform-gpu`,
           shouldOpenUp
             ? 'bottom-full mb-1 origin-bottom'
             : 'top-full mt-1 origin-top',

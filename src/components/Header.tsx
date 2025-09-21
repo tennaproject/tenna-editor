@@ -27,7 +27,7 @@ export function Header() {
             onClick={() => {
               updateUi((ui) => (ui.sidebar.open = !isSidebarOpen));
             }}
-            className="p-1 sm:p-1.5 lg:hidden transition-colors hover:bg-surface-1-hover"
+            className="p-1 sm:p-1.5 lg:hidden motion-reduce:transition-none transition-colors hover:bg-surface-1-hover"
             aria-label="Toggle sidebar"
           >
             <div className="h-9 w-9 flex leading-none justify-center items-center">
@@ -42,7 +42,7 @@ export function Header() {
             onClick={() => {
               updateUi((ui) => (ui.sidebar.retracted = !isSidebarRetracted));
             }}
-            className="p-1.5 hidden lg:inline transition-colors hover:bg-surface-1-hover"
+            className="p-1.5 hidden lg:inline motion-reduce:transition-none transition-colors hover:bg-surface-1-hover"
             aria-label="Toggle sidebar retraction"
           >
             <div className="h-9 w-9 flex leading-none justify-center items-center">
@@ -73,7 +73,7 @@ export function Header() {
         <InlineGroup className="w-full flex justify-end">
           <SaveSelector />
           <button
-            className="text-green bg-surface-3 hover:bg-surface-3-hover transition-colors p-2 cursor-pointer"
+            className="text-green bg-surface-3 hover:bg-surface-3-hover motion-reduce:transition-none transition-colors p-2 cursor-pointer"
             onClick={() => {
               setDownloadOpen(true);
             }}
@@ -84,7 +84,7 @@ export function Header() {
           </button>
           <Download isOpen={isDownloadOpen} setOpen={setDownloadOpen} />
           <button
-            className="text-blue bg-surface-3 hover:bg-surface-3-hover transition-colors p-2 cursor-pointer"
+            className="text-blue bg-surface-3 hover:bg-surface-3-hover motion-reduce:transition-none transition-colors p-2 cursor-pointer"
             onClick={() => setUploadOpen(true)}
           >
             <div className="w-6 h-6">
