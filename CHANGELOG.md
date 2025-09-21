@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.3-beta] - 2025-09-21
+
+### Fixed
+
+- Chapter selector is now working correctly. Thanks [XtronXI](https://github.com/XtronXI) for reporting! ([Issue #6](https://github.com/tennaproject/tenna-editor/issues/6))
+- Saves do not re-add themselves after being deleted anymore. Thanks [XtronXI](https://github.com/XtronXI) for reporting! ([Issue #6](https://github.com/tennaproject/tenna-editor/issues/6))
+
 ## [0.7.2-beta] - 2025-09-21
 
 ### Added
