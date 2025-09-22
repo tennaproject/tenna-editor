@@ -26,9 +26,10 @@ jobs:
           node-version: 22.16.0
           cache: npm
 
+      - run: npm ci
       - run: npm run build
 
-      - name: Deploy Preview (branch=${{ env.PREVIEW_BRANCH }})
+      - name: deploy preview
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ env.CF_API_TOKEN }}
