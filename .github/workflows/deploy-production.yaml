@@ -1,8 +1,8 @@
-name: Deploy to Cloudflare Pages (Preview)
+name: Deploy to Cloudflare Pages (Production)
 
 on:
   push:
-    branches: [main]
+    branches: ['release/*']
 
 jobs:
   deploy-preview:
@@ -17,7 +17,7 @@ jobs:
       CF_PROJECT: tenna
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       BUILD_DIR: dist
-      PREVIEW_BRANCH: preview
+      PREVIEW_BRANCH: main
 
     steps:
       - uses: actions/checkout@v5
