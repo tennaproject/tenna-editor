@@ -3,7 +3,7 @@ import { detectChapter, parseSave } from '@utils';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import type { Save, SaveSlot } from '@types';
-import { saveStorage, toast } from '@services';
+import { saveStorage } from '@services';
 import {
   TextInput,
   TextLabel,
@@ -18,15 +18,15 @@ import {
 import type { ChapterIndex } from '@data';
 
 const CHAPTER_OPTIONS: SelectItem[] = [
-  { id: '2', label: `Chapter 2 (A Cyber's World)` },
-  { id: '3', label: 'Chapter 3 (Late Night)' },
-  { id: '4', label: 'Chapter 4 (Prophecy)' },
+  { id: '2', label: `Chapter 2 (A Cyber's World)`, value: 2 },
+  { id: '3', label: 'Chapter 3 (Late Night)', value: 3 },
+  { id: '4', label: 'Chapter 4 (Prophecy)', value: 4 },
 ];
 
 const SLOT_OPTIONS: SelectItem[] = [
-  { id: '1', label: 'Slot 1' },
-  { id: '2', label: 'Slot 2' },
-  { id: '3', label: 'Slot 3' },
+  { id: '1', label: 'Slot 1', value: 0 },
+  { id: '2', label: 'Slot 2', value: 1 },
+  { id: '3', label: 'Slot 3', value: 2 },
 ];
 
 interface UploadProps {
@@ -57,13 +57,13 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
   // I know these +3/-1 are ugly but hey it works
   function onChapterSelection(item: SelectItem | null) {
     if (item) {
-      setSelectedChapter((parseInt(item.id, 10) + 3) as ChapterIndex);
+      setSelectedChapter(item.value as ChapterIndex);
     }
   }
 
   function onSlotSelection(item: SelectItem | null) {
     if (item) {
-      setSelectedSlot((parseInt(item.id, 10) - 1) as SaveSlot);
+      setSelectedSlot(item.value as SaveSlot);
     }
   }
 
@@ -161,7 +161,6 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
         setSelectedSlot(0);
         setIsCompletionSave(false);
 
-        toast('Save uploaded successfully', 'success');
         setOpen(false);
     }
 

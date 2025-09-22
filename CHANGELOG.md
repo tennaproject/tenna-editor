@@ -11,6 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Now by default only rooms with save point are shown as options. There is a toggle to show all rooms.
 
+## [0.7.3-beta] - 2025-09-21
+
+### Fixed
+
+- Chapter selector is now working correctly. Thanks [XtronXI](https://github.com/XtronXI) for reporting! ([Issue #6](https://github.com/tennaproject/tenna-editor/issues/6))
+- Saves do not re-add themselves after being deleted anymore. Thanks [XtronXI](https://github.com/XtronXI) for reporting! ([Issue #6](https://github.com/tennaproject/tenna-editor/issues/6))
+
 ## [0.7.2-beta] - 2025-09-21
 
 ### Added
