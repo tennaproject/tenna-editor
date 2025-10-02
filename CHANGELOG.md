@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Now by default only rooms with save point are shown as options. There is a toggle to show all rooms.
 
+### Fixed
+
+- Chapter 4 save files are now correctly handled. Thanks [XtronXI](https://github.com/XtronXI) for reporting! ([Issue #11](https://github.com/tennaproject/tenna-editor/issues/11))
+
 ## [0.7.3-beta] - 2025-09-21
 
 ### Fixed
