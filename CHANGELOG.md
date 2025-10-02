@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Now by default only rooms with save point are shown as options. There is a toggle to show all rooms.
 
+### Changed
+
+- Stats limit was increased from 999 to 9999.
+
 ### Fixed
 
 - Chapter 4 save files are now correctly handled. Thanks [XtronXI](https://github.com/XtronXI) for reporting! ([Issue #11](https://github.com/tennaproject/tenna-editor/issues/11))

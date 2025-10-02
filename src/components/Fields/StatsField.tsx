@@ -39,7 +39,7 @@ export function StatsField({ id, type, character }: StatFieldProps) {
         value={current}
         placeholder={`Enter value...`}
         min={0}
-        max={999}
+        max={9999}
         onChange={onChange}
         fullWidth
       />

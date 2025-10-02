@@ -44,7 +44,7 @@ export function LightWorldStatsField({ id, type }: LightWorldStatsFieldProps) {
         value={current}
         placeholder={`Enter value...`}
         min={0}
-        max={999}
+        max={9999}
         onChange={onChange}
         fullWidth
       />
