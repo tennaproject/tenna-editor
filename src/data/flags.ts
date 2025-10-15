@@ -816,11 +816,11 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
     valueType: 'map',
     valueRules: {
       map: {
-        0: 'Kindness',
-        1: 'Mind',
-        2: 'Ambition',
-        3: 'Integrity',
-        4: 'Voice',
+        0: 'Mind',
+        1: 'Kindness',
+        '-1': 'Ambition',
+        '-2': 'Bravery',
+        '-3': 'Voice',
       },
     },
   },
@@ -841,8 +841,8 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
     valueType: 'map',
     valueRules: {
       map: {
-        0: 'No',
-        1: 'Yes',
+        0: 'Yes',
+        1: 'No',
       },
     },
   },
