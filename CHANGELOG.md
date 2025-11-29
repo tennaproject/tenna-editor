@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.6-beta] - 2025-11-29
+
+### Fixed
+
+- Fixed vessel color option "Yellow" to correctly display "Cyan". Thanks [titen96](https://github.com/titen96) for reporting! ([Issue #12](https://github.com/tennaproject/tenna-editor/issues/12))
+
 ## [0.7.5-beta] - 2025-10-15
 
 ### Fixed

@@ -807,7 +807,7 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
         0: 'Red',
         1: 'Blue',
         2: 'Green',
-        3: 'Yellow',
+        3: 'Cyan',
       },
     },
   },
