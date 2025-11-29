@@ -616,6 +616,9 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
   [FLAGS.BERDLY_BROKEN_ARM]: {
     displayName: `Berdly's Arm Broken`,
     valueType: 'boolean',
+    valueRules: {
+      invertedBoolean: true,
+    },
   },
   [FLAGS.CARS_HIT_COUNT]: {
     displayName: 'Cars Hit Count',

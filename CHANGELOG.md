@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Fixed vessel color option "Yellow" to correctly display "Cyan". Thanks [titen96](https://github.com/titen96) for reporting! ([Issue #12](https://github.com/tennaproject/tenna-editor/issues/12))
+- Fixed "Berdly's Arm Broken" flag to correctly display the value. Thanks [ǝɹǝɥǝǝsoʇƃuᴉɥʇou](https://steamcommunity.com/profiles/76561199786538394) for reporting!
 
 ## [0.7.5-beta] - 2025-10-15
 
