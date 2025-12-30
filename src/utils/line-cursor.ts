@@ -34,7 +34,12 @@ export class LineCursor {
     const line = this.nextLine();
 
     const trimmed = line.trim().toLowerCase();
-    if (trimmed === '' || trimmed === 'null' || trimmed === 'undefined') {
+    if (
+      trimmed === '' ||
+      trimmed === 'null' ||
+      trimmed === 'undefined' ||
+      trimmed === 'nan'
+    ) {
       return 0;
     }
 
