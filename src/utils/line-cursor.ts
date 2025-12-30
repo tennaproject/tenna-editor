@@ -32,6 +32,12 @@ export class LineCursor {
 
   nextNumber(): number {
     const line = this.nextLine();
+
+    const trimmed = line.trim().toLowerCase();
+    if (trimmed === '' || trimmed === 'null' || trimmed === 'undefined') {
+      return 0;
+    }
+
     const parsed = Number(line);
     if (isNaN(parsed)) {
       throw new Error(

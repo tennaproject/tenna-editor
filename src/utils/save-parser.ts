@@ -32,11 +32,17 @@ export const SUPPORTED_FORMATS = Object.keys(
 ) as (keyof typeof SAVE_META)[];
 
 function detectSaveFormat(count: number): SaveFormat | null {
-  if (count == SAVE_META.V1.TOTAL_LINES) {
+  if (
+    count >= SAVE_META.V1.TOTAL_LINES &&
+    count <= SAVE_META.V1.TOTAL_LINES + 10
+  ) {
     return 1;
   }
 
-  if (count == SAVE_META.V2.TOTAL_LINES) {
+  if (
+    count >= SAVE_META.V2.TOTAL_LINES &&
+    count <= SAVE_META.V2.TOTAL_LINES + 10
+  ) {
     return 2;
   }
 
@@ -381,7 +387,19 @@ function parseSaveV2(cursor: LineCursor): SaveV2 {
   };
 }
 
-export function parseSave(content: string): Save | null {
+export class ParseError extends Error {
+  line?: number;
+  details?: string;
+
+  constructor(message: string, line?: number, details?: string) {
+    super(message);
+    this.name = 'ParseError';
+    this.line = line;
+    this.details = details;
+  }
+}
+
+export function parseSave(content: string): Save {
   const cursor = new LineCursor(content);
 
   const format = detectSaveFormat(cursor.totalLines);
@@ -389,7 +407,11 @@ export function parseSave(content: string): Save | null {
     return parseSaveV1(cursor);
   } else if (format == 2) {
     return parseSaveV2(cursor);
-  } else {
-    return null;
   }
+
+  throw new ParseError(
+    `Unrecognized save format (${cursor.totalLines} lines)`,
+    undefined,
+    `Expected ${SAVE_META.V1.TOTAL_LINES} lines for Chapter 1 or ${SAVE_META.V2.TOTAL_LINES} lines for Chapter 2+`,
+  );
 }
