@@ -15,7 +15,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "preview": "vite preview",
-    "generate-pwa-assets": "pwa-assets-generator"
+    "generate-pwa-assets": "pwa-assets-generator",
+    "release": "bash scripts/release.sh"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
