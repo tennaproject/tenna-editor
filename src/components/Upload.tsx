@@ -79,12 +79,13 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
         return;
       }
 
-      const save = parseSave(content);
-
-      if (!save) {
-        setUploadError(
-          'Failed to parse save file. Please ensure it is a valid save file.',
-        );
+      let save;
+      try {
+        save = parseSave(content);
+      } catch (error) {
+        const message =
+          error instanceof Error ? error.message : 'Unknown error';
+        setUploadError(message);
         changeStage('error');
         return;
       }
