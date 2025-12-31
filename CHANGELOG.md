@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Fixed serialization of number fields, now they correctly use scientific notation when needed. Thanks [Zakarith](https://github.com/Zakarith) for reporting! ([Issue #15](https://github.com/tennaproject/tenna-editor/issues/15))
 - Added missing Vessel legs variant. Thanks [Zakarith](https://github.com/Zakarith) for reporting! ([Issue #15](https://github.com/tennaproject/tenna-editor/issues/15))
 
 ## [0.7-7-beta] - 2025-12-31
