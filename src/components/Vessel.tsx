@@ -36,12 +36,12 @@ const VESSEL_SOURCES = {
     VesselBody4,
     VesselBody5,
   ],
-  legs: [VesselLegs1, VesselLegs1, VesselLegs1, VesselLegs0],
+  legs: [VesselLegs1, VesselLegs1, VesselLegs1, VesselLegs1, VesselLegs0],
 } as const;
 
 export type VesselHeadIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
 export type VesselBodyIndex = 0 | 1 | 2 | 3 | 4 | 5;
-export type VesselLegsIndex = 0 | 1 | 2 | 3;
+export type VesselLegsIndex = 0 | 1 | 2 | 3 | 4;
 
 interface VesselProps {
   id?: string;

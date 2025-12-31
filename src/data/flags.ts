@@ -772,6 +772,7 @@ export const FLAGS_META: Record<FlagIndex, FlagProperties> = {
         1: 'Legs 2',
         2: 'Legs 3',
         3: 'Legs 4',
+        4: 'Legs 5',
       },
     },
   },
