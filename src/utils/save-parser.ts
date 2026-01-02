@@ -75,7 +75,12 @@ function parseSaveV1(cursor: LineCursor): SaveV1 {
     const weapon = cursor.nextNumber() as WeaponIndex;
     const primaryArmor = cursor.nextNumber() as ArmorIndex;
     const secondaryArmor = cursor.nextNumber() as ArmorIndex;
-    const weaponStyle = cursor.nextString();
+    let weaponStyle = cursor.nextString();
+
+    // Handle nan values from old demo versions
+    if (weaponStyle.trim() === 'nan') {
+      weaponStyle = 'Normal';
+    }
 
     const weaponStats = [];
     for (let j = 0; j < 4; j += 1) {

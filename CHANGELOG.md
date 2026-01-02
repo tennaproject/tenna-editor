@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Fixed 'nan' value handling for weapon style in legacy demo save files. Thanks [Zakarith](https://github.com/Zakarith) for reporting! ([Issue #16](https://github.com/tennaproject/tenna-editor/issues/16))
 - Fixed serialization of number fields, now they correctly use scientific notation when needed. Thanks [Zakarith](https://github.com/Zakarith) for reporting! ([Issue #15](https://github.com/tennaproject/tenna-editor/issues/15))
 - Added missing Vessel legs variant. Thanks [Zakarith](https://github.com/Zakarith) for reporting! ([Issue #15](https://github.com/tennaproject/tenna-editor/issues/15))
 

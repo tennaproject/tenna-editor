@@ -1,9 +1,6 @@
 import type { Save, SaveV1, SaveV2 } from '@types';
 
-export function serializeNumber(value: number | string): string {
-  if (typeof value === 'string') {
-    return value;
-  }
+export function serializeNumber(value: number): string {
   if (value >= 1e6) {
     // Fix scientific notation format: e+6 -> e+06
     return value.toExponential().replace(/e\+(\d)$/, 'e+0$1');
@@ -42,7 +39,7 @@ function serializeSaveV1(save: SaveV1): string {
     lines.push(serializeNumber(character.weapon));
     lines.push(serializeNumber(character.primaryArmor));
     lines.push(serializeNumber(character.secondaryArmor));
-    lines.push(serializeNumber(character.weaponStyle));
+    lines.push(String(character.weaponStyle));
 
     for (const weaponStat of character.weaponStats) {
       lines.push(serializeNumber(weaponStat.attack));
@@ -142,7 +139,7 @@ function serializeSaveV2(save: SaveV2): string {
     lines.push(serializeNumber(character.weapon));
     lines.push(serializeNumber(character.primaryArmor));
     lines.push(serializeNumber(character.secondaryArmor));
-    lines.push(serializeNumber(character.weaponStyle));
+    lines.push(serializeNumber(character.weaponStyle as number));
 
     for (const weaponStat of character.weaponStats) {
       lines.push(serializeNumber(weaponStat.attack));
