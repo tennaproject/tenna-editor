@@ -83,7 +83,7 @@ export function AboutAttributions() {
               - for being direct inspiration.
             </li>
             <li>
-              <Link href="https://crumblingstatue.github.i">
+              <Link href="https://crumblingstatue.github.io/FloweysTimeMachine">
                 Flowey's Time Machine
               </Link>{' '}
               - for being another inspiration.
