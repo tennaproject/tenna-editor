@@ -3,6 +3,7 @@ name: Deploy to Cloudflare Pages (Production)
 on:
   push:
     tags: ['*.*.*']
+  workflow_dispatch:
 
 jobs:
   deploy-production:
