@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased] - XXXX-XX-XX
+
+### Fixed
+
+- Link to Flowey's Time Machine in About tab is now correct. Author: [Matojeje](https://github.com/Matojeje) ([PR #18](https://github.com/tennaproject/tenna-editor/pull/18))
+- Linux path for save files is now correct. Paths now can be copied easily. Author: [KrisGra](https://github.com/krisgrant) ([PR #19](https://github.com/tennaproject/tenna-editor/pull/19))
+
 ## [0.7.8-beta] - 2026-01-03
 
 ### Fixed
