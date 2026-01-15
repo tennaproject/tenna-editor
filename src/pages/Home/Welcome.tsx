@@ -5,7 +5,7 @@ export function HomeWelcome() {
   const [isUploadOpen, setUploadOpen] = useState(false);
 
   return (
-    <Section className="page">
+    <Section className="page select-text">
       <Card className="p-6 flex flex-col gap-4">
         <Section id="heading" className="flex flex-col gap-3">
           <Heading level={3}>Welcome</Heading>
@@ -62,8 +62,7 @@ export function HomeWelcome() {
               <li>
                 Linux:{' '}
                 <span className="font-mono">
-                  ~/.steam/steam/steamapps/compatdata/1690940/pfx/drive_c/users/steamuser/Local
-                  Settings/Application Data/DELTARUNE/
+                  ~/.steam/steam/steamapps/compatdata/1690940/pfx/drive_c/users/steamuser/AppData/Local/DELTARUNE/
                 </span>
               </li>
             </ul>
