@@ -8,7 +8,9 @@ if [ -z "$version" ]; then
 fi
 
 sed -i "s/\"version\": \".*\"/\"version\": \"$version\"/" package.json
+sed -i "s/\"version\": \".*\"/\"version\": \"$version\"/" package-lock.json
 
 git add package.json
+git add package-lock.json
 git commit -m "Bump version to $version"
 git tag -a "v$version" -m "Release $version"
