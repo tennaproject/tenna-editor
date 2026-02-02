@@ -6,6 +6,7 @@ import PartyIcon from '@assets/icons/contact.svg?react';
 import LightWorldIcon from '@assets/icons/sun-alt.svg?react';
 import StoryIcon from '@assets/icons/script-text.svg?react';
 import RecruitsIcon from '@assets/icons/user-plus.svg?react';
+import FlagsIcon from '@assets/icons/flag.svg?react';
 import SettingsIcon from '@assets/icons/sliders.svg?react';
 import AboutIcon from '@assets/icons/book-open.svg?react';
 import DevtoolsIcon from '@assets/icons/code.svg?react';
@@ -50,6 +51,12 @@ export function SidebarMenu() {
           to="/recruits"
           requireSave
           requireChapter={2}
+        />
+        <Sidebar.Item
+          title="Flags"
+          icon={<FlagsIcon />}
+          to="/flags"
+          requireSave
         />
       </Sidebar.Group>
 

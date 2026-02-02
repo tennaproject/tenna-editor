@@ -125,6 +125,13 @@ const RecruitsRoot = React.lazy(() =>
   })),
 );
 
+// Flags
+const FlagsRoot = React.lazy(() =>
+  import('./pages/Flags/Root').then((module) => ({
+    default: module.FlagsRoot,
+  })),
+);
+
 // Devtools
 let DevtoolsRoot: React.LazyExoticComponent<() => JSX.Element> | null = null;
 let DevtoolsColors: React.LazyExoticComponent<() => JSX.Element> | null = null;
@@ -294,6 +301,14 @@ export function AppRouter() {
               }
             ></Route>
           </Route>
+          <Route
+            path="/flags"
+            element={
+              <RequireSave>
+                <FlagsRoot />
+              </RequireSave>
+            }
+          ></Route>
           {import.meta.env.VITE_DEVTOOLS_TAB === 'true' &&
             DevtoolsRoot &&
             DevtoolsColors && (
