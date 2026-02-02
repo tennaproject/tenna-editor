@@ -955,7 +955,7 @@ export const FLAGS = {
   GERSON_STUDY_COUNTER: 1594,
   CHURCHC_TREASURE_ENCOUNTER: 1595,
   ANGEL_PROPHECY_PROGRESS: 1596,
-  PURED_COUNT: 1597,
+  PURIFIED_COUNT: 1597,
   SLAIN_COUNT: 1598,
   CUP_STACK_KNOCKED: 1599,
   SAVEPOINT_TALK_1600: 1600,
@@ -1934,6 +1934,14 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   [FLAGS.GOT_MOSS_CH4]: {
     displayName: 'Got Moss in Chapter 4',
     valueType: 'boolean',
+  },
+  [FLAGS.PURIFIED_COUNT]: {
+    displayName: 'Purified Enemies Count',
+    description: 'Total number of purified Titan Spawn enemies.',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
   },
   [FLAGS.INSPECTED_GLASS_WITH_NOELLE]: {
     displayName: `Inspected Glass in Noelle's house`,

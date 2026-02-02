@@ -30,6 +30,9 @@ function DarkWorldSection() {
               flag={FLAGS.DONATION_FOUNTAIN_COUNT}
             />
           </div>
+          <div className="flex-1 flex flex-col gap-3">
+            <FlagField id="purified-count" flag={FLAGS.PURIFIED_COUNT} />
+          </div>
           <div className="flex-1 flex flex-col gap-3"></div>
           <div className="flex-1 flex flex-col gap-3"></div>
         </div>
