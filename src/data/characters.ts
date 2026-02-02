@@ -268,6 +268,7 @@ export const CHARACTERS_META: Record<CharacterIndex, CharacterProperties> = {
       WEAPONS.EVERYBODY_WEAPON,
     ]),
     allowedArmors: new Set<ArmorIndex>([
+      ARMORS.EMPTY,
       ARMORS.AMBER_CARD,
       ARMORS.IRON_SHACKLE,
       ARMORS.DICE_BRACE,
