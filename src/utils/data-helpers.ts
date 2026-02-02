@@ -25,6 +25,7 @@ import {
   ENEMIES_META,
 } from '@data';
 import type { RoomIndex, RoomProperties } from '../data/rooms';
+import type { FlagIndex, FlagProperties } from '../data/flags';
 
 function createDataHelpers<
   TIndex extends number,
@@ -51,7 +52,10 @@ function createDataHelpers<
 }
 
 // Meta
-export const flagHelpers = createDataHelpers(FLAGS, FLAGS_META);
+export const flagHelpers = createDataHelpers(
+  FLAGS,
+  FLAGS_META as Record<FlagIndex, FlagProperties>,
+);
 export const chapterHelpers = createDataHelpers(CHAPTERS, CHAPTERS_META);
 export const roomHelpers = createDataHelpers(
   ROOMS,
