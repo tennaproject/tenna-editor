@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.10-beta] - 2026-02-02
+
+### Added
+
+- Added new Flags editing page for advanced users. This allows direct editing of individual flags in the save file.
+
+### Fixed
+
+- Empty armor doesn't show as "Invalid" on Kris anymore. Author: [boopboy](https://github.com/afreetoplaynoob) ([PR #20](https://github.com/tennaproject/tenna-editor/pull/20))
+
 ## [0.7.9-beta] - 2026-01-15
 
 ### Fixed
