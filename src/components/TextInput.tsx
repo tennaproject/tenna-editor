@@ -13,6 +13,7 @@ interface TextInputProps {
   className?: string;
   fullWidth?: boolean;
   size?: 'default' | 'small';
+  autoComplete?: string;
 }
 
 export function TextInput({
@@ -27,6 +28,7 @@ export function TextInput({
   className,
   fullWidth = false,
   size = 'default',
+  autoComplete = 'off',
 }: TextInputProps) {
   const isUncontrolled = controlledValue === undefined;
   const [localValue, setLocalValue] = useState(defaultValue ?? '');
@@ -65,6 +67,7 @@ export function TextInput({
         onBlur={handleBlur}
         disabled={disabled}
         placeholder={placeholder}
+        autoComplete={autoComplete}
         className={`
           w-full ${heightClass} px-3 py-2 leading-none ${disabled ? 'bg-surface-2 border border-border text-text-2 opacity-40 cursor-not-allowed select-none' : 'bg-surface-3 border border-border text-text-1'}
           ${disabled ? '' : 'focus:outline-none focus:ring-1 motion-reduce:transition-none transition-colors focus:ring-text-3'}
