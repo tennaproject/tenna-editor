@@ -72,6 +72,7 @@ export function TextInput({
           w-full ${heightClass} px-3 py-2 leading-none ${disabled ? 'bg-surface-2 border border-border text-text-2 opacity-40 cursor-not-allowed select-none' : 'bg-surface-3 border border-border text-text-1'}
           ${disabled ? '' : 'focus:outline-none focus:ring-1 motion-reduce:transition-none transition-colors focus:ring-text-3'}
         `}
+        data-lpignore="true"
       />
       {suffix && (
         <div className="absolute inset-y-0 right-0 flex items-center pr-3">
