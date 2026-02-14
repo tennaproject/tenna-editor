@@ -146,7 +146,7 @@ function DarkWorldSection() {
             <FlagField id="starwalker" flag={FLAGS.STARWALKER} />
             <FlagField id="inspected-beds" flag={FLAGS.INSPECTED_BEDS_CH1} />
             <FlagField id="got-spincake" flag={FLAGS.GOT_SPINCAKE} />
-            <FlagField id="violent-king" flag={FLAGS.VIOLENT_KING} />
+            <FlagField id="peaceful-king" flag={FLAGS.PEACEFUL_KING} />
             <FlagField id="violent-ending" flag={FLAGS.VIOLENT_ENDING_CH1} />
           </div>
           <div className="flex-1 flex flex-col gap-3">
