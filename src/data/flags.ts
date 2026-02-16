@@ -147,7 +147,7 @@ export const FLAGS = {
   TALKED_TO_HATHY: 244,
   MADE_BLUH_CHEST: 245,
   CHECKERS_ACT: 246,
-  VIOLENT_KING: 247,
+  PEACEFUL_KING: 247,
   VIOLENT_ENDING_CH1: 248,
   SPARED_LANCER: 249,
   THRASH_REPEATS: 250,
@@ -1154,8 +1154,8 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
       },
     },
   },
-  [FLAGS.VIOLENT_KING]: {
-    displayName: 'Defeated King Violently',
+  [FLAGS.PEACEFUL_KING]: {
+    displayName: 'Defeated King peacefully',
     valueType: 'boolean',
   },
   [FLAGS.VIOLENT_ENDING_CH1]: {
