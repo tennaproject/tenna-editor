@@ -161,7 +161,11 @@ export function FlagsRoot() {
               {paginatedFlags.length === 0 ? (
                 <p className="text-text-2 py-12 text-center">No flags found.</p>
               ) : (
-                <div className="divide-y divide-border">
+                <form
+                  className="divide-y divide-border"
+                  autoComplete="off"
+                  noValidate
+                >
                   {paginatedFlags.map((flag) => {
                     const meta = flag.meta as FlagProperties | undefined;
                     const knownValues = meta?.valueRules?.map;
@@ -173,7 +177,7 @@ export function FlagsRoot() {
                       <div key={flag.index} className="hover:bg-surface-2/50">
                         <div className="flex items-center gap-4 px-4 py-3">
                           <div className="flex-1 flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3">
-                            <code className="text-text-1 text-sm">
+                            <code className="text-text-1 text-sm select-all">
                               {flag.name}
                             </code>
                             {flag.description && (
@@ -186,9 +190,13 @@ export function FlagsRoot() {
                             <TextInput
                               defaultValue={String(value)}
                               onCommit={(v) => handleFlagChange(flag.index, v)}
-                              placeholder="Enter flag value..."
+                              placeholder="Enter value..."
                               size="small"
                               fullWidth
+                              name={`flag_${flag.index}`}
+                              id={`flag_${flag.index}`}
+                              type="search"
+                              aria-label={`Value for flag ${flag.name}`}
                             />
                           </div>
                           <div className="w-5 shrink-0 flex items-center justify-center">
@@ -243,7 +251,7 @@ export function FlagsRoot() {
                       </div>
                     );
                   })}
-                </div>
+                </form>
               )}
             </Card>
           </Section>

@@ -224,8 +224,11 @@ export function Select({
               if (!hasTyped) setInputItems(items);
             },
           })}
+          type="search"
           className="w-full h-full px-3 pr-10 bg-transparent border-none outline-none text-text-1 placeholder:text-text-2 focus:outline-none focus:ring-1 transition-colors focus:ring-text-3"
           placeholder={placeholder}
+          data-lpignore="true"
+          autoComplete="off"
         />
         <div
           className="absolute right-9 top-1/2 -translate-y-1/2 text-xs text-red font-bold flex items-center gap-1 pointer-events-none"

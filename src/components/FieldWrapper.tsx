@@ -29,7 +29,7 @@ export function FieldWrapper({
       <InlineGroup>
         {inline && <>{children}</>}
         {label && (
-          <TextLabel>
+          <TextLabel htmlFor={id}>
             <Markdown>{title}</Markdown>
           </TextLabel>
         )}

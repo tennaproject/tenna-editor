@@ -46,7 +46,8 @@ export function NumberInput({
   return (
     <div className={mergeClass('relative group', widthClass, className)}>
       <input
-        type="number"
+        type="search"
+        inputMode="numeric"
         value={value}
         onChange={(e) => onChange?.(clamp(parseInt(e.target.value || '0', 10)))}
         disabled={disabled}
@@ -60,6 +61,8 @@ export function NumberInput({
         `}
         style={{ MozAppearance: 'textfield' }}
         aria-label={placeholder || 'Number input'}
+        data-lpignore="true"
+        autoComplete="off"
       />
 
       {suffix && (

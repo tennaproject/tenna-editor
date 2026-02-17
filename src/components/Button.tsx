@@ -31,7 +31,7 @@ export function Button({
   className = '',
   disabled = false,
   ...props
-}: ButtonProps) {
+}: ButtonProps & { 'aria-label'?: string }) {
   return (
     <button
       type="button"
@@ -43,6 +43,7 @@ export function Button({
       )}
       onClick={onClick}
       disabled={disabled}
+      aria-label={props['aria-label']}
       {...props}
     >
       {children}

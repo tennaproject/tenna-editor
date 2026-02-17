@@ -14,6 +14,10 @@ interface TextInputProps {
   fullWidth?: boolean;
   size?: 'default' | 'small';
   autoComplete?: string;
+  name?: string;
+  id?: string;
+  type?: 'text' | 'password' | 'email' | 'search';
+  'aria-label'?: string;
 }
 
 export function TextInput({
@@ -29,6 +33,10 @@ export function TextInput({
   fullWidth = false,
   size = 'default',
   autoComplete = 'off',
+  name,
+  id,
+  type = 'text',
+  'aria-label': ariaLabel,
 }: TextInputProps) {
   const isUncontrolled = controlledValue === undefined;
   const [localValue, setLocalValue] = useState(defaultValue ?? '');
@@ -61,13 +69,16 @@ export function TextInput({
   return (
     <div className={mergeClass('relative', widthClass, className)}>
       <input
-        type="text"
+        type={type}
         value={value}
         onChange={(e) => handleChange(e.target.value)}
         onBlur={handleBlur}
         disabled={disabled}
+        id={id}
+        name={name}
         placeholder={placeholder}
         autoComplete={autoComplete}
+        aria-label={ariaLabel}
         className={`
           w-full ${heightClass} px-3 py-2 leading-none ${disabled ? 'bg-surface-2 border border-border text-text-2 opacity-40 cursor-not-allowed select-none' : 'bg-surface-3 border border-border text-text-1'}
           ${disabled ? '' : 'focus:outline-none focus:ring-1 motion-reduce:transition-none transition-colors focus:ring-text-3'}
