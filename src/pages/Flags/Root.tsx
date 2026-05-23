@@ -1,13 +1,19 @@
 import { useState } from 'react';
-import { Card, Heading, Page, Section, TextInput } from '@components';
+import { Card, Heading, Page, Section, Select, TextInput } from '@components';
 import { FLAGS } from '@data';
 import type { FlagIndex, FlagProperties } from '@data';
+import type { SelectItem } from '@components';
 import { useSave } from '@store';
 import { chapterHelpers, flagHelpers, mergeClass } from '@utils';
 
 import ChevronDownIcon from '@assets/icons/chevron-down.svg?react';
 
-const ITEMS_PER_PAGE = 25;
+const ITEMS_PER_PAGE_OPTIONS: SelectItem[] = [
+  { id: '25', label: '25', value: 25 },
+  { id: '50', label: '50', value: 50 },
+  { id: '100', label: '100', value: 100 },
+  { id: '200', label: '200', value: 200 },
+];
 
 const FLAG_NAMES = Object.fromEntries(
   Object.entries(FLAGS).map(([name, index]) => [index, name]),
@@ -30,6 +36,9 @@ function prepareFlagData(index: FlagIndex) {
 export function FlagsRoot() {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(
+    ITEMS_PER_PAGE_OPTIONS[0].value as number,
+  );
   const [expandedFlag, setExpandedFlag] = useState<FlagIndex | null>(null);
 
   const save = useSave((s) => s.save);
@@ -45,15 +54,25 @@ export function FlagsRoot() {
         flag.searchText.includes(searchQuery.toLowerCase().trim()),
       );
 
-  const totalPages = Math.ceil(filteredFlags.length / ITEMS_PER_PAGE);
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const totalPages = Math.ceil(filteredFlags.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
   const paginatedFlags = filteredFlags.slice(startIndex, endIndex);
 
   const handleSearchChange = (value: string) => {
     setSearchQuery(value);
     setCurrentPage(1);
   };
+
+  const handleItemsPerPageChange = (item: SelectItem | null) => {
+    if (!item) return;
+    setItemsPerPage(item.value as number);
+    setCurrentPage(1);
+  };
+
+  const selectedItemsPerPage =
+    ITEMS_PER_PAGE_OPTIONS.find((o) => o.value === itemsPerPage) ??
+    ITEMS_PER_PAGE_OPTIONS[0];
 
   const handleFlagChange = (flagIndex: FlagIndex, value: string) => {
     const numValue = parseFloat(value);
@@ -105,6 +124,15 @@ export function FlagsRoot() {
                   className="sm:w-80"
                 />
                 <div className="flex items-center gap-4">
+                  <span className="text-text-3 text-sm">Flags per page</span>
+                  <Select
+                    label="Flags per page"
+                    items={ITEMS_PER_PAGE_OPTIONS}
+                    selectedItem={selectedItemsPerPage}
+                    defaultSelectedItem={selectedItemsPerPage}
+                    onSelectionChange={handleItemsPerPageChange}
+                    className="w-20"
+                  />
                   <span className="text-text-3 text-sm">
                     {filteredFlags.length} flags total
                   </span>

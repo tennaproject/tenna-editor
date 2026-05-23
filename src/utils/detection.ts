@@ -17,12 +17,12 @@ export function detectChapter(save: Save): ChapterDetectionResult {
   }
 
   // Handle weird Chapter 4 completion edge case
-  if (save.room as number === 18) {
+  if ((save.room as number) === 18) {
     return {
       chapter: 4,
       reason: 'room',
       supported: true,
-    }
+    };
   }
 
   const roomPrefix = Number(String(save.room)[0]) as ChapterIndex;
