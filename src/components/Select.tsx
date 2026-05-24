@@ -225,7 +225,10 @@ export function Select({
             },
           })}
           type="search"
-          className="w-full h-full px-3 pr-10 bg-transparent border-none outline-none text-text-1 placeholder:text-text-2 focus:outline-none focus:ring-1 transition-colors focus:ring-text-3"
+          className={mergeClass(
+            'w-full h-full px-3 pr-10 bg-transparent border-none outline-none placeholder:text-text-2 focus:outline-none focus:ring-1 transition-colors focus:ring-text-3',
+            selectedItem?.label === 'Empty' ? 'text-text-2' : 'text-text-1',
+          )}
           placeholder={placeholder}
           data-lpignore="true"
           autoComplete="off"
