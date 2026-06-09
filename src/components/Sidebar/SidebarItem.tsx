@@ -1,5 +1,5 @@
 import { useSave, useUi } from '@store';
-import { mergeClass } from '@utils';
+import { mergeClass } from '@utils/merge-class';
 import { type ReactNode } from 'react';
 import { NavLink, useLocation, matchPath } from 'react-router-dom';
 

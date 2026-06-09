@@ -2,7 +2,7 @@ import { useUi } from '@store';
 import { type ReactNode } from 'react';
 import { motion, type Variants } from 'framer-motion';
 import { useMediaQuery } from '@hooks';
-import { mergeClass } from '@utils';
+import { mergeClass } from '@utils/merge-class';
 
 const tweenTransition = {
   type: 'tween',

@@ -1,6 +1,6 @@
 import { Section, TextInput, TextLabel } from '@components';
 import { useSave } from '@store';
-import { mergeClass } from '@utils';
+import { mergeClass } from '@utils/merge-class';
 import { useState, useRef, useEffect } from 'react';
 
 interface SaveNameFieldProps {

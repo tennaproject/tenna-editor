@@ -1,6 +1,6 @@
 import { Checkbox, FieldWrapper } from '@components';
 import { useSave } from '@store';
-import { mergeClass } from '@utils';
+import { mergeClass } from '@utils/merge-class';
 
 interface SaveIsCompletionSaveFieldProps {
   id?: string;

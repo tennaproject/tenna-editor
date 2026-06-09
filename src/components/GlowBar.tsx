@@ -1,4 +1,4 @@
-import { mergeClass } from '@utils';
+import { mergeClass } from '@utils/merge-class';
 
 interface GlowBarProps {
   bg: string;

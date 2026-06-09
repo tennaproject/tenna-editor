@@ -10,7 +10,7 @@ import ErrorIcon from '@assets/icons/alert.svg?react';
 import SuccessIcon from '@assets/icons/radio-on.svg?react';
 import WarningIcon from '@assets/icons/warning-box.svg?react';
 import Markdown from 'react-markdown';
-import { stripIdentation } from '@utils';
+import { stripIdentation } from '@utils/strip-identation';
 import { useReducedMotion } from 'framer-motion';
 
 const COLORS: Record<ToastType, { background: string; text: string }> = {

@@ -1,7 +1,7 @@
 import { FieldWrapper, Select, type SelectItem } from '@components';
 import { useSave } from '@store';
 import type { SaveSlot } from '@types';
-import { mergeClass } from '@utils';
+import { mergeClass } from '@utils/merge-class';
 
 const SLOT_OPTIONS: SelectItem[] = [
   { id: '0', label: 'Slot 1' },

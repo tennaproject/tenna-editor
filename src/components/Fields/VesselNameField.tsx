@@ -1,6 +1,6 @@
 import { FieldWrapper, TextInput } from '@components';
 import { useSave } from '@store';
-import { mergeClass } from '@utils';
+import { mergeClass } from '@utils/merge-class';
 
 interface VesselNameFieldProps {
   id?: string;
