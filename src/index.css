@@ -104,6 +104,12 @@
   --color-yellow-active: #ebeb00;
   --color-yellow-soft: #ffff0024; /* 14% alpha */
 
+  --color-danger: var(--color-red);
+  --color-danger-hover: var(--color-red-hover);
+  --color-success: var(--color-green);
+  --color-focus: var(--color-text-3);
+  --radius-ui: 0;
+
   --font-sans: 'Pixel Operator', sans-serif;
   --font-mono: 'Pixel Operator Mono', monospace;
 
@@ -282,5 +288,53 @@
 @layer components {
   .page {
     @apply flex flex-col mx-auto p-6 w-full flex-none min-w-0 gap-4 max-w-7xl;
+  }
+
+  .ui-focus-ring {
+    @apply outline-none focus:outline-none focus:ring-1 focus:ring-text-3 motion-reduce:transition-none transition-colors;
+  }
+
+  .ui-field {
+    @apply w-full h-10 px-3 py-2 leading-none bg-surface-3 border border-border text-text-1 motion-reduce:transition-none transition-colors;
+  }
+
+  .ui-field:disabled {
+    @apply bg-surface-2 text-text-2 opacity-40 cursor-not-allowed select-none;
+  }
+
+  .ui-field:not(:disabled):focus {
+    @apply outline-none ring-1 ring-text-3;
+  }
+
+  .ui-field-mono {
+    @apply font-mono text-sm text-text-1 px-2.5 py-1.5 bg-surface-2 border border-border leading-none min-w-0;
+  }
+
+  .ui-panel {
+    @apply border border-border bg-surface-2;
+  }
+
+  .ui-panel-muted {
+    @apply rounded border border-border bg-surface-3/50 px-3 py-3 text-sm text-text-2;
+  }
+
+  .ui-section-label {
+    @apply text-xs font-semibold uppercase tracking-wide text-text-2;
+  }
+
+  .ui-icon-btn {
+    @apply p-2 bg-surface-3 hover:bg-surface-3-hover motion-reduce:transition-none transition-colors cursor-pointer outline-none focus:outline-none focus:ring-1 focus:ring-text-3;
+  }
+
+  .ui-danger {
+    @apply text-danger;
+  }
+
+  .ui-prose-muted {
+    @apply text-sm text-text-2 leading-relaxed;
+  }
+
+  .ui-divider-row {
+    @apply border-b border-divider last:border-b-0;
   }
 }
