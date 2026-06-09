@@ -574,7 +574,7 @@ export const FLAGS = {
   CHURCH_SHADOW_PUZZLE_TIMER: 849,
   CH4_INTRO_PROGRESS: 850,
   CHURCH_TALL_BOOKCASES_STATE: 851,
-  AXE_OF_JUSTICE_PROGRESS: 852,
+  CHURCH_AXE_OF_JUSTICE_PROGRESS: 852,
   CHURCH_ARENA_STATE: 853,
   PDC06B_STATE_1: 854,
   SHOP1_STATE_1: 855,
@@ -1541,7 +1541,7 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     displayName: 'Saw scene with King and Tenna in Castle Town',
     valueType: 'boolean',
   },
-  [FLAGS.AXE_OF_JUSTICE_PROGRESS]: {
+  [FLAGS.CHURCH_AXE_OF_JUSTICE_PROGRESS]: {
     displayName: 'Defeated Hammer of Justice',
     valueType: 'boolean',
   },

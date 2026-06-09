@@ -1,5 +1,6 @@
 export * from './detection';
 export * from './data-helpers';
+export * from './chapter-options';
 export * from './line-cursor';
 export * from './save-parser';
 export * from './save-serializer';
