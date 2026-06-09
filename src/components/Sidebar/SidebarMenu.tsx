@@ -1,5 +1,3 @@
-import { Sidebar } from '.';
-
 import HomeIcon from '@assets/icons/home.svg?react';
 import InventoryIcon from '@assets/icons/briefcase.svg?react';
 import PartyIcon from '@assets/icons/contact.svg?react';
@@ -10,59 +8,61 @@ import FlagsIcon from '@assets/icons/flag.svg?react';
 import SettingsIcon from '@assets/icons/sliders.svg?react';
 import AboutIcon from '@assets/icons/book-open.svg?react';
 import DevtoolsIcon from '@assets/icons/code.svg?react';
+import { SidebarGroup } from './SidebarGroup';
+import { SidebarItem } from './SidebarItem';
 
 export function SidebarMenu() {
   return (
     <>
-      <Sidebar.Group>
-        <Sidebar.Item
+      <SidebarGroup>
+        <SidebarItem
           title="Home"
           icon={<HomeIcon />}
           to="/"
           activePaths={['/welcome']}
         />
-        <Sidebar.Item
+        <SidebarItem
           title="Inventory"
           icon={<InventoryIcon />}
           to="/inventory"
           requireSave
         />
-        <Sidebar.Item
+        <SidebarItem
           title="Party"
           icon={<PartyIcon />}
           to="/party"
           requireSave
         />
-        <Sidebar.Item
+        <SidebarItem
           title="Light World"
           icon={<LightWorldIcon />}
           to="/light-world"
           requireSave
         />
-        <Sidebar.Item
+        <SidebarItem
           title="Story"
           icon={<StoryIcon />}
           to="/story"
           requireSave
         />
-        <Sidebar.Item
+        <SidebarItem
           title="Recruits"
           icon={<RecruitsIcon />}
           to="/recruits"
           requireSave
           requireChapter={2}
         />
-        <Sidebar.Item
+        <SidebarItem
           title="Flags"
           icon={<FlagsIcon />}
           to="/flags"
           requireSave
         />
-      </Sidebar.Group>
+      </SidebarGroup>
 
-      <Sidebar.Group>
+      <SidebarGroup>
         {import.meta.env.VITE_DEVTOOLS_TAB === 'true' && (
-          <Sidebar.Item
+          <SidebarItem
             title="Devtools"
             icon={<DevtoolsIcon />}
             to="/devtools"
@@ -70,14 +70,14 @@ export function SidebarMenu() {
           />
         )}
         {import.meta.env.VITE_SETTINGS_TAB === 'true' && (
-          <Sidebar.Item
+          <SidebarItem
             title="Settings"
             icon={<SettingsIcon />}
             to="/settings"
           />
         )}
-        <Sidebar.Item title="About" icon={<AboutIcon />} to="/about" />
-      </Sidebar.Group>
+        <SidebarItem title="About" icon={<AboutIcon />} to="/about" />
+      </SidebarGroup>
     </>
   );
 }
