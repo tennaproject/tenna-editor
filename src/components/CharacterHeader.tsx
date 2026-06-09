@@ -9,12 +9,14 @@ import {
 import { useSaveFlag } from '@hooks';
 import { useSave } from '@store';
 import { characterHelpers, getCharacterColor, mergeClass } from '@utils';
+import type { ReactNode } from 'react';
 
 interface CharacterHeaderProps {
   character: CharacterIndex;
+  icon?: ReactNode;
 }
 
-export function CharacterHeader({ character }: CharacterHeaderProps) {
+export function CharacterHeader({ character, icon }: CharacterHeaderProps) {
   const chapter = useSave((s) => s.save?.meta.chapter) || 1;
   const plot = useSave((s) => s.save?.plot) || 0;
 
@@ -75,9 +77,16 @@ export function CharacterHeader({ character }: CharacterHeaderProps) {
       id="main-title"
       className="flex flex-col items-center border-b border-divider px-2 py-4"
     >
-      <Heading level={2} className={mergeClass('uppercase mb-1', color.text)}>
-        {characterMeta.displayName}
-      </Heading>
+      {icon && (
+        <div className="flex items-center justify-center" aria-hidden>
+          {icon}
+        </div>
+      )}
+      <div className="mb-1">
+        <Heading level={2} className={mergeClass('uppercase', color.text)}>
+          {characterMeta.displayName}
+        </Heading>
+      </div>
       <Heading level={5}>
         LV{characterMeta.lv} {characterMeta.title.name}
       </Heading>

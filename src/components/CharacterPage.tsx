@@ -1,6 +1,8 @@
+import type { ReactNode } from 'react';
 import { type CharacterIndex } from '@data';
 import DividerIcon from '@assets/icons/minus.svg?react';
-import { characterHelpers, getCharacterColor } from '@utils';
+import { characterHelpers } from '@utils/data-helpers';
+import { getCharacterColor } from '@utils/get-character-color';
 import {
   Card,
   Checkbox,
@@ -16,12 +18,14 @@ import {
 
 interface CharacterPageProps {
   character: CharacterIndex;
+  icon?: ReactNode;
   allowAllElements: boolean;
   setAllowAllElements: (value: boolean) => void;
 }
 
 export function CharacterPage({
   character,
+  icon,
   allowAllElements,
   setAllowAllElements,
 }: CharacterPageProps) {
@@ -47,7 +51,7 @@ export function CharacterPage({
         >
           <Card className="flex flex-col justify-between flex-1">
             <div className="flex flex-col">
-              <CharacterHeader character={character} />
+              <CharacterHeader character={character} icon={icon} />
               <div className="flex flex-col gap-6 px-6 py-6">
                 <Section
                   id="health"
