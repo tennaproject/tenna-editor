@@ -50,7 +50,7 @@ export function HomeWelcome() {
               <li>
                 Windows:{' '}
                 <span className="font-mono">
-                  C:\Users\your-user-name\AppData\Local\DELTARUNE
+                  %LOCALAPPDATA%\DELTARUNE
                 </span>
               </li>
               <li>
