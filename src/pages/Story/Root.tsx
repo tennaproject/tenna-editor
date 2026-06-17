@@ -20,6 +20,9 @@ export function StoryRoot() {
           {chapter > 3 && (
             <Page.NavItem title="Chapter 4" to="/story/chapter4" />
           )}
+          {chapter > 4 && (
+            <Page.NavItem title="Chapter 5" to="/story/chapter5" />
+          )}
         </Page.Nav>
       </Page.TopBar>
       <Page.Content>

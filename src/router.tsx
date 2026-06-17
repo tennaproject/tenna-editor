@@ -1,8 +1,14 @@
 import React, { Suspense, type JSX } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import { RequireChapter, RequireDevmode, RequireSave } from '@guards';
-import { Loading } from '@components';
+import {
+  RequireChapter,
+  RequireDevmode,
+  RequireSave,
+  RememberSubtabRedirect,
+} from '@guards';
+import { Loading } from '@components/Loading';
+import { getLastSubtab } from '@utils/last-subtab';
 
 // Home
 const HomeRoot = React.lazy(() =>
@@ -89,8 +95,11 @@ const LightWorldRoot = React.lazy(() =>
 
 // Story
 const StoryRoot = React.lazy(() =>
-  import('./pages/Story/Root').then((module) => ({
-    default: module.StoryRoot,
+  Promise.all([
+    import('./pages/Story/Root'),
+    import('./pages/Story/Chapter1'),
+  ]).then(([root]) => ({
+    default: root.StoryRoot,
   })),
 );
 
@@ -118,13 +127,18 @@ const StoryChapter4 = React.lazy(() =>
   })),
 );
 
+const StoryChapter5 = React.lazy(() =>
+  import('./pages/Story/Chapter5').then((module) => ({
+    default: module.StoryChapter5,
+  })),
+);
+
 // Recruits
 const RecruitsRoot = React.lazy(() =>
   import('./pages/Recruits/Root').then((module) => ({
     default: module.RecruitsRoot,
   })),
 );
-
 // Flags
 const FlagsRoot = React.lazy(() =>
   import('./pages/Flags/Root').then((module) => ({
@@ -150,14 +164,11 @@ if (import.meta.env.VITE_DEVTOOLS_TAB === 'true') {
 }
 
 // Settings
-let SettingsRoot: React.LazyExoticComponent<() => JSX.Element> | null = null;
-if (import.meta.env.VITE_SETTINGS_TAB === 'true') {
-  SettingsRoot = React.lazy(() =>
-    import('./pages/Settings/Root').then((module) => ({
-      default: module.SettingsRoot,
-    })),
-  );
-}
+const SettingsRoot = React.lazy(() =>
+  import('./pages/Settings/Root').then((module) => ({
+    default: module.SettingsRoot,
+  })),
+);
 
 // About
 const AboutPage = React.lazy(() =>
@@ -186,17 +197,24 @@ const AboutAttributions = React.lazy(() =>
   })),
 );
 
+function HomeIndex() {
+  if (getLastSubtab('home') === 'welcome') {
+    return <Navigate to="welcome" replace />;
+  }
+  return <HomeOverview />;
+}
+
 export function AppRouter() {
   return (
     <AnimatePresence mode="wait">
       <Suspense fallback={<Loading />}>
         <Routes>
           <Route path="/" element={<HomeRoot />}>
-            <Route index element={<HomeOverview />} />
+            <Route index element={<HomeIndex />} />
             <Route path="welcome" element={<HomeWelcome />}></Route>
           </Route>
           <Route path="/about" element={<AboutPage />}>
-            <Route index element={<Navigate to="overview" replace />} />
+            <Route index element={<RememberSubtabRedirect tab="about" />} />
             <Route path="overview" element={<AboutOverview />}></Route>
             <Route path="changelog" element={<AboutChangelog />}></Route>
             <Route path="license" element={<AboutLicense />}></Route>
@@ -210,7 +228,7 @@ export function AppRouter() {
               </RequireSave>
             }
           >
-            <Route index element={<Navigate to="consumables" replace />} />
+            <Route index element={<RememberSubtabRedirect tab="inventory" />} />
             <Route
               path="consumables"
               element={<InventoryConsumables />}
@@ -227,7 +245,7 @@ export function AppRouter() {
               </RequireSave>
             }
           >
-            <Route index element={<Navigate to="overview" replace />} />
+            <Route index element={<RememberSubtabRedirect tab="party" />} />
             <Route path="overview" element={<PartyOverview />}></Route>
             <Route path="kris" element={<PartyKris />}></Route>
             <Route path="susie" element={<PartySusie />}></Route>
@@ -267,7 +285,7 @@ export function AppRouter() {
               </RequireSave>
             }
           >
-            <Route index element={<Navigate to="chapter1" replace />} />
+            <Route index element={<RememberSubtabRedirect tab="story" />} />
             <Route
               path="chapter1"
               element={
@@ -300,6 +318,14 @@ export function AppRouter() {
                 </RequireChapter>
               }
             ></Route>
+            <Route
+              path="chapter5"
+              element={
+                <RequireChapter requiredChapter={5}>
+                  <StoryChapter5 />
+                </RequireChapter>
+              }
+            ></Route>
           </Route>
           <Route
             path="/flags"
@@ -320,13 +346,14 @@ export function AppRouter() {
                   </RequireDevmode>
                 }
               >
-                <Route index element={<Navigate to="colors" replace />} />
+                <Route
+                  index
+                  element={<RememberSubtabRedirect tab="devtools" />}
+                />
                 <Route path="colors" element={<DevtoolsColors />} />
               </Route>
             )}
-          {import.meta.env.VITE_SETTINGS_TAB === 'true' && SettingsRoot && (
-            <Route path="/settings" element={<SettingsRoot />}></Route>
-          )}
+          <Route path="/settings" element={<SettingsRoot />}></Route>
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>

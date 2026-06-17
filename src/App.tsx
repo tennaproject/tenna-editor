@@ -2,7 +2,11 @@ import { BrowserRouter } from 'react-router-dom';
 import { Suspense } from 'react';
 
 import { AppRouter } from './router';
-import { Sidebar, Header, ToastContainer } from '@components';
+import { ErrorBoundary } from '@components/ErrorBoundary';
+import { Header } from '@components/Header';
+import { LastSubtabTracker } from '@components/LastSubtabTracker';
+import { Sidebar } from '@components/Sidebar';
+import { ToastContainer } from '@components/Toast';
 import { useSave } from '@store';
 import { MotionConfig } from 'framer-motion';
 
@@ -16,6 +20,7 @@ export function App() {
   return (
     <MotionConfig reducedMotion="user">
       <BrowserRouter>
+        <LastSubtabTracker />
         <ToastContainer />
         <div className="h-full bg-surface-1">
           <main className="h-full flex flex-col overflow-hidden">
@@ -26,9 +31,11 @@ export function App() {
               </Sidebar>
 
               <div className="flex-1 min-h-0 min-w-0 bg-surface-2">
-                <Suspense fallback={<div>Loading…</div>}>
-                  <AppRouter />
-                </Suspense>
+                <ErrorBoundary>
+                  <Suspense fallback={<div>Loading…</div>}>
+                    <AppRouter />
+                  </Suspense>
+                </ErrorBoundary>
               </div>
 
               <Sidebar.Overlay />
