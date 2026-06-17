@@ -1,5 +1,5 @@
 import { Card, Heading, ItemField, Section, type ItemType } from '@components';
-import { mergeClass } from '@utils';
+import { mergeClass } from '@utils/merge-class';
 
 const COLS_CLASSES: Record<1 | 2 | 3 | 4, string> = {
   1: 'lg:grid-cols-1',
@@ -33,12 +33,12 @@ export function InventoryPage({
             <Heading level={3}>{title}</Heading>
             <div
               className={mergeClass(
-                'w-full grid gap-4 mt-2',
+                'w-full grid gap-x-4 gap-y-3 mt-2',
                 COLS_CLASSES[cols],
               )}
             >
-              {Array.from({ length: slots }).map((_, i) => (
-                <ItemField key={i} type={type} slot={i} />
+              {Array.from({ length: slots }, (_, slot) => (
+                <ItemField key={slot} type={type} slot={slot} />
               ))}
             </div>
           </div>

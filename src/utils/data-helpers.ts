@@ -24,23 +24,35 @@ import {
   ENEMIES,
   ENEMIES_META,
 } from '@data';
+import type { BaseProperties } from '@types';
 import type { RoomIndex, RoomProperties } from '../data/rooms';
 import type { FlagIndex, FlagProperties } from '../data/flags';
+
+function buildNameById<TIndex extends number, TName extends string>(
+  registry: Record<TName, TIndex>,
+): Record<TIndex, TName> {
+  const nameById = {} as Record<TIndex, TName>;
+  for (const [name, id] of Object.entries(registry) as [TName, TIndex][]) {
+    nameById[id] = name;
+  }
+  return nameById;
+}
 
 function createDataHelpers<
   TIndex extends number,
   TName extends string,
-  TProperties,
->(registry: Record<TName, TIndex>, definitions: Record<TIndex, TProperties>) {
+  TProperties extends BaseProperties,
+>(
+  registry: Record<TName, TIndex>,
+  definitions: Record<TIndex, TProperties>,
+) {
+  const nameById = buildNameById(registry);
+
   return {
     getIndex: (name: TName): TIndex => registry[name],
     getById: (id: TIndex): TProperties => definitions[id],
     getByName: (name: TName): TProperties => definitions[registry[name]],
-    getName: (id: TIndex): TName => {
-      return Object.entries(registry).find(
-        ([_, value]) => value === id,
-      )?.[0] as TName;
-    },
+    getName: (id: TIndex): TName => nameById[id],
     getAllNames: (): TName[] => Object.keys(registry) as TName[],
     getAll: (): (TProperties & { id: TIndex })[] => {
       return Object.entries(registry).map(([_, id]) => ({
@@ -49,6 +61,10 @@ function createDataHelpers<
       }));
     },
   };
+}
+
+export function formatItemLabel(meta: BaseProperties | undefined, fallback: string) {
+  return meta?.displayName ?? fallback;
 }
 
 // Meta

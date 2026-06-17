@@ -1,7 +1,8 @@
 import { Select, type SelectItem, FieldWrapper } from '@components';
 import { SPELLS, type SpellIndex, type CharacterIndex } from '@data';
 import { useSave } from '@store';
-import { chapterHelpers, characterHelpers, spellHelpers } from '@utils';
+import { getChapterSpellOptions } from '@utils/chapter-options';
+import { chapterHelpers, spellHelpers } from '@utils/data-helpers';
 
 interface SpellFieldProp {
   id?: string;
@@ -23,8 +24,6 @@ export function SpellField({
   const updateSave = useSave((s) => s.updateSave);
 
   const chapterSpells = chapterHelpers.getById(chapter).content.spells;
-  const characterAllowedSpells =
-    characterHelpers.getById(character).allowedSpells;
   let spellMeta = spellHelpers.getById(currentSpell);
 
   const isExisting = !!spellMeta;
@@ -37,27 +36,19 @@ export function SpellField({
     };
   }
 
-  let availableSpells: Set<SpellIndex> = chapterSpells;
-  if (!allowAllItems) {
-    // Only include spells that are both allowed for the character and present in the chapter
-    availableSpells = characterAllowedSpells.intersection(chapterSpells);
-  }
+  const baseItems = getChapterSpellOptions(chapter, character, allowAllItems);
 
-  const selectItems: SelectItem[] = Array.from(availableSpells).map(
-    (spell) => ({
-      id: `${spell}`,
-      label: spellHelpers.getById(spell).displayName,
-      value: spell,
-    }),
-  );
-
-  if (!isValid || !availableSpells.has(currentSpell)) {
-    selectItems.push({
-      id: `${currentSpell}`,
-      label: spellMeta.displayName,
-      value: currentSpell,
-      invalid: true,
-    });
+  let selectItems: SelectItem[] = baseItems;
+  if (!isValid || !baseItems.some((item) => item.value === currentSpell)) {
+    selectItems = [
+      ...baseItems,
+      {
+        id: `${currentSpell}`,
+        label: spellMeta.displayName,
+        value: currentSpell,
+        invalid: true,
+      },
+    ];
   }
 
   const selectedItem =

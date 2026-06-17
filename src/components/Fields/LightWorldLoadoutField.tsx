@@ -1,7 +1,8 @@
 import { Select, type SelectItem, FieldWrapper } from '@components';
 import { type LightWorldItemIndex } from '@data';
 import { useSave } from '@store';
-import { chapterHelpers, lightWorldItemHelpers } from '@utils';
+import { getLightWorldLoadoutOptions } from '@utils/chapter-options';
+import { chapterHelpers, lightWorldItemHelpers } from '@utils/data-helpers';
 
 type LightWorldLoadoutType = 'weapon' | 'armor';
 
@@ -23,10 +24,8 @@ export function LightWorldLoadoutField({
   const current = useSave((s) => s.save?.lightWorld[type]) ?? 0;
   const updateSave = useSave((s) => s.updateSave);
 
-  const chapterAllowedElements =
-    chapterHelpers.getById(chapter).content.lightWorld.items;
-  const chapterSet = new Set<number>(chapterAllowedElements);
-  const availableElements: Set<number> = chapterSet;
+  const chapterSet = chapterHelpers.getById(chapter).content.lightWorld
+    .items as Set<number>;
 
   const elementMeta = lightWorldItemHelpers.getById(
     current as LightWorldItemIndex,
@@ -37,22 +36,19 @@ export function LightWorldLoadoutField({
   const isInChapter = chapterSet.has(current as number);
   const isValid = isExisting && isInChapter;
 
-  const selectItems: SelectItem[] = [...availableElements].map((value) => {
-    const meta = lightWorldItemHelpers.getById(value);
-    return {
-      id: `${value}`,
-      label: meta.displayName,
-      value,
-    };
-  });
+  const baseItems = getLightWorldLoadoutOptions(chapter, type);
 
-  if (!isValid || !availableElements.has(current as number)) {
-    selectItems.push({
-      id: `${current}`,
-      label: isExisting ? elementMeta.displayName : 'Unknown',
-      value: current as number,
-      invalid: true,
-    });
+  let selectItems: SelectItem[] = baseItems;
+  if (!isValid || !baseItems.some((item) => item.value === current)) {
+    selectItems = [
+      ...baseItems,
+      {
+        id: `${current}`,
+        label: isExisting ? elementMeta.displayName : 'Unknown',
+        value: current as number,
+        invalid: true,
+      },
+    ];
   }
 
   const selectedItem =

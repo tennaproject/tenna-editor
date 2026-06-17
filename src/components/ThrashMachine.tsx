@@ -13,7 +13,8 @@ import ThrashMachineShoe3 from '@assets/deltarune/thrash-machine/thrash-machine-
 import ThrashMachineShoe4 from '@assets/deltarune/thrash-machine/thrash-machine-shoe-4.svg?react';
 
 import { Section } from '@components';
-import { getGameColor, mergeClass } from '@utils';
+import { getGameColor } from '@utils/get-game-color';
+import { mergeClass } from '@utils/merge-class';
 
 export type ThrashMachineHeadIndex = -1 | 0 | 1 | 2 | 3;
 export type ThrashMachineBodyIndex = -1 | 0 | 1 | 2 | 3;
@@ -25,7 +26,7 @@ interface ThrashMachineHeadProps {
 }
 
 function ThrashMachineHead({ index, colorIndex }: ThrashMachineHeadProps) {
-  const baseClasses = 'absolute z-30';
+  const baseClasses = 'absolute z-[3]';
   const color = getGameColor(colorIndex);
   return (
     <>
@@ -63,7 +64,7 @@ interface ThrashMachineBodyProps {
 }
 
 function ThrashMachineBody({ index, colorIndex }: ThrashMachineBodyProps) {
-  const baseClasses = 'absolute z-20 w-53';
+  const baseClasses = 'absolute z-[2] w-53';
   const color = getGameColor(colorIndex);
   return (
     <>
@@ -108,11 +109,11 @@ function ThrashMachineShoe({ index, colorIndex }: ThrashMachineShoeProps) {
       {index === 0 && (
         <>
           <ThrashMachineShoe0
-            className={mergeClass(baseClasses, 'z-30 -bottom-5 left-33')}
+            className={mergeClass(baseClasses, 'z-[3] -bottom-5 left-33')}
             color={color}
           />
           <ThrashMachineShoe0
-            className={mergeClass(baseClasses, 'z-10 -bottom-5 left-19')}
+            className={mergeClass(baseClasses, 'z-[1] -bottom-5 left-19')}
             color={color}
           />
         </>
@@ -120,29 +121,29 @@ function ThrashMachineShoe({ index, colorIndex }: ThrashMachineShoeProps) {
       {index === 1 && (
         <>
           <ThrashMachineShoe1
-            className={mergeClass(baseClasses, 'z-30 -bottom-1 left-37')}
+            className={mergeClass(baseClasses, 'z-[3] -bottom-1 left-37')}
             color={color}
           />
           <ThrashMachineShoe1
-            className={mergeClass(baseClasses, 'z-10 -bottom-1 left-23')}
+            className={mergeClass(baseClasses, 'z-[1] -bottom-1 left-23')}
             color={color}
           />
         </>
       )}
       {index === 2 && (
         <ThrashMachineShoe2
-          className={mergeClass(baseClasses, 'z-30 bottom-0 left-15')}
+          className={mergeClass(baseClasses, 'z-[3] bottom-0 left-15')}
           color={color}
         />
       )}
       {index === 3 && (
         <>
           <ThrashMachineShoe3
-            className={mergeClass(baseClasses, 'z-30 -bottom-4 left-37')}
+            className={mergeClass(baseClasses, 'z-[3] -bottom-4 left-37')}
             color={color}
           />
           <ThrashMachineShoe4
-            className={mergeClass(baseClasses, 'z-10 -bottom-4 left-23')}
+            className={mergeClass(baseClasses, 'z-[1] -bottom-4 left-23')}
             color={color}
           />
         </>
@@ -173,7 +174,10 @@ export function ThrashMachine({
   shoeColor,
 }: ThrashMachineProps) {
   return (
-    <Section id={id} className={mergeClass('relative h-45 w-60', className)}>
+    <Section
+      id={id}
+      className={mergeClass('relative isolate h-45 w-60', className)}
+    >
       <ThrashMachineHead index={head} colorIndex={headColor} />
       <ThrashMachineBody index={body} colorIndex={bodyColor} />
       <ThrashMachineShoe index={shoe} colorIndex={shoeColor} />

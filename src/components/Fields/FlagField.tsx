@@ -1,4 +1,4 @@
-import type { FlagIndex, FlagProperties } from '@data';
+import type { FlagIndex } from '@data';
 import { useSaveFlag } from '@hooks';
 import { useSave } from '@store';
 import { chapterHelpers, flagHelpers, getGameColor, mergeClass } from '@utils';
@@ -20,13 +20,15 @@ interface FlagFieldProps {
 export function FlagField({ flag, id, className }: FlagFieldProps) {
   const updateSave = useSave((s) => s.updateSave);
   const currentValue = useSaveFlag(flag);
-  const { valueType, valueRules, displayName, description } =
-    flagHelpers.getById(flag) as FlagProperties;
+  const meta = flagHelpers.getById(flag);
 
   const chapter = useSave((s) => s.save?.meta.chapter) ?? 1;
   const chapterFlags = chapterHelpers.getById(chapter).content.flags;
 
   if (!chapterFlags.has(flag)) return;
+  if (!meta) return;
+
+  const { valueType, valueRules, displayName, description } = meta;
 
   if (valueType === 'boolean') {
     return (

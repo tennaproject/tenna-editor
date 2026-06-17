@@ -1,25 +1,71 @@
 import {
+  Card,
   Checkbox,
-  InlineGroup,
+  GlowBar,
+  Heading,
   NumberInput,
   Section,
-  TextLabel,
 } from '@components';
 import type { EnemyIndex, FlagIndex } from '@data';
+import { useSaveFlag } from '@hooks';
 import { useSave } from '@store';
-import { enemyHelpers } from '@utils';
+import { enemyHelpers } from '@utils/data-helpers';
+import { mergeClass } from '@utils/merge-class';
 
 interface RecruitFieldProps {
   id: string;
   enemy: EnemyIndex;
 }
 
+const STATUS_COLORS = {
+  recruited: {
+    bg: 'bg-green',
+    shadow: 'shadow-green',
+    text: 'text-green',
+  },
+  lost: {
+    bg: 'bg-red',
+    shadow: 'shadow-red',
+    text: 'text-red',
+  },
+  partial: {
+    bg: 'bg-yellow',
+    shadow: 'shadow-yellow',
+    text: 'text-yellow',
+  },
+  none: {
+    bg: 'bg-surface-3',
+    shadow: 'shadow-surface-3',
+    text: 'text-text-3',
+  },
+} as const;
+
+type RecruitStatusKey = keyof typeof STATUS_COLORS;
+
+function getRecruitStatus(
+  currentlyRecruited: number,
+  recruitCount: number,
+): { key: RecruitStatusKey; label: string; showGlow: boolean } {
+  if (currentlyRecruited === -1) {
+    return { key: 'lost', label: 'Lost', showGlow: true };
+  }
+  if (currentlyRecruited === recruitCount) {
+    return { key: 'recruited', label: 'Recruited', showGlow: true };
+  }
+  if (currentlyRecruited > 0 && currentlyRecruited < recruitCount) {
+    return {
+      key: 'partial',
+      label: `${currentlyRecruited} / ${recruitCount}`,
+      showGlow: true,
+    };
+  }
+  return { key: 'none', label: 'Not recruited', showGlow: false };
+}
+
 export function RecruitField({ id, enemy }: RecruitFieldProps) {
   const updateSave = useSave((s) => s.updateSave);
   const meta = enemyHelpers.getById(enemy);
-  const flag =
-    (useSave((s) => s.save?.flags[meta.recruitFlag as FlagIndex]) as number) ??
-    (0 as number);
+  const flag = useSaveFlag(meta.recruitFlag as FlagIndex) as number;
 
   /* Flag values:
     -1 for lost,
@@ -35,25 +81,42 @@ export function RecruitField({ id, enemy }: RecruitFieldProps) {
     }
   }
 
+  const status = getRecruitStatus(currentlyRecruited, recruitCount);
+  const colors = STATUS_COLORS[status.key];
+  const countLabel = recruitCount > 1 ? 'Recruit count' : 'Status';
+
   return (
-    <Section id={id}>
-      <InlineGroup>
-        <div className="flex flex-col">
-          <div className="pl-0.5 flex-1 flex gap-4.5">
-            <p className="text-xs text-text-2">Recruited</p>
-            <p className="text-xs text-text-2">Recruit count</p>
+    <Section id={id} className="flex flex-col">
+      <Card
+        className={mergeClass(
+          'flex flex-col flex-1',
+          !meta.recruitable && 'opacity-75',
+        )}
+      >
+        <div className="flex flex-col gap-3 p-4 flex-1">
+          <div className="flex flex-col gap-1 min-h-12">
+            <Heading level={5} className={mergeClass('uppercase', colors.text)}>
+              {meta.displayName}
+            </Heading>
+            <span className="text-xs uppercase tracking-wide text-text-3">
+              {status.label}
+              {!meta.recruitable && ' · Unused'}
+            </span>
           </div>
-          <InlineGroup className="mt-1">
-            <Checkbox
-              checked={currentlyRecruited === recruitCount}
-              onChange={(state) => {
-                updateSave(
-                  (save) =>
-                    (save.flags[meta.recruitFlag as FlagIndex] = state ? 1 : 0),
-                );
-              }}
-              className="pl-4 pr-2"
-            />
+
+          <Checkbox
+            label="Recruited"
+            checked={currentlyRecruited === recruitCount}
+            onChange={(state) => {
+              updateSave(
+                (save) =>
+                  (save.flags[meta.recruitFlag as FlagIndex] = state ? 1 : 0),
+              );
+            }}
+          />
+
+          <div className="flex flex-col gap-1">
+            <span className="text-xs text-text-2">{countLabel}</span>
             <NumberInput
               min={-1}
               max={recruitCount}
@@ -71,12 +134,17 @@ export function RecruitField({ id, enemy }: RecruitFieldProps) {
                     (save.flags[meta.recruitFlag as FlagIndex] = newValue),
                 );
               }}
-              className="w-20"
+              className="w-full"
+              fullWidth
             />
-            <TextLabel className="ml-1">{meta.displayName}</TextLabel>
-          </InlineGroup>
+          </div>
         </div>
-      </InlineGroup>
+        <GlowBar
+          bg={colors.bg}
+          shadow={colors.shadow}
+          hidden={!status.showGlow}
+        />
+      </Card>
     </Section>
   );
 }

@@ -1,11 +1,5 @@
 import { Section, TextLabel, Select, type SelectItem } from '@components';
 import {
-  ARMORS,
-  CONSUMABLES,
-  KEYITEMS,
-  LIGHTWORLDITEMS,
-  PHONECONTACTS,
-  WEAPONS,
   type ArmorIndex,
   type ConsumableIndex,
   type KeyItemIndex,
@@ -13,16 +7,19 @@ import {
   type PhoneContactIndex,
   type WeaponIndex,
 } from '@data';
+import { useSaveItemSlot } from '@hooks';
 import { useSave } from '@store';
+import { getChapterItemOptions } from '@utils/chapter-options';
 import {
-  chapterHelpers,
   armorHelpers,
-  weaponHelpers,
+  chapterHelpers,
   consumableHelpers,
+  formatItemLabel,
   keyItemHelpers,
   lightWorldItemHelpers,
   phoneContactHelpers,
-} from '@utils';
+  weaponHelpers,
+} from '@utils/data-helpers';
 
 export type ItemType =
   | 'consumable'
@@ -39,107 +36,103 @@ interface ItemFieldProps {
   label?: string;
 }
 
+function getDisplayName(type: ItemType, id: number): string {
+  switch (type) {
+    case 'consumable':
+    case 'storage':
+      return formatItemLabel(
+        consumableHelpers.getById(id as ConsumableIndex),
+        'Unknown',
+      );
+    case 'keyItem':
+      return formatItemLabel(
+        keyItemHelpers.getById(id as KeyItemIndex),
+        'Unknown',
+      );
+    case 'weapon':
+      return formatItemLabel(
+        weaponHelpers.getById(id as WeaponIndex),
+        'Unknown',
+      );
+    case 'armor':
+      return formatItemLabel(armorHelpers.getById(id as ArmorIndex), 'Unknown');
+    case 'lightWorldItem':
+      return formatItemLabel(
+        lightWorldItemHelpers.getById(id as LightWorldItemIndex),
+        'Unknown',
+      );
+    case 'phoneContact':
+      return formatItemLabel(
+        phoneContactHelpers.getById(id as PhoneContactIndex),
+        'Unknown',
+      );
+  }
+}
+
+function getPlaceholder(type: ItemType): string {
+  switch (type) {
+    case 'consumable':
+      return 'Select a consumable...';
+    case 'keyItem':
+      return 'Select a key item...';
+    case 'weapon':
+      return 'Select a weapon...';
+    case 'armor':
+      return 'Select an armor...';
+    case 'storage':
+      return 'Select a storage item...';
+    default:
+      return 'Select an item...';
+  }
+}
+
 export function ItemField({ type, slot, label }: ItemFieldProps) {
-  const save = useSave((s) => s.save);
-  const chapter = save?.meta.chapter || 1;
+  const chapter = useSave((s) => s.save?.meta.chapter ?? 1);
   const updateSave = useSave((s) => s.updateSave);
+  const currentValue = useSaveItemSlot(type, slot);
 
-  let currentValue: number = 0;
   const selectLabel = label ?? 'Slot';
-  let placeholder = 'Select an item...';
-
+  const placeholder = getPlaceholder(type);
+  const baseItems = getChapterItemOptions(chapter, type);
   const chapterContent = chapterHelpers.getById(chapter).content;
 
-  if (type === 'consumable') {
-    currentValue =
-      save?.inventory.consumables[slot] ??
-      (CONSUMABLES.EMPTY as ConsumableIndex);
-    placeholder = 'Select a consumable...';
-  } else if (type === 'keyItem') {
-    currentValue =
-      save?.inventory.keyItems[slot] ?? (KEYITEMS.EMPTY as KeyItemIndex);
-    placeholder = 'Select a key item...';
-  } else if (type === 'weapon') {
-    currentValue =
-      save?.inventory.weapons[slot] ?? (WEAPONS.EMPTY as WeaponIndex);
-    placeholder = 'Select a weapon...';
-  } else if (type === 'armor') {
-    currentValue = save?.inventory.armors[slot] ?? (ARMORS.EMPTY as ArmorIndex);
-    placeholder = 'Select an armor...';
-  } else if (type === 'storage') {
-    const storage =
-      save && 'inventory' in save && 'storage' in save.inventory
-        ? (save.inventory as { storage: ConsumableIndex[] }).storage
-        : [];
-    currentValue = storage?.[slot] ?? (CONSUMABLES.EMPTY as ConsumableIndex);
-    placeholder = 'Select a storage item...';
-  } else if (type === 'lightWorldItem') {
-    currentValue =
-      save?.lightWorld.items[slot] ??
-      (LIGHTWORLDITEMS.EMPTY as LightWorldItemIndex);
-    placeholder = 'Select an item...';
-  } else if (type === 'phoneContact') {
-    currentValue =
-      save?.lightWorld.phone[slot] ??
-      (PHONECONTACTS.EMPTY as PhoneContactIndex);
-    placeholder = 'Select an item...';
+  let availableSet: Set<number>;
+  switch (type) {
+    case 'consumable':
+    case 'storage':
+      availableSet = chapterContent.consumables as Set<number>;
+      break;
+    case 'keyItem':
+      availableSet = chapterContent.keyItems as Set<number>;
+      break;
+    case 'weapon':
+      availableSet = chapterContent.weapons as Set<number>;
+      break;
+    case 'armor':
+      availableSet = chapterContent.armors as Set<number>;
+      break;
+    case 'lightWorldItem':
+      availableSet = chapterContent.lightWorld.items as Set<number>;
+      break;
+    case 'phoneContact':
+      availableSet = chapterContent.lightWorld.phoneContacts as Set<number>;
+      break;
   }
 
-  let availableSet: Set<number> = new Set<number>();
-  // This may be considered hacky way to do it
-  let getDisplayName: (id: number) => string = () => 'Unknown';
+  const metaDisplay = getDisplayName(type, currentValue);
+  const isValid = !!metaDisplay && availableSet.has(currentValue);
 
-  if (type === 'consumable' || type === 'storage') {
-    availableSet = new Set<number>(chapterContent.consumables as Set<number>);
-    getDisplayName = (id: number) =>
-      consumableHelpers.getById(id as ConsumableIndex)?.displayName ??
-      'Unknown';
-  } else if (type === 'keyItem') {
-    availableSet = new Set<number>(chapterContent.keyItems as Set<number>);
-    getDisplayName = (id: number) =>
-      keyItemHelpers.getById(id as KeyItemIndex)?.displayName ?? 'Unknown';
-  } else if (type === 'weapon') {
-    availableSet = new Set<number>(chapterContent.weapons as Set<number>);
-    getDisplayName = (id: number) =>
-      weaponHelpers.getById(id as WeaponIndex)?.displayName ?? 'Unknown';
-  } else if (type === 'armor') {
-    availableSet = new Set<number>(chapterContent.armors as Set<number>);
-    getDisplayName = (id: number) =>
-      armorHelpers.getById(id as ArmorIndex)?.displayName ?? 'Unknown';
-  } else if (type === 'lightWorldItem') {
-    availableSet = new Set<number>(
-      chapterContent.lightWorld.items as Set<number>,
-    );
-    getDisplayName = (id: number) =>
-      lightWorldItemHelpers.getById(id as LightWorldItemIndex)?.displayName ??
-      'Unknown';
-  } else if (type === 'phoneContact') {
-    availableSet = new Set<number>(
-      chapterContent.lightWorld.phoneContacts as Set<number>,
-    );
-    getDisplayName = (id: number) =>
-      phoneContactHelpers.getById(id as PhoneContactIndex)?.displayName ??
-      'Unknown';
-  }
-
-  const metaDisplay = getDisplayName(currentValue);
-  const isExisting = !!metaDisplay;
-  const isInChapter = availableSet.has(currentValue);
-  const isValid = isExisting && isInChapter;
-
-  const selectItems: SelectItem[] = Array.from(availableSet).map((value) => ({
-    id: `${value}`,
-    label: getDisplayName(value),
-    value,
-  }));
-
+  let selectItems: SelectItem[] = baseItems;
   if (!isValid || !availableSet.has(currentValue)) {
-    selectItems.push({
-      id: `${currentValue}`,
-      label: metaDisplay || 'Unknown',
-      value: currentValue,
-      invalid: true,
-    });
+    selectItems = [
+      ...baseItems,
+      {
+        id: `${currentValue}`,
+        label: metaDisplay || 'Unknown',
+        value: currentValue,
+        invalid: true,
+      },
+    ];
   }
 
   const selectedItem =

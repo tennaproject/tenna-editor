@@ -15,6 +15,14 @@ interface FieldWrapperProps {
   children?: ReactNode;
 }
 
+function needsMarkdown(text: string) {
+  return /[*_`[\]]/.test(text);
+}
+
+function renderMaybeMarkdown(text: string) {
+  return needsMarkdown(text) ? <Markdown>{text}</Markdown> : text;
+}
+
 export function FieldWrapper({
   id,
   title,
@@ -30,13 +38,11 @@ export function FieldWrapper({
         {inline && <>{children}</>}
         {label && (
           <TextLabel htmlFor={id}>
-            <Markdown>{title}</Markdown>
+            {title && renderMaybeMarkdown(title)}
           </TextLabel>
         )}
         {description && (
-          <HelpTip title={title}>
-            <Markdown>{description}</Markdown>
-          </HelpTip>
+          <HelpTip title={title}>{renderMaybeMarkdown(description)}</HelpTip>
         )}
       </InlineGroup>
 

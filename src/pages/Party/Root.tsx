@@ -1,5 +1,5 @@
 import { Page } from '@components';
-import type { ChapterIndex } from '@data';
+import { type ChapterIndex } from '@data';
 import { useSave } from '@store';
 import { Outlet } from 'react-router-dom';
 

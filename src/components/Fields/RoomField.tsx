@@ -1,7 +1,8 @@
 import { FieldWrapper, Select, type SelectItem } from '@components';
 import type { RoomIndex } from '@data';
 import { useSave } from '@store';
-import { chapterHelpers, mergeClass, roomHelpers } from '@utils';
+import { getChapterRoomOptions } from '@utils/chapter-options';
+import { mergeClass } from '@utils/merge-class';
 
 interface RoomFieldProps {
   id?: string;
@@ -20,29 +21,7 @@ export function RoomField({ id, className, allowAllElements }: RoomFieldProps) {
     }
   }
 
-  const roomsSource = chapterHelpers.getById(chapter).content
-    .rooms as Set<RoomIndex>;
-  let entries: Array<[string, number]> = Array.from(roomsSource).map(
-    (roomId) => {
-      const id = roomId;
-      const meta = roomHelpers.getById(id as RoomIndex);
-      const name = meta?.displayName || roomHelpers.getName(roomId);
-      return [name, id];
-    },
-  );
-
-  if (!allowAllElements) {
-    entries = entries.filter(
-      ([_, roomId]) => roomHelpers.getById(roomId as RoomIndex)?.hasSavePoint,
-    );
-  }
-
-  const items = entries.map(([name, id]) => ({
-    id: id.toString(),
-    label: name,
-    value: id,
-  }));
-
+  const items = getChapterRoomOptions(chapter, !!allowAllElements);
   const selectedItem = items.find((item) => item.value === room) ?? null;
 
   const description = `

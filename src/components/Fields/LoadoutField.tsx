@@ -1,12 +1,12 @@
 import { Select, type SelectItem, FieldWrapper } from '@components';
 import { type CharacterIndex, type WeaponIndex, type ArmorIndex } from '@data';
 import { useSave } from '@store';
+import { getChapterLoadoutOptions } from '@utils/chapter-options';
 import {
   armorHelpers,
   chapterHelpers,
-  characterHelpers,
   weaponHelpers,
-} from '@utils';
+} from '@utils/data-helpers';
 
 type LoadoutType = 'weapon' | 'primaryArmor' | 'secondaryArmor';
 
@@ -33,22 +33,10 @@ export function LoadoutField({
   const current = useSave((s) => s.save?.characters[character][type]) ?? 0;
   const updateSave = useSave((s) => s.updateSave);
 
-  const chapterAllowedElements =
-    chapterHelpers.getById(chapter).content[
-      type === 'weapon' ? 'weapons' : 'armors'
-    ];
-
-  const characterAllowedElements =
-    characterHelpers.getById(character)[
-      type === 'weapon' ? 'allowedWeapons' : 'allowedArmors'
-    ];
-
-  const chapterSet = new Set<number>(chapterAllowedElements);
-  const characterSet = new Set<number>(characterAllowedElements);
-
-  const availableElements: Set<number> = allowAllElements
-    ? chapterSet
-    : new Set<number>([...chapterSet].filter((i) => characterSet.has(i)));
+  const optionType = type === 'weapon' ? 'weapon' : 'armor';
+  const chapterSet = chapterHelpers.getById(chapter).content[
+    optionType === 'weapon' ? 'weapons' : 'armors'
+  ] as Set<number>;
 
   const elementMeta =
     type === 'weapon'
@@ -60,25 +48,24 @@ export function LoadoutField({
   const isInChapter = chapterSet.has(current as number);
   const isValid = isExisting && isInChapter;
 
-  const selectItems: SelectItem[] = [...availableElements].map((value) => {
-    const meta =
-      type === 'weapon'
-        ? weaponHelpers.getById(value as WeaponIndex)
-        : armorHelpers.getById(value as ArmorIndex);
-    return {
-      id: `${value}`,
-      label: meta.displayName,
-      value,
-    };
-  });
+  const baseItems = getChapterLoadoutOptions(
+    chapter,
+    optionType,
+    character,
+    allowAllElements,
+  );
 
-  if (!isValid || !availableElements.has(current as number)) {
-    selectItems.push({
-      id: `${current}`,
-      label: isExisting ? elementMeta.displayName : 'Unknown',
-      value: current as number,
-      invalid: true,
-    });
+  let selectItems: SelectItem[] = baseItems;
+  if (!isValid || !baseItems.some((item) => item.value === current)) {
+    selectItems = [
+      ...baseItems,
+      {
+        id: `${current}`,
+        label: isExisting ? elementMeta.displayName : 'Unknown',
+        value: current as number,
+        invalid: true,
+      },
+    ];
   }
 
   const selectedItem =
