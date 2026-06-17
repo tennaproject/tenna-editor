@@ -10,6 +10,7 @@ import {
 } from '@components';
 import { mergeClass } from '@utils';
 import DividerIcon from '@assets/icons/minus.svg?react';
+import KrisIcon from '@assets/deltarune/characters/kris.svg?react';
 
 const THEME = {
   bg: 'bg-[#a6ab2f]',
@@ -37,6 +38,15 @@ export function LightWorldRoot() {
                     <Heading level={4} className="uppercase my-1">
                       Light World
                     </Heading>
+                    <span
+                      className={mergeClass(
+                        'inline-flex h-24 w-24 shrink-0 items-center justify-center',
+                        THEME.text,
+                      )}
+                      aria-hidden
+                    >
+                      <KrisIcon className="h-full w-full" />
+                    </span>
                     <Heading
                       level={2}
                       className={mergeClass('uppercase', THEME.text)}
@@ -87,7 +97,7 @@ export function LightWorldRoot() {
                     </div>
                   </Section>
                 </Card>
-              </Section>{' '}
+              </Section>
               <Section id="phone-contacts" className="flex flex-1">
                 <Card className="flex-1 p-6 flex gap-3 flex-col">
                   <Section>

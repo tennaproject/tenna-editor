@@ -57,6 +57,35 @@ export function AboutOverview() {
         </Card>
       </Section>
 
+      <Section id="contributors">
+        <Card className="flex flex-col gap-3 p-6">
+          <Heading level={3}>Contributors</Heading>
+          <ul className="list-disc pl-6 space-y-1 text-text-2">
+            <li>
+              <Link href="https://github.com/jjezewski">jjezewski</Link> -
+              creator & maintainer
+            </li>
+            <li>
+              <Link href="https://github.com/krisgrant">KrisGra</Link>
+            </li>
+            <li>
+              <Link href="https://github.com/Matojeje">Matojeje</Link>
+            </li>
+            <li>
+              <Link href="https://github.com/afreetoplaynoob">
+                afreetoplaynoob
+              </Link>
+            </li>
+            <li>
+              <Link href="https://github.com/Araraura">Araraura</Link>
+            </li>
+            <li>
+              <Link href="https://github.com/soulware1">soulware1</Link>
+            </li>
+          </ul>
+        </Card>
+      </Section>
+
       <Section id="build">
         <Card className="flex flex-col gap-3 p-6">
           <Heading level={3}>Build Info</Heading>

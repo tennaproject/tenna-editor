@@ -9,15 +9,15 @@ export function HomeWelcome() {
       <Card className="p-6 flex flex-col gap-4">
         <Section id="heading" className="flex flex-col gap-3">
           <Heading level={3}>Welcome</Heading>
-          <div className="text-text-2">
+          <div className="ui-prose-muted flex flex-col gap-2">
             <p>
               Tenna Editor is a powerful tool for editing DELTARUNE save files.
             </p>
             <p>
               To get started, click the area below or click the upload button in
-              far right corner.
+              the top-right corner.
             </p>
-            <p className="text-red font-bold">
+            <p className="ui-danger font-bold">
               Remember to always back up your saves before editing them!
             </p>
           </div>
@@ -32,8 +32,8 @@ export function HomeWelcome() {
               <h1 className="font-bold text-lg md:text-xl">
                 Click here to upload save
               </h1>
-              <p className="text-text-2">
-                or click upload button in right corner
+              <p className="ui-prose-muted">
+                or click upload button in the top-right corner
               </p>
             </div>
           </button>
@@ -41,7 +41,7 @@ export function HomeWelcome() {
         </Section>
         <Section id="filelocation" className="flex flex-col gap-1">
           <Heading level={4}>Where to find saves?</Heading>
-          <div className="text-text-2">
+          <div className="ui-prose-muted">
             <p>
               Your DELTARUNE save files are typically located in the following
               directories:
@@ -70,10 +70,11 @@ export function HomeWelcome() {
         </Section>
         <Section id="compatibility" className="flex flex-col gap-1">
           <Heading level={4}>Compatibility</Heading>
-          <div className="text-text-2">
+          <div className="ui-prose-muted">
             <p>
-              Tenna Editor is compatible with DELTARUNE Chapter 1-4 save files
-              from the following platforms:
+              Tenna Editor is compatible with DELTARUNE Chapter 1-5 save files
+              from the following platforms. Chapter 5 support is experimental
+              and currently uses known Chapter 1-4 editor data only.
             </p>
             <ul className="list-disc pl-5">
               <li>PC (Windows)</li>

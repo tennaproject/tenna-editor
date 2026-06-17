@@ -6,7 +6,8 @@ import {
   Heading,
   InlineGroup,
   Button,
-  Modal,
+  ModalLayout,
+  ModalFooter,
   FlagField,
   TimeField,
   MoneyField,
@@ -21,7 +22,8 @@ import {
 } from '@components';
 import { FLAGS } from '@data';
 import { useSave, useUi } from '@store';
-import { chapterHelpers } from '@utils';
+import { chapterHelpers } from '@utils/data-helpers';
+import { formatLocalDateTime } from '@utils/format-date';
 import { saveStorage, toast } from '@services';
 import { PlayerNameField } from '@components/Fields/PlayerNameField';
 
@@ -55,8 +57,8 @@ function SaveTimestamp() {
 
   return (
     <div className="text-text-2">
-      <p>Created at: {new Date(createdAt).toLocaleString()}</p>
-      <p>Modified at: {new Date(modifiedAt).toLocaleString()}</p>
+      <p>Created at: {formatLocalDateTime(createdAt)}</p>
+      <p>Modified at: {formatLocalDateTime(modifiedAt)}</p>
     </div>
   );
 }
@@ -93,27 +95,33 @@ function DeleteSave() {
       <Button variant="primary" onClick={() => setIsOpen(true)}>
         Delete Save
       </Button>
-      <Modal isOpen={isOpen} setOpen={setIsOpen}>
-        <div className="flex flex-col flex-1 gap-4">
-          <Heading level={3}>Delete Save</Heading>
-          <div className="">
-            <p className="text-text-2">
-              Are you sure you want to delete current save from editor?
-            </p>
-            <p className="text-red font-bold">
-              This action cannot be reversed!
-            </p>
-          </div>
+      <ModalLayout
+        isOpen={isOpen}
+        setOpen={setIsOpen}
+        title="Delete Save"
+        footer={
+          <ModalFooter>
+            <Button onClick={() => setIsOpen(false)} variant="secondary">
+              Cancel
+            </Button>
+            <Button
+              onClick={() => void onDelete()}
+              variant="primary"
+              size="lg"
+              className="w-full sm:w-auto sm:min-w-36"
+            >
+              Delete
+            </Button>
+          </ModalFooter>
+        }
+      >
+        <div className="flex flex-col gap-3">
+          <p className="text-text-2">
+            Are you sure you want to delete the current save from the editor?
+          </p>
+          <p className="ui-danger font-bold">This action cannot be reversed!</p>
         </div>
-        <div className="mt-4 flex gap-2 justify-end">
-          <Button onClick={() => onDelete()} variant="primary">
-            Delete
-          </Button>
-          <Button onClick={() => setIsOpen(false)} variant="secondary">
-            Cancel
-          </Button>
-        </div>
-      </Modal>
+      </ModalLayout>
     </div>
   );
 }
@@ -155,46 +163,48 @@ export function HomeOverview() {
           </HelpTip>
         </InlineGroup>
       </div>
-      <Section id="general">
-        <Card className="flex flex-col gap-3 p-6">
-          <Heading level={3}>General</Heading>
-          <div className="flex flex-col md:flex-row gap-3">
-            <div className="flex-1 flex flex-col gap-3">
-              <Chapter />
-              <FlagField id="since-chapter" flag={FLAGS.SINCE_CHAPTER} />
-              <PlayerNameField id="player-name" />
+      <>
+        <Section id="general">
+          <Card className="flex flex-col gap-3 p-6">
+            <Heading level={3}>General</Heading>
+            <div className="flex flex-col md:flex-row gap-3">
+              <div className="flex-1 flex flex-col gap-3">
+                <Chapter />
+                <FlagField id="since-chapter" flag={FLAGS.SINCE_CHAPTER} />
+                <PlayerNameField id="player-name" />
+              </div>
+              <div className="flex-1 flex flex-col gap-3">
+                <MoneyField id="money" />
+                <FlagField id="points" flag={FLAGS.CH3_POINTS} />
+                <TimeField />
+              </div>
+              <div className="flex-1 flex flex-col gap-3">
+                <RoomField id="room" allowAllElements={allowAllSaves} />
+                <PlotField id="plot" />
+                <InDarkWorldField id="in-dark-world" />
+              </div>
             </div>
-            <div className="flex-1 flex flex-col gap-3">
-              <MoneyField id="money" />
-              <FlagField id="points" flag={FLAGS.CH3_POINTS} />
-              <TimeField />
+          </Card>
+        </Section>
+        <Section id="meta">
+          <Card className="flex flex-col gap-3 p-6 justify-between">
+            <Heading level={3}>Meta</Heading>
+            <div className="flex flex-col lg:flex-row gap-3">
+              <div className="flex-1 flex flex-col gap-3">
+                <SaveNameField id="save-field" />
+                <SaveSlotField id="save-slot" />
+                <SaveIsCompletionSaveField id="save-is-completion-save" />
+              </div>
+              <div className="flex-1 flex flex-col">
+                <SaveId />
+                <SaveTimestamp />
+              </div>
+              <div className="flex-1 flex flex-col gap-3"></div>
             </div>
-            <div className="flex-1 flex flex-col gap-3">
-              <RoomField id="room" allowAllElements={allowAllSaves} />
-              <PlotField id="plot" />
-              <InDarkWorldField id="in-dark-world" />
-            </div>
-          </div>
-        </Card>
-      </Section>
-      <Section id="meta">
-        <Card className="flex flex-col gap-3 p-6 justify-between">
-          <Heading level={3}>Meta</Heading>
-          <div className="flex flex-col lg:flex-row gap-3">
-            <div className="flex-1 flex flex-col gap-3">
-              <SaveNameField id="save-field" />
-              <SaveSlotField id="save-slot" />
-              <SaveIsCompletionSaveField id="save-is-completion-save" />
-            </div>
-            <div className="flex-1 flex flex-col">
-              <SaveId />
-              <SaveTimestamp />
-            </div>
-            <div className="flex-1 flex flex-col gap-3"></div>
-          </div>
-          <DeleteSave />
-        </Card>
-      </Section>
+            <DeleteSave />
+          </Card>
+        </Section>
+      </>
     </article>
   );
 }
