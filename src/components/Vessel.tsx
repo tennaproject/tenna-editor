@@ -15,7 +15,7 @@ import VesselBody5 from '@assets/deltarune/vessel/vessel-body-5.png';
 import VesselLegs0 from '@assets/deltarune/vessel/vessel-legs-0.png';
 import VesselLegs1 from '@assets/deltarune/vessel/vessel-legs-1.png';
 import { Section } from '@components';
-import { mergeClass } from '@utils';
+import { mergeClass } from '@utils/merge-class';
 
 const VESSEL_SOURCES = {
   head: [
@@ -57,26 +57,29 @@ export function Vessel({ id, className, head, body, legs }: VesselProps) {
   const legsSource = VESSEL_SOURCES.legs[legs];
 
   return (
-    <Section id={id} className={mergeClass('relative h-40 w-22', className)}>
+    <Section
+      id={id}
+      className={mergeClass('relative isolate h-40 w-22', className)}
+    >
       <img
         src={headSource}
         alt="Vessel head"
         draggable={false}
-        className="absolute z-10 bottom-18 left-0 max-w-22"
+        className="absolute z-[1] bottom-18 left-0 max-w-22"
         style={{ width: 'auto', height: 'auto' }}
       />
       <img
         src={bodySource}
         alt="Vessel body"
         draggable={false}
-        className="absolute z-20 bottom-7 left-0 max-w-22"
+        className="absolute z-[2] bottom-7 left-0 max-w-22"
         style={{ width: 'auto', height: 'auto' }}
       />
       <img
         src={legsSource}
         alt="Vessel legs"
         draggable={false}
-        className="absolute z-30 bottom-0 left-0 max-w-22"
+        className="absolute z-[3] bottom-0 left-0 max-w-22"
         style={{ width: 'auto', height: 'auto' }}
       />
     </Section>

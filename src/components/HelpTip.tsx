@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect, type ReactNode } from 'react';
-import { Heading } from './Heading';
 import LightbulbIcon from '@assets/icons/lightbulb-on.svg?react';
-import { Modal } from './Modal';
+import { ModalLayout } from './ModalLayout';
 
 interface HelpTipProps {
   title?: string;
@@ -55,12 +54,15 @@ export function HelpTip({ title, children }: HelpTipProps) {
         </div>
       )}
 
-      <Modal isOpen={isOpen} setOpen={setOpen} onClose={onClose}>
-        <div className="flex flex-col gap-3">
-          <Heading level={6}>{title}</Heading>
-          <div className="text-text-2">{children}</div>
-        </div>
-      </Modal>
+      <ModalLayout
+        isOpen={isOpen}
+        setOpen={setOpen}
+        onClose={onClose}
+        title={title ?? 'Help'}
+        size="content"
+      >
+        <div className="ui-prose-muted">{children}</div>
+      </ModalLayout>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { mergeClass } from '@utils';
+import { mergeClass } from '@utils/merge-class';
 import {
   useRef,
   useState,
@@ -65,7 +65,7 @@ export function FileInput({ onFileSelect, className }: FileInputProps) {
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       className={mergeClass(
-        'w-full mx-auto h-40 sm:h-44 flex flex-col items-center justify-center border-2 motion-reduce:transition-none transition-all duration-200 select-none cursor-pointer outline-none focus:ring-2 focus:ring-surface-3-active text-text-1 px-6 py-4',
+        'w-full mx-auto min-h-0 h-full flex flex-col items-center justify-center gap-4 border-2 motion-reduce:transition-none transition-all duration-200 select-none cursor-pointer outline-none focus:ring-2 focus:ring-surface-3-active text-text-1 px-10 py-8',
         isDragActive
           ? 'border-border bg-surface-3'
           : 'border-dashed border-border bg-surface-3 hover:bg-surface-3-hover',
@@ -85,10 +85,10 @@ export function FileInput({ onFileSelect, className }: FileInputProps) {
         onChange={handleInputChange}
         tabIndex={-1}
       />
-      <div className="font-bold mb-2 text-text-1 sm:text-lg lg:text-xl text-center">
+      <div className="font-bold text-text-1 text-2xl sm:text-3xl text-center">
         {isDragActive ? 'Drop your file here!' : 'Drag & drop a file here'}
       </div>
-      <div className="text-sm sm:text-base text-text-2 text-center">
+      <div className="text-lg sm:text-xl text-text-2 text-center">
         or click to select a file
       </div>
     </div>

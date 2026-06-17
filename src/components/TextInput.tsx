@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { mergeClass } from '@utils';
+import { mergeClass } from '@utils/merge-class';
 
 interface TextInputProps {
   value?: string;
@@ -65,7 +65,10 @@ export function TextInput({
   };
 
   const widthClass = fullWidth ? 'w-full' : 'w-50';
-  const heightClass = size === 'small' ? 'h-8 text-sm' : 'h-11';
+  const sizeClass =
+    size === 'small'
+      ? 'ui-field h-8 px-2 py-1 text-sm'
+      : 'ui-field';
   return (
     <div className={mergeClass('relative', widthClass, className)}>
       <input
@@ -79,10 +82,7 @@ export function TextInput({
         placeholder={placeholder}
         autoComplete={autoComplete}
         aria-label={ariaLabel}
-        className={`
-          w-full ${heightClass} px-3 py-2 leading-none ${disabled ? 'bg-surface-2 border border-border text-text-2 opacity-40 cursor-not-allowed select-none' : 'bg-surface-3 border border-border text-text-1'}
-          ${disabled ? '' : 'focus:outline-none focus:ring-1 motion-reduce:transition-none transition-colors focus:ring-text-3'}
-        `}
+        className={mergeClass(sizeClass, 'w-full appearance-none')}
         data-lpignore="true"
       />
       {suffix && (

@@ -1,10 +1,11 @@
-import { mergeClass } from '@utils';
+import { mergeClass } from '@utils/merge-class';
 
 const variantClass = {
-  primary: 'bg-red hover:bg-red-active text-text-1',
+  primary:
+    'bg-red hover:bg-red-active text-text-1 border border-[color-mix(in_oklch,var(--color-red)_70%,black)]',
   secondary: 'bg-surface-4 hover:bg-surface-4-active text-text-1',
   ghost:
-    'bg-transparent hover:bg-surface-3-active text-text-2 hover:text-text-1 border border-border ',
+    'bg-transparent hover:bg-surface-3-active text-text-2 hover:text-text-1 border border-border',
 };
 
 const sizeClass = {

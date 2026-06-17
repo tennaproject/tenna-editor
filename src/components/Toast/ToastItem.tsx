@@ -171,7 +171,7 @@ export function ToastItem({
       </div>
       <div
         ref={progressRef}
-        className={`h-1 rounded border-b-1 border-border ${COLORS[type].background}`}
+        className={`h-1 border-b-1 border-border ${COLORS[type].background}`}
         style={{ transformOrigin: 'left' }}
       />
     </div>

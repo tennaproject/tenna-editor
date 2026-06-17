@@ -2,15 +2,23 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useEffect, useRef, type ReactNode } from 'react';
 import CloseIcon from '@assets/icons/close.svg?react';
 import { createPortal } from 'react-dom';
+import { mergeClass } from '@utils/merge-class';
 
 interface ModalProps {
   children: ReactNode;
   isOpen: boolean;
   setOpen: (state: boolean) => void;
   onClose?: () => void;
+  panelClassName?: string;
 }
 
-export function Modal({ children, isOpen, setOpen, onClose }: ModalProps) {
+export function Modal({
+  children,
+  isOpen,
+  setOpen,
+  onClose,
+  panelClassName,
+}: ModalProps) {
   const dialogRef = useRef<HTMLDivElement | null>(null);
   const reducedMotion = useReducedMotion();
 
@@ -96,7 +104,12 @@ export function Modal({ children, isOpen, setOpen, onClose }: ModalProps) {
             aria-modal="true"
             aria-hidden={!isOpen}
           >
-            <div className="pointer-events-auto relative max-w-3xl w-full border border-border bg-surface-2 p-6 overflow-y-auto">
+            <div
+              className={mergeClass(
+                'pointer-events-auto relative border border-border bg-surface-2 shadow-lg shadow-surface-1/50',
+                panelClassName,
+              )}
+            >
               <button
                 type="button"
                 aria-label="Close"

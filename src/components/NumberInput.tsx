@@ -1,6 +1,7 @@
 import ArrowUpIcon from '@assets/icons/chevron-up.svg?react';
 import ArrowDownIcon from '@assets/icons/chevron-down.svg?react';
-import { mergeClass } from '@utils';
+import { mergeClass } from '@utils/merge-class';
+import { useMemo } from 'react';
 
 interface NumberInputProps {
   value: number;
@@ -41,6 +42,20 @@ export function NumberInput({
   const canDecrement = typeof min !== 'number' ? true : value > min;
   const canIncrement = typeof max !== 'number' ? true : value < max;
 
+  const isOutOfRange = useMemo(() => {
+    if (typeof min === 'number' && value < min) return true;
+    if (typeof max === 'number' && value > max) return true;
+    return false;
+  }, [value, min, max]);
+
+  const rangeHint = useMemo(() => {
+    if (!isOutOfRange) return null;
+    if (typeof min === 'number' && typeof max === 'number') return `${min}–${max}`;
+    if (typeof min === 'number') return `≥ ${min}`;
+    if (typeof max === 'number') return `≤ ${max}`;
+    return null;
+  }, [isOutOfRange, min, max]);
+
   const widthClass = fullWidth ? 'w-full' : 'w-50';
 
   return (
@@ -54,16 +69,28 @@ export function NumberInput({
         placeholder={placeholder}
         min={min}
         max={max}
-        className={`
-          w-full h-11 px-3 py-2 leading-none ${disabled ? 'bg-surface-2 border border-border text-text-2 opacity-40 cursor-not-allowed select-none' : 'bg-surface-3 border border-border text-text-1'}
-          ${disabled ? '' : 'focus:outline-none focus:ring-1 transition-colors focus:ring-text-3'}
-          appearance-none
-        `}
+        className={mergeClass(
+          'ui-field',
+          'appearance-none',
+          isOutOfRange && 'border-danger text-danger',
+        )}
         style={{ MozAppearance: 'textfield' }}
         aria-label={placeholder || 'Number input'}
+        aria-invalid={isOutOfRange || undefined}
+        aria-describedby={isOutOfRange ? `${placeholder || 'number'}-range-hint` : undefined}
         data-lpignore="true"
         autoComplete="off"
       />
+
+      {isOutOfRange && rangeHint && (
+        <div
+          id={`${placeholder || 'number'}-range-hint`}
+          className="absolute -bottom-5 left-0 text-xs text-danger"
+          role="alert"
+        >
+          Range: {rangeHint}
+        </div>
+      )}
 
       {suffix && (
         <div className="absolute inset-y-0 right-1 flex items-center pr-3 pointer-events-none group-focus-within:opacity-0 motion-reduce:transition-none transition-all duration-200">
@@ -86,11 +113,10 @@ export function NumberInput({
             changeBy(1);
           }}
           disabled={!canIncrement || disabled}
-          className={`
-            w-8 h-4 flex items-center justify-center border border-border
-            bg-surface-2 text-text-2 hover:bg-surface-2-hover hover:text-text-1 motion-reduce:transition-none transition-colors
-            ${!canIncrement || disabled ? 'opacity-40 cursor-not-allowed' : ''}
-          `}
+          className={mergeClass(
+            'w-8 h-4 flex items-center justify-center border border-border bg-surface-2 text-text-2 hover:bg-surface-2-hover hover:text-text-1 motion-reduce:transition-none transition-colors',
+            (!canIncrement || disabled) && 'opacity-40 cursor-not-allowed',
+          )}
           title="Increase"
         >
           <span className="w-3 h-3">
@@ -105,11 +131,10 @@ export function NumberInput({
             changeBy(-1);
           }}
           disabled={!canDecrement || disabled}
-          className={`
-            w-8 h-4 flex items-center justify-center border border-border
-            bg-surface-2 text-text-2 hover:bg-surface-2-hover hover:text-text-1 motion-reduce:transition-none transition-colors
-            ${!canDecrement || disabled ? 'opacity-40 cursor-not-allowed' : ''}
-          `}
+          className={mergeClass(
+            'w-8 h-4 flex items-center justify-center border border-border bg-surface-2 text-text-2 hover:bg-surface-2-hover hover:text-text-1 motion-reduce:transition-none transition-colors',
+            (!canDecrement || disabled) && 'opacity-40 cursor-not-allowed',
+          )}
           title="Decrease"
         >
           <span className="w-3 h-3">

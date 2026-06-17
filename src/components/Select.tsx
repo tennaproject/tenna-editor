@@ -2,7 +2,7 @@ import { useCombobox } from 'downshift';
 import ChevronDownIcon from '@assets/icons/chevron-down.svg?react';
 import WarningIcon from '@assets/icons/alert.svg?react';
 import { useState, useEffect, useRef } from 'react';
-import { mergeClass } from '@utils';
+import { mergeClass } from '@utils/merge-class';
 
 export interface SelectItem {
   id: string;
@@ -40,22 +40,28 @@ export function Select({
   const [inputValue, setInputValue] = useState(
     defaultSelectedItem ? defaultSelectedItem.label : '',
   );
-  const [hasTyped, setHasTyped] = useState(false);
   const [menuMounted, setMenuMounted] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
+  const preserveSelectionOnMouseUpRef = useRef(false);
+  const selectedLabel = selectedItem?.label ?? defaultSelectedItem?.label ?? '';
+  const isShowingSelectedValue = inputValue === selectedLabel;
+
+  function selectInputValue(input: HTMLInputElement) {
+    if (!input.value || !isShowingSelectedValue) return;
+    requestAnimationFrame(() => {
+      input.select();
+      preserveSelectionOnMouseUpRef.current = true;
+    });
+  }
 
   useEffect(() => {
     setInputItems(items);
   }, [items]);
 
   useEffect(() => {
-    // sync when default selection changes
-    if (defaultSelectedItem) {
-      setInputValue(defaultSelectedItem.label);
-      setHasTyped(false);
-      setInputItems(items);
-    }
-  }, [defaultSelectedItem, items]);
+    setInputValue(selectedLabel);
+    setInputItems(items);
+  }, [items, selectedLabel]);
 
   const {
     isOpen,
@@ -76,7 +82,6 @@ export function Select({
         setMenuMounted(false);
         onSelectionChange?.(selectedItem);
         setInputValue(selectedItem.label);
-        setHasTyped(false);
         setTimeout(() => {
           if (inputRef.current && document.activeElement === inputRef.current) {
             inputRef.current.blur();
@@ -87,11 +92,8 @@ export function Select({
       }
     },
     onInputValueChange: ({ inputValue }) => {
-      // keep the controlled inputValue in sync
       const val = inputValue ?? '';
       setInputValue(val);
-      // track whether the user has typed anything
-      setHasTyped(val !== '');
 
       if (!val) {
         setInputItems(items);
@@ -163,11 +165,10 @@ export function Select({
   });
 
   useEffect(() => {
-    if (isOpen) {
-      setHasTyped(false);
+    if (isOpen && isShowingSelectedValue) {
       setInputItems(items);
     }
-  }, [isOpen, items]);
+  }, [isOpen, isShowingSelectedValue, items]);
 
   // Control mounted vs visible to avoid an empty bar before items render
   useEffect(() => {
@@ -203,7 +204,7 @@ export function Select({
     setShouldOpenUp(spaceBelow < 250 && spaceAbove > spaceBelow);
   }
 
-  const displayItems = hasTyped ? inputItems : items;
+  const displayItems = isShowingSelectedValue ? items : inputItems;
 
   return (
     <div
@@ -215,18 +216,27 @@ export function Select({
           {label}
         </label>
       )}
-      <div className="relative w-full h-11 bg-surface-3 hover:bg-surface-3-hover motion-reduce:transition-none transition-all duration-200 border border-border">
+      <div className="relative w-full h-10 bg-surface-3 hover:bg-surface-3-hover motion-reduce:transition-none transition-all duration-200 border border-border">
         <input
           {...getInputProps({
             ref: inputRef,
-            onFocus: () => {
+            onFocus: (event) => {
               computePosition();
-              if (!hasTyped) setInputItems(items);
+              if (isShowingSelectedValue) setInputItems(items);
+              selectInputValue(event.currentTarget);
+            },
+            onMouseUp: (event) => {
+              if (!preserveSelectionOnMouseUpRef.current) return;
+              event.preventDefault();
+              preserveSelectionOnMouseUpRef.current = false;
+            },
+            onClick: (event) => {
+              selectInputValue(event.currentTarget);
             },
           })}
           type="search"
           className={mergeClass(
-            'w-full h-full px-3 pr-10 bg-transparent border-none outline-none placeholder:text-text-2 focus:outline-none focus:ring-1 transition-colors focus:ring-text-3',
+            'w-full h-full px-3 pr-10 bg-transparent border-none outline-none placeholder:text-text-2 focus:outline-none focus:ring-1 motion-reduce:transition-colors transition-colors focus:ring-text-3',
             selectedItem?.label === 'Empty' ? 'text-text-2' : 'text-text-1',
           )}
           placeholder={placeholder}
@@ -248,7 +258,7 @@ export function Select({
           {...getToggleButtonProps({
             onClick: () => {
               computePosition();
-              if (!hasTyped) setInputItems(items);
+              if (isShowingSelectedValue) setInputItems(items);
             },
           })}
           className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center text-text-2 "
@@ -262,17 +272,13 @@ export function Select({
         {...getMenuProps({}, { suppressRefError: true })}
         ref={listRef}
         className={mergeClass(
-          `absolute left-0 z-50 bg-surface-4 border border-border shadow-lg py-1 px-1 max-h-60 overflow-auto duration-200 motion-reduce:transition-none transition-all transform-gpu`,
+          'absolute left-0 z-50 w-full bg-surface-4 border border-border shadow-lg py-1 px-1 max-h-60 overflow-auto duration-200 motion-reduce:transition-none transition-opacity',
           shouldOpenUp
             ? 'bottom-full mb-1 origin-bottom'
             : 'top-full mt-1 origin-top',
           isOpen ? 'auto' : 'hidden',
           menuVisible ? 'opacity-100' : 'opacity-0',
         )}
-        style={{
-          minWidth: containerRef.current?.offsetWidth,
-          maxWidth: containerRef.current?.offsetWidth,
-        }}
         aria-hidden={!menuVisible}
       >
         {menuMounted ? (
@@ -297,7 +303,7 @@ export function Select({
                       e as unknown as React.MouseEvent<HTMLLIElement>,
                     )
                   }
-                  className={`cursor-pointer text-sm select-none leading-none text-text-1 transition-colors`}
+                  className="cursor-pointer text-sm select-none leading-none text-text-1 transition-colors"
                   aria-selected={chosen}
                 >
                   <div

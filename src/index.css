@@ -195,12 +195,10 @@
 
   ::-webkit-scrollbar-track {
     background: var(--color-tenna-800);
-    border-radius: 6px;
   }
 
   ::-webkit-scrollbar-thumb {
     background: var(--color-tenna-600);
-    border-radius: 6px;
     border: 2px solid var(--color-tenna-800);
     transition: background-color 0.2s ease;
   }
@@ -315,7 +313,7 @@
   }
 
   .ui-panel-muted {
-    @apply rounded border border-border bg-surface-3/50 px-3 py-3 text-sm text-text-2;
+    @apply border border-border bg-surface-3/50 px-3 py-3 text-sm text-text-2;
   }
 
   .ui-section-label {
@@ -323,7 +321,7 @@
   }
 
   .ui-icon-btn {
-    @apply p-2 bg-surface-3 hover:bg-surface-3-hover motion-reduce:transition-none transition-colors cursor-pointer outline-none focus:outline-none focus:ring-1 focus:ring-text-3;
+    @apply p-1.5 sm:p-2 bg-surface-3 hover:bg-surface-3-hover motion-reduce:transition-none transition-colors cursor-pointer outline-none focus:outline-none focus:ring-1 focus:ring-text-3;
   }
 
   .ui-danger {

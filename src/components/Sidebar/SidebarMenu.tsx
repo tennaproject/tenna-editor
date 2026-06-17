@@ -69,13 +69,11 @@ export function SidebarMenu() {
             requireDevmode
           />
         )}
-        {import.meta.env.VITE_SETTINGS_TAB === 'true' && (
-          <SidebarItem
-            title="Settings"
-            icon={<SettingsIcon />}
-            to="/settings"
-          />
-        )}
+        <SidebarItem
+          title="Settings"
+          icon={<SettingsIcon />}
+          to="/settings"
+        />
         <SidebarItem title="About" icon={<AboutIcon />} to="/about" />
       </SidebarGroup>
     </>
