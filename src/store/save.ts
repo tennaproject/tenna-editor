@@ -2,9 +2,11 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 import { STORE_NAMESPACE } from './schema';
-import { SAVE_SCHEMA, type Save } from '@types';
+import { SAVE_SCHEMA, type BaselineSource, type Save } from '@types';
+import { extractGamePayload } from '@utils';
 import { createDebouncedJSONStorage } from 'zustand-debounce';
 import { saveStorage, toast } from '@services';
+import { useHistory } from './history';
 
 const SYNC_DELAY = 300;
 let syncTimer: number | null = null;
@@ -16,7 +18,7 @@ function sync() {
   }, SYNC_DELAY);
 }
 
-export const SAVE_VERSION = 2;
+export const SAVE_VERSION = 3;
 
 interface SaveState {
   hasInitialized: boolean;
@@ -28,7 +30,11 @@ interface SaveState {
   patchSave: (partial: Partial<Save>) => void;
   updateSave: (updater: (draft: Save) => void) => void;
 
+  undo: () => void;
+  redo: () => void;
+
   saveNow: () => Promise<void>;
+  captureBaseline: (source: BaselineSource) => Promise<void>;
   switchSave: (id: string) => Promise<void>;
   initializeSave: () => Promise<void>;
 }
@@ -41,13 +47,17 @@ export const useSave = create<SaveState>()(
         save: null,
         activeSaveId: null,
 
-        setSave: (save: Save | null) =>
+        setSave: (save: Save | null) => {
+          useHistory.getState().clear();
           set((state) => {
             state.save = save;
             state.activeSaveId = save?.meta.id ?? null;
-          }),
+          });
+        },
 
-        setSaveField: (key, value) =>
+        setSaveField: (key, value) => {
+          const current = get().save;
+          if (current) useHistory.getState().push(current);
           set((state) => {
             if (!state.save) return;
             if (!(key in state.save)) return;
@@ -55,28 +65,79 @@ export const useSave = create<SaveState>()(
             (state.save as Save)[key] = value;
             state.save.meta.modifiedAt = new Date();
             sync();
-          }),
+          });
+        },
 
-        patchSave: (partial) =>
+        patchSave: (partial) => {
+          const current = get().save;
+          if (current) useHistory.getState().push(current);
           set((state) => {
             if (!state.save) return;
             Object.assign(state.save as Save, partial);
             sync();
-          }),
+          });
+        },
 
-        updateSave: (updater) =>
+        updateSave: (updater) => {
+          const current = get().save;
+          if (current) useHistory.getState().push(current);
           set((state) => {
             if (!state.save) return;
 
             updater(state.save as Save);
             state.save.meta.modifiedAt = new Date();
             sync();
-          }),
+          });
+        },
+
+        undo: () => {
+          const current = get().save;
+          if (!current) return;
+          const prev = useHistory.getState().undo(current);
+          if (prev) {
+            set((state) => {
+              state.save = prev;
+            });
+            sync();
+          }
+        },
+
+        redo: () => {
+          const current = get().save;
+          if (!current) return;
+          const next = useHistory.getState().redo(current);
+          if (next) {
+            set((state) => {
+              state.save = next;
+            });
+            sync();
+          }
+        },
 
         saveNow: async () => {
           const { activeSaveId, save } = get();
           if (!activeSaveId || !save) return;
           await saveStorage.set(activeSaveId, save);
+        },
+
+        captureBaseline: async (source: BaselineSource) => {
+          const { activeSaveId, save } = get();
+          if (!activeSaveId || !save) return;
+
+          const payload = extractGamePayload(save);
+
+          set((state) => {
+            if (!state.save) return;
+            state.save.meta.baseline = {
+              capturedAt: new Date(),
+              source,
+              payload,
+            };
+            state.save.meta.modifiedAt = new Date();
+            state.save.meta.schema = SAVE_SCHEMA;
+          });
+
+          await get().saveNow();
         },
 
         switchSave: async (id: string) => {
@@ -87,6 +148,7 @@ export const useSave = create<SaveState>()(
 
           const newSave = await saveStorage.get(id);
           if (newSave) {
+            useHistory.getState().clear();
             set((state) => {
               state.save = newSave ?? null;
               state.activeSaveId = id;
@@ -127,6 +189,8 @@ export const useSave = create<SaveState>()(
       },
       version: SAVE_VERSION,
       migrate: async (state, version) => {
+        let nextState = state;
+
         if (version < 2) {
           interface SaveSchemaV1 {
             save: {
@@ -179,9 +243,18 @@ export const useSave = create<SaveState>()(
           });
           await saveStorage.migrate(saves);
 
-          return { activeSaveId: id };
+          nextState = { activeSaveId: id };
         }
-        return state;
+
+        if (version < 3) {
+          const saves = await saveStorage.getAll();
+          saves.forEach((save) => {
+            save.meta.schema = SAVE_SCHEMA;
+          });
+          await saveStorage.migrate(saves);
+        }
+
+        return nextState;
       },
     },
   ),

@@ -1,5 +1,7 @@
 import { useSave, useUi } from '@store';
-import { detectChapter, parseSave } from '@utils';
+import { detectChapter } from '@utils/detection';
+import { extractGamePayload } from '@utils/save-baseline';
+import { parseSave } from '@utils/save-parser';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import type { Save, SaveSlot } from '@types';
@@ -11,9 +13,9 @@ import {
   Button,
   type SelectItem,
   Select,
-  Heading,
   FileInput,
-  Modal,
+  ModalLayout,
+  ModalFooter,
 } from '@components';
 import type { ChapterIndex } from '@data';
 
@@ -21,6 +23,7 @@ const CHAPTER_OPTIONS: SelectItem[] = [
   { id: '2', label: `Chapter 2 (A Cyber's World)`, value: 2 },
   { id: '3', label: 'Chapter 3 (Late Night)', value: 3 },
   { id: '4', label: 'Chapter 4 (Prophecy)', value: 4 },
+  { id: '5', label: 'Chapter 5 (Experimental)', value: 5 },
 ];
 
 const SLOT_OPTIONS: SelectItem[] = [
@@ -28,6 +31,14 @@ const SLOT_OPTIONS: SelectItem[] = [
   { id: '2', label: 'Slot 2', value: 1 },
   { id: '3', label: 'Slot 3', value: 2 },
 ];
+
+const STAGE_TITLES: Record<'idle' | 'chapter' | 'settings' | 'error', string> =
+  {
+    idle: 'Upload Save',
+    chapter: 'Confirm Chapter',
+    settings: 'Save Settings',
+    error: 'Upload Failed',
+  };
 
 interface UploadProps {
   isOpen: boolean;
@@ -54,7 +65,6 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
   const [isCompletionSave, setIsCompletionSave] = useState(false);
   const [saveName, setSaveName] = useState<string>('');
 
-  // I know these +3/-1 are ugly but hey it works
   function onChapterSelection(item: SelectItem | null) {
     if (item) {
       setSelectedChapter(item.value as ChapterIndex);
@@ -90,26 +100,25 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
         return;
       }
 
-      const detection = detectChapter(save);
+      const detection = detectChapter(save, file.name);
       if (!detection.supported) {
         setUploadError(
-          `Unsupported chapter detected. Please upload a save file from Chapter 1-4.`,
+          `Unsupported chapter or save format detected. Please upload a DELTARUNE Chapter 1-5 PC, Mac, or Linux save file.`,
         );
         changeStage('error');
         return;
       }
 
       const filename = file.name;
-      const slotMatch = filename.match(/filech\d+_(\d+)/);
+      const slotMatch = filename.match(/filech(\d+)_(\d+)/);
       let slot: SaveSlot = 1;
       let isCompletionSave = false;
       if (slotMatch) {
-        const detectedSlot = parseInt(slotMatch[1]);
+        const detectedSlot = parseInt(slotMatch[2]);
         if (detectedSlot === 0 || detectedSlot === 1 || detectedSlot === 2) {
           slot = detectedSlot;
         }
 
-        // Map correct slots for completion saves
         if (detectedSlot === 3 || detectedSlot === 4 || detectedSlot === 5) {
           slot = (detectedSlot - 3) as SaveSlot;
           isCompletionSave = true;
@@ -128,11 +137,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
         setSaveName(`Save${uploadedSaves}`);
       }
 
-      if (detection.chapter === 1) {
-        changeStage('settings');
-      } else {
-        changeStage('chapter');
-      }
+      changeStage('chapter');
     };
     reader.readAsText(file);
   }
@@ -154,6 +159,11 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
         parsedSave.meta.slot = selectedSlot;
         parsedSave.meta.isCompletionSave = isCompletionSave;
         parsedSave.meta.name = saveName;
+        parsedSave.meta.baseline = {
+          capturedAt: new Date(),
+          source: 'upload',
+          payload: extractGamePayload(parsedSave),
+        };
 
         await saveStorage.set(parsedSave.meta.id, parsedSave);
         switchSave(parsedSave.meta.id);
@@ -163,6 +173,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
         setIsCompletionSave(false);
 
         setOpen(false);
+        break;
     }
 
     setUploadStage(stage);
@@ -170,15 +181,105 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
   }
 
   useEffect(() => {
-    changeStage('idle');
+    void changeStage('idle').catch((error: unknown) => {
+      console.error('Upload modal reset failed:', error);
+    });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   const transition = { duration: reducedMotion ? 0 : 0.2 };
+  const selectedChapterOption =
+    CHAPTER_OPTIONS.find((option) => option.value === selectedChapter) ?? null;
+
+  function renderFooter() {
+    switch (uploadStage) {
+      case 'idle':
+        return (
+          <ModalFooter>
+            <Button
+              onClick={() => setOpen(false)}
+              variant="secondary"
+              size="lg"
+            >
+              Cancel
+            </Button>
+          </ModalFooter>
+        );
+      case 'chapter':
+        return (
+          <ModalFooter>
+            <Button onClick={() => changeStage('idle')} variant="secondary">
+              Back
+            </Button>
+            <Button
+              onClick={() => changeStage('settings')}
+              variant="primary"
+              size="lg"
+              className="w-full sm:w-auto sm:min-w-40"
+            >
+              Next
+            </Button>
+          </ModalFooter>
+        );
+      case 'settings':
+        return (
+          <ModalFooter>
+            <Button
+              onClick={() => changeStage(previousUploadStage)}
+              variant="secondary"
+            >
+              Back
+            </Button>
+            <Button
+              onClick={() => void changeStage('success')}
+              variant="primary"
+              size="lg"
+              className="w-full sm:w-auto sm:min-w-40"
+            >
+              Confirm upload
+            </Button>
+          </ModalFooter>
+        );
+      case 'error':
+        return (
+          <ModalFooter>
+            <Button
+              onClick={() => {
+                changeStage('idle');
+                setUploadError(null);
+              }}
+              variant="primary"
+              size="lg"
+              className="w-full sm:w-auto sm:min-w-40"
+            >
+              Try again
+            </Button>
+          </ModalFooter>
+        );
+      default:
+        return null;
+    }
+  }
+
   return (
-    <Modal isOpen={isOpen} setOpen={setOpen}>
-      <div className="h-96 flex-1 flex flex-col justify-between select-none relative lg:p-4 p-2">
+    <ModalLayout
+      isOpen={isOpen}
+      setOpen={setOpen}
+      title={
+        uploadStage === 'success'
+          ? STAGE_TITLES.settings
+          : STAGE_TITLES[uploadStage]
+      }
+      footer={renderFooter()}
+      size="tall"
+      bodyClassName={
+        uploadStage === 'error'
+          ? 'flex flex-col min-h-0 flex-1 overflow-y-auto'
+          : 'flex flex-col min-h-0 flex-1 overflow-hidden'
+      }
+    >
+      <div className="flex flex-col flex-1 min-h-0">
         <AnimatePresence mode="wait">
           {uploadStage === 'idle' && (
             <motion.div
@@ -187,12 +288,12 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={transition}
-              className="flex flex-col flex-1 gap-4"
+              className="flex flex-1 min-h-0 items-stretch"
             >
-              <Heading level={3}>Upload Save</Heading>
-              <div className="flex-1 flex justify-center items-center">
-                <FileInput onFileSelect={onFileSelect} />
-              </div>
+              <FileInput
+                onFileSelect={onFileSelect}
+                className="flex-1 min-h-0"
+              />
             </motion.div>
           )}
 
@@ -203,24 +304,29 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={transition}
-              className="flex flex-col flex-1 gap-4 justify-evenly"
+              className="flex flex-col gap-4 max-w-md"
             >
-              <Heading level={3}>Confirm Chapter</Heading>
-              <div className="flex-1 flex flex-col gap-2">
-                <p className="text-text-2">Is this the correct chapter?</p>
+              <p className="ui-prose-muted">Is this the correct chapter?</p>
+              <div>
+                <TextLabel>Chapter</TextLabel>
                 <Select
                   items={CHAPTER_OPTIONS}
                   placeholder="Select chapter"
                   className="w-full"
-                  selectedItem={CHAPTER_OPTIONS[selectedChapter - 2]}
-                  defaultSelectedItem={CHAPTER_OPTIONS[selectedChapter - 2]}
+                  selectedItem={selectedChapterOption}
+                  defaultSelectedItem={selectedChapterOption}
                   onSelectionChange={onChapterSelection}
                 />
-
-                <p className="text-text-2">
-                  NOTE: This cannot be changed once save is fully uploaded.
-                </p>
               </div>
+              <p className="ui-prose-muted">
+                This cannot be changed after the save is uploaded.
+              </p>
+              {selectedChapter === 5 && (
+                <p className="ui-panel-muted border-yellow/40 bg-yellow-soft text-text-1">
+                  Chapter 5 support is experimental and currently uses known
+                  Chapter 1-4 editor data only.
+                </p>
+              )}
             </motion.div>
           )}
 
@@ -231,36 +337,28 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={transition}
-              className="flex flex-col flex-1 gap-4"
+              className="flex flex-col gap-3 max-w-md"
             >
-              <Heading level={3}>Save Settings</Heading>
-              <div className="flex-1 flex lg:flex-row flex-col lg:gap-10 gap-4">
-                {' '}
-                <div>
-                  <TextLabel>Save name</TextLabel>
-                  <TextInput value={saveName} onChange={setSaveName} />
-                </div>
-                <div className="flex flex-col gap-3">
-                  <div>
-                    <TextLabel>In-game slot</TextLabel>
-                    <Select
-                      items={SLOT_OPTIONS}
-                      placeholder="Select slot"
-                      className="w-full"
-                      selectedItem={SLOT_OPTIONS[selectedSlot]}
-                      defaultSelectedItem={SLOT_OPTIONS[selectedSlot]}
-                      onSelectionChange={onSlotSelection}
-                    />
-                  </div>
-                  <div>
-                    <Checkbox
-                      label="Completion save"
-                      checked={isCompletionSave}
-                      onChange={setIsCompletionSave}
-                    />
-                  </div>
-                </div>
+              <div>
+                <TextLabel>Save name</TextLabel>
+                <TextInput value={saveName} onChange={setSaveName} />
               </div>
+              <div>
+                <TextLabel>In-game slot</TextLabel>
+                <Select
+                  items={SLOT_OPTIONS}
+                  placeholder="Select slot"
+                  className="w-full"
+                  selectedItem={SLOT_OPTIONS[selectedSlot]}
+                  defaultSelectedItem={SLOT_OPTIONS[selectedSlot]}
+                  onSelectionChange={onSlotSelection}
+                />
+              </div>
+              <Checkbox
+                label="Completion save"
+                checked={isCompletionSave}
+                onChange={setIsCompletionSave}
+              />
             </motion.div>
           )}
 
@@ -271,60 +369,13 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={transition}
-              className="flex flex-col h-full  gap-4"
+              className="flex flex-col gap-3"
             >
-              <Heading level={3}>Upload Failed</Heading>
-              <div className="flex-1">
-                <p className="text-red">{uploadError}</p>
-              </div>
+              <p className="ui-danger">{uploadError}</p>
             </motion.div>
           )}
         </AnimatePresence>
-
-        <div className="flex gap-2 justify-end">
-          {uploadStage === 'idle' && (
-            <>
-              <Button onClick={() => setOpen(false)} variant="secondary">
-                Cancel
-              </Button>
-            </>
-          )}
-          {uploadStage === 'chapter' && (
-            <>
-              <Button onClick={() => changeStage('settings')} variant="primary">
-                Next
-              </Button>
-              <Button onClick={() => changeStage('idle')} variant="secondary">
-                Back
-              </Button>
-            </>
-          )}
-          {uploadStage === 'settings' && (
-            <>
-              <Button onClick={() => changeStage('success')} variant="primary">
-                Confirm
-              </Button>
-              <Button
-                onClick={() => changeStage(previousUploadStage)}
-                variant="secondary"
-              >
-                Back
-              </Button>
-            </>
-          )}
-          {uploadStage === 'error' && (
-            <Button
-              onClick={() => {
-                changeStage('idle');
-                setUploadError(null);
-              }}
-              variant="primary"
-            >
-              Try Again
-            </Button>
-          )}
-        </div>
       </div>
-    </Modal>
+    </ModalLayout>
   );
 }

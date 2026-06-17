@@ -1,6 +1,9 @@
 export * from './detection';
 export * from './data-helpers';
 export * from './chapter-options';
+export * from './plot-point-helpers';
+export * from './flag-options';
+export * from './last-subtab';
 export * from './line-cursor';
 export * from './save-parser';
 export * from './save-serializer';
@@ -10,3 +13,6 @@ export * from './time';
 export * from './get-game-color';
 export * from './appdata';
 export * from './strip-identation';
+export * from './save-baseline';
+export * from './save-diff';
+export * from './format-date';

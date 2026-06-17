@@ -7,12 +7,14 @@ import {
   Button,
   type SelectItem,
   Select,
-  Heading,
-  Modal,
   InlineGroup,
+  DownloadChanges,
+  ModalLayout,
+  ModalFooter,
 } from '@components';
 import { toast } from '@services';
-import { serializeSave } from '@utils';
+import { getBaselineRevision } from '@utils/save-diff';
+import { serializeSave } from '@utils/save-serializer';
 import type { SaveSlot } from '@types';
 
 const SLOT_OPTIONS: SelectItem[] = [
@@ -30,6 +32,10 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
   const reducedMotion = useReducedMotion();
 
   const save = useSave((s) => s.save);
+  const captureBaseline = useSave((s) => s.captureBaseline);
+  const baselineRevision = useSave((s) =>
+    getBaselineRevision(s.save?.meta.baseline),
+  );
   const [selectedSlot, setSelectedSlot] = useState<SaveSlot>(1);
   const [isCompletionSave, setIsCompletionSave] = useState(false);
   const [fileName, setFileName] = useState('');
@@ -40,7 +46,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
     }
   }
 
-  function downloadSave() {
+  async function downloadSave() {
     if (!save) return;
 
     const serializedSave = serializeSave(save);
@@ -56,6 +62,8 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+
+    await captureBaseline('download');
   }
 
   useEffect(() => {
@@ -79,51 +87,73 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
   }, [selectedSlot, isCompletionSave, save]);
 
   return (
-    <Modal isOpen={isOpen} setOpen={setOpen}>
-      <div className="h-96 flex flex-col select-none relative lg:p-4 p-2">
-        <AnimatePresence mode="wait">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: reducedMotion ? 0 : 0.2 }}
-            className="flex flex-col flex-1 gap-4"
+    <ModalLayout
+      isOpen={isOpen}
+      setOpen={setOpen}
+      title="Download Save"
+      bodyClassName="overflow-hidden gap-5 flex-1"
+      footer={
+        <ModalFooter
+          className="flex-col gap-3 sm:flex-row sm:justify-between"
+          aria-live="polite"
+        >
+          <InlineGroup className="min-w-0 gap-2 sm:flex-1 sm:mr-4 order-last sm:order-first">
+            <span className="text-sm text-text-2 whitespace-nowrap shrink-0">
+              Saves as
+            </span>
+            <span className="ui-field-mono truncate" title={fileName}>
+              {fileName}
+            </span>
+          </InlineGroup>
+          <Button
+            onClick={() => void downloadSave()}
+            variant="primary"
+            size="lg"
+            className="w-full shrink-0 sm:w-auto sm:min-w-52"
           >
-            <Heading level={3}>Download Save</Heading>
-            <div className="flex flex-col gap-3">
-              <div>
-                <TextLabel>In-game slot</TextLabel>
-                <Select
-                  items={SLOT_OPTIONS}
-                  placeholder="Select slot"
-                  className="w-full"
-                  selectedItem={SLOT_OPTIONS[selectedSlot]}
-                  defaultSelectedItem={SLOT_OPTIONS[selectedSlot]}
-                  onSelectionChange={onSlotSelection}
-                />
-              </div>
-              <div>
-                <Checkbox
-                  label="Completion save"
-                  checked={isCompletionSave}
-                  onChange={setIsCompletionSave}
-                />
-              </div>
-              <InlineGroup>
-                <p className="text-text-2">Save will be saved as: </p>
-                <div className="px-2 bg-surface-3 flex justify-center items-center font-mono">
-                  {fileName}
-                </div>
-              </InlineGroup>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-        <div className="mt-4 flex gap-2 justify-end">
-          <Button onClick={() => downloadSave()} variant="primary">
-            Download
+            Download save file
           </Button>
-        </div>
-      </div>
-    </Modal>
+        </ModalFooter>
+      }
+    >
+      <AnimatePresence mode="wait">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: reducedMotion ? 0 : 0.2 }}
+          className="flex flex-col min-h-0 flex-1 gap-5"
+        >
+          <div className="shrink-0 flex flex-col gap-3">
+            <div className="w-36 max-w-full">
+              <TextLabel>In-game slot</TextLabel>
+              <Select
+                items={SLOT_OPTIONS}
+                placeholder="Select slot"
+                className="w-full"
+                selectedItem={SLOT_OPTIONS[selectedSlot]}
+                defaultSelectedItem={SLOT_OPTIONS[selectedSlot]}
+                onSelectionChange={onSlotSelection}
+              />
+            </div>
+            <Checkbox
+              label="Completion save"
+              checked={isCompletionSave}
+              onChange={setIsCompletionSave}
+            />
+          </div>
+
+          {save && (
+            <div className="flex flex-col gap-2 min-h-0 flex-1 overflow-hidden">
+              <TextLabel>Changes since last upload or download</TextLabel>
+              <DownloadChanges
+                key={baselineRevision}
+                className="min-h-0 flex-1"
+              />
+            </div>
+          )}
+        </motion.div>
+      </AnimatePresence>
+    </ModalLayout>
   );
 }

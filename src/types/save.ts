@@ -12,9 +12,10 @@ import type {
 } from '@data';
 import type { UUID } from 'crypto';
 
-export const SAVE_SCHEMA = 2;
+export const SAVE_SCHEMA = 3;
 export type SaveFormat = 1 | 2;
 export type SaveSlot = 0 | 1 | 2;
+export type BaselineSource = 'upload' | 'download';
 
 export interface WeaponStats {
   attack: number;
@@ -102,6 +103,7 @@ export interface SaveData<
     slot: SaveSlot;
     isCompletionSave: boolean;
     name: string;
+    baseline?: SaveBaseline;
   };
   playerName: string;
   vesselName: string;
@@ -126,6 +128,14 @@ export interface SaveData<
 }
 
 export type SaveV1 = SaveData<1, 1, CharacterV1, InventoryV1>;
-export type SaveV2 = SaveData<2, 2 | 3 | 4, CharacterV2, InventoryV2>;
+export type SaveV2 = SaveData<2, 2 | 3 | 4 | 5, CharacterV2, InventoryV2>;
 
 export type Save = SaveV1 | SaveV2;
+
+export type SaveGamePayload = Omit<Save, 'meta'>;
+
+export interface SaveBaseline {
+  capturedAt: Date;
+  source: BaselineSource;
+  payload: SaveGamePayload;
+}

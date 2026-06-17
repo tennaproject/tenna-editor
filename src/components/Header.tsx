@@ -1,14 +1,25 @@
-import { useUi } from '@store';
+import { useUi, useSave, useHistory } from '@store';
 import SidebarVisibilityIcon from '@assets/icons/menu.svg?react';
 import SidebarRetractionIcon from '@assets/icons/layout-sidebar-left.svg?react';
 import DownloadIcon from '@assets/icons/download.svg?react';
 import UploadIcon from '@assets/icons/upload.svg?react';
-import { useState } from 'react';
-import { Upload } from './Upload';
-import { Download } from './Download';
+import UndoIcon from '@assets/icons/undo.svg?react';
+import RedoIcon from '@assets/icons/redo.svg?react';
+import { lazy, Suspense, useMemo, useState } from 'react';
+import { Chapter5Notice } from './Chapter5Notice';
+import { IconButton } from './IconButton';
 import { InlineGroup } from './InlineGroup';
 import { SaveSelector } from './SaveSelector';
 import Tenna from '@assets/tenna.svg?react';
+import { useKeyboardShortcuts } from '@hooks';
+
+
+const Upload = lazy(() =>
+  import('./Upload').then((module) => ({ default: module.Upload })),
+);
+const Download = lazy(() =>
+  import('./Download').then((module) => ({ default: module.Download })),
+);
 
 export function Header() {
   const [isUploadOpen, setUploadOpen] = useState(false);
@@ -17,6 +28,34 @@ export function Header() {
   const isSidebarOpen = useUi((s) => s.ui.sidebar.open);
   const isSidebarRetracted = useUi((s) => s.ui.sidebar.retracted);
   const updateUi = useUi((s) => s.updateUi);
+
+  const hasSave = useSave((s) => s.save !== null);
+  const undo = useSave((s) => s.undo);
+  const redo = useSave((s) => s.redo);
+  const canUndo = useHistory((s) => s.canUndo);
+  const canRedo = useHistory((s) => s.canRedo);
+
+  const shortcutHandlers = useMemo(
+    () => ({
+      onUpload: () => setUploadOpen(true),
+      onDownload: () => {
+        if (useSave.getState().save !== null) setDownloadOpen(true);
+      },
+      onUndo: () => {
+        if (useSave.getState().save !== null && useHistory.getState().canUndo) {
+          useSave.getState().undo();
+        }
+      },
+      onRedo: () => {
+        if (useSave.getState().save !== null && useHistory.getState().canRedo) {
+          useSave.getState().redo();
+        }
+      },
+    }),
+    [],
+  );
+
+  useKeyboardShortcuts(shortcutHandlers);
 
   return (
     <header className="w-full h-15 flex-shrink-0 bg-surface-1 relative select-none">
@@ -53,7 +92,7 @@ export function Header() {
           </button>
 
           {/* <div className="w-8 h-8 bg-red flex-shrink-0" /> */}
-          <InlineGroup>
+          <InlineGroup className="hidden sm:flex">
             <div className="flex leading-none justify-center items-center">
               <div className="w-12 h-12 text-text-2">
                 <Tenna />
@@ -70,28 +109,49 @@ export function Header() {
           </InlineGroup>
         </div>
 
-        <InlineGroup className="w-full flex justify-end">
+        <InlineGroup className="w-full flex justify-end min-w-0">
+          <Chapter5Notice />
           <SaveSelector />
-          <button
-            className="text-green bg-surface-3 hover:bg-surface-3-hover motion-reduce:transition-none transition-colors p-2 cursor-pointer"
-            onClick={() => {
-              setDownloadOpen(true);
-            }}
-          >
-            <div className="w-6 h-6">
-              <DownloadIcon />
-            </div>
-          </button>
-          <Download isOpen={isDownloadOpen} setOpen={setDownloadOpen} />
-          <button
-            className="text-blue bg-surface-3 hover:bg-surface-3-hover motion-reduce:transition-none transition-colors p-2 cursor-pointer"
+          {hasSave && (
+            <>
+              <IconButton
+                accent="neutral"
+                label="Undo"
+                icon={<UndoIcon />}
+                disabled={!canUndo}
+                onClick={undo}
+              />
+              <IconButton
+                accent="neutral"
+                label="Redo"
+                icon={<RedoIcon />}
+                disabled={!canRedo}
+                onClick={redo}
+              />
+            </>
+          )}
+          <IconButton
+            accent="green"
+            label="Download save"
+            icon={<DownloadIcon />}
+            onClick={() => setDownloadOpen(true)}
+          />
+          {isDownloadOpen && (
+            <Suspense fallback={null}>
+              <Download isOpen={isDownloadOpen} setOpen={setDownloadOpen} />
+            </Suspense>
+          )}
+          <IconButton
+            accent="blue"
+            label="Upload save"
+            icon={<UploadIcon />}
             onClick={() => setUploadOpen(true)}
-          >
-            <div className="w-6 h-6">
-              <UploadIcon />
-            </div>
-          </button>
-          <Upload isOpen={isUploadOpen} setOpen={setUploadOpen} />
+          />
+          {isUploadOpen && (
+            <Suspense fallback={null}>
+              <Upload isOpen={isUploadOpen} setOpen={setUploadOpen} />
+            </Suspense>
+          )}
         </InlineGroup>
       </div>
     </header>
