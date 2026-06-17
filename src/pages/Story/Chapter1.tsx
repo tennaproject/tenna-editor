@@ -1,20 +1,24 @@
 import {
-  Card,
-  VesselNameField,
-  FlagField,
-  Heading,
   Section,
-  ThrashMachine,
+  Card,
+  Heading,
   Vessel,
-  type ThrashMachineBodyIndex,
-  type ThrashMachineHeadIndex,
-  type ThrashMachineShoeIndex,
-  type VesselBodyIndex,
+  ThrashMachine,
+  VesselNameField,
   type VesselHeadIndex,
+  type VesselBodyIndex,
   type VesselLegsIndex,
+  type ThrashMachineHeadIndex,
+  type ThrashMachineBodyIndex,
+  type ThrashMachineShoeIndex,
 } from '@components';
 import { FLAGS } from '@data';
 import { useSaveFlag } from '@hooks';
+import {
+  StoryChapterLayout,
+  StoryChapterSections,
+  StoryFlagField,
+} from './components';
 
 function VesselSection() {
   const vesselHead = useSaveFlag(FLAGS.VESSEL_HEAD) as VesselHeadIndex;
@@ -37,18 +41,18 @@ function VesselSection() {
               />
             </div>
 
-            <FlagField id="vessel-head" flag={FLAGS.VESSEL_HEAD} />
-            <FlagField id="vessel-body" flag={FLAGS.VESSEL_BODY} />
-            <FlagField id="vessel-legs" flag={FLAGS.VESSEL_LEGS} />
+            <StoryFlagField id="vessel-head" flag={FLAGS.VESSEL_HEAD} />
+            <StoryFlagField id="vessel-body" flag={FLAGS.VESSEL_BODY} />
+            <StoryFlagField id="vessel-legs" flag={FLAGS.VESSEL_LEGS} />
           </div>
           <div className="flex-1 flex flex-col gap-3">
-            <FlagField id="vessel-food" flag={FLAGS.VESSEL_FOOD} />
-            <FlagField id="vessel-blood-type" flag={FLAGS.VESSEL_BLOOD_TYPE} />
-            <FlagField id="vessel-color" flag={FLAGS.VESSEL_COLOR} />
-            <FlagField id="vessel-gift" flag={FLAGS.VESSEL_GIFT} />
-            <FlagField id="vessel-feeling" flag={FLAGS.VESSEL_FEELING} />
-            <FlagField id="vessel-honesty" flag={FLAGS.VESSEL_HONESTY} />
-            <FlagField
+            <StoryFlagField id="vessel-food" flag={FLAGS.VESSEL_FOOD} />
+            <StoryFlagField id="vessel-blood-type" flag={FLAGS.VESSEL_BLOOD_TYPE} />
+            <StoryFlagField id="vessel-color" flag={FLAGS.VESSEL_COLOR} />
+            <StoryFlagField id="vessel-gift" flag={FLAGS.VESSEL_GIFT} />
+            <StoryFlagField id="vessel-feeling" flag={FLAGS.VESSEL_FEELING} />
+            <StoryFlagField id="vessel-honesty" flag={FLAGS.VESSEL_HONESTY} />
+            <StoryFlagField
               id="vessel-pain-seizure"
               flag={FLAGS.VESSEL_PAIN_SEIZURE}
             />
@@ -83,29 +87,29 @@ function ThrashMachineSection() {
               bodyColor={bodyColor}
               shoeColor={shoeColor}
             />
-            <FlagField
+            <StoryFlagField
               id="thrash-machine-head"
               flag={FLAGS.THRASH_MACHINE_HEAD}
             />
-            <FlagField
+            <StoryFlagField
               id="thrash-machine-body"
               flag={FLAGS.THRASH_MACHINE_BODY}
             />
-            <FlagField
+            <StoryFlagField
               id="thrash-machine-shoe"
               flag={FLAGS.THRASH_MACHINE_SHOE}
             />
           </div>
           <div className="flex-1 flex flex-col gap-3">
-            <FlagField
+            <StoryFlagField
               id="thrash-machine-head-color"
               flag={FLAGS.THRASH_MACHINE_HEAD_COLOR}
             />
-            <FlagField
+            <StoryFlagField
               id="thrash-machine-body-color"
               flag={FLAGS.THRASH_MACHINE_BODY_COLOR}
             />
-            <FlagField
+            <StoryFlagField
               id="thrash-machine-shoe-color"
               flag={FLAGS.THRASH_MACHINE_SHOE_COLOR}
             />
@@ -116,112 +120,14 @@ function ThrashMachineSection() {
   );
 }
 
-function OnionSection() {
-  return (
-    <Section id="onion" className="flex-1 flex">
-      <Card className="flex-1 flex flex-col gap-3 p-6">
-        <Heading level={3}>Onion</Heading>
-        <div className="flex flex-col md:flex-row gap-3">
-          <div className="flex-1 flex flex-col gap-3">
-            <FlagField id="onion-progress" flag={FLAGS.ONION_CH1} />
-            <FlagField id="onion-your-name" flag={FLAGS.ONION_YOUR_NAME} />
-            <FlagField id="onion-name" flag={FLAGS.ONION_NAME} />
-          </div>
-          <div className="flex-1 flex flex-col gap-3"></div>
-        </div>
-      </Card>
-    </Section>
-  );
-}
-
-function DarkWorldSection() {
-  return (
-    <Section id="dark-world" className="flex-1 flex">
-      <Card className="flex-1 flex flex-col gap-3 p-6">
-        <Heading level={3}>Dark World</Heading>
-        <div className="flex flex-col md:flex-row gap-3">
-          <div className="flex-1 flex flex-col gap-3">
-            <FlagField id="running-tutorial" flag={FLAGS.RUNNING_TUTORIAL} />
-            <FlagField id="got-moss" flag={FLAGS.GOT_MOSS_CH1} />
-            <FlagField id="starwalker" flag={FLAGS.STARWALKER} />
-            <FlagField id="inspected-beds" flag={FLAGS.INSPECTED_BEDS_CH1} />
-            <FlagField id="got-spincake" flag={FLAGS.GOT_SPINCAKE} />
-            <FlagField id="peaceful-king" flag={FLAGS.PEACEFUL_KING} />
-            <FlagField id="violent-ending" flag={FLAGS.VIOLENT_ENDING_CH1} />
-          </div>
-          <div className="flex-1 flex flex-col gap-3">
-            <FlagField id="jevil-progress" flag={FLAGS.JEVIL_PROGRESS} />
-            <FlagField id="egg-room" flag={FLAGS.EGG_ROOM_CH1} />
-            <FlagField id="manual-status" flag={FLAGS.MANUAL_STATUS} />
-          </div>
-        </div>
-      </Card>
-    </Section>
-  );
-}
-
-function LightWorldSection() {
-  return (
-    <Section id="light-world" className="flex-1 flex">
-      <Card className="flex-1 flex flex-col gap-3 p-6">
-        <Heading level={3}>Light World</Heading>
-        <div className="flex flex-col md:flex-row gap-3">
-          <div className="flex-1 flex flex-col gap-3">
-            <FlagField
-              id="picnic-table-fingers"
-              flag={FLAGS.PICNIC_TABLE_FINGERS}
-            />
-            <FlagField id="talked-berdly" flag={FLAGS.TALKED_BERDLY_CH1} />
-            <FlagField id="talked-catty" flag={FLAGS.TALKED_CATTY} />
-            <FlagField id="talked-alphys" flag={FLAGS.TALKED_ALPHYS} />
-            <FlagField id="talked-undyne" flag={FLAGS.TALKED_UNDYNE} />
-            <FlagField id="used-rudy-sink" flag={FLAGS.USED_RUDY_SINK} />
-          </div>
-          <div className="flex-1 flex flex-col gap-3">
-            <FlagField id="talked-rudy" flag={FLAGS.TALKED_RUDY} />
-            <FlagField id="talked-qc" flag={FLAGS.TALKED_QC} />
-            <FlagField
-              id="talked-burgerpants"
-              flag={FLAGS.TALKED_BURGERPANTS}
-            />
-
-            <FlagField id="talked-sans" flag={FLAGS.TALKED_SANS} />
-          </div>
-          <div className="flex-1 flex flex-col gap-3">
-            <FlagField id="got-sans-phone" flag={FLAGS.GOT_SANS_PHONE} />
-            <FlagField id="talked-noelle" flag={FLAGS.TALKED_NOELLE} />
-            <FlagField
-              id="asgore-flowers-progress"
-              flag={FLAGS.ASGORE_FLOWERS_PROGRESS}
-            />
-          </div>
-          <div className="flex-1 flex flex-col gap-3">
-            <FlagField id="egg-fridge" flag={FLAGS.EGG_FRIDGE} />
-            <FlagField
-              id="entered-home-count"
-              flag={FLAGS.ENTERED_HOME_COUNT}
-            />
-          </div>
-        </div>
-      </Card>
-    </Section>
-  );
-}
-
 export function StoryChapter1() {
   return (
-    <article className="page flex flex-col gap-3">
+    <StoryChapterLayout chapter={1}>
       <Section id="creations" className="flex flex-col lg:flex-row gap-3">
         <VesselSection />
         <ThrashMachineSection />
       </Section>
-      <Section id="progress" className="flex flex-col gap-3">
-        <div className="flex flex-col lg:flex-row gap-3">
-          <DarkWorldSection />
-          <OnionSection />
-        </div>
-        <LightWorldSection />
-      </Section>
-    </article>
+      <StoryChapterSections chapter={1} />
+    </StoryChapterLayout>
   );
 }
