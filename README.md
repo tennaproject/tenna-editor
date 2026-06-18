@@ -10,11 +10,11 @@ I decided to work on an alternative that works like a modern web app that doesn'
 
 ## Features
 
-At this point, I release this app as beta-quality software.
-There are already more features than present in Spamton Editor, and there is a lot more to come.
-Currently, most of the essential things that you might want to change are present, but there are hundreds of flags that I haven't covered yet.
+Tenna Editor is a browser-based save editor for DELTARUNE.
+It covers the main save data for Chapters 1-4, including inventory, party stats, equipment, Light World data, recruits, rooms, plot progress, and many story flags.
+Some flag metadata is still incomplete and may change as it gets verified.
 
-There are five main tabs:
+The main editor tabs are:
 
 - Home (basic save options)
 - Inventory
@@ -22,6 +22,7 @@ There are five main tabs:
 - Light World
 - Story
 - Recruits
+- Flags (advanced flag editor)
 
 Some of them have their own subtabs.
 For example, in the Party tab, each character has their own subtab for managing their stats and equipment.
@@ -35,13 +36,16 @@ For example, in the Party tab, each character has their own subtab for managing 
 ## One Editor To Edit Everything
 
 Tenna Editor automatically detects your save file Chapter when you upload it.
-It is currently compatible with all saves from Chapters 1 to 4.
+It is currently compatible with saves from Chapters 1 to 5.
+Chapter 5 support is experimental and currently reuses known Chapter 1-4 editor data where applicable.
+Dedicated Chapter 5 weapons, armors, items, rooms, flags, and plot points are not mapped yet.
 
 _NOTE: Console versions are currently unsupported._
 
 All the saves you make are saved in the memory of your browser.
 You can use custom names to easily identify and switch between them seamlessly.
 Editor adapts to your save, displaying only values and tabs that apply to the current chapter.
+Settings also include backup and restore options for exporting or importing editor-managed saves.
 
 ![Saves Selector](/docs/images/promo-multiple-saves.png)
 
@@ -73,8 +77,18 @@ I put a lot of effort into making the layout look distinct and directly inspired
 - Toby Fox and whole Team behind Deltarune - for creating the game.
 - [Spamton Editor](https://saveeditor.spamton.com) - for being direct inspiration.
 - [Flowey's Time Machine](https://crumblingstatue.github.io) - for being another inspiration.
+- [Jacky720's "Flowey's Time Machine" fork](https://github.com/Jacky720/FloweysTimeMachine/tree/deltarune) - for save data research and references that helped with a lot of Tenna Editor's data mapping.
 - [Deltarune Wiki](https://deltarune.wiki) - for much useful information that sped up the process of building this project significantly.
 - [Undertale Mod Tool](https://github.com/UnderminersTeam/UndertaleModTool) - for allowing me to mine through the game code and assets to understand how things work.
+
+## Contributors
+
+- [@jjezewski](https://github.com/jjezewski) - creator and maintainer
+- [@Araraura](https://github.com/Araraura)
+- [@afreetoplaynoob](https://github.com/afreetoplaynoob)
+- [@krisgrant](https://github.com/krisgrant)
+- [@Matojeje](https://github.com/Matojeje)
+- [@soulware1](https://github.com/soulware1)
 
 ## Development
 

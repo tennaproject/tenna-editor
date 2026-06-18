@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.0-beta] - Unreleased
+
+### Added
+
+- Added experimental Chapter 5 save detection and navigation. Dedicated Chapter 5 data is not mapped yet, so the editor still uses known Chapter 1-4 data where applicable.
+- Added undo and redo for save edits.
+- Added a change summary to the download dialog, comparing the current save with the last uploaded or downloaded version.
+- Added search to Story chapter pages.
+- Added party portraits to the party overview and character pages.
+
+### Changed
+
+- Reworked several common UI components and dialogs.
+- Reorganized Story tabs into smaller sections and clusters.
+- Updated Story flag metadata for older chapters. This is still beta-quality and may need corrections based on community feedback.
+- Improved filtering and option generation for editor fields.
+- Updated dependencies and deploy configuration.
+
+### Fixed
+
+- Windows save path handling now uses a path variable for better portability. Author: [soulware1](https://github.com/soulware1).
+- Dropdowns now render `Empty` in grey. Author: [Araraura](https://github.com/Araraura).
+
 ## [0.7.11-beta] - 2026-05-23
 
 ### Added
