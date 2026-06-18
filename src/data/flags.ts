@@ -5104,10 +5104,10 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
       'Whether the Light World north town door greeting event has triggered.',
     valueType: 'boolean',
   },
-  [FLAGS.CHURCH_PIANO_BOOKSHELF_PUZZLE]: {
+  [FLAGS.SEEN_RALSEI_ROOM]: {
     displayName: 'Ralsei room visit',
     description:
-      "Progress through Susie sneaking into Ralsei's room in My Castle Town and follow-up piano loot dialogue in 2nd Sanctuary.",
+      "Progress through Susie sneaking into Ralsei's room in My Castle Town.",
     valueType: 'map',
     valueRules: {
       map: {

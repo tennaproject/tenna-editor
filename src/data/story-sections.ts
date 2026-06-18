@@ -723,7 +723,7 @@ export const STORY_SECTIONS = {
           title: 'Castle Town',
           flags: [
             'RALSEI_ROOM_PIANO',
-            'CHURCH_PIANO_BOOKSHELF_PUZZLE',
+            'SEEN_RALSEI_ROOM',
             'TEA_PARTY_DINER_FLAG',
             'TALKED_KING_KNIGHT',
             'SAW_TENNA_KING_SCENE',
@@ -868,6 +868,17 @@ export const STORY_SECTIONS = {
             'CHURCHC_ENCOUNTER_1',
             'FOUNTAIN_SPECIAL',
             'DARKMAZE_CANDY_PROGRESS',
+          ],
+        },
+        {
+          id: 'bookshelf-piano-puzzle',
+          title: 'Bookshelf Piano Puzzle',
+          flags: [
+            'REMOTE_PIANO_SHELF_X1',
+            'BOOKSHELF_PUZZLE_REVEALED',
+            'PIANO_COUCH_VISIBLE',
+            'RALSEI_ROOM_PIANO',
+            'BOOKSHELF_PUZZLE_OLD_SOLVED',
           ],
         },
       ],
