@@ -100,6 +100,7 @@ export default defineConfig({
         chunkFileNames: 'assets/chunk-[name]-[hash].js',
         entryFileNames: 'assets/entry-[name]-[hash].js',
         assetFileNames: 'assets/[name]-[hash][extname]',
+        experimentalMinChunkSize: 8_000,
         manualChunks(id) {
           if (id.includes('node_modules')) {
             if (id.includes('zustand')) {
@@ -117,7 +118,6 @@ export default defineConfig({
             }
             return 'vendor';
           }
-          if (id.includes('/src/')) return 'tenna';
         },
       },
     },
@@ -126,7 +126,7 @@ export default defineConfig({
     __VERSION__: JSON.stringify(packageVersion) ?? 'error',
     __BRANCH__: JSON.stringify(branch) ?? 'error',
     __COMMIT_HASH__: JSON.stringify(commitHash) ?? 'error',
-    __BUILD_TIMESTAMP__: new Date(),
+    __BUILD_TIMESTAMP__: JSON.stringify(new Date().toISOString()),
     __CHANGELOG__: changelog,
   },
 });

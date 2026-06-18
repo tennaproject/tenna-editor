@@ -364,7 +364,7 @@ function parseSaveV2(cursor: LineCursor): SaveV2 {
       chapter: 2,
       slot: 0,
       isCompletionSave: false,
-      name: 'Cool save',
+      name: '',
     },
     playerName,
     vesselName,
@@ -408,9 +408,9 @@ export function parseSave(content: string): Save {
   const cursor = new LineCursor(content);
 
   const format = detectSaveFormat(cursor.totalLines);
-  if (format == 1) {
+  if (format === 1) {
     return parseSaveV1(cursor);
-  } else if (format == 2) {
+  } else if (format === 2) {
     return parseSaveV2(cursor);
   }
 

@@ -89,7 +89,9 @@ export const useUi = create<UiState>()(
       }),
       version: UI_VERSION,
       migrate: (state, version) => {
-        if (version === 1) {
+        let nextState = state;
+
+        if (version < 2) {
           interface UiStoreV1 {
             isSidebarRetracted?: boolean;
             allowKrisAllElements?: boolean;
@@ -114,13 +116,16 @@ export const useUi = create<UiState>()(
             totalUploaded,
           } = state as UiStoreV1;
 
-          const stateV2 = {
+          nextState = {
             ui: {
               devmode: devmode ?? false,
               uploadedSaves: totalUploaded ?? 1,
               sidebar: {
                 open: false,
                 retracted: isSidebarRetracted ?? false,
+              },
+              home: {
+                allowAllSaves: false,
               },
               party: {
                 allowNonStandardParty: allowNonStandardParty ?? false,
@@ -142,9 +147,16 @@ export const useUi = create<UiState>()(
               },
             },
           };
-
-          return stateV2;
         }
+
+        if (version < 3) {
+          const current = nextState as { ui: Partial<Ui> };
+          if (current.ui && !current.ui.home) {
+            current.ui.home = { allowAllSaves: false };
+          }
+        }
+
+        return nextState;
       },
     },
   ),
