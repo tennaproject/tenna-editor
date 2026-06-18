@@ -92,18 +92,43 @@ export const FLAGS = {
   GOT_CANDY: 101,
   GOT_CANDY_2: 102,
   GOT_BROKEN_CAKE: 103,
+  GOT_WHITE_RIBBON: 104,
   GOT_IRON_SHACKLE: 105,
   GOT_MOSS_CH1: 106,
+  GOT_DANCER_MINT: 107,
   GOT_RAGGER: 108,
+  GOT_DICE_BRACE: 109,
+  GOT_BLOXER_MONEY: 110,
+  GOT_BLOXER_MINT: 111,
   GOT_JEVIL_CHEST: 112,
+  GOT_CLUBSWICH: 113,
+  GOT_CASTLE_MINT: 114,
   GOT_KEY_A: 115,
+  GOT_KEY_B: 116,
+  GOT_KEY_C: 117,
+  GOT_GLOWWRIST: 118,
   GOT_NUBERT_TREASURE: 119,
+  GOT_GLOWWRIST_2: 120,
+  ENCOUNT_TENNA: 121,
+  GOT_TENSION_BIT: 122,
   GOT_CH2_MINT: 123,
-  GOT_CANDY_3: 128,
   GOT_DUST_FAKE: 125,
+  GOT_TRASH_20: 126,
+  GOT_TRASH_80: 127,
+  GOT_CANDY_3: 128,
+  GOT_RAGGER2: 129,
+  GOT_BOUNCE_BLADE: 130,
+  GOT_TRASH_20_2: 131,
+  GOT_TRASH_BAGEL_2: 132,
+  GOT_BASEMENT_DOLLAR: 133,
+  GOT_PINK_RIBBON: 134,
+  GOT_CHEST_BAGEL: 135,
+  GOT_CHEST_CANDY: 136,
+  GOT_REVIVE_DUST: 137,
   GOT_PAINTING_MINT: 138,
   GOT_MANSION_GLOWSHARD: 139,
   GOT_CANDY_4: 140,
+  GOT_CHAIN_MAIL: 141,
   GOT_SPAMTON_CHEST: 142,
   RAN_IN_SCHOOL: 200,
   SOLVED_EYE_PUZZLE: 201,
@@ -360,20 +385,40 @@ export const FLAGS = {
   CLOVER_VIOLENCE: 522,
   RUDINN_SUSIE_WHACKS: 523,
   HATHY_SUSIE_WHACKS: 524,
+  ENCOUNT_FIRST_WW: 525,
   ENCOUNT_FIRST_TASQ: 526,
   ENCOUNT_FIRST_VIRO: 527,
   ENCOUNT_SMORGAS_2: 528,
   ENCOUNT_BERDLY_1: 529,
+  ENCOUNT_POPPUP_1: 530,
   ENCOUNT_TUTOR_VIRO: 531,
   ENCOUNT_AMBULANCE: 532,
   ENCOUNT_ANTIVIRUS: 533,
+  ENCOUNT_DOUBLE_WW: 534,
+  ENCOUNT_ERASER_VIRO: 535,
+  ENCOUNT_SINGLE_MAUS: 536,
+  ENCOUNT_MISC_MAUS: 537,
+  ENCOUNT_POPUP_MAUS: 538,
   ENCOUNT_GLOWWRIST_TASQ: 539,
   ENCOUNT_BUTLERS_1: 540,
   ENCOUNT_BUTLERS_MANY: 541,
   ENCOUNT_TASK_MANAGER: 542,
+  ENCOUNT_MAUSWHEEL: 543,
   ENCOUNT_RUN_BUTLERS: 544,
+  ENCOUNT_ACID_WW: 545,
+  ENCOUNT_ROUXLS: 546,
+  ENCOUNT_WWW: 547,
   ENCOUNT_QUEEN: 548,
+  ENCOUNT_SPAMTON: 549,
   ENCOUNT_BERDLY_2: 550,
+  ENCOUNT_GIGAQUEEN: 551,
+  ENCOUNT_SCRIPTED: 552,
+  ENCOUNT_TRIPLE_MEDIC: 553,
+  ENCOUNT_TASK_VIRO: 554,
+  ENCOUNT_SG_MAICE: 555,
+  ENCOUNT_FLEE_TASK: 556,
+  ENCOUNT_PIPIS_FAKE: 557,
+  ENCOUNT_TASQUE_RETURN: 558,
   ENCOUNT_TRASH_POPUP: 559,
   ENCOUNT_TRASH_VIRO: 560,
   ENCOUNT_TRASH_WW: 561,
@@ -381,12 +426,18 @@ export const FLAGS = {
   ENCOUNT_ROAD_TASQUE: 563,
   ENCOUNT_ROAD_VIRO: 564,
   ENCOUNT_ROAD_WW: 565,
+  ENCOUNT_SG_MAICE_2: 566,
+  ENCOUNT_SG_POPUP: 567,
+  ENCOUNT_WWW_SG: 569,
+  ENCOUNT_ULT_MEDIC: 570,
   ENCOUNT_SPAMTON_NEO: 571,
+  ENCOUNT_VASE_POPPUP: 572,
   ENCOUNT_CH3_580: 580,
   ENCOUNT_CH3_581: 581,
   ENCOUNT_CH3_582: 582,
   ENCOUNT_CH3_583: 583,
   ENCOUNT_CH3_584: 584,
+  ENCOUNT_ROUXLS_WEATHER: 585,
   ENCOUNT_ZAPPER_SHUTTAH: 586,
   ENCOUNT_FIRST_WATERCOOLER: 587,
   ENCOUNT_CH3_588: 588,
@@ -636,6 +687,14 @@ export const FLAGS = {
   CREEPY_STEPS: 928,
   EGG_CH3: 930,
   EGG_CH4: 931,
+  AMOUNT_PAIN_CH1: 932,
+  AMOUNT_ICE_E_PAIN_CH1: 933,
+  AMOUNT_PAIN_CH2: 934,
+  AMOUNT_ICE_E_PAIN_CH2: 935,
+  AMOUNT_PAIN_CH3: 936,
+  AMOUNT_PAIN_CH4: 937,
+  AMOUNT_ICE_E_PAIN_CH4: 938,
+  AMOUNT_TREASURE: 939,
   SHADOW_FAILED_CH2: 950,
   GLASS_FAILED_CH2: 951,
   SHADOW_LAB: 952,
@@ -653,7 +712,6 @@ export const FLAGS = {
   SHADOW_EYES_SEEN: 1009,
   SHADOW_GRIN_SEEN: 1010,
   GAMESHOW_BATTLES_COUNT: 1011,
-  READABLE_1065: 1065,
   GAMESHOW_LETTER_FIRST: 1012,
   GAMESHOW_LETTER_SECOND: 1013,
   GAMESHOW_LETTER_THIRD: 1014,
@@ -670,7 +728,9 @@ export const FLAGS = {
   BOARD_KEY_TRACKER: 1025,
   HOOKSHOT_FLAG: 1026,
   S_STAR_FALLEN: 1027,
+  GOT_RAMB_PRIZE_1: 1028,
   RAMB_BACKSTAGE_TALK: 1029,
+  GOT_RAMB_PRIZE_2: 1030,
   ENTERED_RANK_ROOM: 1031,
   RAMB_FIRST_TALKED: 1032,
   RACING_GAME_TRIED: 1033,
@@ -702,6 +762,7 @@ export const FLAGS = {
   ELNINA_CONTROLLER_GOT: 1060,
   SHADOWMEN_PHOTO_COUNT: 1061,
   GOT_CURTAIN_SABER: 1062,
+  READABLE_1065: 1065,
   RAMB_FOUNTAIN_TALKED: 1066,
   GOT_SHADOWMANTLE_ITEM: 1067,
   LANCER_GREENROOM_TALKED: 1068,
@@ -732,6 +793,7 @@ export const FLAGS = {
   IDCARD_PUZZLE_FOUND: 1097,
   CHEATER_PIPPINS_FLED: 1098,
   LANCER_CONTROLLER_COUNT: 1099,
+  GOT_COOLTRASHY_REWARD: 1100,
   POINT_CHEST_FOUND: 1101,
   ZAPPER_SNEEZED: 1102,
   ICE_KEY_MISSING: 1103,
@@ -760,12 +822,16 @@ export const FLAGS = {
   SNEAK_CAUGHT_BOTLEFT: 1128,
   SNEAK_CAUGHT_HARD1: 1129,
   SNEAK_CAUGHT_HARD2: 1130,
+  OVERWORLD_QUIZ_1: 1131,
+  OVERWORLD_QUIZ_2: 1132,
   PARENTAL_LOCK_1_STARTED: 1133,
   PARENTAL_LOCK_2_STARTED: 1134,
   STEALTH_UNLOCKED: 1135,
   TODO_FLAG: 1136,
   TRASH_SWITCH_FOUND: 1137,
   WATERCOOLER_GOT_NOTHING: 1138,
+  GOT_CH3_MINT: 1139,
+  GOT_ONE_POINT: 1140,
   BIBLIOX_TALK_COUNT: 1141,
   CAMERA_REMINDER_SOLVED: 1142,
   WATERCOOLER_AVOID_COUNT: 1143,
@@ -779,10 +845,21 @@ export const FLAGS = {
   SPAMTENNA_SCENE_SEEN: 1151,
   RALSEI_HORSE: 1152,
   HAY_SUSIE_REACTION: 1153,
+  BONUS_ZONE_TREASURE_1: 1154,
+  BONUS_ZONE_TREASURE_2: 1155,
+  BONUS_ZONE_TREASURE_3: 1156,
+  BONUS_ZONE_POINTS_1: 1157,
+  BONUS_ZONE_POINTS_2: 1158,
+  BONUS_ZONE_POINTS_3: 1159,
+  BONUS_ZONE_POINTS_4: 1160,
   TENNA_BONUS_ENTERED: 1161,
   BONUS_BIG_CHEST: 1162,
   CH3_RECRUITS_CHECKED: 1163,
   LIGHTMAZE_ZAPPER_FOUGHT: 1164,
+  OVERWORLD_QUIZ_3: 1165,
+  OVERWORLD_QUIZ_4: 1166,
+  OVERWORLD_QUIZ_5: 1167,
+  OVERWORLD_QUIZ_6: 1168,
   LANINA_PUZZLE_POINTS: 1169,
   B3BS_RABBICK_STATE: 1170,
   BOARD_2_BATTLES_COUNT: 1171,
@@ -814,10 +891,18 @@ export const FLAGS = {
   SUSIE_TENNA_CHAT_1: 1199,
   RALSEI_FACE_THOUGHTS: 1200,
   TENNA_OPINION_SUSIE: 1201,
+  GOT_TRASH_CH3_1: 1202,
+  GOT_TRASH_CH3_2: 1203,
+  GOT_TRASH_CH3_3: 1204,
+  GOT_TRASH_CH3_4: 1205,
+  GOT_TRASH_CH3_5: 1206,
+  GOT_TRASH_CH3_6: 1207,
   SUSIE_TENNA_CHAT_2: 1208,
+  GOT_TRASH_CH3_7: 1209,
   ELNINA_GREENROOM_TALK: 1210,
   LANINO_GREENROOM_TALK: 1211,
   SUSIEBRIDGE_STATE: 1212,
+  GOT_300_POINTS: 1213,
   WHO_ASKED_OKAY: 1214,
   SUSIE_REASSURANCE_RESPONSE: 1215,
   RALSEI_REASSURANCE_RESPONSE: 1216,
@@ -827,6 +912,9 @@ export const FLAGS = {
   SUSIEZILLA_BEATEN: 1220,
   WATERCOOLER_CRATER_POINTS: 1221,
   GOT_GOLDEN_TENNA: 1222,
+  GOT_DOG_DOLLAR: 1223,
+  OPENED_BONUS_ZONE: 1224,
+  OPENED_SAMS_ZONE: 1225,
   ENTERED_1225_ROOM: 1226,
   BONUS_ZONE_OPENED: 1227,
   COLDPLACE_ENTERED: 1228,
@@ -849,8 +937,11 @@ export const FLAGS = {
   PARENTAL_PHOTOS_NUM: 1245,
   LANCER_DIG_100: 1246,
   TIMES_LEVELED_CH3: 1248,
+  TIMES_GAINED_AT_CH3: 1249,
   JAIL_DINNER_TALKED: 1250,
+  GOULDEN_SON_TALE: 1251,
   GOULDEN_SON_DESTINATION: 1252,
+  GOT_TRASH_CH3_8: 1253,
   STONE_LANCER_SEEN: 1254,
   SWORD_ROUTE_KILLS: 1255,
   GRASS_PLUCKED_COUNT: 1256,
@@ -1035,6 +1126,44 @@ export const FLAGS = {
   MIZZLE_SPECIAL: 1798,
 } as const;
 
+export const RECRUITS = {
+  5: 'Rudinn',
+  6: 'Hathy',
+  11: 'Ponman',
+  13: 'Rabbick',
+  14: 'Bloxer',
+  15: 'Jigsawry',
+  20: 'JEVIL',
+  22: 'Rudinn Ranger',
+  23: 'Head Hathy',
+  30: 'Ambyu-Lance',
+  31: 'Poppup',
+  32: 'Tasque',
+  33: 'Werewire',
+  34: 'Maus',
+  35: 'Virovirokun',
+  36: 'Swatchling',
+  40: 'Werewerewire',
+  42: 'Tasque Manager',
+  44: 'Mauswheel',
+  54: 'Shadowguy',
+  55: 'Shuttah',
+  56: 'Zapper',
+  57: 'Ribbick',
+  58: 'Watercooler',
+  59: 'Pippins',
+  60: 'Elnina',
+  61: 'Lanino',
+  62: 'Guei',
+  63: 'Balthizard',
+  64: 'Bibliox',
+  65: 'Mizzle',
+  66: 'Wicabel',
+  67: 'Winglade',
+  68: 'Organikk',
+  69: 'Miss Mizzle',
+} as const;
+
 export type FlagIndex = (typeof FLAGS)[keyof typeof FLAGS];
 export type FlagName = keyof typeof FLAGS;
 
@@ -1052,31 +1181,787 @@ export interface FlagProperties extends BaseProperties {
 }
 
 export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
+  [FLAGS.DISABLE_TEXT_SKIP]: {
+    displayName: 'Disable text skip',
+    description: 'Volatile. Prevents skipping text in some cutscenes.',
+    valueType: 'boolean',
+  },
+  [FLAGS.DISABLE_MENU]: {
+    displayName: 'Disable Dark World menu',
+    description:
+      'Prevents opening the Dark World menu and can affect shop exit music.',
+    valueType: 'boolean',
+  },
   [FLAGS.SIMPLIFY_VFX]: {
     valueType: 'boolean',
     displayName: 'Simplify VFX',
     description: `
      As the name suggests it turning this on simplifies some of the VFX in game.`,
   },
+  [FLAGS.BATTLE_MUSIC]: {
+    displayName: 'Battle music state',
+    description:
+      'Volatile. Controls whether Rude Buster plays at encounter start.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'In battle',
+        2: 'Starting boss music',
+      },
+    },
+  },
+  [FLAGS.WRIST_PROTECTOR]: {
+    displayName: 'Wrist Protector enabled',
+    description:
+      'Enables the dialogue auto-advance toggle on button 3. On by default from Chapter 3 onward.',
+    valueType: 'boolean',
+  },
+  [FLAGS.AUTO_RUN]: {
+    displayName: 'Auto-run enabled',
+    description:
+      'When enabled, Kris runs by default and holding cancel makes them walk.',
+    valueType: 'boolean',
+  },
+  [FLAGS.DISABLE_SHAKING]: {
+    displayName: 'Disable screen shake',
+    description: 'Stops camera shake effects when enabled.',
+    valueType: 'boolean',
+  },
+  [FLAGS.USE_OLD_ATTACK]: {
+    displayName: 'Use old attack timing',
+    description:
+      'At 0, attacks use single-button timing. At 1, each party member has their own attack button.',
+    valueType: 'boolean',
+  },
+  [FLAGS.REMEMBER_BATTLE_MENU]: {
+    displayName: 'Remember battle menu selection',
+    description:
+      'When disabled, battle menu cursor positions reset at the start of each fight.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SOUND_VOLUME]: {
+    displayName: 'Sound effect volume',
+    description:
+      'Gain multiplier for the sound effects audio group, applied on load and adjustable in the config menu.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.MUSIC_VOLUME]: {
+    displayName: 'Music volume',
+    description:
+      'Multiplier applied to music playback volume. Defaults to 0.85.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.AUDIO_VOLUME]: {
+    displayName: 'Master audio volume',
+    description: 'Master gain for all audio. Defaults to 0.6.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.OTHER_TEXT_COMMAND]: {
+    displayName: 'Other text command',
+    description:
+      'Volatile. Controls overworld sprite behavior during certain dialogue.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.DOOR_FREEZE_TIMER]: {
+    displayName: 'Door freeze timer',
+    description:
+      'Volatile timer controlling door freeze behavior in cutscenes.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.DISABLE_X_SLOWING]: {
+    displayName: 'Disable X slowing',
+    description:
+      'Added in 1.08. Pressing Z while holding C in combat toggles it. Becomes debug-only in 1.09.',
+    valueType: 'boolean',
+  },
+  [FLAGS.BULLET_TESTER_TEMP_23]: {
+    displayName: 'Climbing tutorial unlocked',
+    description:
+      'Whether wall-climbing is enabled in Dark Sanctuary. Blocks climb starters until set during tutorial or story beats.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SUSIE_SHOW_EYES]: {
+    displayName: 'Susie shows eyes',
+    description:
+      'Makes Susie show her eyes at the end of Chapter 1. Ignored in Chapter 2.',
+    valueType: 'boolean',
+  },
+  [FLAGS.RALSEI_HAT_STATE]: {
+    displayName: 'Ralsei hat state',
+    description: 'Ralsei face variant in Chapter 1. Ignored in Chapter 2.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Hat',
+        1: 'Hood',
+        2: 'Hatless',
+      },
+    },
+  },
+  [FLAGS.DISABLE_LOUD_STEPS]: {
+    displayName: 'Disable loud steps',
+    description:
+      "Stops echoing step sounds in ??????, Great Door field, and JEVIL's room.",
+    valueType: 'boolean',
+  },
+  [FLAGS.HIDE_EQUIP_COMMENTS]: {
+    displayName: 'Hide equip comments',
+    description:
+      'Prevents party comments when equipping items in the field menu.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CHOICE_TIME_TAKEN]: {
+    displayName: 'Choice time taken',
+    description:
+      'Volatile. Frames taken to make a choice. Used by Sans phone call.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
   [FLAGS.CAN_PARTY_ACT]: {
     displayName: 'Party Members can ACT',
+    description: 'Whether party members can use ACT in battle this encounter.',
     valueType: 'boolean',
     valueRules: {
       invertedBoolean: true,
     },
   },
+  [FLAGS.GAMEOVER_MODE]: {
+    displayName: 'Game over mode',
+    description: 'Controls what the game does on game over. Usually 0.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.DOJO_FAILURE]: {
+    displayName: 'Dojo failure',
+    description:
+      'Set when losing Party Dojo battles while GAMEOVER_MODE is active. Affects prize and dialogue.',
+    valueType: 'boolean',
+  },
+  [FLAGS.DOJO_ACTIVE]: {
+    displayName: 'Dojo battle active',
+    description:
+      'Alters battle win text and prevents you from gaining money outside of prizes.',
+    valueType: 'boolean',
+  },
+  [FLAGS.NO_BATTLE_END_MSG]: {
+    displayName: 'Suppress battle end message',
+    description:
+      'Disables the battle end message. Used for SnowGraving Berdly and Party Dojo.',
+    valueType: 'boolean',
+  },
+  [FLAGS.DOJO_ABORT]: {
+    displayName: 'Dojo aborted',
+    description: 'Something to do with immediately ending Party Dojo battles.',
+    valueType: 'boolean',
+  },
+  [FLAGS.VIOLENCES]: {
+    displayName: 'Total violences',
+    description:
+      'Total number of enemies defeated through FIGHTing. Can be reduced by obtaining forgiveness from Rudinn or Hathy.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.SPARES]: {
+    displayName: 'Total spares',
+    description: 'Total enemies spared.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.PACIFIES]: {
+    displayName: 'Total pacifies',
+    description: 'Total enemies pacified with Sleep Mist.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.AUTOSUSIE_VIOLENCES]: {
+    displayName: 'Susie auto-violences',
+    description:
+      'Violences by Susie while not under player control. Rarely set due to bugs.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.KILLS]: {
+    displayName: 'Total kills',
+    description:
+      'Total number of enemies you killed for realsies. Includes SnowGrave and killing Pipis.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.FREEZES]: {
+    displayName: 'Total freezes',
+    description: 'Total number of enemy freezes across the save file.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.LAST_ENCOUNTER_TP]: {
+    displayName: 'Last battle tension',
+    description: 'Tension value saved at the end of the last battle.',
+    valueType: 'number',
+  },
+  [FLAGS.LAST_ENCOUNTER_END]: {
+    displayName: 'Last battle result',
+    description:
+      'How the most recent battle ended before being copied to the target encounter flag.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.LAST_MONSTER_END_0]: {
+    displayName: 'Monster 1 result',
+    description: 'How the first enemy in the last battle ended.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.LAST_MONSTER_END_1]: {
+    displayName: 'Monster 2 result',
+    description: 'How the second enemy in the last battle ended.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.LAST_MONSTER_END_2]: {
+    displayName: 'Monster 3 result',
+    description: 'How the third enemy in the last battle ended.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNTER_POINTER]: {
+    displayName: 'Battle result pointer',
+    description:
+      'Flag ID that LAST_ENCOUNTER_END is written to when a battle with a custom encounter flag ends.',
+    valueType: 'number',
+  },
+  [FLAGS.ENEMY_X]: {
+    displayName: 'Frozen enemy X',
+    description: 'Saved X coordinate for a frozen overworld enemy.',
+    valueType: 'number',
+  },
+  [FLAGS.ENEMY_Y]: {
+    displayName: 'Frozen enemy Y',
+    description: 'Saved Y coordinate for a frozen overworld enemy.',
+    valueType: 'number',
+  },
+  [FLAGS.DOJO_NEXT_ENCOUNTER]: {
+    displayName: 'Dojo next encounter',
+    description:
+      'Volatile. Used to chain encounters for the Party Dojo All Stars challenge.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.DISABLE_RECRUITING]: {
+    displayName: 'Recruiting disabled',
+    description: 'Prevents recruiting enemies during Party Dojo battles.',
+    valueType: 'boolean',
+  },
+  [FLAGS.NONNARR_INTRO_TEXT]: {
+    displayName: 'Non-narrator intro text',
+    description:
+      'Used when Noelle enters her first battle and when Susie wants to demonstrate UltimateHeal to not use the normal battle introduction typer.',
+    valueType: 'boolean',
+  },
+  [FLAGS.VIOLENCED_LAST]: {
+    displayName: 'Last encounter violenced',
+    description:
+      "Volatile. Triggers 'You/Noelle became stronger' when violencing enemies.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
   [FLAGS.STORAGE_SIZE]: {
     displayName: 'Storage size',
-    description: `
-    The number of slots in the storage.
-    `,
+    description:
+      'Maximum pocket inventory slots. 24 in Chapter 2+, 36 in Chapter 4+, 48 in Chapter 6+.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.TOTAL_LEVELED_COUNT]: {
+    displayName: 'Total Leveled Count',
+    description:
+      'The number of times you have leveled up by violently defeating an encounter. Used for certain increases that only occur every 2, 4, or 10 encounters.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.TIMES_LEVELED_CH2]: {
+    displayName: 'Times leveled',
+    description:
+      'The number of times your AT and Magic have increased due to leveling up (every ten encounters). Used to prevent overly increasing them when sealing the fountain.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.GOT_GLOWSHARD]: {
+    displayName: 'Got Glowshard',
+    description: 'Whether the Glowshard was collected in the Great Board.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_CANDY]: {
+    displayName: 'First candy tree pickups',
+    description:
+      'How many Dark Candies were taken from the first candy tree in the Field.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'One candy',
+        2: 'Both candies',
+      },
+    },
+  },
+  [FLAGS.GOT_CANDY_2]: {
+    displayName: 'Second candy tree pickups',
+    description:
+      'How many Dark Candies were taken from the second candy tree in the Field.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'One candy',
+        2: 'Both candies',
+      },
+    },
+  },
+  [FLAGS.GOT_BROKEN_CAKE]: {
+    displayName: 'Got Broken Cake piece',
+    description: 'Whether a piece of the Broken Cake was taken in the Field.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_WHITE_RIBBON]: {
+    displayName: 'Got White Ribbon',
+    description:
+      'Whether the White Ribbon chest was opened at the Maze of Death four-way split.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_IRON_SHACKLE]: {
+    displayName: 'Got Iron Shackle',
+    description:
+      'Whether the Iron Shackle was taken from the Card Castle jail.',
+    valueType: 'boolean',
   },
   [FLAGS.GOT_MOSS_CH1]: {
-    displayName: 'Got moss in Jail',
+    displayName: 'Moss',
+    description: 'Whether Kris picked up moss in the Card Castle jail.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_DANCER_MINT]: {
+    displayName: 'Got Dancer Mint',
+    description:
+      'Whether you got the Revive Mint from the Scissor Dancers room.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_RAGGER]: {
+    displayName: 'Got Ragger',
+    description:
+      "Whether you got the Ragger. Affects the Royal Coat Rack's dialogue about it.",
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_DICE_BRACE]: {
+    displayName: 'Got Dice Brace',
+    description:
+      'Whether the Dice Brace chest was opened after solving the Forest suits puzzle.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_BLOXER_MONEY]: {
+    displayName: 'Got Bloxer Money',
+    description: 'Whether you got the 40D$ from that room with Bloxers.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_BLOXER_MINT]: {
+    displayName: 'Got Bloxer Mint',
+    description:
+      'Reserved Revive Mint chest flag for the Bloxer room. No matching accessible chest is known in normal Chapter 1 play.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_JEVIL_CHEST]: {
+    displayName: 'Got JEVIL chest reward',
+    description:
+      'Whether you got the Jevilstail/Devilsknife from a chest. It appears outside the room if your inventory is full after the battle.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_CLUBSWICH]: {
+    displayName: 'Got Clubswich',
+    description: 'Whether you got the Clubs Sandwich from... take a guess.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_CASTLE_MINT]: {
+    displayName: 'Got Castle Mint',
+    description:
+      'Whether you got the Revive Mint from that chest that appears when you interact with the portraits.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_KEY_A]: {
+    displayName: 'Got Broken Key A',
+    description: 'Whether Broken Key A was collected in Card Castle.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_KEY_B]: {
+    displayName: 'Got Key B',
+    description:
+      'Whether Broken Key B was collected from the invisible path below the Scissor Dancer room.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_KEY_C]: {
+    displayName: 'Got Key C',
+    description:
+      'Whether Broken Key C was collected from the card-suit puzzle chest before the Great Board.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_GLOWWRIST]: {
+    displayName: 'Got Glowwrist',
+    description: 'Whether you got the first Glow Wrist.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_NUBERT_TREASURE]: {
+    displayName: 'Got Fiber Scarf',
+    description:
+      "Whether the Fiber Scarf was collected from Nubert's treasure.",
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_GLOWWRIST_2]: {
+    displayName: 'Got Glowwrist 2',
+    description: 'Whether you got that other Glow Wrist.',
+    valueType: 'boolean',
+  },
+  [FLAGS.ENCOUNT_TENNA]: {
+    displayName: 'Tenna battle outcome',
+    description:
+      'Encounter state for the Tenna battle, including violent, spare, pacify, frozen, and in-combat variants.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Violenced (includes SnowGrave)',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch. 1)',
+        5: 'Susie (unused)',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.GOT_TENSION_BIT]: {
+    displayName: 'Got Tension Bit',
+    description:
+      "Whether the Tension Bit chest was opened in Cyber Field after the Sweet Cap'n Cakes shop.",
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_CH2_MINT]: {
+    displayName: 'Got third Revive Mint',
+    description: 'Whether you got the THIRD Revive Mint.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_DUST_FAKE]: {
+    displayName: 'Revive Dust flag (unused)',
+    description:
+      'Legacy Revive Dust pickup flag. Superseded by the main Revive Dust flag.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.GOT_TRASH_20]: {
+    displayName: 'Got Trash 20',
+    description: 'Whether you got 20D$ from the twenty-dollar trash can.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_TRASH_80]: {
+    displayName: 'Got Trash 80',
+    description: 'Whether you got 80D$ from the eighty-dollar trash can.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_CANDY_3]: {
+    displayName: 'Third candy tree pickups',
+    description:
+      'How many Dark Candies were taken from the third candy tree. Checked alongside other candy flags during the church sermon.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'One candy',
+        2: 'Both candies',
+      },
+    },
+  },
+  [FLAGS.GOT_RAGGER2]: {
+    displayName: 'Got Ragger2',
+    description:
+      'Whether the Ragger2 chest appeared and was opened after collecting all teacup-ride orbs.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_BOUNCE_BLADE]: {
+    displayName: 'Got Bounce Blade',
+    description:
+      'Whether the Bounce Blade chest blocked by a Virovirokun in Cyber City was opened.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_TRASH_20_2]: {
+    displayName: 'Got Trash 20 2',
+    description: 'Whether you got 20D$ from the other twenty-dollar trash can.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_TRASH_BAGEL_2]: {
+    displayName: 'Got Trash Bagel 2',
+    description:
+      'Whether you got a CD Bagel from the other CD Bagel trash can.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_BASEMENT_DOLLAR]: {
+    displayName: 'Got Basement Dollar',
+    description: 'Whether you got the $1 from the one-dollar treasure chest.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_PINK_RIBBON]: {
+    displayName: 'Got Pink Ribbon',
+    description:
+      'Whether the Pink Ribbon chest in the Cyber City alley with Noelle was opened.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_CHEST_BAGEL]: {
+    displayName: 'Got Chest Bagel',
+    description: 'Whether you got a CD Bagel from the CD Bagel treasure chest.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_CHEST_CANDY]: {
+    displayName: 'Got Chest Candy',
+    description:
+      "Whether a hidden Dark Candy chest was opened in Queen's Mansion content.",
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_REVIVE_DUST]: {
+    displayName: 'Got Revive Dust',
+    description: "Whether the Revive Dust chest was opened in Queen's Mansion.",
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_PAINTING_MINT]: {
+    displayName: 'Got painting Revive Mint',
+    description: 'Whether you got the fourth Revive Mint from a painting.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_MANSION_GLOWSHARD]: {
+    displayName: 'Got mansion Glowshard',
+    description:
+      "Whether you got the Glowshard in Queen's Mansion, found by activating all the platters behind the door on the 2F moving vases room.",
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_CANDY_4]: {
+    displayName: 'Fourth candy tree pickups',
+    description:
+      'How many Dark Candies were taken from the fourth candy tree. Checked alongside other candy flags during the church sermon.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'One candy',
+        2: 'Both candies',
+      },
+    },
+  },
+  [FLAGS.GOT_CHAIN_MAIL]: {
+    displayName: 'Got Chain Mail',
+    description: 'Whether you got the Chain Mail armor.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_SPAMTON_CHEST]: {
+    displayName: 'Got Dealmaker or Puppet Scarf',
+    description:
+      "Whether you got the Dealmaker/Puppet Scarf from a chest. There's one immediately after you beat Spamton, and one back at My Castle Town.",
+    valueType: 'boolean',
+  },
+  [FLAGS.RAN_IN_SCHOOL]: {
+    displayName: 'Ran to Susie at school',
+    description: 'Whether you ran to Susie in the Chapter 1 school scene.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SOLVED_EYE_PUZZLE]: {
+    displayName: 'Solved eye puzzle',
+    description: 'Whether the eye puzzle was solved in the ?????? area.',
+    valueType: 'boolean',
+  },
+  [FLAGS.RAN_IN_DARK]: {
+    displayName: 'Found Susie approach',
+    description: 'How you proceeded once finding Susie in the ?????? area.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Walked',
+        1: 'Ran',
+        2: 'Wrong way',
+      },
+    },
+  },
+  [FLAGS.SKIPPED_PROPHECY]: {
+    displayName: 'Skipped prophecy',
+    description:
+      "Whether Ralsei's Chapter 1 prophecy explanation was skipped, causing Lancer to explain it instead.",
+    valueType: 'boolean',
+  },
+  [FLAGS.BE_SUBJECT_ANSWER]: {
+    displayName: 'Ralsei subject answer',
+    description: 'Answer when Ralsei said he had no subjects.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: "I'll be your subject",
+        2: 'Keep dreaming',
+      },
+    },
+  },
+  [FLAGS.TUTORIAL_END]: {
+    displayName: 'Battle tutorial outcome',
+    description:
+      "How Ralsei's battle tutorial ended in the Field, including skipped, defended, hugged, missed, and violent outcomes.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Skipped tutorial',
+        1: 'Success',
+        2: 'Hug Ralsei (unused)',
+        3: 'Beat up Ralsei',
+        4: 'Beat up dummy',
+        5: 'Continued defending',
+        6: 'Missed dummy',
+      },
+    },
+  },
+  [FLAGS.RUNNING_TUTORIAL]: {
+    displayName: 'Learned to run',
+    description:
+      'Whether running was explained or demonstrated. Stops Ralsei from asking again.',
+    valueType: 'boolean',
+  },
+  [FLAGS.MANUAL_STATUS]: {
+    displayName: 'Manual Status',
+    description: 'Whether the manual was dropped and picked up in the Field.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not dropped',
+        1: 'Dropped once',
+        3: 'Dropped twice',
+      },
+    },
+  },
+  [FLAGS.RE_CONVINCED_RUDINN]: {
+    displayName: 'Re-convinced Rudinn',
+    description:
+      'Whether you convinced Rudinn after failing the first attempt.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SEEN_FIELD_SONG]: {
+    displayName: 'Seen field song title',
+    description:
+      'Prevents the Field of Hopes and Dreams title card from replaying every room.',
+    valueType: 'boolean',
+  },
+  [FLAGS.LANCER_THRASH_TALK]: {
+    displayName: 'Lancer pre-Hathy talk',
+    description:
+      'Whether Lancer was talked to before the triple Hathy fight. Alters his dialogue.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'Talked',
+        2: 'Did not talk',
+      },
+    },
+  },
+  [FLAGS.C_ROUND_OUTCOME]: {
+    displayName: 'C. Round outcome',
+    description:
+      'What happened to C. Round in the Field. Can skip Ralsei warning Susie.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'Complimented by Susie',
+        2: 'Warned',
+        3: 'Attacked by Kris/Ralsei',
+      },
+    },
+  },
+  [FLAGS.BOX_PUZZLE_STATE]: {
+    displayName: 'Box puzzle progress',
+    description: 'Progress on the vandalized box puzzle.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'Initiated puzzle',
+        2: 'Failure (unused)',
+      },
+    },
+  },
+  [FLAGS.TEAM_NAME]: {
+    displayName: 'Team name',
+    description: 'The name chosen for the party in Chapter 1.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'The Guys',
+        1: 'The $!$? Squad',
+        2: 'The Lancer Fan Club',
+        3: 'The Fun Gang',
+      },
+    },
+  },
+  [FLAGS.TALKED_JOE]: {
+    displayName: 'Talked to Jigsaw Joe',
+    description:
+      'Whether Jigsaw Joe was talked to in Castle Town. Makes him help restore the Warp Door.',
+    valueType: 'boolean',
+  },
+  [FLAGS.DONATED_TO_HOLE]: {
+    displayName: 'Donated to hole',
+    description: 'Whether a dollar was put in the donation hole in the Field.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SOLVED_ROUXLS_PUZZ]: {
+    displayName: 'Solved first Rouxls puzzle',
+    description: "Whether you solved Rouxls's first puzzle.",
+    valueType: 'boolean',
+  },
+  [FLAGS.SOLVED_ROUXLS_PUZZ_2]: {
+    displayName: 'Solved second Rouxls puzzle',
+    description: "Whether you solved Rouxls's second puzzle.",
     valueType: 'boolean',
   },
   [FLAGS.THRASH_MACHINE_HEAD]: {
     displayName: 'Head',
+    description:
+      'Randomized Thrash Machine head part at new game. Sets Lancer and Susie boss ACT mode and appears in the design quiz.',
     valueType: 'map',
     valueRules: {
       map: {
@@ -1090,6 +1975,8 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.THRASH_MACHINE_BODY]: {
     displayName: 'Body',
+    description:
+      'Randomized Thrash Machine body part at new game. Used in the design quiz and duck-build detection.',
     valueType: 'map',
     valueRules: {
       map: {
@@ -1103,6 +1990,8 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.THRASH_MACHINE_SHOE]: {
     displayName: 'Shoe',
+    description:
+      'Randomized Thrash Machine shoe part at new game. Used in the design quiz and duck-build detection.',
     valueType: 'map',
     valueRules: {
       map: {
@@ -1116,33 +2005,118 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.THRASH_MACHINE_HEAD_COLOR]: {
     displayName: 'Head Color',
+    description:
+      'Random palette index for the Thrash Machine head, randomized at new game.',
     valueType: 'color',
   },
   [FLAGS.THRASH_MACHINE_BODY_COLOR]: {
     displayName: 'Body Color',
+    description:
+      'Random palette index for the Thrash Machine body, randomized at new game.',
     valueType: 'color',
   },
   [FLAGS.THRASH_MACHINE_SHOE_COLOR]: {
     displayName: 'Shoe Color',
+    description:
+      'Random palette index for the Thrash Machine shoe, randomized at new game.',
     valueType: 'color',
   },
-  [FLAGS.RUNNING_TUTORIAL]: {
-    displayName: 'Learned to run',
+  [FLAGS.MADE_THRASH_MACHINE]: {
+    displayName: 'Designed Thrash Machine',
+    description:
+      'Whether the Thrash Machine design was completed in Card Castle.',
     valueType: 'boolean',
   },
-  [FLAGS.MANUAL_STATUS]: {
-    displayName: 'Manual Status',
+  [FLAGS.LANCER_FOLLOW_PROGRESS]: {
+    displayName: 'Lancer follow dialogue',
+    description: 'How far Lancer has followed you after joining the team.',
     valueType: 'map',
     valueRules: {
       map: {
-        0: 'Not dropped',
-        1: 'Dropped once',
-        3: 'Dropped twice',
+        0: 'Default',
+        1: 'Monogrammed track jackets',
+        3: 'Just chill with us',
+        4: 'Stop making fun of me',
+        5: 'Darkberry Teacakes (unused)',
+        6: 'A candy tree!',
+        7: 'My teeth are disintegrating!',
+        8: 'Does your dad seem happy?',
+        9: 'I also feel kinda...',
+        10: '...maybe.',
+        11: "That's the FOUNTAIN!",
+        12: 'All we gotta do is crush them.',
+        99: 'Max value (unused)',
       },
     },
   },
+  [FLAGS.JAIL_INTERACTS]: {
+    displayName: 'Jail object interactions',
+    description:
+      'Times objects were interacted with in jail. Talking to Ralsei after 3+ triggers the cutscene.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.INTERACTED_SALSA]: {
+    displayName: 'Interacted with salsa stump',
+    description: 'Whether the salsa stump was interacted with in the Field.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_ABOUT_CHEST]: {
+    displayName: 'Asked about chest',
+    description:
+      'Whether you talked to the Royal Coat Rack before taking the Ragger. Changes their dialogue if you take it without asking.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SOLVED_CLOVER_PUZZLE]: {
+    displayName: 'Solved Clover suits puzzle',
+    description: 'Whether you solved the suits puzzle before the Clover fight.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CLOVER_PUZZLE_2]: {
+    displayName: 'Clover puzzle barrier',
+    description: 'Controls barrier behavior on the suits puzzle entrance.',
+    valueType: 'boolean',
+  },
+  [FLAGS.INTERACTED_CLOVER]: {
+    displayName: 'Talked to all Clover faces',
+    description:
+      'Whether all Clover faces were talked to before her fight. Alters her dialogue.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SOLVED_DARK_PUZZLE]: {
+    displayName: 'Solved darkening puzzle',
+    description:
+      'Whether you solved the puzzle in the darkening room. It does not save if you did it without going in the middle.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SUSIE_BOUGHT_SNACK]: {
+    displayName: 'Susie bought snack',
+    description: 'Whether Susie and Lancer bought their Hearts Donut yet.',
+    valueType: 'boolean',
+  },
+  [FLAGS.ELEVATOR_FLOOR]: {
+    displayName: 'Elevator floor',
+    description: 'Current floor while in the Card Castle elevator.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Basement B1',
+        1: 'Floor 1F',
+        2: 'Floor 5F',
+        3: '???? (JEVIL)',
+      },
+    },
+  },
+  [FLAGS.ELEVATOR_UNLOCKED]: {
+    displayName: 'Elevator unlocked',
+    description:
+      'Whether the Card Castle elevator was unlocked by reaching floor 5F.',
+    valueType: 'boolean',
+  },
   [FLAGS.JEVIL_PROGRESS]: {
-    displayName: 'Jevil Progress',
+    displayName: 'Jevil',
+    description:
+      'Progress through the Jevil fight and surrounding scenes in Card Castle.',
     valueType: 'map',
     valueRules: {
       map: {
@@ -1154,28 +2128,96 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
       },
     },
   },
+  [FLAGS.JEVIL_CHEST]: {
+    displayName: 'JEVIL overflow chest',
+    description:
+      "Overflow item slot for the chest outside JEVIL's room when inventory is full. Stores the Devilsknife or Jevilstail if you could not pick it up after the fight.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'Devilsknife',
+        2: 'Jevilstail',
+      },
+    },
+  },
+  [FLAGS.TALKED_TO_RUDINN]: {
+    displayName: 'Talked to Rudinn in castle',
+    description: 'Conversation status with Rudinn in Card Castle.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'Apologized',
+        2: 'Did not apologize',
+        3: 'Did not need to apologize',
+      },
+    },
+  },
+  [FLAGS.TALKED_TO_HATHY]: {
+    displayName: 'Talked to Hathy in castle',
+    description:
+      'Whether you talked to Hathy in Card Castle. Only set if you had two or fewer Hathy kills.',
+    valueType: 'boolean',
+  },
+  [FLAGS.MADE_BLUH_CHEST]: {
+    displayName: 'Summoned Bluh Chest',
+    description:
+      'Whether all four Bluh Paintings were interacted with in Card Castle.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CHECKERS_ACT]: {
+    displayName: 'Checked K. Round',
+    description:
+      'Whether K. Round was Checked the first time, changing its ACT to Checkers.',
+    valueType: 'boolean',
+  },
   [FLAGS.PEACEFUL_KING]: {
-    displayName: 'Defeated King peacefully',
+    displayName: 'Peaceful ending',
+    description: 'Whether you exhausted King rather than fighting him.',
     valueType: 'boolean',
   },
   [FLAGS.VIOLENT_ENDING_CH1]: {
-    displayName: 'Got Violent Ending',
+    displayName: 'Violent ending',
+    description: 'Whether the violent ending was achieved in Chapter 1.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SPARED_LANCER]: {
+    displayName: 'Spared Lancer and Susie',
+    description: 'Whether you spared Lancer and Susie.',
+    valueType: 'boolean',
+  },
+  [FLAGS.THRASH_REPEATS]: {
+    displayName: 'Thrash Machine rematches',
+    description:
+      'Times Lancer and Susie were fought again, requiring another Thrash Machine explosion.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.SHORTCUT_DOOR_HELP]: {
+    displayName: 'Joe restored Warp Door',
+    description:
+      'Whether Jigsaw Joe helped restore the Warp Door in Castle Town.',
     valueType: 'boolean',
   },
   [FLAGS.INSPECTED_BEDS_CH1]: {
-    displayName: 'Inspected beds in Card Castle',
+    displayName: 'Inspected beds',
+    description: 'Whether the beds were inspected in Card Castle.',
     valueType: 'boolean',
   },
   [FLAGS.GOT_SPINCAKE]: {
-    displayName: 'Got SpinCake',
+    displayName: 'SpinCake',
+    description: 'Whether Spin Cake was obtained from the Card Castle kitchen.',
     valueType: 'boolean',
   },
   [FLAGS.STARWALKER]: {
-    displayName: 'Talked to original &ensp;*Starwalker*',
+    displayName: 'Original Starwalker',
+    description: 'Whether the original Starwalker was talked to in Chapter 1.',
     valueType: 'boolean',
   },
   [FLAGS.TALKED_RUDY]: {
-    displayName: 'Talked to Rudy',
+    displayName: 'Rudy',
+    description: 'Conversation state with Rudy at the hospital in Hometown.',
     valueType: 'map',
     valueRules: {
       map: {
@@ -1186,15 +2228,19 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     },
   },
   [FLAGS.TALKED_BERDLY_CH1]: {
-    displayName: 'Talked to Berdly',
+    displayName: 'Berdly',
+    description: 'Whether Berdly was talked to in Hometown.',
     valueType: 'boolean',
   },
   [FLAGS.PICNIC_TABLE_FINGERS]: {
-    displayName: 'You put your fingers in the picnic table',
+    displayName: 'Picnic table',
+    description: 'Whether Kris put their fingers in the picnic table holes.',
     valueType: 'boolean',
   },
   [FLAGS.ONION_CH1]: {
-    displayName: 'Status',
+    displayName: 'Friendship',
+    description:
+      'Onion friendship progress in the Forest. Set when befriending or refusing Onion.',
     valueType: 'map',
     valueRules: {
       map: {
@@ -1207,6 +2253,7 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.ONION_YOUR_NAME]: {
     displayName: 'Your Name',
+    description: 'Name Kris gave themselves during the Onion friendship scene.',
     valueType: 'map',
     valueRules: {
       map: {
@@ -1218,6 +2265,7 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.ONION_NAME]: {
     displayName: 'Onion Name',
+    description: 'Name Kris gave Onion during the friendship scene.',
     valueType: 'map',
     valueRules: {
       map: {
@@ -1231,6 +2279,8 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.TALKED_QC]: {
     displayName: 'Talked to QC',
+    description:
+      'Conversation state with QC in Hometown, including whether Kris received the hot chocolate.',
     valueType: 'map',
     valueRules: {
       map: {
@@ -1241,7 +2291,8 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     },
   },
   [FLAGS.ASGORE_FLOWERS_PROGRESS]: {
-    displayName: 'Asgore Flowers Progress',
+    displayName: 'Asgore flowers',
+    description: 'Progress delivering flowers for Asgore in Hometown.',
     valueType: 'map',
     valueRules: {
       map: {
@@ -1255,6 +2306,7 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.EGG_FRIDGE]: {
     displayName: 'Egg Fridge',
+    description: "Whether the fridge egg interaction occurred in Kris's house.",
     valueType: 'map',
     valueRules: {
       map: {
@@ -1264,20 +2316,47 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
       },
     },
   },
+  [FLAGS.ASGORE_STAIRS_SIDE]: {
+    displayName: 'Asgore stairs door side',
+    description:
+      "Persists which door side is active when going upstairs in Asgore's fridge area.",
+    valueType: 'number',
+  },
   [FLAGS.TALKED_CATTY]: {
-    displayName: 'Talked to Catty',
+    displayName: 'Catty',
+    description: 'Whether Catty was talked to in Hometown.',
+    valueType: 'boolean',
+  },
+  [FLAGS.UNUSED_TORIEL_TALK]: {
+    displayName: 'Unused Toriel talk',
+    description: 'Progress in an unused Toriel conversation variant.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        '-10': 'Kris...?',
+        0: 'Headband',
+        1: 'Go to bed',
+      },
+    },
+  },
+  [FLAGS.CALLED_IN_HOUSE]: {
+    displayName: 'Called home from house',
+    description: "Whether Toriel's home phone was called while at home.",
     valueType: 'boolean',
   },
   [FLAGS.TALKED_ALPHYS]: {
-    displayName: 'Talked to Alphys',
+    displayName: 'Alphys',
+    description: 'Whether Alphys was talked to in Hometown.',
     valueType: 'boolean',
   },
   [FLAGS.TALKED_UNDYNE]: {
-    displayName: 'Talked to Undyne',
+    displayName: 'Undyne',
+    description: 'Whether Undyne was talked to in Hometown.',
     valueType: 'boolean',
   },
   [FLAGS.TALKED_BURGERPANTS]: {
-    displayName: 'Talked to Burgerpants',
+    displayName: 'Burgerpants',
+    description: 'Conversation state with Burgerpants in Hometown.',
     valueType: 'map',
     valueRules: {
       map: {
@@ -1287,8 +2366,16 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
       },
     },
   },
+  [FLAGS.TIMES_CALLED_MOM]: {
+    displayName: 'Times called Toriel',
+    description:
+      'Times Toriel was called after school. If zero when leaving school, she calls instead.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
   [FLAGS.TALKED_SANS]: {
-    displayName: 'Talked to Sans',
+    displayName: 'Sans',
+    description: 'Conversation state with Sans in Hometown.',
     valueType: 'map',
     valueRules: {
       map: {
@@ -1299,7 +2386,9 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     },
   },
   [FLAGS.GOT_SANS_PHONE]: {
-    displayName: `Got Sans's phone number`,
+    displayName: `Sans's number`,
+    description:
+      "Whether Kris received and used Sans's phone number after talking to him outside his store.",
     valueType: 'map',
     valueRules: {
       map: {
@@ -1309,8 +2398,22 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
       },
     },
   },
+  [FLAGS.IDIOT_BABY_STATUS]: {
+    displayName: 'Idiot baby status',
+    description: 'What Sans called you after getting his phone number.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Idiot',
+        2: 'Baby',
+        3: 'Idiot Baby',
+      },
+    },
+  },
   [FLAGS.TALKED_NOELLE]: {
-    displayName: 'Talked to Noelle',
+    displayName: 'Noelle',
+    description: 'Conversation state with Noelle in Hometown.',
     valueType: 'map',
     valueRules: {
       map: {
@@ -1321,7 +2424,9 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     },
   },
   [FLAGS.ENTERED_HOME_COUNT]: {
-    displayName: 'Times you entered home',
+    displayName: 'Times entered home',
+    description:
+      'The number of times you have returned home at the end of Chapter 1. Special dialogue at 0, 1, and 7. Stops counting at 8.',
     valueType: 'number',
     valueRules: {
       min: 0,
@@ -1329,15 +2434,142 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     },
   },
   [FLAGS.USED_RUDY_SINK]: {
-    displayName: `Used Rudy's sink in hospital`,
+    displayName: `Rudy's sink`,
+    description:
+      'Whether the sink was used at the Holiday house in Chapter 1. Rudy comments on loving the sink.',
+    valueType: 'boolean',
+  },
+  [FLAGS.LOADED_LEGACY_FILE]: {
+    displayName: 'Loaded legacy file',
+    description:
+      'Set to 1 while loading a Chapter 1 file with different room offsets. On an old file this can load into a Chapter 2 room.',
+    valueType: 'boolean',
+  },
+  [FLAGS.USED_SHADOW_CH1]: {
+    displayName: 'Shadow Crystal usage',
+    description:
+      'Your Shadow Crystal usage in Chapter 1. Unique dialogue if less than 2.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'Saw toys',
+        2: 'Not useful',
+      },
+    },
+  },
+  [FLAGS.USED_GLASS_ALONE]: {
+    displayName: 'Glass usage without Susie',
+    description: 'Your Glass usage without Susie around/in Chapter 1.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'Saw through hand',
+        2: 'Not useful',
+      },
+    },
+  },
+  [FLAGS.SOLVED_DICE_PUZZLE]: {
+    displayName: 'Solved dice puzzle',
+    description: 'Whether the suits puzzle for the Dice Brace was solved.',
+    valueType: 'boolean',
+  },
+  [FLAGS.MAZE_PROGRESS]: {
+    displayName: 'Forest maze progress',
+    description:
+      'Correct rooms cleared in the forest maze. Susie appears at 4, maze completes at 9.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.MAZE_FAIL_COUNT]: {
+    displayName: 'Forest maze wrong turns',
+    description:
+      "Volatile. Counts how much you've taken the wrong choice in the forest maze. Jumps straight to 3 (dead end) if you got lost before or found Susie.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.LANCER_DEADEND]: {
+    displayName: 'Lancer dead end count',
+    description: 'The number of times you found the Lancer dead end.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.SUSIE_DEADEND]: {
+    displayName: 'Susie dead end count',
+    description: 'The number of times you found the Susie dead end.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.YOURE_CLOVERS_MOM]: {
+    displayName: "Topchef thinks Susie is Clover's mom",
+    description:
+      'Whether Topchef was talked to after returning the Topcake in the pacifist ending.',
+    valueType: 'boolean',
+  },
+  [FLAGS.VISITED_JAIL]: {
+    displayName: 'Visited jail',
+    description: 'Whether the jail area was visited in Card Castle.',
     valueType: 'boolean',
   },
   [FLAGS.HUGGED_DUMMY]: {
-    displayName: 'Hugged Dummy',
+    displayName: 'Training dummy',
+    description:
+      'Whether the training dummy was hugged in Castle Town at Chapter 2 start.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_KING_PROLOGUE]: {
+    displayName: 'King',
+    description:
+      'Whether King was talked to in jail before entering Cyber World.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'Talked',
+        2: 'Left',
+      },
+    },
+  },
+  [FLAGS.TOY_DELIVER_PROGRESS]: {
+    displayName: 'Toy delivery progress',
+    description:
+      "Progress delivering Ralsei's first batch of subjects in Castle Town at the start of Chapter 2.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'Ball on head',
+        2: 'Toys delivered',
+      },
+    },
+  },
+  [FLAGS.BEEN_CALLED_NORMAL]: {
+    displayName: 'Saw Alphys and Toriel talk',
+    description:
+      "Whether Alphys and Toriel were seen talking about Kris. Alters Toriel's phone dialogue.",
+    valueType: 'boolean',
+  },
+  [FLAGS.SUSIE_ATE_CAKE]: {
+    displayName: 'Susie ate the cake',
+    description: "Whether Susie ate Ralsei's entire cake in Castle Town.",
+    valueType: 'boolean',
+  },
+  [FLAGS.TOLD_MOM_STUDYING]: {
+    displayName: 'Told Toriel about studying',
+    description:
+      'Whether Toriel was told Kris would study with Susie over the phone.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TOLD_MOM_ORB]: {
+    displayName: 'Called Toriel with trash orb',
+    description:
+      "Whether Toriel was called while nearby with a trash orb on Kris's head. Also sets TOLD_MOM_STUDYING.",
     valueType: 'boolean',
   },
   [FLAGS.CARNIVAL_GIFT]: {
-    displayName: 'Carnival Gift Recipient',
+    displayName: 'Carnival plush recipient',
+    description: 'Who received the plush at the acid river carnival ride.',
     valueType: 'map',
     valueRules: {
       map: {
@@ -1349,8 +2581,15 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
       },
     },
   },
+  [FLAGS.SEEN_EGGS_HUSBAND]: {
+    displayName: 'Saw Asgore egg scene',
+    description:
+      'Whether Asgore embarrassed himself in public at the egg fridge.',
+    valueType: 'boolean',
+  },
   [FLAGS.SPAMTON_PROGRESS]: {
     displayName: 'Spamton Progress',
+    description: 'Progress through Spamton encounters in Cyber World.',
     valueType: 'map',
     valueRules: {
       map: {
@@ -1365,8 +2604,93 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
       },
     },
   },
+  [FLAGS.FIRST_CHEESE_DESTROYED]: {
+    displayName: 'First cheese destroyed',
+    description:
+      'Whether the first cheese block on the left was destroyed in Cyber City.',
+    valueType: 'boolean',
+  },
+  [FLAGS.DESTROYED_CHEESE_ALONE]: {
+    displayName: 'Triggered first cheese alone',
+    description:
+      'Whether the first cheese was triggered without Noelle in party.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_SEAM_CH2]: {
+    displayName: 'Seam',
+    description:
+      'be set to 1 when you talk to Seam in Chapter 2, preventing them from repeating themselves.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_SPINCAKE_CH2]: {
+    displayName: 'SpinCake (fresh)',
+    description: 'Whether a fresh SpinCake was received since Chapter 2 began.',
+    valueType: 'boolean',
+  },
+  [FLAGS.MR_SOCIETY_LEFT]: {
+    displayName: 'Mr. Society left cliff',
+    description:
+      'Whether Mr. Society flew up the cliff after being talked to in Castle Town.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SEEN_SHELTER_SCENE]: {
+    displayName: 'Seen shelter scene',
+    description:
+      'Whether Monster Kid and Snowy fled Susie at the bunker and went home.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SEEN_HOSPITAL_SCENE]: {
+    displayName: 'Seen hospital scene',
+    description: 'Whether Noelle went home during Chapter 2 (either route).',
+    valueType: 'boolean',
+  },
+  [FLAGS.SEEN_POLICE_SCENE]: {
+    displayName: 'Police station dogs',
+    description: 'State of the dogs at the police station in Hometown.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'Dogs escaped',
+        2: 'Alarm playing',
+      },
+    },
+  },
+  [FLAGS.FERRIS_SCENE_PLOT]: {
+    displayName: 'Ferris wheel scene state',
+    description:
+      'Progress through the Ferris wheel scene where Suselle becomes canon. Resets to 2 after the scene ends.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'On Ferris wheel',
+        2: 'Off Ferris wheel',
+        3: 'Suselle canon reaction',
+      },
+    },
+  },
+  [FLAGS.TALKED_QUEENIE_BEANIE]: {
+    displayName: 'Saw King and Queen reunion',
+    description:
+      'Whether the reunion scene between King and Queen was seen in Castle Town.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SPAMTON_STRESS_RESPONSE]: {
+    displayName: 'Post-NEO stress response',
+    description: "Kris's answer after the Spamton NEO fight stress prompt.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'Said OK',
+        2: 'Said not OK',
+      },
+    },
+  },
   [FLAGS.RALSEI_PHOTO_STATUS]: {
     displayName: `Ralsei's Photo Type`,
+    description: "Whether Ralsei reacted to the hero photo in Queen's Mansion.",
     valueType: 'map',
     valueRules: {
       map: {
@@ -1378,44 +2702,569 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
       },
     },
   },
+  [FLAGS.ROUXLS_PIRATE_HAT]: {
+    displayName: 'Rouxls wearing pirate hat',
+    description: 'Whether Rouxls Kaard is currently wearing a pirate hat.',
+    valueType: 'boolean',
+  },
+  [FLAGS.INTERACTED_HATHYX_WWW]: {
+    displayName: 'Cafe Hathy and Werewerewire',
+    description:
+      'Whether Head Hathy and Werewerewire were interacted with together at the cafe.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_SPAMTON_KNIGHT]: {
+    displayName: 'Talked Spamton about Knight',
+    description:
+      'Whether you talked with Spamton about the Knight, changing his talk option to Friends.',
+    valueType: 'boolean',
+  },
+  [FLAGS.FOUND_TASQUE_SWITCH]: {
+    displayName: 'Found Tasque maze switch',
+    description:
+      'Whether the hidden switch in the Tasque maze area was flipped.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SEEN_FERRIS_SCENE]: {
+    displayName: 'Ferris scene completed',
+    description: 'Set after the Ferris wheel scene finishes, even if skipped.',
+    valueType: 'boolean',
+  },
+  [FLAGS.FOUND_MAZE_SWITCH]: {
+    displayName: 'Found old maze switch',
+    description:
+      "Whether you found the maze shortcut switch in Queen's Mansion.",
+    valueType: 'boolean',
+  },
+  [FLAGS.SOLVED_AGREE2ALL]: {
+    displayName: 'Solved AGREE2ALL puzzle',
+    description: 'Whether you solved the AGREE2ALL puzzle.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SHOVEL_DOOR_OPEN]: {
+    displayName: 'Shovel room opened',
+    description: 'Whether the door to the room with 999 shovels was opened.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SUSIE_AVOID_ALPHYS]: {
+    displayName: 'Susie avoiding Alphys',
+    description:
+      'Whether Susie waits east rather than approach Alphys in Hometown.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_ALVIN]: {
+    displayName: 'Alvin',
+    description:
+      'Progress talking to Alvin about his father and the hammer at church.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'Talked once',
+        2: 'Talked twice',
+        3: 'Heard mumbling',
+      },
+    },
+  },
+  [FLAGS.FOUND_BASEMENT_SWITCH]: {
+    displayName: 'Mansion basement backdoor',
+    description:
+      "Whether you activated the secret backdoor to the mansion's basement. Alter's Hacker's dialogue.",
+    valueType: 'boolean',
+  },
+  [FLAGS.FOUND_SHORTCUT_OUT]: {
+    displayName: 'Mansion basement shortcut',
+    description:
+      "Whether the foyer shortcut switch was flipped in Queen's Mansion basement.",
+    valueType: 'boolean',
+  },
+  [FLAGS.SUSIE_AVOID_CATTI]: {
+    displayName: 'Susie avoiding diner',
+    description:
+      'Whether Susie refused to enter the diner because Catti is working.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CHOCOLATES_WHO_GAVE]: {
+    displayName: 'Heart chocolates recipient',
+    description: 'Who received the Box of Heart-Shaped Chocolates.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'Ate alone',
+        2: 'Shared with Susie',
+        3: 'Gave to Alphys',
+        4: 'Returned to Sans',
+      },
+    },
+  },
+  [FLAGS.MADE_HIGH_FIVE]: {
+    displayName: 'Giant high-five lever',
+    description:
+      'Whether you pulled the lever to make a giant high-five and progress the swan ride.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SOLVED_SAUCER_PUZZLE]: {
+    displayName: 'Solved first saucer puzzle',
+    description:
+      'Whether you completed the first shell game-style saucer puzzle.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SEEN_TOILET_STATUE]: {
+    displayName: 'Interacted with toilet statue',
+    description:
+      'Whether the Berdly statue in the toilet was interacted with. Spawns the waiting NPC outside.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SOLVED_SAUCER_SHORTCUT]: {
+    displayName: 'Saucer puzzle shortcut',
+    description: 'Whether a mansion shortcut was unlocked via a saucer puzzle.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TIMES_SEEN_STATUE]: {
+    displayName: 'Toilet statue interactions',
+    description:
+      'The number of times you interacted with the Berdly statue with Noelle with you. She has unique comments up to 8 on how obsessed you are with it.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.FROZEN_CHICKEN]: {
+    displayName: 'Frozen chicken block',
+    description:
+      'Whether there is a large ice crystal you cannot blocking the way.',
+    valueType: 'boolean',
+  },
+  [FLAGS.HATBOY_PLUGGED]: {
+    displayName: 'Hatboy Werewire plugged',
+    description:
+      "Whether you walked far enough away for the fedora'd Plugboy to get Werewired offscreen.",
+    valueType: 'boolean',
+  },
+  [FLAGS.MAZE_HINT_DEBUG]: {
+    displayName: 'Queen screen maze hint',
+    description: 'Queen screen maze hint popup state.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SOLVED_VIRO_DODGE]: {
+    displayName: 'Solved Viro Dodge',
+    description: 'Whether you got the key in room_dw_cyber_viro_ring.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TALK_TWO_CRYSTALS]: {
+    displayName: 'Talk Two Crystals',
+    description:
+      "How much you've talked to Seam since obtaining both Shadow Crystals.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'Gave both',
+        2: 'Talked about mantle',
+      },
+    },
+  },
+  [FLAGS.BAGELS_PURCHASED]: {
+    displayName: 'Bagels Purchased',
+    description:
+      'The number of CD Bagels you purchased from K_K. He stops selling them at six, in case somebody orders 400.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.LANCER_CARED_FOR]: {
+    displayName: 'Lancer Cared For',
+    description:
+      'Whether statue-Lancer has been pushed to the table and given his adorable bib.',
+    valueType: 'boolean',
+  },
   [FLAGS.RECRUITED_HACKER]: {
-    displayName: 'Recruited Hacker',
+    displayName: 'Hacker',
+    description: 'Whether the hacker was recruited in Cyber City.',
+    valueType: 'boolean',
+  },
+  [FLAGS.ENTERED_BASEMENT]: {
+    displayName: 'Entered Basement',
+    description:
+      "Tracks how many times you entered the basement alone. Does not go past 1 until you've seen Susie stealing Ralsei's glasses, after which it gets set to 2.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.MET_HACKER]: {
+    displayName: 'Met Hacker',
+    description:
+      'How far your conversation with the Hacker NPC has progressed.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'Talked',
+        2: 'Recruited',
+      },
+    },
+  },
+  [FLAGS.APPROACHED_CHEESE_MAZE]: {
+    displayName: 'Approached Cheese Maze',
+    description:
+      "Whether you've approached the cheese maze, destroying the lone cheese or triggering Noelle dialogue if it's already destroyed.",
+    valueType: 'boolean',
+  },
+  [FLAGS.DID_RIGHT_CHEESE_FIGHT]: {
+    displayName: 'Did Right Cheese Fight',
+    description:
+      'Whether the right-side cheese block fight was completed in Cyber City.',
+    valueType: 'boolean',
+  },
+  [FLAGS.MAUSWHEEL_DEFEATED]: {
+    displayName: 'Mauswheel Defeated',
+    description:
+      'Whether you defeated Mauswheel on the normal route, freeing the Swatchlings.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TASQUE_RELEASED]: {
+    displayName: 'Tasque Released',
+    description:
+      'Keeps one Tasque on the Cyber Field wall screen after you release it.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_CHESTMARK]: {
+    displayName: 'Got Chestmark',
+    description: 'Whether you got the Blue Checksmark from a treasure chest.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SOLVED_MICE_2]: {
+    displayName: 'Solved Mice 2',
+    description: "Progress on the second mice puzzle in Queen's Mansion.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        0.5: 'Mice in hole',
+        1: 'Forcefield down',
+      },
+    },
+  },
+  [FLAGS.SAW_RALSUSIE]: {
+    displayName: 'Saw Ralsusie',
+    description:
+      'Whether Noelle gave her one-time dialogue about seeing Ralsei and Susie having fun.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SOLVED_MANSION_TRAFFIC]: {
+    displayName: 'Solved Mansion Traffic',
+    description:
+      'Whether the traffic challenge at the end of floor 1F was completed, opening the room with the backdoor switch.',
+    valueType: 'boolean',
+  },
+  [FLAGS.FOUGHT_TASQUE_MANAGER]: {
+    displayName: 'Fought Tasque Manager',
+    description: 'Whether you fought Tasque Manager.',
+    valueType: 'boolean',
+  },
+  [FLAGS.UNLOCKED_EAST_BASEMENT]: {
+    displayName: 'Unlocked East Basement',
+    description:
+      'Whether the basement forcefield was disabled using the teacup puzzle.',
+    valueType: 'boolean',
+  },
+  [FLAGS.MICE_GOT_20]: {
+    displayName: 'Mice Got 20',
+    description: "Whether the mice got $20. Alters Mousemillian's dialogue.",
+    valueType: 'boolean',
+  },
+  [FLAGS.MICE_GOT_1]: {
+    displayName: 'Mice Got 1',
+    description: "Whether the mice got $1. Alters Mousemillian's dialogue.",
+    valueType: 'boolean',
+  },
+  [FLAGS.FUNNY_BUTLER_PROGRESS]: {
+    displayName: 'Funny Butler Progress',
+    description:
+      'Progress in the room with the Swatchling and the bridges and the unavoidable vase.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'Swatchling freed',
+        2: 'Vase spawned',
+      },
+    },
+  },
+  [FLAGS.MOUSELOTTERY_SOLVED]: {
+    displayName: 'Mouselottery Solved',
+    description: 'Whether the mice have triggered the blue house.',
+    valueType: 'boolean',
+  },
+  [FLAGS.MOUSELOTTERY_SOLVED_2]: {
+    displayName: 'Mouselottery Solved 2',
+    description: 'Whether the mice have triggered the red house.',
+    valueType: 'boolean',
+  },
+  [FLAGS.NOELLE_BEAT_FEAR]: {
+    displayName: 'Noelle Beat Fear',
+    description: 'Whether Noelle stopped being afraid of mice.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CALLED_MOM_AFTER_LAB]: {
+    displayName: 'Called Mom After Lab',
+    description:
+      'Whether you called Toriel after leaving the computer lab. Prevents her from repeating her dialogue.',
+    valueType: 'boolean',
+  },
+  [FLAGS.DOG_OPENED_DOOR]: {
+    displayName: 'Dog Opened Door',
+    description:
+      'Whether the dog, ah, forced open the double door in the bajillion platters room in the mansion.',
+    valueType: 'boolean',
+  },
+  [FLAGS.DINING_HALL_COMPLETE]: {
+    displayName: 'Dining Hall Complete',
+    description: 'Whether you finished the ultimate dining hall puzzle.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SOLVED_FORCEFIELD_1]: {
+    displayName: 'Solved Forcefield 1',
+    description:
+      'Whether you successfully activated both switches in the first forcefield puzzle, disabling it forever.',
+    valueType: 'boolean',
+  },
+  [FLAGS.FOUGHT_CHEESE_MAZE]: {
+    displayName: 'Fought Cheese Maze',
+    description:
+      'Whether you touched the cheese maze, triggering an encounter and destroying it.',
+    valueType: 'boolean',
+  },
+  [FLAGS.BALANCE_POT_STATUS]: {
+    displayName: 'Balance Pot Status',
+    description: 'What happened in the vase-balancing minigame.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'Dropped pot',
+        2: 'Success',
+      },
+    },
+  },
+  [FLAGS.VISITED_SPAMTON]: {
+    displayName: 'Visited Spamton',
+    description:
+      "Prevents you from getting repeat dialogue every single time you visit Spamton's shop.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'First time in shop',
+        2: 'Exited',
+      },
+    },
+  },
+  [FLAGS.RETURNED_CASTLE_TOWN]: {
+    displayName: 'Queen introduced Castle Town',
+    description: "Whether you've seen Queen introduce herself to Castle Town.",
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_NO_RECRUITS]: {
+    displayName: 'Got No Recruits',
+    description:
+      'Whether you sealed the Fountain with no recruits at all, on the normal route anyway.',
+    valueType: 'boolean',
+  },
+  [FLAGS.FOUGHT_BRIDGE_WEREWIRE]: {
+    displayName: 'Fought Bridge Werewire',
+    description:
+      'Whether you fought the Werewire in the acid lake bridge room, unlocking the Revive Dust chest.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SOLVED_APPLE_PUZZLE]: {
+    displayName: 'Solved Apple Puzzle',
+    description: "Whether you unlocked the way to NUBERT'S TREASURE.",
+    valueType: 'boolean',
+  },
+  [FLAGS.FOUGHT_FIRST_VIRO]: {
+    displayName: 'Fought First Viro',
+    description:
+      'Whether you encountered the first Virovirokun. It flies in a circle afterward instead of staying still.',
+    valueType: 'boolean',
+  },
+  [FLAGS.BOOKCASE_OVERRIDE_3F]: {
+    displayName: '3F bookcase shortcut (Snowgrave)',
+    description: 'Unlocks a mansion shortcut early on the Snowgrave route.',
+    valueType: 'boolean',
+  },
+  [FLAGS.STOLE_SUSIE_STATUE]: {
+    displayName: 'Stole Susie Statue',
+    description: "Whether you stole the Susie statue from Noelle's room.",
+    valueType: 'boolean',
+  },
+  [FLAGS.STOLE_ICE_E_STATUE]: {
+    displayName: 'Stole Ice E Statue',
+    description: "Whether you stole the Ice-E statue from Noelle's room.",
+    valueType: 'boolean',
+  },
+  [FLAGS.OPENED_SIDEA_PAINTING]: {
+    displayName: 'Opened Sidea Painting',
+    description:
+      "Whether the Side A painting was activated to open a passageway in Queen's Mansion.",
+    valueType: 'boolean',
+  },
+  [FLAGS.OPENED_SIDEB_PAINTING]: {
+    displayName: 'Opened Sideb Painting',
+    description:
+      "Whether the Side B painting was activated to open a passageway in Queen's Mansion.",
+    valueType: 'boolean',
+  },
+  [FLAGS.PAINTINGS_ACTIVE]: {
+    displayName: 'Paintings Active',
+    description:
+      'Whether Queen warned you not to take your eyes off her paintings, and activated the painting fireballs.',
+    valueType: 'boolean',
+  },
+  [FLAGS.ACTIVATED_MINT_PAINTING]: {
+    displayName: 'Activated mint painting',
+    description:
+      'Whether you activated the Revive Mint painting with a different painting.',
+    valueType: 'boolean',
+  },
+  [FLAGS.ACTIVATED_PAINTING_EXIT]: {
+    displayName: 'Disabled exit fire painting',
+    description:
+      'Whether you disabled a fire painting blocking the exit by interacting with a different painting.',
+    valueType: 'boolean',
+  },
+  [FLAGS.VASE_INTRO_STATUS]: {
+    displayName: 'Vase Intro Status',
+    description: "Your progress in learning the basics of Queen's Mansion.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'Learned rules',
+        2: 'Broke vase',
+      },
+    },
+  },
+  [FLAGS.GOT_CHESTMARK_2]: {
+    displayName: 'Got Chestmark 2',
+    description: 'Whether you got the second Chest-Checksmark.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SEEN_DJS_FLYBY]: {
+    displayName: 'Seen Djs Flyby',
+    description:
+      "Whether you saw Sweet Cap'n Cakes fly by after fighting them.",
     valueType: 'boolean',
   },
   [FLAGS.INSPECTED_BED_KRIS]: {
-    displayName: `Inspected Kris's Bed`,
+    displayName: `Kris's bed`,
+    description:
+      "Whether Kris's bed was inspected in Queen's Mansion for the Bed Inspector title.",
     valueType: 'boolean',
   },
   [FLAGS.INSPECTED_BED_SUSIE]: {
-    displayName: `Inspected Susie's Bed`,
+    displayName: `Susie's bed`,
+    description:
+      "Whether Susie's bed was inspected in Queen's Mansion for the Bed Inspector title.",
     valueType: 'boolean',
   },
   [FLAGS.INSPECTED_BED_LANCER]: {
-    displayName: `Inspected Lancer's Bed`,
+    displayName: `Lancer's bed`,
+    description:
+      "Whether Lancer's bed was inspected in Queen's Mansion for the Bed Inspector title.",
     valueType: 'boolean',
   },
   [FLAGS.INSPECTED_BED_CLOVER]: {
-    displayName: `Inspected Clover's Bed`,
+    displayName: `Clover's bed`,
+    description:
+      "Whether Clover's bed was inspected in Queen's Mansion for the Bed Inspector title.",
     valueType: 'boolean',
   },
   [FLAGS.INSPECTED_BED_NOELLE]: {
-    displayName: `Inspected Noelle's Bed`,
+    displayName: `Noelle's bed`,
+    description:
+      "Whether Noelle's bed was inspected in Queen's Mansion for the Bed Inspector title.",
     valueType: 'boolean',
   },
   [FLAGS.INSPECTED_BEDS_CH2]: {
-    displayName: 'Got Bed Inspector Title',
+    displayName: 'Bed Inspector',
+    description:
+      "Whether you earned the Bed Inspector title by inspecting every party bed in Queen's Mansion.",
+    valueType: 'boolean',
+  },
+  [FLAGS.MICE_ATTACK_REASON]: {
+    displayName: 'Mice Attack Reason',
+    description:
+      'Answer when Noelle asked what the mice looked like during the attack.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'They like you',
+        2: 'Unknown',
+        3: 'You look like her',
+      },
+    },
+  },
+  [FLAGS.FIELD_TEMPSAVE]: {
+    displayName: 'Field Tempsave',
+    description:
+      "Whether you returned to the Cyber Field hub after defeating Sweet Cap'n Cakes and triggered a tempsave.",
+    valueType: 'boolean',
+  },
+  [FLAGS.TRASH_TEMPSAVE]: {
+    displayName: 'Trash Tempsave',
+    description:
+      'Whether you reached Cyber City by falling into the dump and triggered a tempsave.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_SHOE]: {
+    displayName: 'Got Shoe',
+    description:
+      "Whether you got a free sample from Cyber Shoes. Alters Lancer's dialogue and prevents a Mansion tempsave from happening (reused flag).",
+    valueType: 'boolean',
+  },
+  [FLAGS.TASQUE_MANAGER_RESPONSE]: {
+    displayName: 'Tasque Manager Response',
+    description:
+      "Whether you got all or most of Tasque Manager's questions correct. She starts with 100% if all, 50% if you miss the last due to her phrasing.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'All correct',
+        2: 'Thought alphabetical',
+      },
+    },
+  },
+  [FLAGS.GIASFELFEBREHBER]: {
+    displayName: 'Giasfelfebrehber typing puzzle',
+    description:
+      'Whether you solved the Giasfclfebrebrebrebehr typing puzzle, earning the third Blue Checksmark.',
+    valueType: 'boolean',
+  },
+  [FLAGS.NOELLE_FRIEND]: {
+    displayName: 'Noelle Friend',
+    description:
+      "Whether you told Noelle you were 'something else.' Necessary for Snowgrave.",
     valueType: 'boolean',
   },
   [FLAGS.TALKED_METTATON]: {
-    displayName: 'Talked to Mettaton',
+    displayName: 'Mettaton',
+    description: 'Whether Mettaton was talked to in Hometown during Chapter 2.',
     valueType: 'boolean',
   },
+  [FLAGS.STOLEN_BAGELS]: {
+    displayName: 'Stolen Bagels',
+    description: 'How many CD Bagels you stole on the Snowgrave Route (0-4).',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
   [FLAGS.ONION_CH2]: {
-    displayName: 'Talked to Onion',
+    displayName: 'Onion',
+    description: 'Whether Onion was talked to in Chapter 2 Hometown.',
     valueType: 'boolean',
   },
   [FLAGS.ONION_MISSED]: {
-    displayName: 'Did you miss Onion?',
+    displayName: 'Missed Onion?',
+    description: 'Whether Kris missed befriending Onion in Chapter 1.',
     valueType: 'map',
     valueRules: {
       map: {
@@ -1425,105 +3274,2302 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
       },
     },
   },
+  [FLAGS.SWATCHLING_COMBO]: {
+    displayName: 'Swatchling fight combo',
+    description:
+      'Volatile. The current combination of Swatchlings you are fighting. Later ones are harder, generally.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'ROB',
+        1: 'BGY',
+        2: 'ROY',
+        3: 'BYR',
+        4: 'RBY',
+        5: 'BYG',
+        6: 'RYB',
+        7: 'BRY',
+        8: 'YGO',
+        '-1': 'RRB',
+      },
+    },
+  },
+  [FLAGS.UNLOCKED_MINT_CHEST]: {
+    displayName: 'Unlocked Mint Chest',
+    description:
+      'Whether Virovirokun triggered the hidden path to the Revive Mint chest.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SAW_SWEET]: {
+    displayName: 'Saw Sweet',
+    description:
+      'Whether you saw Sweet right after the first teacup ride. Prevents him from appearing multiple times.',
+    valueType: 'boolean',
+  },
+  [FLAGS.STATUE_SINK_PROGRESS]: {
+    displayName: 'Statue Sink Progress',
+    description:
+      "How far Queen's acid-lake statue has sunk, in frames. Persists if you leave the room.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
   [FLAGS.TOOK_ASRIEL_MONEY]: {
-    displayName: `Took Asriel's money`,
+    displayName: `Asriel's money`,
+    description: "Whether Kris took money from Asriel's room.",
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_JOE_CH2]: {
+    displayName: 'Joe',
+    description:
+      'Whether you talked to Jigsaw Joe yet in the Party Dojo, which he introduces.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TOLD_TO_EXPLORE]: {
+    displayName: 'Told To Explore',
+    description:
+      'Whether Ralsei told you and Susie to explore the Castle Town yet.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TOLD_TO_RUN_CH2]: {
+    displayName: 'Told to run',
+    description:
+      'Whether Susie reminded you that you can run in this game (if you fail to do so in the chapter).',
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_OUR_DEAL]: {
+    displayName: 'Talked Our Deal',
+    description:
+      'Whether Spamton told you about our deal and the machine in the basement. Prevents him from skipping it if you buy KeyGen first.',
+    valueType: 'boolean',
+  },
+  [FLAGS.HOUSE_GAME_WINNER]: {
+    displayName: 'House Game Winner',
+    description: "Who won Rouxls's house minigame.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'Rouxls',
+        2: 'Kris',
+        3: 'Draw',
+      },
+    },
+  },
+  [FLAGS.CALLED_MOM_BUSY]: {
+    displayName: 'Called Mom Busy',
+    description:
+      "Whether you called home during the Chapter 2 end sequence. Unique dialogue the first time, then everyone's too busy to pick it up.",
+    valueType: 'boolean',
+  },
+  [FLAGS.FAVE_PARTY_MEMBER_2]: {
+    displayName: 'Fave Party Member 2',
+    description:
+      "Who you said you would take to the festival in the Chapter 2 ending (Susie's question).",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'Noelle',
+        2: 'Ralsei',
+        3: 'Susie',
+        4: 'Chose ellipsis (...)',
+      },
+    },
+  },
+  [FLAGS.TUTOR_VIRO_LOCATION]: {
+    displayName: 'Tutor Viro Location',
+    description:
+      'Where you fought the tutorial Virovirokun. Persists its ice statue in Snowgrave.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'Progressed',
+        2: 'Backtracked',
+      },
+    },
+  },
+  [FLAGS.DEPOSITED_CH2_EGG]: {
+    displayName: 'Deposited egg',
+    description: "Whether you put the egg in the egg basket in Sans's store.",
+    valueType: 'boolean',
+  },
+  [FLAGS.INTERACTED_FERRIS_POSTER]: {
+    displayName: 'Interacted Ferris Poster',
+    description:
+      'Whether you interacted with the Ferris wheel poster with Noelle. One-time event.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_FRIEND_ADDISON]: {
+    displayName: 'Talked Friend Addison',
+    description:
+      'Whether you talked to the Addison selling Dating Shoes. One-time event. Related to NOELLE_FRIEND.',
+    valueType: 'boolean',
+  },
+  [FLAGS.LEARNED_TEACUPS]: {
+    displayName: 'Learned Teacups',
+    description:
+      'Whether you took your first teacup ride and got the operating tutorial.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TOLD_SAVE_TOWN]: {
+    displayName: 'Told Save Town',
+    description:
+      'Whether Ralsei told you that you can SAVE and take a break in Castle Town.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TOLD_VISIT_TOWN]: {
+    displayName: 'Told Visit Town',
+    description:
+      'Whether Susie told you to go back and check out Castle Town, if you went down south first.',
+    valueType: 'boolean',
+  },
+  [FLAGS.READ_CLEANING_POSTER]: {
+    displayName: 'Read Cleaning Poster',
+    description:
+      'Whether you interacted with the poster for Queen Cleaning Agent with Noelle behind you. Interesting dialogue exclusive to non-Snowgrave.',
+    valueType: 'boolean',
+  },
+  [FLAGS.WENT_WEIRD_DOOR]: {
+    displayName: 'Went Weird Door',
+    description:
+      'Whether you brought Noelle all the way back to the gray door. Unique dialogue about its creepiness, but not required for Snowgrave.',
+    valueType: 'boolean',
+  },
+  [FLAGS.BROKE_BALLOON_CHEESE]: {
+    displayName: 'Broke Balloon Cheese',
+    description:
+      'Whether you dropped the balloon cheese before the mice basket puzzle.',
+    valueType: 'boolean',
+  },
+  [FLAGS.FINISHED_BIG_FORCEFIELD]: {
+    displayName: 'Finished Big Forcefield',
+    description:
+      'Whether you disabled the right-side forcefields in the room where Noelle holds a button.',
+    valueType: 'boolean',
+  },
+  [FLAGS.EASTER_EGG_FORCEFIELD]: {
+    displayName: 'Easter Egg Forcefield',
+    description:
+      'Whether you disabled the Easter egg forcefield (with the balloons) by all getting in one teacup.',
+    valueType: 'boolean',
+  },
+  [FLAGS.EASTER_TEACUP_PLOT]: {
+    displayName: 'Easter Teacup Plot',
+    description: 'Progress in the balloon-teacup Easter egg.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'Read sign',
+        2: 'Rode teacups',
+      },
+    },
+  },
+  [FLAGS.TALKED_ABOUT_PAP]: {
+    displayName: 'Talked About Pap',
+    description:
+      "Whether you talked to Sans about Papyrus in both chapters 1 and 2. Talking in Chapter 2 only isn't saved.",
+    valueType: 'boolean',
+  },
+  [FLAGS.TOLD_WRONGWAY]: {
+    displayName: 'Told Wrongway',
+    description:
+      'Whether Noelle questioned if you were going the right way while backtracking further into the trash zone.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_SNOWGRAVE_NEO]: {
+    displayName: 'Talked Snowgrave Neo',
+    description:
+      "Whether you talked to Spamton through the basement door while he was changing forms. He doesn't repeat himself.",
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_DEALMAKER]: {
+    displayName: 'Got Dealmaker',
+    description: 'Whether you spared Spamton NEO and received the Dealmaker.',
+    valueType: 'boolean',
+  },
+  [FLAGS.RIDE_WITH_ME]: {
+    displayName: 'Ride With Me',
+    description: "Whether you said 'Noelle will ride with me' on Snowgrave.",
+    valueType: 'boolean',
+  },
+  [FLAGS.BEAT_SNOWGRAVE_NEO]: {
+    displayName: 'Beat Snowgrave Neo',
+    description: 'Whether you defeated Spamton NEO on Snowgrave.',
     valueType: 'boolean',
   },
   [FLAGS.BERDLY_BROKEN_ARM]: {
-    displayName: `Berdly's Arm Broken`,
+    displayName: 'Broken arm',
+    description:
+      "State of Berdly's arm after the hospital scene; inverted so the broken-arm state is represented by false.",
     valueType: 'boolean',
     valueRules: {
       invertedBoolean: true,
     },
   },
+  [FLAGS.HOUSES_HIT]: {
+    displayName: 'Houses Hit',
+    description:
+      'The number of houses you hit with the swan boat, converted to TP at the start of the Rouxls fight. Maximum 7.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.PUT_DISK_MANNEQUIN]: {
+    displayName: 'Put Disk Mannequin',
+    description:
+      "Whether you tried to put the LoadedDisk into the Mannequin. It doesn't repeat.",
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_JEVIL_HOLE]: {
+    displayName: 'Got Jevil Hole',
+    description:
+      'Whether you got the Jevil item from the Castle Town hole. Accessed, but not necessary.',
+    valueType: 'boolean',
+  },
+  [FLAGS.INTERACTED_SINK_CH2]: {
+    displayName: 'Interacted with sink',
+    description:
+      "Whether Rudy's sink was interacted with during Chapter 2. Related to the Chapter 1 Rudy sink flag.",
+    valueType: 'boolean',
+  },
   [FLAGS.CARS_HIT_COUNT]: {
     displayName: 'Cars Hit Count',
+    description: 'How many cars were hit during the Cyber City traffic dodge.',
     valueType: 'number',
     valueRules: {
       min: 0,
     },
   },
-  [FLAGS.RECRUIT_DEBUG]: { displayName: 'RECRUIT_DEBUG' },
-  [FLAGS.RECRUIT_LANCER_1]: { displayName: 'RECRUIT_LANCER_1' },
-  [FLAGS.RECRUIT_DUMMY]: { displayName: 'RECRUIT_DUMMY' },
-  [FLAGS.RECRUIT_RALSEI_TUTORIAL]: { displayName: 'RECRUIT_RALSEI_TUTORIAL' },
-  [FLAGS.RECRUIT_RUDINN]: { displayName: 'RECRUIT_RUDINN' },
-  [FLAGS.RECRUIT_HATHY]: { displayName: 'RECRUIT_HATHY' },
-  [FLAGS.RECRUIT_CLOVER_1]: { displayName: 'RECRUIT_CLOVER_1' },
-  [FLAGS.RECRUIT_C_ROUND]: { displayName: 'RECRUIT_C_ROUND' },
-  [FLAGS.RECRUIT_K_ROUND_1]: { displayName: 'RECRUIT_K_ROUND_1' },
-  [FLAGS.RECRUIT_PONMAN]: { displayName: 'RECRUIT_PONMAN' },
-  [FLAGS.RECRUIT_LANCER_2]: { displayName: 'RECRUIT_LANCER_2' },
-  [FLAGS.RECRUIT_RABBICK]: { displayName: 'RECRUIT_RABBICK' },
-  [FLAGS.RECRUIT_BLOXER]: { displayName: 'RECRUIT_BLOXER' },
-  [FLAGS.RECRUIT_JIGSAWRY]: { displayName: 'RECRUIT_JIGSAWRY' },
-  [FLAGS.RECRUIT_CLOVER_2]: { displayName: 'RECRUIT_CLOVER_2' },
-  [FLAGS.RECRUIT_DOOMTANK]: { displayName: 'RECRUIT_DOOMTANK' },
-  [FLAGS.RECRUIT_LANCER_3]: { displayName: 'RECRUIT_LANCER_3' },
-  [FLAGS.RECRUIT_SUSIE_AND_LANCER]: { displayName: 'RECRUIT_SUSIE_AND_LANCER' },
-  [FLAGS.RECRUIT_JEVIL]: { displayName: 'RECRUIT_JEVIL' },
-  [FLAGS.RECRUIT_K_ROUND_2]: { displayName: 'RECRUIT_K_ROUND_2' },
-  [FLAGS.RECRUIT_RUDINN_RANGER]: { displayName: 'RECRUIT_RUDINN_RANGER' },
-  [FLAGS.RECRUIT_HEAD_HATHY]: { displayName: 'RECRUIT_HEAD_HATHY' },
-  [FLAGS.RECRUIT_KING]: { displayName: 'RECRUIT_KING' },
-  [FLAGS.RECRUIT_AMBYU_LANCE]: { displayName: 'RECRUIT_AMBYU_LANCE' },
-  [FLAGS.RECRUIT_POPPUP]: { displayName: 'RECRUIT_POPPUP' },
-  [FLAGS.RECRUIT_TASQUE]: { displayName: 'RECRUIT_TASQUE' },
-  [FLAGS.RECRUIT_WEREWIRE]: { displayName: 'RECRUIT_WEREWIRE' },
-  [FLAGS.RECRUIT_MAUS]: { displayName: 'RECRUIT_MAUS' },
-  [FLAGS.RECRUIT_VIROVIROKUN]: { displayName: 'RECRUIT_VIROVIROKUN' },
-  [FLAGS.RECRUIT_SWATCHLING]: { displayName: 'RECRUIT_SWATCHLING' },
-  [FLAGS.RECRUIT_CAPN]: { displayName: 'RECRUIT_CAPN' },
-  [FLAGS.RECRUIT_K_K]: { displayName: 'RECRUIT_K_K' },
-  [FLAGS.RECRUIT_SWEET]: { displayName: 'RECRUIT_SWEET' },
-  [FLAGS.RECRUIT_WEREWEREWIRE]: { displayName: 'RECRUIT_WEREWEREWIRE' },
-  [FLAGS.RECRUIT_GRAZETEST]: { displayName: 'RECRUIT_GRAZETEST' },
-  [FLAGS.RECRUIT_TASQUE_MANAGER]: { displayName: 'RECRUIT_TASQUE_MANAGER' },
-  [FLAGS.RECRUIT_BERDLY_1]: { displayName: 'RECRUIT_BERDLY_1' },
-  [FLAGS.RECRUIT_MAUSWHEEL]: { displayName: 'RECRUIT_MAUSWHEEL' },
-  [FLAGS.RECRUIT_ROUXLS_1]: { displayName: 'RECRUIT_ROUXLS_1' },
-  [FLAGS.RECRUIT_BERDLY_2]: { displayName: 'RECRUIT_BERDLY_2' },
-  [FLAGS.RECRUIT_CLOVER_DOJO]: { displayName: 'RECRUIT_CLOVER_2_DOJO' },
-  [FLAGS.RECRUIT_QUEEN]: { displayName: 'RECRUIT_QUEEN' },
-  [FLAGS.RECRUIT_SPAMTON]: { displayName: 'RECRUIT_SPAMTON' },
-  [FLAGS.RECRUIT_SPAMTON_NEO]: { displayName: 'RECRUIT_SPAMTON_NEO' },
-  [FLAGS.RECRUIT_GIGA_QUEEN]: { displayName: 'RECRUIT_GIGA_QUEEN' },
-  [FLAGS.RECRUIT_JIGSAW_JOE_DOJO]: { displayName: 'RECRUIT_JIGSAW_JOE_DOJO' },
-  [FLAGS.RECRUIT_PIPIS]: { displayName: 'RECRUIT_PIPIS' },
-  [FLAGS.RECRUIT_SHADOWGUY]: { displayName: 'RECRUIT_SHADOWGUY' },
-  [FLAGS.RECRUIT_SHUTTAH]: { displayName: 'RECRUIT_SHUTTAH' },
-  [FLAGS.RECRUIT_ZAPPER]: { displayName: 'RECRUIT_ZAPPER' },
-  [FLAGS.RECRUIT_RIBBICK]: { displayName: 'RECRUIT_RIBBICK' },
-  [FLAGS.RECRUIT_WATERCOOLER]: { displayName: 'RECRUIT_WATERCOOLER' },
-  [FLAGS.RECRUIT_PIPPINS]: { displayName: 'RECRUIT_PIPPINS' },
-  [FLAGS.RECRUIT_ELNINA]: { displayName: 'RECRUIT_ELNINA' },
-  [FLAGS.RECRUIT_LANINO]: { displayName: 'RECRUIT_LANINO' },
-  [FLAGS.RECRUIT_GUEI]: { displayName: 'RECRUIT_GUEI' },
-  [FLAGS.RECRUIT_BALTHIZARD]: { displayName: 'RECRUIT_BALTHIZARD' },
-  [FLAGS.RECRUIT_BIBLIOX]: { displayName: 'RECRUIT_BIBLIOX' },
-  [FLAGS.RECRUIT_MIZZLE]: { displayName: 'RECRUIT_MIZZLE' },
-  [FLAGS.RECRUIT_WICABEL]: { displayName: 'RECRUIT_WICABEL' },
-  [FLAGS.RECRUIT_WINGLADE]: { displayName: 'RECRUIT_WINGLADE' },
-  [FLAGS.RECRUIT_ORGANIKK]: { displayName: 'RECRUIT_ORGANIKK' },
-  [FLAGS.RECRUIT_MISS_MIZZLE]: { displayName: 'RECRUIT_MISS_MIZZLE' },
+  [FLAGS.READ_CYBERPEDIA]: {
+    displayName: 'Read Cyberpedia',
+    description: "Whether you read Ralsei's editable Cyberpedia entry.",
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_SWATCH]: {
+    displayName: 'Talked Swatch',
+    description:
+      'Whether you talked to Swatch in the Castle Town Cafe about removing Topchef. Poor man.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CAR_PART_COMPLETED]: {
+    displayName: 'Car Part Completed',
+    description:
+      "Whether you completed the car sequence. You can't get the tiny car on Snowgrave, even with all recruits, because of this.",
+    valueType: 'boolean',
+  },
+  [FLAGS.JUNKBALL_DROPPED]: {
+    displayName: 'Junkball Dropped',
+    description: 'Whether you dropped the Ball of Junk at any point.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CHESTMARK_OPENED]: {
+    displayName: 'Chestmark Opened',
+    description:
+      'Prevents reopening a marked chest after it was already opened.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SPAMTON_NO_ROOM]: {
+    displayName: 'Spamton No Room',
+    description:
+      'Whether you had no room after defeating Spamton NEO. Spawns the chest.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'No room (Pacifist)',
+        2: 'No room (Snowgrave)',
+      },
+    },
+  },
+  [FLAGS.CANT_GO_BACK_TIP]: {
+    displayName: 'Save point no-return warning',
+    description:
+      "Whether the save point reminded you that you can't go back to the Cyber World if you overwrite your save in Castle Town. Consider this carefully!",
+    valueType: 'boolean',
+  },
+  [FLAGS.TIMES_RUDINN_FOUGHT]: {
+    displayName: 'First Rudinn fight count',
+    description: 'Times the first Rudinn was fought. Changes encounter text.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.TRIPLE_HATHY_OUTCOME]: {
+    displayName: 'Triple Hathy encounter state',
+    description: 'Copied from LAST_ENCOUNTER_END on Checkers enemy battle end.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch1)',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.TIMES_PONMAN_FOUGHT]: {
+    displayName: 'Ponman fight count',
+    description:
+      'The number of times you fought Ponmen. Minor changes to the overworld chasing Ponmen.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.SUSIE_COMPLIMENTED]: {
+    displayName: 'Susie complimented Rudinn Ranger',
+    description:
+      'Whether Susie attempted to compliment Rudinn Ranger. Prevents repeating free ham sandwich day.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SUSIE_FLIRTED]: {
+    displayName: 'Susie flirt attempts on Head Hathy',
+    description:
+      'The number of times you used X-Flirt on Head Hathy. She tries the first time, makes Ralsei try the second, and you take over from the third.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.FOUGHT_RABBICK]: {
+    displayName: 'Fought Rabbick',
+    description:
+      'Whether you fought any Rabbicks. If so, they run slower in the forest maze. Also set when you fight Clover for some reason.',
+    valueType: 'boolean',
+  },
+  [FLAGS.FOUGHT_BLOXER]: {
+    displayName: 'Fought Bloxer',
+    description:
+      "Whether you fought Bloxer. If so, they don't chase you as diligently.",
+    valueType: 'boolean',
+  },
+  [FLAGS.FOUGHT_RUDINN_RANGER]: {
+    displayName: 'Fought Rudinn Ranger',
+    description:
+      "Whether you fought Rudinn Ranger. If so, they don't chase you at all.",
+    valueType: 'boolean',
+  },
+  [FLAGS.FOUGHT_HATHYX]: {
+    displayName: 'Fought Head Hathy',
+    description:
+      "Whether you fought Head Hathy. If so, they don't chase you at all.",
+    valueType: 'boolean',
+  },
+  [FLAGS.PIPPINS_R_ACT]: {
+    displayName: 'Pippins Ralsei ACT',
+    description:
+      'Whether the Ralsei ACT line was used on Pippins in Chapter 3.',
+    valueType: 'boolean',
+  },
+  [FLAGS.PIPPINS_S_ACT]: {
+    displayName: 'Pippins Susie ACT',
+    description: 'Whether the Susie ACT line was used on Pippins in Chapter 3.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SHUTTAH_S_ACT]: {
+    displayName: 'Shuttah Susie ACT',
+    description: 'Whether the Susie ACT line was used on Shuttah in Chapter 3.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SHUTTAH_R_ACT]: {
+    displayName: 'Shuttah Ralsei ACT',
+    description:
+      'Whether the Ralsei ACT line was used on Shuttah in Chapter 3.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SHUTTAH_KRIS_PIC]: {
+    displayName: 'Shuttah Kris photo',
+    description:
+      'Whether Shuttah took a photo of Kris during the Chapter 3 fight.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SHUTTAH_SUSIE_PIC]: {
+    displayName: 'Shuttah Susie photo',
+    description:
+      'Whether Shuttah took a photo of Susie during the Chapter 3 fight.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SHUTTAH_RALSEI_PIC]: {
+    displayName: 'Shuttah Ralsei photo',
+    description:
+      'Whether Shuttah took a photo of Ralsei during the Chapter 3 fight.',
+    valueType: 'boolean',
+  },
+  [FLAGS.RUDINN_VIOLENCES]: {
+    displayName: 'Rudinns beaten up',
+    description:
+      'Rudinns fought violently in Chapter 1. Subtracted from VIOLENCES if you apologize to Rudinn.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.HATHY_VIOLENCES]: {
+    displayName: 'Hathys beaten up',
+    description:
+      'Number of Hathys beaten up. Subtracts from the VIOLENCES counter when 2 or fewer and you apologize.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.CLOVER_VIOLENCE]: {
+    displayName: 'Beat up Clover',
+    description:
+      'Whether Clover was fought violently the first time. Cannot be apologized for.',
+    valueType: 'boolean',
+  },
+  [FLAGS.RUDINN_SUSIE_WHACKS]: {
+    displayName: 'Susie Rudinn whacks',
+    description:
+      'Tracks Susie attacking Rudinns during autosave battles. Superseded by Autosusie Violences.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.HATHY_SUSIE_WHACKS]: {
+    displayName: 'Susie Hathy whacks',
+    description:
+      'Tracks Susie attacking Hathys during autosave battles. Superseded by Autosusie Violences.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.ENCOUNT_FIRST_WW]: {
+    displayName: 'Encount First Ww',
+    description: 'Tracks the state of the first random Werewire encounter.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Violenced (includes SnowGrave)',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch. 1)',
+        5: 'Susie (unused)',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_FIRST_TASQ]: {
+    displayName: 'First Tasque fight',
+    description:
+      "Tracks the state of the first random Tasque encounter, the one that jumps out at you. Then it's reused for like Giga Queen deaths or something, which is a little broken.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_FIRST_VIRO]: {
+    displayName: 'First Viro fight',
+    description:
+      'Tracks the state of the first Virovirokun encounter, the one en route to AGREE2ALL. Also reused for Giga Queen stuff.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_SMORGAS_2]: {
+    displayName: 'Smorgas fight',
+    description: 'Tracks the state of the Smorgasboard 2 encounter.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_BERDLY_1]: {
+    displayName: 'First Berdly fight',
+    description:
+      'Tracks the state of the first Berdly battle. Used to determine if he breaks his arm.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_POPPUP_1]: {
+    displayName: 'Encount Poppup 1',
+    description:
+      'Tracks the state of the first Poppup encounter, before you meet Noelle.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Violenced (includes SnowGrave)',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch. 1)',
+        5: 'Susie (unused)',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_TUTOR_VIRO]: {
+    displayName: 'Tutorial Viro fight',
+    description:
+      'Tracks the state of the Virovirokun that tells Noelle how to battle.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_AMBULANCE]: {
+    displayName: 'Ambulance fight',
+    description: 'Tracks the state of the first Ambyu-Lance encounter.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_ANTIVIRUS]: {
+    displayName: 'Antivirus fight',
+    description: 'Tracks the state of the Ambyu-Lance + Virovirokun encounter.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_DOUBLE_WW]: {
+    displayName: 'Encount Double Ww',
+    description:
+      'Tracks the state of the double Werewire encounter toward the middle of Cyber City.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Violenced (includes SnowGrave)',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch. 1)',
+        5: 'Susie (unused)',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_ERASER_VIRO]: {
+    displayName: 'Encount Eraser Viro',
+    description:
+      'Tracks the state of the double Virovirokun encounter blocking the way to the Bounce Blade.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Violenced (includes SnowGrave)',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch. 1)',
+        5: 'Susie (unused)',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_SINGLE_MAUS]: {
+    displayName: 'Encount Single Maus',
+    description:
+      'Tracks the state of the single Maus encounter when rubbing the cheese.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Violenced (includes SnowGrave)',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch. 1)',
+        5: 'Susie (unused)',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_MISC_MAUS]: {
+    displayName: 'Encount Misc Maus',
+    description:
+      'Tracks the state of Maus encounters when bumping into cheese.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Violenced (includes SnowGrave)',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch. 1)',
+        5: 'Susie (unused)',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_POPUP_MAUS]: {
+    displayName: 'Encount Popup Maus',
+    description:
+      'Tracks the state of the Poppup and Maus encounter after the last mouse puzzle.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Violenced (includes SnowGrave)',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch. 1)',
+        5: 'Susie (unused)',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_GLOWWRIST_TASQ]: {
+    displayName: 'Glowwrist Tasque fight',
+    description:
+      'Tracks the state of the second random Tasque encounter, in the room with the Glow Wrist and checksmark.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_BUTLERS_1]: {
+    displayName: 'Butlers fight',
+    description:
+      'Tracks the state of the first Swatchling encounter when disrespecting the pottery.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_BUTLERS_MANY]: {
+    displayName: 'Many Butlers fight',
+    description:
+      'Tracks the state of the second Swatchling encounter, in the room full of vases.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_TASK_MANAGER]: {
+    displayName: 'Task Manager fight',
+    description: 'Tracks the state of the Tasque Manager battle.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_MAUSWHEEL]: {
+    displayName: 'Encount Mauswheel',
+    description: 'Tracks the state of the Mauswheel battle.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Violenced (includes SnowGrave)',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch. 1)',
+        5: 'Susie (unused)',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_RUN_BUTLERS]: {
+    displayName: 'Run Butlers fight',
+    description:
+      'Tracks the state of the Swatchlings running after/from vases on 2F.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_ACID_WW]: {
+    displayName: 'Encount Acid Ww',
+    description: 'Tracks the state of the Werewires on the acid lake.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Violenced (includes SnowGrave)',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch. 1)',
+        5: 'Susie (unused)',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_ROUXLS]: {
+    displayName: 'Encount Rouxls',
+    description: 'Tracks the state of the Rouxls/Thrash Machine battle.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Violenced (includes SnowGrave)',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch. 1)',
+        5: 'Susie (unused)',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_WWW]: {
+    displayName: 'Encount Www',
+    description: 'Tracks the state of the Werewerewire encounter.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Violenced (includes SnowGrave)',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch. 1)',
+        5: 'Susie (unused)',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_QUEEN]: {
+    displayName: 'Queen fight',
+    description:
+      'Tracks the state of the normal Queen battle. Used to determine if Berdly breaks his arm.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_SPAMTON]: {
+    displayName: 'Encount Spamton',
+    description: 'Tracks the state of the normal Spamton battle.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Violenced (includes SnowGrave)',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch. 1)',
+        5: 'Susie (unused)',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_BERDLY_2]: {
+    displayName: 'Second Berdly fight',
+    description:
+      'Tracks the state of the second Berdly battle. Used to determine if he breaks his arm.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_GIGAQUEEN]: {
+    displayName: 'Encount Gigaqueen',
+    description: `Honestly I have no idea what gets properly saved to this or if it's ever accessed but take a wild guess.`,
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Violenced (includes SnowGrave)',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch. 1)',
+        5: 'Susie (unused)',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_SCRIPTED]: {
+    displayName: 'Encount Scripted',
+    description: `Tracks the state of various scripted encounters that are non-repeatable anyway (first Werewires and Sweet Cap'n Cakes).`,
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Violenced (includes SnowGrave)',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch. 1)',
+        5: 'Susie (unused)',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_TRIPLE_MEDIC]: {
+    displayName: 'Encount Triple Medic',
+    description:
+      'Tracks the state of the triple Ambyu-Lance encounter on Snowgrave in the big car room.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Violenced (includes SnowGrave)',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch. 1)',
+        5: 'Susie (unused)',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_TASK_VIRO]: {
+    displayName: 'Encount Task Viro',
+    description:
+      'Tracks the state of the double Virovirokun single Tasque encounter on Snowgrave.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Violenced (includes SnowGrave)',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch. 1)',
+        5: 'Susie (unused)',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_SG_MAICE]: {
+    displayName: 'Encount Sg Maice',
+    description:
+      'Tracks the state of the first Maice encounter on Snowgrave (no cheese is involved).',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Violenced (includes SnowGrave)',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch. 1)',
+        5: 'Susie (unused)',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_FLEE_TASK]: {
+    displayName: 'Encount Flee Task',
+    description:
+      'Tracks the state of the Snowgrave Tasques that run away from you.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Violenced (includes SnowGrave)',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch. 1)',
+        5: 'Susie (unused)',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_PIPIS_FAKE]: {
+    displayName: 'Encount Pipis Fake',
+    description: `Tracks the state of the last Pipis encounter you had in the dining hall. Well, it would. Pipis don't chase you.`,
+    valueType: 'number',
+  },
+  [FLAGS.ENCOUNT_TASQUE_RETURN]: {
+    displayName: 'Encount Tasque Return',
+    description: `Tracks the state of the Tasques and Swatchlings found when backtracking to Tasque Manager's room.`,
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Violenced (includes SnowGrave)',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch. 1)',
+        5: 'Susie (unused)',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_TRASH_POPUP]: {
+    displayName: 'Trash popup fight',
+    description:
+      'Tracks the state of the Poppups found when backtracking to the Trash Zone with Noelle.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_TRASH_VIRO]: {
+    displayName: 'Trash Viro fight',
+    description:
+      'Tracks the state of the Virovirokun found when backtracking to the Trash Zone on Snowgrave.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_TRASH_WW]: {
+    displayName: 'Trash Werewerewire fight',
+    description:
+      'Tracks the state of the Werewire found when backtracking to the Trash Zone on Snowgrave.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_ROAD_MEDIC]: {
+    displayName: 'Road Medic fight',
+    description:
+      'Tracks the state of the Ambyu-Lance found in the middle of the road on Snowgrave.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_ROAD_TASQUE]: {
+    displayName: 'Road Tasque fight',
+    description:
+      'Tracks the state of the Tasque found in the middle of the road on Snowgrave.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_ROAD_VIRO]: {
+    displayName: 'Road Viro fight',
+    description:
+      'Tracks the state of the Virovirokun found in the middle of the road on Snowgrave.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_ROAD_WW]: {
+    displayName: 'Road Werewerewire fight',
+    description:
+      'Tracks the state of the Werewire found in the middle of the road on Snowgrave.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_SG_MAICE_2]: {
+    displayName: 'Encount Sg Maice 2',
+    description: 'Tracks the state of the second Maice encounter on Snowgrave.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Violenced (includes SnowGrave)',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch. 1)',
+        5: 'Susie (unused)',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_SG_POPUP]: {
+    displayName: 'Encount Sg Popup',
+    description:
+      'Tracks the state of the double Poppup encounter that hides under a cone on Snowgrave.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Violenced (includes SnowGrave)',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch. 1)',
+        5: 'Susie (unused)',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_WWW_SG]: {
+    displayName: 'Encount Www Sg',
+    description: `That's gotta be the most abbreviated one yet! Tracks the state of Werewerewire on Snowgrave, since it's found elsewhere.`,
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Violenced (includes SnowGrave)',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch. 1)',
+        5: 'Susie (unused)',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_ULT_MEDIC]: {
+    displayName: 'Encount Ult Medic',
+    description:
+      'Tracks the state of the Ambyu-Lance encounter where Susie demonstrates UltimateHeal.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Violenced (includes SnowGrave)',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch. 1)',
+        5: 'Susie (unused)',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_SPAMTON_NEO]: {
+    displayName: 'Spamton NEO fight',
+    description: 'Outcome of the Spamton NEO boss fight in Chapter 2.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_VASE_POPPUP]: {
+    displayName: 'Encount Vase Poppup',
+    description:
+      'Tracks the state of the Poppup under the vase near where Susie and Ralsei leave you.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Violenced (includes SnowGrave)',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch. 1)',
+        5: 'Susie (unused)',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_CH3_580]: {
+    displayName: 'Board 3 zapper chase',
+    description:
+      "Outcome of the default Zapper chase encounter in Board 3 backstage stealth and on Tenna's game boards.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_CH3_581]: {
+    displayName: 'Zapper A chase',
+    description:
+      'Outcome of the Zapper chase encounter in the first Board 3 backstage stealth room.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_CH3_582]: {
+    displayName: 'Zapper B chase',
+    description:
+      'Outcome of the Zapper chase encounter in the second Board 3 backstage stealth room.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_CH3_583]: {
+    displayName: 'Zapper C chase',
+    description:
+      'Outcome of the Zapper chase encounter in the third Board 3 backstage stealth room.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_CH3_584]: {
+    displayName: 'Game Show Shuttah fight',
+    description:
+      'Outcome of the Shuttah boss encounter in the Game Show board 2 room.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_ROUXLS_WEATHER]: {
+    displayName: 'Rouxls weather fight',
+    description: 'Tracks the state of the Rouxls Kaard throuple battle.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_ZAPPER_SHUTTAH]: {
+    displayName: 'Zapper and Shuttah fight',
+    description:
+      'Outcome of the Zapper and Shuttah encounter in Chapter 3 TV World.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_FIRST_WATERCOOLER]: {
+    displayName: 'First Watercooler fight',
+    description:
+      'Outcome of the first Watercooler encounter in Chapter 3 TV World.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_CH3_588]: {
+    displayName: 'Board 3 watercooler fight',
+    description:
+      'Outcome of the Watercooler encounter in the Board 3 backstage stealth treasure room. Affects zapper dialogue about recruiting vs beating up the cooler.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_FIRST_ZAPPER]: {
+    displayName: 'First Zapper fight',
+    description: 'Outcome of the first Zapper encounter in Chapter 3 TV World.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_FIRST_SHADOWGUY]: {
+    displayName: 'First Shadowguy fight',
+    description:
+      'Outcome of the first Shadowguy encounter in Chapter 3 TV World.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_FIRST_RIBBICK]: {
+    displayName: 'First Ribbick fight',
+    description:
+      'Outcome of the first Ribbick encounter in Chapter 3 TV World.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_SECOND_WATERCOOLER]: {
+    displayName: 'Second Watercooler fight',
+    description:
+      'Outcome of the second Watercooler encounter in Chapter 3 TV World.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ENCOUNT_SECOND_RIBBICK]: {
+    displayName: 'Second Ribbick fight',
+    description:
+      'Outcome of the second Ribbick encounter in Chapter 3 TV World.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.RECRUIT_DEBUG]: {
+    displayName: 'Recruit slot (debug enemy)',
+    description: 'Internal recruit flag for debug enemy type 1.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_LANCER_1]: {
+    displayName: 'Lancer recruit slot',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_DUMMY]: {
+    displayName: 'Training dummy recruit slot',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_RALSEI_TUTORIAL]: {
+    displayName: 'Tutorial Ralsei recruit slot',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_RUDINN]: {
+    displayName: 'Rudinn recruit progress',
+    description:
+      'Castle Town party recruitment for Rudinn. Auto-set at Chapter 2 start if spared in Chapter 1.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_HATHY]: {
+    displayName: 'Hathy recruit progress',
+    description:
+      'Castle Town party recruitment for Hathy. Auto-set at Chapter 2 start if spared in Chapter 1.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_CLOVER_1]: {
+    displayName: 'Clover recruit slot (old)',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_C_ROUND]: {
+    displayName: 'C. Round recruit slot',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_K_ROUND_1]: {
+    displayName: 'K. Round recruit slot (first)',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_PONMAN]: {
+    displayName: 'Ponman recruit progress',
+    description:
+      'Castle Town party recruitment for Ponman. Auto-set at Chapter 2 start if spared in Chapter 1.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_LANCER_2]: {
+    displayName: 'Lancer recruit slot (second)',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_RABBICK]: {
+    displayName: 'Rabbick recruit progress',
+    description:
+      'Castle Town party recruitment for Rabbick. Auto-set at Chapter 2 start if spared in Chapter 1.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_BLOXER]: {
+    displayName: 'Bloxer recruit progress',
+    description:
+      'Castle Town party recruitment for Bloxer. Auto-set at Chapter 2 start if spared in Chapter 1.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_JIGSAWRY]: {
+    displayName: 'Jigsawry recruit progress',
+    description:
+      'Castle Town party recruitment for Jigsawry. Auto-set at Chapter 2 start if spared in Chapter 1.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_CLOVER_2]: {
+    displayName: 'Clover recruit slot (second)',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_DOOMTANK]: {
+    displayName: 'Doom Tank recruit slot',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_LANCER_3]: {
+    displayName: 'Lancer recruit slot (third)',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_SUSIE_AND_LANCER]: {
+    displayName: 'Susie and Lancer recruit slot',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_JEVIL]: {
+    displayName: 'JEVIL recruit progress',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_K_ROUND_2]: {
+    displayName: 'K. Round recruit slot (second)',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_RUDINN_RANGER]: {
+    displayName: 'Rudinn Ranger recruit progress',
+    description:
+      'Castle Town party recruitment for Rudinn Ranger. Auto-set at Chapter 2 start if spared in Chapter 1.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_HEAD_HATHY]: {
+    displayName: 'Head Hathy recruit progress',
+    description:
+      'Castle Town party recruitment for Head Hathy. Auto-set at Chapter 2 start if spared in Chapter 1.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_KING]: {
+    displayName: 'King recruit slot',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_AMBYU_LANCE]: {
+    displayName: 'Ambyu-Lance recruit progress',
+    description:
+      'Castle Town party recruitment for Ambyu-Lance. Requires sparing four times in Chapter 2.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_POPPUP]: {
+    displayName: 'Poppup recruit progress',
+    description:
+      'Castle Town party recruitment for Poppup. Requires sparing three times in Chapter 2.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_TASQUE]: {
+    displayName: 'Tasque recruit progress',
+    description:
+      'Castle Town party recruitment for Tasque. Requires sparing five times in Chapter 2.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_WEREWIRE]: {
+    displayName: 'Werewire recruit progress',
+    description:
+      'Castle Town party recruitment for Werewire. Requires sparing six times in Chapter 2.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_MAUS]: {
+    displayName: 'Maus recruit progress',
+    description:
+      'Castle Town party recruitment for Maus. Requires sparing three times in Chapter 2.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_VIROVIROKUN]: {
+    displayName: 'Virovirokun recruit progress',
+    description:
+      'Castle Town party recruitment for Virovirokun. Requires sparing four times in Chapter 2.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_SWATCHLING]: {
+    displayName: 'Swatchling recruit progress',
+    description:
+      'Castle Town party recruitment for Swatchling. Requires sparing five times in Chapter 2.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_CAPN]: {
+    displayName: "Cap'n recruit slot",
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_K_K]: {
+    displayName: 'K_K recruit slot',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_SWEET]: {
+    displayName: 'Sweet recruit slot',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_WEREWEREWIRE]: {
+    displayName: 'Werewerewire recruit progress',
+    description:
+      'Castle Town party recruitment for Werewerewire. Does not appear in the Chapter 2 fusion scene.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_GRAZETEST]: {
+    displayName: 'Graze test recruit slot',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_TASQUE_MANAGER]: {
+    displayName: 'Tasque Manager recruit progress',
+    description:
+      'Castle Town party recruitment for Tasque Manager. Not placeable in town.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_BERDLY_1]: {
+    displayName: 'Berdly recruit slot (first battle)',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_MAUSWHEEL]: {
+    displayName: 'Mauswheel recruit progress',
+    description: 'Castle Town party recruitment for Mauswheel.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_ROUXLS_1]: {
+    displayName: 'Rouxls Kaard recruit slot',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_BERDLY_2]: {
+    displayName: 'Berdly recruit slot (second battle)',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_CLOVER_DOJO]: {
+    displayName: 'Clover recruit slot (Party Dojo)',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_QUEEN]: {
+    displayName: 'Queen recruit slot',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_SPAMTON]: {
+    displayName: 'Spamton recruit slot',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_SPAMTON_NEO]: {
+    displayName: 'Spamton NEO recruit slot',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_GIGA_QUEEN]: {
+    displayName: 'GIGA Queen recruit slot',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_JIGSAW_JOE_DOJO]: {
+    displayName: 'Jigsaw Joe recruit slot (Party Dojo)',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_PIPIS]: {
+    displayName: 'Pipis recruit slot',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_SHADOWGUY]: {
+    displayName: 'Shadowguy recruit progress',
+    description:
+      'Castle Town party recruitment for Shadowguy. Requires sparing twenty-five times in Chapter 3.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_SHUTTAH]: {
+    displayName: 'Shuttah recruit progress',
+    description:
+      'Castle Town party recruitment for Shuttah. Requires sparing twice in Chapter 3.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_ZAPPER]: {
+    displayName: 'Zapper recruit progress',
+    description:
+      'Castle Town party recruitment for Zapper. Requires sparing twice in Chapter 3.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_RIBBICK]: {
+    displayName: 'Ribbick recruit progress',
+    description:
+      'Castle Town party recruitment for Ribbick. Requires sparing three times in Chapter 3.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_WATERCOOLER]: {
+    displayName: 'Watercooler recruit progress',
+    description: 'Castle Town party recruitment for Watercooler.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_PIPPINS]: {
+    displayName: 'Pippins recruit progress',
+    description:
+      'Castle Town party recruitment for Pippins. Requires sparing five times in Chapter 3.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_ELNINA]: {
+    displayName: 'Elnina recruit progress',
+    description:
+      'Castle Town party recruitment for Elnina. Requires both weather presenters. Special placement rules.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_LANINO]: {
+    displayName: 'Lanino recruit progress',
+    description:
+      'Castle Town party recruitment for Lanino. Requires both weather presenters. Special placement rules.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_GUEI]: {
+    displayName: 'Guei recruit progress',
+    description:
+      'Castle Town party recruitment for Guei. Requires sparing three times in Chapter 4.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_BALTHIZARD]: {
+    displayName: 'Balthizard recruit progress',
+    description:
+      'Castle Town party recruitment for Balthizard. Requires sparing four times in Chapter 4.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_BIBLIOX]: {
+    displayName: 'Bibliox recruit progress',
+    description:
+      'Castle Town party recruitment for Bibliox. Requires sparing three times in Chapter 4.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_MIZZLE]: {
+    displayName: 'Mizzle recruit progress',
+    description:
+      'Castle Town party recruitment for Mizzle. Requires sparing twice in Chapter 4.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_WICABEL]: {
+    displayName: 'Wicabel recruit progress',
+    description:
+      'Castle Town party recruitment for Wicabel. Requires sparing twice in Chapter 4.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_WINGLADE]: {
+    displayName: 'Winglade recruit progress',
+    description:
+      'Castle Town party recruitment for Winglade. Requires sparing twice in Chapter 4.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_ORGANIKK]: {
+    displayName: 'Organikk recruit progress',
+    description:
+      'Castle Town party recruitment for Organikk. Requires sparing three times in Chapter 4.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.RECRUIT_MISS_MIZZLE]: {
+    displayName: 'Miss Mizzle recruit progress',
+    description:
+      'Castle Town party recruitment for Miss Mizzle. Special placement rules.',
+    valueType: 'number',
+    valueRules: { min: -1, max: 1 },
+  },
+  [FLAGS.CH4_UNKNOWN_700]: {
+    displayName: 'Sticker scene complete',
+    description:
+      'Whether the sticker-balancing scene finished in 1st Sanctuary.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CHURCH_LIBRARY_CONNECTOR]: {
+    displayName: 'Finished tea party with QC',
+    description:
+      'Whether the Light World tea party with QC is done and the Northwest Library route is open in 2nd Sanctuary.',
+    valueType: 'boolean',
+  },
+  [FLAGS.UNKNOWN_702]: {
+    displayName: 'Drew Susie on window',
+    description:
+      'Whether Susie drew Kris on the foggy window in 1st Sanctuary.',
+    valueType: 'boolean',
+  },
+  [FLAGS.UNKNOWN_703]: {
+    displayName: 'Kris writing on window',
+    description:
+      'Whether Susie noticed Kris writing on the foggy window in 1st Sanctuary.',
+    valueType: 'boolean',
+  },
+  [FLAGS.DARKROOM_WALL_SWITCH]: {
+    displayName: 'Darkroom wall switch',
+    description:
+      'Whether the wall switch was toggled in the 1st Sanctuary darkroom.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CHURCH_CANDLE_LIT]: {
+    displayName: 'Lit all candles',
+    description:
+      'Whether all candles are lit in the Dark Sanctuary candle puzzle room.',
+    valueType: 'boolean',
+  },
+  [FLAGS.UNKNOWN_706]: {
+    displayName: 'Caterpillar outfit scene',
+    description:
+      'Whether the caterpillar outfit cutscene completed in 1st Sanctuary.',
+    valueType: 'boolean',
+  },
+  [FLAGS.UNKNOWN_707]: {
+    displayName: "Grabbed Noelle's wrist",
+    description:
+      "Whether Kris grabbed Noelle's wrist during the Home Alone scene.",
+    valueType: 'boolean',
+  },
+  [FLAGS.UNKNOWN_708]: {
+    displayName: "Took Noelle's watch",
+    description:
+      "Whether Kris took Noelle's watch at chapter start (prank route).",
+    valueType: 'boolean',
+  },
+  [FLAGS.UNKNOWN_709]: {
+    displayName: 'Town north door event',
+    description:
+      'Whether the Light World north town door greeting event has triggered.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CHURCH_PIANO_BOOKSHELF_PUZZLE]: {
+    displayName: 'Ralsei room visit',
+    description:
+      "Progress through Susie sneaking into Ralsei's room in My Castle Town and follow-up piano loot dialogue in 2nd Sanctuary.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not started',
+        1: 'Susie entered room',
+        2: 'Finished room cutscene',
+      },
+    },
+  },
+  [FLAGS.UNKNOWN_711]: {
+    displayName: 'Ralsei sign talk',
+    description:
+      'Whether Ralsei talked at the sanctuary sign in 1st Sanctuary.',
+    valueType: 'boolean',
+  },
+  [FLAGS.UNKNOWN_712]: {
+    displayName: 'Beach festival scene',
+    description:
+      'Progress through the beach wind scene before the festival in Light World.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not started',
+        1: 'Heard lake music',
+        2: 'Kris looked down',
+        3: 'Face comment',
+        4: 'Phone/text prompt',
+        5: 'Scene finished',
+      },
+    },
+  },
+  [FLAGS.UNKNOWN_713]: {
+    displayName: 'Beach festival reply',
+    description:
+      "Kris's closed-mouth reply during the beach wind scene in Light World.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not answered',
+        1: 'Talked with mouth closed',
+        2: 'Said nothing',
+      },
+    },
+  },
+  [FLAGS.UNKNOWN_714]: {
+    displayName: 'Berdly phone choice',
+    description: 'State of the Berdly phone overhear scene in Light World.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        1: 'Overheard Berdly',
+        2: 'Go with Berdly',
+        3: 'Sing wrong song',
+      },
+    },
+  },
+  [FLAGS.UNKNOWN_715]: {
+    displayName: 'Pastor shelter warning',
+    description:
+      'Whether the pastor warned Kris about the shelter via text in Light World.',
+    valueType: 'boolean',
+  },
+  [FLAGS.UNKNOWN_716]: {
+    displayName: 'Pastor sermon sleep',
+    description:
+      'Whether Kris texted the pastor about falling asleep during a sermon in Light World.',
+    valueType: 'boolean',
+  },
+  [FLAGS.UNKNOWN_717]: {
+    displayName: 'Pastor Asgore prayer',
+    description:
+      'Whether Kris asked the pastor about Asgore via text in Light World.',
+    valueType: 'boolean',
+  },
+  [FLAGS.UNKNOWN_718]: {
+    displayName: 'Snowy shelter choice',
+    description:
+      'Which answer was chosen when texting Snowy at the shelter in Light World.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        1: 'Shelter',
+        2: 'Susie will not be tamed',
+      },
+    },
+  },
+  [FLAGS.UNKNOWN_719]: {
+    displayName: 'Juice combo praised',
+    description: "Whether Susie praised Alphys's juice combo in 1st Sanctuary.",
+    valueType: 'boolean',
+  },
+  [FLAGS.UNKNOWN_720]: {
+    displayName: 'Juice given to Alphys',
+    description:
+      'How the red-yellow juice was handled during the Alphys scene in 1st Sanctuary.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not given',
+        1: 'Kris gave Alphys juice',
+        2: 'Kris drank juice',
+      },
+    },
+  },
+  [FLAGS.UNKNOWN_722]: {
+    displayName: 'Shelter research topic',
+    description:
+      'Which shelter topic Kris asked Alphys about in 1st Sanctuary.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        1: 'Architectural history',
+        2: 'Hay for Susie',
+      },
+    },
+  },
+  [FLAGS.UNKNOWN_723]: {
+    displayName: 'Undyne talk with Alphys',
+    description:
+      'Progress on the Undyne conversation topic with Alphys in 1st Sanctuary.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not discussed',
+        1: 'Chocolates answer',
+        2: 'Because of Kris',
+      },
+    },
+  },
+  [FLAGS.UNKNOWN_726]: {
+    displayName: 'Santa cutscene',
+    description:
+      "Whether the dancing santa cutscene played at Noelle's house with Ralsei in party.",
+    valueType: 'boolean',
+  },
+  [FLAGS.UNKNOWN_727]: {
+    displayName: 'Santa batteries talk',
+    description:
+      "Whether Noelle's santa batteries dialogue was seen at Noelle's house.",
+    valueType: 'boolean',
+  },
+  [FLAGS.UNKNOWN_728]: {
+    displayName: 'Treat launcher scene',
+    description:
+      "Whether the holiday treat launcher scene was seen at Noelle's house.",
+    valueType: 'boolean',
+  },
+  [FLAGS.RALSEI_PARTY_TALK_CHECK]: {
+    displayName: 'Krismas cactus talk',
+    description:
+      'Whether Noelle commented on the Christmas cactus named Krismas when inspecting it with Susie in the party.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_731]: {
+    displayName: 'Computer hacked',
+    description:
+      "Whether Kris and Susie hacked Noelle's computer at Noelle's house.",
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_732]: {
+    displayName: 'Found Cat Petterz',
+    description:
+      "Whether Susie found Cat Petterz on Noelle's computer at Noelle's house.",
+    valueType: 'boolean',
+  },
+  [FLAGS.READABLE_733]: {
+    displayName: 'Took desk pencil',
+    description: "Whether Kris took a pencil from Noelle's homework desk.",
+    valueType: 'boolean',
+  },
+  [FLAGS.RAL_SUSIE_FESTIVAL_TALK]: {
+    displayName: 'Ral Susie Festival Talk',
+    description:
+      "Whether you completed the talk between Susie and Ralsei prior to Tenna's introduction in Chapter 3.",
+    valueType: 'boolean',
+  },
+  [FLAGS.HOMEALONE_PHONE_SPEECH]: {
+    displayName: 'Phone speech progress',
+    description: `Which kitchen phone message is active at Noelle's house.`,
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Message 1 (dark fountain)',
+        1: 'Message 2 (Susie guitar)',
+        2: 'Message 3 (need soul)',
+        3: 'Message 4 (Kris will...)',
+        4: 'Message 5 (guitar code)',
+        5: 'Message 6 (police sacrifice)',
+        6: 'Message 7 (church tonight)',
+        7: 'Message 8 (dark world)',
+        8: 'Message 9 (ellipsis)',
+      },
+    },
+  },
+  [FLAGS.HOMEALONE_PIANO_SEQUENCE]: {
+    displayName: 'Solo piano sequence',
+    description: `Progress through the solo piano sequence in the kitchen at Noelle's house.`,
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not started',
+        1: 'Piano sequence active',
+        2: 'Piano sequence finished',
+      },
+    },
+  },
+  [FLAGS.HOMEALONE_PIANO_INDEX]: {
+    displayName: 'Piano song progress',
+    description: 'Which piano song is playing or has finished.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not started',
+        1: 'Song 1',
+        2: 'Song 2',
+        3: 'Song 3',
+        4: 'Song 4',
+        5: 'Song 5',
+        6: 'Song 6',
+        7: 'Song 7',
+        8: 'Song 8',
+        9: 'All songs played',
+      },
+    },
+  },
+  [FLAGS.PDC_PRESENT_X_0]: {
+    displayName: 'Present 1 X position',
+    description:
+      'Saved X coordinate of the first present in the Home Alone present puzzle.',
+    valueType: 'number',
+  },
+  [FLAGS.PDC_PRESENT_X_1]: {
+    displayName: 'Present 2 X position',
+    description:
+      'Saved X coordinate of the second present in the Home Alone present puzzle.',
+    valueType: 'number',
+  },
+  [FLAGS.PDC_PRESENT_X_2]: {
+    displayName: 'Present 3 X position',
+    description:
+      'Saved X coordinate of the third present in the Home Alone present puzzle.',
+    valueType: 'number',
+  },
+  [FLAGS.HOMEALONE_BATHROOM_CONVO]: {
+    displayName: 'Mirror conversation',
+    description: `Progress through the mirror conversation in the bathroom at Noelle's house.`,
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+      max: 7,
+    },
+  },
   [FLAGS.SHOWED_FAMILY_PHOTO_TO_SUSIE]: {
-    displayName: 'Showed family photo to Susie',
+    displayName: 'Family photo',
+    description:
+      "Whether the family photo was shown to Susie at Noelle's house.",
     valueType: 'boolean',
   },
   [FLAGS.SHOWED_ASRIEL_PHOTO_TO_SUSIE]: {
-    displayName: 'Showed Asriel photo to Susie',
+    displayName: 'Asriel photo',
+    description: "Whether Asriel's photo was shown to Susie at Noelle's house.",
+    valueType: 'boolean',
+  },
+  [FLAGS.READABLE_746]: {
+    displayName: 'Dragons book opened',
+    description:
+      "Whether Kris opened the How To Draw Dragons drawer in Kris's room.",
     valueType: 'boolean',
   },
   [FLAGS.GOT_SUSIE_PRIZE]: {
-    displayName: `Got Susie's prize`,
+    displayName: `Susie's prize`,
+    description: 'Whether Susie received her festival prize.',
     valueType: 'boolean',
   },
   [FLAGS.CLEANED_UP_BLOOD_STAIN]: {
-    displayName: 'Cleaned up blood stain',
+    displayName: 'Blood stain',
+    description: "Whether the blood stain was cleaned in Noelle's house.",
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_750]: {
+    displayName: 'Met Berdly at library',
+    description:
+      'Whether Kris and Susie first met Berdly at the library on a weekend.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_751]: {
+    displayName: 'Discussed study plans',
+    description:
+      'Whether Kris discussed study plans with Berdly at the library.',
+    valueType: 'boolean',
+  },
+  [FLAGS.RUDY_HOSPITAL_SIDEB_1]: {
+    displayName: 'Rudy met Susie',
+    description:
+      'Whether Rudy reacted to Susie visiting the hospital (non-Side B route).',
+    valueType: 'boolean',
+  },
+  [FLAGS.RUDY_HOSPITAL_SIDEB_2]: {
+    displayName: 'Rudy church talk',
+    description:
+      'Whether Rudy talked with Susie about church and the festival at the hospital (Side B).',
+    valueType: 'boolean',
+  },
+  [FLAGS.READABLE_754]: {
+    displayName: 'Rudy sink rant',
+    description:
+      'Whether Rudy yelled about Kris and the hospital sink obsession.',
+    valueType: 'boolean',
+  },
+  [FLAGS.HOSPITAL_HALLWAY_PROGRESS]: {
+    displayName: 'Berdly room talk',
+    description:
+      'Whether the party talked to Berdly in his hospital room about his asleep arm.',
+    valueType: 'boolean',
+  },
+  [FLAGS.READABLE_756]: {
+    displayName: 'Heated Berdly',
+    description:
+      'Whether Kris heated Berdly with a hot water bottle in hospital room 2.',
+    valueType: 'boolean',
+  },
+  [FLAGS.READABLE_757]: {
+    displayName: 'Space heater raised',
+    description:
+      "Whether the space heater was turned up in Berdly's hospital room.",
+    valueType: 'boolean',
+  },
+  [FLAGS.HOSPITAL_HALLWAY_PROGRESS_2]: {
+    displayName: 'Hallway arm talk',
+    description:
+      "Whether Susie talked about Berdly's arm in the hospital hallway after he was hospitalized.",
+    valueType: 'boolean',
+  },
+  [FLAGS.HOSPITAL_HALLWAY_PROGRESS_3]: {
+    displayName: 'Hallway visit state',
+    description:
+      'Progress through hospital hallway scenes after Berdly was hospitalized.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not started',
+        1: 'Solo room visit',
+        2: 'Susie hallway talk',
+      },
+    },
+  },
+  [FLAGS.NPC_ANIMATED_760]: {
+    displayName: 'Met Catty in alley',
+    description:
+      'Whether the party met Catty offering free milk in Alphys alley.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_761]: {
+    displayName: 'Eavesdropped on bunny',
+    description: 'Whether Kris eavesdropped on the blue bunny at the diner.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_762]: {
+    displayName: 'Talked to Catty',
+    description: 'Whether Kris talked to Catty about Bratty at the diner.',
+    valueType: 'boolean',
+  },
+  [FLAGS.NPC_FACING_763]: {
+    displayName: 'Alphys milk regrets',
+    description:
+      'Whether Alphys expressed regrets about the alley milk after Mew Mew.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_764]: {
+    displayName: 'Alley milk explained',
+    description:
+      'Whether Alphys re-explained the alley milk and Mew Mew at Alphys alley.',
+    valueType: 'boolean',
+  },
+  [FLAGS.ALPHYS_ALLEY_SEARCHED]: {
+    displayName: 'Searched Alphys alley',
+    description: 'Whether the party searched Alphys alley.',
+    valueType: 'boolean',
+  },
+  [FLAGS.NPC_ROOM_767]: {
+    displayName: 'Catti ladder talk',
+    description:
+      'Whether Kris chose the Susie topic when talking to Catti on the ladder in town.',
+    valueType: 'boolean',
+  },
+  [FLAGS.READABLE_768]: {
+    displayName: 'Gerson gravestone read',
+    description:
+      "Whether the party read Gerson's gravestone at the graveyard during the night visit.",
+    valueType: 'boolean',
+  },
+  [FLAGS.READABLE_769]: {
+    displayName: 'School door dialogue',
+    description:
+      "Whether Susie's school-door dialogue was seen at the school entrance.",
+    valueType: 'boolean',
+  },
+  [FLAGS.SCHOOL_ALPHYS_CLASS_STATE]: {
+    displayName: 'Alphys class entered',
+    description: 'Whether the Alphys class room event was triggered at school.',
+    valueType: 'boolean',
+  },
+  [FLAGS.BEACH_STATE]: {
+    displayName: 'Beach scene progress',
+    description:
+      'Progress through beach scenes before the festival in Light World.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not started',
+        1: 'Talk finished',
+        2: 'Bird NPC spawned',
+        3: 'Stone skip done',
+      },
+    },
+  },
+  [FLAGS.NPC_SIGN_773]: {
+    displayName: 'French fry song (day)',
+    description:
+      'Whether Susie sang about the french fry on the ground at the picnic table during the day.',
+    valueType: 'boolean',
+  },
+  [FLAGS.NPC_SIGN_774]: {
+    displayName: 'French fry song (night)',
+    description:
+      'Whether Susie sang about the soggy french fry at the picnic table during the night visit.',
+    valueType: 'boolean',
+  },
+  [FLAGS.READABLE_775]: {
+    displayName: 'Berdly desk egg',
+    description:
+      "Whether Susie commented on the egg at Berdly's desk at school.",
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_776]: {
+    displayName: 'Date prep monologue',
+    description:
+      "Whether Kris heard Burgerpants' date preparation monologue at the conbini.",
+    valueType: 'boolean',
+  },
+  [FLAGS.BURGERPANTS_TALK_STATE]: {
+    displayName: 'Burgerpants talk state',
+    description:
+      'Progress through Burgerpants dialogue at the conbini in Light World.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not started',
+        1: 'Date scene',
+        2: 'Extended talk',
+      },
+    },
+  },
+  [FLAGS.FACE_DRAW_EFFECT]: {
+    displayName: 'Face draw cutscene',
+    description:
+      'Whether the face-draw cutscene is active during the Light World festival lead-up.',
     valueType: 'boolean',
   },
   [FLAGS.TALKED_METTATON_TENNA]: {
-    displayName: 'Talked to Mettaton about Tenna',
+    displayName: 'Mettaton on Tenna',
+    description: 'Outcome of talking to Mettaton about Tenna at the library.',
     valueType: 'map',
     valueRules: {
       map: {
@@ -1533,21 +5579,667 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
       },
     },
   },
+  [FLAGS.KRIS_YARD_STATE]: {
+    displayName: 'Yard TV scene',
+    description: "Whether the Kris yard TV scene completed at Kris's yard.",
+    valueType: 'boolean',
+  },
+  [FLAGS.READABLE_782]: {
+    displayName: 'Treat catcher inspected',
+    description:
+      "Whether the auto-treat-catcher was inspected at Noelle's house.",
+    valueType: 'boolean',
+  },
+  [FLAGS.HOMEALONE_ORNAMENT_DONE]: {
+    displayName: 'Ornament done',
+    description: 'Whether the Christmas ornament interaction is finished.',
+    valueType: 'boolean',
+  },
+  [FLAGS.HOMEALONE_FAN_ACTIVE]: {
+    displayName: 'Fan running',
+    description: 'Whether the rotating fan is on.',
+    valueType: 'boolean',
+  },
+  [FLAGS.HOMEALONE_FAN_INDEX]: {
+    displayName: 'Fan frame',
+    description: 'Saved fan animation frame.',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
+  },
+  [FLAGS.NPC_FACING_786]: {
+    displayName: 'Sans grill talk',
+    description: 'Whether the party met Sans grilling cattails in town north.',
+    valueType: 'boolean',
+  },
+  [FLAGS.HOMEALONE_KITCHEN_SINK]: {
+    displayName: 'Phone and piano scene',
+    description: `Progress through the phone and piano scene in the kitchen at Noelle's house.`,
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not started',
+        1: 'Phone scene',
+        2: 'At piano (left)',
+        3: 'At piano (down)',
+        4: 'Piano playing',
+      },
+    },
+  },
+  [FLAGS.RECRUIT_CHECK_NPC]: {
+    displayName: 'Lancer construction intro',
+    description:
+      'Whether the Lancer construction-site intro cutscene played in My Castle Town after recruiting.',
+    valueType: 'boolean',
+  },
   [FLAGS.TALKED_KING_KNIGHT]: {
-    displayName: 'Talked with King about Knight',
+    displayName: 'King on Knight',
+    description:
+      'Whether King was talked to about the Knight in My Castle Town.',
     valueType: 'boolean',
   },
   [FLAGS.SAW_TENNA_KING_SCENE]: {
-    displayName: 'Saw scene with King and Tenna in Castle Town',
+    displayName: 'King and Tenna',
+    description: 'Whether the King and Tenna scene was seen in My Castle Town.',
     valueType: 'boolean',
   },
+  [FLAGS.UNKNOWN_791]: {
+    displayName: 'Queen drink readable',
+    description:
+      'Whether the Queen drink readable triggered her conversation in My Castle Town.',
+    valueType: 'boolean',
+  },
+  [FLAGS.UNKNOWN_792]: {
+    displayName: 'Addison booth lineup',
+    description: 'Current Addison booth NPC rotation index in My Castle Town.',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+      max: 3,
+    },
+  },
+  [FLAGS.UNKNOWN_793]: {
+    displayName: 'Post-caterpillar cutscene',
+    description:
+      'Whether the castle town cutscene after the caterpillar scene played in My Castle Town.',
+    valueType: 'boolean',
+  },
+  [FLAGS.RAIN_EFFECT_STATE]: {
+    displayName: 'Rain effect state',
+    description:
+      'Controls the Light World rain overlay during the post-church festival arc.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Inactive',
+        1: 'Starting',
+        2: 'Active',
+        3: 'Crossfading out',
+      },
+    },
+  },
+  [FLAGS.UNKNOWN_795]: {
+    displayName: 'Legender prophecy seen',
+    description: 'Which Legender stairs prophecy was seen in 1st Sanctuary.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Neither seen',
+        1: 'Left stairs',
+        2: 'Right stairs',
+      },
+    },
+  },
+  [FLAGS.UNKNOWN_797]: {
+    displayName: 'Shelter panel inspected',
+    description:
+      'Whether the security panel on the shelter was inspected in Light World.',
+    valueType: 'boolean',
+  },
+  [FLAGS.UNKNOWN_798]: {
+    displayName: 'Egg sign gag progress',
+    description:
+      'Progress through the Sans egg-sign gag at the egg shop in Light World town mid.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'Asked to enter',
+        2: 'Sign retalk reset',
+        3: 'Open argument',
+        4: 'Clopen sign',
+        5: 'Clopen argument',
+        6: 'Advanced',
+        7: 'Blank sans sign',
+      },
+    },
+  },
+  [FLAGS.UNKNOWN_799]: {
+    displayName: 'Diner egg customer',
+    description:
+      'Whether the egg-customer readable was seen at the diner in Light World town mid.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CAFE_TOPLEFT]: {
+    displayName: 'Top-left seat recruit',
+    description:
+      'Recruit ID seated at the top-left table in Butler Cafe at My Castle Town.',
+    valueType: 'map',
+    valueRules: {
+      map: RECRUITS,
+    },
+  },
+  [FLAGS.CAFE_TOPRIGHT]: {
+    displayName: 'Top-right seat recruit',
+    description:
+      'Recruit ID seated at the top-right table in Butler Cafe at My Castle Town.',
+    valueType: 'map',
+    valueRules: {
+      map: RECRUITS,
+    },
+  },
+  [FLAGS.CAFE_BOTTOMLEFT]: {
+    displayName: 'Bottom-left seat recruit',
+    description:
+      'Recruit ID seated at the bottom-left table in Butler Cafe at My Castle Town.',
+    valueType: 'map',
+    valueRules: {
+      map: RECRUITS,
+    },
+  },
+  [FLAGS.CAFE_BOTTOMRIGHT]: {
+    displayName: 'Bottom-right seat recruit',
+    description:
+      'Recruit ID seated at the bottom-right table in Butler Cafe at My Castle Town.',
+    valueType: 'map',
+    valueRules: {
+      map: RECRUITS,
+    },
+  },
+  [FLAGS.BEAT_GRAZING]: {
+    displayName: 'Lanino and Elnina battle cleared',
+    description:
+      'Internal battle clear state for the Lanino and Elnina dojo encounter. The Chapter 4 Story checklist should use the Exec Buffet prize flag instead.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not beaten',
+        2: 'Beaten',
+      },
+    },
+  },
+  [FLAGS.BEAT_DOJO_CLOVER]: {
+    displayName: 'Clover beaten',
+    description:
+      'Completion state for the Clover dojo challenge in My Castle Town.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not completed',
+        2: 'Prize claimed',
+      },
+    },
+  },
+  [FLAGS.BEAT_TM_SAYS]: {
+    displayName: 'Tasque Manager Says beaten',
+    description:
+      'Completion state for the Tasque Manager Says dojo challenge in My Castle Town.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not completed',
+        2: 'Prize claimed',
+      },
+    },
+  },
+  [FLAGS.BEAT_ALLSTARS]: {
+    displayName: 'All Stars beaten',
+    description:
+      'Completion state for the Ch2 All Stars dojo challenge in My Castle Town.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not completed',
+        2: 'Prize claimed',
+      },
+    },
+  },
+  [FLAGS.BEAT_JOE]: {
+    displayName: 'Jigsaw Joe beaten',
+    description:
+      'Completion state for the Jigsaw Joe dojo challenge in My Castle Town.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not completed',
+        2: 'Prize claimed',
+      },
+    },
+  },
+  [FLAGS.UNKNOWN_815]: {
+    displayName: 'Lanino and Elnina Exec Buffet',
+    description:
+      'Prize claim state for the Chapter 4 Lanino and Elnina dojo challenge in My Castle Town.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not claimed',
+        2: 'Exec Buffet claimed',
+      },
+    },
+  },
+  [FLAGS.TORHOUSE_STATE]: {
+    displayName: 'Toriel house scene',
+    description: "Whether the post-church scene triggered at Toriel's house.",
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_832]: {
+    displayName: 'Borrowed drawer money',
+    description:
+      "Whether Kris borrowed $5 from Asriel's drawer in Kris's room.",
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_833]: {
+    displayName: 'Diner refused payment',
+    description:
+      'Whether the diner cashier said Kris did not have enough money in Light World town.',
+    valueType: 'boolean',
+  },
+  [FLAGS.DCA05_STATE]: {
+    displayName: 'Dismissed Kris splat',
+    description:
+      'Whether the player continued after Kris fell trying to reach the high bookshelf at Northwest Library.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SAVEPOINT_FLAG_835]: {
+    displayName: 'Sanctuary save intro',
+    description:
+      'Whether the glass-tapestry savepoint intro played at Dark Sanctuary savepoint.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_836]: {
+    displayName: 'Gerson shop greeting',
+    description:
+      'Whether Gerson gave his first shop greeting in Dark Sanctuary - Study.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_837]: {
+    displayName: 'Gerson writing intro',
+    description:
+      'Whether Gerson showed his writing letter cutscene in Dark Sanctuary - Study.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_838]: {
+    displayName: 'Gerson knight intro',
+    description:
+      'Whether Gerson gave his first knight-direction cutscene in Dark Sanctuary - Study.',
+    valueType: 'boolean',
+  },
+  [FLAGS.DCA07_STATE]: {
+    displayName: 'Study elixir state',
+    description:
+      'Whether the elixir was taken off the shelf in Dark Sanctuary - Study. Removed uses value 2, not 1.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Still on shelf',
+        2: 'Removed from shelf',
+      },
+    },
+  },
+  [FLAGS.CHURCH_BELLHALL_CURTAIN]: {
+    displayName: 'Bell hall curtain scene',
+    description:
+      'Whether the curtain-opening cutscene played in Dark Sanctuary - Bell Hall Curtain.',
+    valueType: 'boolean',
+  },
+  [FLAGS.DCA09_STATE_1]: {
+    displayName: 'Knight daydream rest',
+    description:
+      'Whether Kris rested their eyes at the movable piano room and saw the Knight helmet daydream.',
+    valueType: 'boolean',
+  },
+  [FLAGS.DCA09_STATE_2]: {
+    displayName: 'Drip vision rest',
+    description:
+      'Whether Kris rested their eyes at the movable piano room and saw the drip vision sequence.',
+    valueType: 'boolean',
+  },
+  [FLAGS.ORGAN_SHEET_MUSIC_USED]: {
+    displayName: 'Organ sheet music state',
+    description:
+      'How far the party has used sheet music on the organ in Dark Sanctuary - Study.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not used',
+        1: 'Used on organ',
+        2: 'Returned from Gerson study',
+        3: 'Returned after taking elixir',
+      },
+    },
+  },
+  [FLAGS.CHURCH_SHADOW_PUZZLE_STATE]: {
+    displayName: 'Organ shadow puzzle',
+    description:
+      'Completion state of the shadow organ puzzle in Dark Sanctuary - Study.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not started',
+        1: 'Completed with sheet music',
+        2: 'Completed without sheet music',
+      },
+    },
+  },
+  [FLAGS.CHURCH_SHADOW_PUZZLE_TIMER]: {
+    displayName: 'Covered eyes for Jackenstein',
+    description:
+      'Whether Kris covered their eyes during the Jackenstein fight in Dark Sanctuary - Study.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CH4_INTRO_PROGRESS]: {
+    displayName: 'Sheet music hunt progress',
+    description:
+      'How far the party has progressed through the Gerson study sheet-music arc in Dark Sanctuary.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not started',
+        '0.5': 'Found first melody half (Northwest Library)',
+        1: 'Found second melody half (Northwest Library)',
+        2: 'Solved bookshelf prophecy (Northwest Library)',
+        3: 'Cleared dark lantern hall',
+        4: 'Started organ shadow puzzle (Dark Sanctuary - Study)',
+        5: 'Finished Jackenstein fight (Dark Sanctuary - Study)',
+        6: 'Finished organ sequence (Dark Sanctuary - Study)',
+        7: 'Reached movable piano room',
+      },
+    },
+  },
+  [FLAGS.CHURCH_TALL_BOOKCASES_STATE]: {
+    displayName: 'Tall bookcase puzzle',
+    description:
+      'Progress pushing the tall bookcases aside in Dark Sanctuary - Study.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not started',
+        1: 'Moved at secret piano (Dark Sanctuary - Study)',
+        2: 'Moved at Gerson arena (Dark Sanctuary - Study)',
+        3: 'Fully cleared',
+      },
+    },
+  },
   [FLAGS.CHURCH_AXE_OF_JUSTICE_PROGRESS]: {
-    displayName: 'Defeated Hammer of Justice',
+    displayName: 'Finished Gerson arena',
+    description:
+      'Whether the Gerson arena scene resolved and the Justice Axe reward is available in Dark Sanctuary - Study.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CHURCH_ARENA_STATE]: {
+    displayName: 'Gerson arena losses',
+    description:
+      'How many times Susie lost the Hammer of Justice fight in Dark Sanctuary - Study.',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
+  },
+  [FLAGS.PDC06B_STATE_1]: {
+    displayName: 'Ralsei room apology',
+    description:
+      "How Kris responded to Ralsei's apology after the room incident in My Castle Town.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not chosen',
+        1: 'Sincere apology',
+        2: 'Said "of course"',
+      },
+    },
+  },
+  [FLAGS.SHOP1_STATE_1]: {
+    displayName: 'Seam shop intro',
+    description:
+      'Whether Seam told his Addisons card-game story at the shop in My Castle Town.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SHOP1_STATE_2]: {
+    displayName: 'Seam Shadow Crystal',
+    description:
+      'Whether Seam reacted to the party bringing a Shadow Crystal at the shop in My Castle Town.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_862]: {
+    displayName: 'Rudy Asgore topic',
+    description:
+      'Whether the Rudy and Toriel Asgore-support conversation played at the hospital.',
+    valueType: 'boolean',
+  },
+  [FLAGS.REMOTE_PIANO_SHELF_X1]: {
+    displayName: 'Remote piano shelf X (session)',
+    description:
+      'Saved X coordinate for the first bookshelf while playing the remote piano in the 2nd Sanctuary bookshelf puzzle.',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
+  },
+  [FLAGS.BOOKSHELF_PUZZLE_REVEALED]: {
+    displayName: 'Marked ladder for Ralsei',
+    description:
+      "Whether Susie marked stealing the ladder for Ralsei's room in the 2nd Sanctuary bookshelf puzzle.",
+    valueType: 'boolean',
+  },
+  [FLAGS.PIANO_COUCH_VISIBLE]: {
+    displayName: 'Couch cushion taken',
+    description:
+      'Whether Susie took part of the couch cushion in the 2nd Sanctuary movable piano room.',
+    valueType: 'boolean',
+  },
+  [FLAGS.RALSEI_ROOM_PIANO]: {
+    displayName: 'Ralsei room piano marker',
+    description:
+      "Marks the sun-room piano for Ralsei's room. During the remote-piano bookshelf puzzle this can temporarily store the second shelf's Y position; after Susie marks the piano it becomes 1.",
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
+  },
+  [FLAGS.BOOKSHELF_PUZZLE_OLD_SOLVED]: {
+    displayName: 'Solved old bookshelf puzzle',
+    description:
+      'Whether the earlier bookshelf puzzle variant in 2nd Sanctuary was solved.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GUEI_MONSTER_ENCOUNTERED]: {
+    displayName: 'Fought Guei',
+    description: 'Whether the party fought Guei in the East Belltower.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CHURCH_INTRO_PIANO]: {
+    displayName: 'Solved caged piano',
+    description:
+      'Whether the steel-cage piano in Dark Sanctuary - Small Piano was solved.',
+    valueType: 'boolean',
+  },
+  [FLAGS.DARKMAZE_CANDY_PROGRESS]: {
+    displayName: 'Candy bowl progress',
+    description: 'State of the candy bowl in the dark maze at 2nd Sanctuary.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Untouched',
+        1: 'First interaction',
+        2: 'Second interaction',
+        3: 'Bowl broken',
+      },
+    },
+  },
+  [FLAGS.READABLE_ROOM_873]: {
+    displayName: 'Locked door inspected',
+    description:
+      'Whether the party saw the extended dialogue about the locked church door at Light World church entrance.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CHURCH_INTRO_GERSON]: {
+    displayName: 'Gerson walked away',
+    description:
+      'Whether Gerson left after warning the party about the Knight in Dark Sanctuary - Atrium.',
+    valueType: 'boolean',
+  },
+  [FLAGS.DCC03_STATE]: {
+    displayName: 'Ralsei night talk ending',
+    description:
+      "Which ending branch played during Ralsei's bedroom conversation in My Castle Town.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not finished',
+        1: 'Honest and scared',
+        2: 'Cheerful "of course"',
+      },
+    },
+  },
+  [FLAGS.BOOKSHELF_BOOK_1]: {
+    displayName: 'Blue shelf X position',
+    description:
+      'Saved X position of the blue bookshelf in the 2nd Sanctuary remote piano puzzle.',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
+  },
+  [FLAGS.BOOKSHELF_BOOK_2]: {
+    displayName: 'Blue shelf Y position',
+    description:
+      'Saved Y position of the blue bookshelf in the 2nd Sanctuary remote piano puzzle.',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
+  },
+  [FLAGS.BOOKSHELF_BOOK_3]: {
+    displayName: 'Red shelf X position',
+    description:
+      'Saved X position of the red bookshelf in the 2nd Sanctuary remote piano puzzle.',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
+  },
+  [FLAGS.BOOKSHELF_BOOK_4]: {
+    displayName: 'Red shelf Y position',
+    description:
+      'Saved Y position of the red bookshelf in the 2nd Sanctuary remote piano puzzle.',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
+  },
+  [FLAGS.BOOKSHELF_BOOK_5]: {
+    displayName: 'Green shelf X position',
+    description:
+      'Saved X position of the green bookshelf in the 2nd Sanctuary remote piano puzzle.',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
+  },
+  [FLAGS.BOOKSHELF_BOOK_6]: {
+    displayName: 'Green shelf Y position',
+    description:
+      'Saved Y position of the green bookshelf in the 2nd Sanctuary remote piano puzzle.',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
+  },
+  [FLAGS.PIANO_HINT_1]: {
+    displayName: 'Right melody hint',
+    description:
+      'Whether the right-hand prophecy melody hint was found in Northwest Library.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        '-1': 'Consumed after solve',
+        0: 'Not found',
+        1: 'Found',
+      },
+    },
+  },
+  [FLAGS.PIANO_HINT_2]: {
+    displayName: 'Left melody hint',
+    description:
+      'Whether the left-hand melody hint was found in Northwest Library.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        '-1': 'Consumed after solve',
+        0: 'Not found',
+        1: 'Found',
+      },
+    },
+  },
+  [FLAGS.PIANO_PUZZLE_SOLVED]: {
+    displayName: 'Solved prophecy piano',
+    description:
+      'Whether the caged prophecy piano was solved in Dark Sanctuary - Small Piano.',
+    valueType: 'boolean',
+  },
+  [FLAGS.PIANO_PUZZLE_HINT_1]: {
+    displayName: 'Caged piano hint dialogue',
+    description:
+      'Which party hint dialogue played after a failed attempt at the caged piano in Dark Sanctuary - Small Piano.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not seen',
+        1: 'Ralsei hint',
+        '1.1': 'Susie smash-keys hint',
+      },
+    },
+  },
+  [FLAGS.PIANO_PIECE_LEFT_PROGRESS]: {
+    displayName: 'Left piano treasure',
+    description:
+      'Whether the hidden treasure was collected in Northwest Library, opening the walkway to the left melody room.',
+    valueType: 'boolean',
+  },
+  [FLAGS.HOMEALONE_BASEMENT_CONVO]: {
+    displayName: 'Susie conversation',
+    description: `Progress through the conversation with Susie in the basement at Noelle's house.`,
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+      max: 3,
+    },
+  },
+  [FLAGS.PIANO_PUZZLE_HINT_2]: {
+    displayName: 'Incomplete music dialogue',
+    description:
+      'Whether the party saw the incomplete-music hint dialogue at the caged piano in Dark Sanctuary - Small Piano.',
     valueType: 'boolean',
   },
   [FLAGS.DONATION_FOUNTAIN_COUNT]: {
-    displayName: 'Money In Donation Fountain',
+    displayName: 'Donation fountain',
+    description:
+      'Total money donated at the Dark Sanctuary fountain. The later fountain chest reward is based on this amount.',
     valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
+  },
+  [FLAGS.SECRET_PIANO_VALUE]: {
+    displayName: 'Secret piano hint 1',
+    description:
+      'Controls visibility of the first secret piano hint in Dark Sanctuary - Study (absolute value).',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
   },
   [FLAGS.VESSEL_HEAD]: {
     displayName: 'Head',
@@ -1631,19 +6323,6 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
       },
     },
   },
-  [FLAGS.VESSEL_GIFT]: {
-    displayName: 'Please give it a gift',
-    valueType: 'map',
-    valueRules: {
-      map: {
-        0: 'Mind',
-        1: 'Kindness',
-        '-1': 'Ambition',
-        '-2': 'Bravery',
-        '-3': 'Voice',
-      },
-    },
-  },
   [FLAGS.VESSEL_FEELING]: {
     displayName: 'How do you feel about your creation? (It will not hear.)',
     valueType: 'map',
@@ -1658,26 +6337,29 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.VESSEL_HONESTY]: {
     displayName: 'Have you answered honestly?',
-    valueType: 'map',
-    valueRules: {
-      map: {
-        0: 'Yes',
-        1: 'No',
-      },
-    },
+    valueType: 'boolean',
   },
   [FLAGS.VESSEL_PAIN_SEIZURE]: {
     displayName: 'You acknowledge the possibility of pain and seizure.',
+    valueType: 'boolean',
+  },
+  [FLAGS.VESSEL_GIFT]: {
+    displayName: 'Please give it a gift',
     valueType: 'map',
     valueRules: {
       map: {
-        0: 'Yes',
-        1: 'No',
+        0: 'Mind',
+        1: 'Kindness',
+        '-1': 'Ambition',
+        '-2': 'Bravery',
+        '-3': 'Voice',
       },
     },
   },
   [FLAGS.EGG_ROOM_CH1]: {
-    displayName: 'Egg Room',
+    displayName: 'Egg room',
+    description:
+      'Progress finding the mysterious man in the Chapter 1 egg room.',
     valueType: 'map',
     valueRules: {
       map: {
@@ -1688,7 +6370,26 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     },
   },
   [FLAGS.EGG_CH1]: {
-    displayName: 'Got Egg in Chapter 1',
+    displayName: 'Had egg',
+    description:
+      'Set entering Chapter 2 if the Chapter 1 egg was kept or deposited. Checks key item, not dropped egg.',
+    valueType: 'boolean',
+  },
+  [FLAGS.LANGUAGE]: {
+    displayName: 'Text language',
+    description: 'In-game text language setting. Separate from global.lang.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'English',
+        1: 'Japanese',
+      },
+    },
+  },
+  [FLAGS.INTERACTED_MAN_CAR]: {
+    displayName: 'Saw man in car',
+    description:
+      'Whether the man waved at you from his car after you met him in the Chapter 1 egg room.',
     valueType: 'boolean',
   },
   [FLAGS.SINCE_CHAPTER]: {
@@ -1705,7 +6406,8 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     },
   },
   [FLAGS.WEIRDROUTE_PROGRESS_CH2]: {
-    displayName: 'Weird Route Progress',
+    displayName: 'Weird Route',
+    description: 'Progress through the Weird Route in Chapter 2.',
     valueType: 'map',
     valueRules: {
       map: {
@@ -1720,11 +6422,13 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     },
   },
   [FLAGS.WEIRDROUTE_FAILED]: {
-    displayName: 'Weird Route Failed',
+    displayName: 'Weird Route failed',
+    description: 'Whether the Chapter 2 Weird Route was failed.',
     valueType: 'boolean',
   },
   [FLAGS.EGG_ROOM_CH2]: {
     displayName: 'Egg Room',
+    description: 'Whether the hidden egg room was found in Chapter 2.',
     valueType: 'map',
     valueRules: {
       map: {
@@ -1735,57 +6439,469 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
       },
     },
   },
+  [FLAGS.GOT_CH2_EGG]: {
+    displayName: 'Got egg',
+    description: "Whether you got the Chapter 2 egg, for Temmie's collection.",
+    valueType: 'boolean',
+  },
+  [FLAGS.TIMES_NOELLE_LEVELED]: {
+    displayName: 'Times Noelle Leveled',
+    description: 'Times Noelle leveled up during Chapter 2.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
   [FLAGS.GOT_MOSS_CH2]: {
-    displayName: 'Got moss',
+    displayName: 'Moss',
+    description:
+      'Whether you got the Moss in Chapter 2 and the Moss Finder title.',
     valueType: 'boolean',
   },
   [FLAGS.GOT_MOSS_WITH_NOELLE]: {
-    displayName: 'Ate moss with Noelle in party',
+    displayName: 'Moss with Noelle',
+    description: 'Whether moss was eaten with Noelle in the party.',
     valueType: 'boolean',
   },
   [FLAGS.GOT_MOSS_WITH_SUSIE]: {
-    displayName: 'Ate moss with Susie in party',
+    displayName: 'Moss with Susie',
+    description: 'Whether moss was eaten with Susie in the party.',
     valueType: 'boolean',
   },
+  [FLAGS.FORGOT_RING]: {
+    displayName: 'Forgot Ring',
+    description:
+      'Whether you failed the Snowgrave route because of not having the Thorn Ring at Berdly.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SNOWGRAVE_ATTEMPTS]: {
+    displayName: 'Snowgrave Attempts',
+    description:
+      'The number of times you told Noelle to KILL HIM, KILL HIM NOW. (0-4)',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
   [FLAGS.NOELLE_ICE_SHOCK_COUNT]: {
-    displayName: 'Noelle Ice Shock spell count',
+    displayName: 'Ice Shock uses',
+    description: 'How many times Noelle used Ice Shock in Chapter 2.',
     valueType: 'number',
     valueRules: {
       min: 0,
     },
   },
+  [FLAGS.ICESHOCKED_ENCOUNTERS]: {
+    displayName: 'Iceshocked Encounters',
+    description: 'The number of encounters defeated with IceShock.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.CREEPY_STEPS]: {
+    displayName: 'Creepy Steps',
+    description:
+      'Steps taken toward Noelle (0-3) after the Snowgrave hospital scene.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
   [FLAGS.EGG_CH3]: {
-    displayName: 'Got Egg',
+    displayName: 'Egg',
+    description: 'Whether the egg was obtained in Chapter 3.',
     valueType: 'boolean',
   },
   [FLAGS.EGG_CH4]: {
-    displayName: 'Got Egg',
+    displayName: 'Egg',
+    description: 'Whether the egg was obtained in Chapter 4.',
     valueType: 'boolean',
   },
+  [FLAGS.AMOUNT_PAIN_CH1]: {
+    displayName: 'Amount Pain Ch1',
+    description: 'Number of times hit in Chapter 1, used for trophies.',
+    valueType: 'number',
+  },
+  [FLAGS.AMOUNT_ICE_E_PAIN_CH1]: {
+    displayName: 'Amount Ice E Pain Ch1',
+    description:
+      'Number of times you looked at the ICE-E pain scale in Chapter 1, used for trophies.',
+    valueType: 'number',
+  },
+  [FLAGS.AMOUNT_PAIN_CH2]: {
+    displayName: 'Amount Pain Ch2',
+    description: 'Number of times hit in Chapter 2, used for trophies.',
+    valueType: 'number',
+  },
+  [FLAGS.AMOUNT_ICE_E_PAIN_CH2]: {
+    displayName: 'Amount Ice E Pain Ch2',
+    description:
+      'Number of times you looked at the ICE-E pain scale in Chapter 2, used for trophies.',
+    valueType: 'number',
+  },
+  [FLAGS.AMOUNT_PAIN_CH3]: {
+    displayName: 'Amount Pain Ch3',
+    description: 'Number of times hit in Chapter 3, used for trophies.',
+    valueType: 'number',
+  },
+  [FLAGS.AMOUNT_PAIN_CH4]: {
+    displayName: 'Amount Pain Ch4',
+    description: 'Number of times hit in Chapter 4, used for trophies.',
+    valueType: 'number',
+  },
+  [FLAGS.AMOUNT_ICE_E_PAIN_CH4]: {
+    displayName: 'Amount Ice E Pain Ch4',
+    description:
+      'Number of times you looked at the ICE-E pain scale in Chapter 4, used for trophies.',
+    valueType: 'number',
+  },
+  [FLAGS.AMOUNT_TREASURE]: {
+    displayName: 'Amount Treasure',
+    description: 'Number of chests opened, used for trophies.',
+    valueType: 'number',
+  },
+  [FLAGS.SHADOW_FAILED_CH2]: {
+    displayName: 'Shadow failed',
+    description:
+      'Whether you used the Shadow Crystal in Chapter 2 and saw nothing.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GLASS_FAILED_CH2]: {
+    displayName: 'Glass failed',
+    description: 'Whether you used the Glass in Chapter 2 and saw nothing.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SHADOW_LAB]: {
+    displayName: 'Shadow Lab',
+    description: 'Whether you saw the computer lab using the Shadow Crystal.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GLASS_SUSIE_GLARE]: {
+    displayName: 'Glass Susie Glare',
+    description: 'Whether you saw Susie glare at you using the Glass.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GAVE_JEVIL_CRYSTAL]: {
+    displayName: 'Gave Jevil Crystal',
+    description: "Whether you gave Seam JEVIL's Shadow Crystal.",
+    valueType: 'boolean',
+  },
+  [FLAGS.FAILED_SPAM_CRYSTAL]: {
+    displayName: 'Failed Spam Crystal',
+    description:
+      "Whether you got JEVIL's Shadow Crystal but failed to find Spamton's, and told Seam. They seem quite dejected...",
+    valueType: 'boolean',
+  },
+  [FLAGS.PYRAMID_PUZZLE_STATE]: {
+    displayName: 'Tiny pyramid puzzle',
+    description:
+      "Progress finding the even tinier pyramid in Desert Board. Resets to 0 if you enter Rouxls's shop.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.SHADOWMANTLE_BATTLE]: {
+    displayName: 'Shadow Mantle fight started',
+    description:
+      "Whether you've started the Shadow Mantle fight. Speeds up repeat fights, as your death isn't a real Game Over and doesn't reload a save.",
+    valueType: 'boolean',
+  },
+  [FLAGS.TENNA_BOARD_LOSSES]: {
+    displayName: 'Tenna show game overs',
+    description: "Game over count on Tenna's game boards.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.MAZE_CROWD_TREASURE]: {
+    displayName: 'Maze crowd chest',
+    description:
+      'Whether you opened the chest in the lower-left corner of that maze with Zapper+Shuttah fights.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.MAZE_CROWD_FOUND]: {
+    displayName: 'Maze crowd triggered',
+    description:
+      'Whether you triggered the cheering crowd in the upper-right corner of that maze with Zapper+Shuttah fights.',
+    valueType: 'boolean',
+  },
+  [FLAGS.FOREST_CUT_ROOMS]: {
+    displayName: 'Forest cut room count',
+    description:
+      'Number of repeating forest rooms passed through looking for the Ice Key.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.SWORDROUTE_KICKED]: {
+    displayName: 'Kicked from original game',
+    description:
+      "Whether you've (recently) done something to get yourself kicked out of the original game. Like dying.",
+    valueType: 'boolean',
+  },
+  [FLAGS.SHADOW_TEASER_FOUND]: {
+    displayName: 'Found shadow teaser message',
+    description:
+      "Whether you found the ' soon' hidden message in the Sword Route.",
+    valueType: 'boolean',
+  },
+  [FLAGS.SHADOW_EYES_SEEN]: {
+    displayName: 'Shadow teaser eyes',
+    description:
+      'Whether you saw the teaser eyes on the side of the pyramid in Sword Board 1.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SHADOW_GRIN_SEEN]: {
+    displayName: 'Shadow teaser grin',
+    description:
+      'Whether you saw the teaser grin on the side of the pyramid in Sword Board 1.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GAMESHOW_BATTLES_COUNT]: {
+    displayName: 'Gameshow battles entered',
+    description:
+      "Number of battles entered during Tenna's Chapter 3 gameshow boards.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
   [FLAGS.GAMESHOW_LETTER_FIRST]: {
+    displayName: 'First team-name letter',
+    description:
+      "First letter selected for the custom team name on Tenna's gameshow board.",
     valueType: 'map',
     valueRules: {
       map: ALPHABET,
     },
-    displayName: 'First letter',
   },
   [FLAGS.GAMESHOW_LETTER_SECOND]: {
+    displayName: 'Second team-name letter',
+    description:
+      "Second letter selected for the custom team name on Tenna's gameshow board.",
     valueType: 'map',
     valueRules: {
       map: ALPHABET,
     },
-    displayName: 'Second letter',
   },
   [FLAGS.GAMESHOW_LETTER_THIRD]: {
+    displayName: 'Third team-name letter',
+    description:
+      "Third letter selected for the custom team name on Tenna's gameshow board.",
     valueType: 'map',
     valueRules: {
       map: ALPHABET,
     },
-    displayName: 'Third letter',
+  },
+  [FLAGS.STOOL_BOARD_FLAG]: {
+    displayName: 'Ralsei used board stool',
+    description:
+      "Whether Ralsei has used the stool on Tenna's game board. Hides the stool object afterward.",
+    valueType: 'boolean',
+  },
+  [FLAGS.BOARD_CAMERA_FLAG]: {
+    displayName: 'Board camera active',
+    description:
+      "Volatile. Whether the board camera is currently controlling the scene in Tenna's minigames.",
+    valueType: 'boolean',
+  },
+  [FLAGS.WEATHER_FAVORITE]: {
+    displayName: 'Favorite weather attack',
+    description:
+      'Whose attack you liked better, causing the Weather to not Stick Together.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.PREEGG_BOARD_TRIED]: {
+    displayName: 'Tried preegg board',
+    description:
+      'Whether you tried the prerequisite board for the Nowhere puzzle.',
+    valueType: 'boolean',
+  },
+  [FLAGS.QUIZ_CORRECT_ANSWERS]: {
+    displayName: 'Quiz correct answers',
+    description:
+      "Number of correct answers (totalled on all characters) in the most recent of Tenna's quizzes. Slightly alters the Tenna-sphinx dialogue.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.SUSIE_POWER_CROISSANT]: {
+    displayName: 'Susie got Power Croissant',
+    description:
+      'Whether Susie has obtained the Power Croissant, allowing her to pick up boxes, pots, weeds, and Ralsei.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CH3_COUCH_WALKING]: {
+    displayName: 'Couch walking away',
+    description:
+      'Whether the couch has begun walking away (if you go right then go back to it) at the start of Chapter 3.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TENNA_LEFT_BOARD]: {
+    displayName: 'Tenna left board',
+    description:
+      'Whether Tenna has left the current board, allowing for additional chicanery. Volatile?',
+    valueType: 'boolean',
+  },
+  [FLAGS.DISABLE_GRAB_RALSEI]: {
+    displayName: 'Cannot grab Ralsei',
+    description:
+      'When 1, blocks grabbing party members during board segments. Set entering Board 3 intro. Cleared in bridge puzzle and Board 2 intro.',
+    valueType: 'boolean',
+  },
+  [FLAGS.BOARD_TRANSITION_FREEZE]: {
+    displayName: 'Board transition freeze',
+    description:
+      'Volatile. When 1, blocks gameshow character controller resets during Chapter 3 board cutscenes and minigame transitions. Set during scenes, cleared when they finish.',
+    valueType: 'boolean',
+  },
+  [FLAGS.BOARD_KEY_TRACKER]: {
+    displayName: 'Board key tracker',
+    description:
+      'Board 1 key count tracker. Also increments if you buy the Board 2 key.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.HOOKSHOT_FLAG]: {
+    displayName: 'Board hookshot state',
+    description: "Volatile hookshot progress on Tenna's game boards.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.S_STAR_FALLEN]: {
+    displayName: 'S-rank star fallen',
+    description:
+      'Whether you interacted with the stars in the S-Rank room, causing one of them to fall on the floor.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_RAMB_PRIZE_1]: {
+    displayName: 'Got Ramb Prize 1',
+    description:
+      'Whether you got the first board reward from Ramb (if available based on rank).',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Got prize',
+        2: 'Got nothing (Z-Rank)',
+      },
+    },
+  },
+  [FLAGS.RAMB_BACKSTAGE_TALK]: {
+    displayName: 'Ramb backstage talk',
+    description: 'Ramb moved away from the door the first time',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'Moved first time',
+        2: 'Moved second time',
+        3: 'Talked round 3',
+      },
+    },
+  },
+  [FLAGS.GOT_RAMB_PRIZE_2]: {
+    displayName: 'Got Ramb Prize 2',
+    description:
+      'Whether you got the second board reward from Ramb (if available based on rank).',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Got prize',
+        2: 'Got nothing (Z-Rank)',
+      },
+    },
+  },
+  [FLAGS.ENTERED_RANK_ROOM]: {
+    displayName: 'Entered rank room',
+    description:
+      "Whether you've interacted to enter the S- or Z-Rank room. Stops Susie's and Ralsei's dialogue on repeat.",
+    valueType: 'boolean',
+  },
+  [FLAGS.RAMB_FIRST_TALKED]: {
+    displayName: 'Talked to Ramb first',
+    description:
+      "Whether you've talked to Ramb at least once in the Green Room. Alters repeat interaction.",
+    valueType: 'boolean',
+  },
+  [FLAGS.RACING_GAME_TRIED]: {
+    displayName: 'Tried racing game',
+    description:
+      "Whether you've interacted with the TV with the racing game at least once. Alters repeat interaction.",
+    valueType: 'boolean',
+  },
+  [FLAGS.RACING_GAME_PLAYS]: {
+    displayName: 'Racing game plays',
+    description: 'Number of times you played the unseeable racing game.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.RACING_GAME_WON]: {
+    displayName: 'Won racing game',
+    description:
+      'Whether you won the racing game. Susie refuses to play any more afterward.',
+    valueType: 'boolean',
+  },
+  [FLAGS.ARMOR_INFO_STATE]: {
+    displayName: 'LodeStone description variant',
+    description:
+      'Which LodeStone flavor text to show after Board 2 rewards (snail, athlete record, or pizza).',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default snail',
+        1: 'Athlete record',
+        2: 'Pizza shape',
+      },
+    },
+  },
+  [FLAGS.RALSEI_CHEER_EQUIPS]: {
+    displayName: 'Ralsei cheer equips',
+    description:
+      "Number of times you've equipped the Blue Ribbon to Ralsei, giving progress of a cheer chant.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.PIPIS_INVENTORY_SOUNDS]: {
+    displayName: 'Pipis inventory sounds',
+    description: 'Status of the Pipis in your inventory. Increases over time.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'Chirping',
+        2: 'Clucking',
+      },
+    },
+  },
+  [FLAGS.TENNA_PIPIS_BONUS]: {
+    displayName: 'Tenna Pipis bonus state',
+    description: "State of Tenna's Pipis in the Bonus Zone (without Spamton).",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'Tenna panicked',
+        2: 'Got Pipis',
+      },
+    },
+  },
+  [FLAGS.HERO_PHOTO_TAKEN]: {
+    displayName: 'Hero photo taken',
+    description:
+      "Whether you've photographed the three heroes for Shuttah. The same flag is reused in some scrapped content.",
+    valueType: 'boolean',
+  },
+  [FLAGS.HALF_FLOWER_PHOTO]: {
+    displayName: 'Half flower photo',
+    description: "Whether you've photographed the half flower in Board 2.",
+    valueType: 'boolean',
+  },
+  [FLAGS.SPRING_PHOTO_TAKEN]: {
+    displayName: 'Spring photo taken',
+    description:
+      "Whether you've photographed the healing green spring in Board 2.",
+    valueType: 'boolean',
+  },
+  [FLAGS.CACTUS_PHOTO_TAKEN]: {
+    displayName: 'Cactus photo taken',
+    description: "Whether you've photographed the only cactus in Board 2.",
+    valueType: 'boolean',
   },
   [FLAGS.CH3_POINTS]: {
     displayName: 'Points (PTs)',
-    description: 'Currency used in Chapter 3',
+    description:
+      'Current Chapter 3 points held by the party for Tenna board purchases and scoring.',
     valueType: 'number',
     valueRules: {
       min: 0,
@@ -1793,7 +6909,8 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     },
   },
   [FLAGS.SUSIE_HEAL_COUNT]: {
-    displayName: `Susie's Heal Count`,
+    displayName: 'Susie heals',
+    description: 'How many times Susie healed the party in Chapter 3/4.',
     valueType: 'number',
     valueRules: {
       min: 0,
@@ -1801,7 +6918,8 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     },
   },
   [FLAGS.KNIGHT_FIGHT]: {
-    displayName: 'Knight Fight Status',
+    displayName: 'Knight fight',
+    description: 'State of the Knight fight in Chapter 3.',
     valueType: 'map',
     valueRules: {
       map: {
@@ -1811,8 +6929,66 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
       },
     },
   },
+  [FLAGS.LANCER_PURCHASE_COST]: {
+    displayName: 'Lancer purchase cost',
+    description:
+      'Amount spent on Lancer in Board 2. Decreases if he is photographed before purchase.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Uninitialized',
+        9: '9 points',
+        99: '99 points',
+        999: '999 points',
+      },
+    },
+  },
+  [FLAGS.BOARD_1_BATTLES_COUNT]: {
+    displayName: 'Board 1 Battles Count',
+    description: "Battles fought on Board 1 of Tenna's game show.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.SHADOWMANTLE_DEFEATED]: {
+    displayName: 'Shadow Mantle defeated',
+    description: 'Whether the Shadow Mantle boss was defeated.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CHEATER_ADMITS_COUNT]: {
+    displayName: 'Cheater admits count',
+    description:
+      'Times you admitted to Zappers that you cheated, usually starting a battle.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.TENNA_DELETED_GRASS]: {
+    displayName: 'Tenna deleted grass',
+    description:
+      'Whether Tenna deleted the grass to keep Susie from wasting time on it in the unused Board 3.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GAMESHOW_VOLATILE_STATE]: {
+    displayName: 'Gameshow transition lock',
+    description:
+      'Volatile flag freezing characters during Chapter 3 gameshow board transitions.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TENNA_VOICE_MOD]: {
+    displayName: 'Tenna voice pitch',
+    description:
+      "Appears to be a volatile factor applied to Tenna's voice bite. Only used for his flashback.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Uninitialized',
+        1: 'Full pitch',
+        '0.8': '80% pitch',
+      },
+    },
+  },
   [FLAGS.SWORD_PROGRESS]: {
     displayName: 'Sword Progress',
+    description: 'Progress through the Sword Route in Chapter 3.',
     valueType: 'map',
     valueRules: {
       map: {
@@ -1827,16 +7003,215 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
       },
     },
   },
-  [FLAGS.SKIPPED_INTRO_CH3]: {
-    displayName: 'Slept through Tenna introduction',
+  [FLAGS.KRIS_TENNA_TALKED]: {
+    displayName: 'Kris talked with Tenna',
+    description:
+      'Whether Tenna tried to justify himself to Kris between rounds.',
     valueType: 'boolean',
+  },
+  [FLAGS.BACKSTAGE_SEQUENCE]: {
+    displayName: 'Backstage sequence',
+    description:
+      'Board 3 backstage intro state. Read at 1 during the gameshow intro (advances to 2 on load). Nothing in available scripts sets it to 1.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.TROPIC_TENNA_FOUND]: {
+    displayName: 'Found Tropic Tenna',
+    description:
+      'Whether you found Tenna at the Tropic of Love on the original game, and heard his musings.',
+    valueType: 'boolean',
+  },
+  [FLAGS.ROUXLS_CH3_BATTLE]: {
+    displayName: 'Rouxls battle',
+    description:
+      'Rouxls/Lanino encounter outcome on Board 3. Read during the gameshow finale when greater than 0.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch1)',
+        6: 'Frozen',
+      },
+    },
+  },
+  [FLAGS.ELNINA_CONTROLLER_GOT]: {
+    displayName: 'Got Elnina controller',
+    description:
+      'Whether you got the Elnina Controller for an unused game. The item ID got repurposed as the Odd Controller.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SHADOWMEN_PHOTO_COUNT]: {
+    displayName: 'Shadowmen photo count',
+    description:
+      'Number of photos taken of the Shadowmen shooting at you from trees. They have bunny ears after 5.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.GOT_CURTAIN_SABER]: {
+    displayName: 'Got curtain saber',
+    description:
+      'Whether you got the Saber10 from the quiet person behind the S-Rank curtain.',
+    valueType: 'boolean',
+  },
+  [FLAGS.READABLE_1065]: {
+    displayName: 'Reserved flag',
+    description:
+      'Chapter 3 flag with no scr_flag usage found in available decompiled scripts.',
+    valueType: 'number',
+  },
+  [FLAGS.RAMB_FOUNTAIN_TALKED]: {
+    displayName: 'Ramb Fountain Talked',
+    description:
+      'Whether Ramb explained (after Board 3) that he saw Kris make the fountain.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_SHADOWMANTLE_ITEM]: {
+    displayName: 'Got Shadow Mantle',
+    description:
+      'Whether the chest containing the Shadow Mantle was opened on the Sword Route.',
+    valueType: 'boolean',
+  },
+  [FLAGS.LANCER_GREENROOM_TALKED]: {
+    displayName: 'Lancer green room talk',
+    description:
+      "Whether you've talked to Lancer in the Green Room (and he phased through the door).",
+    valueType: 'boolean',
+  },
+  [FLAGS.SKIPPED_INTRO_CH3]: {
+    displayName: 'Slept through intro',
+    description:
+      "Whether Kris slept through Tenna's Chapter 3 introduction sequence.",
+    valueType: 'boolean',
+  },
+  [FLAGS.LANCER_QUIZ_NAME]: {
+    displayName: 'Lancer Quiz Name',
+    description: "What you (and Ralsei) named Lancer in Tenna's quiz.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.S_RANK_ACCESS_1]: {
+    displayName: 'S Rank Access 1',
+    description:
+      "Whether you've talked to the Zapper guarding the S-Rank room and gotten in for board 1.",
+    valueType: 'boolean',
+  },
+  [FLAGS.S_RANK_ACCESS_2]: {
+    displayName: 'S Rank Access 2',
+    description:
+      "Whether you've talked to the Zapper guarding the S-Rank room and gotten in for board 2.",
+    valueType: 'boolean',
+  },
+  [FLAGS.COUNTERFEIT_RANK_1]: {
+    displayName: 'Counterfeit Rank 1',
+    description: 'Buying the counterfeit S-Rank for Board 1.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.COUNTERFEIT_RANK_2]: {
+    displayName: 'Counterfeit Rank 2',
+    description: 'Buying the counterfeit S-Rank for Board 2.',
+    valueType: 'number',
+    valueRules: { min: 0 },
   },
   [FLAGS.GOT_MOSS_CH3]: {
-    displayName: 'Got Moss in Chapter 3',
+    displayName: 'Moss',
+    description: 'Whether moss was collected in Chapter 3.',
     valueType: 'boolean',
   },
+  [FLAGS.OASIS_DRAINED]: {
+    displayName: 'Oasis drained',
+    description:
+      'Whether you chose to deplete the oasis by drinking it. Dries up all the trees.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SUSIEZILLA_LOSSES]: {
+    displayName: 'Susiezilla losses',
+    description: 'Losses in the Susiezilla minigame.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.SUSIEZILLA_RESULT]: {
+    displayName: 'Susiezilla result',
+    description: 'Exactly how much you won at Suziezilla.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Won',
+        2: 'Lost',
+      },
+    },
+  },
+  [FLAGS.LANCER_NAME_QUESTION]: {
+    displayName: 'Lancer name question',
+    description:
+      "Whether you've faced the question of Tenna forgetting Lancer's name. (there's an unused follow-up).",
+    valueType: 'boolean',
+  },
+  [FLAGS.RAMB_GAME_RESPONSE]: {
+    displayName: 'Ramb game response',
+    description: "Your choice to Ramb of whether you're enjoying Tenna's game.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.UNUSED_PUZZLE_STARTED]: {
+    displayName: 'Unused Puzzle Started',
+    description:
+      'Unused board puzzle room state. Read alongside BACKSTAGE_SEQUENCE during gameshow scenes.',
+    valueType: 'boolean',
+  },
+  [FLAGS.DOOM_SHADOWMAN_BEAT]: {
+    displayName: 'Beat Doom Shadowman',
+    description:
+      "Whether you've defeated the Shadowman on the Doom Board, to prompt the Zapper encounter instead.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Spared',
+        2: 'Fought',
+      },
+    },
+  },
+  [FLAGS.ICE_PALACE_ENTERED]: {
+    displayName: 'Entered Ice Palace',
+    description:
+      'Set to 1 on first entry to the Ice Palace on Sword Board 2. Read on re-entry to skip intro.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CHEATED_DICE_VALUE]: {
+    displayName: 'Cheated dice value',
+    description:
+      'Number on the die in the unused room where a Pippins challenges you to roll even.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.COOKING_LOSSES_COUNT]: {
+    displayName: 'Cooking losses',
+    description: 'Times lost at the cooking game (counted by Tenna).',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.PARENT_LOCK_1_INTRO]: {
+    displayName: 'Parent Lock 1 Intro',
+    description:
+      "Whether you've completed specifically the introductory scene activating the puzzle for Parental Lock 1.",
+    valueType: 'boolean',
+  },
+  [FLAGS.SUSIE_SWORD_NOTICED]: {
+    displayName: 'Susie noticed sword',
+    description:
+      'Status of Susie noticing Kris has a sword in the minigame if the OddController was obtained.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
   [FLAGS.BIBLIOX_PROGRESS]: {
-    displayName: 'Bibliox Progress (Egg Room)',
+    displayName: 'Bibliox',
+    description: 'Progress through the Bibliox encounter in Dark Sanctuary.',
     valueType: 'map',
     valueRules: {
       map: {
@@ -1849,11 +7224,509 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
       },
     },
   },
+  [FLAGS.CHEATER_JAILED]: {
+    displayName: 'Cheater Jailed',
+    description:
+      'Whether you confessed to the Zapper that you are cheaters, and went into the highly escapable prison.',
+    valueType: 'boolean',
+  },
+  [FLAGS.PARENTAL_LOCK_1_SOLVED]: {
+    displayName: 'Parental Lock 1 Solved',
+    description: 'Whether you solved the first parental lock in Chapter 3.',
+    valueType: 'boolean',
+  },
+  [FLAGS.PARENTAL_LOCK_2_SOLVED]: {
+    displayName: 'Parental Lock 2 Solved',
+    description: 'Whether you solved the second parental lock in Chapter 3.',
+    valueType: 'boolean',
+  },
+  [FLAGS.RHYTHM_GAME_ATTEMPTS]: {
+    displayName: 'Rhythm game failures',
+    description:
+      'Total number of attempts on the rock band game after Board 2 (not replays).',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.IDCARD_PUZZLE_FOUND]: {
+    displayName: 'ID card puzzle found',
+    description:
+      'Whether you found something(?) with the water of the unused ID card puzzle.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CHEATER_PIPPINS_FLED]: {
+    displayName: 'Cheater Pippins fled',
+    description:
+      'Whether the unused dice-cheating Pippins have fled from being photographed.',
+    valueType: 'boolean',
+  },
+  [FLAGS.LANCER_CONTROLLER_COUNT]: {
+    displayName: 'Lancer controller count',
+    description: 'Times Lancer used the game controller in Chapter 3.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.GOT_COOLTRASHY_REWARD]: {
+    displayName: 'Got Cooltrashy Reward',
+    description: `Whether you got Trashy's DeluxeDinner.`,
+    valueType: 'boolean',
+  },
+  [FLAGS.POINT_CHEST_FOUND]: {
+    displayName: 'Point chest found',
+    description:
+      'Progress with the 10-point chest in the dust pile at the start of Chapter 3.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.ZAPPER_SNEEZED]: {
+    displayName: 'Zapper sneezed',
+    description:
+      'Whether a Zapper left of the Chapter 3 starting area gave itself away by sneezing.',
+    valueType: 'boolean',
+  },
+  [FLAGS.ICE_KEY_MISSING]: {
+    displayName: 'Ice key missing',
+    description:
+      'Whether you reached the Ice Palace with no key, thus forgetting something important.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CUT_RIBBICK_ITEM]: {
+    displayName: 'Cut Ribbick item',
+    description: 'Unused Ribbick room item trigger.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CUT_RIBBICK_FIGHTS]: {
+    displayName: 'Cut Ribbick fights',
+    description: 'Unused Ribbick room trigger counter.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.CUT_WEATHER_PUZZLE]: {
+    displayName: 'Cut weather puzzle',
+    description:
+      'Board 3 bridge puzzle state during the Rouxls and Lanino segment. Set to 1 when the weather puzzle triggers.',
+    valueType: 'boolean',
+  },
+  [FLAGS.LANINA_PUZZLE_FOUND]: {
+    displayName: 'Lanina puzzle found',
+    description:
+      'Whether you found something(?) with the water of the unused Rouxls and Lanina puzzle.',
+    valueType: 'boolean',
+  },
+  [FLAGS.LANINA_PUZZLE_GRASS]: {
+    displayName: 'Lanina puzzle grass',
+    description:
+      'Amount of grass plucked by Susie in the unused Rouxls and Lanina puzzle. Just keeps you from re-plucking.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.PREEGG_BLOCK_X]: {
+    displayName: 'Preegg block X',
+    description: 'X coordinate of the persistent block needed for the Ch3 egg.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.PREEGG_BLOCK_Y]: {
+    displayName: 'Preegg block Y',
+    description: 'Y coordinate of the persistent block needed for the Ch3 egg.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.PREEGG_BLOCK_STATUS]: {
+    displayName: 'Preegg block status',
+    description:
+      'Status of the puzzle with the persistent block needed for the Ch3 egg.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Block placed',
+        2: 'Puzzle solved',
+      },
+    },
+  },
+  [FLAGS.NOWHERE_PUZZLE_SOLVED]: {
+    displayName: 'Nowhere puzzle solved',
+    description:
+      "Whether you've solved the block puzzle to get to the Chapter 3 Bibliox with the TripTicket.",
+    valueType: 'boolean',
+  },
+  [FLAGS.GUARD_ZAPPER_BUTTONS]: {
+    displayName: 'Guard Zapper buttons',
+    description: 'Progress with the Zapper guarding the cold area.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.GUARD_ZAPPER_FOUGHT]: {
+    displayName: 'Guard Zapper fought',
+    description:
+      'Attempting to do nothing against the Zapper guarding the cold area.',
+    valueType: 'boolean',
+  },
+  [FLAGS.MAILROOM_STATUS]: {
+    displayName: 'Mailroom status',
+    description:
+      "Progress entering and resolving Tenna's secret mail room sequence.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default',
+        1: 'Entered',
+        2: 'Solved',
+      },
+    },
+  },
+  [FLAGS.BATTLE_POINTS_CURRENT]: {
+    displayName: 'Battle points current',
+    description:
+      'Number of points earned in battles on the current board. Used for the board score.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.POINTS_SPENT_CURRENT]: {
+    displayName: 'Points spent',
+    description:
+      'Number of points spent on the current board. Used to include them in the board score as well as held points.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.MINIGAME_POINTS_LAST]: {
+    displayName: 'Last minigame points',
+    description:
+      'Points from the latest physical-challenge minigame (rhythm game or chef game). Used for round evaluation scoring, then reset to 0.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.WATERCOOLER_BEG_COUNT]: {
+    displayName: 'Watercooler beg count',
+    description:
+      'Number of times begged for mercy from Watercooler. Alters repeat flavortext.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.BOARD_KEY_ACTUAL]: {
+    displayName: 'Board key count',
+    description:
+      'Board 1 key count. Used to award bonuses for extra keys. Also incremented if you buy the useless board 2 key.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'None',
+        1: 'Board 1 key',
+        2: 'Board 2 key',
+      },
+    },
+  },
+  [FLAGS.PARENTAL_ROOM_ENTERED]: {
+    displayName: 'Entered parental room',
+    description:
+      "Whether you've entered the room before the first Parental Lock, acknowledged by the party.",
+    valueType: 'boolean',
+  },
+  [FLAGS.TENNA_FALLING_CALLED]: {
+    displayName: 'Called falling Tenna',
+    description:
+      'What Tenna last called the falling objects on Board 1. Alters Board 2 dialogue.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.COWBOY_GAME_STARTED]: {
+    displayName: 'Cowboy game started',
+    description: 'Whether you reached the first cowboy game in Chapter 3.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SNEAK_CAUGHT_TOPLEFT]: {
+    displayName: 'Sneak Caught Topleft',
+    description:
+      'Number of times captured in the top-left zone of the unused big sneaking section.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SNEAK_CAUGHT_TOPRIGHT]: {
+    displayName: 'Sneak Caught Topright',
+    description:
+      'Number of times captured in the top-right zone of the unused big sneaking section.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SNEAK_CAUGHT_BOTLEFT]: {
+    displayName: 'Sneak Caught Botleft',
+    description:
+      'Number of times captured in the left zone of the unused big sneaking section.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SNEAK_CAUGHT_HARD1]: {
+    displayName: 'Sneak Caught Hard1',
+    description:
+      "Number of times captured in the first 'hard' zone of the unused big sneaking section.",
+    valueType: 'boolean',
+  },
+  [FLAGS.SNEAK_CAUGHT_HARD2]: {
+    displayName: 'Sneak Caught Hard2',
+    description:
+      "Number of times captured in the second 'hard' zone of the unused big sneaking section.",
+    valueType: 'boolean',
+  },
+  [FLAGS.OVERWORLD_QUIZ_1]: {
+    displayName: 'Overworld Quiz 1',
+    description: 'Whether you completed the 1st overworld quiz while escaping.',
+    valueType: 'boolean',
+  },
+  [FLAGS.OVERWORLD_QUIZ_2]: {
+    displayName: 'Overworld Quiz 2',
+    description: 'Whether you completed the 2nd overworld quiz while escaping.',
+    valueType: 'boolean',
+  },
+  [FLAGS.PARENTAL_LOCK_1_STARTED]: {
+    displayName: 'Parental Lock 1 Started',
+    description:
+      'Whether you got a wrong answer for the first parental lock, activating the screen with the puzzle.',
+    valueType: 'boolean',
+  },
+  [FLAGS.PARENTAL_LOCK_2_STARTED]: {
+    displayName: 'Parental Lock 2 Started',
+    description:
+      "Whether you've activated the second parental lock puzzle by interacting with it.",
+    valueType: 'boolean',
+  },
+  [FLAGS.STEALTH_UNLOCKED]: {
+    displayName: 'Stealth unlocked',
+    description: 'Whether Susie has suggested the use of stealth.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TODO_FLAG]: {
+    displayName: 'Stealth PA announced',
+    description:
+      'Whether the backstage stealth-zone PA announcement has already played in Board 3. When set, the zapper room skips re-triggering it.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TRASH_SWITCH_FOUND]: {
+    displayName: 'Trash switch found',
+    description:
+      "Whether you've activated the trash switch at the end of the first stealth section.",
+    valueType: 'boolean',
+  },
+  [FLAGS.WATERCOOLER_GOT_NOTHING]: {
+    displayName: 'Watercooler Got Nothing',
+    description:
+      'Whether you got an undefined item from an unused watercooler room in Chapter 3.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_CH3_MINT]: {
+    displayName: 'Got Ch3 Mint',
+    description: 'Whether you got the puzzle-locked Revive Mint in Chapter 3.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_ONE_POINT]: {
+    displayName: 'Got One Point',
+    description:
+      'Whether you got the chest with a singular point in the room with the Zapper who takes you nowhere.',
+    valueType: 'boolean',
+  },
+  [FLAGS.BIBLIOX_TALK_COUNT]: {
+    displayName: 'Bibliox talk count',
+    description:
+      'Number of times talked to the Chapter 3 in-game Bibliox. Dialogue does not reset.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.CAMERA_REMINDER_SOLVED]: {
+    displayName: 'Camera reminder solved',
+    description: 'Chapter 3 camera reminder puzzle progress.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.WATERCOOLER_AVOID_COUNT]: {
+    displayName: 'Watercooler Avoid Count',
+    description:
+      'Number of times you entered the room with the second Watercooler fight. They get closer up to 5 times, then block the way. Set to 50 after actually doing the fight.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.WATERCOOLER_2_FLIRTED]: {
+    displayName: 'Watercooler 2 Flirted',
+    description:
+      'Status flirting with the second Watercooler. Affects curtain flavortext.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.WATERCOOLER_DIALOGUE_STATE]: {
+    displayName: 'Board 2 watercooler chest',
+    description:
+      'Progress opening the nested Watercooler treasure chest on Board 2.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Unopened',
+        1: 'Opened (no room for Watercooler)',
+        2: 'Opened (got Watercooler)',
+      },
+    },
+  },
+  [FLAGS.CURTAIN_WATERCOOLER]: {
+    displayName: 'Curtain Watercooler',
+    description:
+      'Whether you interacted with the curtain after the second Watercooler fight.',
+    valueType: 'boolean',
+  },
+  [FLAGS.LAWNMOWER_DESTROYED_PAPER]: {
+    displayName: 'Lawnmower Destroyed Paper',
+    description:
+      "Whether you used the lawnmower to destroy the Shadowmen's contracts. Earns their gratitude if not previously LOST.",
+    valueType: 'boolean',
+  },
+  [FLAGS.ROUXLS_SNACKS_STATUS]: {
+    displayName: 'Rouxls Snacks Status',
+    description: "Rouxls's progress when he shows up with the weather duo.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.STEALTH_LIGHTMAZE_STATE]: {
+    displayName: 'Light maze stealth started',
+    description:
+      'Whether the stealth sequence has begun in the Board 2 light maze or audience pits.',
+    valueType: 'boolean',
+  },
+  [FLAGS.PARENTAL_LOCK_3_PROGRESS]: {
+    displayName: 'Parental Lock 3 Progress',
+    description: 'Progress with the third parental lock puzzle.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Activated',
+        2: 'Solved block puzzle',
+        3: 'Solved bridge puzzle',
+        4: 'Got camera',
+        '1.5': 'Used TV',
+      },
+    },
+  },
+  [FLAGS.SPAMTENNA_SCENE_SEEN]: {
+    displayName: 'Spamtenna Scene Seen',
+    description: 'Whether you saw Tenna coat Spamton in foam in self-defense.',
+    valueType: 'boolean',
+  },
   [FLAGS.RALSEI_HORSE]: {
-    displayName: 'Tracks Ralsei being horse',
+    displayName: 'Ralsei horse',
+    description: 'Whether Ralsei was carrying Kris on his back.',
+    valueType: 'boolean',
+  },
+  [FLAGS.HAY_SUSIE_REACTION]: {
+    displayName: 'Hay Susie Reaction',
+    description:
+      "Set based on how Susie reacts to Ralsei considering eating hay. Depends on whether you've previously eaten moss.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.BONUS_ZONE_TREASURE_1]: {
+    displayName: 'Bonus Zone Treasure 1',
+    description: `Whether you got the 1st treasure chest (of points) in Tenna's bonus zone.`,
+    valueType: 'boolean',
+  },
+  [FLAGS.BONUS_ZONE_TREASURE_2]: {
+    displayName: 'Bonus Zone Treasure 2',
+    description: `Whether you got the 2nd treasure chest (of points) in Tenna's bonus zone.`,
+    valueType: 'boolean',
+  },
+  [FLAGS.BONUS_ZONE_TREASURE_3]: {
+    displayName: 'Bonus Zone Treasure 3',
+    description: `Whether you got the 3rd treasure chest (of points) in Tenna's bonus zone.`,
+    valueType: 'boolean',
+  },
+  [FLAGS.BONUS_ZONE_POINTS_1]: {
+    displayName: 'Bonus Zone Points 1',
+    description: `Whether you got the 1st coin in Tenna's bonus zone.`,
+    valueType: 'boolean',
+  },
+  [FLAGS.BONUS_ZONE_POINTS_2]: {
+    displayName: 'Bonus Zone Points 2',
+    description: `Whether you got the 2nd coin in Tenna's bonus zone.`,
+    valueType: 'boolean',
+  },
+  [FLAGS.BONUS_ZONE_POINTS_3]: {
+    displayName: 'Bonus Zone Points 3',
+    description: `Whether you got the 3rd coin in Tenna's bonus zone.`,
+    valueType: 'boolean',
+  },
+  [FLAGS.BONUS_ZONE_POINTS_4]: {
+    displayName: 'Bonus Zone Points 4',
+    description: `Whether you got the 4th coin in Tenna's bonus zone.`,
+    valueType: 'boolean',
+  },
+  [FLAGS.TENNA_BONUS_ENTERED]: {
+    displayName: 'Entered Bonus Zone',
+    description:
+      "Whether you've entered Tenna's Bonus Zone behind the green panel (prior to Pipis scene).",
+    valueType: 'boolean',
+  },
+  [FLAGS.BONUS_BIG_CHEST]: {
+    displayName: 'Bonus Big Chest',
+    description:
+      "Whether you've opened the giant test in Tenna's Bonus Zone (with a Pippins).",
+    valueType: 'boolean',
+  },
+  [FLAGS.CH3_RECRUITS_CHECKED]: {
+    displayName: 'Recruits checked',
+    description:
+      'Whether you checked the employee list in Chapter 3 to tell if you had missed any recruits.',
+    valueType: 'boolean',
+  },
+  [FLAGS.LIGHTMAZE_ZAPPER_FOUGHT]: {
+    displayName: 'Lightmaze Zapper Fought',
+    description:
+      'Whether you fought the Zapper in the lightmaze room so unused, it has no exits.',
+    valueType: 'boolean',
+  },
+  [FLAGS.OVERWORLD_QUIZ_3]: {
+    displayName: 'Overworld Quiz 3',
+    description:
+      'Whether you completed an overworld quiz in the big maze room.',
+    valueType: 'boolean',
+  },
+  [FLAGS.OVERWORLD_QUIZ_4]: {
+    displayName: 'Overworld Quiz 4',
+    description:
+      'Whether you completed an overworld quiz in the big maze room.',
+    valueType: 'boolean',
+  },
+  [FLAGS.OVERWORLD_QUIZ_5]: {
+    displayName: 'Overworld Quiz 5',
+    description:
+      'Whether you completed an overworld quiz in the big maze room.',
+    valueType: 'boolean',
+  },
+  [FLAGS.OVERWORLD_QUIZ_6]: {
+    displayName: 'Overworld Quiz 6',
+    description:
+      'Whether you completed an overworld quiz in the big maze room.',
+    valueType: 'boolean',
+  },
+  [FLAGS.LANINA_PUZZLE_POINTS]: {
+    displayName: 'Lanina Puzzle Points',
+    description:
+      'Whether you got a 100-point chest in the unused Rouxls and Lanina puzzle room.',
+    valueType: 'boolean',
+  },
+  [FLAGS.B3BS_RABBICK_STATE]: {
+    displayName: 'B3BS Ribbick door sealed',
+    description:
+      'Whether the Ribbick room door was sealed after the encounter in Board 3 behind the scenes.',
+    valueType: 'boolean',
+  },
+  [FLAGS.BOARD_2_BATTLES_COUNT]: {
+    displayName: 'Board 2 Battles Count',
+    description: "Battles fought on Board 2 of Tenna's game show.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.TOTAL_BATTLES_EVALUATION]: {
+    displayName: 'Total battles this evaluation',
+    description:
+      "Battle count fed into the round evaluation screen on Tenna's game show.",
+    valueType: 'number',
+    valueRules: { min: 0 },
   },
   [FLAGS.RANK_BOARD_1]: {
     displayName: 'Board 1 Rank',
+    description: 'Best rank achieved during Tenna gameshow Board 1 evaluation.',
     valueType: 'map',
     valueRules: {
       map: GAMESHOW_RANKS,
@@ -1861,21 +7734,122 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.RANK_BOARD_2]: {
     displayName: 'Board 2 Rank',
+    description: 'Best rank achieved during Tenna gameshow Board 2 evaluation.',
     valueType: 'map',
     valueRules: {
       map: GAMESHOW_RANKS,
     },
   },
+  [FLAGS.ODDCONTROLLER_STATE]: {
+    displayName: 'Oddcontroller State',
+    description: 'Progress obtaining the OddController.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.GOT_TENNA_TIE]: {
+    displayName: 'Got Tenna Tie',
+    description: 'Whether you got the Tenna Tie from the Ball Machine.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_EXEC_BUFFET]: {
+    displayName: 'Got Exec Buffet',
+    description: 'Whether you got the Executive Buffet from the Ball Machine.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_TENSION_MAX]: {
+    displayName: 'Got Tension Max',
+    description: 'Whether you got the TensionMax from the Ball Machine.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_REVIVE_MINT]: {
+    displayName: 'Got Revive Mint',
+    description: 'Whether you got the Revive Mint from the Ball Machine.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_BLUE_RIBBON]: {
+    displayName: 'Got Blue Ribbon',
+    description: 'Whether you got the Blue Ribbon from the Ball Machine.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GACHA_LAST_BET]: {
+    displayName: 'Gacha Last Bet',
+    description:
+      'Amount previously spent on the gumball machine in Chapter 3, used to compute gold prize odds. Resets upon earning a gold prize.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.SNEAKING_FAST]: {
+    displayName: 'Sneaking Fast',
+    description: 'Whether the party has decided to sneak really fast.',
+    valueType: 'boolean',
+  },
+  [FLAGS.S_RANK_ROOM_ANSWER]: {
+    displayName: 'S Rank Room Answer',
+    description: 'What you told Susie you were doing in the S-Rank room.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.S_RANK_RETURN_2]: {
+    displayName: 'S Rank Return 2',
+    description:
+      "Whether you've gotten the scene of Ralsei mentioning RPGs after returning from the Sword Island Board.",
+    valueType: 'boolean',
+  },
+  [FLAGS.Z_RANK_DOOR_UNLOCK]: {
+    displayName: 'Z Rank Door Unlock',
+    description:
+      "Whether you've talked to unlock the Z-Rank door. Changes for each board.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.WATERCOOLER_C_RANK]: {
+    displayName: 'Watercooler C Rank',
+    description: 'Status of the Watercooler encounter in the C-Rank room.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Fought',
+        2: 'Spared',
+        3: 'Pacified',
+        4: 'In combat (Ch1)',
+        6: 'Frozen',
+      },
+    },
+  },
   [FLAGS.UNLOCKED_SUSIEZILLA]: {
-    displayName: 'Unlocked Susiezilla',
+    displayName: 'Susiezilla unlocked',
+    description: 'Whether the Susiezilla minigame was unlocked.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CONTROLS_UNJUMBLED]: {
+    displayName: 'Controls Unjumbled',
+    description:
+      "Whether you chose to... keep your controls? It's reversed, Ralsei playing as Kris (board 2) is actually the 0 value.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.CH3_MANHOLE_USED]: {
+    displayName: 'Manhole used',
+    description:
+      'When you last used the Z-Rank manhole to reach the original game. Used to open the return manhole.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.S_RANK_RETURN_3]: {
+    displayName: 'S Rank Return 3',
+    description:
+      "Whether you've gotten the scene of Susie and Ralsei racing after returning with the Shadow Mantle.",
     valueType: 'boolean',
   },
   [FLAGS.SCORE_COOKING]: {
     displayName: 'Cooking Score',
+    description: 'High score in the Cooking minigame.',
     valueType: 'number',
   },
   [FLAGS.RANK_COOKING]: {
     displayName: 'Cooking Rank',
+    description: 'Rank achieved in the Cooking minigame.',
     valueType: 'map',
     valueRules: {
       map: GAMESHOW_RANKS,
@@ -1883,10 +7857,12 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.SCORE_LIGHTNERS_LIVE]: {
     displayName: 'Lightners Live Score',
+    description: 'High score in the Lightners Live minigame.',
     valueType: 'number',
   },
   [FLAGS.RANK_LIGHTNERS_LIVE]: {
     displayName: 'Lightners Live Rank',
+    description: 'Rank achieved in the Lightners Live minigame.',
     valueType: 'map',
     valueRules: {
       map: GAMESHOW_RANKS,
@@ -1894,61 +7870,1711 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.SCORE_SUSIEZILLA]: {
     displayName: 'Susiezilla Score',
+    description: 'Highest score recorded in the Susiezilla Chapter 3 minigame.',
     valueType: 'number',
   },
   [FLAGS.RANK_SUSIEZILLA]: {
     displayName: 'Susiezilla Rank',
+    description: 'Best rank achieved in the Susiezilla Chapter 3 minigame.',
     valueType: 'map',
     valueRules: {
       map: GAMESHOW_RANKS,
     },
   },
+  [FLAGS.SUSIE_TENNA_CHAT_1]: {
+    displayName: 'Susie Tenna Chat 1',
+    description:
+      "Whether you saw Susie compliment Tenna's show between boards.",
+    valueType: 'boolean',
+  },
+  [FLAGS.RALSEI_FACE_THOUGHTS]: {
+    displayName: 'Ralsei Face Thoughts',
+    description: "Your commentary on Ralsei's face, if not watching Susie.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.TENNA_OPINION_SUSIE]: {
+    displayName: 'Tenna Opinion Susie',
+    description: 'Your opinion on Tenna as given to Susie before Board 2.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.GOT_TRASH_CH3_1]: {
+    displayName: 'Got Trash Ch3 1',
+    description:
+      'Whether you opened the 1st trash can in Chapter 3, with 10 points inside.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_TRASH_CH3_2]: {
+    displayName: 'Got Trash Ch3 2',
+    description:
+      'Whether you opened the 2nd trash can in Chapter 3, with nothing inside.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_TRASH_CH3_3]: {
+    displayName: 'Got Trash Ch3 3',
+    description:
+      'Whether you opened the 3rd trash can in Chapter 3, with the TVSlop.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_TRASH_CH3_4]: {
+    displayName: 'Got Trash Ch3 4',
+    description:
+      'Whether you opened the 4th trash can in Chapter 3, with nothing inside.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_TRASH_CH3_5]: {
+    displayName: 'Got Trash Ch3 5',
+    description:
+      'Whether you opened the 5th trash can in Chapter 3, with 2 points inside.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_TRASH_CH3_6]: {
+    displayName: 'Got Trash Ch3 6',
+    description:
+      'Whether you opened the 6th trash can in Chapter 3, with 50 points inside.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SUSIE_TENNA_CHAT_2]: {
+    displayName: 'Susie Tenna Chat 2',
+    description: "Progress with Susie questioning Tenna's show between boards.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.GOT_TRASH_CH3_7]: {
+    displayName: 'Got Trash Ch3 7',
+    description:
+      'Whether you opened the 7th trash can in Chapter 3, with nothing inside.',
+    valueType: 'boolean',
+  },
+  [FLAGS.ELNINA_GREENROOM_TALK]: {
+    displayName: 'Elnina Greenroom Talk',
+    description:
+      'What you told Elnina about her relationship in the Green Room.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.LANINO_GREENROOM_TALK]: {
+    displayName: 'Lanino Greenroom Talk',
+    description:
+      'What you told Lanino about his relationship in the Green Room.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.SUSIEBRIDGE_STATE]: {
+    displayName: 'Susiebridge State',
+    description:
+      "Progress on the unused Susie bridging minigame. There isn't any code to set it to 1, very unused.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.GOT_300_POINTS]: {
+    displayName: 'Got 300 Points',
+    description:
+      'Whether you got the chest of points in the room with a Susie board puzzle.',
+    valueType: 'boolean',
+  },
+  [FLAGS.WHO_ASKED_OKAY]: {
+    displayName: 'Who Asked Okay',
+    description:
+      'Who you asked whether they were okay in the Chapter 3 parental lock room.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.SUSIE_REASSURANCE_RESPONSE]: {
+    displayName: 'Susie Reassurance Response',
+    description:
+      'What you said to Susie (if talking to her) in the parental lock room.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.RALSEI_REASSURANCE_RESPONSE]: {
+    displayName: 'Ralsei Reassurance Response',
+    description:
+      'What you said to Ralsei (if talking to him) in the parental lock room.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.ICECREAM_FOR_SUSIE]: {
+    displayName: 'Icecream For Susie',
+    description:
+      'What you said to Ralsei about getting ice cream from him to Susie.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.FESTIVAL_RALSEI_WHOELSE]: {
+    displayName: 'Festival Ralsei Whoelse',
+    description:
+      "Who you told Ralsei you're going to the festival with, if not Susie.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.SUSIEZILLA_TRIED]: {
+    displayName: 'Susiezilla Tried',
+    description:
+      'Whether you completed the intro scene for the Susiezilla game.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SUSIEZILLA_BEATEN]: {
+    displayName: 'Susiezilla Beaten',
+    description:
+      'Whether you reached the elusive BOARD CLEAR of the Suziezilla game.',
+    valueType: 'boolean',
+  },
+  [FLAGS.WATERCOOLER_CRATER_POINTS]: {
+    displayName: 'Watercooler Crater Points',
+    description:
+      'Whether you got the 200 points from underneath the C-Rank Watercooler.',
+    valueType: 'boolean',
+  },
   [FLAGS.GOT_GOLDEN_TENNA]: {
-    displayName: 'Got Golden Tenna Statue',
+    displayName: 'Golden Tenna',
+    description: 'Whether the Golden Tenna statue was obtained.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_DOG_DOLLAR]: {
+    displayName: 'Got Dog Dollar',
+    description: 'Whether you got the Dog Dollar from the Ball Machine.',
+    valueType: 'boolean',
+  },
+  [FLAGS.OPENED_BONUS_ZONE]: {
+    displayName: 'Opened Bonus Zone',
+    description: `Whether you opened Tenna's secret bonus zone behind a green screen.`,
+    valueType: 'boolean',
+  },
+  [FLAGS.OPENED_SAMS_ZONE]: {
+    displayName: 'Opened Sams Zone',
+    description:
+      'Whether you opened the secret zone where you can choose whether the talking cages love or hate. Behind a green screen.',
     valueType: 'boolean',
   },
   [FLAGS.ENTERED_1225_ROOM]: {
-    displayName: 'Entered 1225 Gacha Machine Room',
+    displayName: 'Gacha room',
+    description: 'Whether the Gacha Machine room was entered.',
     valueType: 'boolean',
+  },
+  [FLAGS.BONUS_ZONE_OPENED]: {
+    displayName: 'Bonus Zone Opened',
+    description: 'Whether you photographed the red antlion in Board 2.',
+    valueType: 'boolean',
+  },
+  [FLAGS.COLDPLACE_ENTERED]: {
+    displayName: 'Entered Cold Place',
+    description:
+      "Whether you've entered the Cold Place and such has been acknowledged by the party.",
+    valueType: 'boolean',
+  },
+  [FLAGS.SNEAK_TIMES_CAUGHT]: {
+    displayName: 'Sneak Times Caught',
+    description:
+      "Number of times caught by the Zapper who later reveals he doesn't wanna be here either.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.SNEAK_ZAPPER_STATE]: {
+    displayName: 'Sneak Zapper State',
+    description: "Progress with the Zapper who doesn't wanna be here either.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.PARENTAL_LOCK_3_DONE]: {
+    displayName: 'Parental Lock 3 Done',
+    description:
+      'Whether you solved the undefined parental lock in Chapter 3, optional on Sword Route.',
+    valueType: 'boolean',
+  },
+  [FLAGS.COWBOY_GAME_2_STARTED]: {
+    displayName: 'Cowboy Game 2 Started',
+    description: 'Whether you reached the second cowboy game in Chapter 3.',
+    valueType: 'boolean',
+  },
+  [FLAGS.PARENTAL_LOCK_3_USED]: {
+    displayName: 'Parental Lock 3 Used',
+    description:
+      'Whether you went through the door after the undefined parental lock in Chapter 3.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SUSIEZILLA_BEST_TIME]: {
+    displayName: 'Susiezilla Best Time',
+    description: 'Best Susiezilla run time in milliseconds.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.TENNA_MAD_AT_STAFF]: {
+    displayName: 'Tenna Mad At Staff',
+    description:
+      "Whether you've seen the scene where Tenna gets mad the Darkners haven't found the Lightners yet.",
+    valueType: 'boolean',
+  },
+  [FLAGS.RAMB_QUIT_SCENE]: {
+    displayName: 'Ramb Quit Scene',
+    description:
+      "Whether you've seen the scene where Tenna gets mad Ramb is quitting on him.",
+    valueType: 'boolean',
+  },
+  [FLAGS.ROUXLS_BLOCK_PURCHASED]: {
+    displayName: 'Rouxls Block Purchased',
+    description:
+      "Whether Rouxls Kaard's block was purchased for 1 point on the gameshow board.",
+    valueType: 'boolean',
+  },
+  [FLAGS.RAMB_MOVED_FINAL]: {
+    displayName: 'Ramb Moved Final',
+    description:
+      "Whether you've moved Ramb to play the final game. Enjoy the games, eh, luv?",
+    valueType: 'boolean',
+  },
+  [FLAGS.RAMB_PETRIFY_STORY]: {
+    displayName: 'Ramb Petrify Story',
+    description: 'Your progress in learning about why Ramb petrified.',
+    valueType: 'number',
+    valueRules: { min: 0 },
   },
   [FLAGS.STARWALKER_CH3]: {
-    displayName: 'Talked to original &ensp;*Starwalker*',
+    displayName: 'Original Starwalker',
+    description: 'Whether the original Starwalker was talked to in Chapter 3.',
     valueType: 'boolean',
   },
+  [FLAGS.RALSEI_SUSPECT_ZAPPER]: {
+    displayName: 'Ralsei Suspect Zapper',
+    description:
+      "Whether you've interacted with the Zapper guarding the parental locks, preventing Ralsei's dialogue from repeating.",
+    valueType: 'boolean',
+  },
+  [FLAGS.BEST_FOOD_STACK]: {
+    displayName: 'Best Food Stack',
+    description:
+      'Number of food items successfully served in a single simultaneous stack in the cooking minigame. Used to track the record on replay.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.ZAPPER_JAIL_2_STATE]: {
+    displayName: 'Zapper Jail 2 State',
+    description:
+      'Progress on the second highly ineffective jail you are placed in by a Zapper while sneaking.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.PARENTAL_CAMERA_GOT]: {
+    displayName: 'Parental Camera Got',
+    description: 'Whether you got the camera in the Parental Lock 3 puzzle.',
+    valueType: 'boolean',
+  },
+  [FLAGS.PARENTAL_PHOTOS_NUM]: {
+    displayName: 'Parental Photos Num',
+    description:
+      'Number of photos taken in the Parental Lock 3 puzzle. Crashes after 8.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.LANCER_DIG_100]: {
+    displayName: 'Lancer Dig 100',
+    description:
+      'Whether you dug up the rare 100-point hole in the room with the many Lancers.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TIMES_LEVELED_CH3]: {
+    displayName: 'Times leveled',
+    description:
+      'The number of times you have leveled up by violently defeating an encounter. Used for certain increases that only occur every 2, 4, or 10 encounters.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.TIMES_GAINED_AT_CH3]: {
+    displayName: 'Times Gained at Ch3',
+    description:
+      'The number of times your AT and Magic have increased due to leveling up (every ten encounters).',
+    valueType: 'number',
+  },
+  [FLAGS.JAIL_DINNER_TALKED]: {
+    displayName: 'Jail Dinner Talked',
+    description:
+      "Whether you've talked to the imprisoned Pippins selling TV Dinners. Alters repeat interaction.",
+    valueType: 'boolean',
+  },
+  [FLAGS.GOULDEN_SON_TALE]: {
+    displayName: 'Goulden Son Tale',
+    description:
+      'Progress through the Goulden Son tale sequence and which part of the story has been told.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Interacted with 2',
+        2: '2 knew of 1',
+        3: '1 became 3',
+        4: 'Told of 3',
+        1.5: 'Told of 2',
+      },
+    },
+  },
+  [FLAGS.GOULDEN_SON_DESTINATION]: {
+    displayName: 'Goulden Son Destination',
+    description:
+      'Used to determine which is Goulden Son and which is Goulden Son 2. The one you interact with first after the lights are gone will be Goulden Son.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.GOT_TRASH_CH3_8]: {
+    displayName: 'Got Trash Ch3 8',
+    description:
+      'Whether you opened the 8th trash can in Chapter 3, with 120 points inside.',
+    valueType: 'boolean',
+  },
+  [FLAGS.STONE_LANCER_SEEN]: {
+    displayName: 'Stone Lancer Seen',
+    description:
+      'Whether you saw Lancer petrified in Chapter 3 (in the room where you get his controllers).',
+    valueType: 'boolean',
+  },
+  [FLAGS.SWORD_ROUTE_KILLS]: {
+    displayName: 'Sword Route Kills',
+    description:
+      "Number of enemies killed using your sword in the Chapter 3 minigames. Appears in Kris's stats.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.GRASS_PLUCKED_COUNT]: {
+    displayName: 'Grass Plucked Count',
+    description:
+      'Times grass was plucked in Chapter 3 minigames (shown in Susie stats, max 99).',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.RALSEI_CARRIED_COUNT]: {
+    displayName: 'Ralsei Carried Count',
+    description:
+      "The number of times Ralsei was carried in the Chapter 3 minigames. Appears in Ralsei's stats (up to 99).",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.CH3_RUN_REMINDER]: {
+    displayName: 'Run reminder',
+    description:
+      'Whether Susie reminded you you can run at the start of Chapter 3.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CH3_RUN_REMINDER_2]: {
+    displayName: 'Run reminder 2',
+    description: 'Whether Ralsei reminded you you can run in Chapter 3.',
+    valueType: 'boolean',
+  },
+  [FLAGS.RALSEI_EYE_PUZZLE_TALKED]: {
+    displayName: 'Ralsei Eye Puzzle Talked',
+    description:
+      "Whether you've talked to Ralsei at the Chapter 3 starting eye puzzle. Alters repeat dialogue.",
+    valueType: 'boolean',
+  },
+  [FLAGS.SUSIE_EYE_PUZZLE_TALKED]: {
+    displayName: 'Susie Eye Puzzle Talked',
+    description:
+      "Whether you've talked to Susie at the Chapter 3 starting eye puzzle. Alters repeat dialogue.",
+    valueType: 'boolean',
+  },
+  [FLAGS.PARENTAL_LOCK_1_CLOSE]: {
+    displayName: 'Parental Lock 1 Close',
+    description:
+      'Number of times you got the first parental lock numbers, but in the wrong order. Ralsei has special dialogue for the first couple tries.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.KNIGHT_PEP_TALK]: {
+    displayName: 'Almost beat Knight speech',
+    description:
+      'Whether the extra Roaring Knight game-over speech played (DEVICE_FAILURE). Requires 3+ deaths in the fight, Knight HP below 80% on that attempt, and only triggers once. Uses the \\\\M0 text speaker.',
+    valueType: 'boolean',
+  },
+  [FLAGS.KNIGHT_DEATHS_COUNT]: {
+    displayName: 'Knight Deaths Count',
+    description:
+      'Number of times you died to the Knight. Does not reset your save when you retry.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.PHASER_CANNONS]: {
+    displayName: 'Phaser Cannons',
+    description:
+      'Whether you performed the Phaser Cannons Easter Egg in the cooking minigame.',
+    valueType: 'boolean',
+  },
+  [FLAGS.RAMB_MOVED_2]: {
+    displayName: 'Ramb Moved 2',
+    description:
+      "Whether you've talked to Ramb after round 2 for him to move away from the door.",
+    valueType: 'boolean',
+  },
+  [FLAGS.LAWNMOWER_SCORE]: {
+    displayName: 'Lawnmower Score',
+    description:
+      "Score in Tenna's lawnmower minigame, minimum 1. Reused for a TVDinner chest.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.MINI_ATTACK_SUSIE]: {
+    displayName: 'Mini Attack Susie',
+    description:
+      'Whether mini-Kris tried to attack Susie in the parental lock scene.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SHADOW_HOME_SEEN]: {
+    displayName: 'Shadow Home Seen',
+    description: 'Whether you saw the smashed TV using the Shadow Crystal.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SHADOW_FAILED_CH3]: {
+    displayName: 'Shadow failed',
+    description:
+      'Whether you used the Shadow Crystal in Chapter 3 and saw nothing.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GLASS_UNDYNE_FROZE]: {
+    displayName: 'Glass Undyne Froze',
+    description:
+      'Whether you used the Glass in Chapter 3 and saw Undyne frozen in ice. Unused. You cannot visit the Light World in Chapter 3.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GLASS_FAILED_CH3]: {
+    displayName: 'Glass failed',
+    description: 'Whether you used the Glass in Chapter 3 and saw nothing.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GAMESHOW_JAPANESE]: {
+    displayName: 'Gameshow Japanese',
+    description:
+      'Whether the start of Chapter 3 (naming Kris on the show) was played in Japanese.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GAMESHOW_NAME_1_BACKUP]: {
+    displayName: 'First backup name letter',
+    description:
+      "Backup storage for the first custom team-name letter on Tenna's gameshow board.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.GAMESHOW_NAME_2_BACKUP]: {
+    displayName: 'Second backup name letter',
+    description:
+      "Backup storage for the second custom team-name letter on Tenna's gameshow board.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.GAMESHOW_NAME_3_BACKUP]: {
+    displayName: 'Third backup name letter',
+    description:
+      "Backup storage for the third custom team-name letter on Tenna's gameshow board.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.PIPPINS_BONUS_STOLE]: {
+    displayName: 'Pippins bonus chests',
+    description:
+      'Number of Bonus Zone chests looted by Pippins before the party could open them.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.SWORDROUTE_SODA]: {
+    displayName: 'Swordroute Soda',
+    description:
+      'Status of the soda left by Susie after obtaining the Shadow Mantle.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.RAISE_BAT_HARD_HISCORE]: {
+    displayName: 'Raise Bat Hard Hiscore',
+    description: 'High score on Raise Up Your Bat, Hard Mode',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.RAISE_BAT_HARD_HIRANK]: {
+    displayName: 'Raise Bat Hard Hirank',
+    description: 'Highest rank on Raise Up Your Bat, Hard Mode',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.DONATION_100_REWARD]: {
+    displayName: 'Unlocked $100 fountain reward',
+    description:
+      'Whether the bonus treasure unlocked after donating $100 to the fountain in Dark Sanctuary.',
+    valueType: 'boolean',
+  },
+  [FLAGS.DARKMAZE_PROGRESS]: {
+    displayName: 'Dark maze candy arc',
+    description:
+      'Progress through the candy-bowl scene in the dark maze at 2nd Sanctuary.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not started',
+        1: 'Reached candy trigger',
+        2: 'Finished candy cutscene',
+      },
+    },
+  },
+  [FLAGS.RIPPLE_WORSHIP_PROGRESS]: {
+    displayName: 'Ripple worship progress',
+    description: 'Progress through the ripple worship area in 2nd Sanctuary.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not started',
+        1: 'Read the sign',
+        2: 'Pressed glow tile',
+      },
+    },
+  },
+  [FLAGS.FOUNTAIN_NPC_1]: {
+    displayName: 'Organikk at fountain',
+    description:
+      'Whether Organikk appeared at the donation fountain after the waterfall tearoom in 2nd Sanctuary - Study.',
+    valueType: 'boolean',
+  },
+  [FLAGS.READABLE_ROOM_BOOK_1]: {
+    displayName: 'Office cupboard read',
+    description:
+      'Whether the party read the office cupboard documents at Light World church office.',
+    valueType: 'boolean',
+  },
+  [FLAGS.READABLE_ROOM_BOOK_2]: {
+    displayName: 'Office books read',
+    description:
+      'Whether the party read the office bookshelf at Light World church office.',
+    valueType: 'boolean',
+  },
+  [FLAGS.READABLE_ROOM_BOOK_3]: {
+    displayName: 'Hope candles read',
+    description:
+      'Whether the party read the hope candles during the day visit at Light World church entrance.',
+    valueType: 'boolean',
+  },
+  [FLAGS.READABLE_ROOM_BOOK_4]: {
+    displayName: 'Prayer target',
+    description:
+      'Which person Kris prayed for during the night visit at Light World church entrance.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        1: 'Pray for Susie',
+        2: 'Pray for Noelle',
+        3: 'Pray for Asriel',
+      },
+    },
+  },
+  [FLAGS.READABLE_ROOM_BOOK_5]: {
+    displayName: 'Bookshelf letter found',
+    description:
+      'Whether the party found the letter gag in the entrance bookshelf during the night visit at Light World church.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CHURCH_ENTRANCE_FLAG]: {
+    displayName: 'Candle quiz answer',
+    description:
+      'Which answer Susie gave about the hope candles during the day visit at Light World church entrance.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        1: "That's right",
+        2: 'Prayer',
+      },
+    },
+  },
+  [FLAGS.READABLE_ROOM_BOOK_6]: {
+    displayName: 'Choir closet opened',
+    description:
+      'Whether the party opened the closet in the Light World church choir room.',
+    valueType: 'boolean',
+  },
+  [FLAGS.READABLE_ROOM_BOOK_7]: {
+    displayName: 'Choir piano inspected',
+    description:
+      'Whether the party inspected the piano in the Light World church choir room.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CHURCH_CHOIR_FLAG]: {
+    displayName: 'Piano promise',
+    description:
+      'Which answer was chosen about playing piano again in the Light World church choir room.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        1: "I'll play again someday",
+        2: 'If you play too',
+        3: "I'll never play again",
+      },
+    },
+  },
+  [FLAGS.TEXT_FLAG_1513]: {
+    displayName: 'Met Jackenstein maid',
+    description:
+      "Whether Jackenstein's maid intro dialogue has played in Gerson's study at 2nd Sanctuary - Study.",
+    valueType: 'boolean',
+  },
+  [FLAGS.HAD_TEA_SCENE]: {
+    displayName: 'Castle tea party answer',
+    description:
+      "Which dialogue choice was selected during the tea party in Kris and Susie's room in My Castle Town.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'No choice selected',
+        1: 'First choice',
+        2: 'Second choice',
+        3: 'Third choice',
+      },
+    },
+  },
+  [FLAGS.CASTLE_KRIS_SUSIE_FLAG]: {
+    displayName: 'Kris and Susie room choice',
+    description:
+      "Which dialogue branch was chosen during scenes in Kris and Susie's room in My Castle Town.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not chosen',
+        1: 'Choice 1',
+        2: 'Choice 2',
+      },
+    },
+  },
+  [FLAGS.CASTLE_2F_FLAG]: {
+    displayName: 'Castle second floor scene',
+    description:
+      "Whether the second-floor cutscene in Ralsei's castle has already played.",
+    valueType: 'boolean',
+  },
+  [FLAGS.SECRET_PIANO_PROGRESS]: {
+    displayName: 'Secret piano tea answer',
+    description:
+      "Which dialogue choice was selected during Gerson's tea party in the waterfall tearoom, unlocking the third secret piano hint.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'No choice selected',
+        1: 'First choice',
+        2: 'Second choice',
+        3: 'Third choice',
+      },
+    },
+  },
+  [FLAGS.WATERFALL_TEAROOM]: {
+    displayName: 'Waterfall tea answer',
+    description:
+      'Which dialogue choice was selected during the second tea question in the waterfall tearoom at 2nd Sanctuary - Study.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'No choice selected',
+        1: 'First choice',
+        2: 'Second choice',
+      },
+    },
+  },
+  [FLAGS.FOUNTAIN_NPC_2]: {
+    displayName: 'Third tearoom answer',
+    description:
+      'Which dialogue choice was selected for the third tea question in the waterfall tearoom at 2nd Sanctuary - Study.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'No choice selected',
+        1: 'First choice',
+        2: 'Second choice',
+      },
+    },
+  },
+  [FLAGS.SIDECLIMB_TIME_1]: {
+    displayName: 'Red route best time',
+    description:
+      'Best completion time in frames for the red wall-switch route on the side climb in 2nd Sanctuary. 999 means skipped.',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
+  },
+  [FLAGS.SIDECLIMB_TIME_2]: {
+    displayName: 'Blue route best time',
+    description:
+      'Best completion time in frames for the blue wall-switch route on the side climb in 2nd Sanctuary. 999 means skipped.',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
+  },
+  [FLAGS.SIDECLIMB_PROGRESS]: {
+    displayName: 'Mizzle climb arc',
+    description:
+      'Progress through the Mizzle side-climb fight in 2nd Sanctuary.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not started',
+        1: 'Fight in progress',
+        2: 'Mizzle defeated',
+        3: 'Fully cleared',
+      },
+    },
+  },
+  [FLAGS.SIDEB_DIALOGUE_PROGRESS]: {
+    displayName: 'Side B route started',
+    description:
+      'Whether the Side B route received the light item at the hospital and began its alternate town progression.',
+    valueType: 'boolean',
+  },
+  [FLAGS.LW_TOWN_SIDEB_DIALOGUE]: {
+    displayName: 'Side B town waypoint',
+    description:
+      'Current dialogue waypoint index for the Side B town tour across Light World rooms.',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+      max: 2,
+    },
+  },
+  [FLAGS.NORTH_PROPHECIES_SEEN]: {
+    displayName: 'Read north prophecies',
+    description:
+      'Whether the party interacted with the Knight prophecies in the north area of 2nd Sanctuary.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TRUE_CLIMB_ADVENTURE]: {
+    displayName: 'Started true climb',
+    description:
+      'Whether the true-climb adventure sequence has started in 2nd Sanctuary.',
+    valueType: 'boolean',
+  },
+  [FLAGS.READABLE_NUBERT_FLAG]: {
+    displayName: 'Nubert spare follow-up',
+    description:
+      "Whether the party saw Nubert's extra dialogue about sparing enemies.",
+    valueType: 'boolean',
+  },
+  [FLAGS.NPC_ROOM_FLAG_1532]: {
+    displayName: 'Rudinn welcome home',
+    description:
+      'Whether the Rudinn gave the returning-home welcome speech in My Castle Town.',
+    valueType: 'boolean',
+  },
+  [FLAGS.PDC03_PUZZLE_A]: {
+    displayName: 'Church sermon choice A',
+    description:
+      'First player choice during the Light World church sermon scene before entering the Dark World.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not chosen',
+        1: 'Choice 1',
+        2: 'Choice 2',
+      },
+    },
+  },
+  [FLAGS.PDC03_PUZZLE_B]: {
+    displayName: 'Church sermon choice B',
+    description:
+      'Second player choice during the Light World church sermon scene before entering the Dark World.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not chosen',
+        1: 'Choice 1',
+        2: 'Choice 2',
+      },
+    },
+  },
+  [FLAGS.READABLE_ROOM_BOOK_8]: {
+    displayName: 'Choir door overheard',
+    description:
+      'Whether the party overheard choir rehearsal through the choir room door at Light World church entrance.',
+    valueType: 'boolean',
+  },
+  [FLAGS.READABLE_ROOM_BOOK_9]: {
+    displayName: 'Office door inspected',
+    description:
+      'Whether the party inspected the office door at Light World church entrance.',
+    valueType: 'boolean',
+  },
+  [FLAGS.FOUNTAIN_ITEM_RECEIVED]: {
+    displayName: 'Took fountain treasure',
+    description:
+      'Whether the party collected treasure from the donation fountain in 2nd Sanctuary.',
+    valueType: 'boolean',
+  },
+  [FLAGS.REMOTE_PIANO_SOLVED]: {
+    displayName: 'Solved remote piano maze',
+    description:
+      'Whether the movable piano reached its goal in the 2nd Sanctuary bookshelf puzzle.',
+    valueType: 'boolean',
+  },
+  [FLAGS.LIBRARY_FLAG]: {
+    displayName: 'Cleared library puzzle',
+    description:
+      'Whether the 2nd Sanctuary library puzzle was cleared, removing the movable piano and destructible shelf.',
+    valueType: 'boolean',
+  },
+  [FLAGS.MIZZLE_ENCOUNTER]: {
+    displayName: 'Encountered Mizzle',
+    description:
+      'Whether the party fought or encountered Mizzle on the side climb in 2nd Sanctuary.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SECRET_PIANO_SOLVED]: {
+    displayName: 'Solved secret piano',
+    description:
+      "Whether the secret piano was solved in Dark Sanctuary - Study, opening the path to Gerson's study.",
+    valueType: 'boolean',
+  },
+  [FLAGS.SAVEPOINT_TALK_1548]: {
+    displayName: 'Magic axe plaque hint',
+    description:
+      'Whether the Magic Axe plaque hint sparkle and Susie reaction played in Dark Sanctuary - Study.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_1549]: {
+    displayName: 'Magic axe plaque talk',
+    description:
+      'Whether Gerson gave follow-up Magic Axe plaque dialogue when leaving his shop in Dark Sanctuary - Study.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TOWN_SOUTH_FLAG]: {
+    displayName: 'School visit choice',
+    description:
+      "Susie's response when asked about checking on Asriel at school in Town - South.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not chosen',
+        1: 'Go to school now',
+        2: 'Go later alone',
+      },
+    },
+  },
   [FLAGS.TALKED_NAPSTABLOOK_UNDYNE]: {
-    displayName: 'Talked to Napstablook about Undyne',
+    displayName: 'Napstablook on Undyne',
+    description:
+      'Whether Napstablook was talked to about Undyne at the shelter.',
     valueType: 'boolean',
   },
   [FLAGS.TALKED_NAPSTABLOOK_SHELTER]: {
-    displayName: 'Talked to Napstablook about shelter',
+    displayName: 'Napstablook on shelter',
+    description: 'Whether Napstablook was talked to about the shelter.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_1554]: {
+    displayName: 'Catti Susie warning',
+    description:
+      'Whether Catti warned Kris about walking with Susie in Light World town.',
+    valueType: 'boolean',
+  },
+  [FLAGS.PDC16_READABLE_FLAG]: {
+    displayName: 'Kris yard locked door',
+    description:
+      "Whether the party found Kris's yard door locked and decided to get the key from church.",
+    valueType: 'boolean',
+  },
+  [FLAGS.READABLE_ROOM_FLAG_1556]: {
+    displayName: 'Church case inspected',
+    description:
+      'Whether the glass case with the hammer and old man photo was inspected at Light World church.',
+    valueType: 'boolean',
+  },
+  [FLAGS.PDC16_PUZZLE_PROGRESS]: {
+    displayName: 'Church door scene choice',
+    description:
+      'Player choice during the church door cutscene that leads into the Dark World.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not chosen',
+        1: 'Choice 1',
+        2: 'Choice 2',
+      },
+    },
+  },
+  [FLAGS.HOMEALONE_NORTH_CONVO]: {
+    displayName: 'Upstairs conversation',
+    description: `Progress through the conversation in the north room at Noelle's house.`,
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+      max: 11,
+    },
+  },
+  [FLAGS.TEA_PARTY_DINER_FLAG]: {
+    displayName: 'Tea party or diner visit',
+    description:
+      'Whether Kris waited for a castle tea party or went to the diner during the Home Alone sequence.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Neither',
+        1: 'Tea party at castle',
+        2: 'Diner visit',
+      },
+    },
+  },
+  [FLAGS.GALLERY_PROGRESS]: {
+    displayName: 'Gallery arc progress',
+    description:
+      "Progress through Susie's painting gallery tour in 2nd Sanctuary.",
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+      max: 4,
+    },
+  },
+  [FLAGS.ORGAN_PUZZLE_PROGRESS]: {
+    displayName: 'Played correct organ song',
+    description:
+      'Whether Kris played the correct melody on the practice organ in 2nd Sanctuary - Study.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_1562]: {
+    displayName: 'Odds box dug through',
+    description:
+      "Whether the party dug through the odds-and-ends box at Noelle's house.",
+    valueType: 'boolean',
+  },
+  [FLAGS.NPC_ROOM_FLAG_1563]: {
+    displayName: 'Noelle phone hint',
+    description:
+      "Whether Noelle hinted Kris should leave while she looks for her phone at Noelle's house.",
+    valueType: 'boolean',
+  },
+  [FLAGS.NPC_ROOM_FLAG_1564]: {
+    displayName: 'Susie phone clue hint',
+    description:
+      'Whether Susie told Kris to search for clues like a dog while Noelle looks for her phone.',
     valueType: 'boolean',
   },
   [FLAGS.TALKED_ASGORE_OUTFIT]: {
-    displayName: 'Talked to Asgore about his outfit',
+    displayName: 'Asgore outfit',
+    description:
+      'Whether Asgore was talked to about his outfit at the hospital.',
     valueType: 'boolean',
   },
   [FLAGS.TALKED_ASGORE_WELLBEING]: {
-    displayName: 'Talked to Asgore about his well-being',
+    displayName: 'Asgore well-being',
+    description:
+      'Whether Asgore was talked to about his well-being at the hospital.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_1567]: {
+    displayName: 'Axe bridge unlocked',
+    description:
+      'Whether the magical-glass bridge opened after the Justice Axe climb switch in Dark Sanctuary.',
+    valueType: 'boolean',
+  },
+  [FLAGS.AXE_SPELL_UNLOCKED]: {
+    displayName: 'Unlocked Axe spell',
+    description:
+      'Whether the Axe spell was unlocked from the Hammer of Justice or Sound of Justice fights.',
+    valueType: 'boolean',
+  },
+  [FLAGS.READABLE_ROOM_FLAG_1570]: {
+    displayName: 'Study fountain found',
+    description:
+      'Whether the donation fountain pool was first discovered in Dark Sanctuary - Study.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TRUE_CLIMB_PROGRESS]: {
+    displayName: 'Finished true climb',
+    description:
+      'Whether the true-climb adventure sequence was completed in 2nd Sanctuary.',
+    valueType: 'boolean',
+  },
+  [FLAGS.BELLROOM_FLAG]: {
+    displayName: 'Bell room Susie position',
+    description:
+      'How far Susie has moved through the bell room in 2nd Sanctuary.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Starting position',
+        1: 'First waypoint',
+        2: 'Second waypoint',
+      },
+    },
+  },
+  [FLAGS.WINDOWS_COUNT]: {
+    displayName: 'Windows loop count',
+    description:
+      'How many times the party exited the looping windows room in 2nd Sanctuary. At 8, the route switches to the Man room.',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+      max: 8,
+    },
+  },
+  [FLAGS.READABLE_ROOM_FLAG_1574]: {
+    displayName: 'Tenna TV talk',
+    description:
+      "Whether Susie talked about searching for Tenna at Kris's room TV on the alt-route.",
+    valueType: 'boolean',
+  },
+  [FLAGS.READABLE_ROOM_FLAG_1575]: {
+    displayName: 'Toriel house talk',
+    description:
+      "Whether Toriel's difficult-stay-at-home dialogue played at Noelle's house on the alt-route.",
+    valueType: 'boolean',
+  },
+  [FLAGS.SUS_TALK_FLAG]: {
+    displayName: 'Tenna TV backstory talk',
+    description:
+      "Whether Susie explained finding and patching up Tenna when inspecting the repaired TV in Kris's room.",
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_1577]: {
+    displayName: 'Cat cafe intro',
+    description:
+      'Whether the butler gave the cat-cafe greeting after recruiting cat NPCs in Butler Cafe.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_1578]: {
+    displayName: 'Love Dojo intro',
+    description:
+      'Whether the Love Dojo intro dialogue played in My Castle Town.',
+    valueType: 'boolean',
+  },
+  [FLAGS.HOMEALONE_COUNTER]: {
+    displayName: 'Home interaction count',
+    description: 'Times certain home objects were interacted with.',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
+  },
+  [FLAGS.LEVELUP_COUNTER]: {
+    displayName: 'Level-up count',
+    description:
+      'Number of violent encounter level-ups in Chapter 4. Governs Noelle stat gains and final-climb recruit dialogue.',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
+  },
+  [FLAGS.CLOUD_DAMAGE_COUNT]: {
+    displayName: 'Titan cloud near-deaths',
+    description:
+      'How many times Kris nearly died to Titan cloud damage. Slows clouds after each near-death (max 3).',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+      max: 3,
+    },
+  },
+  [FLAGS.REMOTE_PIANO_POSITION]: {
+    displayName: 'Movable piano position',
+    description:
+      'Encoded save position of the movable piano in the 2nd Sanctuary bookshelf puzzle.',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
+  },
+  [FLAGS.FACE_DRAW_CH4]: {
+    displayName: 'Face draw cutscene active',
+    description:
+      'Whether the face-draw cutscene is running during the Light World festival lead-up in Chapter 4.',
     valueType: 'boolean',
   },
   [FLAGS.GOT_MOSS_CH4]: {
-    displayName: 'Got Moss in Chapter 4',
+    displayName: 'Moss',
+    description: 'Whether moss was collected in Chapter 4.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GERSON_STUDY_PROGRESS]: {
+    displayName: 'Unmanned table choice',
+    description:
+      "What the party chose at Gerson's unmanned item table in 2nd Sanctuary - Study.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not interacted',
+        1: 'Tried to steal',
+        2: 'Left it alone',
+      },
+    },
+  },
+  [FLAGS.GERSON_STUDY_COUNTER]: {
+    displayName: 'Rhapsotea purchases',
+    description:
+      "How many times Rhapsotea was bought from Gerson's table in 2nd Sanctuary - Study.",
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
+  },
+  [FLAGS.CHURCHC_TREASURE_ENCOUNTER]: {
+    displayName: 'Treasure chest arc',
+    description:
+      'Progress through the treasure-chest encounter in 3rd Sanctuary.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not started',
+        1: 'Chest opened',
+        2: 'Post-encounter blackout',
+      },
+    },
+  },
+  [FLAGS.ANGEL_PROPHECY_PROGRESS]: {
+    displayName: 'Angel prophecy active',
+    description:
+      'Whether the angel prophecy room was activated in 3rd Sanctuary.',
     valueType: 'boolean',
   },
   [FLAGS.PURIFIED_COUNT]: {
-    displayName: 'Purified Enemies Count',
+    displayName: 'Purified enemies',
     description: 'Total number of purified Titan Spawn enemies.',
     valueType: 'number',
     valueRules: {
       min: 0,
     },
   },
+  [FLAGS.SLAIN_COUNT]: {
+    displayName: 'Enemies slain count',
+    description:
+      'Running total of violently defeated enemies, displayed during Titan fight sequences.',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
+  },
+  [FLAGS.CUP_STACK_KNOCKED]: {
+    displayName: 'Cup stack knocked over',
+    description:
+      'Whether the cup-stack obstacle was knocked over in 3rd Sanctuary.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SAVEPOINT_TALK_1600]: {
+    displayName: 'Study save intro',
+    description:
+      'Progress through savepoint intro text at Dark Sanctuary - Study.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not seen',
+        1: 'First hearth text',
+        2: 'Mural text unlocked',
+      },
+    },
+  },
+  [FLAGS.SAVEPOINT_TALK_1601]: {
+    displayName: 'NW connect save intro',
+    description:
+      'Whether the unreadable-books savepoint intro played at Northwest Library connector.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SAVEPOINT_TALK_1602]: {
+    displayName: 'Piano corridor save intro',
+    description:
+      'Whether the dark-corridor savepoint intro played at the caged piano area.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SAVEPOINT_TALK_1603]: {
+    displayName: 'Super prophecies save intro',
+    description:
+      'Whether the prism savepoint intro played in 3rd Sanctuary super prophecies room.',
+    valueType: 'boolean',
+  },
+  [FLAGS.RIPPLE_PUZZLE_GERSON]: {
+    displayName: 'Finished ripple puzzle',
+    description:
+      'Whether the post-Gerson ripple puzzle was completed in 2nd Sanctuary.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_1605]: {
+    displayName: 'Central door opened talk',
+    description:
+      'Whether Gerson commented that the central door upstairs is open in Dark Sanctuary - Study.',
+    valueType: 'boolean',
+  },
+  [FLAGS.ANGEL_PROPHECY_ENCOUNTER]: {
+    displayName: 'Angel prophecy dialogue',
+    description: 'State of the angel prophecy NPC dialogue in 3rd Sanctuary.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not started',
+        1: 'First branch',
+        2: 'Advanced branch',
+      },
+    },
+  },
+  [FLAGS.TEXT_FLAG_1607]: {
+    displayName: 'Gerson Jack letter intro',
+    description:
+      'Whether Gerson showed the Jackenstein letter cutscene in Dark Sanctuary - Study.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_1608]: {
+    displayName: 'Gerson sheet letter intro',
+    description:
+      'Whether Gerson showed the sheet-music letter cutscene after the organ puzzle in Dark Sanctuary - Study.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SAVEPOINT_TALK_1609]: {
+    displayName: 'Sanctuary temp save',
+    description:
+      'Whether a temp save was created at the Dark Sanctuary savepoint on first entry.',
+    valueType: 'boolean',
+  },
+  [FLAGS.PROPHECIES_1611]: {
+    displayName: 'Triggered prophecies room',
+    description:
+      'Whether the prophecies room interaction was triggered in 3rd Sanctuary.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_1612]: {
+    displayName: 'Gerson table shop intro',
+    description:
+      'Whether Gerson greeted the party at his unmanned item table in Dark Sanctuary - Study.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_1613]: {
+    displayName: 'Gerson table post-departure',
+    description:
+      "Whether the party first shopped at Gerson's table after he left Dark Sanctuary - Study.",
+    valueType: 'boolean',
+  },
+  [FLAGS.SUPER_PROPHECIES_SEEN]: {
+    displayName: 'Saw super prophecies',
+    description: 'Whether the party saw the super prophecies in 3rd Sanctuary.',
+    valueType: 'boolean',
+  },
+  [FLAGS.ENCOUNTER_1616]: {
+    displayName: 'Collected treasure armor',
+    description:
+      'Whether the armor from the ChurchC treasure chest was collected in 3rd Sanctuary.',
+    valueType: 'boolean',
+  },
+  [FLAGS.INTRO_GERSON_1617]: {
+    displayName: 'Declined climbing gloves',
+    description:
+      'Whether the hidden climbing-gloves treasure was found and left in Dark Sanctuary - Atrium.',
+    valueType: 'boolean',
+  },
+  [FLAGS.RUDY_TORIEL_DIALOGUE]: {
+    displayName: 'Juice subplot clue progress',
+    description:
+      'How many clues Kris gathered about Noelle being locked out for the juice subplot at the hospital.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'No clues',
+        1: 'One clue',
+        2: 'Enough to tell Susie',
+      },
+    },
+  },
+  [FLAGS.RUDY_TORIEL_DIALOGUE_2]: {
+    displayName: 'Noelle locked-out story',
+    description:
+      "Whether Noelle told Kris about being locked out of her house and breaking in with Kris's help.",
+    valueType: 'boolean',
+  },
+  [FLAGS.ALPHYS_JUICE_DIALOGUE]: {
+    displayName: 'Alphys juice clue',
+    description:
+      "Whether Alphys provided a clue about Noelle's house keys during the juice subplot.",
+    valueType: 'boolean',
+  },
+  [FLAGS.CHURCHB_MAN_TALKED]: {
+    displayName: 'Washed hands after painting',
+    description:
+      'Whether the sink hand-washing scene played after the painting man in 2nd Sanctuary.',
+    valueType: 'boolean',
+  },
   [FLAGS.INSPECTED_GLASS_WITH_NOELLE]: {
-    displayName: `Inspected Glass in Noelle's house`,
+    displayName: 'Glass with Noelle',
+    description: 'Whether the glass was inspected with Noelle at her house.',
+    valueType: 'boolean',
+  },
+  [FLAGS.ITEM_USE_FLAG_1624]: {
+    displayName: 'Crystal lobby vision',
+    description:
+      'Whether looking through the glass shard showed a brief church-lobby vision in Dark Sanctuary.',
+    valueType: 'boolean',
+  },
+  [FLAGS.ITEM_USE_FLAG_1625]: {
+    displayName: 'Crystal prophecy check',
+    description:
+      'Whether the party shook the glass shard at the final prophecy in 3rd Sanctuary.',
+    valueType: 'boolean',
+  },
+  [FLAGS.ITEM_USE_FLAG_1626]: {
+    displayName: 'Crystal no effect',
+    description:
+      'Whether the party tried the glass shard somewhere it had no special effect.',
+    valueType: 'boolean',
+  },
+  [FLAGS.PRESENTS_CHECKED]: {
+    displayName: 'Gift box inspections',
+    description:
+      "How many times the empty gift box was inspected in Noelle's closet. At 3 with Susie and Noelle present, triggers extra dialogue.",
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+      max: 3,
+    },
+  },
+  [FLAGS.CHURCH_INTRO_FLAG]: {
+    displayName: 'Dozed in church pew',
+    description:
+      'Whether Kris fell asleep in the church pew and entered Dark Sanctuary through the atrium.',
+    valueType: 'boolean',
+  },
+  [FLAGS.ARENA_PIANO_FLAG]: {
+    displayName: 'Gerson arena piano scene',
+    description:
+      'Whether the Gerson arena piano cutscene has played in Dark Sanctuary - Study.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_1630]: {
+    displayName: 'Bakery bread chat',
+    description:
+      'Whether the Top Bakery baker talked about discovering bread in My Castle Town.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_1631]: {
+    displayName: 'Bakery leave chat',
+    description:
+      'Whether the Top Bakery baker gave the journey-continues farewell in My Castle Town.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_1632]: {
+    displayName: 'Bakery first greeting',
+    description:
+      'Whether the Top Bakery first-visit greeting played in My Castle Town.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_1633]: {
+    displayName: 'Restaurant first greeting',
+    description:
+      "Whether the restaurant baker's first greeting played in My Castle Town.",
+    valueType: 'boolean',
+  },
+  [FLAGS.READABLE_ROOM_FLAG_1634]: {
+    displayName: 'Final climb cutscene',
+    description:
+      'Whether the blocked-path cutscene triggered at the 3rd Sanctuary final climb.',
+    valueType: 'boolean',
+  },
+  [FLAGS.READABLE_ROOM_FLAG_1635]: {
+    displayName: 'Church door go home',
+    description:
+      "Whether Susie suggested going to Kris's house after the festival at Light World church.",
+    valueType: 'boolean',
+  },
+  [FLAGS.RUN_CHECK_FLAG]: {
+    displayName: 'Run tutorial shown',
+    description:
+      'Whether Susie reminded Kris they can run during the Dark Sanctuary intro cutscene.',
+    valueType: 'boolean',
+  },
+  [FLAGS.PUMPKIN_NPC_PROGRESS]: {
+    displayName: 'Pumpkin NPC story',
+    description:
+      'Progress through the Jackenstein pumpkin NPC story in Dark Sanctuary.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not started',
+        1: 'Early laugh reaction',
+        2: 'Story complete',
+      },
+    },
+  },
+  [FLAGS.INTRO_GUEI_TALKED]: {
+    displayName: 'Talked to Guei intro',
+    description:
+      'Whether Guei was talked to during the Dark Sanctuary intro before the party regrouped.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TITAN_FIGHT_PROGRESS]: {
+    displayName: 'Titan fight phase',
+    description:
+      'Current phase of the Titan fight during the 3rd Sanctuary climb.',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
+  },
+  [FLAGS.SOUND_OF_JUSTICE_FLAG]: {
+    displayName: 'Sound of Justice state',
+    description:
+      'Boss state value saved from the Sound of Justice fight in Dark Sanctuary - Study.',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
+  },
+  [FLAGS.GERSON_STUDY_DOOR]: {
+    displayName: 'Study door opened',
+    description:
+      "Whether the central door into Gerson's study was opened in 2nd Sanctuary - Study.",
+    valueType: 'boolean',
+  },
+  [FLAGS.HOMEALONE_KITCHEN]: {
+    displayName: 'Visit count',
+    description: `Times the kitchen at Noelle's house was entered during Home Alone.`,
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+      max: 3,
+    },
+  },
+  [FLAGS.TEXT_READABLE_FLAG]: {
+    displayName: 'Cliff hole looted',
+    description:
+      'Whether the hidden loot was taken from the hole in the west cliff wall at My Castle Town.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CASTLE_TV_CODE_DOOR]: {
+    displayName: 'Unlocked code door',
+    description:
+      'Whether the mystery code door at Castle Town - TV Building was solved.',
+    valueType: 'boolean',
+  },
+  [FLAGS.READABLE_ROOM_FLAG_1650]: {
+    displayName: 'Cup stack talk',
+    description:
+      'Whether the cup-stack knight dialogue played during the 3rd Sanctuary final climb.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TEM_SCHOOL_SONG]: {
+    displayName: 'Tem school song index',
+    description:
+      'Which song Tem is playing at school. Cycles through four variants on repeat interactions.',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+      max: 3,
+    },
+  },
+  [FLAGS.AXE_SPELL_TALK]: {
+    displayName: 'Talked about Axe spell',
+    description:
+      'Whether the party talked to an NPC about the Axe spell after the Gerson arena in My Castle Town.',
+    valueType: 'boolean',
+  },
+  [FLAGS.NPC_ROOM_FLAG]: {
+    displayName: 'Chariel name gag',
+    description:
+      'Whether Susie reacted to the Chariel name gag in My Castle Town.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TEXT_FLAG_1655]: {
+    displayName: 'Juice titration',
+    description:
+      'Whether Kris carefully titrated juice into a glass during the Alphys juice scene at 1st Sanctuary.',
     valueType: 'boolean',
   },
   [FLAGS.WEIRDROUTE_FAILED_CH4]: {
     displayName: 'Weird Route failed',
+    description: 'Whether the Chapter 4 Weird Route was failed.',
+    valueType: 'boolean',
+  },
+  [FLAGS.ALPHYS_JUICE_MODIFIER]: {
+    displayName: 'Rudy juice clue path',
+    description:
+      'Whether Rudy provided the alternate locked-out-house clue during the juice subplot.',
+    valueType: 'boolean',
+  },
+  [FLAGS.KNIGHT_CLIMB_INIT]: {
+    displayName: 'Light pillar available',
+    description:
+      'Whether the Castle Town warp pillar is active past the Knight Climb. Applied on save load after Chapter 4 is complete.',
+    valueType: 'boolean',
+  },
+  [FLAGS.KNIGHT_CLIMB_PROGRESS]: {
+    displayName: 'Saw pillar reveal',
+    description:
+      'Whether the one-time light pillar reveal cutscene has played.',
+    valueType: 'boolean',
+  },
+  [FLAGS.KNIGHT_CLIMB_1660]: {
+    displayName: 'Talked at light pillar',
+    description:
+      'Whether the party had their first conversation at the light pillar.',
+    valueType: 'boolean',
+  },
+  [FLAGS.POST_DARK_WORLD]: {
+    displayName: 'Solo pillar visits',
+    description:
+      'How many times Kris used the light pillar to visit Castle Town without Susie and Ralsei.',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
+  },
+  [FLAGS.MICCHECK_FLAG]: {
+    displayName: 'Mic crystal examined',
+    description:
+      'Whether the microphone-shaped crystal description was read at a mic platform in Castle Town.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SAVEPOINT_DARKZONE]: {
+    displayName: 'Light World savepoint text',
+    description:
+      'Whether the anomalous Light World savepoint description was shown once outside the Dark World.',
+    valueType: 'boolean',
+  },
+  [FLAGS.READABLE_ROOM_FLAG_1665]: {
+    displayName: 'Rudy bouquet talk',
+    description:
+      'Whether Rudy commented on Asgore bringing another bouquet at the hospital.',
+    valueType: 'boolean',
+  },
+  [FLAGS.ARENA_PROGRESS]: {
+    displayName: 'Justice Axe pickup',
+    description:
+      'Whether Susie received the Justice Axe after the Gerson arena in Dark Sanctuary - Study.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not received',
+        1: 'Added to weapons',
+        2: 'Inventory full (left on anvil)',
+      },
+    },
+  },
+  [FLAGS.CASTLE_TV_ZONE1_VISITED]: {
+    displayName: 'Entered locked TV room',
+    description:
+      'Whether the party entered the locked TV room in Castle Town - TV Building.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CASTLE_TV_ZONE1_COMPLETE]: {
+    displayName: 'Petted the cat statue',
+    description:
+      'Whether the cat-eared statue in zone 1 of Castle Town - TV Building was petted.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CASTLE_TV_ZONE1_STATE]: {
+    displayName: 'Cat statue choice',
+    description:
+      'Outcome of the zone 1 cat statue interaction in Castle Town - TV Building.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not chosen / petted',
+        2: 'Declined to pet',
+      },
+    },
+  },
+  [FLAGS.CASTLE_TV_MIC_PLATFORM]: {
+    displayName: 'Mic platform active',
+    description: 'Whether the MAUS mic platform is active in MIKE ZONE.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CASTLE_TV_ZONE3_STATE]: {
+    displayName: 'Collected tall cat treasure',
+    description:
+      'Whether the zone 3 tall cat statue sequence in MIKE ZONE is finished.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CASTLE_TV_ZONE2_FLAGS]: {
+    displayName: 'Removed cat statues',
+    description:
+      'Bitmask of which tall cat statues were removed in zone 2 of MIKE ZONE.',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+      max: 7,
+    },
+  },
+  [FLAGS.CASTLE_TV_BATTLE_STATE]: {
+    displayName: 'Mike battle started',
+    description: 'Whether the Mike boss fight intro has started in MIKE ZONE.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CASTLE_TV_BATTLE_COMPLETE]: {
+    displayName: 'Defeated Mike',
+    description: 'Whether the Mike boss fight is finished.',
+    valueType: 'boolean',
+  },
+  [FLAGS.MIKE_DOOR_OPENED]: {
+    displayName: 'Opened inner door',
+    description: "Whether Mike's inner door in MIKE ZONE is open.",
+    valueType: 'boolean',
+  },
+  [FLAGS.MIKE_MINIGAME_SCORE_1]: {
+    displayName: 'BATTAT high score',
+    description:
+      'Your best score on the BATTAT Mike minigame at the Castle Town TV zone.',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
+  },
+  [FLAGS.MIKE_MINIGAME_SCORE_2]: {
+    displayName: 'JONGLER high score',
+    description:
+      'Your best score on the JONGLER Mike minigame at the Castle Town TV zone.',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
+  },
+  [FLAGS.MIKE_MINIGAME_HISCORE]: {
+    displayName: 'PLUEY high score',
+    description:
+      'Your best score on the PLUEY Mike minigame at the Castle Town TV zone.',
+    valueType: 'number',
+    valueRules: {
+      min: 0,
+    },
+  },
+  [FLAGS.MIC_SENSITIVITY]: {
+    displayName: 'Microphone sensitivity',
+    description:
+      'Saved microphone sensitivity for Mike battles and minigames. Decimal values from 0.035 to 4.',
+    valueType: 'number',
+    valueRules: {
+      min: 0.035,
+      max: 4,
+    },
+  },
+  [FLAGS.CASTLE_TV_WATCHED]: {
+    displayName: 'Watched TV after Mike battle',
+    description: 'Whether the post-battle TV cutscene has played.',
+    valueType: 'boolean',
+  },
+  [FLAGS.NOELLE_ROOM_PROGRESS]: {
+    displayName: 'Noelle room vent sequence',
+    description:
+      "Progress through the vent and closet sequence at Noelle's house during Home Alone.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not started',
+        1: 'Vent sequence active',
+        2: 'Closet scene done',
+      },
+    },
+  },
+  [FLAGS.FOUNTAIN_SPECIAL]: {
+    displayName: 'Money fountain encounter',
+    description:
+      'Whether the money fountain enemy encounter was completed in 2nd Sanctuary.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CHURCHC_ENCOUNTER_1]: {
+    displayName: 'Bluebook encounter state',
+    description:
+      'State of the bluebook enemy encounter in 3rd Sanctuary. Values above 1 keep the encounter active but enable easy movement.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not fought',
+        1: 'Defeated',
+        2: 'Easy mode active',
+      },
+    },
+  },
+  [FLAGS.MIZZLE_SPECIAL]: {
+    displayName: 'Mizzle watercooler encounter',
+    description:
+      'Whether the Mizzle watercooler encounter was completed, preventing the playable bell from spawning.',
     valueType: 'boolean',
   },
 };

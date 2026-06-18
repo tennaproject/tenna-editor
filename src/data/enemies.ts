@@ -106,7 +106,7 @@ export const ENEMIES_META: Record<EnemyIndex, EnemyProperties> = {
   [ENEMIES.DUMMY]: {
     displayName: 'Dummy',
     recruitable: false,
-    recruitFlag: FLAGS.RECRUIT_LANCER_2,
+    recruitFlag: FLAGS.RECRUIT_DUMMY,
   },
   [ENEMIES.RALSEI_TUTORIAL]: {
     displayName: 'Ralsei (tutorial)',

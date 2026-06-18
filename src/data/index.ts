@@ -10,3 +10,5 @@ export * from './spells';
 export * from './weapons';
 export * from './characters';
 export * from './enemies';
+export * from './story-sections';
+export * from './plot-points';

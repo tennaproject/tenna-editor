@@ -10,12 +10,14 @@ import { ROOMS, type RoomIndex } from './rooms';
 import { SPELLS, type SpellIndex } from './spells';
 import { WEAPONS, type WeaponIndex } from './weapons';
 import { ENEMIES, type EnemyIndex } from './enemies';
+import { CH1_PLOT, CH2_PLOT, CH3_PLOT, CH4_PLOT } from './plot-points';
 
 export const CHAPTERS = {
   CH1: 1,
   CH2: 2,
   CH3: 3,
   CH4: 4,
+  CH5: 5,
 } as const;
 
 export type ChapterIndex = (typeof CHAPTERS)[keyof typeof CHAPTERS];
@@ -39,6 +41,7 @@ interface ChapterContent {
   rooms: Set<RoomIndex>;
   flags: Set<FlagIndex>;
   enemies: Set<EnemyIndex>;
+  plotPoints: Set<number>;
   meta: {
     consumablesSize: number;
     storagesSize: number;
@@ -422,7 +425,18 @@ const CH1_CONTENT: ChapterContent = {
     FLAGS.EGG_ROOM_CH1,
     FLAGS.EGG_CH1,
     FLAGS.LANGUAGE,
-  ]),
+    FLAGS.GOT_WHITE_RIBBON,
+    FLAGS.GOT_DANCER_MINT,
+    FLAGS.GOT_DICE_BRACE,
+    FLAGS.GOT_BLOXER_MONEY,
+    FLAGS.GOT_BLOXER_MINT,
+    FLAGS.GOT_CLUBSWICH,
+    FLAGS.GOT_CASTLE_MINT,
+    FLAGS.GOT_KEY_B,
+    FLAGS.GOT_KEY_C,
+    FLAGS.AMOUNT_PAIN_CH1,
+    FLAGS.AMOUNT_ICE_E_PAIN_CH1,
+]),
   enemies: new Set<EnemyIndex>([
     ENEMIES.DEBUG,
     ENEMIES.LANCER_1,
@@ -448,6 +462,7 @@ const CH1_CONTENT: ChapterContent = {
     ENEMIES.HEAD_HATHY,
     ENEMIES.KING,
   ]),
+  plotPoints: new Set<number>(Object.values(CH1_PLOT)),
 };
 
 const CH2_CONTENT: ChapterContent = {
@@ -1085,7 +1100,68 @@ const CH2_CONTENT: ChapterContent = {
     FLAGS.GLASS_SUSIE_GLARE,
     FLAGS.GAVE_JEVIL_CRYSTAL,
     FLAGS.FAILED_SPAM_CRYSTAL,
-  ]),
+    FLAGS.ENCOUNT_FIRST_WW,
+    FLAGS.ENCOUNT_POPPUP_1,
+    FLAGS.ENCOUNT_DOUBLE_WW,
+    FLAGS.ENCOUNT_ERASER_VIRO,
+    FLAGS.ENCOUNT_SINGLE_MAUS,
+    FLAGS.ENCOUNT_MISC_MAUS,
+    FLAGS.ENCOUNT_POPUP_MAUS,
+    FLAGS.ENCOUNT_MAUSWHEEL,
+    FLAGS.ENCOUNT_ACID_WW,
+    FLAGS.ENCOUNT_ROUXLS,
+    FLAGS.ENCOUNT_WWW,
+    FLAGS.ENCOUNT_SPAMTON,
+    FLAGS.ENCOUNT_GIGAQUEEN,
+    FLAGS.ENCOUNT_SCRIPTED,
+    FLAGS.ENCOUNT_TRIPLE_MEDIC,
+    FLAGS.ENCOUNT_TASK_VIRO,
+    FLAGS.ENCOUNT_SG_MAICE,
+    FLAGS.ENCOUNT_FLEE_TASK,
+    FLAGS.ENCOUNT_PIPIS_FAKE,
+    FLAGS.ENCOUNT_TASQUE_RETURN,
+    FLAGS.ENCOUNT_SG_MAICE_2,
+    FLAGS.ENCOUNT_SG_POPUP,
+    FLAGS.ENCOUNT_WWW_SG,
+    FLAGS.ENCOUNT_ULT_MEDIC,
+    FLAGS.ENCOUNT_VASE_POPPUP,
+    FLAGS.RECRUIT_DEBUG,
+    FLAGS.RECRUIT_LANCER_1,
+    FLAGS.RECRUIT_DUMMY,
+    FLAGS.RECRUIT_RALSEI_TUTORIAL,
+    FLAGS.RECRUIT_CLOVER_1,
+    FLAGS.RECRUIT_C_ROUND,
+    FLAGS.RECRUIT_K_ROUND_1,
+    FLAGS.RECRUIT_LANCER_2,
+    FLAGS.RECRUIT_CLOVER_2,
+    FLAGS.RECRUIT_DOOMTANK,
+    FLAGS.RECRUIT_LANCER_3,
+    FLAGS.RECRUIT_SUSIE_AND_LANCER,
+    FLAGS.RECRUIT_JEVIL,
+    FLAGS.RECRUIT_K_ROUND_2,
+    FLAGS.RECRUIT_KING,
+    FLAGS.RECRUIT_CAPN,
+    FLAGS.RECRUIT_K_K,
+    FLAGS.RECRUIT_SWEET,
+    FLAGS.RECRUIT_GRAZETEST,
+    FLAGS.RECRUIT_BERDLY_1,
+    FLAGS.AMOUNT_PAIN_CH2,
+    FLAGS.AMOUNT_ICE_E_PAIN_CH2,
+    FLAGS.GOT_GLOWWRIST,
+    FLAGS.GOT_GLOWWRIST_2,
+    FLAGS.GOT_TENSION_BIT,
+    FLAGS.GOT_TRASH_20,
+    FLAGS.GOT_TRASH_80,
+    FLAGS.GOT_TRASH_20_2,
+    FLAGS.GOT_TRASH_BAGEL_2,
+    FLAGS.GOT_RAGGER2,
+    FLAGS.GOT_BOUNCE_BLADE,
+    FLAGS.GOT_BASEMENT_DOLLAR,
+    FLAGS.GOT_PINK_RIBBON,
+    FLAGS.GOT_CHEST_BAGEL,
+    FLAGS.GOT_CHEST_CANDY,
+    FLAGS.GOT_REVIVE_DUST,
+    FLAGS.GOT_CHAIN_MAIL,]),
   enemies: new Set<EnemyIndex>([
     ...CH1_CONTENT.enemies,
     ENEMIES.AMBYU_LANCE,
@@ -1113,6 +1189,7 @@ const CH2_CONTENT: ChapterContent = {
     ENEMIES.JIGSAW_JOE_DOJO,
     ENEMIES.PIPIS,
   ]),
+  plotPoints: new Set<number>(Object.values(CH2_PLOT)),
 };
 
 const CH3_CONTENT: ChapterContent = {
@@ -1628,7 +1705,41 @@ const CH3_CONTENT: ChapterContent = {
     FLAGS.SWORDROUTE_SODA,
     FLAGS.RAISE_BAT_HARD_HISCORE,
     FLAGS.RAISE_BAT_HARD_HIRANK,
-  ]),
+    FLAGS.GOT_RAMB_PRIZE_1,
+    FLAGS.GOT_RAMB_PRIZE_2,
+    FLAGS.GOT_COOLTRASHY_REWARD,
+    FLAGS.OVERWORLD_QUIZ_1,
+    FLAGS.OVERWORLD_QUIZ_2,
+    FLAGS.OVERWORLD_QUIZ_3,
+    FLAGS.OVERWORLD_QUIZ_4,
+    FLAGS.OVERWORLD_QUIZ_5,
+    FLAGS.OVERWORLD_QUIZ_6,
+    FLAGS.GOT_CH3_MINT,
+    FLAGS.GOT_ONE_POINT,
+    FLAGS.BONUS_ZONE_TREASURE_1,
+    FLAGS.BONUS_ZONE_TREASURE_2,
+    FLAGS.BONUS_ZONE_TREASURE_3,
+    FLAGS.BONUS_ZONE_POINTS_1,
+    FLAGS.BONUS_ZONE_POINTS_2,
+    FLAGS.BONUS_ZONE_POINTS_3,
+    FLAGS.BONUS_ZONE_POINTS_4,
+    FLAGS.GOT_TRASH_CH3_1,
+    FLAGS.GOT_TRASH_CH3_2,
+    FLAGS.GOT_TRASH_CH3_3,
+    FLAGS.GOT_TRASH_CH3_4,
+    FLAGS.GOT_TRASH_CH3_5,
+    FLAGS.GOT_TRASH_CH3_6,
+    FLAGS.GOT_TRASH_CH3_7,
+    FLAGS.GOT_300_POINTS,
+    FLAGS.GOT_DOG_DOLLAR,
+    FLAGS.OPENED_BONUS_ZONE,
+    FLAGS.OPENED_SAMS_ZONE,
+    FLAGS.TIMES_GAINED_AT_CH3,
+    FLAGS.GOULDEN_SON_TALE,
+    FLAGS.GOT_TRASH_CH3_8,
+    FLAGS.AMOUNT_PAIN_CH3,
+    FLAGS.ENCOUNT_TENNA,
+    FLAGS.ENCOUNT_ROUXLS_WEATHER,]),
   enemies: new Set<EnemyIndex>([
     ...CH2_CONTENT.enemies,
     ENEMIES.SHADOWGUY,
@@ -1646,6 +1757,7 @@ const CH3_CONTENT: ChapterContent = {
     ENEMIES.BOSS_6,
     ENEMIES.BOSS_7,
   ]),
+  plotPoints: new Set<number>(Object.values(CH3_PLOT)),
 };
 
 const CH4_CONTENT: ChapterContent = {
@@ -2062,7 +2174,7 @@ const CH4_CONTENT: ChapterContent = {
     FLAGS.CHURCH_SHADOW_PUZZLE_TIMER,
     FLAGS.CH4_INTRO_PROGRESS,
     FLAGS.CHURCH_TALL_BOOKCASES_STATE,
-    FLAGS.AXE_OF_JUSTICE_PROGRESS,
+    FLAGS.CHURCH_AXE_OF_JUSTICE_PROGRESS,
     FLAGS.CHURCH_ARENA_STATE,
     FLAGS.PDC06B_STATE_1,
     FLAGS.SHOP1_STATE_1,
@@ -2250,7 +2362,11 @@ const CH4_CONTENT: ChapterContent = {
     FLAGS.FOUNTAIN_SPECIAL,
     FLAGS.CHURCHC_ENCOUNTER_1,
     FLAGS.MIZZLE_SPECIAL,
-  ]),
+    FLAGS.CHURCH_AXE_OF_JUSTICE_PROGRESS,
+    FLAGS.AMOUNT_PAIN_CH4,
+    FLAGS.AMOUNT_ICE_E_PAIN_CH4,
+    FLAGS.AMOUNT_TREASURE,
+]),
   enemies: new Set<EnemyIndex>([
     ...CH3_CONTENT.enemies,
     ENEMIES.GUEI,
@@ -2266,6 +2382,27 @@ const CH4_CONTENT: ChapterContent = {
     ENEMIES.BOSS_10,
     ENEMIES.BOSS_11,
   ]),
+  plotPoints: new Set<number>(Object.values(CH4_PLOT)),
+};
+
+const CH5_CONTENT: ChapterContent = {
+  meta: { ...CH4_CONTENT.meta },
+  characters: new Set<CharacterIndex>(CH4_CONTENT.characters),
+  consumables: new Set<ConsumableIndex>(CH4_CONTENT.consumables),
+  keyItems: new Set<KeyItemIndex>(CH4_CONTENT.keyItems),
+  spells: new Set<SpellIndex>(CH4_CONTENT.spells),
+  weapons: new Set<WeaponIndex>(CH4_CONTENT.weapons),
+  armors: new Set<ArmorIndex>(CH4_CONTENT.armors),
+  lightWorld: {
+    items: new Set<LightWorldItemIndex>(CH4_CONTENT.lightWorld.items),
+    phoneContacts: new Set<PhoneContactIndex>(
+      CH4_CONTENT.lightWorld.phoneContacts,
+    ),
+  },
+  rooms: new Set<RoomIndex>(CH4_CONTENT.rooms),
+  flags: new Set<FlagIndex>(CH4_CONTENT.flags),
+  enemies: new Set<EnemyIndex>(CH4_CONTENT.enemies),
+  plotPoints: new Set<number>(),
 };
 
 export const CHAPTERS_META: Record<ChapterIndex, ChapterProperties> = {
@@ -2284,5 +2421,9 @@ export const CHAPTERS_META: Record<ChapterIndex, ChapterProperties> = {
   [CHAPTERS.CH4]: {
     displayName: 'Prophecy',
     content: CH4_CONTENT,
+  },
+  [CHAPTERS.CH5]: {
+    displayName: 'Untitled',
+    content: CH5_CONTENT,
   },
 };
