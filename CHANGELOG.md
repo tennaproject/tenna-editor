@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Corrected the Ralsei room visit Story flag mapping. Author: [MiaouKING](https://github.com/MiaouKING) ([PR #33](https://github.com/tennaproject/tenna-editor/pull/33)).
 - Windows save path handling now uses a path variable for better portability. Author: [soulware1](https://github.com/soulware1).
 - Dropdowns now render `Empty` in grey. Author: [Araraura](https://github.com/Araraura).
 
