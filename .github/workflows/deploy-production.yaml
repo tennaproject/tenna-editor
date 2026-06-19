@@ -21,8 +21,8 @@ jobs:
       PREVIEW_BRANCH: main
 
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
         with:
           node-version: 22.16.0
           cache: npm
@@ -33,7 +33,7 @@ jobs:
       - run: npm run build
 
       - name: deploy with wrangler
-        uses: cloudflare/wrangler-action@v3
+        uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ env.CF_API_TOKEN }}
           accountId: ${{ env.CF_ACCOUNT_ID }}
