@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Corrected the Ralsei room visit Story flag mapping. Author: [MiaouKING](https://github.com/MiaouKING) ([PR #33](https://github.com/tennaproject/tenna-editor/pull/33)).
 - Windows save path handling now uses a path variable for better portability. Author: [soulware1](https://github.com/soulware1).
 - Dropdowns now render `Empty` in grey. Author: [Araraura](https://github.com/Araraura).
+- Added missing White Ribbon armor to Ralsei. Thanks [Anonymously599](https://github.com/Anonymously599) for reporting! ([Issue #36](https://github.com/tennaproject/tenna-editor/issues/36))
 
 ## [0.7.11-beta] - 2026-05-23
 

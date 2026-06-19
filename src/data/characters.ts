@@ -534,6 +534,7 @@ export const CHARACTERS_META: Record<CharacterIndex, CharacterProperties> = {
       ARMORS.AMBER_CARD,
       ARMORS.DICE_BRACE,
       ARMORS.PINK_RIBBON,
+      ARMORS.WHITE_RIBBON,
       ARMORS.IRON_SHACKLE,
       ARMORS.MOUSE_TOKEN,
       ARMORS.JEVILSTAIL,
