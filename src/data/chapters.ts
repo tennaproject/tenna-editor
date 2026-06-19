@@ -139,6 +139,7 @@ const CH1_CONTENT: ChapterContent = {
       LIGHTWORLDITEMS.HALLOWEEN_PENCIL,
       LIGHTWORLDITEMS.LUCKY_PENCIL,
       LIGHTWORLDITEMS.EGG,
+      LIGHTWORLDITEMS.GLASS,
     ]),
     phoneContacts: new Set<PhoneContactIndex>([
       PHONECONTACTS.EMPTY,
@@ -436,7 +437,7 @@ const CH1_CONTENT: ChapterContent = {
     FLAGS.GOT_KEY_C,
     FLAGS.AMOUNT_PAIN_CH1,
     FLAGS.AMOUNT_ICE_E_PAIN_CH1,
-]),
+  ]),
   enemies: new Set<EnemyIndex>([
     ENEMIES.DEBUG,
     ENEMIES.LANCER_1,
@@ -1161,7 +1162,8 @@ const CH2_CONTENT: ChapterContent = {
     FLAGS.GOT_CHEST_BAGEL,
     FLAGS.GOT_CHEST_CANDY,
     FLAGS.GOT_REVIVE_DUST,
-    FLAGS.GOT_CHAIN_MAIL,]),
+    FLAGS.GOT_CHAIN_MAIL,
+  ]),
   enemies: new Set<EnemyIndex>([
     ...CH1_CONTENT.enemies,
     ENEMIES.AMBYU_LANCE,
@@ -1739,7 +1741,8 @@ const CH3_CONTENT: ChapterContent = {
     FLAGS.GOT_TRASH_CH3_8,
     FLAGS.AMOUNT_PAIN_CH3,
     FLAGS.ENCOUNT_TENNA,
-    FLAGS.ENCOUNT_ROUXLS_WEATHER,]),
+    FLAGS.ENCOUNT_ROUXLS_WEATHER,
+  ]),
   enemies: new Set<EnemyIndex>([
     ...CH2_CONTENT.enemies,
     ENEMIES.SHADOWGUY,
@@ -2366,7 +2369,7 @@ const CH4_CONTENT: ChapterContent = {
     FLAGS.AMOUNT_PAIN_CH4,
     FLAGS.AMOUNT_ICE_E_PAIN_CH4,
     FLAGS.AMOUNT_TREASURE,
-]),
+  ]),
   enemies: new Set<EnemyIndex>([
     ...CH3_CONTENT.enemies,
     ENEMIES.GUEI,
