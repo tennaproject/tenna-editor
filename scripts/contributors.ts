@@ -31,6 +31,7 @@ interface Contributor {
 const configPath = resolve('contributors.config.json');
 const markdownPath = resolve('CONTRIBUTORS.md');
 const appDataPath = resolve('src/data/contributors.ts');
+const readmePath = resolve('README.md');
 
 function extractGithubLogin(name: string, email: string) {
   const noreplyMatch = email.match(/^\d+\+(.+)@users\.noreply\.github\.com$/);
@@ -176,6 +177,20 @@ export const CONTRIBUTORS: Contributor[] = ${JSON.stringify(contributors, null, 
 `;
 }
 
+function renderReadmeContributors(contributors: Contributor[]) {
+  return contributors
+    .map((contributor) => {
+      const handle = contributor.login ? `@${contributor.login}` : contributor.displayName;
+      const name = contributor.url
+        ? `[${handle}](${contributor.url})`
+        : handle;
+      const note = contributor.note ? ` - ${contributor.note}` : '';
+
+      return `- ${name}${note}`;
+    })
+    .join('\n');
+}
+
 async function main() {
   const config = JSON.parse(
     await readFile(configPath, 'utf8'),
@@ -184,6 +199,15 @@ async function main() {
 
   await writeFile(markdownPath, renderMarkdown(contributors));
   await writeFile(appDataPath, renderAppData(contributors));
+
+  const readmeContent = await readFile(readmePath, 'utf8');
+  const readmeContributorsList = renderReadmeContributors(contributors);
+  const readmeRegex = /(## Contributors\n+)([\s\S]*?)(\n+(?=## |$))/;
+  const newReadmeContent = readmeContent.replace(
+    readmeRegex,
+    (_match, p1, _p2, p3) => p1 + readmeContributorsList + p3,
+  );
+  await writeFile(readmePath, newReadmeContent);
 }
 
 main().catch((error) => {

@@ -83,13 +83,14 @@ I put a lot of effort into making the layout look distinct and directly inspired
 
 ## Contributors
 
-- [@jjezewski](https://github.com/jjezewski) - creator and maintainer
-- [@Araraura](https://github.com/Araraura)
 - [@afreetoplaynoob](https://github.com/afreetoplaynoob)
+- [@Araraura](https://github.com/Araraura)
+- [@jjezewski](https://github.com/jjezewski) - creator & maintainer
 - [@krisgrant](https://github.com/krisgrant)
 - [@Matojeje](https://github.com/Matojeje)
 - [@MiaouKING](https://github.com/MiaouKING)
 - [@soulware1](https://github.com/soulware1)
+- [@wryyyong](https://github.com/wryyyong)
 
 ## Development
 
