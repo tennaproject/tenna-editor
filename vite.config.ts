@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import react, { reactCompilerPreset } from '@vitejs/plugin-react';
+import babel from '@rolldown/plugin-babel';
 import tailwindcss from '@tailwindcss/vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import svgr from 'vite-plugin-svgr';
@@ -20,10 +21,9 @@ await generateRobots(branch);
 
 export default defineConfig({
   plugins: [
-    react({
-      babel: {
-        plugins: ['babel-plugin-react-compiler'],
-      },
+    react(),
+    babel({
+      presets: [reactCompilerPreset()],
     }),
     tailwindcss(),
     tsconfigPaths(),
@@ -100,7 +100,6 @@ export default defineConfig({
         chunkFileNames: 'assets/chunk-[name]-[hash].js',
         entryFileNames: 'assets/entry-[name]-[hash].js',
         assetFileNames: 'assets/[name]-[hash][extname]',
-        experimentalMinChunkSize: 8_000,
         manualChunks(id) {
           if (id.includes('node_modules')) {
             if (id.includes('zustand')) {
