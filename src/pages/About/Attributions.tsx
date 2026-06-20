@@ -89,13 +89,20 @@ export function AboutAttributions() {
               - for being another inspiration.
             </li>
             <li>
+              <Link href="https://github.com/Jacky720/FloweysTimeMachine/tree/deltarune">
+                Jacky720's "Flowey's Time Machine" fork
+              </Link>{' '}
+              - for save data research and references that helped with a lot of
+              Tenna Editor's data mapping.
+            </li>
+            <li>
               <Link href="https://deltarune.wiki">Deltarune Wiki</Link> - for
               much useful information that sped up the process of building this
               project significantly.
             </li>
             <li>
               <Link href="https://github.com/UnderminersTeam/UndertaleModTool">
-                Undertale Mod
+                Undertale Mod Tool
               </Link>{' '}
               - for allowing me to mine through the game code and assets to
               understand how things work.
