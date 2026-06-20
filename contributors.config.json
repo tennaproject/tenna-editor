@@ -1,0 +1,45 @@
+{
+  "ignoredLogins": ["dependabot[bot]"],
+  "ignoredEmails": [],
+  "contributors": [
+    {
+      "displayName": "afreetoplaynoob",
+      "login": "afreetoplaynoob",
+      "emails": ["149265233+afreetoplaynoob@users.noreply.github.com"]
+    },
+    {
+      "displayName": "Araraura",
+      "login": "Araraura",
+      "emails": ["25017422+Araraura@users.noreply.github.com"]
+    },
+    {
+      "displayName": "jjezewski",
+      "login": "jjezewski",
+      "note": "creator & maintainer",
+      "emails": [
+        "41429302+jjezewski@users.noreply.github.com",
+        "jakub@jezewski.net"
+      ]
+    },
+    {
+      "displayName": "KrisGra",
+      "login": "krisgrant",
+      "emails": ["39800337+krisgrant@users.noreply.github.com"]
+    },
+    {
+      "displayName": "Matojeje",
+      "login": "Matojeje",
+      "emails": ["mato@riolu.tf"]
+    },
+    {
+      "displayName": "MiaouKING",
+      "login": "MiaouKING",
+      "emails": ["miaouanes@hotmail.com"]
+    },
+    {
+      "displayName": "soulware1",
+      "login": "soulware1",
+      "emails": ["81992759+soulware1@users.noreply.github.com"]
+    }
+  ]
+}

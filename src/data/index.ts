@@ -1,6 +1,7 @@
 export * from './armors';
 export * from './chapters';
 export * from './consumables';
+export * from './contributors';
 export * from './flags';
 export * from './key-items';
 export * from './light-world-items';

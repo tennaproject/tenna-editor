@@ -29,6 +29,7 @@ jobs:
 
       - run: npm ci
       - run: npm run lint
+      - run: npm run check-contributors
       - run: npx tsc --noEmit
       - run: npm run build
 

@@ -1,4 +1,5 @@
 import { Section, Card, Heading, Link } from '@components';
+import { CONTRIBUTORS } from '@data';
 
 export function AboutOverview() {
   return (
@@ -61,30 +62,16 @@ export function AboutOverview() {
         <Card className="flex flex-col gap-3 p-6">
           <Heading level={3}>Contributors</Heading>
           <ul className="list-disc pl-6 space-y-1 text-text-2">
-            <li>
-              <Link href="https://github.com/jjezewski">jjezewski</Link> -
-              creator & maintainer
-            </li>
-            <li>
-              <Link href="https://github.com/krisgrant">KrisGra</Link>
-            </li>
-            <li>
-              <Link href="https://github.com/Matojeje">Matojeje</Link>
-            </li>
-            <li>
-              <Link href="https://github.com/afreetoplaynoob">
-                afreetoplaynoob
-              </Link>
-            </li>
-            <li>
-              <Link href="https://github.com/Araraura">Araraura</Link>
-            </li>
-            <li>
-              <Link href="https://github.com/MiaouKING">MiaouKING</Link>
-            </li>
-            <li>
-              <Link href="https://github.com/soulware1">soulware1</Link>
-            </li>
+            {CONTRIBUTORS.map((contributor) => (
+              <li key={contributor.login ?? contributor.displayName}>
+                {contributor.url ? (
+                  <Link href={contributor.url}>{contributor.displayName}</Link>
+                ) : (
+                  contributor.displayName
+                )}
+                {'note' in contributor ? ` - ${contributor.note}` : null}
+              </li>
+            ))}
           </ul>
         </Card>
       </Section>
