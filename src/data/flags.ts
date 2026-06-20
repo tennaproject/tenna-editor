@@ -5384,7 +5384,7 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.CLEANED_UP_BLOOD_STAIN]: {
     displayName: 'Blood stain',
-    description: "Whether the blood stain was cleaned in Noelle's house.",
+    description: "Whether the blood stain was cleaned in Kris's room.",
     valueType: 'boolean',
   },
   [FLAGS.TEXT_FLAG_750]: {
