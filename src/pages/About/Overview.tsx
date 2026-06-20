@@ -80,6 +80,9 @@ export function AboutOverview() {
               <Link href="https://github.com/Araraura">Araraura</Link>
             </li>
             <li>
+              <Link href="https://github.com/MiaouKING">MiaouKING</Link>
+            </li>
+            <li>
               <Link href="https://github.com/soulware1">soulware1</Link>
             </li>
           </ul>

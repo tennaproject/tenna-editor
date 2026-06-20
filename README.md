@@ -88,6 +88,7 @@ I put a lot of effort into making the layout look distinct and directly inspired
 - [@afreetoplaynoob](https://github.com/afreetoplaynoob)
 - [@krisgrant](https://github.com/krisgrant)
 - [@Matojeje](https://github.com/Matojeje)
+- [@MiaouKING](https://github.com/MiaouKING)
 - [@soulware1](https://github.com/soulware1)
 
 ## Development
