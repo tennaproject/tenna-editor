@@ -1,6 +1,6 @@
 {
   "name": "tenna-editor",
-  "private": true,
+  "private": false,
   "version": "0.8.0-beta",
   "type": "module",
   "engines": {
