@@ -43,5 +43,10 @@ export const CONTRIBUTORS: Contributor[] = [
     "displayName": "soulware1",
     "login": "soulware1",
     "url": "https://github.com/soulware1"
+  },
+  {
+    "displayName": "wryyyong",
+    "login": "wryyyong",
+    "url": "https://github.com/wryyyong"
   }
 ];
