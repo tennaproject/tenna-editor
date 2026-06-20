@@ -42,10 +42,7 @@ function createDataHelpers<
   TIndex extends number,
   TName extends string,
   TProperties extends BaseProperties,
->(
-  registry: Record<TName, TIndex>,
-  definitions: Record<TIndex, TProperties>,
-) {
+>(registry: Record<TName, TIndex>, definitions: Record<TIndex, TProperties>) {
   const nameById = buildNameById(registry);
 
   return {
@@ -63,7 +60,10 @@ function createDataHelpers<
   };
 }
 
-export function formatItemLabel(meta: BaseProperties | undefined, fallback: string) {
+export function formatItemLabel(
+  meta: BaseProperties | undefined,
+  fallback: string,
+) {
   return meta?.displayName ?? fallback;
 }
 

@@ -9,44 +9,44 @@ export interface Contributor {
 
 export const CONTRIBUTORS: Contributor[] = [
   {
-    "displayName": "afreetoplaynoob",
-    "login": "afreetoplaynoob",
-    "url": "https://github.com/afreetoplaynoob"
+    displayName: 'afreetoplaynoob',
+    login: 'afreetoplaynoob',
+    url: 'https://github.com/afreetoplaynoob',
   },
   {
-    "displayName": "Araraura",
-    "login": "Araraura",
-    "url": "https://github.com/Araraura"
+    displayName: 'Araraura',
+    login: 'Araraura',
+    url: 'https://github.com/Araraura',
   },
   {
-    "displayName": "jjezewski",
-    "login": "jjezewski",
-    "note": "creator & maintainer",
-    "url": "https://github.com/jjezewski"
+    displayName: 'jjezewski',
+    login: 'jjezewski',
+    note: 'creator & maintainer',
+    url: 'https://github.com/jjezewski',
   },
   {
-    "displayName": "KrisGra",
-    "login": "krisgrant",
-    "url": "https://github.com/krisgrant"
+    displayName: 'KrisGra',
+    login: 'krisgrant',
+    url: 'https://github.com/krisgrant',
   },
   {
-    "displayName": "Matojeje",
-    "login": "Matojeje",
-    "url": "https://github.com/Matojeje"
+    displayName: 'Matojeje',
+    login: 'Matojeje',
+    url: 'https://github.com/Matojeje',
   },
   {
-    "displayName": "MiaouKING",
-    "login": "MiaouKING",
-    "url": "https://github.com/MiaouKING"
+    displayName: 'MiaouKING',
+    login: 'MiaouKING',
+    url: 'https://github.com/MiaouKING',
   },
   {
-    "displayName": "soulware1",
-    "login": "soulware1",
-    "url": "https://github.com/soulware1"
+    displayName: 'soulware1',
+    login: 'soulware1',
+    url: 'https://github.com/soulware1',
   },
   {
-    "displayName": "wryyyong",
-    "login": "wryyyong",
-    "url": "https://github.com/wryyyong"
-  }
+    displayName: 'wryyyong',
+    login: 'wryyyong',
+    url: 'https://github.com/wryyyong',
+  },
 ];

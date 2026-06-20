@@ -25,7 +25,10 @@ export function formatPlotPointLabel(
   return `${meta.displayName}${suffix}`;
 }
 
-export function getPlotPointLabel(chapter: ChapterIndex, value: number): string {
+export function getPlotPointLabel(
+  chapter: ChapterIndex,
+  value: number,
+): string {
   return formatPlotPointLabel(value, getChapterPlotPointMeta(chapter, value));
 }
 

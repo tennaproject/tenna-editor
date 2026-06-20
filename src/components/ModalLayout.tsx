@@ -43,10 +43,7 @@ export function ModalLayout({
       isOpen={isOpen}
       setOpen={setOpen}
       onClose={onClose}
-      panelClassName={mergeClass(
-        MODAL_PANEL_BY_SIZE[size],
-        panelClassName,
-      )}
+      panelClassName={mergeClass(MODAL_PANEL_BY_SIZE[size], panelClassName)}
     >
       <div
         className={mergeClass(

@@ -80,7 +80,9 @@ function getContributorOverrides(config: ContributorsConfig) {
 }
 
 function contributorKey(contributor: Contributor) {
-  return contributor.login?.toLowerCase() ?? contributor.displayName.toLowerCase();
+  return (
+    contributor.login?.toLowerCase() ?? contributor.displayName.toLowerCase()
+  );
 }
 
 function normalizeContributor(
@@ -125,7 +127,10 @@ function buildContributors(authors: GitAuthor[], config: ContributorsConfig) {
     }
 
     const contributor = normalizeContributor(author, overrides);
-    if (contributor.login && ignoredLogins.has(contributor.login.toLowerCase())) {
+    if (
+      contributor.login &&
+      ignoredLogins.has(contributor.login.toLowerCase())
+    ) {
       return;
     }
 
@@ -180,10 +185,10 @@ export const CONTRIBUTORS: Contributor[] = ${JSON.stringify(contributors, null, 
 function renderReadmeContributors(contributors: Contributor[]) {
   return contributors
     .map((contributor) => {
-      const handle = contributor.login ? `@${contributor.login}` : contributor.displayName;
-      const name = contributor.url
-        ? `[${handle}](${contributor.url})`
-        : handle;
+      const handle = contributor.login
+        ? `@${contributor.login}`
+        : contributor.displayName;
+      const name = contributor.url ? `[${handle}](${contributor.url})` : handle;
       const note = contributor.note ? ` - ${contributor.note}` : '';
 
       return `- ${name}${note}`;

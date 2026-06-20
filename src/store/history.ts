@@ -51,7 +51,10 @@ export const useHistory = create<HistoryState>((set, get) => ({
 
     set((state) => ({
       past: nextPast,
-      future: [...state.future, { snapshot: currentSnapshot, label: entry.label }],
+      future: [
+        ...state.future,
+        { snapshot: currentSnapshot, label: entry.label },
+      ],
       canUndo: nextPast.length > 0,
       canRedo: true,
     }));

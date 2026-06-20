@@ -15,7 +15,10 @@ export function useKeyboardShortcuts(handlers: ShortcutHandlers) {
 
       // Don't intercept when typing in inputs (except for undo/redo)
       const target = e.target as HTMLElement;
-      const isInput = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable;
+      const isInput =
+        target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA' ||
+        target.isContentEditable;
 
       switch (e.key.toLowerCase()) {
         case 's':

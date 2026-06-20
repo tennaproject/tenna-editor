@@ -47,7 +47,10 @@ function VesselSection() {
           </div>
           <div className="flex-1 flex flex-col gap-3">
             <StoryFlagField id="vessel-food" flag={FLAGS.VESSEL_FOOD} />
-            <StoryFlagField id="vessel-blood-type" flag={FLAGS.VESSEL_BLOOD_TYPE} />
+            <StoryFlagField
+              id="vessel-blood-type"
+              flag={FLAGS.VESSEL_BLOOD_TYPE}
+            />
             <StoryFlagField id="vessel-color" flag={FLAGS.VESSEL_COLOR} />
             <StoryFlagField id="vessel-gift" flag={FLAGS.VESSEL_GIFT} />
             <StoryFlagField id="vessel-feeling" flag={FLAGS.VESSEL_FEELING} />

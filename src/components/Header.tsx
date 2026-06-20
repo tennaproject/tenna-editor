@@ -13,7 +13,6 @@ import { SaveSelector } from './SaveSelector';
 import Tenna from '@assets/tenna.svg?react';
 import { useKeyboardShortcuts } from '@hooks';
 
-
 const Upload = lazy(() =>
   import('./Upload').then((module) => ({ default: module.Upload })),
 );

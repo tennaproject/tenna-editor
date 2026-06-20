@@ -228,7 +228,8 @@ interface CharacterPropertiesOverrides {
 }
 
 interface CharacterProperties
-  extends BaseProperties,
+  extends
+    BaseProperties,
     WithOverrides<CharacterProperties, CharacterPropertiesOverrides> {
   allowedSlots: number[];
   title: CharacterTitle;

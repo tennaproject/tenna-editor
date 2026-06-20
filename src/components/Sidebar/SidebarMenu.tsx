@@ -69,11 +69,7 @@ export function SidebarMenu() {
             requireDevmode
           />
         )}
-        <SidebarItem
-          title="Settings"
-          icon={<SettingsIcon />}
-          to="/settings"
-        />
+        <SidebarItem title="Settings" icon={<SettingsIcon />} to="/settings" />
         <SidebarItem title="About" icon={<AboutIcon />} to="/about" />
       </SidebarGroup>
     </>

@@ -220,7 +220,8 @@ function diffCharacter(
   after: SaveGamePayload['characters'][number] | undefined,
 ): DiffSection | null {
   const title =
-    characterHelpers.getById(charIndex)?.displayName ?? `Character ${charIndex}`;
+    characterHelpers.getById(charIndex)?.displayName ??
+    `Character ${charIndex}`;
   const changes: DiffEntry[] = [];
 
   if (!before || !after) {

@@ -24,7 +24,8 @@ export function SettingsRoot() {
       }, 1500);
     } catch (error) {
       console.error(error);
-      const message = error instanceof Error ? error.message : 'Failed to import backup file';
+      const message =
+        error instanceof Error ? error.message : 'Failed to import backup file';
       toast(message, 'error');
     } finally {
       e.target.value = '';
@@ -53,7 +54,8 @@ export function SettingsRoot() {
             <Card className="flex flex-col gap-3 p-6">
               <Heading level={3}>Backup & Restore</Heading>
               <p className="text-text-2 text-sm">
-                Export all your save data into a JSON file, or import it back from a backup.
+                Export all your save data into a JSON file, or import it back
+                from a backup.
               </p>
               <div className="flex flex-wrap gap-3 mt-2">
                 <Button

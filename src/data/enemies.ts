@@ -85,7 +85,8 @@ export type EnemyIndex = (typeof ENEMIES)[keyof typeof ENEMIES];
 export type EnemyName = keyof typeof ENEMIES;
 
 interface EnemyProperties
-  extends BaseProperties,
+  extends
+    BaseProperties,
     WithOverrides<EnemyProperties, { chapter: ChapterIndex }> {
   recruitable: boolean;
   recruitCount?: number;

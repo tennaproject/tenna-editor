@@ -50,7 +50,8 @@ export function NumberInput({
 
   const rangeHint = useMemo(() => {
     if (!isOutOfRange) return null;
-    if (typeof min === 'number' && typeof max === 'number') return `${min}–${max}`;
+    if (typeof min === 'number' && typeof max === 'number')
+      return `${min}–${max}`;
     if (typeof min === 'number') return `≥ ${min}`;
     if (typeof max === 'number') return `≤ ${max}`;
     return null;
@@ -77,7 +78,9 @@ export function NumberInput({
         style={{ MozAppearance: 'textfield' }}
         aria-label={placeholder || 'Number input'}
         aria-invalid={isOutOfRange || undefined}
-        aria-describedby={isOutOfRange ? `${placeholder || 'number'}-range-hint` : undefined}
+        aria-describedby={
+          isOutOfRange ? `${placeholder || 'number'}-range-hint` : undefined
+        }
         data-lpignore="true"
         autoComplete="off"
       />

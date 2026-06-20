@@ -66,9 +66,7 @@ export function TextInput({
 
   const widthClass = fullWidth ? 'w-full' : 'w-50';
   const sizeClass =
-    size === 'small'
-      ? 'ui-field h-8 px-2 py-1 text-sm'
-      : 'ui-field';
+    size === 'small' ? 'ui-field h-8 px-2 py-1 text-sm' : 'ui-field';
   return (
     <div className={mergeClass('relative', widthClass, className)}>
       <input

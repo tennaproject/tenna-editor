@@ -53,7 +53,8 @@ export type ConsumableIndex = (typeof CONSUMABLES)[keyof typeof CONSUMABLES];
 export type ConsumableName = keyof typeof CONSUMABLES;
 
 interface ConsumableProperties
-  extends BaseProperties,
+  extends
+    BaseProperties,
     WithOverrides<ConsumableProperties, { chapter: ChapterIndex }> {}
 
 export const CONSUMABLES_META: Record<ConsumableIndex, ConsumableProperties> = {

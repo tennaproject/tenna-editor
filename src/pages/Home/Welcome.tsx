@@ -49,9 +49,7 @@ export function HomeWelcome() {
             <ul className="list-disc pl-5 break-words">
               <li>
                 Windows:{' '}
-                <span className="font-mono">
-                  %LOCALAPPDATA%\DELTARUNE
-                </span>
+                <span className="font-mono">%LOCALAPPDATA%\DELTARUNE</span>
               </li>
               <li>
                 Mac:{' '}

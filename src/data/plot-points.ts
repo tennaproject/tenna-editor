@@ -265,9 +265,15 @@ export const CH1_PLOT_META: Record<Ch1PlotIndex, PlotPointProperties> = {
   [CH1_PLOT.CLOSET_ENTRANCE]: { displayName: 'At Closet Entrance' },
   [CH1_PLOT.INSIDE_CLOSET]: { displayName: 'Inside Closet' },
   [CH1_PLOT.ENTERED_DARK_WORLD]: { displayName: 'Entered Dark World' },
-  [CH1_PLOT.STOOD_UP_IN_DARK_WORLD]: { displayName: 'Stood Up After Entering Dark World' },
-  [CH1_PLOT.SEEN_FIRST_BACKGROUND_LANCER]: { displayName: 'Seen First Background Lancer' },
-  [CH1_PLOT.SEEN_SECOND_BACKGROUND_LANCER]: { displayName: 'Seen Second Background Lancer' },
+  [CH1_PLOT.STOOD_UP_IN_DARK_WORLD]: {
+    displayName: 'Stood Up After Entering Dark World',
+  },
+  [CH1_PLOT.SEEN_FIRST_BACKGROUND_LANCER]: {
+    displayName: 'Seen First Background Lancer',
+  },
+  [CH1_PLOT.SEEN_SECOND_BACKGROUND_LANCER]: {
+    displayName: 'Seen Second Background Lancer',
+  },
   [CH1_PLOT.FOUND_AND_LOST_SUSIE]: { displayName: 'Found (and Lost) Susie' },
   [CH1_PLOT.LANDED_IN_CASTLE_TOWN]: { displayName: 'Landed in Castle Town' },
   [CH1_PLOT.VIEWING_LEGEND]: { displayName: 'Viewing Legend' },
@@ -276,39 +282,65 @@ export const CH1_PLOT_META: Record<Ch1PlotIndex, PlotPointProperties> = {
   [CH1_PLOT.RALSEI_JOINED]: { displayName: 'Ralsei Joined' },
   [CH1_PLOT.PASSED_DUMMY_FIGHT]: { displayName: 'Passed Dummy Fight' },
   [CH1_PLOT.RALSEI_MENTIONED_DOOR]: { displayName: 'Ralsei Mentioned Door' },
-  [CH1_PLOT.ENTERED_FIELD]: { displayName: 'Entered Field of Hopes and Dreams' },
-  [CH1_PLOT.LANCER_INVITES_HATHY_FIGHT]: { displayName: 'Lancer Invites Hathy Fight' },
+  [CH1_PLOT.ENTERED_FIELD]: {
+    displayName: 'Entered Field of Hopes and Dreams',
+  },
+  [CH1_PLOT.LANCER_INVITES_HATHY_FIGHT]: {
+    displayName: 'Lancer Invites Hathy Fight',
+  },
   [CH1_PLOT.ENTERED_HATHY_FIGHT]: { displayName: 'Entered Hathy Fight' },
   [CH1_PLOT.SUSIE_JOINED]: { displayName: 'Susie Joined' },
-  [CH1_PLOT.RALSEI_MENTIONED_ACT]: { displayName: 'Ralsei Mentioned Susie Should ACT' },
+  [CH1_PLOT.RALSEI_MENTIONED_ACT]: {
+    displayName: 'Ralsei Mentioned Susie Should ACT',
+  },
   [CH1_PLOT.C_ROUND_FIGHT]: { displayName: 'C. Round Fight' },
-  [CH1_PLOT.RALSEI_DISCUSSED_WARNING]: { displayName: 'Ralsei Discussed Warning' },
-  [CH1_PLOT.SUSIE_THREATENED_LANCER]: { displayName: 'Susie Threatened Lancer' },
+  [CH1_PLOT.RALSEI_DISCUSSED_WARNING]: {
+    displayName: 'Ralsei Discussed Warning',
+  },
+  [CH1_PLOT.SUSIE_THREATENED_LANCER]: {
+    displayName: 'Susie Threatened Lancer',
+  },
   [CH1_PLOT.COMPLETED_BOX_PUZZLE]: { displayName: 'Completed Box Puzzle' },
   [CH1_PLOT.COMPLETED_BUCKET_SCENE]: { displayName: 'Completed Bucket Scene' },
   [CH1_PLOT.DEFEATED_K_ROUND]: { displayName: 'Defeated K. Round' },
-  [CH1_PLOT.DARK_FUN_GANG_INTRODUCED]: { displayName: 'Dark Fun Gang Introduced' },
-  [CH1_PLOT.ENTERED_FIRST_SUITS_PUZZLE]: { displayName: 'Entered First Suits Puzzle' },
-  [CH1_PLOT.COMPLETED_SUITS_PUZZLE_FOR_OTHERS]: { displayName: "Completed Suits Puzzle for Lancer and Susie" },
+  [CH1_PLOT.DARK_FUN_GANG_INTRODUCED]: {
+    displayName: 'Dark Fun Gang Introduced',
+  },
+  [CH1_PLOT.ENTERED_FIRST_SUITS_PUZZLE]: {
+    displayName: 'Entered First Suits Puzzle',
+  },
+  [CH1_PLOT.COMPLETED_SUITS_PUZZLE_FOR_OTHERS]: {
+    displayName: 'Completed Suits Puzzle for Lancer and Susie',
+  },
   [CH1_PLOT.CLOVER_FIGHT]: { displayName: 'Clover Fight' },
   [CH1_PLOT.BOUGHT_LANCER_COOKIE]: { displayName: 'Bought Lancer Cookie' },
-  [CH1_PLOT.WARNED_ABOUT_FOREST_MAZE]: { displayName: 'Warned About Forest Maze' },
+  [CH1_PLOT.WARNED_ABOUT_FOREST_MAZE]: {
+    displayName: 'Warned About Forest Maze',
+  },
   [CH1_PLOT.ENTERED_FOREST_MAZE]: { displayName: 'Entered Forest Maze' },
   [CH1_PLOT.FOUND_LANCER_DEAD_END]: { displayName: 'Found Lancer Dead End' },
   [CH1_PLOT.FOUND_SUSIE_DEAD_END]: { displayName: 'Found Susie Dead End' },
   [CH1_PLOT.ESCAPED_FOREST_MAZE]: { displayName: 'Escaped Forest Maze' },
   [CH1_PLOT.LANCER_JOINED]: { displayName: 'Lancer Joined' },
-  [CH1_PLOT.FREED_SUSIE_FROM_PRISON]: { displayName: 'Freed Susie from Prison' },
+  [CH1_PLOT.FREED_SUSIE_FROM_PRISON]: {
+    displayName: 'Freed Susie from Prison',
+  },
   [CH1_PLOT.SUSIE_SPARED_LANCER]: { displayName: 'Susie Spared Lancer' },
   [CH1_PLOT.PARTY_REUNITED]: { displayName: 'Party Reunited' },
   [CH1_PLOT.SUSIE_JOINED_FOR_REAL]: { displayName: 'Susie Joined for Real' },
   [CH1_PLOT.DEFEATED_K_ROUND_2]: { displayName: 'Defeated K. Round 2' },
   [CH1_PLOT.KING_FIGHT]: { displayName: 'King Fight' },
   [CH1_PLOT.LEFT_TOWARD_FOUNTAIN]: { displayName: 'Left Toward Fountain' },
-  [CH1_PLOT.COMPELLED_TO_RETURN_FOR_GOODBYES]: { displayName: 'Compelled to Return for Goodbyes' },
-  [CH1_PLOT.TALKED_TO_RALSEI_ABOUT_LANCER]: { displayName: 'Talked to Ralsei About Lancer' },
+  [CH1_PLOT.COMPELLED_TO_RETURN_FOR_GOODBYES]: {
+    displayName: 'Compelled to Return for Goodbyes',
+  },
+  [CH1_PLOT.TALKED_TO_RALSEI_ABOUT_LANCER]: {
+    displayName: 'Talked to Ralsei About Lancer',
+  },
   [CH1_PLOT.TALKED_TO_LANCER]: { displayName: 'Talked to Lancer' },
-  [CH1_PLOT.LEFT_TOWARD_FOUNTAIN_FOR_REAL]: { displayName: 'Left Toward Fountain for Real' },
+  [CH1_PLOT.LEFT_TOWARD_FOUNTAIN_FOR_REAL]: {
+    displayName: 'Left Toward Fountain for Real',
+  },
   [CH1_PLOT.AWAKENED_IN_CLASSROOM]: { displayName: 'Awakened in Classroom' },
   [CH1_PLOT.SUSIE_LEFT]: { displayName: 'Susie Left' },
 };
@@ -334,26 +366,47 @@ export const CH2_PLOT_META: Record<Ch2PlotIndex, PlotPointProperties> = {
   [CH2_PLOT.BED_SKIP]: { displayName: 'Bed Skip' },
   [CH2_PLOT.ENTERED_CYBER_WORLD]: { displayName: 'Entered Cyber World' },
   [CH2_PLOT.MET_QUEEN]: { displayName: 'Met Queen' },
-  [CH2_PLOT.SEEN_SWEET]: { displayName: 'Seen Sweet', description: 'Exact trigger location is unclear.', },
-  [CH2_PLOT.ARCADE_GAME_INTRODUCED]: { displayName: 'Arcade Game Introduced', description: 'Plot value is set out of narrative order.', },
+  [CH2_PLOT.SEEN_SWEET]: {
+    displayName: 'Seen Sweet',
+    description: 'Exact trigger location is unclear.',
+  },
+  [CH2_PLOT.ARCADE_GAME_INTRODUCED]: {
+    displayName: 'Arcade Game Introduced',
+    description: 'Plot value is set out of narrative order.',
+  },
   [CH2_PLOT.POWERS_COMBINED]: { displayName: 'Powers Combined' },
   [CH2_PLOT.PLAYED_ARCADE_GAME]: { displayName: 'Played Arcade Game' },
-  [CH2_PLOT.FOUGHT_SWEET_CAPN_CAKES]: { displayName: "Fought Sweet Cap'n Cakes" },
+  [CH2_PLOT.FOUGHT_SWEET_CAPN_CAKES]: {
+    displayName: "Fought Sweet Cap'n Cakes",
+  },
   [CH2_PLOT.FOUGHT_BERDLY_1]: { displayName: 'Fought Berdly 1' },
   [CH2_PLOT.ENTERED_CYBER_CITY]: { displayName: 'Entered Cyber City' },
   [CH2_PLOT.LEARNED_ABOUT_STORAGE]: { displayName: 'Learned About Storage' },
   [CH2_PLOT.RALSEI_AND_SUSIE_LEFT]: { displayName: 'Ralsei and Susie Left' },
-  [CH2_PLOT.SEEN_RALSEI_AND_SUSIE_IN_BACKGROUND]: { displayName: 'Seen Ralsei and Susie in Background' },
+  [CH2_PLOT.SEEN_RALSEI_AND_SUSIE_IN_BACKGROUND]: {
+    displayName: 'Seen Ralsei and Susie in Background',
+  },
   [CH2_PLOT.SEEN_NOELLE]: { displayName: 'Seen Noelle' },
   [CH2_PLOT.SEEN_NOELLE_AGAIN]: { displayName: 'Seen Noelle Again' },
   [CH2_PLOT.NOELLE_JOINED]: { displayName: 'Noelle Joined' },
-  [CH2_PLOT.FIRST_MOUSE_PUZZLE_DONE]: { displayName: 'First Mouse Puzzle Done' },
-  [CH2_PLOT.BERDLY_STATUE_INTRODUCED]: { displayName: 'Berdly Statue Introduced' },
-  [CH2_PLOT.SECOND_MOUSE_PUZZLE_DONE]: { displayName: 'Second Mouse Puzzle Done' },
-  [CH2_PLOT.THIRD_MOUSE_PUZZLE_DONE]: { displayName: 'Third Mouse Puzzle Done' },
+  [CH2_PLOT.FIRST_MOUSE_PUZZLE_DONE]: {
+    displayName: 'First Mouse Puzzle Done',
+  },
+  [CH2_PLOT.BERDLY_STATUE_INTRODUCED]: {
+    displayName: 'Berdly Statue Introduced',
+  },
+  [CH2_PLOT.SECOND_MOUSE_PUZZLE_DONE]: {
+    displayName: 'Second Mouse Puzzle Done',
+  },
+  [CH2_PLOT.THIRD_MOUSE_PUZZLE_DONE]: {
+    displayName: 'Third Mouse Puzzle Done',
+  },
   [CH2_PLOT.FOUGHT_BERDLY_2]: { displayName: 'Fought Berdly 2' },
   [CH2_PLOT.FINISHED_CAR_GAME]: { displayName: 'Finished Car Game' },
-  [CH2_PLOT.FINISHED_UNUSED_PUZZLE]: { displayName: 'Finished Unused Puzzle', unused: true, },
+  [CH2_PLOT.FINISHED_UNUSED_PUZZLE]: {
+    displayName: 'Finished Unused Puzzle',
+    unused: true,
+  },
   [CH2_PLOT.LEFT_AFTER_UNUSED_PUZZLE]: {
     displayName: 'Left After Unused Puzzle',
     unused: true,
@@ -362,25 +415,38 @@ export const CH2_PLOT_META: Record<Ch2PlotIndex, PlotPointProperties> = {
   },
   [CH2_PLOT.DEFEATED_SPAMTON]: { displayName: 'Defeated Spamton' },
   [CH2_PLOT.LEFT_CAR]: { displayName: 'Left Car' },
-  [CH2_PLOT.FINISHED_DECEMBER_SEQUENCE]: { displayName: 'Finished DECEMBER Sequence' },
+  [CH2_PLOT.FINISHED_DECEMBER_SEQUENCE]: {
+    displayName: 'Finished DECEMBER Sequence',
+  },
   [CH2_PLOT.FULL_PARTY]: { displayName: 'Full Party' },
   [CH2_PLOT.SENT_TO_ROOM]: { displayName: 'Sent to Room' },
   [CH2_PLOT.FREED_LANCER]: { displayName: 'Freed Lancer' },
   [CH2_PLOT.BERDLY_REJOINED]: { displayName: 'Berdly Rejoined' },
-  [CH2_PLOT.FIRST_LIGHT_PUZZLE_SOLVED]: { displayName: 'First Light Puzzle Solved' },
-  [CH2_PLOT.SECOND_LIGHT_PUZZLE_SOLVED]: { displayName: 'Second Light Puzzle Solved' },
-  [CH2_PLOT.FOR_THE_SIDE_OF_IGNORANCE]: { displayName: 'FOR THE SIDE OF IGNORANCE' },
+  [CH2_PLOT.FIRST_LIGHT_PUZZLE_SOLVED]: {
+    displayName: 'First Light Puzzle Solved',
+  },
+  [CH2_PLOT.SECOND_LIGHT_PUZZLE_SOLVED]: {
+    displayName: 'Second Light Puzzle Solved',
+  },
+  [CH2_PLOT.FOR_THE_SIDE_OF_IGNORANCE]: {
+    displayName: 'FOR THE SIDE OF IGNORANCE',
+  },
   [CH2_PLOT.REGAINED_RALSEI]: { displayName: 'Regained Ralsei' },
   [CH2_PLOT.LOST_SUSIE_AND_BERDLY]: { displayName: 'Lost Susie and Berdly' },
   [CH2_PLOT.HIT_HAND]: { displayName: 'Hit Hand' },
   [CH2_PLOT.SWAN_RIDE_COMPLETE]: { displayName: 'Swan Ride Complete' },
-  [CH2_PLOT.SUSIE_REJOINED_3F]: { displayName: 'Susie Rejoined / Reached 3F', description: 'Weird Route variant.' },
+  [CH2_PLOT.SUSIE_REJOINED_3F]: {
+    displayName: 'Susie Rejoined / Reached 3F',
+    description: 'Weird Route variant.',
+  },
   [CH2_PLOT.QUEEN_DEFEATED]: { displayName: 'Queen Defeated' },
   [CH2_PLOT.GIGA_QUEEN_SKIPPED]: { displayName: 'GIGA Queen Skipped' },
   [CH2_PLOT.GIGA_QUEEN_DEFEATED]: { displayName: 'GIGA Queen Defeated' },
   [CH2_PLOT.SEALED_FOUNTAIN]: { displayName: 'Sealed Fountain' },
   [CH2_PLOT.SUSIE_FOLLOWING]: { displayName: 'Susie Following' },
-  [CH2_PLOT.SUSIE_AND_TORIEL_COOKING]: { displayName: 'Susie & Toriel Cooking' },
+  [CH2_PLOT.SUSIE_AND_TORIEL_COOKING]: {
+    displayName: 'Susie & Toriel Cooking',
+  },
   [CH2_PLOT.WASHED_YOUR_HANDS]: { displayName: 'Washed Your Hands' },
 };
 
@@ -390,17 +456,29 @@ export const CH3_PLOT_META: Record<Ch3PlotIndex, PlotPointProperties> = {
   [CH3_PLOT.NEW_GAME]: { displayName: 'New Game' },
   [CH3_PLOT.WOKE_UP]: { displayName: 'Woke Up' },
   [CH3_PLOT.MET_RALSEI]: { displayName: 'Met Ralsei' },
-  [CH3_PLOT.COMPLETED_BLIND_EYE_PUZZLE]: { displayName: 'Completed Blind Eye Puzzle' },
-  [CH3_PLOT.COMPLETED_BUTTON_PUZZLE]: { displayName: 'Completed Standing on Buttons Puzzle' },
-  [CH3_PLOT.CANT_GO_TO_LIGHT_WORLD]: { displayName: `"I can't go to the Light World."` },
-  [CH3_PLOT.EXPLAINED_DARKER_THAN_DARK]: { displayName: 'Explained Darker Than Dark' },
-  [CH3_PLOT.REVEALED_DARKNERS_AS_OBJECTS]: { displayName: 'Revealed Darkners as Objects' },
+  [CH3_PLOT.COMPLETED_BLIND_EYE_PUZZLE]: {
+    displayName: 'Completed Blind Eye Puzzle',
+  },
+  [CH3_PLOT.COMPLETED_BUTTON_PUZZLE]: {
+    displayName: 'Completed Standing on Buttons Puzzle',
+  },
+  [CH3_PLOT.CANT_GO_TO_LIGHT_WORLD]: {
+    displayName: `"I can't go to the Light World."`,
+  },
+  [CH3_PLOT.EXPLAINED_DARKER_THAN_DARK]: {
+    displayName: 'Explained Darker Than Dark',
+  },
+  [CH3_PLOT.REVEALED_DARKNERS_AS_OBJECTS]: {
+    displayName: 'Revealed Darkners as Objects',
+  },
   [CH3_PLOT.TENNA_INTRODUCED]: { displayName: 'Tenna Introduced' },
   [CH3_PLOT.TENNA_INTRODUCTION]: { displayName: 'Tenna Introduction' },
   [CH3_PLOT.BEFORE_THE_SHOW]: { displayName: 'Before the Show' },
   [CH3_PLOT.BOARD_1_STARTED]: { displayName: 'Board 1 Started' },
   [CH3_PLOT.COOKING_SHOW_STARTED]: { displayName: 'Cooking Show Started' },
-  [CH3_PLOT.COOKING_TUTORIAL_COMPLETED]: { displayName: 'Cooking Tutorial Completed' },
+  [CH3_PLOT.COOKING_TUTORIAL_COMPLETED]: {
+    displayName: 'Cooking Tutorial Completed',
+  },
   [CH3_PLOT.BOARD_1_COMPLETED]: { displayName: 'Board 1 Completed' },
   [CH3_PLOT.A_WORD_FROM_SPONSORS]: { displayName: 'A WORD from Our Sponsors' },
   [CH3_PLOT.REACHED_GREEN_ROOM]: { displayName: 'Reached Green Room' },
@@ -410,22 +488,42 @@ export const CH3_PLOT_META: Record<Ch3PlotIndex, PlotPointProperties> = {
   [CH3_PLOT.ENTERED_ATLANTIS]: { displayName: 'Entered Atlantis' },
   [CH3_PLOT.BOARD_2_COMPLETED]: { displayName: 'Board 2 Completed' },
   [CH3_PLOT.A_WORM_FROM_SPONSORS]: { displayName: 'A WORM from Our Sponsors' },
-  [CH3_PLOT.REACHED_GREEN_ROOM_AGAIN]: { displayName: 'Reached Green Room Again' },
+  [CH3_PLOT.REACHED_GREEN_ROOM_AGAIN]: {
+    displayName: 'Reached Green Room Again',
+  },
   [CH3_PLOT.DOOM_BOARD_STARTED]: { displayName: 'Doom Board Started' },
-  [CH3_PLOT.BOARD_3_STARTED]: { displayName: 'Board 3 Started', unused: true, },
-  [CH3_PLOT.BOARD_3_YOGURT_EMERGENCY]: { displayName: 'Board 3 Yogurt Emergency', unused: true },
-  [CH3_PLOT.BOARD_3_COMPLETED]: { displayName: 'Board 3 Completed', unused: true, },
-  [CH3_PLOT.BOARD_3_SWORD_ROUTE_FAILED]: { displayName: 'Board 3 Attempt 2 Failed (Sword Route)', unused: true },
+  [CH3_PLOT.BOARD_3_STARTED]: { displayName: 'Board 3 Started', unused: true },
+  [CH3_PLOT.BOARD_3_YOGURT_EMERGENCY]: {
+    displayName: 'Board 3 Yogurt Emergency',
+    unused: true,
+  },
+  [CH3_PLOT.BOARD_3_COMPLETED]: {
+    displayName: 'Board 3 Completed',
+    unused: true,
+  },
+  [CH3_PLOT.BOARD_3_SWORD_ROUTE_FAILED]: {
+    displayName: 'Board 3 Attempt 2 Failed (Sword Route)',
+    unused: true,
+  },
   [CH3_PLOT.DOOM_BOARD_MORE_STARTED]: { displayName: 'Doom Board Continued' },
   [CH3_PLOT.ESCAPED_TENNA]: { displayName: 'Escaped Tenna' },
   [CH3_PLOT.STARTED_COWBOY_GAME]: { displayName: 'Started Cowboy Game' },
   [CH3_PLOT.DARKNERS_LEFT_TENNA]: { displayName: 'Darkners Left Tenna' },
   [CH3_PLOT.MIKE_LEFT_TENNA]: { displayName: 'Mike Left Tenna' },
-  [CH3_PLOT.TENNA_PREFIGHT_SPEECH_STARTED]: { displayName: 'Tenna Prefight Speech Started' },
-  [CH3_PLOT.TENNA_PREFIGHT_SPEECH_COMPLETED]: { displayName: 'Tenna Prefight Speech Completed' },
+  [CH3_PLOT.TENNA_PREFIGHT_SPEECH_STARTED]: {
+    displayName: 'Tenna Prefight Speech Started',
+  },
+  [CH3_PLOT.TENNA_PREFIGHT_SPEECH_COMPLETED]: {
+    displayName: 'Tenna Prefight Speech Completed',
+  },
   [CH3_PLOT.TENNA_DEFEATED]: { displayName: 'Tenna Defeated' },
-  [CH3_PLOT.NO_ONES_GETTING_THROWN_AWAY]: { displayName: `"No one's gonna get thrown away."` },
-  [CH3_PLOT.KNIGHT_PASSED]: { displayName: 'Knight Passed', description: 'Value is duplicated when reaching the Light World.', },
+  [CH3_PLOT.NO_ONES_GETTING_THROWN_AWAY]: {
+    displayName: `"No one's gonna get thrown away."`,
+  },
+  [CH3_PLOT.KNIGHT_PASSED]: {
+    displayName: 'Knight Passed',
+    description: 'Value is duplicated when reaching the Light World.',
+  },
   [CH3_PLOT.SHELTER_OPENED]: { displayName: 'Shelter Opened' },
 };
 
@@ -438,37 +536,60 @@ export const CH4_PLOT_META: Record<Ch4PlotIndex, PlotPointProperties> = {
   [CH4_PLOT.GOT_CHURCH_CLOTHES]: { displayName: 'Got Church Clothes' },
   [CH4_PLOT.OFF_TO_CHURCH]: { displayName: 'Off to Church' },
   [CH4_PLOT.IN_CHURCH_LOBBY]: { displayName: 'In Church Lobby' },
-  [CH4_PLOT.WANDERING_AROUND_CHURCH]: { displayName: 'Wandering Around Church' },
+  [CH4_PLOT.WANDERING_AROUND_CHURCH]: {
+    displayName: 'Wandering Around Church',
+  },
   [CH4_PLOT.INVITED_TO_NOELLES]: { displayName: "Invited to Noelle's" },
   [CH4_PLOT.DITCHED_CHURCH_CLOTHES]: { displayName: 'Ditched Church Clothes' },
   [CH4_PLOT.HOLIDAY_GATE_UNLOCKED]: { displayName: 'Holiday Gate Unlocked' },
   [CH4_PLOT.IN_FRONT_OF_HO_HO_HOME]: { displayName: 'In Front of Ho-ho-home' },
   [CH4_PLOT.ENTERED_HO_HO_HOME]: { displayName: 'Entered Ho-ho-home' },
-  [CH4_PLOT.SUSIE_DISTRACTING_NOELLE]: { displayName: 'Susie Distracting Noelle from Phone' },
+  [CH4_PLOT.SUSIE_DISTRACTING_NOELLE]: {
+    displayName: 'Susie Distracting Noelle from Phone',
+  },
   [CH4_PLOT.SOUL_RIPPED_OUT]: { displayName: 'SOUL Ripped Out' },
-  [CH4_PLOT.NOELLE_WENT_TO_ROOM]: { displayName: 'Noelle Went to Her Room', description: 'Weird Route.' },
+  [CH4_PLOT.NOELLE_WENT_TO_ROOM]: {
+    displayName: 'Noelle Went to Her Room',
+    description: 'Weird Route.',
+  },
   [CH4_PLOT.THROWN_IN_PRESENT]: { displayName: 'Thrown in Present' },
-  [CH4_PLOT.KRIS_AND_NOELLE_ESCAPED]: { displayName: 'Kris and Noelle Escaped', description: 'Aborted Weird Route.' },
-  [CH4_PLOT.SOUL_CAPTURED_BY_NOELLE]: { displayName: 'SOUL Captured by Noelle' },
+  [CH4_PLOT.KRIS_AND_NOELLE_ESCAPED]: {
+    displayName: 'Kris and Noelle Escaped',
+    description: 'Aborted Weird Route.',
+  },
+  [CH4_PLOT.SOUL_CAPTURED_BY_NOELLE]: {
+    displayName: 'SOUL Captured by Noelle',
+  },
   [CH4_PLOT.SOUL_LEFT_ON_TABLE]: { displayName: 'SOUL Left on Table' },
   [CH4_PLOT.SUSIE_GOT_GUITAR]: { displayName: 'Susie Got Guitar' },
-  [CH4_PLOT.REEQUIPPED_THORN_RING]: { displayName: 'Re-equipped Thorn Ring', description: 'Weird Route.' },
+  [CH4_PLOT.REEQUIPPED_THORN_RING]: {
+    displayName: 'Re-equipped Thorn Ring',
+    description: 'Weird Route.',
+  },
   [CH4_PLOT.MET_CAROL]: { displayName: 'Met Carol' },
   [CH4_PLOT.LEAVING_HO_HO_HOME]: { displayName: 'Leaving Ho-ho-home' },
   [CH4_PLOT.ATE_SNACK_TRAY]: { displayName: 'Ate Snack Tray' },
   [CH4_PLOT.RAIN_STARTED]: { displayName: 'Rain Started' },
   [CH4_PLOT.ENTERED_DARK_SANCTUARY]: { displayName: 'Entered Dark Sanctuary' },
-  [CH4_PLOT.KINDA_GIVES_ME_THE_CREEPS]: { displayName: '"Kinda gives me the creeps."' },
+  [CH4_PLOT.KINDA_GIVES_ME_THE_CREEPS]: {
+    displayName: '"Kinda gives me the creeps."',
+  },
   [CH4_PLOT.CAST_DOWN_BY_KNIGHT]: { displayName: 'Cast Down by Knight' },
   [CH4_PLOT.MET_RALSEI]: { displayName: 'Met Ralsei' },
   [CH4_PLOT.ENTERED_GUEI_ROOM]: { displayName: 'Entered Guei Room' },
   [CH4_PLOT.SEEN_FIRST_PROPHECIES]: { displayName: 'Seen First Prophecies' },
-  [CH4_PLOT.RALSEI_ACKNOWLEDGES_SUMMARY]: { displayName: 'Ralsei Acknowledges His Is a Summary' },
+  [CH4_PLOT.RALSEI_ACKNOWLEDGES_SUMMARY]: {
+    displayName: 'Ralsei Acknowledges His Is a Summary',
+  },
   [CH4_PLOT.GLIMPSED_GERSON]: { displayName: 'Glimpsed Gerson' },
   [CH4_PLOT.MET_GERSON]: { displayName: 'Met Gerson' },
-  [CH4_PLOT.ROOM_AFTER_MEETING_GERSON]: { displayName: 'Room After Meeting Gerson' },
+  [CH4_PLOT.ROOM_AFTER_MEETING_GERSON]: {
+    displayName: 'Room After Meeting Gerson',
+  },
   [CH4_PLOT.RALSEI_STOOL_FORM]: { displayName: 'Ralsei Stool Form' },
-  [CH4_PLOT.ENTERED_GERSON_LOST_ROOM]: { displayName: 'Entered Room Gerson Gets Lost In' },
+  [CH4_PLOT.ENTERED_GERSON_LOST_ROOM]: {
+    displayName: 'Entered Room Gerson Gets Lost In',
+  },
   [CH4_PLOT.GERSON_WENT_TO_STUDY]: { displayName: 'Gerson Went to the Study' },
   [CH4_PLOT.PARTY_WENT_TO_STUDY]: { displayName: 'Party Went to the Study' },
   [CH4_PLOT.GETTING_SHEET_MUSIC]: { displayName: 'Getting Sheet Music' },
@@ -480,40 +601,90 @@ export const CH4_PLOT_META: Record<Ch4PlotIndex, PlotPointProperties> = {
   [CH4_PLOT.SEALED_DARK_SANCTUARY]: { displayName: 'Sealed Dark Sanctuary' },
   [CH4_PLOT.DOOR_IS_LOCKED]: { displayName: 'Door Is Locked' },
   [CH4_PLOT.GERSON_IS_DEAD]: { displayName: 'Wait, Gerson Is Dead' },
-  [CH4_PLOT.CREATING_SECOND_SANCTUARY]: { displayName: 'Creating Second Sanctuary' },
-  [CH4_PLOT.CREATED_SECOND_SANCTUARY]: { displayName: 'Created Second Sanctuary' },
-  [CH4_PLOT.ENTERED_SECOND_SANCTUARY]: { displayName: 'Entered Second Sanctuary' },
-  [CH4_PLOT.TRIGGERED_SECOND_SANCTUARY_MUSIC]: { displayName: 'Triggered Second Sanctuary Music' },
-  [CH4_PLOT.ENTERED_FIRST_PROPHECY_ROOM]: { displayName: 'Entered First Second Sanctuary Prophecy Room' },
-  [CH4_PLOT.SUSIE_ACKNOWLEDGES_PROPHECY]: { displayName: 'Susie Acknowledges Prophecy' },
+  [CH4_PLOT.CREATING_SECOND_SANCTUARY]: {
+    displayName: 'Creating Second Sanctuary',
+  },
+  [CH4_PLOT.CREATED_SECOND_SANCTUARY]: {
+    displayName: 'Created Second Sanctuary',
+  },
+  [CH4_PLOT.ENTERED_SECOND_SANCTUARY]: {
+    displayName: 'Entered Second Sanctuary',
+  },
+  [CH4_PLOT.TRIGGERED_SECOND_SANCTUARY_MUSIC]: {
+    displayName: 'Triggered Second Sanctuary Music',
+  },
+  [CH4_PLOT.ENTERED_FIRST_PROPHECY_ROOM]: {
+    displayName: 'Entered First Second Sanctuary Prophecy Room',
+  },
+  [CH4_PLOT.SUSIE_ACKNOWLEDGES_PROPHECY]: {
+    displayName: 'Susie Acknowledges Prophecy',
+  },
   [CH4_PLOT.MOVABLE_PIANO_ROOM]: { displayName: 'Movable Piano Room' },
-  [CH4_PLOT.FULLY_IN_MOVABLE_PIANO_ROOM]: { displayName: 'Fully in Movable Piano Room' },
+  [CH4_PLOT.FULLY_IN_MOVABLE_PIANO_ROOM]: {
+    displayName: 'Fully in Movable Piano Room',
+  },
   [CH4_PLOT.WALKING_ON_WALLS_ROOM]: { displayName: 'Walking on Walls Room' },
-  [CH4_PLOT.SUSIE_NOTICING_CAGE_PROPHECY]: { displayName: 'Susie Noticing "Cage" Prophecy' },
-  [CH4_PLOT.CAGE_PROPHECY_COMPLETED]: { displayName: '"Cage" Prophecy Completed' },
-  [CH4_PLOT.ENTERED_FIRST_CYLINDER_TOWER]: { displayName: 'Entered First Cylinder Tower Climb' },
-  [CH4_PLOT.SUSIE_SAW_HOPE_PROPHECY]: { displayName: 'Susie Saw Hope Prophecy' },
-  [CH4_PLOT.CLIMBED_FIRST_CYLINDER_TOWER]: { displayName: 'Climbed First Cylinder Tower' },
-  [CH4_PLOT.SUSIE_SAW_LOVE_PROPHECY]: { displayName: 'Susie Saw Love Prophecy' },
-  [CH4_PLOT.REACHED_ABANDONED_STUDY]: { displayName: 'Reached Abandoned Study' },
-  [CH4_PLOT.DIALOGUE_IN_ABANDONED_STUDY]: { displayName: 'Dialogue in Abandoned Study' },
-  [CH4_PLOT.CONSIDERED_TAKING_HAMMER]: { displayName: 'Considered Taking Hammer to Castle Town' },
-  [CH4_PLOT.WARPED_TO_SOUND_OF_JUSTICE]: { displayName: 'Warped to Sound of Justice' },
-  [CH4_PLOT.DEFEATED_SOUND_OF_JUSTICE]: { displayName: 'Defeated Sound of Justice' },
+  [CH4_PLOT.SUSIE_NOTICING_CAGE_PROPHECY]: {
+    displayName: 'Susie Noticing "Cage" Prophecy',
+  },
+  [CH4_PLOT.CAGE_PROPHECY_COMPLETED]: {
+    displayName: '"Cage" Prophecy Completed',
+  },
+  [CH4_PLOT.ENTERED_FIRST_CYLINDER_TOWER]: {
+    displayName: 'Entered First Cylinder Tower Climb',
+  },
+  [CH4_PLOT.SUSIE_SAW_HOPE_PROPHECY]: {
+    displayName: 'Susie Saw Hope Prophecy',
+  },
+  [CH4_PLOT.CLIMBED_FIRST_CYLINDER_TOWER]: {
+    displayName: 'Climbed First Cylinder Tower',
+  },
+  [CH4_PLOT.SUSIE_SAW_LOVE_PROPHECY]: {
+    displayName: 'Susie Saw Love Prophecy',
+  },
+  [CH4_PLOT.REACHED_ABANDONED_STUDY]: {
+    displayName: 'Reached Abandoned Study',
+  },
+  [CH4_PLOT.DIALOGUE_IN_ABANDONED_STUDY]: {
+    displayName: 'Dialogue in Abandoned Study',
+  },
+  [CH4_PLOT.CONSIDERED_TAKING_HAMMER]: {
+    displayName: 'Considered Taking Hammer to Castle Town',
+  },
+  [CH4_PLOT.WARPED_TO_SOUND_OF_JUSTICE]: {
+    displayName: 'Warped to Sound of Justice',
+  },
+  [CH4_PLOT.DEFEATED_SOUND_OF_JUSTICE]: {
+    displayName: 'Defeated Sound of Justice',
+  },
   [CH4_PLOT.RALSEI_OFFERS_HONESTY]: { displayName: 'Ralsei Offers Honesty' },
-  [CH4_PLOT.RALSEI_DOESNT_KNOW_ANYTHING]: { displayName: "Ralsei Doesn't Know Anything Else Useful" },
-  [CH4_PLOT.FIRE_EXTINGUISHER_KNOWS_CODE]: { displayName: 'Fire Extinguisher Knows the Code' },
-  [CH4_PLOT.MET_RALSEI_IN_THIRD_SANCTUARY]: { displayName: 'Met Ralsei in Third Sanctuary' },
+  [CH4_PLOT.RALSEI_DOESNT_KNOW_ANYTHING]: {
+    displayName: "Ralsei Doesn't Know Anything Else Useful",
+  },
+  [CH4_PLOT.FIRE_EXTINGUISHER_KNOWS_CODE]: {
+    displayName: 'Fire Extinguisher Knows the Code',
+  },
+  [CH4_PLOT.MET_RALSEI_IN_THIRD_SANCTUARY]: {
+    displayName: 'Met Ralsei in Third Sanctuary',
+  },
   [CH4_PLOT.LOOKING_FOR_KNIGHT]: { displayName: 'Looking for Knight' },
-  [CH4_PLOT.FIRST_SAVE_IN_THIRD_SANCTUARY]: { displayName: 'First Save Point in Third Sanctuary' },
+  [CH4_PLOT.FIRST_SAVE_IN_THIRD_SANCTUARY]: {
+    displayName: 'First Save Point in Third Sanctuary',
+  },
   [CH4_PLOT.RODE_RECRUITS_TOWER]: { displayName: 'Rode Recruits Tower' },
-  [CH4_PLOT.CLIMBED_PAST_SWORDS]: { displayName: 'Climbed Past a Ton of Swords' },
+  [CH4_PLOT.CLIMBED_PAST_SWORDS]: {
+    displayName: 'Climbed Past a Ton of Swords',
+  },
   [CH4_PLOT.CLIMBING_TITAN_1]: { displayName: 'Climbing Titan (1)' },
   [CH4_PLOT.INSIDE_TITAN]: { displayName: 'Inside Titan' },
   [CH4_PLOT.DEFEATED_TITAN]: { displayName: 'Defeated Titan' },
-  [CH4_PLOT.SUSIE_REJECTS_FINAL_PROPHECY]: { displayName: 'Susie Rejects Final Prophecy' },
+  [CH4_PLOT.SUSIE_REJECTS_FINAL_PROPHECY]: {
+    displayName: 'Susie Rejects Final Prophecy',
+  },
   [CH4_PLOT.CLOSED_LAST_FOUNTAIN]: { displayName: 'Closed Last Fountain' },
-  [CH4_PLOT.REALIZES_THAT_WAS_POINTLESS]: { displayName: 'Realizes That Was All Pointless' },
+  [CH4_PLOT.REALIZES_THAT_WAS_POINTLESS]: {
+    displayName: 'Realizes That Was All Pointless',
+  },
   [CH4_PLOT.EXITED_CHURCH]: { displayName: 'Exited Church' },
   [CH4_PLOT.WENT_TO_BED]: { displayName: 'Went to Bed' },
   [CH4_PLOT.CHAPTER_COMPLETE]: { displayName: 'Chapter Complete' },
@@ -524,4 +695,6 @@ export const PLOT_META_BY_CHAPTER = {
   2: CH2_PLOT_META,
   3: CH3_PLOT_META,
   4: CH4_PLOT_META,
-} as const satisfies Partial<Record<1 | 2 | 3 | 4, Record<number, PlotPointProperties>>>;
+} as const satisfies Partial<
+  Record<1 | 2 | 3 | 4, Record<number, PlotPointProperties>>
+>;
