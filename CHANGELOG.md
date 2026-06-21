@@ -5,10 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.8.1-beta] - 2026-06-21
+
+### Added
+
+- Added support for Chapter 4 rhythm game score flags and a dedicated "Rhythm Games" section in the Story tab. Thanks [Ranoru24](https://github.com/Ranoru24) for reporting! ([Issue #55](https://github.com/tennaproject/tenna-editor/issues/55))
+
+### Changed
+
+- Refactored rhythm game flags, updating their names and descriptions for clarity.
+- Updated the contributors generation script to dynamically render and sync the contributor list in `README.md`.
 
 ### Fixed
 
+- Fixed the Story tab search logic to correctly filter story sections and flag clusters based on the search query. Thanks [Ranoru24](https://github.com/Ranoru24) for reporting! ([Issue #55](https://github.com/tennaproject/tenna-editor/issues/55))
 - Fix a mistake in the description for Chapter 4's "Blood stain" flag. Author: [Wryyyong](https://github.com/Wryyyong) ([PR #51](https://github.com/tennaproject/tenna-editor/pull/51)).
 
 ## [0.8.0-beta] - 2026-06-20
