@@ -60,7 +60,7 @@ export function HomeWelcome() {
               <li>
                 Linux:{' '}
                 <span className="font-mono">
-                  ~/.steam/steam/steamapps/compatdata/1690940/pfx/drive_c/users/steamuser/AppData/Local/DELTARUNE/
+                  ~/.steam/steam/steamapps/compatdata/1671210/pfx/drive_c/users/steamuser/AppData/Local/DELTARUNE/
                 </span>
               </li>
             </ul>

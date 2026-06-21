@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased] - 2026-06-XX
+
+### Changed
+
+- Updated the Linux save path in the Welcome page. It now points to correct directory, instead of the one for demo version. Thanks [LenNerd42](https://github.com/LenNerd42) for reporting! ([Issue #56](https://github.com/tennaproject/tenna-editor/issues/56))
+
 ## [0.8.1-beta] - 2026-06-21
 
 ### Added
