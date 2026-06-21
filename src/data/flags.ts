@@ -884,8 +884,8 @@ export const FLAGS = {
   S_RANK_RETURN_3: 1192,
   SCORE_COOKING: 1193,
   RANK_COOKING: 1194,
-  SCORE_LIGHTNERS_LIVE: 1195,
-  RANK_LIGHTNERS_LIVE: 1196,
+  RAISE_BAT_HISCORE: 1195,
+  RAISE_BAT_HIRANK: 1196,
   SCORE_SUSIEZILLA: 1197,
   RANK_SUSIEZILLA: 1198,
   SUSIE_TENNA_CHAT_1: 1199,
@@ -1105,6 +1105,10 @@ export const FLAGS = {
   MICCHECK_FLAG: 1663,
   SAVEPOINT_DARKZONE: 1664,
   READABLE_ROOM_FLAG_1665: 1665,
+  TV_TIME_HISCORE: 1666,
+  TV_TIME_HARD_HISCORE: 1667,
+  KNOCK_YOU_DOWN_HISCORE: 1668,
+  KNOCK_YOU_DOWN_HARD_HISCORE: 1669,
   ARENA_PROGRESS: 1688,
   CASTLE_TV_ZONE1_VISITED: 1689,
   CASTLE_TV_ZONE1_COMPLETE: 1690,
@@ -7855,14 +7859,15 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
       map: GAMESHOW_RANKS,
     },
   },
-  [FLAGS.SCORE_LIGHTNERS_LIVE]: {
-    displayName: 'Lightners Live Score',
-    description: 'High score in the Lightners Live minigame.',
+  [FLAGS.RAISE_BAT_HISCORE]: {
+    displayName: 'Raise Up Your Bat Hiscore',
+    description: 'Score on Raise Up Your Bat',
     valueType: 'number',
+    valueRules: { min: 0 },
   },
-  [FLAGS.RANK_LIGHTNERS_LIVE]: {
-    displayName: 'Lightners Live Rank',
-    description: 'Rank achieved in the Lightners Live minigame.',
+  [FLAGS.RAISE_BAT_HIRANK]: {
+    displayName: 'Raise Up Your Bat Hirank',
+    description: 'Highest rank on Raise Up Your Bat',
     valueType: 'map',
     valueRules: {
       map: GAMESHOW_RANKS,
@@ -8380,14 +8385,40 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     valueRules: { min: 0 },
   },
   [FLAGS.RAISE_BAT_HARD_HISCORE]: {
-    displayName: 'Raise Bat Hard Hiscore',
-    description: 'High score on Raise Up Your Bat, Hard Mode',
+    displayName: 'Raise Up Your Bat Hard Hiscore',
+    description: 'Score on Raise Up Your Bat, Hard Mode',
     valueType: 'number',
     valueRules: { min: 0 },
   },
   [FLAGS.RAISE_BAT_HARD_HIRANK]: {
-    displayName: 'Raise Bat Hard Hirank',
+    displayName: 'Raise Up Your Bat Hard Hirank',
     description: 'Highest rank on Raise Up Your Bat, Hard Mode',
+    valueType: 'map',
+    valueRules: {
+      map: GAMESHOW_RANKS,
+    },
+  },
+  [FLAGS.TV_TIME_HISCORE]: {
+    displayName: "It's TV Time! Hiscore",
+    description: "Score on the It's TV Time! rhythm game",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.TV_TIME_HARD_HISCORE]: {
+    displayName: "It's TV Time! Hard Hiscore",
+    description: "Score on the It's TV Time! rhythm game, Hard Mode",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.KNOCK_YOU_DOWN_HISCORE]: {
+    displayName: 'Knock You Down!! Hiscore',
+    description: 'Score on the Knock You Down!! rhythm game',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.KNOCK_YOU_DOWN_HARD_HISCORE]: {
+    displayName: 'Knock You Down!! Hard Hiscore',
+    description: 'Score on the Knock You Down!! rhythm game, Hard Mode',
     valueType: 'number',
     valueRules: { min: 0 },
   },
@@ -9518,7 +9549,7 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   [FLAGS.MIKE_MINIGAME_HISCORE]: {
     displayName: 'PLUEY high score',
     description:
-      'Your best score on the PLUEY Mike minigame at the Castle Town TV zone.',
+      'Score on the PLUEY Mike minigame at the Castle Town TV zone.',
     valueType: 'number',
     valueRules: {
       min: 0,

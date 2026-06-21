@@ -571,8 +571,8 @@ export const STORY_SECTIONS = {
           title: 'Board 2 Progress',
           flags: [
             'RANK_BOARD_2',
-            'SCORE_LIGHTNERS_LIVE',
-            'RANK_LIGHTNERS_LIVE',
+            'RAISE_BAT_HISCORE',
+            'RAISE_BAT_HIRANK',
           ],
         },
       ],
@@ -750,6 +750,18 @@ export const STORY_SECTIONS = {
             'MIKE_MINIGAME_SCORE_1',
             'MIKE_MINIGAME_HISCORE',
             'MIKE_MINIGAME_SCORE_2',
+          ],
+        },
+        {
+          id: 'rhythm-games',
+          title: 'Rhythm Games',
+          flags: [
+            'RAISE_BAT_HISCORE',
+            'RAISE_BAT_HARD_HISCORE',
+            'TV_TIME_HISCORE',
+            'TV_TIME_HARD_HISCORE',
+            'KNOCK_YOU_DOWN_HISCORE',
+            'KNOCK_YOU_DOWN_HARD_HISCORE',
           ],
         },
         {
