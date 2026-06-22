@@ -66,7 +66,7 @@ export function FlagField({ flag, id, className }: FlagFieldProps) {
           value={(currentValue as number) ?? 0}
           placeholder="Enter number..."
           min={valueRules?.min ?? 0}
-          max={valueRules?.max ?? 99999}
+          max={valueRules?.max ?? 999999999}
           onChange={(value) => {
             updateSave((save) => (save.flags[flag] = value));
           }}

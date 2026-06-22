@@ -16,10 +16,10 @@ import { chapterHelpers, enemyHelpers } from '@utils';
 
 const recruitableEnemiesCache = new Map<string, EnemyIndex[]>();
 const CAFE_SEATS = [
-  { id: 'cafe-top-left', flag: FLAGS.CAFE_TOPLEFT },
-  { id: 'cafe-top-right', flag: FLAGS.CAFE_TOPRIGHT },
-  { id: 'cafe-bottom-left', flag: FLAGS.CAFE_BOTTOMLEFT },
-  { id: 'cafe-bottom-right', flag: FLAGS.CAFE_BOTTOMRIGHT },
+  { id: 'cafe-top-left', flag: FLAGS.CAFE_TOP_LEFT_RECRUIT },
+  { id: 'cafe-top-right', flag: FLAGS.CAFE_TOP_RIGHT_RECRUIT },
+  { id: 'cafe-bottom-left', flag: FLAGS.CAFE_BOTTOM_LEFT_RECRUIT },
+  { id: 'cafe-bottom-right', flag: FLAGS.CAFE_BOTTOM_RIGHT_RECRUIT },
 ] as const;
 
 function getRecruitableEnemies(

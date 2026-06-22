@@ -7,8 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] - 2026-06-XX
 
+This is the final feature release before Chapter 5. The Story tabs are now much more usable, accurate, and complete. I apologize for the previous low-quality and often misleading flag descriptions. The basic Chapter 5 data will most likely be added within a few hours of its release.
+
 ### Changed
 
+- The flags metadata has been massively refactored to be more accurate and consistent. Thanks [Jacky720](https://github.com/Jacky720) and the contributors of [Flowey's Time Machine fork](https://github.com/Jacky720/FloweysTimeMachine) for providing high-quality source of metadata!
+- Refactored Story tabs data to utilize the new flags metadata.
 - Updated the Linux save path in the Welcome page. It now points to correct directory, instead of the one for demo version. Thanks [LenNerd42](https://github.com/LenNerd42) for reporting! ([Issue #56](https://github.com/tennaproject/tenna-editor/issues/56))
 
 ## [0.8.1-beta] - 2026-06-21

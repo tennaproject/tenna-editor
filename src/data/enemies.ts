@@ -117,13 +117,13 @@ export const ENEMIES_META: Record<EnemyIndex, EnemyProperties> = {
   [ENEMIES.RUDINN]: {
     displayName: 'Rudinn',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_RUDINN,
+    recruitFlag: FLAGS.RECRUITED_RUDINN,
     recruitCount: 1,
   },
   [ENEMIES.HATHY]: {
     displayName: 'Hathy',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_HATHY,
+    recruitFlag: FLAGS.RECRUITED_HATHY,
     recruitCount: 1,
   },
   [ENEMIES.CLOVER_1]: {
@@ -144,7 +144,7 @@ export const ENEMIES_META: Record<EnemyIndex, EnemyProperties> = {
   [ENEMIES.PONMAN]: {
     displayName: 'Ponman',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_PONMAN,
+    recruitFlag: FLAGS.RECRUITED_PONMAN,
     recruitCount: 1,
   },
   [ENEMIES.LANCER_2]: {
@@ -155,19 +155,19 @@ export const ENEMIES_META: Record<EnemyIndex, EnemyProperties> = {
   [ENEMIES.RABBICK]: {
     displayName: 'Rabbick',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_RABBICK,
+    recruitFlag: FLAGS.RECRUITED_RABBICK,
     recruitCount: 1,
   },
   [ENEMIES.BLOXER]: {
     displayName: 'Bloxer',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_BLOXER,
+    recruitFlag: FLAGS.RECRUITED_BLOXER,
     recruitCount: 1,
   },
   [ENEMIES.JIGSAWRY]: {
     displayName: 'Jigsawry',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_JIGSAWRY,
+    recruitFlag: FLAGS.RECRUITED_JIGSAW,
     recruitCount: 1,
   },
   [ENEMIES.CLOVER_2]: {
@@ -193,7 +193,7 @@ export const ENEMIES_META: Record<EnemyIndex, EnemyProperties> = {
   [ENEMIES.JEVIL]: {
     displayName: 'JEVIL',
     recruitable: false,
-    recruitFlag: FLAGS.RECRUIT_JEVIL,
+    recruitFlag: FLAGS.RECRUITED_JEVIL,
   },
   [ENEMIES.K_ROUND_2]: {
     displayName: 'K. Round 2',
@@ -203,13 +203,13 @@ export const ENEMIES_META: Record<EnemyIndex, EnemyProperties> = {
   [ENEMIES.RUDINN_RANGER]: {
     displayName: 'Rudinn Ranger',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_RUDINN_RANGER,
+    recruitFlag: FLAGS.RECRUITED_RUDINN_RANGER,
     recruitCount: 1,
   },
   [ENEMIES.HEAD_HATHY]: {
     displayName: 'Head Hathy',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_HEAD_HATHY,
+    recruitFlag: FLAGS.RECRUITED_HEAD_HATHY,
     recruitCount: 1,
   },
   [ENEMIES.KING]: {
@@ -220,43 +220,43 @@ export const ENEMIES_META: Record<EnemyIndex, EnemyProperties> = {
   [ENEMIES.AMBYU_LANCE]: {
     displayName: 'Ambyu-Lance',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_AMBYU_LANCE,
+    recruitFlag: FLAGS.RECRUITED_AMBYU_LANCE,
     recruitCount: 4,
   },
   [ENEMIES.POPPUP]: {
     displayName: 'Poppup',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_POPPUP,
+    recruitFlag: FLAGS.RECRUITED_POPPUP,
     recruitCount: 3,
   },
   [ENEMIES.TASQUE]: {
     displayName: 'Tasque',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_TASQUE,
+    recruitFlag: FLAGS.RECRUITED_TASQUE,
     recruitCount: 5,
   },
   [ENEMIES.WEREWIRE]: {
     displayName: 'Werewire',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_WEREWIRE,
+    recruitFlag: FLAGS.RECRUITED_WEREWIRE,
     recruitCount: 6,
   },
   [ENEMIES.MAUS]: {
     displayName: 'Maus',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_MAUS,
+    recruitFlag: FLAGS.RECRUITED_MAUS,
     recruitCount: 3,
   },
   [ENEMIES.VIROVIROKUN]: {
     displayName: 'Virovirokun',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_VIROVIROKUN,
+    recruitFlag: FLAGS.RECRUITED_VIROVIROKUN,
     recruitCount: 4,
   },
   [ENEMIES.SWATCHLING]: {
     displayName: 'Swatchling',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_SWATCHLING,
+    recruitFlag: FLAGS.RECRUITED_SWATCHLING,
     recruitCount: 5,
   },
   [ENEMIES.CAPN]: {
@@ -277,7 +277,7 @@ export const ENEMIES_META: Record<EnemyIndex, EnemyProperties> = {
   [ENEMIES.WEREWEREWIRE]: {
     displayName: 'Werewerewire',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_WEREWEREWIRE,
+    recruitFlag: FLAGS.RECRUITED_WEREWEREWIRE,
     recruitCount: 1,
   },
   [ENEMIES.GRAZETEST]: {
@@ -288,7 +288,7 @@ export const ENEMIES_META: Record<EnemyIndex, EnemyProperties> = {
   [ENEMIES.TASQUE_MANAGER]: {
     displayName: 'Tasque Manager',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_TASQUE_MANAGER,
+    recruitFlag: FLAGS.RECRUITED_TASQUE_MANAGER,
     recruitCount: 1,
   },
   [ENEMIES.BERDLY_1]: {
@@ -299,7 +299,7 @@ export const ENEMIES_META: Record<EnemyIndex, EnemyProperties> = {
   [ENEMIES.MAUSWHEEL]: {
     displayName: 'Mauswheel',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_MAUSWHEEL,
+    recruitFlag: FLAGS.RECRUITED_MAUSWHEEL,
     recruitCount: 1,
   },
   [ENEMIES.ROUXLS_1]: {
@@ -350,97 +350,97 @@ export const ENEMIES_META: Record<EnemyIndex, EnemyProperties> = {
   [ENEMIES.SHADOWGUY]: {
     displayName: 'Shadowguy',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_SHADOWGUY,
+    recruitFlag: FLAGS.RECRUITED_SHADOWGUY,
     recruitCount: 25,
   },
   [ENEMIES.SHUTTAH]: {
     displayName: 'Shuttah',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_SHUTTAH,
+    recruitFlag: FLAGS.RECRUITED_SHUTTAH,
     recruitCount: 2,
   },
   [ENEMIES.ZAPPER]: {
     displayName: 'Zapper',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_ZAPPER,
+    recruitFlag: FLAGS.RECRUITED_ZAPPER,
     recruitCount: 2,
   },
   [ENEMIES.RIBBICK]: {
     displayName: 'Ribbick',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_RIBBICK,
+    recruitFlag: FLAGS.RECRUITED_RIBBICK,
     recruitCount: 3,
   },
   [ENEMIES.WATERCOOLER]: {
     displayName: 'Watercooler',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_WATERCOOLER,
+    recruitFlag: FLAGS.RECRUITED_COOLER,
     recruitCount: 1,
   },
   [ENEMIES.PIPPINS]: {
     displayName: 'Pippins',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_PIPPINS,
+    recruitFlag: FLAGS.RECRUITED_PIPPINS,
     recruitCount: 5,
   },
   [ENEMIES.ELNINA]: {
     displayName: 'Elnina',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_ELNINA,
+    recruitFlag: FLAGS.RECRUITED_ELNINA,
     recruitCount: 1,
   },
   [ENEMIES.LANINO]: {
     displayName: 'Lanino',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_LANINO,
+    recruitFlag: FLAGS.RECRUITED_LANINO,
     recruitCount: 1,
   },
   [ENEMIES.GUEI]: {
     displayName: 'Guei',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_GUEI,
+    recruitFlag: FLAGS.RECRUITED_GUEI,
     recruitCount: 3,
   },
   [ENEMIES.BALTHIZARD]: {
     displayName: 'Balthizard',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_BALTHIZARD,
+    recruitFlag: FLAGS.RECRUITED_BALTHIZARD,
     recruitCount: 5,
   },
   [ENEMIES.BIBLIOX]: {
     displayName: 'Bibliox',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_BIBLIOX,
+    recruitFlag: FLAGS.RECRUITED_BIBLIOX,
     recruitCount: 3,
   },
   [ENEMIES.MIZZLE]: {
     displayName: 'Mizzle',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_MIZZLE,
+    recruitFlag: FLAGS.RECRUITED_MIZZLE,
     recruitCount: 2,
   },
   [ENEMIES.WICABEL]: {
     displayName: 'Wicabel',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_WICABEL,
+    recruitFlag: FLAGS.RECRUITED_WICABEL,
     recruitCount: 2,
   },
   [ENEMIES.WINGLADE]: {
     displayName: 'Winglade',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_WINGLADE,
+    recruitFlag: FLAGS.RECRUITED_WINGLADE,
     recruitCount: 2,
   },
   [ENEMIES.ORGANIKK]: {
     displayName: 'Organikk',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_ORGANIKK,
+    recruitFlag: FLAGS.RECRUITED_ORGANIKK,
     recruitCount: 3,
   },
   [ENEMIES.MISS_MIZZLE]: {
     displayName: 'Miss Mizzle',
     recruitable: true,
-    recruitFlag: FLAGS.RECRUIT_MISS_MIZZLE,
+    recruitFlag: FLAGS.RECRUITED_MISS_MIZZLE,
     recruitCount: 1,
   },
 

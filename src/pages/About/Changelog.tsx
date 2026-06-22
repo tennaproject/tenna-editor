@@ -6,6 +6,7 @@ type ChangelogScope = 'added' | 'changed' | 'fixed' | 'removed';
 export interface ChangelogEntry {
   version: string | null;
   date: string | null;
+  description: string | null;
   scopes: Record<ChangelogScope, string[]>;
 }
 
@@ -28,6 +29,13 @@ export function AboutChangelog() {
                 )}
               </div>
               <div className="flex flex-col gap-3">
+                {entry.description && (
+                  <div className="text-text-2">
+                    <Markdown components={{ a: Link }}>
+                      {entry.description}
+                    </Markdown>
+                  </div>
+                )}
                 {Object.entries(entry.scopes).map(
                   ([scope, elements], index) => {
                     if (elements.length <= 0) return;
