@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased] - 2026-06-XX
+## [0.9.0-beta] - 2026-06-22
 
 This is the final feature release before Chapter 5. The Story tabs are now much more usable, accurate, and complete. I apologize for the previous low-quality and often misleading flag descriptions. The basic Chapter 5 data will most likely be added within a few hours of its release.
 
