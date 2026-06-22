@@ -1,4 +1,4 @@
-import { StoryChapterLayout, StoryChapterSections } from './components';
+import { StoryChapterLayout, StoryChapterSections } from '@components';
 
 export function StoryChapter3() {
   return (

@@ -11,14 +11,12 @@ import {
   type ThrashMachineHeadIndex,
   type ThrashMachineBodyIndex,
   type ThrashMachineShoeIndex,
-} from '@components';
-import { FLAGS } from '@data';
-import { useSaveFlag } from '@hooks';
-import {
   StoryChapterLayout,
   StoryChapterSections,
   StoryFlagField,
-} from './components';
+} from '@components';
+import { FLAGS } from '@data';
+import { useSaveFlag } from '@hooks';
 
 function VesselSection() {
   const vesselHead = useSaveFlag(FLAGS.VESSEL_HEAD) as VesselHeadIndex;
@@ -47,18 +45,12 @@ function VesselSection() {
           </div>
           <div className="flex-1 flex flex-col gap-3">
             <StoryFlagField id="vessel-food" flag={FLAGS.VESSEL_FOOD} />
-            <StoryFlagField
-              id="vessel-blood-type"
-              flag={FLAGS.VESSEL_BLOOD_TYPE}
-            />
+            <StoryFlagField id="vessel-blood" flag={FLAGS.VESSEL_BLOOD} />
             <StoryFlagField id="vessel-color" flag={FLAGS.VESSEL_COLOR} />
             <StoryFlagField id="vessel-gift" flag={FLAGS.VESSEL_GIFT} />
             <StoryFlagField id="vessel-feeling" flag={FLAGS.VESSEL_FEELING} />
-            <StoryFlagField id="vessel-honesty" flag={FLAGS.VESSEL_HONESTY} />
-            <StoryFlagField
-              id="vessel-pain-seizure"
-              flag={FLAGS.VESSEL_PAIN_SEIZURE}
-            />
+            <StoryFlagField id="vessel-honest" flag={FLAGS.VESSEL_HONEST} />
+            <StoryFlagField id="vessel-seizure" flag={FLAGS.VESSEL_SEIZURE} />
           </div>
         </div>
       </Card>
