@@ -170,12 +170,12 @@ export function HomeOverview() {
             <div className="flex flex-col md:flex-row gap-3">
               <div className="flex-1 flex flex-col gap-3">
                 <Chapter />
-                <FlagField id="since-chapter" flag={FLAGS.SINCE_CHAPTER} />
+                <FlagField id="since-chapter" flag={FLAGS.STARTING_CHAPTER} />
                 <PlayerNameField id="player-name" />
               </div>
               <div className="flex-1 flex flex-col gap-3">
                 <MoneyField id="money" />
-                <FlagField id="points" flag={FLAGS.CH3_POINTS} />
+                <FlagField id="points" flag={FLAGS.POINTS_CH3} />
                 <TimeField />
               </div>
               <div className="flex-1 flex flex-col gap-3">
