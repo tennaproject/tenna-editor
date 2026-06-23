@@ -5756,11 +5756,17 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     displayName: 'Have you answered honestly?',
     description: 'Were you honest about your vessel choices?',
     valueType: 'boolean',
+    valueRules: {
+      invertedBoolean: true,
+    },
   },
   [FLAGS.VESSEL_SEIZURE]: {
     displayName: 'You acknowledge the possibility of pain and seizure.',
     description: 'Do you acknowledge the possibility of pain and seizure?',
     valueType: 'boolean',
+    valueRules: {
+      invertedBoolean: true,
+    },
   },
   [FLAGS.VESSEL_GIFT]: {
     displayName: 'Please give it a gift',
