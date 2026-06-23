@@ -97,13 +97,13 @@ export function Header() {
                 <Tenna />
               </div>
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col m-1">
               <h1 className="text-text-1 text-2xl font-bold leading-none hidden sm:block text-nowrap">
                 TENNA EDITOR
               </h1>
-              <p className="text-text-2 font-bold leading-none hidden lg:block text-nowrap">
+              {/* <p className="text-text-2 font-bold leading-none hidden lg:block text-nowrap">
                 AN UNOFFICIAL DELTARUNE SAVE EDITOR
-              </p>
+              </p> */}
             </div>
           </InlineGroup>
         </div>
