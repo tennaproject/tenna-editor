@@ -111,24 +111,20 @@ export function Header() {
         <InlineGroup className="w-full flex justify-end min-w-0">
           <Chapter5Notice />
           <SaveSelector />
-          {hasSave && (
-            <>
-              <IconButton
-                accent="neutral"
-                label="Undo"
-                icon={<UndoIcon />}
-                disabled={!canUndo}
-                onClick={undo}
-              />
-              <IconButton
-                accent="neutral"
-                label="Redo"
-                icon={<RedoIcon />}
-                disabled={!canRedo}
-                onClick={redo}
-              />
-            </>
-          )}
+          <IconButton
+            accent="neutral"
+            label="Undo"
+            icon={<UndoIcon />}
+            disabled={!hasSave || !canUndo}
+            onClick={undo}
+          />
+          <IconButton
+            accent="neutral"
+            label="Redo"
+            icon={<RedoIcon />}
+            disabled={!hasSave || !canRedo}
+            onClick={redo}
+          />
           <IconButton
             accent="green"
             label="Download save"
