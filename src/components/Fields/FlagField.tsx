@@ -130,17 +130,17 @@ export function FlagField({ flag, id, className }: FlagFieldProps) {
         label
       >
         <div className="flex flex-wrap">
-          {[...Array(32)].map((_, i) => (
+          {COLOR_INDICES.map((colorIndex) => (
             <div
-              key={i}
+              key={colorIndex}
               className={mergeClass(
                 'w-8 h-8 cursor-pointer border-2',
-                i === currentValue ? 'border-text-1' : 'border-border',
+                colorIndex === currentValue ? 'border-text-1' : 'border-border',
               )}
-              style={{ backgroundColor: getGameColor(i) }}
+              style={{ backgroundColor: getGameColor(colorIndex) }}
               onClick={() => {
                 updateSave((save) => {
-                  save.flags[flag] = i;
+                  save.flags[flag] = colorIndex;
                 });
               }}
             />
@@ -151,3 +151,5 @@ export function FlagField({ flag, id, className }: FlagFieldProps) {
   }
   return;
 }
+
+const COLOR_INDICES = Array.from({ length: 32 }, (_, i) => i);

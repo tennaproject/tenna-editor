@@ -2,7 +2,7 @@ import { Card, Heading, Section, Upload } from '@components';
 import { useState } from 'react';
 
 export function HomeWelcome() {
-  const [isUploadOpen, setUploadOpen] = useState(false);
+  const [isUploadOpen, setIsUploadOpen] = useState(false);
 
   return (
     <Section className="page select-text">
@@ -26,7 +26,7 @@ export function HomeWelcome() {
         <Section id="upload">
           <button
             className="h-45 w-full border-border bg-surface-3 hover:bg-surface-3-hover motion-reduce:transition-none transition-colors duration-200"
-            onClick={() => setUploadOpen(true)}
+            onClick={() => setIsUploadOpen(true)}
           >
             <div className="flex flex-col justify-center items-center">
               <h1 className="font-bold text-lg md:text-xl">
@@ -37,7 +37,7 @@ export function HomeWelcome() {
               </p>
             </div>
           </button>
-          <Upload isOpen={isUploadOpen} setOpen={setUploadOpen} />
+          <Upload isOpen={isUploadOpen} setOpen={setIsUploadOpen} />
         </Section>
         <Section id="filelocation" className="flex flex-col gap-1">
           <Heading level={4}>Where to find saves?</Heading>

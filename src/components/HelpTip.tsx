@@ -8,8 +8,8 @@ interface HelpTipProps {
 }
 
 export function HelpTip({ title, children }: HelpTipProps) {
-  const [isOpen, setOpen] = useState(false);
-  const [isSupressed, setSuppression] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isSuppressed, setIsSuppressed] = useState(false);
   const tipTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
@@ -21,22 +21,22 @@ export function HelpTip({ title, children }: HelpTipProps) {
   }, []);
 
   function onClose() {
-    setSuppression(true);
+    setIsSuppressed(true);
     if (tipTimerRef.current) window.clearTimeout(tipTimerRef.current);
-    tipTimerRef.current = window.setTimeout(() => setSuppression(false), 500);
+    tipTimerRef.current = window.setTimeout(() => setIsSuppressed(false), 500);
   }
 
   return (
     <div
       className="relative inline-flex group"
       onMouseLeave={() => {
-        setSuppression(false);
+        setIsSuppressed(false);
       }}
     >
       <button
         aria-expanded={isOpen}
         aria-haspopup="dialog"
-        onClick={() => setOpen(true)}
+        onClick={() => setIsOpen(true)}
         className="inline-flex w-6 h-6 select-none leading-none justify-center items-center"
       >
         <span
@@ -46,7 +46,7 @@ export function HelpTip({ title, children }: HelpTipProps) {
         </span>
       </button>
 
-      {!isOpen && !isSupressed && (
+      {!isOpen && !isSuppressed && (
         <div className="hidden lg:inline absolute left-1/2 -translate-x-1/2 -top-8 opacity-0 group-hover:opacity-100 motion-reduce:transition-none transition-opacity duration-200 ease-in-out pointer-events-none z-[70]">
           <div className="border border-border bg-surface-3 px-2 py-1 shadow-lg whitespace-nowrap text-text-1 text-xs">
             Click to show description
@@ -56,7 +56,7 @@ export function HelpTip({ title, children }: HelpTipProps) {
 
       <ModalLayout
         isOpen={isOpen}
-        setOpen={setOpen}
+        setOpen={setIsOpen}
         onClose={onClose}
         title={title ?? 'Help'}
         size="content"

@@ -14,12 +14,8 @@ Disallow: /`,
 } as const;
 
 export async function generateRobots(branch: string) {
-  let content = ``;
-  if (branch in ROBOTS) {
-    content = ROBOTS[branch as keyof typeof ROBOTS];
-  } else {
-    content = ROBOTS.dev;
-  }
+  const content =
+    branch in ROBOTS ? ROBOTS[branch as keyof typeof ROBOTS] : ROBOTS.dev;
 
   try {
     await writeFile(resolve(resolve(), 'public/robots.txt'), content);

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { mergeClass } from '@utils/merge-class';
 
 interface TextInputProps {
@@ -41,12 +41,14 @@ export function TextInput({
   const isUncontrolled = controlledValue === undefined;
   const [localValue, setLocalValue] = useState(defaultValue ?? '');
 
-  // Sync local value when defaultValue changes (for uncontrolled mode)
-  useEffect(() => {
-    if (isUncontrolled && defaultValue !== undefined) {
+  const [prevDefaultValue, setPrevDefaultValue] = useState(defaultValue);
+
+  if (isUncontrolled && defaultValue !== prevDefaultValue) {
+    setPrevDefaultValue(defaultValue);
+    if (defaultValue !== undefined) {
       setLocalValue(defaultValue);
     }
-  }, [defaultValue, isUncontrolled]);
+  }
 
   const value = isUncontrolled ? localValue : controlledValue;
 

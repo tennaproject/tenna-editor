@@ -5,9 +5,11 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 import prettier from 'eslint-config-prettier';
 import { globalIgnores } from 'eslint/config';
+import eslintReact from '@eslint-react/eslint-plugin';
 
 export default tseslint.config([
   globalIgnores(['dist', 'dev-dist']),
+  eslintReact.configs.recommended,
   {
     files: ['**/*.{ts,tsx}'],
     extends: [

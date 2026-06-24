@@ -132,11 +132,11 @@ export function CharacterPage({
             </div>
 
             <div className="w-full grid lg:grid-cols-2 gap-4 lg:px-6 mt-8">
-              {Array.from({ length: 6 }).map((_, i) => (
+              {SPELL_SLOTS.map((slot) => (
                 <SpellField
-                  id={`spell-slot${i}`}
-                  key={i}
-                  slot={i}
+                  id={`spell-slot${slot}`}
+                  key={slot}
+                  slot={slot}
                   character={character}
                   allowAllItems={allowAllElements}
                 />
@@ -148,3 +148,5 @@ export function CharacterPage({
     </div>
   );
 }
+
+const SPELL_SLOTS = [0, 1, 2, 3, 4, 5];

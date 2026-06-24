@@ -1,6 +1,6 @@
 import { mergeClass } from '@utils/merge-class';
 import type { ReactNode } from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 interface CheckboxProps {
   checked?: boolean;
@@ -26,9 +26,12 @@ export function Checkbox({
   const isControlled = checked !== undefined;
   const [internalChecked, setInternalChecked] = useState(checked ?? false);
 
-  useEffect(() => {
-    if (isControlled) setInternalChecked(checked);
-  }, [checked, isControlled]);
+  const [prevChecked, setPrevChecked] = useState(checked);
+
+  if (checked !== prevChecked) {
+    setPrevChecked(checked);
+    setInternalChecked(checked ?? false);
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (disabled) return;

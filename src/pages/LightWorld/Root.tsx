@@ -91,8 +91,8 @@ export function LightWorldRoot() {
                     </div>
 
                     <div className="w-full grid lg:grid-cols-4 gap-4 mt-8">
-                      {Array.from({ length: 8 }).map((_, i) => (
-                        <ItemField key={i} slot={i} type="lightWorldItem" />
+                      {INVENTORY_SLOTS.map((slot) => (
+                        <ItemField key={slot} slot={slot} type="lightWorldItem" />
                       ))}
                     </div>
                   </Section>
@@ -103,8 +103,8 @@ export function LightWorldRoot() {
                   <Section>
                     <Heading level={4}>Phone Contacts</Heading>
                     <div className="w-full grid lg:grid-cols-4 gap-4 mt-8">
-                      {Array.from({ length: 8 }).map((_, i) => (
-                        <ItemField key={i} slot={i} type="phoneContact" />
+                      {PHONE_CONTACT_SLOTS.map((slot) => (
+                        <ItemField key={slot} slot={slot} type="phoneContact" />
                       ))}
                     </div>
                   </Section>
@@ -117,3 +117,6 @@ export function LightWorldRoot() {
     </Page>
   );
 }
+
+const INVENTORY_SLOTS = [0, 1, 2, 3, 4, 5, 6, 7];
+const PHONE_CONTACT_SLOTS = [0, 1, 2, 3, 4, 5, 6, 7];

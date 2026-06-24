@@ -46,6 +46,17 @@ export function Select({
   const selectedLabel = selectedItem?.label ?? defaultSelectedItem?.label ?? '';
   const isShowingSelectedValue = inputValue === selectedLabel;
 
+  const [prevItems, setPrevItems] = useState(items);
+  const [prevSelectedLabel, setPrevSelectedLabel] = useState(selectedLabel);
+  const [prevIsOpen, setPrevIsOpen] = useState(false);
+
+  if (items !== prevItems || selectedLabel !== prevSelectedLabel) {
+    setPrevItems(items);
+    setPrevSelectedLabel(selectedLabel);
+    setInputItems(items);
+    setInputValue(selectedLabel);
+  }
+
   function selectInputValue(input: HTMLInputElement) {
     if (!input.value || !isShowingSelectedValue) return;
     requestAnimationFrame(() => {
@@ -53,15 +64,6 @@ export function Select({
       preserveSelectionOnMouseUpRef.current = true;
     });
   }
-
-  useEffect(() => {
-    setInputItems(items);
-  }, [items]);
-
-  useEffect(() => {
-    setInputValue(selectedLabel);
-    setInputItems(items);
-  }, [items, selectedLabel]);
 
   const {
     isOpen,
@@ -164,11 +166,17 @@ export function Select({
     },
   });
 
-  useEffect(() => {
-    if (isOpen && isShowingSelectedValue) {
-      setInputItems(items);
+  if (isOpen !== prevIsOpen) {
+    setPrevIsOpen(isOpen);
+    if (isOpen) {
+      setMenuMounted(true);
+      if (isShowingSelectedValue) {
+        setInputItems(items);
+      }
+    } else {
+      setMenuVisible(false);
     }
-  }, [isOpen, isShowingSelectedValue, items]);
+  }
 
   // Control mounted vs visible to avoid an empty bar before items render
   useEffect(() => {
@@ -177,13 +185,11 @@ export function Select({
     const fadeDurationMs = 120;
 
     if (isOpen) {
-      setMenuMounted(true);
       // next frame: make it visible so content is already rendered
       rafId = requestAnimationFrame(() => {
         setMenuVisible(true);
       });
     } else {
-      setMenuVisible(false);
       // after fade-out completes, unmount to save work
       timeoutId = setTimeout(() => {
         setMenuMounted(false);

@@ -1,7 +1,7 @@
 import { Section, TextInput, TextLabel } from '@components';
 import { useSave } from '@store';
 import { mergeClass } from '@utils/merge-class';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 
 interface SaveNameFieldProps {
   id?: string;
@@ -12,18 +12,20 @@ export function SaveNameField({ id, className }: SaveNameFieldProps) {
   const name = useSave((s) => s.save?.meta.name) || 'Cool save';
   const updateSave = useSave((s) => s.updateSave);
   const [localValue, setLocalValue] = useState(name);
-  const debounceTimer = useRef<NodeJS.Timeout | null>(null);
+  const [prevName, setPrevName] = useState(name);
+  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
+  if (name !== prevName) {
+    setPrevName(name);
     setLocalValue(name);
-  }, [name]);
+  }
 
   function onChange(value: string) {
     setLocalValue(value);
-    if (debounceTimer.current) {
-      clearTimeout(debounceTimer.current);
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
     }
-    debounceTimer.current = setTimeout(() => {
+    debounceTimerRef.current = setTimeout(() => {
       if (!value.trim()) return;
       updateSave((save) => {
         save.meta.name = value.trim();

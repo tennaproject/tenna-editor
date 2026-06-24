@@ -11,22 +11,22 @@ export function ProgressiveMount({
   delayMs = 0,
   fallback = null,
 }: ProgressiveMountProps) {
-  const [isMounted, setMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     if (delayMs > 0) {
-      const id = window.setTimeout(() => setMounted(true), delayMs);
+      const id = window.setTimeout(() => setIsMounted(true), delayMs);
       return () => window.clearTimeout(id);
     }
 
     if (window.requestIdleCallback) {
-      const id = window.requestIdleCallback(() => setMounted(true), {
+      const id = window.requestIdleCallback(() => setIsMounted(true), {
         timeout: 500,
       });
       return () => window.cancelIdleCallback(id);
     }
 
-    const id = window.setTimeout(() => setMounted(true), 0);
+    const id = window.setTimeout(() => setIsMounted(true), 0);
     return () => window.clearTimeout(id);
   }, [delayMs]);
 

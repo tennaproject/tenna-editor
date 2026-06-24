@@ -21,8 +21,8 @@ const Download = lazy(() =>
 );
 
 export function Header() {
-  const [isUploadOpen, setUploadOpen] = useState(false);
-  const [isDownloadOpen, setDownloadOpen] = useState(false);
+  const [isUploadOpen, setIsUploadOpen] = useState(false);
+  const [isDownloadOpen, setIsDownloadOpen] = useState(false);
 
   const isSidebarOpen = useUi((s) => s.ui.sidebar.open);
   const isSidebarRetracted = useUi((s) => s.ui.sidebar.retracted);
@@ -36,9 +36,9 @@ export function Header() {
 
   const shortcutHandlers = useMemo(
     () => ({
-      onUpload: () => setUploadOpen(true),
+      onUpload: () => setIsUploadOpen(true),
       onDownload: () => {
-        if (useSave.getState().save !== null) setDownloadOpen(true);
+        if (useSave.getState().save !== null) setIsDownloadOpen(true);
       },
       onUndo: () => {
         if (useSave.getState().save !== null && useHistory.getState().canUndo) {
@@ -133,22 +133,22 @@ export function Header() {
             accent="green"
             label="Download save"
             icon={<DownloadIcon />}
-            onClick={() => setDownloadOpen(true)}
+            onClick={() => setIsDownloadOpen(true)}
           />
           {isDownloadOpen && (
             <Suspense fallback={null}>
-              <Download isOpen={isDownloadOpen} setOpen={setDownloadOpen} />
+              <Download isOpen={isDownloadOpen} setOpen={setIsDownloadOpen} />
             </Suspense>
           )}
           <IconButton
             accent="blue"
             label="Upload save"
             icon={<UploadIcon />}
-            onClick={() => setUploadOpen(true)}
+            onClick={() => setIsUploadOpen(true)}
           />
           {isUploadOpen && (
             <Suspense fallback={null}>
-              <Upload isOpen={isUploadOpen} setOpen={setUploadOpen} />
+              <Upload isOpen={isUploadOpen} setOpen={setIsUploadOpen} />
             </Suspense>
           )}
         </InlineGroup>

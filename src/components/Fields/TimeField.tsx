@@ -12,14 +12,14 @@ interface TimeFieldProps {
 export function TimeField({ id, className }: TimeFieldProps) {
   const time = formatTime(useSave((s) => s.save?.time) ?? 0);
   const updateSave = useSave((s) => s.updateSave);
-  const debounceTimer = useRef<NodeJS.Timeout | null>(null);
+  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
   const [internalValue, setInternalValue] = useState<string>(time);
 
   function onChange(value: string) {
     setInternalValue(value);
 
-    if (debounceTimer.current) {
-      clearTimeout(debounceTimer.current);
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
     }
 
     const timeRegex = /^([0-9]{2}):([0-9]{2}):([0-9]{2})$/;
@@ -27,7 +27,7 @@ export function TimeField({ id, className }: TimeFieldProps) {
       return;
     }
 
-    debounceTimer.current = setTimeout(() => {
+    debounceTimerRef.current = setTimeout(() => {
       const seconds = parseTime(value);
       updateSave((save) => {
         if (save) {
@@ -39,8 +39,8 @@ export function TimeField({ id, className }: TimeFieldProps) {
 
   useEffect(() => {
     return () => {
-      if (debounceTimer.current) {
-        clearTimeout(debounceTimer.current);
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
       }
     };
   }, []);

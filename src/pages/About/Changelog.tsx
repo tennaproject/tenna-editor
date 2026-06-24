@@ -15,10 +15,10 @@ export function AboutChangelog() {
 
   return (
     <article className="page">
-      {changelog.map((entry, index) => {
+      {changelog.map((entry) => {
         if (!entry.version) return;
         return (
-          <Section key={index} id={entry.version}>
+          <Section key={entry.version} id={entry.version}>
             <Card className="p-6 flex flex-col gap-4">
               <div className="flex items-center justify-between border-b pb-1 border-divider">
                 <Heading level={3}>{entry.version}</Heading>
@@ -37,11 +37,11 @@ export function AboutChangelog() {
                   </div>
                 )}
                 {Object.entries(entry.scopes).map(
-                  ([scope, elements], index) => {
+                  ([scope, elements]) => {
                     if (elements.length <= 0) return;
                     return (
                       <Section
-                        key={index}
+                        key={scope}
                         id={`${entry.version}-${scope}`}
                         className="flex flex-col gap-2"
                       >
@@ -49,9 +49,9 @@ export function AboutChangelog() {
                           {scope.at(0)?.toUpperCase() + scope.slice(1)}
                         </Heading>
                         <div className="text-text-2">
-                          {elements.map((element, index) => {
+                          {elements.map((element) => {
                             return (
-                              <div key={index} className="flex gap-1">
+                              <div key={element} className="flex gap-1">
                                 -{' '}
                                 <Markdown components={{ a: Link }}>
                                   {element}

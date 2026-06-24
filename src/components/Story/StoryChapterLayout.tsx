@@ -20,8 +20,8 @@ export function StoryChapterLayout(props: StoryChapterLayoutProps) {
   const chapterFlagSet = getChapterFlagSet(saveChapter);
 
   return (
-    <ChapterFlagsContext.Provider value={chapterFlagSet}>
-      <FieldSearchContext.Provider value={debouncedSearch}>
+    <ChapterFlagsContext value={chapterFlagSet}>
+      <FieldSearchContext value={debouncedSearch}>
         <article className="page flex flex-col gap-3">
           <div className="flex flex-col sm:flex-row sm:items-center gap-3">
             <TextInput
@@ -35,7 +35,7 @@ export function StoryChapterLayout(props: StoryChapterLayoutProps) {
           </div>
           <div className="flex flex-col gap-4">{children}</div>
         </article>
-      </FieldSearchContext.Provider>
-    </ChapterFlagsContext.Provider>
+      </FieldSearchContext>
+    </ChapterFlagsContext>
   );
 }

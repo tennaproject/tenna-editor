@@ -6,14 +6,13 @@ import { Outlet, useNavigate } from 'react-router-dom';
 export function HomeRoot() {
   const navigate = useNavigate();
   const save = useSave.getState().save;
-  const firstVisit = Boolean(sessionStorage.getItem('tenna-welcome'));
-
   useEffect(() => {
+    const firstVisit = Boolean(sessionStorage.getItem('tenna-welcome'));
     if (!save && !firstVisit) {
       navigate('/welcome');
       sessionStorage.setItem('tenna-welcome', 'true');
     }
-  }, [save, firstVisit, navigate]);
+  }, [save, navigate]);
 
   return (
     <Page>

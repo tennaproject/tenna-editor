@@ -36,9 +36,16 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
   const baselineRevision = useSave((s) =>
     getBaselineRevision(s.save?.meta.baseline),
   );
-  const [selectedSlot, setSelectedSlot] = useState<SaveSlot>(1);
-  const [isCompletionSave, setIsCompletionSave] = useState(false);
-  const [fileName, setFileName] = useState('');
+  const [selectedSlot, setSelectedSlot] = useState<SaveSlot>(
+    (save?.meta.slot ?? 0) as SaveSlot,
+  );
+  const [isCompletionSave, setIsCompletionSave] = useState(
+    save?.meta.isCompletionSave ?? false,
+  );
+
+  const fileName = save
+    ? `filech${save.meta.chapter}_${isCompletionSave ? selectedSlot + 3 : selectedSlot}`
+    : '';
 
   function onSlotSelection(item: SelectItem | null) {
     if (item) {
@@ -67,24 +74,11 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
   }
 
   useEffect(() => {
-    if (isOpen !== true) return;
-    if (save) {
-      setSelectedSlot(save.meta.slot);
-      setIsCompletionSave(save.meta.isCompletionSave);
-    } else {
+    if (isOpen && !save) {
       setOpen(false);
       toast('There is no save loaded currently', 'error');
-      return;
     }
   }, [isOpen, save, setOpen]);
-
-  useEffect(() => {
-    if (!save) return;
-
-    setFileName(
-      `filech${save.meta.chapter}_${isCompletionSave ? selectedSlot + 3 : selectedSlot}`,
-    );
-  }, [selectedSlot, isCompletionSave, save]);
 
   return (
     <ModalLayout

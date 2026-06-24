@@ -4,13 +4,13 @@ import { Button } from './Button';
 import { ModalFooter, ModalLayout } from './ModalLayout';
 
 export function Chapter5Notice() {
-  const [isOpen, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
       <button
         type="button"
-        onClick={() => setOpen(true)}
+        onClick={() => setIsOpen(true)}
         className="h-10 shrink-0 inline-flex items-center gap-1 sm:gap-2 border border-yellow/40 bg-yellow-soft px-1.5 sm:px-2 text-sm font-bold text-text-1 hover:bg-yellow-soft/80 motion-reduce:transition-none transition-colors ui-focus-ring"
         aria-label="Chapter 5 information"
       >
@@ -22,7 +22,7 @@ export function Chapter5Notice() {
 
       <ModalLayout
         isOpen={isOpen}
-        setOpen={setOpen}
+        setOpen={setIsOpen}
         title="Chapter 5 Info"
         size="content"
         footer={
@@ -31,7 +31,7 @@ export function Chapter5Notice() {
               variant="primary"
               size="lg"
               className="w-full sm:w-auto sm:min-w-32"
-              onClick={() => setOpen(false)}
+              onClick={() => setIsOpen(false)}
             >
               Got it
             </Button>

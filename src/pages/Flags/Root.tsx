@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Card, Heading, Page, Section, Select, TextInput } from '@components';
 import { FLAGS } from '@data';
 import type { ChapterIndex, FlagIndex } from '@data';
@@ -70,6 +70,13 @@ export function FlagsRoot() {
   const chapter = useSave((s) => s.save?.meta.chapter ?? 1) as ChapterIndex;
 
   const debouncedSearchQuery = useDebouncedValue(searchQuery, 200);
+  const [prevSearchQuery, setPrevSearchQuery] = useState(debouncedSearchQuery);
+
+  if (debouncedSearchQuery !== prevSearchQuery) {
+    setPrevSearchQuery(debouncedSearchQuery);
+    setCurrentPage(1);
+  }
+
   const allFlags = useMemo(() => getChapterFlagList(chapter), [chapter]);
   const normalizedSearchQuery = useMemo(
     () => debouncedSearchQuery.toLowerCase().trim(),
@@ -83,10 +90,6 @@ export function FlagsRoot() {
       flag.searchText.includes(normalizedSearchQuery),
     );
   }, [allFlags, normalizedSearchQuery]);
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [debouncedSearchQuery]);
 
   const totalPages = Math.ceil(filteredFlags.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;

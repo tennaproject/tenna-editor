@@ -10,6 +10,8 @@ export function Page({ children }: PageProps) {
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
+    let timerId: NodeJS.Timeout | null = null;
+
     if (location.hash) {
       const id = location.hash.replace('#', '');
       const element = document.getElementById(id);
@@ -26,10 +28,18 @@ export function Page({ children }: PageProps) {
           );
         } else {
           element.style.boxShadow = '0 0 0 8px var(--color-blue)';
-          setTimeout(() => (element.style.boxShadow = ''), 2000);
+          timerId = setTimeout(() => {
+            element.style.boxShadow = '';
+          }, 2000);
         }
       }
     }
+
+    return () => {
+      if (timerId) {
+        clearTimeout(timerId);
+      }
+    };
   }, [location, reducedMotion]);
 
   return (

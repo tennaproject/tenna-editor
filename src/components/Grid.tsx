@@ -70,6 +70,7 @@ export function Grid({
       className,
     );
 
+    // eslint-disable-next-line @eslint-react/no-children-map
     const items = Children.map(children, (child) => {
       if (!isValidElement(child))
         return <div className="basis-[calc(100%_-_var(--g))]">{child}</div>;
@@ -77,6 +78,7 @@ export function Grid({
       const el = child as ReactElement<GridProps>;
 
       if (el.type === Grid || el.props?.size != null) {
+        // eslint-disable-next-line @eslint-react/no-clone-element
         return cloneElement(el, { item: true });
       }
 

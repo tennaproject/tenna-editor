@@ -185,7 +185,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
       console.error('Upload modal reset failed:', error);
     });
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps, @eslint-react/exhaustive-deps
   }, [isOpen]);
 
   const transition = { duration: reducedMotion ? 0 : 0.2 };
