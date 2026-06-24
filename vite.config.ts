@@ -2,7 +2,6 @@ import { defineConfig } from 'vite';
 import react, { reactCompilerPreset } from '@vitejs/plugin-react';
 import babel from '@rolldown/plugin-babel';
 import tailwindcss from '@tailwindcss/vite';
-import tsconfigPaths from 'vite-tsconfig-paths';
 import svgr from 'vite-plugin-svgr';
 import { VitePWA } from 'vite-plugin-pwa';
 import fg from 'fast-glob';
@@ -26,7 +25,6 @@ export default defineConfig({
       presets: [reactCompilerPreset()],
     }),
     tailwindcss(),
-    tsconfigPaths(),
     svgr({
       svgrOptions: {
         plugins: ['@svgr/plugin-svgo', '@svgr/plugin-jsx'],
@@ -86,6 +84,9 @@ export default defineConfig({
       },
     }),
   ],
+  resolve: {
+    tsconfigPaths: true,
+  },
   server: {
     host: '127.0.0.1',
     port: 4500,

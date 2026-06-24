@@ -9,7 +9,7 @@ import eslintReact from '@eslint-react/eslint-plugin';
 
 export default tseslint.config([
   globalIgnores(['dist', 'dev-dist']),
-  eslintReact.configs.recommended,
+  eslintReact.configs['recommended-typescript'],
   {
     files: ['**/*.{ts,tsx}'],
     extends: [

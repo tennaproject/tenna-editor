@@ -92,7 +92,11 @@ export function LightWorldRoot() {
 
                     <div className="w-full grid lg:grid-cols-4 gap-4 mt-8">
                       {INVENTORY_SLOTS.map((slot) => (
-                        <ItemField key={slot} slot={slot} type="lightWorldItem" />
+                        <ItemField
+                          key={slot}
+                          slot={slot}
+                          type="lightWorldItem"
+                        />
                       ))}
                     </div>
                   </Section>

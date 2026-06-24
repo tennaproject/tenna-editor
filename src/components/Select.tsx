@@ -45,17 +45,17 @@ export function Select({
   const preserveSelectionOnMouseUpRef = useRef(false);
   const selectedLabel = selectedItem?.label ?? defaultSelectedItem?.label ?? '';
   const isShowingSelectedValue = inputValue === selectedLabel;
-
-  const [prevItems, setPrevItems] = useState(items);
-  const [prevSelectedLabel, setPrevSelectedLabel] = useState(selectedLabel);
-  const [prevIsOpen, setPrevIsOpen] = useState(false);
-
-  if (items !== prevItems || selectedLabel !== prevSelectedLabel) {
-    setPrevItems(items);
-    setPrevSelectedLabel(selectedLabel);
+  useEffect(() => {
+    // eslint-disable-next-line @eslint-react/set-state-in-effect
     setInputItems(items);
+  }, [items]);
+
+  useEffect(() => {
+    // eslint-disable-next-line @eslint-react/set-state-in-effect
     setInputValue(selectedLabel);
-  }
+    // eslint-disable-next-line @eslint-react/set-state-in-effect
+    setInputItems(items);
+  }, [items, selectedLabel]);
 
   function selectInputValue(input: HTMLInputElement) {
     if (!input.value || !isShowingSelectedValue) return;
@@ -166,17 +166,12 @@ export function Select({
     },
   });
 
-  if (isOpen !== prevIsOpen) {
-    setPrevIsOpen(isOpen);
-    if (isOpen) {
-      setMenuMounted(true);
-      if (isShowingSelectedValue) {
-        setInputItems(items);
-      }
-    } else {
-      setMenuVisible(false);
+  useEffect(() => {
+    if (isOpen && isShowingSelectedValue) {
+      // eslint-disable-next-line @eslint-react/set-state-in-effect
+      setInputItems(items);
     }
-  }
+  }, [isOpen, isShowingSelectedValue, items]);
 
   // Control mounted vs visible to avoid an empty bar before items render
   useEffect(() => {
@@ -185,11 +180,15 @@ export function Select({
     const fadeDurationMs = 120;
 
     if (isOpen) {
+      // eslint-disable-next-line @eslint-react/set-state-in-effect
+      setMenuMounted(true);
       // next frame: make it visible so content is already rendered
       rafId = requestAnimationFrame(() => {
         setMenuVisible(true);
       });
     } else {
+      // eslint-disable-next-line @eslint-react/set-state-in-effect
+      setMenuVisible(false);
       // after fade-out completes, unmount to save work
       timeoutId = setTimeout(() => {
         setMenuMounted(false);
