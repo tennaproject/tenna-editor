@@ -13,6 +13,8 @@ export const SPELLS = {
   ICESHOCK: 9,
   SNOWGRAVE: 10,
   SUSIE_HEAL: 11, // this one has different name every chapter
+  REVIVE_SONG: 12,
+  SCYTHEMARE: 13,
 } as const;
 
 export type SpellIndex = (typeof SPELLS)[keyof typeof SPELLS];
@@ -57,5 +59,11 @@ export const SPELLS_META: Record<SpellIndex, SpellProperties> = {
   },
   [SPELLS.SUSIE_HEAL]: {
     displayName: 'Ultimate Heal', // name overrides needed here
+  },
+  [SPELLS.REVIVE_SONG]: {
+    displayName: 'ReviveSong',
+  },
+  [SPELLS.SCYTHEMARE]: {
+    displayName: 'Scythemare',
   },
 };

@@ -72,7 +72,8 @@ export function HomeWelcome() {
             <p>
               Tenna Editor is compatible with DELTARUNE Chapter 1-5 save files
               from the following platforms. Chapter 5 support is experimental
-              and currently uses known Chapter 1-4 editor data only.
+              and includes basic features like recruits, rooms, items, weapons,
+              and armors. Flags and plot points will come later.
             </p>
             <ul className="list-disc pl-5">
               <li>PC (Windows)</li>

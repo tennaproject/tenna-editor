@@ -323,8 +323,9 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
               </p>
               {selectedChapter === 5 && (
                 <p className="ui-panel-muted border-yellow/40 bg-yellow-soft text-text-1">
-                  Chapter 5 support is experimental and currently uses known
-                  Chapter 1-4 editor data only.
+                  Chapter 5 support is experimental. Basic data like recruits,
+                  rooms, items, weapons, and armors are in place. Flags and plot
+                  points will come later.
                 </p>
               )}
             </motion.div>

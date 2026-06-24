@@ -9,13 +9,13 @@ export function StoryChapter5() {
           Story flag editing for Chapter 5 is not available yet.
         </p>
         <div className="ui-panel-muted border-yellow/40 bg-yellow-soft text-text-1 flex flex-col gap-3 p-4">
-          <p>
-            Pre-release Chapter 5 support is available in Tenna Editor. You can
-            open and edit Chapter 5 saves using existing Chapter 1–4 data.
-          </p>
-          <p>
-            New Chapter 5 weapons, armors, items, and rooms will be added
-            shortly after release.
+          <p>Chapter 5 support is available in Tenna Editor.</p>
+          <p className="flex items-start gap-1">
+            <span className="text-green font-bold shrink-0">[NEW]</span>
+            <span>
+              Basic features like recruits, rooms, items, weapons, and armors
+              are in place.
+            </span>
           </p>
           <p>Flags and plot points will come later.</p>
         </div>

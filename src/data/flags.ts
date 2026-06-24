@@ -86,6 +86,14 @@ export const RECRUITS: Record<number, string> = {
   67: 'Winglade',
   68: 'Organikk',
   69: 'Ms. Mizzle',
+  70: 'Floradinn',
+  71: 'Leafling',
+  72: 'Shi',
+  73: 'Shinobeetle',
+  74: 'KawKaw',
+  75: 'Sheary',
+  76: 'Netskie',
+  77: 'Terakota',
 };
 
 export const FLAGS = {
@@ -566,6 +574,14 @@ export const FLAGS = {
   RECRUITED_WINGLADE: 667,
   RECRUITED_ORGANIKK: 668,
   RECRUITED_MISS_MIZZLE: 669,
+  RECRUITED_FLORADINN: 670,
+  RECRUITED_LEAFLING: 671,
+  RECRUITED_SHI: 672,
+  RECRUITED_SHINOBEETLE: 673,
+  RECRUITED_KAWKAW: 674,
+  RECRUITED_SHEARY: 675,
+  RECRUITED_NETSKIE: 676,
+  RECRUITED_TERAKOTA: 677,
   // Chapter 4 Hometown and early Dark Sanctuary
   COMPLETED_CHURCH_STICKER_FIGHT: 700,
   COMPLETED_DINER_SCENE_WITH_SUSIE: 701,
@@ -4478,6 +4494,46 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.RECRUITED_MISS_MIZZLE]: {
     displayName: 'Recruited Ms. Mizzle',
+    description: 'Recruit progress.',
+    valueType: 'boolean',
+  },
+  [FLAGS.RECRUITED_FLORADINN]: {
+    displayName: 'Recruited Floradinn',
+    description: 'Recruit progress.',
+    valueType: 'boolean',
+  },
+  [FLAGS.RECRUITED_LEAFLING]: {
+    displayName: 'Recruited Leafling',
+    description: 'Recruit progress.',
+    valueType: 'boolean',
+  },
+  [FLAGS.RECRUITED_SHI]: {
+    displayName: 'Recruited Shi',
+    description: 'Recruit progress.',
+    valueType: 'boolean',
+  },
+  [FLAGS.RECRUITED_SHINOBEETLE]: {
+    displayName: 'Recruited Shinobeetle',
+    description: 'Recruit progress.',
+    valueType: 'boolean',
+  },
+  [FLAGS.RECRUITED_KAWKAW]: {
+    displayName: 'Recruited KawKaw',
+    description: 'Recruit progress.',
+    valueType: 'boolean',
+  },
+  [FLAGS.RECRUITED_SHEARY]: {
+    displayName: 'Recruited Sheary',
+    description: 'Recruit progress.',
+    valueType: 'boolean',
+  },
+  [FLAGS.RECRUITED_NETSKIE]: {
+    displayName: 'Recruited Netskie',
+    description: 'Recruit progress.',
+    valueType: 'boolean',
+  },
+  [FLAGS.RECRUITED_TERAKOTA]: {
+    displayName: 'Recruited Terakota',
     description: 'Recruit progress.',
     valueType: 'boolean',
   },

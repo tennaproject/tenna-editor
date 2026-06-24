@@ -11,13 +11,16 @@ export function Chapter5Notice() {
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="h-10 shrink-0 inline-flex items-center gap-1 sm:gap-2 border border-yellow/40 bg-yellow-soft px-1.5 sm:px-2 text-sm font-bold text-text-1 hover:bg-yellow-soft/80 motion-reduce:transition-none transition-colors ui-focus-ring"
+        className="h-10 shrink-0 inline-flex items-center gap-1 sm:gap-2 border border-yellow/40 bg-yellow-soft px-1.5 sm:px-2.5 text-sm font-bold text-text-1 hover:bg-yellow-soft/80 motion-reduce:transition-none transition-colors ui-focus-ring"
         aria-label="Chapter 5 information"
       >
         <span className="h-5 w-5 text-yellow" aria-hidden="true">
           <WarningIcon />
         </span>
         <span className="hidden sm:inline text-nowrap">Chapter 5 info</span>
+        <span className="text-green font-bold text-xs shrink-0 animate-pulse">
+          [NEW]
+        </span>
       </button>
 
       <ModalLayout
@@ -39,14 +42,13 @@ export function Chapter5Notice() {
         }
       >
         <div className="flex flex-col gap-3 text-text-2">
-          <p>Pre-release Chapter 5 support is available in Tenna Editor.</p>
-          <p>
-            It currently supports opening and editing saves with existing
-            Chapter 1-4 data only.
-          </p>
-          <p>
-            New Chapter 5 weapons, armors, items, and rooms will be added
-            shortly after release.
+          <p>Chapter 5 support is available in Tenna Editor.</p>
+          <p className="flex items-start gap-1">
+            <span className="text-green font-bold shrink-0">[NEW]</span>
+            <span>
+              Basic features like recruits, rooms, items, weapons, and armors
+              are in place.
+            </span>
           </p>
           <p>Flags and plot points will come later.</p>
         </div>

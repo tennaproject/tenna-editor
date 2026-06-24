@@ -47,6 +47,17 @@ export const CONSUMABLES = {
   RHAPSOTEA: 61,
   SCARLIXIR: 62,
   BITTERTEAR: 63,
+  PUNCH_BOWL: 40,
+  FLAVIGNE: 41,
+  GREEN_TEA: 42,
+  ORANGE_JUICE: 43,
+  SCHADENBROT: 64,
+  TREE_CAKE: 65,
+  S_POTION: 66,
+  RAW_MOON: 67,
+  PHANTA: 68,
+  FLOWERY_SODA: 69,
+  SHIKA_COLA: 70,
 } as const;
 
 export type ConsumableIndex = (typeof CONSUMABLES)[keyof typeof CONSUMABLES];
@@ -162,4 +173,15 @@ export const CONSUMABLES_META: Record<ConsumableIndex, ConsumableProperties> = {
   [CONSUMABLES.RHAPSOTEA]: { displayName: 'Rhapsotea' },
   [CONSUMABLES.SCARLIXIR]: { displayName: 'Scarlixir' },
   [CONSUMABLES.BITTERTEAR]: { displayName: 'BitterTear' },
+  [CONSUMABLES.PUNCH_BOWL]: { displayName: 'PunchBowl' },
+  [CONSUMABLES.FLAVIGNE]: { displayName: 'Flavigne' },
+  [CONSUMABLES.GREEN_TEA]: { displayName: 'GreenTea' },
+  [CONSUMABLES.ORANGE_JUICE]: { displayName: 'OrangeJuice' },
+  [CONSUMABLES.SCHADENBROT]: { displayName: 'Schadenbrot' },
+  [CONSUMABLES.TREE_CAKE]: { displayName: 'TreeCake' },
+  [CONSUMABLES.S_POTION]: { displayName: 'S. POTION' },
+  [CONSUMABLES.RAW_MOON]: { displayName: 'Raw Moon' },
+  [CONSUMABLES.PHANTA]: { displayName: 'Phanta' },
+  [CONSUMABLES.FLOWERY_SODA]: { displayName: 'FlowerySoda' },
+  [CONSUMABLES.SHIKA_COLA]: { displayName: 'Shikacola' },
 };

@@ -20,6 +20,11 @@ export const LIGHTWORLDITEMS = {
   CACTUSNEEDLE: 16,
   BLACKSHARD: 17,
   QUILLPEN: 18,
+  HONEY_TOAST: 19,
+  BREAD: 20,
+  SEEDS: 21,
+  PENCIL2: 22,
+  PETAL: 23,
 };
 
 export type LightWorldItemIndex =
@@ -60,4 +65,9 @@ export const LIGHTWORLDITEMS_META: Record<
   [LIGHTWORLDITEMS.CACTUSNEEDLE]: { displayName: 'CactusNeedle', weapon: true },
   [LIGHTWORLDITEMS.BLACKSHARD]: { displayName: 'BlackShard', weapon: true },
   [LIGHTWORLDITEMS.QUILLPEN]: { displayName: 'QuillPen', weapon: true },
+  [LIGHTWORLDITEMS.HONEY_TOAST]: { displayName: 'Honey Toast' },
+  [LIGHTWORLDITEMS.BREAD]: { displayName: 'Bread' },
+  [LIGHTWORLDITEMS.SEEDS]: { displayName: 'Seeds' },
+  [LIGHTWORLDITEMS.PENCIL2]: { displayName: 'Pencil2', weapon: true },
+  [LIGHTWORLDITEMS.PETAL]: { displayName: 'Petal' },
 };

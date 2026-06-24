@@ -34,6 +34,15 @@ export const ARMORS = {
   POWER_BAND: 52,
   PRINCESS_RBN: 53,
   GOLD_WIDOW: 54,
+  MONARCH_RBN: 30,
+  TRUE_TIE: 31,
+  DOG_WIDOW: 32,
+  RED_RIBBON: 33,
+  NETSKIE_HAT: 34,
+  SETH_SPECS: 35,
+  YELLOW_HAT: 36,
+  O_GLOVE: 37,
+  GREEN_APRON: 38,
 } as const;
 
 export type ArmorIndex = (typeof ARMORS)[keyof typeof ARMORS];
@@ -73,4 +82,13 @@ export const ARMORS_META: Record<ArmorIndex, BaseProperties> = {
   [ARMORS.POWER_BAND]: { displayName: 'PowerBand' },
   [ARMORS.PRINCESS_RBN]: { displayName: 'PrincessRBN' },
   [ARMORS.GOLD_WIDOW]: { displayName: 'GoldWidow' },
+  [ARMORS.MONARCH_RBN]: { displayName: 'MonarchRBN' },
+  [ARMORS.TRUE_TIE]: { displayName: 'TrueTie' },
+  [ARMORS.DOG_WIDOW]: { displayName: 'DogWidow' },
+  [ARMORS.RED_RIBBON]: { displayName: 'RedRibbon' },
+  [ARMORS.NETSKIE_HAT]: { displayName: 'NetskieHat' },
+  [ARMORS.SETH_SPECS]: { displayName: 'SethSpecs' },
+  [ARMORS.YELLOW_HAT]: { displayName: 'YellowHat' },
+  [ARMORS.O_GLOVE]: { displayName: 'O.Glove' },
+  [ARMORS.GREEN_APRON]: { displayName: 'GreenApron' },
 };

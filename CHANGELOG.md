@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.10.0-beta] - 2026-06-24
+
+This is the first basic Chapter 5 content update. Chapter-specific progression flags are not included yet and will require more time to research and add.
+
+### Added
+
+- Added basic Chapter 5 support including recruits, rooms, weapons, armors, and items.
+
+### Changed
+
+- Displayed undo/redo buttons in the Header even when no save file is loaded.
+- Hidden the editor subheading in the Header for less visual clutter.
+
+### Fixed
+
+- Fixed an issue where the "Have you answered honestly?" and "pain and seizure" vessel flags were saved in reverse/inverted. Thanks [
+  Pizzaboy610](https://github.com/Pizzaboy610) for reporting! ([Issue #59](https://github.com/tennaproject/tenna-editor/issues/59))
+
 ## [0.9.0-beta] - 2026-06-22
 
 This is the final feature release before Chapter 5. The Story tabs are now much more usable, accurate, and complete. I apologize for the previous low-quality and often misleading flag descriptions. The basic Chapter 5 data will most likely be added within a few hours of its release.

@@ -33,6 +33,14 @@ export const WEAPONS = {
   JUSTICE_AXE: 52,
   WINGLADE: 53,
   ABSORB_AX: 54,
+  WOOD_BLADE_2: 30,
+  THATCHET: 31,
+  BLUE_SHOES: 32,
+  AQUA_KNIFE: 33,
+  FLOWERY_SCARF: 34,
+  BROKEN_SCARF: 35,
+  GILDED_ROSE: 36,
+  MISTLE_WP: 37,
 } as const;
 
 export type WeaponIndex = (typeof WEAPONS)[keyof typeof WEAPONS];
@@ -71,4 +79,12 @@ export const WEAPONS_META: Record<WeaponIndex, BaseProperties> = {
   [WEAPONS.JUSTICE_AXE]: { displayName: 'JusticeAxe' },
   [WEAPONS.WINGLADE]: { displayName: 'Winglade' },
   [WEAPONS.ABSORB_AX]: { displayName: 'AbsorbAx' },
+  [WEAPONS.WOOD_BLADE_2]: { displayName: 'WoodBlade2' },
+  [WEAPONS.THATCHET]: { displayName: 'Thatchet' },
+  [WEAPONS.BLUE_SHOES]: { displayName: 'BlueShoes' },
+  [WEAPONS.AQUA_KNIFE]: { displayName: 'AquaKnife' },
+  [WEAPONS.FLOWERY_SCARF]: { displayName: 'FloweryScarf' },
+  [WEAPONS.BROKEN_SCARF]: { displayName: 'BrokenScarf' },
+  [WEAPONS.GILDED_ROSE]: { displayName: 'GildedRose' },
+  [WEAPONS.MISTLE_WP]: { displayName: 'MistleWP' },
 };
