@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.10.1-beta] - 2026-06-25
+
+This minor update adds highly requested ability to modify amount of Pink Coins and Flowery Dollars in Chapter 5 saves.
+
+### Added
+
+- Added Pink Coins and Flowery Dollars to the Overview tab.
+
+### Fixed
+
+- Fixed missing rhythm minigames flags in the Story tab. Thanks [Ranoru24](https://github.com/Ranoru24) for reporting! ([Issue #67](https://github.com/tennaproject/tenna-editor/issues/67))
+
 ## [0.10.0-beta] - 2026-06-24
 
 This is the first basic Chapter 5 content update. Chapter-specific progression flags are not included yet and will require more time to research and add.
