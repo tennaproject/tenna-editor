@@ -944,12 +944,16 @@ export const STORY_SECTIONS = {
           ],
         },
         {
-          id: 'concert',
-          title: 'Concert T-Ranks',
+          id: 'rhythm-games',
+          title: 'Rhythm Games',
           flags: [
             'RAISE_BAT_HISCORE',
             'RAISE_BAT_HARD_HISCORE',
             'RAISE_BAT_HARD_HIRANK',
+            'TV_TIME_HISCORE',
+            'TV_TIME_HARD_HISCORE',
+            'KNOCK_YOU_DOWN_HISCORE',
+            'KNOCK_YOU_DOWN_HARD_HISCORE',
           ],
         },
         {

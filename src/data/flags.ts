@@ -1201,6 +1201,10 @@ export const FLAGS = {
   INTERACTED_WITH_MICROPHONE_CRYSTAL: 1663,
   CHECKED_KRIS_ROOM_SAVE_POINT: 1664,
   INTERACTED_WITH_RUDY_FLOWERS_CH4: 1665,
+  TV_TIME_HISCORE: 1666,
+  TV_TIME_HARD_HISCORE: 1667,
+  KNOCK_YOU_DOWN_HISCORE: 1668,
+  KNOCK_YOU_DOWN_HARD_HISCORE: 1669,
   JUSTICE_AXE_REWARD_STATE: 1688,
   ENTERED_MIKE_ZONE_ACCOMPANIED: 1689,
   PET_FIRST_MIKE_STATUE: 1690,
@@ -9106,6 +9110,30 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     description:
       "Interacted with the flowers in Rudy's hospital room in chapter 4.",
     valueType: 'boolean',
+  },
+  [FLAGS.TV_TIME_HISCORE]: {
+    displayName: "It's TV Time! Hiscore",
+    description: "Score on the It's TV Time! rhythm game",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.TV_TIME_HARD_HISCORE]: {
+    displayName: "It's TV Time! Hard Hiscore",
+    description: "Score on the It's TV Time! rhythm game, Hard Mode",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.KNOCK_YOU_DOWN_HISCORE]: {
+    displayName: 'Knock You Down!! Hiscore',
+    description: 'Score on the Knock You Down!! rhythm game',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.KNOCK_YOU_DOWN_HARD_HISCORE]: {
+    displayName: 'Knock You Down!! Hard Hiscore',
+    description: 'Score on the Knock You Down!! rhythm game, Hard Mode',
+    valueType: 'number',
+    valueRules: { min: 0 },
   },
   [FLAGS.JUSTICE_AXE_REWARD_STATE]: {
     displayName: 'Justice Axe',
