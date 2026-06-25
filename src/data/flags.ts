@@ -1042,6 +1042,8 @@ export const FLAGS = {
   SWORDROUTE_SODA: 1278,
   RAISE_BAT_HARD_HISCORE: 1279,
   RAISE_BAT_HARD_HIRANK: 1280,
+  PINK_COINS: 1312,
+  FLOWERY_DOLLARS: 1411,
   // Chapter 4 Dark Sanctuary
   MONEYFOUNTAIN_DONATION_OVER_100: 1500,
   CANDY_BOWL_PROGRESS: 1501,
@@ -7991,6 +7993,16 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     valueRules: {
       map: GAMESHOW_RANKS,
     },
+  },
+  [FLAGS.PINK_COINS]: {
+    displayName: 'Pink Coins',
+    description: 'Your amount of Pink Coins.',
+    valueType: 'number',
+  },
+  [FLAGS.FLOWERY_DOLLARS]: {
+    displayName: 'Flowery Dollars',
+    description: 'Your amount of Flowery Dollars.',
+    valueType: 'number',
   },
   [FLAGS.MONEYFOUNTAIN_DONATION_OVER_100]: {
     displayName: '$100 Reward',

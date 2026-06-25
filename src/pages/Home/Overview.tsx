@@ -176,12 +176,14 @@ export function HomeOverview() {
               <div className="flex-1 flex flex-col gap-3">
                 <MoneyField id="money" />
                 <FlagField id="points" flag={FLAGS.POINTS_CH3} />
-                <TimeField />
+                <FlagField id="pink-coins" flag={FLAGS.PINK_COINS} />
+                <FlagField id="flowery-dollars" flag={FLAGS.FLOWERY_DOLLARS} />
               </div>
               <div className="flex-1 flex flex-col gap-3">
                 <RoomField id="room" allowAllElements={allowAllSaves} />
                 <PlotField id="plot" />
                 <InDarkWorldField id="in-dark-world" />
+                <TimeField />
               </div>
             </div>
           </Card>

@@ -2745,6 +2745,8 @@ const CH5_CONTENT: ChapterContent = {
     FLAGS.RECRUITED_SHEARY,
     FLAGS.RECRUITED_NETSKIE,
     FLAGS.RECRUITED_TERAKOTA,
+    FLAGS.PINK_COINS,
+    FLAGS.FLOWERY_DOLLARS,
   ]),
   enemies: new Set<EnemyIndex>([
     ...CH4_CONTENT.enemies,
