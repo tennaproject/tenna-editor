@@ -23,7 +23,7 @@ const CHAPTER_OPTIONS: SelectItem[] = [
   { id: '2', label: `Chapter 2 (A Cyber's World)`, value: 2 },
   { id: '3', label: 'Chapter 3 (Late Night)', value: 3 },
   { id: '4', label: 'Chapter 4 (Prophecy)', value: 4 },
-  { id: '5', label: 'Chapter 5 (Experimental)', value: 5 },
+  { id: '5', label: 'Chapter 5 (Festival Day)', value: 5 },
 ];
 
 const SLOT_OPTIONS: SelectItem[] = [
