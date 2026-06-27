@@ -29,6 +29,7 @@ export * from './SaveSelector';
 export * from './Fields';
 export * from './Vessel';
 export * from './ThrashMachine';
+export * from './ThrashFit';
 export * from './CharacterHeader';
 export * from './CharacterPage';
 export * from './FieldWrapper';
