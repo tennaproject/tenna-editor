@@ -1,12 +1,12 @@
 import { useCallback, useMemo, useState } from 'react';
 import { Card, Heading, Page, Section, Select, TextInput } from '@components';
-import { FLAGS } from '@data';
 import type { ChapterIndex, FlagIndex } from '@data';
 import type { SelectItem } from '@components';
 import { useDebouncedValue } from '@hooks';
 import { useSave } from '@store';
-import { chapterHelpers, flagHelpers } from '@utils';
+import { chapterHelpers, prepareFlagData, type PreparedFlag } from '@utils';
 import { FlagRow } from './FlagRow';
+import { ManualFlagEditor } from './ManualFlagEditor';
 
 const ITEMS_PER_PAGE_OPTIONS: SelectItem[] = [
   { id: '25', label: '25', value: 25 },
@@ -14,38 +14,6 @@ const ITEMS_PER_PAGE_OPTIONS: SelectItem[] = [
   { id: '100', label: '100', value: 100 },
   { id: '200', label: '200', value: 200 },
 ];
-
-const FLAG_NAMES = Object.fromEntries(
-  Object.entries(FLAGS).map(([name, index]) => [index, name]),
-) as Record<FlagIndex, string>;
-
-interface PreparedFlag {
-  name: string;
-  index: FlagIndex;
-  description: string;
-  knownValues?: Record<number, string>;
-  knownValueEntries?: readonly [string, string][];
-  searchText: string;
-}
-
-function prepareFlagData(index: FlagIndex): PreparedFlag {
-  const name = FLAG_NAMES[index] || `FLAG_${index}`;
-  const meta = flagHelpers.getById(index);
-  const description = meta?.description?.trim() ?? '';
-  return {
-    name,
-    index,
-    description,
-    knownValues: meta?.valueRules?.map,
-    knownValueEntries: meta?.valueRules?.map
-      ? Object.entries(meta.valueRules.map).sort(
-          ([a], [b]) => Number(a) - Number(b),
-        )
-      : undefined,
-    searchText:
-      `${name} ${meta?.displayName ?? ''} ${description}`.toLowerCase(),
-  };
-}
 
 const CHAPTER_FLAG_LISTS = new Map<ChapterIndex, PreparedFlag[]>();
 function getChapterFlagList(chapter: ChapterIndex): PreparedFlag[] {
@@ -119,6 +87,47 @@ export function FlagsRoot() {
 
   if (!hasSave) return null;
 
+  const paginationNav =
+    totalPages > 1 ? (
+      <div className="flex items-center gap-2">
+        <button
+          onClick={() => setCurrentPage(1)}
+          disabled={currentPage === 1}
+          className="text-text-2 hover:text-text-1 disabled:opacity-30 px-1"
+          title="First page"
+        >
+          ««
+        </button>
+        <button
+          onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+          disabled={currentPage === 1}
+          className="text-text-2 hover:text-text-1 disabled:opacity-30 px-1"
+          title="Previous page"
+        >
+          «
+        </button>
+        <span className="text-text-2 font-mono text-xs min-w-16 text-center">
+          {currentPage} / {totalPages}
+        </span>
+        <button
+          onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+          disabled={currentPage === totalPages}
+          className="text-text-2 hover:text-text-1 disabled:opacity-30 px-1"
+          title="Next page"
+        >
+          »
+        </button>
+        <button
+          onClick={() => setCurrentPage(totalPages)}
+          disabled={currentPage === totalPages}
+          className="text-text-2 hover:text-text-1 disabled:opacity-30 px-1"
+          title="Last page"
+        >
+          »»
+        </button>
+      </div>
+    ) : null;
+
   return (
     <Page>
       <Page.TopBar title="Flags" />
@@ -149,8 +158,15 @@ export function FlagsRoot() {
               </Card>
             </Section>
 
-            <Section id="controls" className="mb-4">
-              <Card className="p-4">
+            <Section id="manual-edit" className="mb-4">
+              <Card className="p-4 flex flex-col gap-4">
+                <Heading level={3}>Manual edit</Heading>
+                <ManualFlagEditor />
+              </Card>
+            </Section>
+
+            <Section id="flags">
+              <Card className="p-4 mb-4">
                 <div className="flex w-full flex-col sm:flex-row gap-4 items-start sm:items-center">
                   <TextInput
                     value={searchQuery}
@@ -172,55 +188,9 @@ export function FlagsRoot() {
                     <span className="text-text-3 text-sm">
                       {filteredFlags.length} flags total
                     </span>
-                    {totalPages > 1 && (
-                      <div className="flex items-center gap-2">
-                        <button
-                          onClick={() => setCurrentPage(1)}
-                          disabled={currentPage === 1}
-                          className="text-text-2 hover:text-text-1 disabled:opacity-30 disabled:cursor-not-allowed px-1"
-                          title="First page"
-                        >
-                          ««
-                        </button>
-                        <button
-                          onClick={() =>
-                            setCurrentPage((p) => Math.max(1, p - 1))
-                          }
-                          disabled={currentPage === 1}
-                          className="text-text-2 hover:text-text-1 disabled:opacity-30 disabled:cursor-not-allowed px-1"
-                          title="Previous page"
-                        >
-                          «
-                        </button>
-                        <span className="text-text-2 font-mono text-xs min-w-16 text-center">
-                          {currentPage} / {totalPages}
-                        </span>
-                        <button
-                          onClick={() =>
-                            setCurrentPage((p) => Math.min(totalPages, p + 1))
-                          }
-                          disabled={currentPage === totalPages}
-                          className="text-text-2 hover:text-text-1 disabled:opacity-30 disabled:cursor-not-allowed px-1"
-                          title="Next page"
-                        >
-                          »
-                        </button>
-                        <button
-                          onClick={() => setCurrentPage(totalPages)}
-                          disabled={currentPage === totalPages}
-                          className="text-text-2 hover:text-text-1 disabled:opacity-30 disabled:cursor-not-allowed px-1"
-                          title="Last page"
-                        >
-                          »»
-                        </button>
-                      </div>
-                    )}
                   </div>
                 </div>
               </Card>
-            </Section>
-
-            <Section id="flags">
               <Card>
                 {paginatedFlags.length === 0 ? (
                   <p className="text-text-2 py-12 text-center">
@@ -232,6 +202,13 @@ export function FlagsRoot() {
                     autoComplete="off"
                     noValidate
                   >
+                    <div className="ui-section-label grid grid-cols-[3.5rem_minmax(0,1fr)_7rem_1.25rem] sm:grid-cols-[3.5rem_minmax(9rem,16rem)_minmax(0,1fr)_7rem_1.25rem] items-center gap-4 bg-surface-2 px-4 py-2">
+                      <span>Id</span>
+                      <span>Flag</span>
+                      <span className="hidden sm:block">Description</span>
+                      <span className="w-28">Value</span>
+                      <span className="w-5" aria-hidden />
+                    </div>
                     {paginatedFlags.map((flag) => (
                       <FlagRow
                         key={flag.index}
@@ -247,6 +224,9 @@ export function FlagsRoot() {
                   </form>
                 )}
               </Card>
+              {paginationNav && (
+                <div className="flex justify-center pt-4">{paginationNav}</div>
+              )}
             </Section>
           </>
         </div>

@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- Added a manual flag editor on the Flags page for editing flags by id, including direct value and bitfield value modes, a selector for known bitfields, and an unlisted flag notice when a flag id is not in the catalog.
+
+### Changed
+
+- Reworked the Flags page list into a table layout with Id, Flag, Description, and Value columns.
+- Moved flag list pagination to the bottom of the table; search and per-page controls stay with the list.
+- Updated the Chapter 5 label from "Experimental" to "Festival Day" in the upload dialog.
+- Centralized button pointer and disabled cursors in base CSS for consistent behavior across the UI.
+
+### Fixed
+
+- Fixed Select inputs showing a blue selection highlight when clicked, matching selection colors to the field background instead.
+
 ## [0.10.1-beta] - 2026-06-25
 
 This minor update adds highly requested ability to modify amount of Pink Coins and Flowery Dollars in Chapter 5 saves.

@@ -1,9 +1,10 @@
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { TextInput } from '@components';
 import type { FlagIndex } from '@data';
 import { useSaveFlag } from '@hooks';
 import { useSave } from '@store';
 import { mergeClass } from '@utils';
+import { parseFiniteNumberInput } from '@utils';
 
 import ChevronDownIcon from '@assets/icons/chevron-down.svg?react';
 
@@ -29,15 +30,20 @@ function FlagRowComponent({
   const updateSave = useSave((s) => s.updateSave);
   const value = Number(useSaveFlag(flagIndex)) || 0;
   const hasDetails = !!knownValues;
+  const [error, setError] = useState<string | null>(null);
 
   const handleFlagChange = useCallback(
     (nextValue: string) => {
-      const numValue = parseFloat(nextValue);
-      if (!isNaN(numValue)) {
-        updateSave((save) => {
-          save.flags[flagIndex] = numValue;
-        });
+      const numValue = parseFiniteNumberInput(nextValue);
+      if (numValue === null) {
+        setError('Invalid number.');
+        return;
       }
+
+      setError(null);
+      updateSave((save) => {
+        save.flags[flagIndex] = numValue;
+      });
     },
     [flagIndex, updateSave],
   );
@@ -48,9 +54,17 @@ function FlagRowComponent({
 
   return (
     <div className="hover:bg-surface-2/50">
-      <div className="flex items-center gap-4 px-4 py-3">
-        <div className="flex-1 flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3">
-          <code className="text-text-1 text-sm select-all">{name}</code>
+      <div className="grid grid-cols-[3.5rem_minmax(0,1fr)_7rem_1.25rem] sm:grid-cols-[3.5rem_minmax(9rem,16rem)_minmax(0,1fr)_7rem_1.25rem] items-center gap-4 px-4 py-2.5">
+        <span className="text-text-3 text-xs font-mono tabular-nums">
+          <span className="select-none">#</span>
+          <span className="select-all">{flagIndex}</span>
+        </span>
+        <div className="min-w-0">
+          <code className="text-text-1 text-sm select-all truncate block">
+            {name}
+          </code>
+        </div>
+        <div className="hidden sm:block min-w-0">
           {description && (
             <span className="text-text-2 text-xs">{description}</span>
           )}
@@ -67,6 +81,7 @@ function FlagRowComponent({
             type="search"
             aria-label={`Value for flag ${name}`}
           />
+          {error && <p className="mt-1 text-xs text-danger">{error}</p>}
         </div>
         <div className="w-5 shrink-0 flex items-center justify-center">
           {hasDetails && (

@@ -22,7 +22,7 @@ export function AboutChangelog() {
             <Card className="p-6 flex flex-col gap-4">
               <div className="flex items-center justify-between border-b pb-1 border-divider">
                 <Heading level={3}>{entry.version}</Heading>
-                {entry && (
+                {entry.date && (
                   <p className="text-text-2 leading-none text-xl font-mono">
                     {entry.date}
                   </p>
