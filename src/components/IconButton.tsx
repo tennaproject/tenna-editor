@@ -34,7 +34,7 @@ export function IconButton({
       className={mergeClass(
         'ui-icon-btn',
         accentClass[accent],
-        disabled && 'opacity-40 cursor-not-allowed pointer-events-none',
+        disabled && 'opacity-40 pointer-events-none',
         className,
       )}
       onClick={onClick}
