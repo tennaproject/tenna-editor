@@ -3,7 +3,6 @@ import { ChapterFlagsContext } from '@contexts/ChapterFlagsContext';
 import { FieldSearchContext } from '@contexts/FieldSearchContext';
 import type { ChapterIndex } from '@data';
 import { useDebouncedValue } from '@hooks';
-import { useSave } from '@store';
 import { getChapterFlagSet } from '@utils';
 import { useState, type ReactNode } from 'react';
 
@@ -13,11 +12,10 @@ interface StoryChapterLayoutProps {
 }
 
 export function StoryChapterLayout(props: StoryChapterLayoutProps) {
-  const { children } = props;
+  const { children, chapter } = props;
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebouncedValue(search, 200);
-  const saveChapter = useSave((s) => s.save?.meta.chapter ?? 1) as ChapterIndex;
-  const chapterFlagSet = getChapterFlagSet(saveChapter);
+  const chapterFlagSet = getChapterFlagSet(chapter as ChapterIndex);
 
   return (
     <ChapterFlagsContext value={chapterFlagSet}>

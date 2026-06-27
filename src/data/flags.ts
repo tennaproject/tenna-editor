@@ -1043,7 +1043,15 @@ export const FLAGS = {
   RAISE_BAT_HARD_HISCORE: 1279,
   RAISE_BAT_HARD_HIRANK: 1280,
   PINK_COINS: 1312,
+  SCISSORS_PUZZLE_FLAGS: 1365,
+  HOPSCHEF_PROGRESS_FLAG: 1399,
   FLOWERY_DOLLARS: 1411,
+  // Chapter 5 Thrash Fit
+  THRASH_FIT_HAIR: 1421,
+  THRASH_FIT_SHIRT: 1422,
+  THRASH_FIT_PANTS: 1423,
+  THRASH_FIT_HAT: 1424,
+  THRASH_FIT_SHOES: 1425,
   // Chapter 4 Dark Sanctuary
   MONEYFOUNTAIN_DONATION_OVER_100: 1500,
   CANDY_BOWL_PROGRESS: 1501,
@@ -7999,10 +8007,100 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     description: 'Your amount of Pink Coins.',
     valueType: 'number',
   },
+  [FLAGS.SCISSORS_PUZZLE_FLAGS]: {
+    displayName: 'Scissors puzzle flags',
+    description: 'Raw bitfield state for Chapter 5 scissors puzzle progress.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.HOPSCHEF_PROGRESS_FLAG]: {
+    displayName: 'Hop Chef progress',
+    description: 'Raw progress state for the Hop Chef challenge.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
   [FLAGS.FLOWERY_DOLLARS]: {
     displayName: 'Flowery Dollars',
     description: 'Your amount of Flowery Dollars.',
     valueType: 'number',
+  },
+  [FLAGS.THRASH_FIT_HAIR]: {
+    displayName: 'Hair',
+    description: 'Thrash Fit hair variant.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Normal',
+        1: 'Ponytail',
+        2: 'Royal Bob',
+        3: 'Duck Tiara',
+        4: 'Fresh Swish',
+        5: 'Princey',
+      },
+    },
+  },
+  [FLAGS.THRASH_FIT_SHIRT]: {
+    displayName: 'Shirt',
+    description: 'Thrash Fit shirt variant.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Dark Jacket',
+        1: 'Rip Jacket',
+        2: 'Similar Hood',
+        3: 'Duck',
+        4: 'Lancer Shirt',
+        5: 'Royal Dress',
+        6: 'Swag Jacket',
+        7: 'Tuxusie',
+      },
+    },
+  },
+  [FLAGS.THRASH_FIT_PANTS]: {
+    displayName: 'Pants',
+    description: 'Thrash Fit pants variant.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Susie Pant',
+        1: 'Shorter',
+        2: 'Bagi',
+        3: 'Duck',
+        4: 'White Pant',
+        5: 'Gray Pants',
+        6: 'Blackpants2',
+      },
+    },
+  },
+  [FLAGS.THRASH_FIT_HAT]: {
+    displayName: 'Hat',
+    description: 'Thrash Fit hat variant.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'No Hat',
+        1: 'Casual Hat',
+        2: 'Second Hat',
+        3: 'Tiara',
+        4: 'Silk',
+      },
+    },
+  },
+  [FLAGS.THRASH_FIT_SHOES]: {
+    displayName: 'Shoes',
+    description: 'Thrash Fit shoes variant.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Susie Shoesy',
+        1: 'Brown Leg',
+        2: 'Black Flats',
+        3: 'Duck',
+        4: 'Glass Shoes',
+        5: 'Brown Shoe',
+        6: 'Blackshoes3',
+      },
+    },
   },
   [FLAGS.MONEYFOUNTAIN_DONATION_OVER_100]: {
     displayName: '$100 Reward',

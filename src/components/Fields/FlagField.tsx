@@ -1,7 +1,20 @@
-import type { FlagIndex } from '@data';
+import {
+  FLAG_BITFIELDS_META,
+  type FlagBitfieldId,
+  type FlagIndex,
+  type FlagProperties,
+} from '@data';
+import { useChapterFlags } from '@contexts';
 import { useSaveFlag } from '@hooks';
 import { useSave } from '@store';
-import { chapterHelpers, flagHelpers, getGameColor, mergeClass } from '@utils';
+import {
+  chapterHelpers,
+  flagHelpers,
+  getGameColor,
+  mergeClass,
+  readFlagBitfield,
+  writeFlagBitfield,
+} from '@utils';
 import Markdown from 'react-markdown';
 import {
   Checkbox,
@@ -11,23 +24,79 @@ import {
   FieldWrapper,
 } from '@components';
 
-interface FlagFieldProps {
+interface FlagFieldBaseProps {
   id?: string;
   className?: string;
-  flag: FlagIndex;
 }
 
-export function FlagField({ flag, id, className }: FlagFieldProps) {
+type FlagFieldProps = FlagFieldBaseProps &
+  (
+    | {
+        flag: FlagIndex;
+        bitfield?: never;
+      }
+    | {
+        flag?: never;
+        bitfield: FlagBitfieldId;
+      }
+  );
+
+interface ResolvedField {
+  meta: FlagProperties;
+  currentValue: number;
+  updateValue: (value: number) => void;
+}
+
+export function FlagField(props: FlagFieldProps) {
+  const { id, className } = props;
   const updateSave = useSave((s) => s.updateSave);
-  const currentValue = useSaveFlag(flag);
-  const meta = flagHelpers.getById(flag);
+  const sourceFlag = props.flag ?? FLAG_BITFIELDS_META[props.bitfield]?.parent;
+  const currentFlagValue = useSaveFlag(sourceFlag);
+  const resolvedField = (() => {
+    if (props.flag !== undefined) {
+      const meta = flagHelpers.getById(props.flag);
+      if (!meta) return null;
 
-  const chapter = useSave((s) => s.save?.meta.chapter) ?? 1;
-  const chapterFlags = chapterHelpers.getById(chapter).content.flags;
+      return {
+        meta,
+        currentValue: currentFlagValue,
+        updateValue: (value: number) => {
+          updateSave((save) => {
+            save.flags[props.flag] = value;
+          });
+        },
+      };
+    }
 
-  if (!chapterFlags.has(flag)) return;
-  if (!meta) return;
+    const bitfield = FLAG_BITFIELDS_META[props.bitfield];
+    if (!bitfield) return null;
 
+    return {
+      meta: bitfield,
+      currentValue: readFlagBitfield(currentFlagValue, bitfield),
+      updateValue: (value: number) => {
+        updateSave((save) => {
+          const parentValue = Number(save.flags[bitfield.parent]) || 0;
+          save.flags[bitfield.parent] = writeFlagBitfield(
+            parentValue,
+            bitfield,
+            value,
+          );
+        });
+      },
+    };
+  })() satisfies ResolvedField | null;
+
+  const chapterFlagsContext = useChapterFlags();
+  const saveChapter = useSave((s) => s.save?.meta.chapter) ?? 1;
+  const chapterFlags =
+    chapterFlagsContext ??
+    chapterHelpers.getById(saveChapter).content.flags;
+
+  if (sourceFlag === undefined || !chapterFlags.has(sourceFlag)) return;
+  if (!resolvedField) return;
+
+  const { meta, currentValue, updateValue } = resolvedField;
   const { valueType, valueRules, displayName, description } = meta;
 
   if (valueType === 'boolean') {
@@ -42,13 +111,9 @@ export function FlagField({ flag, id, className }: FlagFieldProps) {
           label={<Markdown>{displayName}</Markdown>}
           checked={valueRules?.invertedBoolean ? !currentValue : !!currentValue}
           onChange={(value: boolean) => {
-            updateSave((save) => {
-              if (valueRules?.invertedBoolean) {
-                save.flags[flag] = value ? 0 : 1;
-              } else {
-                save.flags[flag] = value ? 1 : 0;
-              }
-            });
+            updateValue(
+              valueRules?.invertedBoolean ? (value ? 0 : 1) : value ? 1 : 0,
+            );
           }}
         />
       </FieldWrapper>
@@ -68,7 +133,7 @@ export function FlagField({ flag, id, className }: FlagFieldProps) {
           min={valueRules?.min ?? 0}
           max={valueRules?.max ?? 999999999}
           onChange={(value) => {
-            updateSave((save) => (save.flags[flag] = value));
+            updateValue(value);
           }}
         />
       </FieldWrapper>
@@ -113,7 +178,7 @@ export function FlagField({ flag, id, className }: FlagFieldProps) {
               const value = parseInt(item.id, 10);
 
               if (valueRules.map[value]) {
-                updateSave((save) => (save.flags[flag] = value));
+                updateValue(value);
               }
             }}
           />
@@ -139,9 +204,7 @@ export function FlagField({ flag, id, className }: FlagFieldProps) {
               )}
               style={{ backgroundColor: getGameColor(colorIndex) }}
               onClick={() => {
-                updateSave((save) => {
-                  save.flags[flag] = colorIndex;
-                });
+                updateValue(colorIndex);
               }}
             />
           ))}

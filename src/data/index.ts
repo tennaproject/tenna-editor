@@ -3,6 +3,7 @@ export * from './chapters';
 export * from './consumables';
 export * from './contributors';
 export * from './flags';
+export * from './flag-bitfields';
 export * from './key-items';
 export * from './light-world-items';
 export * from './phone-contacts';
