@@ -241,8 +241,10 @@ export function Select({
           })}
           type="search"
           className={mergeClass(
-            'w-full h-full px-3 pr-10 bg-transparent border-none outline-none placeholder:text-text-2 focus:outline-none focus:ring-1 motion-reduce:transition-colors transition-colors focus:ring-text-3',
-            selectedItem?.label === 'Empty' ? 'text-text-2' : 'text-text-1',
+            'w-full h-full px-3 pr-10 bg-transparent border-none outline-none placeholder:text-text-2 focus:outline-none focus:ring-1 motion-reduce:transition-colors transition-colors focus:ring-text-3 selection:bg-surface-3',
+            selectedItem?.label === 'Empty'
+              ? 'text-text-2 selection:text-text-2'
+              : 'text-text-1 selection:text-text-1',
           )}
           placeholder={placeholder}
           data-lpignore="true"
