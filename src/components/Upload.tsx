@@ -137,7 +137,13 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
         setSaveName(`Save${uploadedSaves}`);
       }
 
-      changeStage('chapter');
+      // Format 1 saves are exclusive to Chapter 1, so there is no chapter to
+      // choose. Skip straight to the settings stage.
+      if (save.meta.format === 1) {
+        changeStage('settings');
+      } else {
+        changeStage('chapter');
+      }
     };
     reader.readAsText(file);
   }

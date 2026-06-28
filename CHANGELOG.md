@@ -20,6 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Hardened save file parsing to handle variable line counts and trailing blank lines, deriving the flag count from the file instead of a fixed value. Thanks [Mrcreper123566](https://github.com/Mrcreper123566) for reporting! ([Issue #70](https://github.com/tennaproject/tenna-editor/issues/70))
+- Fixed Chapter 1 saves prompting for a chapter that was missing from the selector. Chapter 1 saves skip the chapter selection step since the format is exclusive to Chapter 1. Thanks [HTI-VS3](https://github.com/HTI-VS3) for reporting! ([Issue #60](https://github.com/tennaproject/tenna-editor/issues/60))
 - Fixed Select inputs showing a blue selection highlight when clicked, matching selection colors to the field background instead.
 
 ## [0.10.1-beta] - 2026-06-25

@@ -3,7 +3,16 @@ export class LineCursor {
   private position = 0;
 
   constructor(content: string) {
-    this.lines = content.trim().split(/\r?\n/);
+    const normalized = content
+      .replace(/^\uFEFF/, '')
+      .replace(/\r\n/g, '\n')
+      .replace(/\r/g, '\n');
+    this.lines = normalized.split('\n');
+
+    // Drop only the empty segment from a trailing newline, not blank lines.
+    if (this.lines.length > 0 && this.lines[this.lines.length - 1] === '') {
+      this.lines.pop();
+    }
   }
 
   get totalLines(): number {

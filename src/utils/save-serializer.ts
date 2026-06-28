@@ -89,7 +89,7 @@ function serializeSaveV1(save: SaveV1): string {
     lines.push(serializeNumber(save.lightWorld.phone[i] || 0));
   }
 
-  for (let i = 0; i < 9999; i += 1) {
+  for (let i = 0; i < save.flags.length; i += 1) {
     lines.push(serializeNumber(Number(save.flags[i]) || 0));
   }
 
@@ -198,7 +198,7 @@ function serializeSaveV2(save: SaveV2): string {
     lines.push(serializeNumber(save.lightWorld.phone[i] || 0));
   }
 
-  for (let i = 0; i < 2500; i += 1) {
+  for (let i = 0; i < save.flags.length; i += 1) {
     lines.push(serializeNumber(Number(save.flags[i]) || 0));
   }
 

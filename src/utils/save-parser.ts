@@ -18,12 +18,18 @@ import { LineCursor } from './line-cursor';
 
 export const SAVE_META = {
   V1: {
+    MIN_TOTAL_LINES: 10_311,
+    MAX_TOTAL_LINES: 10_328,
+    MIN_FLAG_COUNT: 9999,
     TOTAL_LINES: 10_318,
     FLAG_COUNT: 9999,
   },
   V2: {
+    MIN_TOTAL_LINES: 3046,
+    MAX_TOTAL_LINES: 3065,
+    MIN_FLAG_COUNT: 2500,
     TOTAL_LINES: 3055,
-    FLAG_COUNT: 2500,
+    FLAG_COUNT: 2509,
   },
 } as const;
 
@@ -33,20 +39,36 @@ export const SUPPORTED_FORMATS = Object.keys(
 
 function detectSaveFormat(count: number): SaveFormat | null {
   if (
-    count >= SAVE_META.V1.TOTAL_LINES &&
-    count <= SAVE_META.V1.TOTAL_LINES + 10
+    count >= SAVE_META.V1.MIN_TOTAL_LINES &&
+    count <= SAVE_META.V1.MAX_TOTAL_LINES
   ) {
     return 1;
   }
 
   if (
-    count >= SAVE_META.V2.TOTAL_LINES &&
-    count <= SAVE_META.V2.TOTAL_LINES + 10
+    count >= SAVE_META.V2.MIN_TOTAL_LINES &&
+    count <= SAVE_META.V2.MAX_TOTAL_LINES
   ) {
     return 2;
   }
 
   return null;
+}
+
+function readFlags(cursor: LineCursor, minFlagCount: number): unknown[] {
+  const flagCount = cursor.totalLines - cursor.currentPosition - 3;
+  if (flagCount < minFlagCount) {
+    throw new ParseError(
+      `Invalid save format (${flagCount} flags, expected at least ${minFlagCount})`,
+      cursor.currentPosition + 1,
+    );
+  }
+
+  const flags: unknown[] = [];
+  for (let i = 0; i < flagCount; i += 1) {
+    flags.push(cursor.nextNumber());
+  }
+  return flags;
 }
 
 function parseSaveV1(cursor: LineCursor): SaveV1 {
@@ -169,10 +191,7 @@ function parseSaveV1(cursor: LineCursor): SaveV1 {
     lightWorld.phone.push(cursor.nextNumber());
   }
 
-  const flags: unknown[] = [];
-  for (let i = 0; i < 9999; i += 1) {
-    flags.push(cursor.nextNumber() as unknown);
-  }
+  const flags = readFlags(cursor, SAVE_META.V1.MIN_FLAG_COUNT);
 
   const plot = cursor.nextNumber();
   const room = cursor.nextNumber() as RoomIndex;
@@ -344,10 +363,7 @@ function parseSaveV2(cursor: LineCursor): SaveV2 {
     lightWorld.phone.push(cursor.nextNumber());
   }
 
-  const flags: unknown[] = [];
-  for (let i = 0; i < 2500; i += 1) {
-    flags.push(cursor.nextNumber());
-  }
+  const flags = readFlags(cursor, SAVE_META.V2.MIN_FLAG_COUNT);
 
   const plot = cursor.nextNumber();
   const room = cursor.nextNumber() as RoomIndex;
@@ -417,6 +433,6 @@ export function parseSave(content: string): Save {
   throw new ParseError(
     `Unrecognized save format (${cursor.totalLines} lines)`,
     undefined,
-    `Expected ${SAVE_META.V1.TOTAL_LINES} lines for Chapter 1 or ${SAVE_META.V2.TOTAL_LINES} lines for Chapter 2+`,
+    `Expected ${SAVE_META.V1.MIN_TOTAL_LINES}-${SAVE_META.V1.MAX_TOTAL_LINES} lines for Chapter 1 or ${SAVE_META.V2.MIN_TOTAL_LINES}-${SAVE_META.V2.MAX_TOTAL_LINES} lines for Chapter 2+`,
   );
 }
