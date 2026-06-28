@@ -120,9 +120,10 @@ export function getChapterItemOptions(
 
 export function getChapterRoomOptions(
   chapter: ChapterIndex,
-  allowAllElements: boolean,
+  showNonSavepoint: boolean,
+  showDogcheckedRooms: boolean,
 ): SelectItem[] {
-  const key = `${chapter}:${allowAllElements ? 'all' : 'savepoint'}`;
+  const key = `${chapter}:${showNonSavepoint ? 'all' : 'savepoint'}:${showDogcheckedRooms ? 'dogcheck' : 'nodogcheck'}`;
   const cached = roomOptionsCache.get(key);
   if (cached) return cached;
 
@@ -131,15 +132,21 @@ export function getChapterRoomOptions(
 
   let entries = Array.from(roomsSource).map((roomId) => {
     const meta = roomHelpers.getById(roomId);
-    const name = formatItemLabel(
-      meta,
-      meta?.displayName || roomHelpers.getName(roomId),
-    );
-    return { roomId, name, hasSavePoint: meta?.hasSavePoint };
+    const name = meta.displayName || roomHelpers.getName(roomId);
+    return {
+      roomId,
+      name,
+      hasSavePoint: meta.hasSavePoint,
+      dogcheck: meta.dogcheck,
+    };
   });
 
-  if (!allowAllElements) {
+  if (!showNonSavepoint) {
     entries = entries.filter((entry) => entry.hasSavePoint);
+  }
+
+  if (!showDogcheckedRooms) {
+    entries = entries.filter((entry) => !entry.dogcheck);
   }
 
   const items = entries.map(({ roomId, name }) => ({

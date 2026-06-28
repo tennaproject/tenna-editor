@@ -121,7 +121,12 @@ function formatFlagValue(flag: FlagIndex, value: unknown): string {
   const { valueType, valueRules } = meta;
 
   if (valueType === 'boolean') {
-    const on = valueRules?.invertedBoolean ? !raw : !!raw;
+    const numericRaw = Number(raw);
+    const on = valueRules?.booleanMap
+      ? valueRules.booleanMap.trueValues.includes(numericRaw)
+      : valueRules?.invertedBoolean
+        ? !raw
+        : !!raw;
     return on ? 'On' : 'Off';
   }
 
@@ -202,8 +207,10 @@ function diffRoom(
   after: SaveGamePayload['room'],
 ): DiffEntry[] {
   if (before === after) return [];
-  const formatRoom = (id: RoomIndex) =>
-    roomHelpers.getById(id)?.displayName ?? String(id);
+  const formatRoom = (id: RoomIndex) => {
+    const meta = roomHelpers.getById(id);
+    return meta?.displayName || roomHelpers.getName(id);
+  };
   return [
     {
       path: 'room',

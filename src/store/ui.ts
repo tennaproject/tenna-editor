@@ -4,7 +4,7 @@ import { immer } from 'zustand/middleware/immer';
 import { STORE_NAMESPACE } from './schema';
 import { createDebouncedJSONStorage } from 'zustand-debounce';
 
-export const UI_VERSION = 3;
+export const UI_VERSION = 4;
 
 export interface Ui {
   devmode: boolean;
@@ -15,6 +15,7 @@ export interface Ui {
   };
   home: {
     allowAllSaves: boolean;
+    showDogcheckedRooms: boolean;
   };
   party: {
     allowNonStandardParty: boolean;
@@ -53,6 +54,7 @@ export const useUi = create<UiState>()(
         },
         home: {
           allowAllSaves: false,
+          showDogcheckedRooms: false,
         },
         party: {
           allowNonStandardParty: false,
@@ -126,6 +128,7 @@ export const useUi = create<UiState>()(
               },
               home: {
                 allowAllSaves: false,
+                showDogcheckedRooms: false,
               },
               party: {
                 allowNonStandardParty: allowNonStandardParty ?? false,
@@ -152,7 +155,17 @@ export const useUi = create<UiState>()(
         if (version < 3) {
           const current = nextState as { ui: Partial<Ui> };
           if (current.ui && !current.ui.home) {
-            current.ui.home = { allowAllSaves: false };
+            current.ui.home = {
+              allowAllSaves: false,
+              showDogcheckedRooms: false,
+            };
+          }
+        }
+
+        if (version < 4) {
+          const current = nextState as { ui: Partial<Ui> };
+          if (current.ui?.home) {
+            current.ui.home.showDogcheckedRooms ??= false;
           }
         }
 

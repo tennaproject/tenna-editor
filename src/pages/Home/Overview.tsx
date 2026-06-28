@@ -129,6 +129,7 @@ function DeleteSave() {
 export function HomeOverview() {
   const isSavePresent = useSave((s) => !!s.save);
   const allowAllSaves = useUi((s) => s.ui.home.allowAllSaves);
+  const showDogcheckedRooms = useUi((s) => s.ui.home.showDogcheckedRooms);
   const updateUi = useUi((s) => s.updateUi);
 
   if (!isSavePresent) {
@@ -162,6 +163,21 @@ export function HomeOverview() {
             </p>
           </HelpTip>
         </InlineGroup>
+        <InlineGroup>
+          <Checkbox
+            onChange={(checked) =>
+              updateUi((ui) => (ui.home.showDogcheckedRooms = checked))
+            }
+            checked={showDogcheckedRooms}
+            label={'Show dogchecked rooms'}
+          />
+          <HelpTip title="Show dogchecked rooms">
+            <p>
+              Dogchecked rooms are not valid load targets and may send the
+              player to the dogcheck screen when the save is loaded.
+            </p>
+          </HelpTip>
+        </InlineGroup>
       </div>
       <>
         <Section id="general">
@@ -180,7 +196,11 @@ export function HomeOverview() {
                 <FlagField id="flowery-dollars" flag={FLAGS.FLOWERY_DOLLARS} />
               </div>
               <div className="flex-1 flex flex-col gap-3">
-                <RoomField id="room" allowAllElements={allowAllSaves} />
+                <RoomField
+                  id="room"
+                  showNonSavepoint={allowAllSaves}
+                  showDogcheckedRooms={showDogcheckedRooms}
+                />
                 <PlotField id="plot" />
                 <InDarkWorldField id="in-dark-world" />
                 <TimeField />

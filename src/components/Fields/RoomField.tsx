@@ -2,15 +2,22 @@ import { FieldWrapper, Select, type SelectItem } from '@components';
 import type { RoomIndex } from '@data';
 import { useSave } from '@store';
 import { getChapterRoomOptions } from '@utils/chapter-options';
+import { roomHelpers } from '@utils/data-helpers';
 import { mergeClass } from '@utils/merge-class';
 
 interface RoomFieldProps {
   id?: string;
   className?: string;
-  allowAllElements?: boolean;
+  showNonSavepoint?: boolean;
+  showDogcheckedRooms?: boolean;
 }
 
-export function RoomField({ id, className, allowAllElements }: RoomFieldProps) {
+export function RoomField({
+  id,
+  className,
+  showNonSavepoint,
+  showDogcheckedRooms,
+}: RoomFieldProps) {
   const room = useSave((s) => s.save?.room) ?? 0;
   const chapter = useSave((s) => s.save?.meta.chapter) || 1;
   const updateSave = useSave((s) => s.updateSave);
@@ -21,8 +28,30 @@ export function RoomField({ id, className, allowAllElements }: RoomFieldProps) {
     }
   }
 
-  const items = getChapterRoomOptions(chapter, !!allowAllElements);
-  const selectedItem = items.find((item) => item.value === room) ?? null;
+  const items = getChapterRoomOptions(
+    chapter,
+    !!showNonSavepoint,
+    !!showDogcheckedRooms,
+  );
+
+  const isCurrentRoomInList = items.some((item) => item.value === room);
+  let selectItems: SelectItem[] = items;
+  if (!isCurrentRoomInList && room) {
+    const meta = roomHelpers.getById(room as RoomIndex);
+    const label = meta.displayName || roomHelpers.getName(room as RoomIndex);
+    selectItems = [
+      ...items,
+      {
+        id: room.toString(),
+        label,
+        value: room,
+        invalid: true,
+      },
+    ];
+  }
+
+  const selectedItem =
+    selectItems.find((item) => item.value === room) ?? null;
 
   const description = `
   This sets which room the player is currently in when the save is loaded.
@@ -37,7 +66,7 @@ export function RoomField({ id, className, allowAllElements }: RoomFieldProps) {
       label
     >
       <Select
-        items={items}
+        items={selectItems}
         placeholder="Select a room..."
         label="Current Room"
         defaultSelectedItem={selectedItem}

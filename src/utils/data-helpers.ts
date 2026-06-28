@@ -26,7 +26,6 @@ import {
 } from '@data';
 import type { BaseProperties } from '@types';
 import type { ChapterIndex } from '../data/chapters';
-import type { RoomIndex, RoomProperties } from '../data/rooms';
 import type { FlagIndex, FlagProperties } from '../data/flags';
 import type { SpellIndex } from '../data/spells';
 
@@ -90,10 +89,7 @@ export const flagHelpers = createDataHelpers(
   FLAGS_META as Record<FlagIndex, FlagProperties>,
 );
 export const chapterHelpers = createDataHelpers(CHAPTERS, CHAPTERS_META);
-export const roomHelpers = createDataHelpers(
-  ROOMS,
-  ROOMS_META as Record<RoomIndex, RoomProperties>,
-);
+export const roomHelpers = createDataHelpers(ROOMS, ROOMS_META);
 
 // Characters
 export const characterHelpers = createDataHelpers(CHARACTERS, CHARACTERS_META);

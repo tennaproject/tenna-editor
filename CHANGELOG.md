@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Added a manual flag editor on the Flags page for editing flags by id, including direct value and bitfield value modes, a selector for known bitfields, and an unlisted flag notice when a flag id is not in the catalog.
+- Added a "Show dogchecked rooms" toggle on the Overview page. Dogchecked rooms are hidden from the room picker by default.
 
 ### Changed
 
@@ -20,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Fixed room display names, save-point flags, and dogcheck metadata for Chapters 1–5 to match in-game values.
 - Hardened save file parsing to handle variable line counts and trailing blank lines, deriving the flag count from the file instead of a fixed value. Thanks [Mrcreper123566](https://github.com/Mrcreper123566) for reporting! ([Issue #70](https://github.com/tennaproject/tenna-editor/issues/70))
 - Fixed Chapter 1 saves prompting for a chapter that was missing from the selector. Chapter 1 saves skip the chapter selection step since the format is exclusive to Chapter 1. Thanks [HTI-VS3](https://github.com/HTI-VS3) for reporting! ([Issue #60](https://github.com/tennaproject/tenna-editor/issues/60))
 - Fixed Select inputs showing a blue selection highlight when clicked, matching selection colors to the field background instead.
