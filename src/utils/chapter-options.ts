@@ -23,7 +23,7 @@ import {
   lightWorldItemHelpers,
   phoneContactHelpers,
   roomHelpers,
-  spellHelpers,
+  getStaticSpellDisplayName,
   weaponHelpers,
 } from './data-helpers';
 import {
@@ -218,7 +218,7 @@ export function getChapterSpellOptions(
 
   const items = Array.from(availableSpells).map((spell) => ({
     id: `${spell}`,
-    label: spellHelpers.getById(spell as SpellIndex).displayName,
+    label: getStaticSpellDisplayName(spell as SpellIndex),
     value: spell,
   }));
 

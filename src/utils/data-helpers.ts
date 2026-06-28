@@ -25,8 +25,10 @@ import {
   ENEMIES_META,
 } from '@data';
 import type { BaseProperties } from '@types';
+import type { ChapterIndex } from '../data/chapters';
 import type { RoomIndex, RoomProperties } from '../data/rooms';
 import type { FlagIndex, FlagProperties } from '../data/flags';
+import type { SpellIndex } from '../data/spells';
 
 function buildNameById<TIndex extends number, TName extends string>(
   registry: Record<TName, TIndex>,
@@ -65,6 +67,21 @@ export function formatItemLabel(
   fallback: string,
 ) {
   return meta?.displayName ?? fallback;
+}
+
+export function getStaticSpellDisplayName(spell: SpellIndex) {
+  return spellHelpers.getById(spell)?.displayName ?? String(spell);
+}
+
+export function getSpellDisplayName(
+  spell: SpellIndex,
+  chapter: ChapterIndex,
+  plot: number,
+  flags: readonly unknown[],
+) {
+  const meta = spellHelpers.getById(spell);
+  const overrides = meta?.getOverrides?.({ chapter, plot, flags });
+  return overrides?.displayName ?? getStaticSpellDisplayName(spell);
 }
 
 // Meta

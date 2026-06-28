@@ -2,7 +2,11 @@ import { Select, type SelectItem, FieldWrapper } from '@components';
 import { SPELLS, type SpellIndex, type CharacterIndex } from '@data';
 import { useSave } from '@store';
 import { getChapterSpellOptions } from '@utils/chapter-options';
-import { chapterHelpers, spellHelpers } from '@utils/data-helpers';
+import {
+  chapterHelpers,
+  getSpellDisplayName,
+  spellHelpers,
+} from '@utils/data-helpers';
 
 interface SpellFieldProp {
   id?: string;
@@ -18,25 +22,34 @@ export function SpellField({
   allowAllItems,
 }: SpellFieldProp) {
   const chapter = useSave((s) => s.save?.meta.chapter) || 1;
+  const plot = useSave((s) => s.save?.plot) || 0;
   const currentSpell =
     useSave((s) => s.save?.characters[character].spells?.[slot]) ||
     SPELLS.EMPTY;
+  const flags = useSave((s) => s.save?.flags) ?? [];
   const updateSave = useSave((s) => s.updateSave);
 
   const chapterSpells = chapterHelpers.getById(chapter).content.spells;
-  let spellMeta = spellHelpers.getById(currentSpell);
+  const spellMeta = spellHelpers.getById(currentSpell);
 
   const isExisting = !!spellMeta;
   const isInChapter = chapterSpells.has(currentSpell);
   const isValid = isExisting && isInChapter;
 
-  if (!isExisting) {
-    spellMeta = {
-      displayName: 'Unknown',
-    };
-  }
-
-  const baseItems = getChapterSpellOptions(chapter, character, allowAllItems);
+  const baseItems = getChapterSpellOptions(chapter, character, allowAllItems).map(
+    (item) =>
+      item.value === SPELLS.SUSIE_HEAL
+        ? {
+            ...item,
+            label: getSpellDisplayName(
+              item.value as SpellIndex,
+              chapter,
+              plot,
+              flags,
+            ),
+          }
+        : item,
+  );
 
   let selectItems: SelectItem[] = baseItems;
   if (!isValid || !baseItems.some((item) => item.value === currentSpell)) {
@@ -44,7 +57,7 @@ export function SpellField({
       ...baseItems,
       {
         id: `${currentSpell}`,
-        label: spellMeta.displayName,
+        label: getSpellDisplayName(currentSpell, chapter, plot, flags),
         value: currentSpell,
         invalid: true,
       },

@@ -22,7 +22,7 @@ import {
   lightWorldItemHelpers,
   phoneContactHelpers,
   roomHelpers,
-  spellHelpers,
+  getSpellDisplayName,
   weaponHelpers,
 } from './data-helpers';
 import { getPlotPointLabel } from './plot-point-helpers';
@@ -218,6 +218,9 @@ function diffCharacter(
   charIndex: CharacterIndex,
   before: SaveGamePayload['characters'][number] | undefined,
   after: SaveGamePayload['characters'][number] | undefined,
+  chapter: ChapterIndex,
+  plot: number,
+  flags: SaveGamePayload['flags'],
 ): DiffSection | null {
   const title =
     characterHelpers.getById(charIndex)?.displayName ??
@@ -301,7 +304,7 @@ function diffCharacter(
     'Spell slot',
     before.spells,
     after.spells,
-    (id) => spellHelpers.getById(id as SpellIndex)?.displayName ?? String(id),
+    (id) => getSpellDisplayName(id as SpellIndex, chapter, plot, flags),
   );
 
   const statsLen = Math.max(
@@ -331,12 +334,22 @@ function diffCharacter(
 function diffCharacters(
   before: SaveGamePayload['characters'],
   after: SaveGamePayload['characters'],
+  chapter: ChapterIndex,
+  plot: number,
+  flags: SaveGamePayload['flags'],
 ): DiffSection | null {
   const children: DiffSection[] = [];
   const maxLen = Math.max(before.length, after.length);
 
   for (let i = 0; i < maxLen; i++) {
-    const section = diffCharacter(i as CharacterIndex, before[i], after[i]);
+    const section = diffCharacter(
+      i as CharacterIndex,
+      before[i],
+      after[i],
+      chapter,
+      plot,
+      flags,
+    );
     if (section) children.push(section);
   }
 
@@ -613,7 +626,13 @@ export function computeSaveDiff(
     });
   }
 
-  const partySection = diffCharacters(before.characters, current.characters);
+  const partySection = diffCharacters(
+    before.characters,
+    current.characters,
+    chapter,
+    current.plot,
+    current.flags,
+  );
   if (partySection) sections.push(partySection);
 
   const battleSection = diffBattle(before.battle, current.battle);

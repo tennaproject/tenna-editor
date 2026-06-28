@@ -1,4 +1,6 @@
-import type { BaseProperties } from '@types';
+import type { BaseProperties, WithOverrides } from '@types';
+import { FLAGS } from './flags';
+import type { ChapterIndex } from './chapters';
 
 export const SPELLS = {
   EMPTY: 0,
@@ -12,7 +14,7 @@ export const SPELLS = {
   SLEEPMIST: 8,
   ICESHOCK: 9,
   SNOWGRAVE: 10,
-  SUSIE_HEAL: 11, // this one has different name every chapter
+  SUSIE_HEAL: 11,
   REVIVE_SONG: 12,
   SCYTHEMARE: 13,
 } as const;
@@ -20,7 +22,15 @@ export const SPELLS = {
 export type SpellIndex = (typeof SPELLS)[keyof typeof SPELLS];
 export type SpellName = keyof typeof SPELLS;
 
-type SpellProperties = BaseProperties;
+interface SpellOverrideInputs {
+  chapter: ChapterIndex;
+  plot: number;
+  flags: readonly unknown[];
+}
+
+interface SpellProperties
+  extends BaseProperties,
+    WithOverrides<SpellProperties, SpellOverrideInputs> {}
 
 export const SPELLS_META: Record<SpellIndex, SpellProperties> = {
   [SPELLS.EMPTY]: {
@@ -58,7 +68,34 @@ export const SPELLS_META: Record<SpellIndex, SpellProperties> = {
     displayName: 'SnowGrave',
   },
   [SPELLS.SUSIE_HEAL]: {
-    displayName: 'Ultimate Heal', // name overrides needed here
+    displayName: 'UltimatHeal',
+    getOverrides: ({ chapter, plot, flags }) => {
+      if (
+        chapter >= 4 &&
+        (Number(flags[FLAGS.SUSIE_LEARNED_BETTER_HEAL]) ||
+          Number(flags[FLAGS.DEFEATED_HAMMER_OF_JUSTICE]))
+      ) {
+        return { displayName: 'BetterHeal' };
+      }
+
+      if (
+        chapter === 4 &&
+        plot >= 110 &&
+        Number(flags[FLAGS.JACKENSTEIN_CUTSCENE_PROGRESS]) < 6
+      ) {
+        return { displayName: 'Heal' };
+      }
+
+      if (chapter >= 4) {
+        return { displayName: 'OKHeal' };
+      }
+
+      if (chapter >= 3) {
+        return { displayName: 'UltraHeal' };
+      }
+
+      return {};
+    },
   },
   [SPELLS.REVIVE_SONG]: {
     displayName: 'ReviveSong',
