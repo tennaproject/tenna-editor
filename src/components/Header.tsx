@@ -6,7 +6,6 @@ import UploadIcon from '@assets/icons/upload.svg?react';
 import UndoIcon from '@assets/icons/undo.svg?react';
 import RedoIcon from '@assets/icons/redo.svg?react';
 import { lazy, Suspense, useMemo, useState } from 'react';
-import { Chapter5Notice } from './Chapter5Notice';
 import { IconButton } from './IconButton';
 import { InlineGroup } from './InlineGroup';
 import { SaveSelector } from './SaveSelector';
@@ -67,7 +66,7 @@ export function Header() {
   useKeyboardShortcuts(shortcutHandlers);
 
   return (
-    <header className="w-full h-15 flex-shrink-0 bg-surface-1 relative select-none">
+    <header className="w-full h-15 shrink-0 bg-surface-1 relative select-none">
       <div className="flex items-center justify-between h-full px-2">
         <div className="flex items-center gap-2 sm:gap-4">
           {/* sidebar visibility button */}
@@ -122,8 +121,9 @@ export function Header() {
         </div>
 
         <InlineGroup className="w-full flex justify-end min-w-0">
-          <Chapter5Notice />
-          <SaveSelector />
+          <div className="flex min-w-0 items-center gap-1.5">
+            <SaveSelector />
+          </div>
           <IconButton
             accent="neutral"
             label="Undo"

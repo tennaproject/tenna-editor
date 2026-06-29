@@ -1,16 +1,28 @@
+import type { FlagBitfieldName } from './flag-bitfields';
 import type { FlagName } from './flags';
+
+export type StoryFieldName = FlagName | FlagBitfieldName;
 
 export interface StoryClusterDef {
   id: string;
   title: string;
-  flags: FlagName[];
+  flags: StoryFieldName[];
 }
 
-export interface StorySectionDef {
+interface StorySectionBase {
   id: string;
   title: string;
+}
+
+export interface StoryClusteredSectionDef extends StorySectionBase {
   clusters: StoryClusterDef[];
 }
+
+export interface StoryFlatSectionDef extends StorySectionBase {
+  flags: StoryFieldName[];
+}
+
+export type StorySectionDef = StoryClusteredSectionDef | StoryFlatSectionDef;
 
 export const STORY_SECTIONS = {
   1: [
@@ -1434,6 +1446,30 @@ export const STORY_SECTIONS = {
       ],
     },
   ],
-} as const satisfies Record<1 | 2 | 3 | 4, StorySectionDef[]>;
+  5: [
+    {
+      id: 'all-flags-ch5',
+      title: 'All flags',
+      flags: [
+        'PINK_COINS',
+        'PINK_PROGRESS',
+        'VOICE_CLIPS_ENABLED',
+        'FLOWERY_DOLLARS',
+        'TALKED_TORIEL_TOAST_REQUEST',
+        'LOOKED_AT_MICROWAVE',
+        'CASTLE_CLIMB_HISCORE',
+        'SEEN_HOW_TO_DRAW_DRAGONS',
+        'TALKED_TORIEL_LAST_NIGHT',
+        'PLATMODE_JUMP_COUNT',
+        'PLATMODE_SWING_COUNT',
+        'DEFEATED_PINK',
+        'SCISSORS_PUZZLE_SHAPED_BUSH_CUT',
+        'SCISSORS_PUZZLE_FLOWERY_FACE_PATH_CUT',
+        'RALSEI_HOLD_Z_HINT',
+        'HOPSCHEF_PROGRESS',
+      ],
+    },
+  ],
+} as const satisfies Record<1 | 2 | 3 | 4 | 5, StorySectionDef[]>;
 
 export type StoryChapterNumber = keyof typeof STORY_SECTIONS;

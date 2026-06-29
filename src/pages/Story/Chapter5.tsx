@@ -1,9 +1,9 @@
 import {
   Card,
-  FlagField,
   Heading,
   Section,
   StoryChapterLayout,
+  StoryChapterSections,
   StoryFlagField,
   ThrashFit,
   type ThrashFitHairIndex,
@@ -12,27 +12,28 @@ import {
   type ThrashFitShirtIndex,
   type ThrashFitShoesIndex,
 } from '@components';
-import { FLAG_BITFIELDS, FLAGS } from '@data';
+import { FLAGS } from '@data';
 import { useSaveFlag } from '@hooks';
+
+const THRASH_FIT_FIELDS = [
+  ['thrash-fit-hair', FLAGS.THRASH_FIT_HAIR],
+  ['thrash-fit-shirt', FLAGS.THRASH_FIT_SHIRT],
+  ['thrash-fit-pants', FLAGS.THRASH_FIT_PANTS],
+  ['thrash-fit-hat', FLAGS.THRASH_FIT_HAT],
+  ['thrash-fit-shoes', FLAGS.THRASH_FIT_SHOES],
+] as const;
 
 function Chapter5Notice() {
   return (
-    <Card className="flex flex-col gap-4 p-6">
-      <Heading level={2}>Chapter 5</Heading>
+    <Card className="flex flex-col gap-3 p-6">
+      <Heading level={3}>Chapter 5</Heading>
       <p className="text-text-2">
-        Story flag editing for Chapter 5 is still being expanded.
+        Chapter 5 support is a work in progress.{' '}
+        <span className="text-red font-bold">
+          For now, all flag fields are uncategorized, descriptions may be
+          incomplete, and everything here is subject to change.
+        </span>
       </p>
-      <div className="ui-panel-muted border-yellow/40 bg-yellow-soft text-text-1 flex flex-col gap-3 p-4">
-        <p>Chapter 5 support is available in Tenna Editor.</p>
-        <p className="flex items-start gap-1">
-          <span className="text-green font-bold shrink-0">[NEW]</span>
-          <span>
-            Basic features like recruits, rooms, items, weapons, and armors are
-            in place.
-          </span>
-        </p>
-        <p>More flags and plot points will come later.</p>
-      </div>
     </Card>
   );
 }
@@ -45,12 +46,12 @@ function ThrashFitSection() {
   const shoes = useSaveFlag(FLAGS.THRASH_FIT_SHOES) as ThrashFitShoesIndex;
 
   return (
-    <Section className="flex-1 flex">
-      <Card className="flex-1 flex flex-col gap-3 p-6">
+    <Section id="creations">
+      <Card className="flex flex-col gap-4 p-6">
         <Heading level={3}>Thrash Fit</Heading>
-        <div className="flex flex-col md:flex-row gap-3">
-          <div className="flex-1 flex flex-col gap-3">
-            <div className="flex items-center justify-center w-50 pt-1">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(180px,240px)_minmax(0,1fr)] gap-5">
+          <div className="flex min-h-[250px] items-center justify-center">
+            <div className="flex items-center justify-center">
               <ThrashFit
                 id="thrash-fit-preview"
                 hair={hair}
@@ -60,60 +61,13 @@ function ThrashFitSection() {
                 shoes={shoes}
               />
             </div>
-            <StoryFlagField id="thrash-fit-hair" flag={FLAGS.THRASH_FIT_HAIR} />
-            <StoryFlagField
-              id="thrash-fit-shirt"
-              flag={FLAGS.THRASH_FIT_SHIRT}
-            />
-            <StoryFlagField
-              id="thrash-fit-pants"
-              flag={FLAGS.THRASH_FIT_PANTS}
-            />
           </div>
-          <div className="flex-1 flex flex-col gap-3">
-            <StoryFlagField id="thrash-fit-hat" flag={FLAGS.THRASH_FIT_HAT} />
-            <StoryFlagField
-              id="thrash-fit-shoes"
-              flag={FLAGS.THRASH_FIT_SHOES}
-            />
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 content-start">
+            {THRASH_FIT_FIELDS.map(([id, flag]) => (
+              <StoryFlagField key={id} id={id} flag={flag} />
+            ))}
           </div>
         </div>
-      </Card>
-    </Section>
-  );
-}
-
-function HopChefSection() {
-  return (
-    <Section>
-      <Card className="flex flex-col gap-3 p-6">
-        <Heading level={3}>Hop Chef</Heading>
-        <FlagField
-          id="hopchef-progress"
-          bitfield={FLAG_BITFIELDS.HOPSCHEF_PROGRESS}
-        />
-      </Card>
-    </Section>
-  );
-}
-
-function ScissorsPuzzleSection() {
-  return (
-    <Section>
-      <Card className="flex flex-col gap-3 p-6">
-        <Heading level={3}>Scissors Puzzle</Heading>
-        <FlagField
-          id="scissors-puzzle-shaped-bush-cut"
-          bitfield={FLAG_BITFIELDS.SCISSORS_PUZZLE_SHAPED_BUSH_CUT}
-        />
-        <FlagField
-          id="scissors-puzzle-flowery-face-path-cut"
-          bitfield={FLAG_BITFIELDS.SCISSORS_PUZZLE_FLOWERY_FACE_PATH_CUT}
-        />
-        <FlagField
-          id="ralsei-hold-z-hint"
-          bitfield={FLAG_BITFIELDS.RALSEI_HOLD_Z_HINT}
-        />
       </Card>
     </Section>
   );
@@ -123,12 +77,8 @@ export function StoryChapter5() {
   return (
     <StoryChapterLayout chapter={5}>
       <Chapter5Notice />
-      <HopChefSection />
-      <ScissorsPuzzleSection />
-      <Section id="creations" className="flex flex-col lg:flex-row gap-3">
-        <ThrashFitSection />
-        <ThrashFitSection />
-      </Section>
+      <ThrashFitSection />
+      <StoryChapterSections chapter={5} />
     </StoryChapterLayout>
   );
 }

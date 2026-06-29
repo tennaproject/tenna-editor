@@ -1044,8 +1044,13 @@ export const FLAGS = {
   RAISE_BAT_HARD_HIRANK: 1280,
   PINK_COINS: 1312,
   SCISSORS_PUZZLE_FLAGS: 1365,
+  VOICE_CLIPS_ENABLED: 1391,
   HOPSCHEF_PROGRESS_FLAG: 1399,
   FLOWERY_DOLLARS: 1411,
+  TALKED_TORIEL_TOAST_REQUEST: 1435,
+  LOOKED_AT_MICROWAVE: 1438,
+  CASTLE_CLIMB_HISCORE: 1440,
+  SEEN_HOW_TO_DRAW_DRAGONS: 1443,
   // Chapter 5 Thrash Fit
   THRASH_FIT_HAIR: 1421,
   THRASH_FIT_SHIRT: 1422,
@@ -1252,6 +1257,11 @@ export const FLAGS = {
   BIBLIOX_ENCOUNTER_OUTCOME: 1796,
   SCENTED_CANDLES_ENCOUNTER_OUTCOME: 1797,
   SECOND_MIZZLE_ENCOUNTER_OUTCOME: 1798,
+  PLATMODE_JUMP_COUNT: 1904,
+  PLATMODE_SWING_COUNT: 1905,
+  DEFEATED_PINK: 1908,
+  TALKED_TORIEL_LAST_NIGHT: 1747,
+  PINK_PROGRESS: 1846,
 } as const;
 
 export type FlagIndex = (typeof FLAGS)[keyof typeof FLAGS];
@@ -8013,6 +8023,35 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     description: 'Your amount of Pink Coins.',
     valueType: 'number',
   },
+  [FLAGS.PINK_PROGRESS]: {
+    displayName: 'Pink progress',
+    description: 'Progress through the Pink encounter and hideout sequence.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Door closed',
+        1: 'Door opened',
+        1.5: 'Save point before the boss',
+        2: 'Defeated boss',
+        3: 'Entered hideout',
+        4: 'Cutscene starts after buying 3 items in hideout',
+        5: 'Cutscene ends',
+      },
+    },
+  },
+  [FLAGS.VOICE_CLIPS_ENABLED]: {
+    displayName: 'Voice Clips',
+    description: 'Voice Clips toggle in settings.',
+    valueType: 'boolean',
+    valueRules: {
+      booleanMap: {
+        trueValues: [0, 2],
+        falseValues: [1],
+        writeTrue: 0,
+        writeFalse: 1,
+      },
+    },
+  },
   [FLAGS.SCISSORS_PUZZLE_FLAGS]: {
     displayName: 'Scissors puzzle flags',
     description: 'Raw bitfield state for Chapter 5 scissors puzzle progress.',
@@ -8029,6 +8068,33 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     displayName: 'Flowery Dollars',
     description: 'Your amount of Flowery Dollars.',
     valueType: 'number',
+  },
+  [FLAGS.TALKED_TORIEL_TOAST_REQUEST]: {
+    displayName: 'Toriel toast request',
+    description: 'Toriel toast request answer.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Yes',
+        2: "I'm busy",
+      },
+    },
+  },
+  [FLAGS.LOOKED_AT_MICROWAVE]: {
+    displayName: 'Looked at microwave',
+    description: 'Looked at microwave while it was running.',
+    valueType: 'boolean',
+  },
+  [FLAGS.CASTLE_CLIMB_HISCORE]: {
+    displayName: 'Castle climb high score',
+    description: 'Castle Town climbing minigame high score.',
+    valueType: 'number',
+  },
+  [FLAGS.SEEN_HOW_TO_DRAW_DRAGONS]: {
+    displayName: 'Seen "How To Draw Dragons"',
+    description: 'Seen "How To Draw Dragons" inside the drawer.',
+    valueType: 'boolean',
   },
   [FLAGS.THRASH_FIT_HAIR]: {
     displayName: 'Hair',
@@ -8107,6 +8173,33 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
         6: 'Blackshoes3',
       },
     },
+  },
+  [FLAGS.TALKED_TORIEL_LAST_NIGHT]: {
+    displayName: 'Talked with Toriel last night',
+    description: 'Talked with Toriel about her behavior night before Festival.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'We were locked out',
+        2: 'You were way too loud',
+      },
+    },
+  },
+  [FLAGS.PLATMODE_JUMP_COUNT]: {
+    displayName: 'Platform mode jump count',
+    description: "Kris's jump count in platform mode.",
+    valueType: 'number',
+  },
+  [FLAGS.PLATMODE_SWING_COUNT]: {
+    displayName: 'Platform mode swing count',
+    description: "Kris's swing count in platform mode.",
+    valueType: 'number',
+  },
+  [FLAGS.DEFEATED_PINK]: {
+    displayName: 'Defeated Pink',
+    description: 'Whether you defeated Pink.',
+    valueType: 'boolean',
   },
   [FLAGS.MONEYFOUNTAIN_DONATION_OVER_100]: {
     displayName: '$100 Reward',

@@ -100,6 +100,13 @@ export function FlagField(props: FlagFieldProps) {
   const { valueType, valueRules, displayName, description } = meta;
 
   if (valueType === 'boolean') {
+    const booleanMap = valueRules?.booleanMap;
+    const checked = booleanMap
+      ? booleanMap.trueValues.includes(currentValue)
+      : valueRules?.invertedBoolean
+        ? !currentValue
+        : !!currentValue;
+
     return (
       <FieldWrapper
         id={id}
@@ -109,8 +116,12 @@ export function FlagField(props: FlagFieldProps) {
       >
         <Checkbox
           label={<Markdown>{displayName}</Markdown>}
-          checked={valueRules?.invertedBoolean ? !currentValue : !!currentValue}
+          checked={checked}
           onChange={(value: boolean) => {
+            if (booleanMap) {
+              updateValue(value ? booleanMap.writeTrue : booleanMap.writeFalse);
+              return;
+            }
             updateValue(
               valueRules?.invertedBoolean ? (value ? 0 : 1) : value ? 1 : 0,
             );
@@ -152,11 +163,11 @@ export function FlagField(props: FlagFieldProps) {
 
       selectItems.sort(
         (itemA, itemB) =>
-          parseInt(String(itemA.value), 10) - parseInt(String(itemB.value), 10),
+          Number(itemA.value) - Number(itemB.value),
       );
 
       const selectedItem = selectItems.find(
-        (item) => parseInt(String(item.value), 10) === currentValue,
+        (item) => Number(item.value) === currentValue,
       );
 
       return (
@@ -175,9 +186,9 @@ export function FlagField(props: FlagFieldProps) {
             selectedItem={selectedItem}
             onSelectionChange={(item) => {
               if (!item || !valueRules?.map) return;
-              const value = parseInt(item.id, 10);
+              const value = Number(item.id);
 
-              if (valueRules.map[value]) {
+              if (Number.isFinite(value) && valueRules.map[value]) {
                 updateValue(value);
               }
             }}

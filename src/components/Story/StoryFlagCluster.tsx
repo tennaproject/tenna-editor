@@ -1,6 +1,6 @@
 import { Heading } from '@components';
-import { FLAGS } from '@data';
-import type { FlagName } from '@data';
+import { FLAG_BITFIELDS, FLAGS } from '@data';
+import type { StoryFieldName } from '@data';
 import { StoryFlagField } from './StoryFlagField';
 
 function flagNameToId(name: string): string {
@@ -9,7 +9,7 @@ function flagNameToId(name: string): string {
 
 interface StoryFlagClusterProps {
   title: string;
-  flags: FlagName[];
+  flags: StoryFieldName[];
 }
 
 export function StoryFlagCluster({ title, flags }: StoryFlagClusterProps) {
@@ -21,13 +21,27 @@ export function StoryFlagCluster({ title, flags }: StoryFlagClusterProps) {
         {title}
       </Heading>
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3">
-        {flags.map((name) => (
-          <StoryFlagField
-            key={name}
-            id={flagNameToId(name)}
-            flag={FLAGS[name]}
-          />
-        ))}
+        {flags.map((name) => {
+          const id = flagNameToId(name);
+
+          if (name in FLAGS) {
+            return (
+              <StoryFlagField
+                key={name}
+                id={id}
+                flag={FLAGS[name as keyof typeof FLAGS]}
+              />
+            );
+          }
+
+          return (
+            <StoryFlagField
+              key={name}
+              id={id}
+              bitfield={FLAG_BITFIELDS[name as keyof typeof FLAG_BITFIELDS]}
+            />
+          );
+        })}
       </div>
     </section>
   );
