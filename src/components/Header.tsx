@@ -27,6 +27,7 @@ export function Header() {
   const [isUploadOpen, setIsUploadOpen] = useState(false);
   const [isDownloadOpen, setIsDownloadOpen] = useState(false);
   const envLabel = useMemo(() => getAppEnvironment(), []);
+  const showEnvBadge = envLabel !== 'PRODUCTION';
   const envTone = useMemo<BadgeTone>(() => {
     if (envLabel === 'DEV') return 'blue';
     if (envLabel === 'PREVIEW') return 'green';
@@ -111,7 +112,7 @@ export function Header() {
                 <h1 className="text-text-1 text-2xl font-bold leading-none text-nowrap hidden sm:block">
                   TENNA EDITOR
                 </h1>
-                <Badge tone={envTone}>{envLabel}</Badge>
+                {showEnvBadge && <Badge tone={envTone}>{envLabel}</Badge>}
               </div>
               {/* <p className="text-text-2 font-bold leading-none hidden lg:block text-nowrap">
                 AN UNOFFICIAL DELTARUNE SAVE EDITOR

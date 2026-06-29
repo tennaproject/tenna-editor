@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added a manual flag editor on the Flags page for editing flags by id, including direct value and bitfield value modes, a selector for known bitfields, and an unlisted flag notice when a flag id is not in the catalog.
 - Added a "Show dogchecked rooms" toggle on the Overview page. Dogchecked rooms are hidden from the room picker by default.
+- Added an environment badge to header to indicate the current environment like Dev or Preview.
 
 ### Changed
 
