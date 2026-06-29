@@ -5,13 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.11.0-beta] - 2026-06-29
+
+Critical bug fixes and some minor flag additions. More to come soon!
 
 ### Added
 
 - Added a manual flag editor on the Flags page for editing flags by id, including direct value and bitfield value modes, a selector for known bitfields, and an unlisted flag notice when a flag id is not in the catalog.
 - Added a "Show dogchecked rooms" toggle on the Overview page. Dogchecked rooms are hidden from the room picker by default.
-- Added an environment badge to header to indicate the current environment like Dev or Preview.
+- Added an environment badge in the header for Dev and Preview builds, with build environment details on the About page.
+- Added Chapter 5 story flags including Pink progress, voice clips, Toriel interactions and platforming counters.
 
 ### Changed
 

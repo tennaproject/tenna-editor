@@ -28,7 +28,8 @@ function Chapter5Notice() {
     <Card className="flex flex-col gap-3 p-6">
       <Heading level={3}>Chapter 5</Heading>
       <p className="text-text-2">
-        Chapter 5 support is a work in progress.{' '}
+        Chapter 5 support is a work in progress.
+        <br />
         <span className="text-red font-bold">
           For now, all flag fields are uncategorized, descriptions may be
           incomplete, and everything here is subject to change.
