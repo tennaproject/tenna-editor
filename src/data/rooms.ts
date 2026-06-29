@@ -4069,7 +4069,7 @@ export const ROOMS_META: Record<RoomIndex, RoomProperties> = {
     dogcheck: false,
   },
   [ROOMS.DW_CHURCH_INTRO1]: {
-    displayName: "~1 - Atrium",
+    displayName: "Dark Sanctuary - Atrium",
     hasSavePoint: true,
     dogcheck: false,
   },
@@ -4089,7 +4089,7 @@ export const ROOMS_META: Record<RoomIndex, RoomProperties> = {
     dogcheck: false,
   },
   [ROOMS.DW_CHURCH_GERSONSTUDY]: {
-    displayName: "~1 - Study",
+    displayName: "Dark Sanctuary - Study",
     hasSavePoint: true,
     dogcheck: false,
   },
@@ -4339,7 +4339,7 @@ export const ROOMS_META: Record<RoomIndex, RoomProperties> = {
     dogcheck: false,
   },
   [ROOMS.DW_CHURCH_SAVEPOINT]: {
-    displayName: "~1 - Lower Left",
+    displayName: "Dark Sanctuary - Lower Left",
     hasSavePoint: true,
     dogcheck: false,
   },
@@ -4469,12 +4469,12 @@ export const ROOMS_META: Record<RoomIndex, RoomProperties> = {
     dogcheck: false,
   },
   [ROOMS.DW_CHURCH_PIANOPUZZLE]: {
-    displayName: "~1 - Small Piano",
+    displayName: "Dark Sanctuary - Small Piano",
     hasSavePoint: true,
     dogcheck: false,
   },
   [ROOMS.DW_CHURCH_NWCONNECT]: {
-    displayName: "~1 - Library",
+    displayName: "Dark Sanctuary - Library",
     hasSavePoint: true,
     dogcheck: false,
   },
@@ -4514,7 +4514,7 @@ export const ROOMS_META: Record<RoomIndex, RoomProperties> = {
     dogcheck: false,
   },
   [ROOMS.DW_CHURCH_RIPPLEPUZZLE_POSTGERS]: {
-    displayName: "~1 - Lower Right",
+    displayName: "Dark Sanctuary - Lower Right",
     hasSavePoint: true,
     dogcheck: false,
   },
@@ -4604,7 +4604,7 @@ export const ROOMS_META: Record<RoomIndex, RoomProperties> = {
     dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_STAIRCASEINTRO]: {
-    displayName: "~1 - Atrium",
+    displayName: "2nd Sanctuary - Atrium",
     hasSavePoint: true,
     dogcheck: false,
   },
@@ -4624,7 +4624,7 @@ export const ROOMS_META: Record<RoomIndex, RoomProperties> = {
     dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_SAVEPOINT]: {
-    displayName: "~1 - Floor",
+    displayName: "2nd Sanctuary - Floor",
     hasSavePoint: true,
     dogcheck: false,
   },
@@ -4654,7 +4654,7 @@ export const ROOMS_META: Record<RoomIndex, RoomProperties> = {
     dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_GERSONSTUDY]: {
-    displayName: "~1 - Study",
+    displayName: "2nd Sanctuary - Study",
     hasSavePoint: true,
     dogcheck: false,
   },
@@ -4754,7 +4754,7 @@ export const ROOMS_META: Record<RoomIndex, RoomProperties> = {
     dogcheck: false,
   },
   [ROOMS.DW_CHURCHC_SAVEPOINT]: {
-    displayName: "~1 - Stairs",
+    displayName: "3rd Sanctuary - Stairs",
     hasSavePoint: true,
     dogcheck: false,
   },
@@ -4769,7 +4769,7 @@ export const ROOMS_META: Record<RoomIndex, RoomProperties> = {
     dogcheck: false,
   },
   [ROOMS.DW_CHURCHC_PREPRETITAN]: {
-    displayName: "~1 - Last Chamber",
+    displayName: "3rd Sanctuary - Last Chamber",
     hasSavePoint: true,
     dogcheck: false,
   },
@@ -4864,7 +4864,7 @@ export const ROOMS_META: Record<RoomIndex, RoomProperties> = {
     dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_DARKCLIMB]: {
-    displayName: "~1 - Study",
+    displayName: "2nd Sanctuary - Study (Climbing Area)",
     hasSavePoint: true,
     dogcheck: false,
   },
@@ -5706,7 +5706,7 @@ export const ROOMS_META: Record<RoomIndex, RoomProperties> = {
   [ROOMS.DW_GARDEN_AQUADASH_PLAT]: {
     displayName: "",
     hasSavePoint: true,
-    dogcheck: false,
+    dogcheck: true,
   },
   [ROOMS.DW_CLIFF_GARDENTRANSITION_NEW]: {
     displayName: "",

@@ -38,7 +38,10 @@ export function RoomField({
   let selectItems: SelectItem[] = items;
   if (!isCurrentRoomInList && room) {
     const meta = roomHelpers.getById(room as RoomIndex);
-    const label = meta.displayName || roomHelpers.getName(room as RoomIndex);
+    const label =
+      meta?.displayName ||
+      roomHelpers.getName(room as RoomIndex) ||
+      `Unknown ${room}`;
     selectItems = [
       ...items,
       {
@@ -50,8 +53,7 @@ export function RoomField({
     ];
   }
 
-  const selectedItem =
-    selectItems.find((item) => item.value === room) ?? null;
+  const selectedItem = selectItems.find((item) => item.value === room) ?? null;
 
   const description = `
   This sets which room the player is currently in when the save is loaded.
