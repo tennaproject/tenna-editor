@@ -1,6 +1,7 @@
 import WarningIcon from '@assets/icons/warning-box.svg?react';
 import { useState } from 'react';
 import { Button } from './Button';
+import { Badge } from './Badge';
 import { ModalFooter, ModalLayout } from './ModalLayout';
 
 export function Chapter5Notice() {
@@ -18,9 +19,9 @@ export function Chapter5Notice() {
           <WarningIcon />
         </span>
         <span className="hidden sm:inline text-nowrap">Chapter 5 info</span>
-        <span className="text-green font-bold text-xs shrink-0 animate-pulse">
-          [NEW]
-        </span>
+        <Badge tone="green" className="animate-pulse">
+          NEW
+        </Badge>
       </button>
 
       <ModalLayout
@@ -44,7 +45,7 @@ export function Chapter5Notice() {
         <div className="flex flex-col gap-3 text-text-2">
           <p>Chapter 5 support is available in Tenna Editor.</p>
           <p className="flex items-start gap-1">
-            <span className="text-green font-bold shrink-0">[NEW]</span>
+            <Badge tone="green">NEW</Badge>
             <span>
               Basic features like recruits, rooms, items, weapons, and armors
               are in place.

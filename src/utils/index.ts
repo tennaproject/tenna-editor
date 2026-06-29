@@ -18,3 +18,4 @@ export * from './save-diff';
 export * from './format-date';
 export * from './flag-bitfields';
 export * from './flag-helpers';
+export * from './environment';

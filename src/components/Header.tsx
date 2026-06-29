@@ -10,8 +10,11 @@ import { Chapter5Notice } from './Chapter5Notice';
 import { IconButton } from './IconButton';
 import { InlineGroup } from './InlineGroup';
 import { SaveSelector } from './SaveSelector';
+import { Badge } from './Badge';
+import type { BadgeTone } from './Badge';
 import Tenna from '@assets/tenna.svg?react';
 import { useKeyboardShortcuts } from '@hooks';
+import { getAppEnvironment } from '@utils';
 
 const Upload = lazy(() =>
   import('./Upload').then((module) => ({ default: module.Upload })),
@@ -23,6 +26,12 @@ const Download = lazy(() =>
 export function Header() {
   const [isUploadOpen, setIsUploadOpen] = useState(false);
   const [isDownloadOpen, setIsDownloadOpen] = useState(false);
+  const envLabel = useMemo(() => getAppEnvironment(), []);
+  const envTone = useMemo<BadgeTone>(() => {
+    if (envLabel === 'DEV') return 'blue';
+    if (envLabel === 'PREVIEW') return 'green';
+    return 'neutral';
+  }, [envLabel]);
 
   const isSidebarOpen = useUi((s) => s.ui.sidebar.open);
   const isSidebarRetracted = useUi((s) => s.ui.sidebar.retracted);
@@ -98,9 +107,12 @@ export function Header() {
               </div>
             </div>
             <div className="flex flex-col m-1">
-              <h1 className="text-text-1 text-2xl font-bold leading-none hidden sm:block text-nowrap">
-                TENNA EDITOR
-              </h1>
+              <div className="flex items-center gap-2">
+                <h1 className="text-text-1 text-2xl font-bold leading-none text-nowrap hidden sm:block">
+                  TENNA EDITOR
+                </h1>
+                <Badge tone={envTone}>{envLabel}</Badge>
+              </div>
               {/* <p className="text-text-2 font-bold leading-none hidden lg:block text-nowrap">
                 AN UNOFFICIAL DELTARUNE SAVE EDITOR
               </p> */}

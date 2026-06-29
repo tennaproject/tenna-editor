@@ -31,6 +31,8 @@ jobs:
       - run: npm run lint
       - run: npx tsc --noEmit
       - run: npm run build
+        env:
+          VITE_DEPLOY_TARGET: production
 
       - name: deploy with wrangler
         uses: cloudflare/wrangler-action@v4

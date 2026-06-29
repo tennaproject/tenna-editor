@@ -1,7 +1,10 @@
 import { Section, Card, Heading, Link } from '@components';
 import { CONTRIBUTORS } from '@data';
+import { getAppEnvironment } from '@utils';
 
 export function AboutOverview() {
+  const environment = getAppEnvironment();
+
   return (
     <article className="page">
       <Section id="legal">
@@ -82,7 +85,8 @@ export function AboutOverview() {
           <div className="text-text-2">
             <p>ID: {__COMMIT_HASH__}</p>
             <p>Version: {__VERSION__}</p>
-            <p>Type: {__BRANCH__}</p>
+            <p>Environment: {environment}</p>
+            <p>Branch: {__BRANCH__}</p>
             <p>Timestamp: {__BUILD_TIMESTAMP__}</p>
           </div>
         </Card>

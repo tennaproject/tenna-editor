@@ -26,6 +26,7 @@ export * from './Upload';
 export * from './Download';
 export * from './DownloadChanges';
 export * from './SaveSelector';
+export * from './Badge';
 export * from './Fields';
 export * from './Vessel';
 export * from './ThrashMachine';
