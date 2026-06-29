@@ -2,7 +2,7 @@ import { Section, Card, Heading } from '@components';
 
 const LICENSE = `zlib License
 
-Copyright (c) 2025 jjezewski
+Copyright (c) 2025-2026 jjezewski
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
