@@ -1268,6 +1268,12 @@ export interface FlagProperties extends BaseProperties {
     allowedValues?: number[];
     map?: Record<number, string>;
     invertedBoolean?: boolean;
+    booleanMap?: {
+      trueValues: number[];
+      falseValues: number[];
+      writeTrue: number;
+      writeFalse: number;
+    };
   };
 }
 
