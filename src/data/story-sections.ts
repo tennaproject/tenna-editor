@@ -180,7 +180,6 @@ export const STORY_SECTIONS = {
             'JEVIL_PROGRESS',
             'JEVIL_REWARD_CHEST_ITEM',
             'OBTAINED_JEVIL_REWARD',
-            'OBTAINED_SHADOW_CRYSTAL_CH1',
           ],
         },
         {
@@ -428,8 +427,6 @@ export const STORY_SECTIONS = {
           title: 'Amusement Park',
           flags: [
             'PLUSH_RECIPIENT',
-            'OBTAINED_CD_BAGEL_CHEST',
-            'OBTAINED_SECRET_DARK_CANDY',
             'EASTER_EGG_FORCEFIELD',
             'BALLOON_TEACUP_EASTER_EGG_PROGRESS',
           ],
@@ -468,7 +465,6 @@ export const STORY_SECTIONS = {
             'OBTAINED_DEALMAKER',
             'OBTAINED_SPAMTON_REWARD',
             'TALKED_TO_SPAMTON_BEHIND_BASEMENT_DOOR',
-            'OBTAINED_SHADOW_CRYSTAL_CH2',
           ],
         },
         {
@@ -841,7 +837,6 @@ export const STORY_SECTIONS = {
             'KNIGHT_BATTLE_OUTCOME_CH3',
             'ALMOST_BEAT_KNIGHT',
             'KNIGHT_DEATHS_COUNT',
-            'OBTAINED_SHADOW_CRYSTAL_CH3',
           ],
         },
         {
@@ -1271,7 +1266,6 @@ export const STORY_SECTIONS = {
             'HAMMER_OF_JUSTICE_ATTEMPT_COUNT',
             'DEFEATED_HAMMER_OF_JUSTICE',
             'JUSTICE_AXE_REWARD_STATE',
-            'OBTAINED_SHADOW_CRYSTAL_CH4',
             'SUSIE_LEARNED_BETTER_HEAL',
             'TALKED_TO_GERSON_AFTER_BATTLE',
           ],
@@ -1440,7 +1434,6 @@ export const STORY_SECTIONS = {
             'CHECKED_LAKE_TABLE_AFTER_RAIN',
             'LAKE_SITTING_SCENE_PROGRESS',
             'LAKE_CUTSCENE_PROGRESS_CH4',
-            'RALSEI_BLOODY_FACE',
           ],
         },
       ],
