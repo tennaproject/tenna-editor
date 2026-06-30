@@ -433,7 +433,6 @@ export const CHARACTERS_META: Record<CharacterIndex, CharacterProperties> = {
       WEAPONS.JUSTICE_AXE,
       WEAPONS.EVERYBODY_WEAPON,
       WEAPONS.THATCHET,
-      WEAPONS.BLUE_SHOES,
     ]),
     allowedArmors: new Set<ArmorIndex>([
       ARMORS.EMPTY,
@@ -469,6 +468,7 @@ export const CHARACTERS_META: Record<CharacterIndex, CharacterProperties> = {
       ARMORS.NETSKIE_HAT,
       ARMORS.SETH_SPECS,
       ARMORS.YELLOW_HAT,
+      ARMORS.O_GLOVE,
       ARMORS.GREEN_APRON,
     ]),
     allowedSpells: new Set<SpellIndex>([
@@ -552,8 +552,8 @@ export const CHARACTERS_META: Record<CharacterIndex, CharacterProperties> = {
       WEAPONS.EVERYBODY_WEAPON,
       WEAPONS.FLOWERY_SCARF,
       WEAPONS.BROKEN_SCARF,
-      WEAPONS.GILDED_ROSE,
       WEAPONS.MISTLE_WP,
+      WEAPONS.BLUE_SHOES,
     ]),
     allowedArmors: new Set<ArmorIndex>([
       ARMORS.EMPTY,
@@ -700,6 +700,9 @@ export const CHARACTERS_META: Record<CharacterIndex, CharacterProperties> = {
       WEAPONS.BLACK_SHARD,
       WEAPONS.JINGLE_BLADE,
       WEAPONS.WOOD_BLADE_2,
+      WEAPONS.AQUA_KNIFE,
+      WEAPONS.BROKEN_SCARF,
+      WEAPONS.GILDED_ROSE,
     ]),
     allowedArmors: new Set<ArmorIndex>([
       ARMORS.EMPTY,
@@ -737,6 +740,7 @@ export const CHARACTERS_META: Record<CharacterIndex, CharacterProperties> = {
       ARMORS.RED_RIBBON,
       ARMORS.NETSKIE_HAT,
       ARMORS.YELLOW_HAT,
+      ARMORS.O_GLOVE,
       ARMORS.GREEN_APRON,
     ]),
     allowedSpells: new Set<SpellIndex>([
