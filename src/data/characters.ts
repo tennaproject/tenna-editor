@@ -16,6 +16,16 @@ export const CHARACTERS = {
 export type CharacterIndex = (typeof CHARACTERS)[keyof typeof CHARACTERS];
 export type CharacterName = keyof typeof CHARACTERS;
 
+const RIBBON_ARMORS = new Set<ArmorIndex>([
+  ARMORS.PINK_RIBBON,
+  ARMORS.WHITE_RIBBON,
+  ARMORS.TWIN_RIBBON,
+  ARMORS.BLUE_RIBBON,
+  ARMORS.PRINCESS_RBN,
+  ARMORS.MONARCH_RBN,
+  ARMORS.RED_RIBBON,
+]);
+
 interface CharacterTitle {
   name: string;
   description: string;
@@ -221,6 +231,7 @@ interface CharacterPropertiesOverrides {
     ralseiHorse: boolean;
     gotMossWithNoelle: boolean;
     noelleIceShockCount: number;
+    susieCanEquipRibbons: boolean;
   };
   hasEgg: boolean;
   weapon: WeaponIndex;
@@ -438,7 +449,6 @@ export const CHARACTERS_META: Record<CharacterIndex, CharacterProperties> = {
       ARMORS.EMPTY,
       ARMORS.AMBER_CARD,
       ARMORS.DICE_BRACE,
-      ARMORS.WHITE_RIBBON,
       ARMORS.IRON_SHACKLE,
       ARMORS.MOUSE_TOKEN,
       ARMORS.JEVILSTAIL,
@@ -461,10 +471,8 @@ export const CHARACTERS_META: Record<CharacterIndex, CharacterProperties> = {
       ARMORS.MYSTIC_BAND,
       ARMORS.POWER_BAND,
       ARMORS.GOLD_WIDOW,
-      ARMORS.MONARCH_RBN,
       ARMORS.TRUE_TIE,
       ARMORS.DOG_WIDOW,
-      ARMORS.RED_RIBBON,
       ARMORS.NETSKIE_HAT,
       ARMORS.SETH_SPECS,
       ARMORS.YELLOW_HAT,
@@ -528,6 +536,13 @@ export const CHARACTERS_META: Record<CharacterIndex, CharacterProperties> = {
         }
 
         return overrides;
+      }
+
+      if (chapter === 5 && flags.susieCanEquipRibbons) {
+        overrides.allowedArmors = new Set([
+          ...CHARACTERS_META[CHARACTERS.SUSIE].allowedArmors,
+          ...RIBBON_ARMORS,
+        ]);
       }
 
       return overrides;

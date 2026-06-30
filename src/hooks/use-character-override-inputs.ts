@@ -36,6 +36,7 @@ export function useCharacterOverrideInputs(character: CharacterIndex) {
     ralseiHorse: !!useSaveFlag(FLAGS.HORSE_RALSEI),
     gotMossWithNoelle: !!useSaveFlag(FLAGS.ATE_MOSS_WITH_NOELLE),
     noelleIceShockCount: useSaveFlag(FLAGS.ICESHOCKS) as number,
+    susieCanEquipRibbons: useSaveFlag(FLAGS.RIBBON_CHEST_STATE) > 0,
   };
 
   const hasEgg = useSave(

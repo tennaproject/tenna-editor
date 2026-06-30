@@ -1046,6 +1046,7 @@ export const FLAGS = {
   SCISSORS_PUZZLE_FLAGS: 1365,
   VOICE_CLIPS_ENABLED: 1391,
   HOPSCHEF_PROGRESS_FLAG: 1399,
+  RIBBON_CHEST_STATE: 1404,
   FLOWERY_DOLLARS: 1411,
   TALKED_TORIEL_TOAST_REQUEST: 1435,
   LOOKED_AT_MICROWAVE: 1438,
@@ -8063,6 +8064,21 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     description: 'Raw progress state for the Hop Chef challenge.',
     valueType: 'number',
     valueRules: { min: 0 },
+  },
+  [FLAGS.RIBBON_CHEST_STATE]: {
+    displayName: 'Ribbon chest state',
+    description:
+      'Tracks the Chapter 5 RedRibbon chest and first ribbon equip scenes.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Opened chest; Susie can equip ribbons',
+        2: 'First equipped ribbon on Kris',
+        3: 'First equipped ribbon on Susie',
+        4: 'First equipped ribbon on Ralsei',
+      },
+    },
   },
   [FLAGS.FLOWERY_DOLLARS]: {
     displayName: 'Flowery Dollars',

@@ -164,9 +164,11 @@ export function getChapterLoadoutOptions(
   type: LoadoutOptionType,
   character: CharacterIndex,
   allowAllElements: boolean,
+  allowedElementsOverride?: ReadonlySet<number>,
 ): SelectItem[] {
+  const canUseCache = !allowedElementsOverride;
   const key = `${chapter}:${type}:${character}:${allowAllElements ? 'all' : 'restricted'}`;
-  const cached = loadoutOptionsCache.get(key);
+  const cached = canUseCache ? loadoutOptionsCache.get(key) : undefined;
   if (cached) return cached;
 
   const chapterContent = chapterHelpers.getById(chapter).content;
@@ -176,6 +178,7 @@ export function getChapterLoadoutOptions(
       : (chapterContent.armors as Set<number>);
 
   const characterAllowedElements =
+    allowedElementsOverride ??
     characterHelpers.getById(character)[
       type === 'weapon' ? 'allowedWeapons' : 'allowedArmors'
     ];
@@ -202,7 +205,9 @@ export function getChapterLoadoutOptions(
     };
   });
 
-  loadoutOptionsCache.set(key, items);
+  if (canUseCache) {
+    loadoutOptionsCache.set(key, items);
+  }
   return items;
 }
 

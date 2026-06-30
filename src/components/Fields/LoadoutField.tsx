@@ -1,10 +1,12 @@
 import { Select, type SelectItem, FieldWrapper } from '@components';
 import { type CharacterIndex, type WeaponIndex, type ArmorIndex } from '@data';
+import { useCharacterOverrideInputs } from '@hooks';
 import { useSave } from '@store';
 import { getChapterLoadoutOptions } from '@utils/chapter-options';
 import {
   armorHelpers,
   chapterHelpers,
+  characterHelpers,
   weaponHelpers,
 } from '@utils/data-helpers';
 
@@ -32,6 +34,9 @@ export function LoadoutField({
   const chapter = useSave((s) => s.save?.meta.chapter) ?? 1;
   const current = useSave((s) => s.save?.characters[character][type]) ?? 0;
   const updateSave = useSave((s) => s.updateSave);
+  const characterMeta = characterHelpers.getById(character);
+  const overrideInputs = useCharacterOverrideInputs(character);
+  const overrides = characterMeta.getOverrides?.(overrideInputs);
 
   const optionType = type === 'weapon' ? 'weapon' : 'armor';
   const chapterSet = chapterHelpers.getById(chapter).content[
@@ -48,11 +53,17 @@ export function LoadoutField({
   const isInChapter = chapterSet.has(current as number);
   const isValid = isExisting && isInChapter;
 
+  const allowedElementsOverride =
+    optionType === 'weapon'
+      ? overrides?.allowedWeapons
+      : overrides?.allowedArmors;
+
   const baseItems = getChapterLoadoutOptions(
     chapter,
     optionType,
     character,
     allowAllElements,
+    allowedElementsOverride,
   );
 
   let selectItems: SelectItem[] = baseItems;
