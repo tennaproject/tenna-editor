@@ -50,8 +50,10 @@ export async function downloadAppdata(filename?: string) {
   a.download = name;
   document.body.appendChild(a);
   a.click();
-  URL.revokeObjectURL(a.href);
+  const href = a.href;
   a.remove();
+  // Apparently some browsers start the download asynchronously so we have to defer it
+  setTimeout(() => URL.revokeObjectURL(href), 10_000);
 }
 
 export async function exportAllSaves(): Promise<void> {
@@ -79,7 +81,8 @@ export async function exportAllSaves(): Promise<void> {
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+  // Apparently some browsers start the download asynchronously so we have to defer it
+  setTimeout(() => URL.revokeObjectURL(url), 10_000);
 
   toast(`Exported ${saves.length} save(s)`, 'success');
 }

@@ -68,7 +68,8 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    // Apparently some browsers start the download asynchronously so we have to defer it
+    setTimeout(() => URL.revokeObjectURL(url), 10_000);
 
     await captureBaseline('download');
   }
