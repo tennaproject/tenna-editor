@@ -3,8 +3,10 @@ import type { Save } from '@types';
 import { useState, useEffect } from 'react';
 import { type SelectItem, Select } from './Select';
 import { useSave } from '@store';
+import { useTranslation } from '../i18n';
 
 export function SaveSelector() {
+  const { t } = useTranslation();
   const [saveSelectOptions, setSaveSelectOptions] = useState<SelectItem[]>([]);
   const activeSaveId = useSave((s) => s.activeSaveId);
   const saveName = useSave((s) => s.save?.meta.name);
@@ -42,7 +44,7 @@ export function SaveSelector() {
   return (
     <Select
       className="h-10 mr-[0.11rem] w-[100%] max-w-30 sm:max-w-50"
-      placeholder="No saves..."
+      placeholder={t('ui.common.noSaves', 'No saves...')}
       items={saveSelectOptions}
       selectedItem={selectedItem}
       onSelectionChange={(item) => {

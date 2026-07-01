@@ -1,6 +1,7 @@
 import { FieldWrapper, TextInput } from '@components';
 import { useSave } from '@store';
 import { mergeClass } from '@utils/merge-class';
+import { useTranslation } from '../../i18n';
 
 interface VesselNameFieldProps {
   id?: string;
@@ -8,6 +9,7 @@ interface VesselNameFieldProps {
 }
 
 export function VesselNameField({ id, className }: VesselNameFieldProps) {
+  const { t } = useTranslation();
   const vesselName = useSave((s) => s.save?.vesselName) ?? '';
   const updateSave = useSave((s) => s.updateSave);
 
@@ -19,12 +21,12 @@ export function VesselNameField({ id, className }: VesselNameFieldProps) {
     <FieldWrapper
       id={id}
       className={mergeClass('flex flex-col gap-2', className)}
-      title="Name"
+      title={t('ui.field.name', 'Name')}
       label
     >
       <TextInput
         value={vesselName}
-        placeholder="Enter vessel name..."
+        placeholder={t('ui.field.selectVesselName', 'Enter vessel name...')}
         onChange={onChange}
       />
     </FieldWrapper>

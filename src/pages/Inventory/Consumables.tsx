@@ -1,8 +1,10 @@
 import { useSave } from '@store';
 import { chapterHelpers } from '@utils';
 import { InventoryPage } from '@components';
+import { useTranslation } from '../../i18n';
 
 export function InventoryConsumables() {
+  const { t } = useTranslation();
   const chapter = useSave((s) => s.save?.meta.chapter) || 1;
   const meta = chapterHelpers.getById(chapter).content.meta;
   const consumableSlots = meta.consumablesSize;
@@ -13,7 +15,7 @@ export function InventoryConsumables() {
       <InventoryPage
         slots={consumableSlots}
         id="consumables"
-        title="Consumables"
+        title={t('ui.nav.consumables', 'Consumables')}
         type="consumable"
         cols={3}
       />
@@ -21,7 +23,7 @@ export function InventoryConsumables() {
         <InventoryPage
           slots={storageSlots}
           id="storage"
-          title="Storage"
+          title={t('ui.inventory.storage', 'Storage')}
           type="storage"
           cols={3}
         />

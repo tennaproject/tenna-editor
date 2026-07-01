@@ -2,11 +2,14 @@ import { useCombobox } from 'downshift';
 import ChevronDownIcon from '@assets/icons/chevron-down.svg?react';
 import WarningIcon from '@assets/icons/alert.svg?react';
 import { useState, useEffect, useRef } from 'react';
+import type { ReactNode } from 'react';
 import { mergeClass } from '@utils/merge-class';
+import { useTranslation } from '../i18n';
 
 export interface SelectItem {
   id: string;
   label: string;
+  icon?: ReactNode;
   value?: unknown;
   invalid?: boolean;
 }
@@ -32,6 +35,7 @@ export function Select({
   className = '',
   strict = true,
 }: SelectProps) {
+  const { t } = useTranslation();
   const [inputItems, setInputItems] = useState(items);
   const [shouldOpenUp, setShouldOpenUp] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -222,6 +226,11 @@ export function Select({
         </label>
       )}
       <div className="relative w-full h-10 bg-surface-3 hover:bg-surface-3-hover motion-reduce:transition-none transition-all duration-200 border border-border">
+        {selectedItem?.icon ? (
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
+            {selectedItem.icon}
+          </span>
+        ) : null}
         <input
           {...getInputProps({
             ref: inputRef,
@@ -242,6 +251,7 @@ export function Select({
           type="search"
           className={mergeClass(
             'w-full h-full px-3 pr-10 bg-transparent border-none outline-none placeholder:text-text-2 focus:outline-none focus:ring-1 motion-reduce:transition-colors transition-colors focus:ring-text-3 selection:bg-surface-3',
+            selectedItem?.icon && 'pl-14',
             selectedItem?.label === 'Empty'
               ? 'text-text-2 selection:text-text-2'
               : 'text-text-1 selection:text-text-1',
@@ -290,7 +300,9 @@ export function Select({
       >
         {menuMounted ? (
           displayItems.length === 0 ? (
-            <li className="px-3 py-2 text-text-2 text-sm">No options found</li>
+            <li className="px-3 py-2 text-text-2 text-sm">
+              {t('ui.common.noOptionsFound', 'No options found')}
+            </li>
           ) : (
             displayItems.map((item, index) => {
               const chosen = selectedItem?.id === item.id;
@@ -323,6 +335,11 @@ export function Select({
                           : 'bg-surface-4 hover:bg-surface-4-hover',
                     )}
                   >
+                    {item.icon ? (
+                      <span className="shrink-0" aria-hidden>
+                        {item.icon}
+                      </span>
+                    ) : null}
                     <span className="break-words flex-1 min-w-0">
                       {item.label}
                     </span>

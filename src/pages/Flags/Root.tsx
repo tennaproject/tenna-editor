@@ -7,6 +7,7 @@ import { useSave } from '@store';
 import { chapterHelpers, prepareFlagData, type PreparedFlag } from '@utils';
 import { FlagRow } from './FlagRow';
 import { ManualFlagEditor } from './ManualFlagEditor';
+import { getFlagTranslationKeyPrefix, translateMeta, useTranslation } from '../../i18n';
 
 const ITEMS_PER_PAGE_OPTIONS: SelectItem[] = [
   { id: '25', label: '25', value: 25 },
@@ -27,6 +28,7 @@ function getChapterFlagList(chapter: ChapterIndex): PreparedFlag[] {
 }
 
 export function FlagsRoot() {
+  const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(
@@ -45,7 +47,35 @@ export function FlagsRoot() {
     setCurrentPage(1);
   }
 
-  const allFlags = useMemo(() => getChapterFlagList(chapter), [chapter]);
+  const allFlags = useMemo(
+    () =>
+      getChapterFlagList(chapter).map((flag) => {
+        const translatedMeta = translateMeta(
+          getFlagTranslationKeyPrefix(flag.index),
+          {
+            displayName: flag.name,
+            description: flag.description,
+            valueRules: { map: flag.knownValues },
+          },
+          t,
+        );
+        const knownValueEntries = translatedMeta.valueRules?.map
+          ? Object.entries(translatedMeta.valueRules.map).sort(
+              ([a], [b]) => Number(a) - Number(b),
+            )
+          : undefined;
+
+        return {
+          ...flag,
+          description: translatedMeta.description ?? '',
+          knownValues: translatedMeta.valueRules?.map,
+          knownValueEntries,
+          searchText:
+            `${flag.name} ${flag.index} ${translatedMeta.displayName} ${translatedMeta.description ?? ''}`.toLowerCase(),
+        };
+      }),
+    [chapter, t],
+  );
   const normalizedSearchQuery = useMemo(
     () => debouncedSearchQuery.toLowerCase().trim(),
     [debouncedSearchQuery],
@@ -94,7 +124,7 @@ export function FlagsRoot() {
           onClick={() => setCurrentPage(1)}
           disabled={currentPage === 1}
           className="text-text-2 hover:text-text-1 disabled:opacity-30 px-1"
-          title="First page"
+          title={t('ui.flags.paginationFirst', 'First page')}
         >
           ««
         </button>
@@ -102,7 +132,7 @@ export function FlagsRoot() {
           onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
           disabled={currentPage === 1}
           className="text-text-2 hover:text-text-1 disabled:opacity-30 px-1"
-          title="Previous page"
+          title={t('ui.flags.paginationPrevious', 'Previous page')}
         >
           «
         </button>
@@ -113,7 +143,7 @@ export function FlagsRoot() {
           onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
           disabled={currentPage === totalPages}
           className="text-text-2 hover:text-text-1 disabled:opacity-30 px-1"
-          title="Next page"
+          title={t('ui.flags.paginationNext', 'Next page')}
         >
           »
         </button>
@@ -121,7 +151,7 @@ export function FlagsRoot() {
           onClick={() => setCurrentPage(totalPages)}
           disabled={currentPage === totalPages}
           className="text-text-2 hover:text-text-1 disabled:opacity-30 px-1"
-          title="Last page"
+          title={t('ui.flags.paginationLast', 'Last page')}
         >
           »»
         </button>
@@ -130,29 +160,38 @@ export function FlagsRoot() {
 
   return (
     <Page>
-      <Page.TopBar title="Flags" />
+      <Page.TopBar title={t('ui.nav.flags', 'Flags')} />
       <Page.Content>
         <div className="page">
           <>
             <Section id="warning" className="mb-4">
               <Card className="p-6 flex flex-col gap-3">
-                <Heading level={3}>Flags</Heading>
+                <Heading level={3}>{t('ui.nav.flags', 'Flags')}</Heading>
                 <div className="text-text-2">
                   <p>
-                    This feature is intended for advanced users only who want
-                    more control over specific flags.
+                    {t(
+                      'ui.flags.advancedWarning',
+                      'This feature is intended for advanced users only who want more control over specific flags.',
+                    )}
                   </p>
                   <p>
-                    Some of the flags are already covered by other parts of the
-                    editor.
+                    {t(
+                      'ui.flags.alreadyCoveredWarning',
+                      'Some of the flags are already covered by other parts of the editor.',
+                    )}
                   </p>
 
                   <p className="text-red font-bold mt-2">
-                    Modifying flags incorrectly may corrupt your save file.
+                    {t(
+                      'ui.flags.corruptionWarning',
+                      'Modifying flags incorrectly may corrupt your save file.',
+                    )}
                   </p>
                   <p className="text-xs">
-                    NOTE: Flag names are work in progress and may be changed
-                    with future updates.
+                    {t(
+                      'ui.flags.namesWorkInProgress',
+                      'NOTE: Flag names are work in progress and may be changed with future updates.',
+                    )}
                   </p>
                 </div>
               </Card>
@@ -160,7 +199,7 @@ export function FlagsRoot() {
 
             <Section id="manual-edit" className="mb-4">
               <Card className="p-4 flex flex-col gap-4">
-                <Heading level={3}>Manual edit</Heading>
+                <Heading level={3}>{t('ui.flags.manualEdit', 'Manual edit')}</Heading>
                 <ManualFlagEditor />
               </Card>
             </Section>
@@ -171,14 +210,16 @@ export function FlagsRoot() {
                   <TextInput
                     value={searchQuery}
                     onChange={handleSearchChange}
-                    placeholder="Search flags..."
+                    placeholder={t('ui.flags.searchPlaceholder', 'Search flags...')}
                     fullWidth
                     className="sm:min-w-0 sm:flex-1"
                   />
                   <div className="flex shrink-0 items-center gap-4">
-                    <span className="text-text-3 text-sm">Flags per page</span>
+                    <span className="text-text-3 text-sm">
+                      {t('ui.flags.flagsPerPage', 'Flags per page')}
+                    </span>
                     <Select
-                      label="Flags per page"
+                      label={t('ui.flags.flagsPerPage', 'Flags per page')}
                       items={ITEMS_PER_PAGE_OPTIONS}
                       selectedItem={selectedItemsPerPage}
                       defaultSelectedItem={selectedItemsPerPage}
@@ -186,7 +227,10 @@ export function FlagsRoot() {
                       className="w-20"
                     />
                     <span className="text-text-3 text-sm">
-                      {filteredFlags.length} flags total
+                      {t('ui.flags.flagsTotal', '{count} flags total').replace(
+                        '{count}',
+                        String(filteredFlags.length),
+                      )}
                     </span>
                   </div>
                 </div>
@@ -194,7 +238,7 @@ export function FlagsRoot() {
               <Card>
                 {paginatedFlags.length === 0 ? (
                   <p className="text-text-2 py-12 text-center">
-                    No flags found.
+                    {t('ui.flags.noFlagsFound', 'No flags found.')}
                   </p>
                 ) : (
                   <form
@@ -203,10 +247,14 @@ export function FlagsRoot() {
                     noValidate
                   >
                     <div className="ui-section-label grid grid-cols-[3.5rem_minmax(0,1fr)_7rem_1.25rem] sm:grid-cols-[3.5rem_minmax(9rem,16rem)_minmax(0,1fr)_7rem_1.25rem] items-center gap-4 bg-surface-2 px-4 py-2">
-                      <span>Id</span>
-                      <span>Flag</span>
-                      <span className="hidden sm:block">Description</span>
-                      <span className="w-28">Value</span>
+                      <span>{t('ui.flags.idColumn', 'Id')}</span>
+                      <span>{t('ui.flags.flagColumn', 'Flag')}</span>
+                      <span className="hidden sm:block">
+                        {t('ui.flags.descriptionColumn', 'Description')}
+                      </span>
+                      <span className="w-28">
+                        {t('ui.flags.valueColumn', 'Value')}
+                      </span>
                       <span className="w-5" aria-hidden />
                     </div>
                     {paginatedFlags.map((flag) => (

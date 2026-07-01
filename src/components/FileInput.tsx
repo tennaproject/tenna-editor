@@ -1,4 +1,5 @@
 import { mergeClass } from '@utils/merge-class';
+import { useTranslation } from '../i18n';
 import {
   useRef,
   useState,
@@ -13,6 +14,7 @@ interface FileInputProps {
 }
 
 export function FileInput({ onFileSelect, className }: FileInputProps) {
+  const { t } = useTranslation();
   const [isDragActive, setIsDragActive] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -61,7 +63,7 @@ export function FileInput({ onFileSelect, className }: FileInputProps) {
       onDrop={handleDrop}
       tabIndex={0}
       role="button"
-      aria-label="Upload file"
+      aria-label={t('ui.common.uploadFile', 'Upload file')}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       className={mergeClass(
@@ -86,10 +88,12 @@ export function FileInput({ onFileSelect, className }: FileInputProps) {
         tabIndex={-1}
       />
       <div className="font-bold text-text-1 text-2xl sm:text-3xl text-center">
-        {isDragActive ? 'Drop your file here!' : 'Drag & drop a file here'}
+        {isDragActive
+          ? t('ui.common.dropFileHere', 'Drop your file here!')
+          : t('ui.common.dragDropFileHere', 'Drag & drop a file here')}
       </div>
       <div className="text-lg sm:text-xl text-text-2 text-center">
-        or click to select a file
+        {t('ui.common.clickToSelectFile', 'or click to select a file')}
       </div>
     </div>
   );

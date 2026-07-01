@@ -3,6 +3,7 @@ import { useSave } from '@store';
 import { getChapterPlotOptions, getPlotPointLabel } from '@utils';
 import { mergeClass } from '@utils/merge-class';
 import { useMemo } from 'react';
+import { useTranslation } from '../../i18n';
 
 interface PlotFieldProps {
   id?: string;
@@ -10,6 +11,7 @@ interface PlotFieldProps {
 }
 
 export function PlotField({ id, className }: PlotFieldProps) {
+  const { t } = useTranslation();
   const plot = useSave((s) => s.save?.plot) ?? 0;
   const chapter = useSave((s) => s.save?.meta.chapter) || 1;
   const updateSave = useSave((s) => s.updateSave);
@@ -44,14 +46,14 @@ export function PlotField({ id, className }: PlotFieldProps) {
     <FieldWrapper
       id={id}
       className={mergeClass('flex flex-col gap-2', className)}
-      title="Plot Point"
+      title={t('ui.field.plotPoint', 'Plot Point')}
       description={description}
       label
     >
       <Select
         items={items}
-        placeholder="Select a plot point..."
-        label="Plot Point"
+        placeholder={t('ui.field.selectPlotPoint', 'Select a plot point...')}
+        label={t('ui.field.plotPoint', 'Plot Point')}
         defaultSelectedItem={selectedItem}
         selectedItem={selectedItem}
         onSelectionChange={onChange}

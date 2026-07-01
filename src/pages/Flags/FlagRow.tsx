@@ -7,6 +7,7 @@ import { mergeClass } from '@utils';
 import { parseFiniteNumberInput } from '@utils';
 
 import ChevronDownIcon from '@assets/icons/chevron-down.svg?react';
+import { useTranslation } from '../../i18n';
 
 interface FlagRowProps {
   flagIndex: FlagIndex;
@@ -27,6 +28,7 @@ function FlagRowComponent({
   isExpanded,
   onToggleExpand,
 }: FlagRowProps) {
+  const { t } = useTranslation();
   const updateSave = useSave((s) => s.updateSave);
   const value = Number(useSaveFlag(flagIndex)) || 0;
   const hasDetails = !!knownValues;
@@ -36,7 +38,7 @@ function FlagRowComponent({
     (nextValue: string) => {
       const numValue = parseFiniteNumberInput(nextValue);
       if (numValue === null) {
-        setError('Invalid number.');
+        setError(t('ui.flags.invalidNumber', 'Invalid number.'));
         return;
       }
 
@@ -45,7 +47,7 @@ function FlagRowComponent({
         save.flags[flagIndex] = numValue;
       });
     },
-    [flagIndex, updateSave],
+    [flagIndex, t, updateSave],
   );
 
   const handleToggleExpand = useCallback(() => {
@@ -73,7 +75,7 @@ function FlagRowComponent({
           <TextInput
             defaultValue={String(value)}
             onCommit={handleFlagChange}
-            placeholder="Enter value..."
+            placeholder={t('ui.flags.enterValue', 'Enter value...')}
             size="small"
             fullWidth
             name={`flag_${flagIndex}`}
@@ -104,7 +106,9 @@ function FlagRowComponent({
         <div className="overflow-hidden">
           {knownValues && (
             <div className="px-4 pb-3 text-xs">
-              <p className="text-text-2 mb-1.5">Known values:</p>
+              <p className="text-text-2 mb-1.5">
+                {t('ui.flags.knownValues', 'Known values:')}
+              </p>
               <div className="flex flex-col gap-0.5 pl-2">
                 {knownValueEntries?.map(([val, label]) => (
                   <span

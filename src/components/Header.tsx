@@ -14,6 +14,7 @@ import type { BadgeTone } from './Badge';
 import Tenna from '@assets/tenna.svg?react';
 import { useKeyboardShortcuts } from '@hooks';
 import { getAppEnvironment } from '@utils';
+import { useTranslation } from '../i18n';
 
 const Upload = lazy(() =>
   import('./Upload').then((module) => ({ default: module.Upload })),
@@ -23,6 +24,7 @@ const Download = lazy(() =>
 );
 
 export function Header() {
+  const { t } = useTranslation();
   const [isUploadOpen, setIsUploadOpen] = useState(false);
   const [isDownloadOpen, setIsDownloadOpen] = useState(false);
   const envLabel = useMemo(() => getAppEnvironment(), []);
@@ -75,7 +77,7 @@ export function Header() {
               updateUi((ui) => (ui.sidebar.open = !isSidebarOpen));
             }}
             className="p-1 sm:p-1.5 lg:hidden motion-reduce:transition-none transition-colors hover:bg-surface-1-hover"
-            aria-label="Toggle sidebar"
+            aria-label={t('ui.header.toggleSidebar', 'Toggle sidebar')}
           >
             <div className="h-9 w-9 flex leading-none justify-center items-center">
               <div className="w-6 h-6 text-text-2">
@@ -90,7 +92,10 @@ export function Header() {
               updateUi((ui) => (ui.sidebar.retracted = !isSidebarRetracted));
             }}
             className="p-1.5 hidden lg:inline motion-reduce:transition-none transition-colors hover:bg-surface-1-hover"
-            aria-label="Toggle sidebar retraction"
+            aria-label={t(
+              'ui.header.toggleSidebarRetraction',
+              'Toggle sidebar retraction',
+            )}
           >
             <div className="h-9 w-9 flex leading-none justify-center items-center">
               <div className="w-6 h-6 text-text-2">
@@ -126,21 +131,21 @@ export function Header() {
           </div>
           <IconButton
             accent="neutral"
-            label="Undo"
+            label={t('ui.header.undo', 'Undo')}
             icon={<UndoIcon />}
             disabled={!hasSave || !canUndo}
             onClick={undo}
           />
           <IconButton
             accent="neutral"
-            label="Redo"
+            label={t('ui.header.redo', 'Redo')}
             icon={<RedoIcon />}
             disabled={!hasSave || !canRedo}
             onClick={redo}
           />
           <IconButton
             accent="green"
-            label="Download save"
+            label={t('ui.header.downloadSave', 'Download save')}
             icon={<DownloadIcon />}
             onClick={() => setIsDownloadOpen(true)}
           />
@@ -151,7 +156,7 @@ export function Header() {
           )}
           <IconButton
             accent="blue"
-            label="Upload save"
+            label={t('ui.header.uploadSave', 'Upload save')}
             icon={<UploadIcon />}
             onClick={() => setIsUploadOpen(true)}
           />

@@ -1,6 +1,7 @@
 import { FieldWrapper, NumberInput } from '@components';
 import { useSave } from '@store';
 import { mergeClass } from '@utils/merge-class';
+import { useTranslation } from '../../i18n';
 
 interface MoneyFieldProps {
   id?: string;
@@ -8,6 +9,7 @@ interface MoneyFieldProps {
 }
 
 export function MoneyField({ id, className }: MoneyFieldProps) {
+  const { t } = useTranslation();
   const money = useSave((s) => s.save?.money) ?? 0;
   const updateSave = useSave((s) => s.updateSave);
 
@@ -19,12 +21,12 @@ export function MoneyField({ id, className }: MoneyFieldProps) {
     <FieldWrapper
       id={id}
       className={mergeClass('flex flex-col gap-2', className)}
-      title="Money (D$)"
+      title={t('ui.field.money', 'Money (D$)')}
       label
     >
       <NumberInput
         value={money}
-        placeholder="Enter money amount..."
+        placeholder={t('ui.field.selectMoney', 'Enter money amount...')}
         onChange={onChange}
       />
     </FieldWrapper>

@@ -17,8 +17,10 @@ import {
 } from '@components';
 import { FLAGS } from '@data';
 import { useSaveFlag } from '@hooks';
+import { useTranslation } from '../../i18n';
 
 function VesselSection() {
+  const { t } = useTranslation();
   const vesselHead = useSaveFlag(FLAGS.VESSEL_HEAD) as VesselHeadIndex;
   const vesselBody = useSaveFlag(FLAGS.VESSEL_BODY) as VesselBodyIndex;
   const vesselLegs = useSaveFlag(FLAGS.VESSEL_LEGS) as VesselLegsIndex;
@@ -26,7 +28,7 @@ function VesselSection() {
   return (
     <Section className="flex-1 flex">
       <Card className="flex-1 flex flex-col gap-3 p-6">
-        <Heading level={3}>Vessel</Heading>
+        <Heading level={3}>{t('ui.story.vessel', 'Vessel')}</Heading>
         <div className="flex flex-col md:flex-row gap-3">
           <div className="flex-1 flex flex-col gap-3">
             <VesselNameField id="vessel-name" />
@@ -59,6 +61,7 @@ function VesselSection() {
 }
 
 function ThrashMachineSection() {
+  const { t } = useTranslation();
   const head = useSaveFlag(FLAGS.THRASH_MACHINE_HEAD) as ThrashMachineHeadIndex;
   const body = useSaveFlag(FLAGS.THRASH_MACHINE_BODY) as ThrashMachineBodyIndex;
   const shoe = useSaveFlag(FLAGS.THRASH_MACHINE_SHOE) as ThrashMachineShoeIndex;
@@ -70,7 +73,9 @@ function ThrashMachineSection() {
   return (
     <Section className="flex-1 flex">
       <Card className="flex-1 flex flex-col gap-3 p-6">
-        <Heading level={3}>Thrash Machine</Heading>
+        <Heading level={3}>
+          {t('ui.story.thrashMachine', 'Thrash Machine')}
+        </Heading>
         <div className="flex flex-col md:flex-row gap-3">
           <div className="flex-1 flex flex-col gap-3">
             <ThrashMachine

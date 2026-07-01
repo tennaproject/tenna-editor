@@ -1,13 +1,59 @@
 import { useUi } from '@store';
-import { Checkbox, Page, Section, Card, Heading, Button } from '@components';
+import {
+  Checkbox,
+  Page,
+  Section,
+  Card,
+  Heading,
+  Button,
+  Select,
+  type SelectItem,
+} from '@components';
 import { exportAllSaves, importAllSaves } from '@utils';
 import { toast } from '@services';
 import { useRef } from 'react';
+import FlagJp from '@assets/flags/flag-jp.png';
+import FlagKr from '@assets/flags/flag-kr.png';
+import FlagUs from '@assets/flags/flag-us.png';
+import {
+  SUPPORTED_LOCALES,
+  getLocaleTranslationStats,
+  isSupportedLocale,
+  useTranslation,
+  type Locale,
+} from '../../i18n';
+
+const LANGUAGE_OPTIONS: SelectItem[] = Object.entries(SUPPORTED_LOCALES).map(
+  ([id, locale]) => ({
+    id,
+    icon: <LocaleFlag country={locale.flag} />,
+    label: `${locale.displayName} (${getLocaleTranslationStats(id as Locale).percentage}%)`,
+  }),
+);
+
+const FLAG_ASSETS = {
+  us: FlagUs,
+  jp: FlagJp,
+  kr: FlagKr,
+};
+
+function LocaleFlag({ country }: { country: 'us' | 'jp' | 'kr' }) {
+  return (
+    <img
+      src={FLAG_ASSETS[country]}
+      alt=""
+      className="block h-[26px] w-[38px] object-contain"
+    />
+  );
+}
 
 export function SettingsRoot() {
+  const { locale, t } = useTranslation();
   const devmode = useUi((s) => s.ui.devmode);
   const updateUi = useUi((s) => s.updateUi);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const selectedLanguage =
+    LANGUAGE_OPTIONS.find((item) => item.id === locale) ?? LANGUAGE_OPTIONS[0];
 
   const handleImport = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -16,7 +62,12 @@ export function SettingsRoot() {
     try {
       const result = await importAllSaves(file);
       toast(
-        `Successfully imported ${result.imported} save(s) (skipped ${result.skipped})`,
+        t(
+          'ui.settings.importSuccess',
+          'Successfully imported {imported} save(s) (skipped {skipped})',
+        )
+          .replace('{imported}', String(result.imported))
+          .replace('{skipped}', String(result.skipped)),
         'success',
       );
       setTimeout(() => {
@@ -25,7 +76,9 @@ export function SettingsRoot() {
     } catch (error) {
       console.error(error);
       const message =
-        error instanceof Error ? error.message : 'Failed to import backup file';
+        error instanceof Error
+          ? error.message
+          : t('ui.settings.importFailedGeneric', 'Failed to import backup file');
       toast(message, 'error');
     } finally {
       e.target.value = '';
@@ -34,15 +87,43 @@ export function SettingsRoot() {
 
   return (
     <Page>
-      <Page.TopBar title="Settings" />
+      <Page.TopBar title={t('ui.settings.title', 'Settings')} />
       <Page.Content>
         <div className="page">
+          <Section id="language">
+            <Card className="flex flex-col gap-3 p-6">
+              <Heading level={3}>{t('ui.settings.language', 'Language')}</Heading>
+              <p className="text-text-2 text-sm">
+                {t(
+                  'ui.settings.languageDescription',
+                  'Choose which language the editor uses. Missing translations fall back to English.',
+                )}
+              </p>
+              <Select
+                items={LANGUAGE_OPTIONS}
+                placeholder={t(
+                  'ui.settings.languagePlaceholder',
+                  'Select language...',
+                )}
+                selectedItem={selectedLanguage}
+                defaultSelectedItem={selectedLanguage}
+                onSelectionChange={(item) => {
+                  if (!item || !isSupportedLocale(item.id)) return;
+                  updateUi((ui) => (ui.locale = item.id as Locale));
+                }}
+              />
+            </Card>
+          </Section>
+
           {import.meta.env.VITE_DEVTOOLS_TAB === 'true' && (
             <Section id="general">
               <Card className="flex flex-col gap-3 p-6">
-                <Heading level={3}>General</Heading>
+                <Heading level={3}>{t('ui.settings.general', 'General')}</Heading>
                 <Checkbox
-                  label="Enable developer mode"
+                  label={t(
+                    'ui.settings.enableDeveloperMode',
+                    'Enable developer mode',
+                  )}
                   checked={devmode}
                   onChange={(state) => updateUi((ui) => (ui.devmode = state))}
                 />
@@ -52,10 +133,14 @@ export function SettingsRoot() {
 
           <Section id="backup">
             <Card className="flex flex-col gap-3 p-6">
-              <Heading level={3}>Backup & Restore</Heading>
+              <Heading level={3}>
+                {t('ui.settings.backupRestore', 'Backup & Restore')}
+              </Heading>
               <p className="text-text-2 text-sm">
-                Export all your save data into a JSON file, or import it back
-                from a backup.
+                {t(
+                  'ui.settings.backupRestoreDescription',
+                  'Export all your save data into a JSON file, or import it back from a backup.',
+                )}
               </p>
               <div className="flex flex-wrap gap-3 mt-2">
                 <Button
@@ -65,17 +150,20 @@ export function SettingsRoot() {
                       await exportAllSaves();
                     } catch (e) {
                       console.error(e);
-                      toast('Failed to export saves', 'error');
+                      toast(
+                        t('ui.settings.exportFailed', 'Failed to export saves'),
+                        'error',
+                      );
                     }
                   }}
                 >
-                  Export All Saves
+                  {t('ui.settings.exportAllSaves', 'Export All Saves')}
                 </Button>
                 <Button
                   variant="secondary"
                   onClick={() => fileInputRef.current?.click()}
                 >
-                  Import Saves
+                  {t('ui.settings.importSaves', 'Import Saves')}
                 </Button>
                 <input
                   type="file"

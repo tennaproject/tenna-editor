@@ -1,6 +1,7 @@
 import { saveStorage, toast } from '@services';
 import { SAVE_VERSION, UI_VERSION, useSave, useUi, type Ui } from '@store';
 import { type Save } from '@types';
+import { translate } from '../i18n';
 
 export const APPDATA_VERSION = 1;
 
@@ -59,7 +60,7 @@ export async function downloadAppdata(filename?: string) {
 export async function exportAllSaves(): Promise<void> {
   const saves = await saveStorage.getAll();
   if (saves.length === 0) {
-    toast('No saves to export', 'warning');
+    toast(translate('ui.backup.noSavesToExport', 'No saves to export'), 'warning');
     return;
   }
 
@@ -84,7 +85,13 @@ export async function exportAllSaves(): Promise<void> {
   // Apparently some browsers start the download asynchronously so we have to defer it
   setTimeout(() => URL.revokeObjectURL(url), 10_000);
 
-  toast(`Exported ${saves.length} save(s)`, 'success');
+  toast(
+    translate('ui.backup.exportedSaves', 'Exported {count} save(s)').replace(
+      '{count}',
+      String(saves.length),
+    ),
+    'success',
+  );
 }
 
 export interface ImportResult {
@@ -98,11 +105,15 @@ export async function importAllSaves(file: File): Promise<ImportResult> {
   try {
     data = JSON.parse(text);
   } catch {
-    throw new Error('Invalid backup file: not valid JSON');
+    throw new Error(
+      translate('ui.backup.invalidBackupNotJson', 'Invalid backup file: not valid JSON'),
+    );
   }
 
   if (!data.saves || !Array.isArray(data.saves)) {
-    throw new Error('Invalid backup file: no saves found');
+    throw new Error(
+      translate('ui.backup.invalidBackupNoSaves', 'Invalid backup file: no saves found'),
+    );
   }
 
   let imported = 0;

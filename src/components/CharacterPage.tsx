@@ -15,6 +15,11 @@ import {
   StatsField,
   LoadoutField,
 } from '@components';
+import {
+  getCharacterTranslationKeyPrefix,
+  translateMeta,
+  useTranslation,
+} from '../i18n';
 
 interface CharacterPageProps {
   character: CharacterIndex;
@@ -29,8 +34,13 @@ export function CharacterPage({
   allowAllElements,
   setAllowAllElements,
 }: CharacterPageProps) {
+  const { t } = useTranslation();
   const color = getCharacterColor(character);
-  const name = characterHelpers.getById(character).displayName;
+  const name = translateMeta(
+    getCharacterTranslationKeyPrefix(character),
+    characterHelpers.getById(character),
+    t,
+  ).displayName;
 
   return (
     <div className="page lg:h-full">
@@ -39,7 +49,10 @@ export function CharacterPage({
           <Checkbox
             onChange={setAllowAllElements}
             checked={allowAllElements}
-            label={`Allow non-${name}'s weapons, armors and spells`}
+            label={t(
+              'ui.party.allowNonCharacterEquipment',
+              "Allow non-{name}'s weapons, armors and spells",
+            ).replace('{name}', name)}
           />
         </InlineGroup>
       </div>
@@ -123,11 +136,13 @@ export function CharacterPage({
           className="flex flex-7/16 lg:min-h-[700px] min-h-[800px]"
         >
           <Card className="flex-1 p-6 flex gap-3 flex-col">
-            <Heading level={3}>Spells</Heading>
+            <Heading level={3}>{t('ui.party.spells', 'Spells')}</Heading>
             <div className="text-text-2">
               <p>
-                Some of the spells are unobtainable in game. They are often
-                unfinished, broken and can cause issues.
+                {t(
+                  'ui.party.unobtainableSpellsWarning',
+                  'Some of the spells are unobtainable in game. They are often unfinished, broken and can cause issues.',
+                )}
               </p>
             </div>
 

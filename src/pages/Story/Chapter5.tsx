@@ -14,6 +14,7 @@ import {
 } from '@components';
 import { FLAGS } from '@data';
 import { useSaveFlag } from '@hooks';
+import { useTranslation } from '../../i18n';
 
 const THRASH_FIT_FIELDS = [
   ['thrash-fit-hair', FLAGS.THRASH_FIT_HAIR],
@@ -24,15 +25,18 @@ const THRASH_FIT_FIELDS = [
 ] as const;
 
 function Chapter5Notice() {
+  const { t } = useTranslation();
   return (
     <Card className="flex flex-col gap-3 p-6">
-      <Heading level={3}>Chapter 5</Heading>
+      <Heading level={3}>{t('ui.nav.chapter5', 'Chapter 5')}</Heading>
       <p className="text-text-2">
-        Chapter 5 support is a work in progress.
+        {t('ui.story.chapter5Wip', 'Chapter 5 support is a work in progress.')}
         <br />
         <span className="text-red font-bold">
-          For now, all flag fields are uncategorized, descriptions may be
-          incomplete, and everything here is subject to change.
+          {t(
+            'ui.story.chapter5UncategorizedWarning',
+            'For now, all flag fields are uncategorized, descriptions may be incomplete, and everything here is subject to change.',
+          )}
         </span>
       </p>
     </Card>
@@ -40,6 +44,7 @@ function Chapter5Notice() {
 }
 
 function ThrashFitSection() {
+  const { t } = useTranslation();
   const hair = useSaveFlag(FLAGS.THRASH_FIT_HAIR) as ThrashFitHairIndex;
   const shirt = useSaveFlag(FLAGS.THRASH_FIT_SHIRT) as ThrashFitShirtIndex;
   const pants = useSaveFlag(FLAGS.THRASH_FIT_PANTS) as ThrashFitPantsIndex;
@@ -49,7 +54,7 @@ function ThrashFitSection() {
   return (
     <Section id="creations">
       <Card className="flex flex-col gap-4 p-6">
-        <Heading level={3}>Thrash Fit</Heading>
+        <Heading level={3}>{t('ui.story.thrashFit', 'Thrash Fit')}</Heading>
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(180px,240px)_minmax(0,1fr)] gap-5">
           <div className="flex min-h-[250px] items-center justify-center">
             <div className="flex items-center justify-center">

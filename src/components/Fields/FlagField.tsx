@@ -8,6 +8,12 @@ import { useChapterFlags } from '@contexts';
 import { useSaveFlag } from '@hooks';
 import { useSave } from '@store';
 import {
+  getFlagBitfieldTranslationKeyPrefix,
+  getFlagTranslationKeyPrefix,
+  translateMeta,
+  useTranslation,
+} from '../../i18n';
+import {
   chapterHelpers,
   flagHelpers,
   getGameColor,
@@ -49,6 +55,7 @@ interface ResolvedField {
 
 export function FlagField(props: FlagFieldProps) {
   const { id, className } = props;
+  const { t } = useTranslation();
   const updateSave = useSave((s) => s.updateSave);
   const sourceFlag = props.flag ?? FLAG_BITFIELDS_META[props.bitfield]?.parent;
   const currentFlagValue = useSaveFlag(sourceFlag);
@@ -96,7 +103,14 @@ export function FlagField(props: FlagFieldProps) {
   if (sourceFlag === undefined || !chapterFlags.has(sourceFlag)) return;
   if (!resolvedField) return;
 
-  const { meta, currentValue, updateValue } = resolvedField;
+  const { currentValue, updateValue } = resolvedField;
+  const meta = translateMeta(
+    props.flag !== undefined
+      ? getFlagTranslationKeyPrefix(props.flag)
+      : getFlagBitfieldTranslationKeyPrefix(props.bitfield),
+    resolvedField.meta,
+    t,
+  );
   const { valueType, valueRules, displayName, description } = meta;
 
   if (valueType === 'boolean') {
@@ -140,7 +154,7 @@ export function FlagField(props: FlagFieldProps) {
       >
         <NumberInput
           value={(currentValue as number) ?? 0}
-          placeholder="Enter number..."
+          placeholder={t('ui.flag.numberPlaceholder', 'Enter number...')}
           min={valueRules?.min ?? 0}
           max={valueRules?.max ?? 999999999}
           onChange={(value) => {
@@ -180,7 +194,7 @@ export function FlagField(props: FlagFieldProps) {
         >
           <Select
             items={selectItems}
-            placeholder="Select value..."
+            placeholder={t('ui.flag.mapPlaceholder', 'Select value...')}
             label={description}
             defaultSelectedItem={selectedItem}
             selectedItem={selectedItem}

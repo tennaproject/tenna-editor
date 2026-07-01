@@ -3,6 +3,7 @@ import { useEffect, useRef, type ReactNode } from 'react';
 import CloseIcon from '@assets/icons/close.svg?react';
 import { createPortal } from 'react-dom';
 import { mergeClass } from '@utils/merge-class';
+import { useTranslation } from '../i18n';
 
 interface ModalProps {
   children: ReactNode;
@@ -19,6 +20,7 @@ export function Modal({
   onClose,
   panelClassName,
 }: ModalProps) {
+  const { t } = useTranslation();
   const dialogRef = useRef<HTMLDivElement | null>(null);
   const reducedMotion = useReducedMotion();
 
@@ -112,7 +114,7 @@ export function Modal({
             >
               <button
                 type="button"
-                aria-label="Close"
+                aria-label={t('ui.common.close', 'Close')}
                 className="absolute top-2 right-2 inline-flex items-center justify-center w-6 h-6 motion-reduce:transition-none transition-all duration-200 text-text-2 hover:text-text-1"
                 onClick={() => {
                   if (onClose) onClose();

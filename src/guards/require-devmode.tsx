@@ -2,6 +2,7 @@ import { toast } from '@services';
 import { useUi } from '@store';
 import { type ReactElement, useRef, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
+import { translate } from '../i18n';
 
 interface RequireDevmodeProps {
   children: ReactElement;
@@ -17,7 +18,13 @@ export function RequireDevmode({
 
   useEffect(() => {
     if (!devmode && !shownRef.current) {
-      toast('Developer mode is not enabled', 'error');
+      toast(
+        translate(
+          'ui.guard.developerModeDisabled',
+          'Developer mode is not enabled',
+        ),
+        'error',
+      );
       shownRef.current = true;
     }
 

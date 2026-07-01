@@ -11,6 +11,11 @@ import { useSaveFlag } from '@hooks';
 import { useSave } from '@store';
 import { enemyHelpers } from '@utils/data-helpers';
 import { mergeClass } from '@utils/merge-class';
+import {
+  getEnemyTranslationKeyPrefix,
+  translateMeta,
+  useTranslation,
+} from '../../i18n';
 
 interface RecruitFieldProps {
   id: string;
@@ -63,8 +68,13 @@ function getRecruitStatus(
 }
 
 export function RecruitField({ id, enemy }: RecruitFieldProps) {
+  const { t } = useTranslation();
   const updateSave = useSave((s) => s.updateSave);
-  const meta = enemyHelpers.getById(enemy);
+  const meta = translateMeta(
+    getEnemyTranslationKeyPrefix(enemy),
+    enemyHelpers.getById(enemy),
+    t,
+  );
   const flag = useSaveFlag(meta.recruitFlag as FlagIndex) as number;
 
   /* Flag values:
@@ -83,7 +93,18 @@ export function RecruitField({ id, enemy }: RecruitFieldProps) {
 
   const status = getRecruitStatus(currentlyRecruited, recruitCount);
   const colors = STATUS_COLORS[status.key];
-  const countLabel = recruitCount > 1 ? 'Recruit count' : 'Status';
+  const statusLabel =
+    status.key === 'lost'
+      ? t('ui.recruits.lost', status.label)
+      : status.key === 'recruited'
+        ? t('ui.recruits.recruited', status.label)
+        : status.key === 'none'
+          ? t('ui.recruits.notRecruited', status.label)
+          : status.label;
+  const countLabel =
+    recruitCount > 1
+      ? t('ui.field.recruitCount', 'Recruit count')
+      : t('ui.field.status', 'Status');
 
   return (
     <Section id={id} className="flex flex-col">
@@ -99,13 +120,13 @@ export function RecruitField({ id, enemy }: RecruitFieldProps) {
               {meta.displayName}
             </Heading>
             <span className="text-xs uppercase tracking-wide text-text-3">
-              {status.label}
-              {!meta.recruitable && ' · Unused'}
+              {statusLabel}
+              {!meta.recruitable && ` · ${t('ui.recruits.unused', 'Unused')}`}
             </span>
           </div>
 
           <Checkbox
-            label="Recruited"
+            label={t('ui.field.recruited', 'Recruited')}
             checked={currentlyRecruited === recruitCount}
             onChange={(state) => {
               updateSave(

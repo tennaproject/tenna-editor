@@ -2,6 +2,7 @@ import { toast } from '@services';
 import { useSave } from '@store';
 import { type ReactElement, useRef, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
+import { translate } from '../i18n';
 
 interface RequireSaveProps {
   children: ReactElement;
@@ -14,7 +15,7 @@ export function RequireSave({ children, navigateTo = '/' }: RequireSaveProps) {
 
   useEffect(() => {
     if (!save && !shownRef.current) {
-      toast('There is no save loaded', 'error');
+      toast(translate('ui.guard.noSaveLoaded', 'There is no save loaded'), 'error');
       shownRef.current = true;
     }
 

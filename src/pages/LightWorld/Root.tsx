@@ -11,6 +11,7 @@ import {
 import { mergeClass } from '@utils';
 import DividerIcon from '@assets/icons/minus.svg?react';
 import KrisIcon from '@assets/deltarune/characters/kris.svg?react';
+import { useTranslation } from '../../i18n';
 
 const THEME = {
   bg: 'bg-[#a6ab2f]',
@@ -19,9 +20,11 @@ const THEME = {
 } as const;
 
 export function LightWorldRoot() {
+  const { t } = useTranslation();
+
   return (
     <Page>
-      <Page.TopBar title="Light World" />
+      <Page.TopBar title={t('ui.nav.lightWorld', 'Light World')} />
       <Page.Content>
         <div className="page lg:h-full">
           <div className="flex flex-col lg:flex-row gap-3 lg:h-full lg:max-h-[900px]">
@@ -36,7 +39,7 @@ export function LightWorldRoot() {
                     className="flex flex-col items-center border-b border-divider px-2 py-4"
                   >
                     <Heading level={4} className="uppercase my-1">
-                      Light World
+                      {t('ui.nav.lightWorld', 'Light World')}
                     </Heading>
                     <span
                       className={mergeClass(
@@ -85,9 +88,14 @@ export function LightWorldRoot() {
               <Section id="items" className="flex flex-1">
                 <Card className="flex-1 p-6 flex gap-3 flex-col">
                   <Section>
-                    <Heading level={4}>Items</Heading>
+                    <Heading level={4}>{t('ui.lightWorld.items', 'Items')}</Heading>
                     <div className="text-text-2">
-                      <p>This inventory applies to Light World only.</p>
+                      <p>
+                        {t(
+                          'ui.lightWorld.itemsDescription',
+                          'This inventory applies to Light World only.',
+                        )}
+                      </p>
                     </div>
 
                     <div className="w-full grid lg:grid-cols-4 gap-4 mt-8">
@@ -105,7 +113,9 @@ export function LightWorldRoot() {
               <Section id="phone-contacts" className="flex flex-1">
                 <Card className="flex-1 p-6 flex gap-3 flex-col">
                   <Section>
-                    <Heading level={4}>Phone Contacts</Heading>
+                    <Heading level={4}>
+                      {t('ui.lightWorld.phoneContacts', 'Phone Contacts')}
+                    </Heading>
                     <div className="w-full grid lg:grid-cols-4 gap-4 mt-8">
                       {PHONE_CONTACT_SLOTS.map((slot) => (
                         <ItemField key={slot} slot={slot} type="phoneContact" />

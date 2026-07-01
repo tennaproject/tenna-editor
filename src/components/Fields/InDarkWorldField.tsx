@@ -1,6 +1,7 @@
 import { Checkbox, FieldWrapper } from '@components';
 import { useSave } from '@store';
 import { mergeClass } from '@utils/merge-class';
+import { useTranslation } from '../../i18n';
 
 interface InDarkWorldFieldProps {
   id?: string;
@@ -8,6 +9,7 @@ interface InDarkWorldFieldProps {
 }
 
 export function InDarkWorldField({ id, className }: InDarkWorldFieldProps) {
+  const { t } = useTranslation();
   const checked = useSave((s) => s.save?.inDarkWorld) ?? false;
   const setField = useSave((s) => s.setSaveField);
 
@@ -24,12 +26,12 @@ export function InDarkWorldField({ id, className }: InDarkWorldFieldProps) {
     <FieldWrapper
       id={id}
       className={mergeClass('flex flex-col gap-2', className)}
-      title={'Currently in Dark World'}
+      title={t('ui.field.inDarkWorld', 'Currently in Dark World')}
       description={description}
       inline
     >
       <Checkbox
-        label="Currently in Dark World"
+        label={t('ui.field.inDarkWorld', 'Currently in Dark World')}
         checked={checked}
         onChange={onChange}
       />

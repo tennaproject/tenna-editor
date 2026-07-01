@@ -23,6 +23,11 @@ import KrisIcon from '@assets/deltarune/characters/kris.svg?react';
 import SusieIcon from '@assets/deltarune/characters/susie.svg?react';
 import RalseiIcon from '@assets/deltarune/characters/ralsei.svg?react';
 import NoelleIcon from '@assets/deltarune/characters/noelle.svg?react';
+import {
+  getCharacterTranslationKeyPrefix,
+  translateMeta,
+  useTranslation,
+} from '../../i18n';
 
 const BATTLE_ICONS: Partial<
   Record<CharacterIndex, ComponentType<SVGProps<SVGSVGElement>>>
@@ -44,6 +49,7 @@ function CharacterCard({
   character,
   allowNonStandardParty,
 }: CharacterCardProps) {
+  const { t } = useTranslation();
   const party = useSave((s) => s.save?.party) as CharacterIndex[] | undefined;
   const setField = useSave((s) => s.setSaveField);
   const { chapter, plot, flags, hasEgg, weapon, room } =
@@ -138,7 +144,7 @@ function CharacterCard({
         <div className="flex flex-col flex-1 py-6 lg:py-10 justify-between items-center">
           <div className="flex flex-col justify-center items-center gap-2">
             <Heading level={1}>{slot + 1}</Heading>
-            <Heading level={5}>MEMBER</Heading>
+            <Heading level={5}>{t('ui.party.member', 'MEMBER')}</Heading>
             {isExisting && isInChapter && Icon && (
               <span
                 className={mergeClass(
@@ -151,7 +157,13 @@ function CharacterCard({
               </span>
             )}
             <Heading level={3} className={mergeClass('uppercase', color.text)}>
-              {characterMeta.displayName}
+              {
+                translateMeta(
+                  getCharacterTranslationKeyPrefix(character),
+                  characterMeta,
+                  t,
+                ).displayName
+              }
             </Heading>
           </div>
           <div className="flex flex-col justify-between items-center">
@@ -190,6 +202,7 @@ function CharacterCard({
 }
 
 export function PartyOverview() {
+  const { t } = useTranslation();
   const party = useSave((s) => s.save?.party) as CharacterIndex[] | undefined;
   const allowNonStandardParty = useUi((s) => s.ui.party.allowNonStandardParty);
   const updateUi = useUi((s) => s.updateUi);
@@ -200,14 +213,27 @@ export function PartyOverview() {
     <div className="page lg:h-full">
       <InlineGroup>
         <Checkbox
-          label="Allow non-standard party combinations"
+          label={t(
+            'ui.party.allowNonStandardParty',
+            'Allow non-standard party combinations',
+          )}
           checked={allowNonStandardParty}
           onChange={(state) =>
             updateUi((ui) => (ui.party.allowNonStandardParty = state))
           }
         />
-        <HelpTip title="Allow non-standard party combinations">
-          <p>Enabling this allows you to set every character at every slot.</p>
+        <HelpTip
+          title={t(
+            'ui.party.allowNonStandardParty',
+            'Allow non-standard party combinations',
+          )}
+        >
+          <p>
+            {t(
+              'ui.party.allowNonStandardPartyDescription',
+              'Enabling this allows you to set every character at every slot.',
+            )}
+          </p>
           <p>
             The game isn't usually set up to handle this, so using it will
             usually lead to a lot of crashes.

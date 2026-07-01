@@ -1,0 +1,14 @@
+{
+  "ui.settings.title": "Settings",
+  "ui.settings.general": "General",
+  "ui.settings.enableDeveloperMode": "Enable developer mode",
+  "ui.settings.backupRestore": "Backup & Restore",
+  "ui.settings.backupRestoreDescription": "Export all your save data into a JSON file, or import it back from a backup.",
+  "ui.settings.exportAllSaves": "Export All Saves",
+  "ui.settings.importSaves": "Import Saves",
+  "ui.settings.language": "Language",
+  "ui.settings.languageDescription": "Choose which language the editor uses. Missing translations fall back to English.",
+  "ui.settings.languagePlaceholder": "Select language...",
+  "ui.flag.numberPlaceholder": "Enter number...",
+  "ui.flag.mapPlaceholder": "Select value..."
+}

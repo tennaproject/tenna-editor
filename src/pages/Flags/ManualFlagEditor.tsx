@@ -13,6 +13,7 @@ import {
   writeFlagBitfield,
   type KnownBitfield,
 } from '@utils';
+import { useTranslation } from '../../i18n';
 
 type ManualMode = 'value' | 'bitfield';
 
@@ -56,6 +57,7 @@ function validateManualEdit(
   fieldIndexInput: string,
   fieldWidthInput: string,
   flagCount: number,
+  t: (key: string, fallback: string) => string,
 ): ValidationResult {
   if (!flagInput.trim()) {
     return {
@@ -72,7 +74,10 @@ function validateManualEdit(
       flagId,
       directValue: null,
       bitfield: null,
-      error: `Flag id must be between 0 and ${Math.max(flagCount - 1, 0)}.`,
+      error: t('ui.flags.flagIdRange', 'Flag id must be between 0 and {max}.').replace(
+        '{max}',
+        String(Math.max(flagCount - 1, 0)),
+      ),
     };
   }
 
@@ -82,7 +87,10 @@ function validateManualEdit(
       flagId,
       directValue,
       bitfield: null,
-      error: directValue === null ? 'Value must be a finite number.' : null,
+      error:
+        directValue === null
+          ? t('ui.flags.valueMustBeFinite', 'Value must be a finite number.')
+          : null,
     };
   }
 
@@ -92,7 +100,10 @@ function validateManualEdit(
       flagId,
       directValue: null,
       bitfield: null,
-      error: 'Field index must be a non-negative integer.',
+      error: t(
+        'ui.flags.fieldIndexMustBeNonNegative',
+        'Field index must be a non-negative integer.',
+      ),
     };
   }
 
@@ -102,7 +113,10 @@ function validateManualEdit(
       flagId,
       directValue: null,
       bitfield: null,
-      error: 'Width must be a positive integer.',
+      error: t(
+        'ui.flags.widthMustBePositive',
+        'Width must be a positive integer.',
+      ),
     };
   }
 
@@ -115,7 +129,10 @@ function validateManualEdit(
       flagId,
       directValue: null,
       bitfield: null,
-      error: 'Value must be a non-negative integer.',
+      error: t(
+        'ui.flags.valueMustBeNonNegative',
+        'Value must be a non-negative integer.',
+      ),
     };
   }
 
@@ -124,7 +141,10 @@ function validateManualEdit(
       flagId,
       directValue: null,
       bitfield: null,
-      error: `Value must be between 0 and ${maxValue}.`,
+      error: t('ui.flags.valueRange', 'Value must be between 0 and {max}.').replace(
+        '{max}',
+        String(maxValue),
+      ),
     };
   }
 
@@ -179,6 +199,7 @@ function buildInputsFromFlag(
 }
 
 export function ManualFlagEditor() {
+  const { t } = useTranslation();
   const updateSave = useSave((s) => s.updateSave);
   const flagCount = useSave((s) => s.save?.flags.length ?? 0);
   const saveFlags = useSave((s) => s.save?.flags);
@@ -265,8 +286,9 @@ export function ManualFlagEditor() {
         fieldIndexInput,
         fieldWidthInput,
         flagCount,
+        t,
       ),
-    [fieldIndexInput, fieldWidthInput, flagCount, flagInput, mode, valueInput],
+    [fieldIndexInput, fieldWidthInput, flagCount, flagInput, mode, valueInput, t],
   );
 
   const currentValue =
@@ -370,7 +392,10 @@ export function ManualFlagEditor() {
     <div className="flex w-full flex-col gap-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <span className="ui-prose-muted text-xs">
-          Target a flag by id and write a direct value or a bitfield value.
+          {t(
+            'ui.flags.manualIntro',
+            'Target a flag by id and write a direct value or a bitfield value.',
+          )}
         </span>
         <Page.Nav>
           <button
@@ -383,7 +408,7 @@ export function ManualFlagEditor() {
                 : 'bg-transparent text-text-2 hover:text-text-1 hover:bg-surface-1-hover',
             )}
           >
-            Direct value
+            {t('ui.flags.directValue', 'Direct value')}
           </button>
           <button
             type="button"
@@ -395,20 +420,23 @@ export function ManualFlagEditor() {
                 : 'bg-transparent text-text-2 hover:text-text-1 hover:bg-surface-1-hover',
             )}
           >
-            Bitfield value
+            {t('ui.flags.bitfieldValueTab', 'Bitfield value')}
           </button>
         </Page.Nav>
       </div>
 
       {showBitfieldSuggestion && (
         <p className="ui-prose-muted text-xs">
-          This flag has known bitfields.{' '}
+          {t(
+            'ui.flags.thisFlagHasKnownBitfields',
+            'This flag has known bitfields.',
+          )}{' '}
           <button
             type="button"
             onClick={() => handleModeChange('bitfield')}
             className="text-accent-1 hover:underline"
           >
-            Use Bitfield value
+            {t('ui.flags.useBitfieldValue', 'Use Bitfield value')}
           </button>
         </p>
       )}
@@ -422,54 +450,62 @@ export function ManualFlagEditor() {
         )}
       >
         <label className="flex min-w-0 flex-col gap-1">
-          <span className="text-xs text-text-3">Flag id</span>
+          <span className="text-xs text-text-3">
+            {t('ui.flags.flagId', 'Flag id')}
+          </span>
           <TextInput
             value={flagInput}
             onChange={handleFlagInputChange}
             placeholder="0"
             size="small"
             type="search"
-            aria-label="Manual flag id"
+            aria-label={t('ui.flags.manualFlagId', 'Manual flag id')}
             fullWidth
           />
         </label>
         {mode === 'bitfield' && (
           <>
             <label className="flex min-w-0 flex-col gap-1">
-              <span className="text-xs text-text-3">Field index</span>
+              <span className="text-xs text-text-3">
+                {t('ui.flags.fieldIndex', 'Field index')}
+              </span>
               <TextInput
                 value={fieldIndexInput}
                 onChange={handleFieldIndexInputChange}
                 placeholder="0"
                 size="small"
                 type="search"
-                aria-label="Bitfield index"
+                aria-label={t('ui.flags.bitfieldIndex', 'Bitfield index')}
                 fullWidth
               />
             </label>
             <label className="flex min-w-0 flex-col gap-1">
-              <span className="text-xs text-text-3">Width</span>
+              <span className="text-xs text-text-3">
+                {t('ui.flags.width', 'Width')}
+              </span>
               <TextInput
                 value={fieldWidthInput}
                 onChange={handleFieldWidthInputChange}
                 placeholder="1"
                 size="small"
                 type="search"
-                aria-label="Bitfield width"
+                aria-label={t('ui.flags.width', 'Bitfield width')}
                 fullWidth
               />
             </label>
           </>
         )}
         <label className="flex min-w-0 flex-col gap-1">
-          <span className="text-xs text-text-3">Value</span>
+          <span className="text-xs text-text-3">
+            {t('ui.flags.valueColumn', 'Value')}
+          </span>
           <TextInput
             value={valueInput}
             onChange={handleValueInputChange}
             placeholder="0"
             size="small"
             type="search"
-            aria-label="Manual flag value"
+            aria-label={t('ui.flags.manualFlagValue', 'Manual flag value')}
             fullWidth
           />
         </label>
@@ -480,13 +516,13 @@ export function ManualFlagEditor() {
           disabled={!!validation.error || nextValue === null}
           className="h-8 w-full justify-center px-2 whitespace-nowrap sm:w-14 sm:justify-self-end"
         >
-          Apply
+          {t('ui.flags.apply', 'Apply')}
         </Button>
       </div>
 
       {mode === 'bitfield' && isBitfieldFlag && (
         <Select
-          label="Bitfield"
+          label={t('ui.flags.bitfield', 'Bitfield')}
           items={bitfieldSelectItems}
           selectedItem={selectedBitfieldItem}
           defaultSelectedItem={selectedBitfieldItem}
@@ -499,7 +535,9 @@ export function ManualFlagEditor() {
           {validation.error}
         </div>
       ) : flagIndex === null ? (
-        <p className="ui-prose-muted text-xs">Enter a flag id to inspect.</p>
+        <p className="ui-prose-muted text-xs">
+          {t('ui.flags.enterFlagId', 'Enter a flag id to inspect.')}
+        </p>
       ) : (
         <div className="flex flex-col gap-3 text-xs">
           <div className="flex flex-col gap-1">
@@ -517,7 +555,7 @@ export function ManualFlagEditor() {
             )}
             {!isListed && (
               <span className="ui-prose-muted text-xs">
-                This flag isn't listed.
+                {t('ui.flags.unlistedFlag', "This flag isn't listed.")}
               </span>
             )}
           </div>
@@ -525,7 +563,9 @@ export function ManualFlagEditor() {
           {showValueDiff && (
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 py-2 ui-divider-row text-sm">
               <span className="text-text-1 min-w-0">
-                {hasApplied ? 'Applied' : 'Pending change'}
+                {hasApplied
+                  ? t('ui.flags.applied', 'Applied')
+                  : t('ui.flags.pendingChange', 'Pending change')}
               </span>
               <div className="flex flex-wrap items-center gap-1.5 font-mono text-xs shrink-0">
                 <span className="text-text-2 line-through decoration-text-2/50">

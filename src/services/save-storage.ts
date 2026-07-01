@@ -2,10 +2,10 @@ import { openDB } from 'idb';
 import type { Save } from '@types';
 import type { UUID } from 'crypto';
 import { toast } from './toast';
+import { translate } from '../i18n';
 
 const STORE_NAME = 'saves';
 const DATABASE_NAME = 'tenna';
-/** Bump when IndexedDB layout changes (must be >= any version already opened in users' browsers). */
 const DATABASE_VERSION = 2;
 
 const DATABASE = openDB(DATABASE_NAME, DATABASE_VERSION, {
@@ -13,7 +13,6 @@ const DATABASE = openDB(DATABASE_NAME, DATABASE_VERSION, {
     if (oldVersion < 1 && !db.objectStoreNames.contains(STORE_NAME)) {
       db.createObjectStore(STORE_NAME);
     }
-    // v1 → v2: no store changes; save shape (e.g. baseline) lives in stored values only.
   },
 });
 
@@ -29,7 +28,10 @@ async function get(id: string): Promise<Save | null> {
     return value ?? null;
   } catch (error) {
     console.error('save-storage: get failed', error);
-    toast('Failed to load save data', 'error');
+    toast(
+      translate('ui.storage.loadFailed', 'Failed to load save data'),
+      'error',
+    );
     return null;
   }
 }
@@ -44,7 +46,7 @@ async function set(id: string, save: Save): Promise<void> {
     await tx.done;
   } catch (error) {
     console.error('save-storage: set failed', error);
-    toast('Failed to save data', 'error');
+    toast(translate('ui.storage.saveFailed', 'Failed to save data'), 'error');
   }
 }
 
@@ -58,7 +60,10 @@ async function remove(id: string): Promise<void> {
     await tx.done;
   } catch (error) {
     console.error('save-storage: remove failed', error);
-    toast('Failed to remove save data', 'error');
+    toast(
+      translate('ui.storage.removeFailed', 'Failed to remove save data'),
+      'error',
+    );
   }
 }
 
@@ -71,7 +76,10 @@ async function getKeys() {
     return (await tx.objectStore(STORE_NAME).getAllKeys()) as UUID[];
   } catch (error) {
     console.error('save-storage: getKeys failed', error);
-    toast('Failed to load save data', 'error');
+    toast(
+      translate('ui.storage.loadFailed', 'Failed to load save data'),
+      'error',
+    );
     return [];
   }
 }
@@ -85,7 +93,10 @@ async function getAll(): Promise<Save[]> {
     return (await tx.objectStore(STORE_NAME).getAll()) as Save[];
   } catch (error) {
     console.error('save-storage: getAll failed', error);
-    toast('Failed to load saves', 'error');
+    toast(
+      translate('ui.storage.loadAllFailed', 'Failed to load saves'),
+      'error',
+    );
     return [];
   }
 }
@@ -106,7 +117,10 @@ async function migrate(saves: Save[]) {
     await tx.done;
   } catch (error) {
     console.error('save-storage: migrate failed', error);
-    toast('Failed to migrate save data', 'error');
+    toast(
+      translate('ui.storage.migrateFailed', 'Failed to migrate save data'),
+      'error',
+    );
   }
 }
 

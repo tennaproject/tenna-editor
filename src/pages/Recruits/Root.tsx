@@ -13,6 +13,7 @@ import { FLAGS } from '@data';
 import type { ChapterIndex, EnemyIndex } from '@data';
 import { useSave, useUi } from '@store';
 import { chapterHelpers, enemyHelpers } from '@utils';
+import { useTranslation } from '../../i18n';
 
 const recruitableEnemiesCache = new Map<string, EnemyIndex[]>();
 const CAFE_SEATS = [
@@ -47,6 +48,7 @@ function getRecruitableEnemies(
 }
 
 export function RecruitsRoot() {
+  const { t } = useTranslation();
   const showNonRecruitableEnemies = useUi(
     (s) => s.ui.recruits.showNonRecruitableEnemies,
   );
@@ -60,7 +62,7 @@ export function RecruitsRoot() {
 
   return (
     <Page>
-      <Page.TopBar title="Recruits" />
+      <Page.TopBar title={t('ui.nav.recruits', 'Recruits')} />
       <Page.Content>
         <div className="page">
           <div className="mb-4 flex flex-col gap-2 lg:flex-row lg:gap-5">
@@ -72,15 +74,35 @@ export function RecruitsRoot() {
                   )
                 }
                 checked={showNonRecruitableEnemies}
-                label="Show non-recruitable enemies"
+                label={t(
+                  'ui.recruits.showNonRecruitableEnemies',
+                  'Show non-recruitable enemies',
+                )}
               />
-              <HelpTip title="Show non-recruitable enemies">
+              <HelpTip
+                title={t(
+                  'ui.recruits.showNonRecruitableEnemies',
+                  'Show non-recruitable enemies',
+                )}
+              >
                 <p>
-                  All Chapter 1 and 2 enemies have their respective recruitment
-                  flags.
+                  {t(
+                    'ui.recruits.showNonRecruitableEnemiesDescription1',
+                    'All Chapter 1 and 2 enemies have their respective recruitment flags.',
+                  )}
                 </p>
-                <p>These do not affect anything but do exist.</p>
-                <p>This option allows to set them as recruited.</p>
+                <p>
+                  {t(
+                    'ui.recruits.showNonRecruitableEnemiesDescription2',
+                    'These do not affect anything but do exist.',
+                  )}
+                </p>
+                <p>
+                  {t(
+                    'ui.recruits.showNonRecruitableEnemiesDescription3',
+                    'This option allows to set them as recruited.',
+                  )}
+                </p>
               </HelpTip>
             </InlineGroup>
           </div>
@@ -89,11 +111,13 @@ export function RecruitsRoot() {
             <Card className="px-6 py-6">
               <div className="flex flex-col gap-3">
                 <InlineGroup>
-                  <Heading level={3}>Cafe</Heading>
-                  <HelpTip title="Cafe seating">
+                  <Heading level={3}>{t('ui.recruits.cafe', 'Cafe')}</Heading>
+                  <HelpTip title={t('ui.recruits.cafeSeating', 'Cafe seating')}>
                     <p>
-                      Choose which recruit sits at each table in the Cafe at
-                      Castle Town.
+                      {t(
+                        'ui.recruits.cafeSeatingDescription',
+                        'Choose which recruit sits at each table in the Cafe at Castle Town.',
+                      )}
                     </p>
                   </HelpTip>
                 </InlineGroup>
@@ -109,7 +133,7 @@ export function RecruitsRoot() {
           <Section id="main">
             <Card className="flex flex-col justify-between flex-1 px-6 py-6">
               <div className="flex flex-col gap-3">
-                <Heading level={3}>Recruits</Heading>
+                <Heading level={3}>{t('ui.nav.recruits', 'Recruits')}</Heading>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mt-3">
                   {recruitableEnemies.map((enemy) => (
                     <RecruitField

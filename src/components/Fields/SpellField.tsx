@@ -7,6 +7,11 @@ import {
   getSpellDisplayName,
   spellHelpers,
 } from '@utils/data-helpers';
+import {
+  getSpellTranslationKeyPrefix,
+  translateMeta,
+  useTranslation,
+} from '../../i18n';
 
 interface SpellFieldProp {
   id?: string;
@@ -21,6 +26,7 @@ export function SpellField({
   character,
   allowAllItems,
 }: SpellFieldProp) {
+  const { t } = useTranslation();
   const chapter = useSave((s) => s.save?.meta.chapter) || 1;
   const plot = useSave((s) => s.save?.plot) || 0;
   const currentSpell =
@@ -37,18 +43,26 @@ export function SpellField({
   const isValid = isExisting && isInChapter;
 
   const baseItems = getChapterSpellOptions(chapter, character, allowAllItems).map(
-    (item) =>
-      item.value === SPELLS.SUSIE_HEAL
-        ? {
-            ...item,
-            label: getSpellDisplayName(
+    (item) => {
+      const label =
+        item.value === SPELLS.SUSIE_HEAL
+          ? getSpellDisplayName(
               item.value as SpellIndex,
               chapter,
               plot,
               flags,
-            ),
-          }
-        : item,
+            )
+          : item.label;
+
+      return {
+        ...item,
+        label: translateMeta(
+          getSpellTranslationKeyPrefix(item.value as number),
+          { displayName: label },
+          t,
+        ).displayName,
+      };
+    },
   );
 
   let selectItems: SelectItem[] = baseItems;
@@ -57,7 +71,13 @@ export function SpellField({
       ...baseItems,
       {
         id: `${currentSpell}`,
-        label: getSpellDisplayName(currentSpell, chapter, plot, flags),
+        label: translateMeta(
+          getSpellTranslationKeyPrefix(currentSpell),
+          {
+            displayName: getSpellDisplayName(currentSpell, chapter, plot, flags),
+          },
+          t,
+        ).displayName,
         value: currentSpell,
         invalid: true,
       },
@@ -66,12 +86,13 @@ export function SpellField({
 
   const selectedItem =
     selectItems.find((item) => item.value === currentSpell) ?? null;
+  const label = `${t('ui.field.spell', 'Spell')} ${slot + 1}`;
 
   return (
-    <FieldWrapper id={id} className="flex-1" title={`Spell ${slot + 1}`} label>
+    <FieldWrapper id={id} className="flex-1" title={label} label>
       <Select
-        placeholder="Select a spell..."
-        label={`Spell ${slot + 1}`}
+        placeholder={t('ui.field.selectSpell', 'Select a spell...')}
+        label={label}
         defaultSelectedItem={selectedItem}
         selectedItem={selectedItem}
         onSelectionChange={(item) => {

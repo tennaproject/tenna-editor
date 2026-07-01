@@ -26,17 +26,33 @@ import { chapterHelpers } from '@utils/data-helpers';
 import { formatLocalDateTime } from '@utils/format-date';
 import { saveStorage, toast } from '@services';
 import { PlayerNameField } from '@components/Fields/PlayerNameField';
+import {
+  getChapterTranslationKeyPrefix,
+  translateMeta,
+  useTranslation,
+} from '../../i18n';
 
 function Chapter() {
+  const { t } = useTranslation();
   const value = useSave((s) => s.save?.meta.chapter) || 1;
+  const chapterMeta = chapterHelpers.getById(value);
+
   return (
     <Section id="chapter" className="flex flex-col justify-center h-19 gap-2">
-      <TextLabel>Chapter</TextLabel>
+      <TextLabel>{t('ui.home.chapter', 'Chapter')}</TextLabel>
       <InlineGroup className="leading-none">
         <div className="w-8 h-8 bg-surface-3 flex justify-center items-center font-bold">
           <p>{value}</p>
         </div>
-        <p>{chapterHelpers.getById(value).displayName}</p>
+        <p>
+          {
+            translateMeta(
+              getChapterTranslationKeyPrefix(value),
+              chapterMeta,
+              t,
+            ).displayName
+          }
+        </p>
       </InlineGroup>
     </Section>
   );
@@ -52,18 +68,30 @@ function SaveId() {
 }
 
 function SaveTimestamp() {
+  const { t } = useTranslation();
   const createdAt = useSave((s) => s.save?.meta.createdAt) ?? 0;
   const modifiedAt = useSave((s) => s.save?.meta.modifiedAt) ?? 0;
 
   return (
     <div className="text-text-2">
-      <p>Created at: {formatLocalDateTime(createdAt)}</p>
-      <p>Modified at: {formatLocalDateTime(modifiedAt)}</p>
+      <p>
+        {t('ui.home.createdAt', 'Created at: {date}').replace(
+          '{date}',
+          formatLocalDateTime(createdAt),
+        )}
+      </p>
+      <p>
+        {t('ui.home.modifiedAt', 'Modified at: {date}').replace(
+          '{date}',
+          formatLocalDateTime(modifiedAt),
+        )}
+      </p>
     </div>
   );
 }
 
 function DeleteSave() {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const activeSaveId = useSave((s) => s.activeSaveId);
   const setSave = useSave((s) => s.setSave);
@@ -87,22 +115,22 @@ function DeleteSave() {
     }
 
     setIsOpen(false);
-    toast('Save deleted.', 'success');
+    toast(t('ui.home.saveDeleted', 'Save deleted.'), 'success');
   }
 
   return (
     <div className="flex justify-end">
       <Button variant="primary" onClick={() => setIsOpen(true)}>
-        Delete Save
+        {t('ui.home.deleteSave', 'Delete Save')}
       </Button>
       <ModalLayout
         isOpen={isOpen}
         setOpen={setIsOpen}
-        title="Delete Save"
+        title={t('ui.home.deleteSave', 'Delete Save')}
         footer={
           <ModalFooter>
             <Button onClick={() => setIsOpen(false)} variant="secondary">
-              Cancel
+              {t('ui.common.cancel', 'Cancel')}
             </Button>
             <Button
               onClick={() => void onDelete()}
@@ -110,16 +138,21 @@ function DeleteSave() {
               size="lg"
               className="w-full sm:w-auto sm:min-w-36"
             >
-              Delete
+              {t('ui.common.delete', 'Delete')}
             </Button>
           </ModalFooter>
         }
       >
         <div className="flex flex-col gap-3">
           <p className="text-text-2">
-            Are you sure you want to delete the current save from the editor?
+            {t(
+              'ui.home.deleteSaveConfirm',
+              'Are you sure you want to delete the current save from the editor?',
+            )}
           </p>
-          <p className="ui-danger font-bold">This action cannot be reversed!</p>
+          <p className="ui-danger font-bold">
+            {t('ui.home.unreversible', 'This action cannot be reversed!')}
+          </p>
         </div>
       </ModalLayout>
     </div>
@@ -127,6 +160,7 @@ function DeleteSave() {
 }
 
 export function HomeOverview() {
+  const { t } = useTranslation();
   const isSavePresent = useSave((s) => !!s.save);
   const allowAllSaves = useUi((s) => s.ui.home.allowAllSaves);
   const showDogcheckedRooms = useUi((s) => s.ui.home.showDogcheckedRooms);
@@ -137,7 +171,7 @@ export function HomeOverview() {
       <div className="page">
         <Section>
           <div className="flex items-center justify-center h-32 text-text-2">
-            No save loaded
+            {t('ui.home.noSaveLoaded', 'No save loaded')}
           </div>
         </Section>
       </div>
@@ -153,9 +187,17 @@ export function HomeOverview() {
               updateUi((ui) => (ui.home.allowAllSaves = checked))
             }
             checked={allowAllSaves}
-            label={'Show rooms without save point'}
+            label={t(
+              'ui.home.showRoomsWithoutSavePoint',
+              'Show rooms without save point',
+            )}
           />
-          <HelpTip title="Show rooms without save point">
+          <HelpTip
+            title={t(
+              'ui.home.showRoomsWithoutSavePoint',
+              'Show rooms without save point',
+            )}
+          >
             <p>
               Rooms without a save point are not expected to be the starting
               point after loading save (or even being accessed at all), so
@@ -169,9 +211,11 @@ export function HomeOverview() {
               updateUi((ui) => (ui.home.showDogcheckedRooms = checked))
             }
             checked={showDogcheckedRooms}
-            label={'Show dogchecked rooms'}
+            label={t('ui.home.showDogcheckedRooms', 'Show dogchecked rooms')}
           />
-          <HelpTip title="Show dogchecked rooms">
+          <HelpTip
+            title={t('ui.home.showDogcheckedRooms', 'Show dogchecked rooms')}
+          >
             <p>
               Dogchecked rooms are not valid load targets and may send the
               player to the dogcheck screen when the save is loaded.
@@ -182,7 +226,7 @@ export function HomeOverview() {
       <>
         <Section id="general">
           <Card className="flex flex-col gap-3 p-6">
-            <Heading level={3}>General</Heading>
+            <Heading level={3}>{t('ui.home.general', 'General')}</Heading>
             <div className="flex flex-col md:flex-row gap-3">
               <div className="flex-1 flex flex-col gap-3">
                 <Chapter />
@@ -210,7 +254,7 @@ export function HomeOverview() {
         </Section>
         <Section id="meta">
           <Card className="flex flex-col gap-3 p-6 justify-between">
-            <Heading level={3}>Meta</Heading>
+            <Heading level={3}>{t('ui.home.meta', 'Meta')}</Heading>
             <div className="flex flex-col lg:flex-row gap-3">
               <div className="flex-1 flex flex-col gap-3">
                 <SaveNameField id="save-field" />

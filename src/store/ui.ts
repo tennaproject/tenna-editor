@@ -4,9 +4,12 @@ import { immer } from 'zustand/middleware/immer';
 import { STORE_NAMESPACE } from './schema';
 import { createDebouncedJSONStorage } from 'zustand-debounce';
 
-export const UI_VERSION = 4;
+export const UI_VERSION = 5;
+
+export type UiLocale = 'en' | 'ja' | 'ko';
 
 export interface Ui {
+  locale: UiLocale;
   devmode: boolean;
   uploadedSaves: number;
   sidebar: {
@@ -46,6 +49,7 @@ export const useUi = create<UiState>()(
   persist(
     immer((set) => ({
       ui: {
+        locale: 'en',
         devmode: false,
         uploadedSaves: 1,
         sidebar: {
@@ -121,6 +125,7 @@ export const useUi = create<UiState>()(
           nextState = {
             ui: {
               devmode: devmode ?? false,
+              locale: 'en',
               uploadedSaves: totalUploaded ?? 1,
               sidebar: {
                 open: false,
@@ -166,6 +171,13 @@ export const useUi = create<UiState>()(
           const current = nextState as { ui: Partial<Ui> };
           if (current.ui?.home) {
             current.ui.home.showDogcheckedRooms ??= false;
+          }
+        }
+
+        if (version < 5) {
+          const current = nextState as { ui: Partial<Ui> };
+          if (current.ui) {
+            current.ui.locale ??= 'en';
           }
         }
 

@@ -4,6 +4,7 @@
 
 import { toast } from '@services';
 import { registerSW } from 'virtual:pwa-register';
+import { translate } from './i18n';
 
 export function setupPWA() {
   const storageisUpdatingKey = 'tenna-isupdating';
@@ -34,7 +35,7 @@ export function setupPWA() {
               installing.state === 'installed' &&
               navigator.serviceWorker.controller
             ) {
-              toast('Editor is updating...', 'info');
+              toast(translate('ui.sw.updating', 'Editor is updating...'), 'info');
               localStorage.setItem(storageisUpdatingKey, 'true');
             }
           });
@@ -46,9 +47,9 @@ export function setupPWA() {
       );
       if (isUpdating) {
         const message = `
-        Editor was updated to version ${__VERSION__}
+        ${translate('ui.sw.updated', 'Editor was updated to version {version}').replace('{version}', __VERSION__)}
 
-        Check out changelog in the About page
+        ${translate('ui.sw.checkChangelog', 'Check out changelog in the About page')}
         `;
         toast(message, 'success', undefined, 'sm');
         localStorage.removeItem(storageisUpdatingKey);
@@ -57,7 +58,10 @@ export function setupPWA() {
 
     onRegisterError(error) {
       console.error('Service worker registration error', error);
-      toast('Failed to register service worker', 'error');
+      toast(
+        translate('ui.sw.registrationFailed', 'Failed to register service worker'),
+        'error',
+      );
     },
   });
 }

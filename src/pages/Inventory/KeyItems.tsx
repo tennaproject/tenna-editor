@@ -1,8 +1,10 @@
 import { InventoryPage } from '@components';
 import { useSave } from '@store';
 import { chapterHelpers } from '@utils';
+import { useTranslation } from '../../i18n';
 
 export function InventoryKeyItems() {
+  const { t } = useTranslation();
   const chapter = useSave((s) => s.save?.meta.chapter) || 1;
   const meta = chapterHelpers.getById(chapter).content.meta;
   const slots = meta.keyItemsSize;
@@ -12,7 +14,7 @@ export function InventoryKeyItems() {
       <InventoryPage
         slots={slots}
         id="key-items"
-        title="Key Items"
+        title={t('ui.nav.keyItems', 'Key Items')}
         type="keyItem"
         cols={3}
       />

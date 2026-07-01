@@ -11,6 +11,11 @@ import { useSaveItemSlot } from '@hooks';
 import { useSave } from '@store';
 import { getChapterItemOptions } from '@utils/chapter-options';
 import {
+  getItemTranslationKeyPrefix,
+  translateMeta,
+  useTranslation,
+} from '../../i18n';
+import {
   armorHelpers,
   chapterHelpers,
   consumableHelpers,
@@ -69,6 +74,19 @@ function getDisplayName(type: ItemType, id: number): string {
   }
 }
 
+function getTranslatedDisplayName(
+  type: ItemType,
+  id: number,
+  fallback: string,
+  t: (key: string, fallback: string) => string,
+) {
+  return translateMeta(
+    getItemTranslationKeyPrefix(type, id),
+    { displayName: fallback },
+    t,
+  ).displayName;
+}
+
 function getPlaceholder(type: ItemType): string {
   switch (type) {
     case 'consumable':
@@ -86,14 +104,40 @@ function getPlaceholder(type: ItemType): string {
   }
 }
 
+function getPlaceholderKey(type: ItemType): string {
+  switch (type) {
+    case 'consumable':
+      return 'ui.field.selectConsumable';
+    case 'keyItem':
+      return 'ui.field.selectKeyItem';
+    case 'weapon':
+      return 'ui.field.selectWeapon';
+    case 'armor':
+      return 'ui.field.selectArmor';
+    case 'storage':
+      return 'ui.field.selectStorageItem';
+    default:
+      return 'ui.field.selectItem';
+  }
+}
+
 export function ItemField({ type, slot, label }: ItemFieldProps) {
+  const { t } = useTranslation();
   const chapter = useSave((s) => s.save?.meta.chapter ?? 1);
   const updateSave = useSave((s) => s.updateSave);
   const currentValue = useSaveItemSlot(type, slot);
 
-  const selectLabel = label ?? 'Slot';
-  const placeholder = getPlaceholder(type);
-  const baseItems = getChapterItemOptions(chapter, type);
+  const selectLabel = label ?? t('ui.field.slot', 'Slot');
+  const placeholder = t(getPlaceholderKey(type), getPlaceholder(type));
+  const baseItems = getChapterItemOptions(chapter, type).map((item) => ({
+    ...item,
+    label: getTranslatedDisplayName(
+      type,
+      item.value as number,
+      item.label,
+      t,
+    ),
+  }));
   const chapterContent = chapterHelpers.getById(chapter).content;
 
   let availableSet: Set<number>;
@@ -119,7 +163,12 @@ export function ItemField({ type, slot, label }: ItemFieldProps) {
       break;
   }
 
-  const metaDisplay = getDisplayName(type, currentValue);
+  const metaDisplay = getTranslatedDisplayName(
+    type,
+    currentValue,
+    getDisplayName(type, currentValue),
+    t,
+  );
   const isValid = !!metaDisplay && availableSet.has(currentValue);
 
   let selectItems: SelectItem[] = baseItems;
@@ -128,7 +177,7 @@ export function ItemField({ type, slot, label }: ItemFieldProps) {
       ...baseItems,
       {
         id: `${currentValue}`,
-        label: metaDisplay || 'Unknown',
+        label: metaDisplay || t('ui.common.unknown', 'Unknown'),
         value: currentValue,
         invalid: true,
       },

@@ -5,6 +5,7 @@ import type { ChapterIndex } from '@data';
 import { useDebouncedValue } from '@hooks';
 import { getChapterFlagSet } from '@utils';
 import { useState, type ReactNode } from 'react';
+import { useTranslation } from '../../i18n';
 
 interface StoryChapterLayoutProps {
   children: ReactNode;
@@ -12,6 +13,7 @@ interface StoryChapterLayoutProps {
 }
 
 export function StoryChapterLayout(props: StoryChapterLayoutProps) {
+  const { t } = useTranslation();
   const { children, chapter } = props;
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebouncedValue(search, 200);
@@ -25,10 +27,10 @@ export function StoryChapterLayout(props: StoryChapterLayoutProps) {
             <TextInput
               value={search}
               onChange={setSearch}
-              placeholder="Search story fields..."
+              placeholder={t('ui.story.searchPlaceholder', 'Search story fields...')}
               type="search"
               fullWidth
-              aria-label="Search fields"
+              aria-label={t('ui.story.searchFields', 'Search fields')}
             />
           </div>
           <div className="flex flex-col gap-4">{children}</div>

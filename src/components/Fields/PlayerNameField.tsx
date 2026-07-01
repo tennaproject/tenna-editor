@@ -1,6 +1,7 @@
 import { TextInput, FieldWrapper } from '@components';
 import { useSave } from '@store';
 import { mergeClass } from '@utils/merge-class';
+import { useTranslation } from '../../i18n';
 
 interface PlayerNameFieldProps {
   id?: string;
@@ -8,6 +9,7 @@ interface PlayerNameFieldProps {
 }
 
 export function PlayerNameField({ id, className }: PlayerNameFieldProps) {
+  const { t } = useTranslation();
   const playerName = useSave((s) => s.save?.playerName) ?? '';
   const updateSave = useSave((s) => s.updateSave);
 
@@ -25,13 +27,13 @@ export function PlayerNameField({ id, className }: PlayerNameFieldProps) {
     <FieldWrapper
       id={id}
       className={mergeClass('flex flex-col gap-2', className)}
-      title="Player Name"
+      title={t('ui.field.playerName', 'Player Name')}
       description={description}
       label
     >
       <TextInput
         value={playerName}
-        placeholder="Enter player name..."
+        placeholder={t('ui.field.selectPlayerName', 'Enter player name...')}
         onChange={onChange}
       />
     </FieldWrapper>

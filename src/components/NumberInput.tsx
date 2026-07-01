@@ -2,6 +2,7 @@ import ArrowUpIcon from '@assets/icons/chevron-up.svg?react';
 import ArrowDownIcon from '@assets/icons/chevron-down.svg?react';
 import { mergeClass } from '@utils/merge-class';
 import { useMemo } from 'react';
+import { useTranslation } from '../i18n';
 
 interface NumberInputProps {
   value: number;
@@ -26,6 +27,7 @@ export function NumberInput({
   className,
   fullWidth = false,
 }: NumberInputProps) {
+  const { t } = useTranslation();
   const clamp = (v: number) => {
     let next = v;
     if (typeof min === 'number') next = Math.max(next, min);
@@ -111,7 +113,7 @@ export function NumberInput({
       >
         <button
           type="button"
-          aria-label="Increase value"
+          aria-label={t('ui.common.increaseValue', 'Increase value')}
           onClick={() => {
             changeBy(1);
           }}
@@ -120,7 +122,7 @@ export function NumberInput({
             'w-8 h-4 flex items-center justify-center border border-border bg-surface-2 text-text-2 hover:bg-surface-2-hover hover:text-text-1 motion-reduce:transition-none transition-colors',
             (!canIncrement || disabled) && 'opacity-40',
           )}
-          title="Increase"
+          title={t('ui.common.increase', 'Increase')}
         >
           <span className="w-3 h-3">
             <ArrowUpIcon />
@@ -129,7 +131,7 @@ export function NumberInput({
 
         <button
           type="button"
-          aria-label="Decrease value"
+          aria-label={t('ui.common.decreaseValue', 'Decrease value')}
           onClick={() => {
             changeBy(-1);
           }}
@@ -138,7 +140,7 @@ export function NumberInput({
             'w-8 h-4 flex items-center justify-center border border-border bg-surface-2 text-text-2 hover:bg-surface-2-hover hover:text-text-1 motion-reduce:transition-none transition-colors',
             (!canDecrement || disabled) && 'opacity-40',
           )}
-          title="Decrease"
+          title={t('ui.common.decrease', 'Decrease')}
         >
           <span className="w-3 h-3">
             <ArrowDownIcon />

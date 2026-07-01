@@ -2,6 +2,7 @@ import { Section, TextInput, TextLabel } from '@components';
 import { useSave } from '@store';
 import { mergeClass } from '@utils/merge-class';
 import { useState, useRef } from 'react';
+import { useTranslation } from '../../i18n';
 
 interface SaveNameFieldProps {
   id?: string;
@@ -9,6 +10,7 @@ interface SaveNameFieldProps {
 }
 
 export function SaveNameField({ id, className }: SaveNameFieldProps) {
+  const { t } = useTranslation();
   const name = useSave((s) => s.save?.meta.name) || 'Cool save';
   const updateSave = useSave((s) => s.updateSave);
   const [localValue, setLocalValue] = useState(name);
@@ -35,7 +37,7 @@ export function SaveNameField({ id, className }: SaveNameFieldProps) {
 
   return (
     <Section id={id} className={mergeClass('flex flex-col gap-2', className)}>
-      <TextLabel>Save name</TextLabel>
+      <TextLabel>{t('ui.field.saveName', 'Save name')}</TextLabel>
       <TextInput value={localValue} onChange={onChange} />
     </Section>
   );

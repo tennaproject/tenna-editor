@@ -2,6 +2,7 @@ import { FieldWrapper, Select, type SelectItem } from '@components';
 import { useSave } from '@store';
 import type { SaveSlot } from '@types';
 import { mergeClass } from '@utils/merge-class';
+import { useTranslation } from '../../i18n';
 
 const SLOT_OPTIONS: SelectItem[] = [
   { id: '0', label: 'Slot 1' },
@@ -15,6 +16,7 @@ interface SaveSlotFieldProps {
 }
 
 export function SaveSlotField({ id, className }: SaveSlotFieldProps) {
+  const { t } = useTranslation();
   const slot = useSave((s) => s.save?.meta.slot) ?? 0;
   const updateSave = useSave((s) => s.updateSave);
 
@@ -31,12 +33,12 @@ export function SaveSlotField({ id, className }: SaveSlotFieldProps) {
     <FieldWrapper
       id={id}
       className={mergeClass('flex flex-col gap-2', className)}
-      title="In-game slot"
+      title={t('ui.field.inGameSlot', 'In-game slot')}
       label
     >
       <Select
         items={SLOT_OPTIONS}
-        placeholder="Select slot"
+        placeholder={t('ui.field.selectSlot', 'Select slot')}
         selectedItem={SLOT_OPTIONS[slot]}
         defaultSelectedItem={SLOT_OPTIONS[slot]}
         onSelectionChange={onSelectionChange}

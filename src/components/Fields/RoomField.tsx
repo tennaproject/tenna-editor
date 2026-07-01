@@ -4,6 +4,11 @@ import { useSave } from '@store';
 import { getChapterRoomOptions } from '@utils/chapter-options';
 import { roomHelpers } from '@utils/data-helpers';
 import { mergeClass } from '@utils/merge-class';
+import {
+  getRoomTranslationKeyPrefix,
+  translateMeta,
+  useTranslation,
+} from '../../i18n';
 
 interface RoomFieldProps {
   id?: string;
@@ -18,6 +23,7 @@ export function RoomField({
   showNonSavepoint,
   showDogcheckedRooms,
 }: RoomFieldProps) {
+  const { t } = useTranslation();
   const room = useSave((s) => s.save?.room) ?? 0;
   const chapter = useSave((s) => s.save?.meta.chapter) || 1;
   const updateSave = useSave((s) => s.updateSave);
@@ -32,7 +38,14 @@ export function RoomField({
     chapter,
     !!showNonSavepoint,
     !!showDogcheckedRooms,
-  );
+  ).map((item) => ({
+    ...item,
+    label: translateMeta(
+      getRoomTranslationKeyPrefix(item.value as number),
+      { displayName: item.label },
+      t,
+    ).displayName,
+  }));
 
   const isCurrentRoomInList = items.some((item) => item.value === room);
   let selectItems: SelectItem[] = items;
@@ -42,11 +55,16 @@ export function RoomField({
       meta?.displayName ||
       roomHelpers.getName(room as RoomIndex) ||
       `Unknown ${room}`;
+    const translatedLabel = translateMeta(
+      getRoomTranslationKeyPrefix(room),
+      { displayName: label },
+      t,
+    ).displayName;
     selectItems = [
       ...items,
       {
         id: room.toString(),
-        label,
+        label: translatedLabel,
         value: room,
         invalid: true,
       },
@@ -63,14 +81,14 @@ export function RoomField({
     <FieldWrapper
       id={id}
       className={mergeClass('flex flex-col gap-2', className)}
-      title="Current Room"
+      title={t('ui.field.currentRoom', 'Current Room')}
       description={description}
       label
     >
       <Select
         items={selectItems}
-        placeholder="Select a room..."
-        label="Current Room"
+        placeholder={t('ui.field.selectRoom', 'Select a room...')}
+        label={t('ui.field.currentRoom', 'Current Room')}
         defaultSelectedItem={selectedItem}
         selectedItem={selectedItem}
         onSelectionChange={onChange}

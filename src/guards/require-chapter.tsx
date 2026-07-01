@@ -3,6 +3,7 @@ import { toast } from '@services';
 import { useSave } from '@store';
 import { useEffect, useRef, type ReactElement } from 'react';
 import { Navigate } from 'react-router-dom';
+import { translate } from '../i18n';
 
 interface RequireChapterProps {
   children: ReactElement;
@@ -21,7 +22,13 @@ export function RequireChapter({
   const pass = chapter >= requiredChapter;
   useEffect(() => {
     if (!pass && !shownRef.current) {
-      toast('This page is not available in this chapter', 'error');
+      toast(
+        translate(
+          'ui.guard.wrongChapter',
+          'This page is not available in this chapter',
+        ),
+        'error',
+      );
       shownRef.current = true;
     }
 

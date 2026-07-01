@@ -7,6 +7,7 @@ import { extractGamePayload } from '@utils';
 import { createDebouncedJSONStorage } from 'zustand-debounce';
 import { saveStorage, toast } from '@services';
 import { useHistory } from './history';
+import { translate } from '../i18n';
 
 const SYNC_DELAY = 300;
 let syncTimer: number | null = null;
@@ -154,9 +155,21 @@ export const useSave = create<SaveState>()(
               state.activeSaveId = id;
             });
 
-            toast(`Switched to save "${newSave.meta.name}"`, 'success');
+            toast(
+              translate('ui.save.switchedTo', 'Switched to save "{name}"').replace(
+                '{name}',
+                newSave.meta.name,
+              ),
+              'success',
+            );
           } else {
-            toast('Error occured while switching to new save', 'error');
+            toast(
+              translate(
+                'ui.save.switchError',
+                'Error occured while switching to new save',
+              ),
+              'error',
+            );
           }
         },
 

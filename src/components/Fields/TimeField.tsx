@@ -3,6 +3,7 @@ import { useSave } from '@store';
 import { mergeClass } from '@utils/merge-class';
 import { formatTime, parseTime } from '@utils/time';
 import { useRef, useEffect, useState } from 'react';
+import { useTranslation } from '../../i18n';
 
 interface TimeFieldProps {
   id?: string;
@@ -10,6 +11,7 @@ interface TimeFieldProps {
 }
 
 export function TimeField({ id, className }: TimeFieldProps) {
+  const { t } = useTranslation();
   const time = formatTime(useSave((s) => s.save?.time) ?? 0);
   const updateSave = useSave((s) => s.updateSave);
   const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -49,7 +51,7 @@ export function TimeField({ id, className }: TimeFieldProps) {
     <FieldWrapper
       id={id}
       className={mergeClass('flex flex-col gap-2', className)}
-      title="Playtime"
+      title={t('ui.field.playtime', 'Playtime')}
       label
     >
       <TextInput
