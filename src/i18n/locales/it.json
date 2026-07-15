@@ -9,9 +9,9 @@
   "ui.settings.language": "Lingua",
   "ui.settings.languageDescription": "Scegli quale lingua utilizza l'editor. Le traduzioni mancanti seguiranno quelle Inglesi.",
   "ui.settings.languagePlaceholder": "Scegli lingua...",
-  'ui.settings.exportFailed': 'Impossibile esportare salvataggi',
-  'ui.settings.importSuccess': 'Importato con successo {imported} salvataggi/o (saltati {skipped})',
-  'ui.settings.importFailedGeneric': 'Impossibile importare file di backup',
+  "ui.settings.exportFailed': "Impossibile esportare salvataggi",
+  "ui.settings.importSuccess": "Importato con successo {imported} salvataggi/o (saltati {skipped})",
+  "ui.settings.importFailedGeneric": "Impossibile importare file di backup",
   "ui.flag.numberPlaceholder": "Inserisci numero...",
   "ui.flag.mapPlaceholder": "Seleziona valore..."
   'ui.nav.about': 'A Riguardo',
