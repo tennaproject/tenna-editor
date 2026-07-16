@@ -19,6 +19,7 @@ export const FLAG_BITFIELDS = {
   SCISSORS_PUZZLE_FLOWERY_FACE_PATH_CUT: 'SCISSORS_PUZZLE_FLOWERY_FACE_PATH_CUT',
   RALSEI_HOLD_Z_HINT: 'RALSEI_HOLD_Z_HINT',
   HOPSCHEF_PROGRESS: 'HOPSCHEF_PROGRESS',
+  SAW_FINAL_STARWALKER: 'SAW_FINAL_STARWALKER',
 } as const;
 
 export type FlagBitfieldName = keyof typeof FLAG_BITFIELDS;
@@ -64,6 +65,14 @@ export const FLAG_BITFIELDS_META: Record<
         2: 'Completed challenge',
       },
     },
+  },
+  [FLAG_BITFIELDS.SAW_FINAL_STARWALKER]: {
+    parent: FLAGS.FINAL_STARWALKER_FLAG,
+    index: 0,
+    displayName: 'Final Starwalker scene',
+    description:
+      "Saw Original Starwalker's final Starwalker scene at the top of the Castle; enables Kris's Walkerstar title.",
+    valueType: 'boolean',
   },
 };
 

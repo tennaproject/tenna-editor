@@ -102,6 +102,34 @@ export const CHARACTER_TITLES: Record<
       name: 'Dark Bead',
       description: 'Broken off, but still locked',
     },
+    BLUE_ROSE: {
+      name: 'Blue Rose',
+      description: 'Quiet, yet flirtatious',
+    },
+    DARK_ROSE: {
+      name: 'Dark Rose',
+      description: 'Conveys departure',
+    },
+    PINK_ROSE: {
+      name: 'Pink Rose',
+      description: 'Flirtatious, and flirtatious',
+    },
+    SHATTERED_ROSE: {
+      name: 'Shattered Rose',
+      description: "Only one knows the rose's meaning",
+    },
+    LAST_MOSS: {
+      name: 'Last Moss',
+      description: "A mossliker's final form",
+    },
+    WALKERSTAR: {
+      name: 'Walkerstar',
+      description: "Starwalker's walking buddy",
+    },
+    ROOM_MAN: {
+      name: 'LV1',
+      description: '',
+    },
   },
   SUSIE: {
     MEAN_GIRL: {
@@ -131,6 +159,14 @@ export const CHARACTER_TITLES: Record<
     AXE_OF_JUSTICE: {
       name: 'Axe of Justice',
       description: 'Faces fate with the blade',
+    },
+    VIOLENT_VIOLET: {
+      name: 'Violent Violet',
+      description: 'For that special someone',
+    },
+    DARK_VINE_SEAL: {
+      name: 'Dark Vine',
+      description: 'Assists in sealing the Fountain',
     },
   },
   RALSEI: {
@@ -186,6 +222,14 @@ export const CHARACTER_TITLES: Record<
       name: 'Stool Boy',
       description: 'Boy with stool like abilities',
     },
+    ARTEMISIA: {
+      name: 'Artemisia',
+      description: 'Goes well with tea',
+    },
+    DARK_VINE_WATER: {
+      name: 'Dark Vine',
+      description: 'Watering their own thorns',
+    },
   },
   NOELLE: {
     SNOWCASTER: {
@@ -203,6 +247,10 @@ export const CHARACTER_TITLES: Record<
     MOSS_NEUTRAL: {
       name: 'Moss Neutral',
       description: 'Neither chaotic nor lawful to moss',
+    },
+    MISTLETOE: {
+      name: 'Mistletoe',
+      description: 'Things got serious today',
     },
   },
 } as const;
@@ -231,6 +279,9 @@ interface CharacterPropertiesOverrides {
     ralseiHorse: boolean;
     gotMossWithNoelle: boolean;
     noelleIceShockCount: number;
+    weirdRouteFailCh5: boolean;
+    krisTitlePinkRose: number;
+    sawFinalStarwalker: boolean;
     susieCanEquipRibbons: boolean;
   };
   hasEgg: boolean;
@@ -325,7 +376,7 @@ export const CHARACTERS_META: Record<CharacterIndex, CharacterProperties> = {
       ARMORS.GREEN_APRON,
     ]),
     allowedSpells: new Set<SpellIndex>([SPELLS.EMPTY, SPELLS.ACT]),
-    getOverrides: ({ chapter, plot, flags, hasEgg }) => {
+    getOverrides: ({ chapter, plot, flags, hasEgg, room }) => {
       const overrides: Partial<CharacterProperties> = {};
 
       if (chapter === 1) {
@@ -421,6 +472,44 @@ export const CHARACTERS_META: Record<CharacterIndex, CharacterProperties> = {
 
         if (flags.weirdRouteProgressCh2 >= 3) {
           overrides.title = CHARACTER_TITLES.KRIS.DARK_BEAD;
+        }
+
+        return overrides;
+      }
+
+      if (chapter === 5) {
+        overrides.lv = 5;
+        overrides.title = CHARACTER_TITLES.KRIS.BLUE_ROSE;
+
+        if (plot >= 440) {
+          overrides.title = CHARACTER_TITLES.KRIS.DARK_ROSE;
+        }
+
+        if (flags.krisTitlePinkRose >= 2) {
+          overrides.title = CHARACTER_TITLES.KRIS.PINK_ROSE;
+        }
+
+        if (flags.weirdRouteFailCh5) {
+          overrides.title = CHARACTER_TITLES.KRIS.SHATTERED_ROSE;
+        }
+
+        if (
+          plot >= 398 &&
+          flags.gotMossCh1 &&
+          flags.gotMossWithSusie &&
+          flags.gotMossCh3 &&
+          flags.gotMossCh4
+        ) {
+          overrides.title = CHARACTER_TITLES.KRIS.LAST_MOSS;
+        }
+
+        if (flags.sawFinalStarwalker) {
+          overrides.title = CHARACTER_TITLES.KRIS.WALKERSTAR;
+        }
+
+        if (room === ROOMS.MAN_CH5) {
+          overrides.lv = 1;
+          overrides.title = CHARACTER_TITLES.KRIS.ROOM_MAN;
         }
 
         return overrides;
@@ -538,11 +627,22 @@ export const CHARACTERS_META: Record<CharacterIndex, CharacterProperties> = {
         return overrides;
       }
 
-      if (chapter === 5 && flags.susieCanEquipRibbons) {
-        overrides.allowedArmors = new Set([
-          ...CHARACTERS_META[CHARACTERS.SUSIE].allowedArmors,
-          ...RIBBON_ARMORS,
-        ]);
+      if (chapter === 5) {
+        overrides.lv = 5;
+        overrides.title = CHARACTER_TITLES.SUSIE.VIOLENT_VIOLET;
+
+        if (plot >= 440) {
+          overrides.title = CHARACTER_TITLES.SUSIE.DARK_VINE_SEAL;
+        }
+
+        if (flags.susieCanEquipRibbons) {
+          overrides.allowedArmors = new Set([
+            ...CHARACTERS_META[CHARACTERS.SUSIE].allowedArmors,
+            ...RIBBON_ARMORS,
+          ]);
+        }
+
+        return overrides;
       }
 
       return overrides;
@@ -699,6 +799,17 @@ export const CHARACTERS_META: Record<CharacterIndex, CharacterProperties> = {
         return overrides;
       }
 
+      if (chapter === 5) {
+        overrides.lv = 5;
+        overrides.title = CHARACTER_TITLES.RALSEI.ARTEMISIA;
+
+        if (plot >= 440) {
+          overrides.title = CHARACTER_TITLES.RALSEI.DARK_VINE_WATER;
+        }
+
+        return overrides;
+      }
+
       return overrides;
     },
   },
@@ -765,8 +876,14 @@ export const CHARACTERS_META: Record<CharacterIndex, CharacterProperties> = {
       SPELLS.ICESHOCK,
       SPELLS.SNOWGRAVE,
     ]),
-    getOverrides: ({ plot, flags, weapon }) => {
+    getOverrides: ({ chapter, plot, flags, weapon }) => {
       const overrides: Partial<CharacterProperties> = {};
+
+      if (chapter === 5) {
+        overrides.lv = 5;
+        overrides.title = CHARACTER_TITLES.NOELLE.MISTLETOE;
+        return overrides;
+      }
 
       if (flags.noelleIceShockCount > 0) {
         overrides.lv = 2;

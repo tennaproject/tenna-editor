@@ -36,6 +36,9 @@ export function useCharacterOverrideInputs(character: CharacterIndex) {
     ralseiHorse: !!useSaveFlag(FLAGS.HORSE_RALSEI),
     gotMossWithNoelle: !!useSaveFlag(FLAGS.ATE_MOSS_WITH_NOELLE),
     noelleIceShockCount: useSaveFlag(FLAGS.ICESHOCKS) as number,
+    weirdRouteFailCh5: useSaveFlag(FLAGS.WEIRD_ROUTE_FAIL_CH5) === 1,
+    krisTitlePinkRose: useSaveFlag(FLAGS.PINK_PROGRESS) as number,
+    sawFinalStarwalker: (useSaveFlag(FLAGS.FINAL_STARWALKER_FLAG) & 1) === 1,
     susieCanEquipRibbons: useSaveFlag(FLAGS.RIBBON_CHEST_STATE) > 0,
   };
 

@@ -1261,8 +1261,10 @@ export const FLAGS = {
   PLATMODE_JUMP_COUNT: 1904,
   PLATMODE_SWING_COUNT: 1905,
   DEFEATED_PINK: 1908,
+  WEIRD_ROUTE_FAIL_CH5: 1743,
   TALKED_TORIEL_LAST_NIGHT: 1747,
   PINK_PROGRESS: 1846,
+  FINAL_STARWALKER_FLAG: 1851,
 } as const;
 
 export type FlagIndex = (typeof FLAGS)[keyof typeof FLAGS];
@@ -8772,6 +8774,19 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     displayName: 'Suggested Tenna',
     description: "Suggested Tenna to Mettaton, if it wasn't repaired.",
     valueType: 'boolean',
+  },
+  [FLAGS.WEIRD_ROUTE_FAIL_CH5]: {
+    displayName: 'Nothing changed',
+    description:
+      "Aborted the Chapter 5 Weird Route at the lake. Also unlocks Kris's Shattered Rose title and changes later dialogue.",
+    valueType: 'boolean',
+  },
+  [FLAGS.FINAL_STARWALKER_FLAG]: {
+    displayName: 'Final Starwalker flags',
+    description:
+      "Raw bitfield state for Original Starwalker's final Castle scene.",
+    valueType: 'number',
+    valueRules: { min: 0 },
   },
   [FLAGS.INTERACTED_WITH_TV_FIXED]: {
     displayName: 'Checked the fixed TV',
