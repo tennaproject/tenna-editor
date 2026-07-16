@@ -88,11 +88,11 @@ export default defineConfig({
     tsconfigPaths: true,
   },
   server: {
-    host: '127.0.0.1',
+    host: process.env.VITE_HOST ?? '127.0.0.1',
     port: 4500,
   },
   preview: {
-    host: '127.0.0.1',
+    host: process.env.VITE_HOST ?? '127.0.0.1',
     port: 4545,
   },
   build: {

@@ -1,16 +1,36 @@
 {
-  "name": "Tenna",
-  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
-  // "features": {},
-  "forwardPorts": [4500],
+  "name": "Tenna Editor",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "BUN_VERSION": "1.3.14"
+    }
+  },
+  "init": true,
+  "remoteUser": "vscode",
+  "updateRemoteUserUID": true,
+  "remoteEnv": {
+    "VITE_HOST": "0.0.0.0"
+  },
+  "forwardPorts": [4500, 4545],
+  "portsAttributes": {
+    "4500": {
+      "label": "Vite development server",
+      "onAutoForward": "notify"
+    },
+    "4545": {
+      "label": "Vite preview server",
+      "onAutoForward": "silent"
+    }
+  },
   "customizations": {
     "vscode": {
       "extensions": [
         "bradlc.vscode-tailwindcss",
-        "esbenp.prettier-vscode",
-        "ms-vscode-remote.remote-containers"
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
       ]
     }
   },
-  "postCreateCommand": "bash .devcontainer/devcontainer-setup.sh"
+  "postCreateCommand": "bun install --frozen-lockfile"
 }

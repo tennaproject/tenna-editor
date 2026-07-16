@@ -94,14 +94,18 @@ I put a lot of effort into making the layout look distinct and directly inspired
 
 ## Development
 
-Ensure Node.js >=22.16.0 and npm >=10.9.2. A Node version manager like [nvm](https://github.com/nvm-sh/nvm) can use the version specified in `.nvmrc`.
+The project uses [Bun](https://bun.sh/) for dependency management, package scripts, and its JavaScript runtime.
+
+> [!WARNING]
+> Node.js/npm is not supported. It may currently work in some cases, but the
+> project does not provide an npm lockfile or test Node-based workflows.
 
 You can also open the repository in the provided [Dev Container](https://containers.dev/) for a preconfigured environment.
 
 Install dependencies:
 
 ```bash
-npm install
+bun install --frozen-lockfile
 ```
 
 ### Running
@@ -109,7 +113,7 @@ npm install
 Start a development server:
 
 ```bash
-npm run dev
+bun run dev
 ```
 
 ### Building
@@ -117,13 +121,13 @@ npm run dev
 Create a production build:
 
 ```bash
-npm run build
+bun run build
 ```
 
 Preview the production build locally:
 
 ```bash
-npm run preview
+bun run preview
 ```
 
 ### Contributing
@@ -131,10 +135,7 @@ npm run preview
 Run linting and formatting before submitting changes:
 
 ```bash
-npm run lint
-npm run lint:fix
-npm run format
-npm run format:check
+bun run check
 ```
 
 ## License

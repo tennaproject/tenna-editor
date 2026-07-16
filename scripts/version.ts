@@ -18,6 +18,10 @@ async function getPackageVersion() {
 }
 
 function getCommitHash() {
+  if (process.env.COMMIT_HASH) {
+    return process.env.COMMIT_HASH;
+  }
+
   try {
     const commitHash = execSync('git rev-parse --short HEAD').toString().trim();
     return commitHash;
@@ -30,6 +34,10 @@ function getCommitHash() {
 function getBranch() {
   if (process.env.CF_PAGES_BRANCH) {
     return process.env.CF_PAGES_BRANCH;
+  }
+
+  if (process.env.BRANCH) {
+    return process.env.BRANCH;
   }
 
   try {

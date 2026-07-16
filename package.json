@@ -3,22 +3,23 @@
   "private": false,
   "version": "0.11.0-beta",
   "type": "module",
+  "packageManager": "bun@1.3.14",
   "engines": {
-    "node": ">=22.16.0",
-    "npm": ">=10.9.2"
+    "bun": ">=1.3.14"
   },
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "update-contributors": "node scripts/contributors.ts",
-    "check-contributors": "npm run update-contributors && git diff --exit-code -- CONTRIBUTORS.md src/data/contributors.ts",
-    "preview": "vite preview",
-    "generate-favicon": "node scripts/generate-favicon.ts",
-    "generate-pwa-assets": "pwa-assets-generator && npm run generate-favicon",
+    "dev": "bunx --bun vite",
+    "build": "bunx --bun tsc -b && bunx --bun vite build",
+    "check": "bun run lint && bun run format:check && bun run build",
+    "lint": "bunx --bun eslint .",
+    "lint:fix": "bunx --bun eslint . --fix",
+    "format": "bunx --bun prettier --write .",
+    "format:check": "bunx --bun prettier --check .",
+    "update-contributors": "bun scripts/contributors.ts",
+    "check-contributors": "bun run update-contributors && git diff --exit-code -- CONTRIBUTORS.md src/data/contributors.ts",
+    "preview": "bunx --bun vite preview",
+    "generate-favicon": "bun scripts/generate-favicon.ts",
+    "generate-pwa-assets": "bunx --bun pwa-assets-generator && bun run generate-favicon",
     "release": "bash scripts/release.sh"
   },
   "dependencies": {
@@ -42,7 +43,7 @@
     "zustand-debounce": "^2.3.1"
   },
   "devDependencies": {
-    "@babel/core": "^8.0.1",
+    "@babel/core": "^7.29.0",
     "@eslint-react/eslint-plugin": "^5.14.6",
     "@eslint/js": "^10.0.1",
     "@rolldown/plugin-babel": "^0.2.3",
