@@ -4,6 +4,12 @@ import {
 } from '@vite-pwa/assets-generator/config';
 
 export default defineConfig({
-  preset,
+  preset: {
+    ...preset,
+    transparent: {
+      ...preset.transparent,
+      favicons: [],
+    },
+  },
   images: ['public/logo.svg'],
 });

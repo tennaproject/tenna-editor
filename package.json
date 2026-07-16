@@ -17,7 +17,8 @@
     "update-contributors": "node scripts/contributors.ts",
     "check-contributors": "npm run update-contributors && git diff --exit-code -- CONTRIBUTORS.md src/data/contributors.ts",
     "preview": "vite preview",
-    "generate-pwa-assets": "pwa-assets-generator",
+    "generate-favicon": "node scripts/generate-favicon.ts",
+    "generate-pwa-assets": "pwa-assets-generator && npm run generate-favicon",
     "release": "bash scripts/release.sh"
   },
   "dependencies": {
