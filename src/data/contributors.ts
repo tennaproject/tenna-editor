@@ -40,6 +40,11 @@ export const CONTRIBUTORS: Contributor[] = [
     url: 'https://github.com/MiaouKING',
   },
   {
+    displayName: 'newhajinyoon',
+    login: 'newhajinyoon',
+    url: 'https://github.com/newhajinyoon',
+  },
+  {
     displayName: 'soulware1',
     login: 'soulware1',
     url: 'https://github.com/soulware1',
@@ -50,8 +55,8 @@ export const CONTRIBUTORS: Contributor[] = [
     url: 'https://github.com/wryyyong',
   },
   {
-    displayName: 'Xanderrock98',
-    login: 'Xanderrock98',
-    url: 'https://github.com/Xanderrock98',
+    displayName: 'xanderrock98',
+    login: 'xanderrock98',
+    url: 'https://github.com/xanderrock98',
   },
 ];

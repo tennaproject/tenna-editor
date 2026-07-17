@@ -107,19 +107,16 @@ export default defineConfig({
               name: 'react',
               test: /node_modules[/\\](react|react-dom|scheduler)[/\\]/,
               priority: 30,
-              maxSize: 400 * 1024,
             },
             {
               name: 'motion',
               test: /node_modules[/\\]framer-motion[/\\]/,
               priority: 20,
-              maxSize: 400 * 1024,
             },
             {
               name: 'downshift',
               test: /node_modules[/\\]downshift[/\\]/,
               priority: 20,
-              maxSize: 400 * 1024,
             },
             {
               name: 'zustand',
@@ -135,7 +132,6 @@ export default defineConfig({
               name: 'vendor',
               test: /node_modules[/\\]/,
               priority: 10,
-              maxSize: 400 * 1024,
             },
             {
               name: 'common',

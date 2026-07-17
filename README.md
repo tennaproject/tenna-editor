@@ -89,8 +89,10 @@ I put a lot of effort into making the layout look distinct and directly inspired
 - [@krisgrant](https://github.com/krisgrant)
 - [@Matojeje](https://github.com/Matojeje)
 - [@MiaouKING](https://github.com/MiaouKING)
+- [@newhajinyoon](https://github.com/newhajinyoon)
 - [@soulware1](https://github.com/soulware1)
 - [@wryyyong](https://github.com/wryyyong)
+- [@xanderrock98](https://github.com/xanderrock98)
 
 ## Development
 

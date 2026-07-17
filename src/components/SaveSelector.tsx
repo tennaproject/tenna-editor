@@ -43,7 +43,7 @@ export function SaveSelector() {
 
   return (
     <Select
-      className="h-10 mr-[0.11rem] w-[100%] max-w-30 sm:max-w-50"
+      className="h-10 mr-[0.11rem] w-full max-w-30 sm:max-w-100"
       placeholder={t('ui.common.noSaves', 'No saves...')}
       items={saveSelectOptions}
       selectedItem={selectedItem}

@@ -1,5 +1,5 @@
 {
-  "ignoredLogins": ["dependabot[bot]"],
+  "ignoredLogins": ["dependabot[bot]", "github-actions[bot]"],
   "ignoredEmails": [],
   "contributors": [
     {

@@ -1,0 +1,53 @@
+name: Update Contributors
+
+on:
+  pull_request_target:
+    types: [closed]
+
+concurrency:
+  group: update-contributors
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  update-contributors:
+    if: >-
+      github.event.pull_request.merged == true &&
+      github.event.pull_request.base.ref == github.event.repository.default_branch
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          fetch-depth: 0
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.14
+
+      - run: bun run update-contributors
+
+      - name: Find changed contributor files
+        id: contributor-files
+        run: |
+          file_list="${RUNNER_TEMP}/contributor-files.txt"
+          git diff --name-only -- CONTRIBUTORS.md README.md src/data/contributors.ts > "${file_list}"
+
+          if [[ -s "${file_list}" ]]; then
+            echo "changed=true" >> "${GITHUB_OUTPUT}"
+            echo "file-list=${file_list}" >> "${GITHUB_OUTPUT}"
+          else
+            echo "changed=false" >> "${GITHUB_OUTPUT}"
+          fi
+
+      - name: Commit updated contributors
+        if: steps.contributor-files.outputs.changed == 'true'
+        uses: magmanu/github-action-bot-signed-commit@fb2582c7c22a7183a95504156c4ac02bb734d6ed # v1.0.4
+        with:
+          TARGET_REF: ${{ github.event.repository.default_branch }}
+          FILE_LIST: ${{ steps.contributor-files.outputs.file-list }}
+          SHOULD_CREATE_NEW_BRANCH: false
+          COMMIT_MESSAGE: 'Update contributors after #${{ github.event.pull_request.number }}'
