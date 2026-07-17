@@ -17,9 +17,15 @@ export type SaveFormat = 1 | 2;
 export type SaveSlot = 0 | 1 | 2;
 export type BaselineSource = 'upload' | 'download';
 
+export interface PcDrIniSource {
+  fileName: string;
+  content: string;
+}
+
 export interface PcSaveSource {
   platform: 'pc';
   fileName?: string;
+  drIni?: PcDrIniSource;
 }
 
 export interface SwitchSaveSource {

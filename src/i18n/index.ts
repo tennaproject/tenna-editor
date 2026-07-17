@@ -141,10 +141,10 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.header.uploadSave': 'Upload save',
   'ui.download.baseDrIni': 'Base dr.ini',
   'ui.download.baseDrIniDescription':
-    'Optional: choose your existing dr.ini to preserve metadata that is not stored in save files.',
+    'An imported dr.ini is used automatically. Optionally choose another file to override it.',
   'ui.download.baseContainer': 'Base container',
   'ui.download.baseContainerDescription':
-    'Save metadata is generated automatically. Optionally choose an existing container to preserve entries that are not selected below.',
+    'Imported dr.ini metadata is used automatically. Optionally choose a container to preserve other entries.',
   'ui.download.changesSinceBaseline': 'Changes since last upload or download',
   'ui.download.clearBase': 'Clear base',
   'ui.download.downloadMultipleSaves': 'Download multiple saves',
@@ -181,19 +181,42 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.download.target': 'Target',
   'ui.download.source': 'Source',
   'ui.upload.chapter': 'Chapter',
+  'ui.upload.chooseFilesArchives': 'Choose files or archives',
+  'ui.upload.chooseFolder': 'Choose folder',
+  'ui.upload.chooseInputInstead': 'or choose what to import',
   'ui.upload.chooseSwitchSave': 'Choose Switch Save',
+  'ui.upload.clearSelection': 'Clear selection',
   'ui.upload.confirmChapter': 'Confirm Chapter',
   'ui.upload.containedSave': 'Contained save',
   'ui.upload.correctChapterQuestion': 'Is this the correct chapter?',
+  'ui.upload.discoveredSaves':
+    'Found {count} save candidate(s). Review what will be imported.',
+  'ui.upload.discoveringSaves': 'Discovering saves…',
+  'ui.upload.dragDropFilesFolders':
+    'Drag & drop saves, folders, or ZIP archives here',
+  'ui.upload.drIniRegenerated':
+    'dr.ini was imported and will be used as the base during multiple-save export.',
+  'ui.upload.folderDropUnsupported':
+    'This browser could not read the dropped folder. Use Choose folder or upload a ZIP archive instead.',
+  'ui.upload.importedSaves': 'Imported {count} save(s).',
+  'ui.upload.importingSaves': 'Importing saves…',
+  'ui.upload.importSelectedSaves': 'Import {count} save(s)',
+  'ui.upload.noSupportedSaves': 'No supported DELTARUNE saves were found.',
+  'ui.upload.readingSaves': 'Reading Saves',
+  'ui.upload.readInputFailed': 'Could not read the selected files.',
+  'ui.upload.reviewSaves': 'Review Saves',
   'ui.upload.saveSettings': 'Save Settings',
+  'ui.upload.selectAllValid': 'Select all valid',
+  'ui.upload.selectCandidate': 'Select {name}',
   'ui.upload.selectChapter': 'Select chapter',
   'ui.upload.selectSave': 'Select save',
   'ui.upload.switchContainerChooseEntry':
     'This Switch container includes multiple save entries. Choose one to edit.',
-  'ui.upload.switchSupportWarning':
-    'Switch support expects an already-exported save payload. Tenna Editor cannot extract or restore saves on hardware.',
+  'ui.upload.tooManyFolderFiles':
+    'The selected folder contains more than {count} files or folders. Choose a smaller folder or ZIP only the saves you want to import.',
   'ui.upload.uploadFailed': 'Upload Failed',
   'ui.upload.uploadSave': 'Upload Save',
+  'ui.upload.uploadSaves': 'Upload Saves',
   'ui.upload.unsupportedChapterOrFormat':
     'Unsupported chapter or save format detected. Please upload a DELTARUNE Chapter 1-5 PC, Mac, Linux, or already-exported save container.',
   'ui.upload.chapterCannotChangeAfterUpload':

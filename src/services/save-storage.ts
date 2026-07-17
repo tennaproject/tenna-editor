@@ -37,6 +37,36 @@ async function set(id: string, save: Save): Promise<void> {
   }
 }
 
+async function setMany(saves: Save[]): Promise<boolean> {
+  try {
+    const db = await browserDatabase;
+    if (!db) return false;
+    const tx = db.transaction(SAVES_STORE, 'readwrite');
+    if (!tx) return false;
+    const store = tx.objectStore(SAVES_STORE);
+
+    try {
+      for (const save of saves) {
+        await store.put(save, save.meta.id);
+      }
+      await tx.done;
+      return true;
+    } catch (error) {
+      try {
+        tx.abort();
+      } catch {
+        // It's theoretically possible for that transaction is already aborted
+      }
+      await tx.done.catch(() => undefined);
+      throw error;
+    }
+  } catch (error) {
+    console.error('save-storage: setMany failed', error);
+    toast(translate('ui.storage.saveFailed', 'Failed to save data'), 'error');
+    return false;
+  }
+}
+
 async function remove(id: string): Promise<void> {
   try {
     const db = await browserDatabase;
@@ -114,6 +144,7 @@ async function migrate(saves: Save[]) {
 export const saveStorage = {
   get,
   set,
+  setMany,
   remove,
   getKeys,
   getAll,

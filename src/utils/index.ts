@@ -16,6 +16,7 @@ export * from './appdata';
 export * from './strip-identation';
 export * from './save-baseline';
 export * from './save-diff';
+export * from './save-import';
 export * from './format-date';
 export * from './flag-bitfields';
 export * from './flag-helpers';

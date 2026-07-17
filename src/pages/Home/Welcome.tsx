@@ -1,6 +1,12 @@
-import { Card, Heading, Section, Upload } from '@components';
-import { useState } from 'react';
+import { Card, Heading, Section } from '@components';
+import { lazy, Suspense, useState } from 'react';
 import { formatTranslation, useTranslation } from '../../i18n';
+
+const Upload = lazy(() =>
+  import('../../components/Upload').then((module) => ({
+    default: module.Upload,
+  })),
+);
 
 export function HomeWelcome() {
   const { t } = useTranslation();
@@ -50,7 +56,11 @@ export function HomeWelcome() {
               </p>
             </div>
           </button>
-          <Upload isOpen={isUploadOpen} setOpen={setIsUploadOpen} />
+          {isUploadOpen && (
+            <Suspense fallback={null}>
+              <Upload isOpen={isUploadOpen} setOpen={setIsUploadOpen} />
+            </Suspense>
+          )}
         </Section>
         <Section id="filelocation" className="flex flex-col gap-1">
           <Heading level={4}>

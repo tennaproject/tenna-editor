@@ -1,35 +1,42 @@
 import { useSave, useUi } from '@store';
-import { detectChapter } from '@utils/detection';
 import { extractGamePayload } from '@utils/save-baseline';
-import { parseSave } from '@utils/save-parser';
 import {
-  parseSwitchSaveContainer,
-  parseSwitchSaveEntry,
-  type SwitchSaveContainer,
-  type SwitchSaveEntry,
-} from '@utils/switch-save-container';
-import { useEffect, useState } from 'react';
+  discoverImportCandidates,
+  getTrimmedSwitchContainer,
+  refreshImportCandidateNames,
+  type CollectedUploadFile,
+  type ImportCandidate,
+} from '@utils/save-import';
+import { useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import type { Save, SaveSlot } from '@types';
-import { saveStorage } from '@services';
+import { saveStorage, toast } from '@services';
 import {
   TextInput,
   TextLabel,
   Checkbox,
+  Badge,
   Button,
   type SelectItem,
   Select,
   FileInput,
   ModalLayout,
   ModalFooter,
+  ResponsiveTable,
+  ResponsiveTableFields,
+  ResponsiveTableMobileLabel,
+  ResponsiveTableRow,
+  type ResponsiveTableSort,
 } from '@components';
 import type { ChapterIndex } from '@data';
 import {
+  formatTranslation,
   getChapterTranslationKeyPrefix,
   translateMeta,
   useTranslation,
 } from '../i18n';
 import { chapterHelpers } from '@utils/data-helpers';
+import { mergeClass } from '@utils/merge-class';
 
 const CHAPTER_OPTIONS: SelectItem[] = [
   { id: '2', label: `Chapter 2 (A Cyber's World)`, value: 2 },
@@ -44,20 +51,19 @@ const SLOT_OPTIONS: SelectItem[] = [
   { id: '3', label: 'Slot 3', value: 2 },
 ];
 
-const STAGE_TITLES: Record<
-  'idle' | 'switch' | 'chapter' | 'settings' | 'error',
-  string
-> = {
-  idle: 'Upload Save',
-  switch: 'Choose Switch Save',
+const STAGE_TITLES: Record<UploadStage, string> = {
+  idle: 'Upload Saves',
+  processing: 'Reading Saves',
+  review: 'Review Saves',
   chapter: 'Confirm Chapter',
   settings: 'Save Settings',
   error: 'Upload Failed',
 };
 
-const STAGE_TITLE_KEYS: Record<keyof typeof STAGE_TITLES, string> = {
-  idle: 'ui.upload.uploadSave',
-  switch: 'ui.upload.chooseSwitchSave',
+const STAGE_TITLE_KEYS: Record<UploadStage, string> = {
+  idle: 'ui.upload.uploadSaves',
+  processing: 'ui.upload.readingSaves',
+  review: 'ui.upload.reviewSaves',
   chapter: 'ui.upload.confirmChapter',
   settings: 'ui.upload.saveSettings',
   error: 'ui.upload.uploadFailed',
@@ -69,31 +75,47 @@ interface UploadProps {
 }
 
 type UploadStage =
-  'idle' | 'success' | 'error' | 'switch' | 'chapter' | 'settings';
+  'idle' | 'processing' | 'review' | 'chapter' | 'settings' | 'error';
+
+interface DiscoverySummary {
+  sawDrIni: boolean;
+  sourceErrors: string[];
+}
 
 export function Upload({ isOpen, setOpen }: UploadProps) {
   const { t } = useTranslation();
   const reducedMotion = useReducedMotion();
 
-  const switchSave = useSave((s) => s.switchSave);
-  const uploadedSaves = useUi((s) => s.ui.uploadedSaves);
-  const updateUi = useUi((s) => s.updateUi);
+  const setSave = useSave((state) => state.setSave);
+  const saveNow = useSave((state) => state.saveNow);
+  const activeSaveName = useSave((state) => state.save?.meta.name);
+  const updateUi = useUi((state) => state.updateUi);
 
   const [uploadStage, setUploadStage] = useState<UploadStage>('idle');
   const [previousUploadStage, setPreviousUploadStage] =
     useState<UploadStage>('idle');
   const [uploadError, setUploadError] = useState<string | null>(null);
+  const [isImporting, setIsImporting] = useState(false);
 
+  const [singleCandidate, setSingleCandidate] =
+    useState<ImportCandidate | null>(null);
   const [selectedChapter, setSelectedChapter] = useState<ChapterIndex>(1);
-  const [parsedSave, setParsedSave] = useState<Save | null>(null);
   const [selectedSlot, setSelectedSlot] = useState<SaveSlot>(0);
   const [isCompletionSave, setIsCompletionSave] = useState(false);
-  const [saveName, setSaveName] = useState<string>('');
-  const [switchContainer, setSwitchContainer] =
-    useState<SwitchSaveContainer | null>(null);
-  const [selectedSwitchEntry, setSelectedSwitchEntry] =
-    useState<SwitchSaveEntry | null>(null);
-  const [uploadedFileName, setUploadedFileName] = useState('');
+  const [saveName, setSaveName] = useState('');
+  const [singleNameEdited, setSingleNameEdited] = useState(false);
+  const [reservedSaveNames, setReservedSaveNames] = useState<string[]>([]);
+
+  const [candidates, setCandidates] = useState<ImportCandidate[]>([]);
+  const [reviewSort, setReviewSort] = useState<ResponsiveTableSort | null>(
+    null,
+  );
+  const [discoverySummary, setDiscoverySummary] = useState<DiscoverySummary>({
+    sawDrIni: false,
+    sourceErrors: [],
+  });
+  const discoveryRunRef = useRef(0);
+
   const chapterOptions = CHAPTER_OPTIONS.map((item) => {
     const chapter = item.value as ChapterIndex;
     const meta = translateMeta(
@@ -106,235 +128,321 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
       label: `${t('ui.upload.chapter', 'Chapter')} ${chapter} (${meta.displayName})`,
     };
   });
+  const chapterOneOption: SelectItem = {
+    id: '1',
+    label: `${t('ui.upload.chapter', 'Chapter')} 1`,
+    value: 1,
+  };
   const slotOptions = SLOT_OPTIONS.map((item, index) => ({
     ...item,
     label: `${t('ui.field.slot', 'Slot')} ${index + 1}`,
   }));
 
-  function onChapterSelection(item: SelectItem | null) {
-    if (item) {
-      setSelectedChapter(item.value as ChapterIndex);
-    }
-  }
+  const selectedCandidates = candidates.filter(
+    (candidate) =>
+      candidate.selected && candidate.save && candidate.error === null,
+  );
+  const displayedCandidates = getDisplayedCandidates();
 
-  function onSlotSelection(item: SelectItem | null) {
-    if (item) {
-      setSelectedSlot(item.value as SaveSlot);
-    }
-  }
+  function getDisplayedCandidates(): ImportCandidate[] {
+    if (!reviewSort) return candidates;
 
-  function onSwitchEntrySelection(item: SelectItem | null) {
-    const entry = item?.value as SwitchSaveEntry | undefined;
-    if (entry) setSelectedSwitchEntry(entry);
-  }
-
-  function prepareSaveForUpload(
-    save: Save,
-    sourceName: string,
-    source?: {
-      container: SwitchSaveContainer;
-      entry: SwitchSaveEntry;
-    },
-  ): boolean {
-    const detection = detectChapter(save, source?.entry.key ?? sourceName);
-    if (!detection.supported) {
-      setUploadError(
-        t(
-          'ui.upload.unsupportedChapterOrFormat',
-          'Unsupported chapter or save format detected. Please upload a DELTARUNE Chapter 1-5 PC, Mac, Linux, or already-exported save container.',
-        ),
-      );
-      changeStage('error');
-      return false;
-    }
-
-    const filename = source?.entry.key ?? sourceName;
-    const slotMatch = filename.match(/filech(\d+)_(\d+)/);
-    let slot: SaveSlot = 0;
-    let nextIsCompletionSave = false;
-    if (slotMatch) {
-      const detectedSlot = parseInt(slotMatch[2]);
-      if (detectedSlot === 0 || detectedSlot === 1 || detectedSlot === 2) {
-        slot = detectedSlot;
+    const getValue = (candidate: ImportCandidate): string | number => {
+      switch (reviewSort.columnId) {
+        case 'name':
+          return candidate.name.toLocaleLowerCase();
+        case 'chapter':
+          return candidate.chapter;
+        case 'slot':
+          return candidate.slot;
+        case 'complete':
+          return Number(candidate.isCompletionSave);
+        case 'source':
+          return `${candidate.platform}:${
+            candidate.platform === 'switch'
+              ? candidate.displayKey
+              : candidate.sourcePath
+          }`.toLocaleLowerCase();
+        default:
+          return 0;
       }
-
-      if (detectedSlot === 3 || detectedSlot === 4 || detectedSlot === 5) {
-        slot = (detectedSlot - 3) as SaveSlot;
-        nextIsCompletionSave = true;
-      }
-    }
-
-    if (source) {
-      save.meta.source = {
-        platform: 'switch',
-        fileName: sourceName,
-        key: source.entry.key,
-        container: source.container.files,
-      };
-    } else {
-      save.meta.source = {
-        platform: 'pc',
-        fileName: sourceName,
-      };
-    }
-
-    setParsedSave(save);
-    setSelectedChapter(detection.chapter ?? 1);
-    setSelectedSlot(slot);
-    setIsCompletionSave(nextIsCompletionSave);
-    updateUi((ui) => (ui.uploadedSaves += 1));
-
-    if (!slotMatch) {
-      setSaveName(sourceName);
-    } else {
-      setSaveName(`Save${uploadedSaves}`);
-    }
-
-    if (save.meta.format === 1) {
-      changeStage('settings');
-    } else {
-      changeStage('chapter');
-    }
-    return true;
-  }
-
-  function prepareSelectedSwitchSave() {
-    if (!switchContainer || !selectedSwitchEntry) return;
-
-    try {
-      const save = parseSwitchSaveEntry(
-        switchContainer,
-        selectedSwitchEntry.key,
-      );
-      prepareSaveForUpload(save, uploadedFileName, {
-        container: switchContainer,
-        entry: selectedSwitchEntry,
-      });
-    } catch (error) {
-      const message = error instanceof Error ? error.message : 'Unknown error';
-      setUploadError(message);
-      changeStage('error');
-    }
-  }
-
-  function onFileSelect(file: File) {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const content = reader.result as string;
-      setUploadedFileName(file.name);
-      if (!content) {
-        setUploadError(
-          'Failed to read file content. The file may be empty or corrupted.',
-        );
-        changeStage('error');
-        return;
-      }
-
-      let save;
-      try {
-        save = parseSave(content);
-      } catch (error) {
-        const container = parseSwitchSaveContainer(content);
-        if (container) {
-          setSwitchContainer(container);
-          setSelectedSwitchEntry(container.entries[0] ?? null);
-          changeStage('switch');
-          return;
-        }
-
-        const message =
-          error instanceof Error ? error.message : 'Unknown error';
-        setUploadError(message);
-        changeStage('error');
-        return;
-      }
-
-      prepareSaveForUpload(save, file.name);
     };
-    reader.readAsText(file);
+    const direction = reviewSort.direction === 'asc' ? 1 : -1;
+
+    return candidates
+      .map((candidate, index) => ({ candidate, index }))
+      .sort((left, right) => {
+        const leftValue = getValue(left.candidate);
+        const rightValue = getValue(right.candidate);
+        const comparison =
+          typeof leftValue === 'number' && typeof rightValue === 'number'
+            ? leftValue - rightValue
+            : String(leftValue).localeCompare(String(rightValue));
+        return comparison === 0
+          ? left.index - right.index
+          : comparison * direction;
+      })
+      .map(({ candidate }) => candidate);
   }
 
-  async function changeStage(stage: UploadStage) {
+  function resetUpload() {
+    discoveryRunRef.current += 1;
+    setSingleCandidate(null);
+    setSelectedChapter(1);
+    setSelectedSlot(0);
+    setIsCompletionSave(false);
+    setSaveName('');
+    setSingleNameEdited(false);
+    setReservedSaveNames([]);
+    setCandidates([]);
+    setReviewSort(null);
+    setDiscoverySummary({
+      sawDrIni: false,
+      sourceErrors: [],
+    });
+    setUploadError(null);
+    setIsImporting(false);
+  }
+
+  function changeStage(stage: UploadStage) {
     const currentStage = uploadStage;
-
-    switch (stage) {
-      case 'idle':
-        setParsedSave(null);
-        setSelectedChapter(1);
-        setSelectedSlot(0);
-        setIsCompletionSave(false);
-        setSaveName('');
-        setSwitchContainer(null);
-        setSelectedSwitchEntry(null);
-        setUploadedFileName('');
-        break;
-      case 'success':
-        if (!parsedSave) break;
-        parsedSave.meta.chapter = selectedChapter;
-        parsedSave.meta.slot = selectedSlot;
-        parsedSave.meta.isCompletionSave = isCompletionSave;
-        parsedSave.meta.name = saveName;
-        parsedSave.meta.baseline = {
-          capturedAt: new Date(),
-          source: 'upload',
-          payload: extractGamePayload(parsedSave),
-        };
-
-        await saveStorage.set(parsedSave.meta.id, parsedSave);
-        switchSave(parsedSave.meta.id);
-
-        setParsedSave(null);
-        setSelectedSlot(0);
-        setIsCompletionSave(false);
-
-        setOpen(false);
-        break;
-    }
-
+    if (stage === 'idle') resetUpload();
     setUploadStage(stage);
     setPreviousUploadStage(currentStage);
   }
 
-  useEffect(() => {
-    void changeStage('idle').catch((error: unknown) => {
-      console.error('Upload modal reset failed:', error);
-    });
+  function prepareSingleCandidate(candidate: ImportCandidate) {
+    setSingleCandidate(candidate);
+    setSelectedChapter(candidate.chapter);
+    setSelectedSlot(candidate.slot);
+    setIsCompletionSave(candidate.isCompletionSave);
+    setSaveName(candidate.name);
+    setSingleNameEdited(candidate.nameEdited);
+    changeStage(candidate.save?.meta.format === 1 ? 'settings' : 'chapter');
+  }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps, @eslint-react/exhaustive-deps
-  }, [isOpen]);
+  async function onFilesSelect(files: CollectedUploadFile[]) {
+    const run = discoveryRunRef.current + 1;
+    discoveryRunRef.current = run;
+    changeStage('processing');
+    try {
+      const storedSaves = await saveStorage.getAll();
+      if (run !== discoveryRunRef.current) return;
+      const reservedNames = storedSaves.map((save) => save.meta.name);
+      if (activeSaveName) reservedNames.push(activeSaveName);
+      const result = await discoverImportCandidates(files, reservedNames);
+      if (run !== discoveryRunRef.current) return;
+      setReservedSaveNames(reservedNames);
+      setDiscoverySummary({
+        sawDrIni: result.sawDrIni,
+        sourceErrors: result.sourceErrors,
+      });
+
+      if (result.candidates.length === 0) {
+        setUploadError(
+          result.sourceErrors.join('\n') ||
+            t(
+              'ui.upload.noSupportedSaves',
+              'No supported DELTARUNE saves were found.',
+            ),
+        );
+        setUploadStage('error');
+        return;
+      }
+
+      const onlyCandidate = result.candidates[0];
+      const isSingleSave = result.candidates.length === 1;
+
+      if (isSingleSave) {
+        if (!onlyCandidate.save || onlyCandidate.error) {
+          setUploadError(
+            onlyCandidate.error ??
+              t(
+                'ui.upload.unsupportedChapterOrFormat',
+                'Unsupported chapter or save format detected.',
+              ),
+          );
+          setUploadStage('error');
+          return;
+        }
+        prepareSingleCandidate(onlyCandidate);
+        return;
+      }
+
+      setCandidates(result.candidates);
+      setUploadStage('review');
+    } catch (error) {
+      setUploadError(
+        error instanceof Error
+          ? error.message
+          : t(
+              'ui.upload.readInputFailed',
+              'Could not read the selected files.',
+            ),
+      );
+      setUploadStage('error');
+    }
+  }
+
+  function closeUpload() {
+    resetUpload();
+    setOpen(false);
+  }
+
+  function updateCandidate(id: string, patch: Partial<ImportCandidate>) {
+    setCandidates((current) => {
+      const updated = current.map((candidate) =>
+        candidate.id === id ? { ...candidate, ...patch } : candidate,
+      );
+      if (
+        patch.chapter === undefined &&
+        patch.slot === undefined &&
+        patch.isCompletionSave === undefined
+      ) {
+        return updated;
+      }
+      return refreshImportCandidateNames(updated, reservedSaveNames);
+    });
+  }
+
+  function updateSingleTarget(
+    chapter: ChapterIndex,
+    slot: SaveSlot,
+    completion: boolean,
+  ) {
+    if (!singleCandidate) return;
+    const [updated] = refreshImportCandidateNames(
+      [
+        {
+          ...singleCandidate,
+          chapter,
+          slot,
+          isCompletionSave: completion,
+          name: saveName,
+          nameEdited: singleNameEdited,
+        },
+      ],
+      reservedSaveNames,
+    );
+    setSingleCandidate(updated);
+    if (!singleNameEdited) setSaveName(updated.name);
+  }
+
+  function prepareSave(candidate: ImportCandidate): Save {
+    const save = candidate.save as Save;
+    save.meta.chapter = candidate.chapter;
+    save.meta.slot = candidate.slot;
+    save.meta.isCompletionSave = candidate.isCompletionSave;
+    save.meta.name = candidate.name.trim() || candidate.defaultName;
+    save.meta.baseline = {
+      capturedAt: new Date(),
+      source: 'upload',
+      payload: extractGamePayload(save),
+    };
+
+    if (candidate.switchSource) {
+      save.meta.source = {
+        platform: 'switch',
+        fileName: candidate.switchSource.fileName,
+        key: candidate.switchSource.entryKey,
+        container: getTrimmedSwitchContainer(candidate),
+      };
+    } else {
+      save.meta.source = {
+        platform: 'pc',
+        fileName: candidate.sourcePath,
+        drIni: candidate.pcDrIni,
+      };
+    }
+    return save;
+  }
+
+  async function importCandidates(toImport: ImportCandidate[]) {
+    if (toImport.length === 0 || isImporting) return;
+    setIsImporting(true);
+    const saves = toImport.map(prepareSave);
+    const stored = await saveStorage.setMany(saves);
+    if (!stored) {
+      setIsImporting(false);
+      return;
+    }
+
+    updateUi((ui) => (ui.uploadedSaves += saves.length));
+    await saveNow();
+    setSave(saves[0]);
+    toast(
+      formatTranslation(
+        t('ui.upload.importedSaves', 'Imported {count} save(s).'),
+        { count: saves.length },
+      ),
+      'success',
+    );
+    closeUpload();
+  }
+
+  async function importSingleCandidate() {
+    if (!singleCandidate?.save) return;
+    await importCandidates([
+      {
+        ...singleCandidate,
+        chapter: selectedChapter,
+        slot: selectedSlot,
+        isCompletionSave,
+        name: saveName,
+      },
+    ]);
+  }
 
   const transition = { duration: reducedMotion ? 0 : 0.2 };
   const selectedChapterOption =
-    chapterOptions.find((option) => option.value === selectedChapter) ?? null;
+    chapterOptions.find((option) => option.value === selectedChapter) ??
+    chapterOneOption;
 
   function renderFooter() {
     switch (uploadStage) {
       case 'idle':
         return (
           <ModalFooter>
-            <Button
-              onClick={() => setOpen(false)}
-              variant="secondary"
-              size="lg"
-            >
-              Cancel
+            <Button onClick={closeUpload} variant="secondary" size="lg">
+              {t('ui.common.cancel', 'Cancel')}
             </Button>
           </ModalFooter>
         );
-      case 'switch':
+      case 'processing':
+        return (
+          <ModalFooter aria-hidden="true">
+            <Button
+              variant="secondary"
+              size="lg"
+              className="invisible"
+              disabled
+            >
+              {t('ui.common.cancel', 'Cancel')}
+            </Button>
+          </ModalFooter>
+        );
+      case 'review':
         return (
           <ModalFooter>
             <Button onClick={() => changeStage('idle')} variant="secondary">
               {t('ui.common.back', 'Back')}
             </Button>
             <Button
-              onClick={prepareSelectedSwitchSave}
+              onClick={() => void importCandidates(selectedCandidates)}
               variant="primary"
               size="lg"
-              className="w-full sm:w-auto sm:min-w-40"
-              disabled={!selectedSwitchEntry}
+              className="w-full sm:w-auto sm:min-w-48"
+              disabled={selectedCandidates.length === 0 || isImporting}
             >
-              {t('ui.common.next', 'Next')}
+              {isImporting
+                ? t('ui.upload.importingSaves', 'Importing saves…')
+                : formatTranslation(
+                    t(
+                      'ui.upload.importSelectedSaves',
+                      'Import {count} save(s)',
+                    ),
+                    { count: selectedCandidates.length },
+                  )}
             </Button>
           </ModalFooter>
         );
@@ -364,12 +472,15 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
               {t('ui.common.back', 'Back')}
             </Button>
             <Button
-              onClick={() => void changeStage('success')}
+              onClick={() => void importSingleCandidate()}
               variant="primary"
               size="lg"
               className="w-full sm:w-auto sm:min-w-40"
+              disabled={isImporting}
             >
-              {t('ui.upload.confirmUpload', 'Confirm upload')}
+              {isImporting
+                ? t('ui.upload.importingSaves', 'Importing saves…')
+                : t('ui.upload.confirmUpload', 'Confirm upload')}
             </Button>
           </ModalFooter>
         );
@@ -377,10 +488,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
         return (
           <ModalFooter>
             <Button
-              onClick={() => {
-                changeStage('idle');
-                setUploadError(null);
-              }}
+              onClick={() => changeStage('idle')}
               variant="primary"
               size="lg"
               className="w-full sm:w-auto sm:min-w-40"
@@ -394,25 +502,194 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
     }
   }
 
+  function renderReviewCandidate(candidate: ImportCandidate) {
+    const isChapterLocked = candidate.save?.meta.format === 1;
+    const selectedChapterItem =
+      chapterOptions.find((item) => item.value === candidate.chapter) ??
+      chapterOptions[0];
+    const displayedSource =
+      candidate.platform === 'switch'
+        ? candidate.displayKey
+        : candidate.sourcePath;
+    const sourceTitle =
+      candidate.platform === 'switch'
+        ? `${candidate.sourcePath}: ${candidate.displayKey}`
+        : candidate.sourcePath;
+
+    return (
+      <ResponsiveTableRow
+        key={candidate.id}
+        className={candidate.error ? 'bg-red-soft' : undefined}
+      >
+        <div className="flex justify-center">
+          <Checkbox
+            checked={candidate.selected}
+            disabled={!candidate.save || candidate.error !== null}
+            onChange={(selected) => updateCandidate(candidate.id, { selected })}
+            ariaLabel={formatTranslation(
+              t('ui.upload.selectCandidate', 'Select {name}'),
+              { name: candidate.displayKey },
+            )}
+          />
+        </div>
+
+        <ResponsiveTableFields>
+          <div
+            className={mergeClass(
+              'flex min-w-0 flex-col gap-1',
+              !candidate.selected && !candidate.error && 'opacity-60',
+            )}
+          >
+            <span className="ui-section-label md:hidden">
+              {t('ui.field.saveName', 'Save name')}
+            </span>
+            {candidate.error ? (
+              <div className="ui-field-mono truncate">
+                {candidate.displayKey}
+              </div>
+            ) : (
+              <TextInput
+                value={candidate.name}
+                onChange={(name) =>
+                  updateCandidate(candidate.id, { name, nameEdited: true })
+                }
+                fullWidth
+                size="small"
+                variant="inline"
+              />
+            )}
+            <div
+              className="truncate px-2 text-xs text-text-3"
+              title={sourceTitle}
+            >
+              {displayedSource}
+            </div>
+          </div>
+
+          {candidate.error ? (
+            <div className="text-sm text-danger md:col-span-3">
+              {candidate.error}
+            </div>
+          ) : (
+            <>
+              <div
+                className={mergeClass(
+                  'flex min-w-0 items-center gap-2',
+                  !candidate.selected && 'opacity-60',
+                )}
+              >
+                <ResponsiveTableMobileLabel>
+                  {t('ui.upload.chapter', 'Chapter')}
+                </ResponsiveTableMobileLabel>
+                {isChapterLocked ? (
+                  <span className="px-2 text-sm text-text-2">
+                    {chapterOneOption.label}
+                  </span>
+                ) : (
+                  <Select
+                    items={chapterOptions}
+                    selectedItem={selectedChapterItem}
+                    defaultSelectedItem={selectedChapterItem}
+                    className="h-8 min-h-0 w-full"
+                    onSelectionChange={(item) => {
+                      if (item) {
+                        const chapter = item.value as ChapterIndex;
+                        updateCandidate(candidate.id, {
+                          chapter,
+                        });
+                      }
+                    }}
+                  />
+                )}
+              </div>
+
+              <div
+                className={mergeClass(
+                  'flex items-center gap-2',
+                  !candidate.selected && 'opacity-60',
+                )}
+              >
+                <ResponsiveTableMobileLabel>
+                  {t('ui.field.slot', 'Slot')}
+                </ResponsiveTableMobileLabel>
+                <Select
+                  items={slotOptions}
+                  selectedItem={slotOptions[candidate.slot]}
+                  defaultSelectedItem={slotOptions[candidate.slot]}
+                  className="h-8 min-h-0 w-36 md:w-full"
+                  onSelectionChange={(item) => {
+                    if (item) {
+                      const slot = item.value as SaveSlot;
+                      updateCandidate(candidate.id, {
+                        slot,
+                      });
+                    }
+                  }}
+                />
+              </div>
+
+              <div
+                className={mergeClass(
+                  'flex items-center gap-2 md:justify-center',
+                  !candidate.selected && 'opacity-60',
+                )}
+              >
+                <ResponsiveTableMobileLabel>
+                  {t('ui.field.completionSave', 'Complete')}
+                </ResponsiveTableMobileLabel>
+                <Checkbox
+                  ariaLabel={`${t(
+                    'ui.field.completionSave',
+                    'Completion save',
+                  )}: ${candidate.name}`}
+                  checked={candidate.isCompletionSave}
+                  onChange={(completion) =>
+                    updateCandidate(candidate.id, {
+                      isCompletionSave: completion,
+                    })
+                  }
+                />
+              </div>
+            </>
+          )}
+
+          <div
+            className={mergeClass(
+              'flex items-center gap-2 md:justify-center',
+              !candidate.selected && !candidate.error && 'opacity-60',
+            )}
+          >
+            <ResponsiveTableMobileLabel>
+              {t('ui.download.source', 'Source')}
+            </ResponsiveTableMobileLabel>
+            <Badge
+              tone={candidate.platform === 'switch' ? 'red' : 'neutral'}
+              size="sm"
+            >
+              {candidate.platform.toUpperCase()}
+            </Badge>
+          </div>
+        </ResponsiveTableFields>
+      </ResponsiveTableRow>
+    );
+  }
+
   return (
     <ModalLayout
       isOpen={isOpen}
       setOpen={setOpen}
-      title={
-        uploadStage === 'success'
-          ? t(STAGE_TITLE_KEYS.settings, STAGE_TITLES.settings)
-          : t(STAGE_TITLE_KEYS[uploadStage], STAGE_TITLES[uploadStage])
-      }
+      onClose={resetUpload}
+      title={t(STAGE_TITLE_KEYS[uploadStage], STAGE_TITLES[uploadStage])}
       footer={renderFooter()}
-      size="tall"
+      variant={uploadStage === 'review' ? 'workspace' : 'standard'}
       bodyClassName={
-        uploadStage === 'error'
-          ? 'flex flex-col min-h-0 flex-1 overflow-y-auto'
-          : 'flex flex-col min-h-0 flex-1 overflow-hidden'
+        uploadStage === 'review'
+          ? 'flex min-h-0 flex-1 flex-col overflow-hidden'
+          : 'flex min-h-0 flex-1 flex-col overflow-y-auto'
       }
     >
-      <div className="flex flex-col flex-1 min-h-0">
-        <AnimatePresence mode="wait">
+      <div className="relative flex min-h-0 flex-1 flex-col">
+        <AnimatePresence initial={false}>
           {uploadStage === 'idle' && (
             <motion.div
               key="idle"
@@ -420,71 +697,146 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={transition}
-              className="flex flex-1 min-h-0 items-stretch"
+              className="absolute inset-0 flex min-h-0 items-stretch"
             >
               <FileInput
-                onFileSelect={onFileSelect}
-                className="flex-1 min-h-0"
+                onFilesSelect={(files) => void onFilesSelect(files)}
+                onInputError={(message) => {
+                  setUploadError(message);
+                  setUploadStage('error');
+                }}
+                className="min-h-0 flex-1"
               />
             </motion.div>
           )}
 
-          {uploadStage === 'switch' && (
+          {uploadStage === 'processing' && (
             <motion.div
-              key="switch"
+              key="processing"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={transition}
-              className="flex flex-col gap-4 max-w-md"
+              className="absolute inset-0 flex items-center justify-center text-lg text-text-2"
+              aria-live="polite"
             >
-              <p className="ui-prose-muted">
-                {t(
-                  'ui.upload.switchContainerChooseEntry',
-                  'This Switch container includes multiple save entries. Choose one to edit.',
-                )}
-              </p>
-              <div>
-                <TextLabel>
-                  {t('ui.upload.containedSave', 'Contained save')}
-                </TextLabel>
-                <Select
-                  items={
-                    switchContainer?.entries.map((entry) => ({
-                      id: entry.key,
-                      label: `${entry.key} (${entry.lineCount} lines)`,
-                      value: entry,
-                    })) ?? []
-                  }
-                  placeholder={t('ui.upload.selectSave', 'Select save')}
-                  className="w-full"
-                  selectedItem={
-                    selectedSwitchEntry
-                      ? {
-                          id: selectedSwitchEntry.key,
-                          label: `${selectedSwitchEntry.key} (${selectedSwitchEntry.lineCount} lines)`,
-                          value: selectedSwitchEntry,
-                        }
-                      : null
-                  }
-                  defaultSelectedItem={
-                    selectedSwitchEntry
-                      ? {
-                          id: selectedSwitchEntry.key,
-                          label: `${selectedSwitchEntry.key} (${selectedSwitchEntry.lineCount} lines)`,
-                          value: selectedSwitchEntry,
-                        }
-                      : null
-                  }
-                  onSelectionChange={onSwitchEntrySelection}
-                />
+              {t('ui.upload.discoveringSaves', 'Discovering saves…')}
+            </motion.div>
+          )}
+
+          {uploadStage === 'review' && (
+            <motion.div
+              key="review"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={transition}
+              className="absolute inset-0 flex min-h-0 flex-col gap-3"
+            >
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <p className="ui-prose-muted">
+                  {formatTranslation(
+                    t(
+                      'ui.upload.discoveredSaves',
+                      'Found {count} save candidate(s). Review what will be imported.',
+                    ),
+                    { count: candidates.length },
+                  )}
+                </p>
+                <div className="flex gap-2">
+                  <Button
+                    size="sm"
+                    onClick={() =>
+                      setCandidates((current) =>
+                        current.map((candidate) => ({
+                          ...candidate,
+                          selected:
+                            candidate.save !== null && candidate.error === null,
+                        })),
+                      )
+                    }
+                  >
+                    {t('ui.upload.selectAllValid', 'Select all valid')}
+                  </Button>
+                  <Button
+                    size="sm"
+                    onClick={() =>
+                      setCandidates((current) =>
+                        current.map((candidate) => ({
+                          ...candidate,
+                          selected: false,
+                        })),
+                      )
+                    }
+                  >
+                    {t('ui.upload.clearSelection', 'Clear selection')}
+                  </Button>
+                </div>
               </div>
-              <p className="ui-panel-muted">
-                {t(
-                  'ui.upload.switchSupportWarning',
-                  'Switch support expects an already-exported save payload. Tenna Editor cannot extract or restore saves on hardware.',
-                )}
-              </p>
+
+              {discoverySummary.sawDrIni && (
+                <div className="ui-panel-muted text-sm">
+                  <p>
+                    {t(
+                      'ui.upload.drIniRegenerated',
+                      'dr.ini was imported and will be used as the base during multiple-save export.',
+                    )}
+                  </p>
+                </div>
+              )}
+
+              {discoverySummary.sourceErrors.length > 0 && (
+                <div
+                  className="ui-danger max-h-24 overflow-y-auto text-sm"
+                  role="status"
+                >
+                  {Array.from(new Set(discoverySummary.sourceErrors)).map(
+                    (error) => (
+                      <p key={error}>{error}</p>
+                    ),
+                  )}
+                </div>
+              )}
+
+              <ResponsiveTable
+                layout="import-review"
+                className="flex-1"
+                ariaLabel={t('ui.upload.reviewSaves', 'Review saves')}
+                sort={reviewSort}
+                onSortChange={setReviewSort}
+                headers={[
+                  { id: 'select' },
+                  {
+                    id: 'name',
+                    content: t('ui.download.name', 'Name'),
+                    sortable: true,
+                  },
+                  {
+                    id: 'chapter',
+                    content: t('ui.upload.chapter', 'Chapter'),
+                    sortable: true,
+                  },
+                  {
+                    id: 'slot',
+                    content: t('ui.field.slot', 'Slot'),
+                    sortable: true,
+                  },
+                  {
+                    id: 'complete',
+                    content: t('ui.field.completionSave', 'Complete'),
+                    sortable: true,
+                    align: 'center',
+                  },
+                  {
+                    id: 'source',
+                    content: t('ui.download.source', 'Source'),
+                    sortable: true,
+                    align: 'center',
+                  },
+                ]}
+              >
+                {displayedCandidates.map(renderReviewCandidate)}
+              </ResponsiveTable>
             </motion.div>
           )}
 
@@ -495,7 +847,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={transition}
-              className="flex flex-col gap-4 max-w-md"
+              className="absolute inset-0 flex max-w-md flex-col gap-4"
             >
               <p className="ui-prose-muted">
                 {t(
@@ -511,7 +863,17 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
                   className="w-full"
                   selectedItem={selectedChapterOption}
                   defaultSelectedItem={selectedChapterOption}
-                  onSelectionChange={onChapterSelection}
+                  onSelectionChange={(item) => {
+                    if (item) {
+                      const chapter = item.value as ChapterIndex;
+                      setSelectedChapter(chapter);
+                      updateSingleTarget(
+                        chapter,
+                        selectedSlot,
+                        isCompletionSave,
+                      );
+                    }
+                  }}
                 />
               </div>
               <p className="ui-prose-muted">
@@ -530,11 +892,23 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={transition}
-              className="flex flex-col gap-3 max-w-md"
+              className="absolute inset-0 flex max-w-md flex-col gap-3"
             >
               <div>
                 <TextLabel>{t('ui.field.saveName', 'Save name')}</TextLabel>
-                <TextInput value={saveName} onChange={setSaveName} />
+                <TextInput
+                  value={saveName}
+                  fullWidth
+                  onChange={(name) => {
+                    setSaveName(name);
+                    setSingleNameEdited(true);
+                    setSingleCandidate((candidate) =>
+                      candidate
+                        ? { ...candidate, name, nameEdited: true }
+                        : candidate,
+                    );
+                  }}
+                />
               </div>
               <div>
                 <TextLabel>
@@ -546,13 +920,26 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
                   className="w-full"
                   selectedItem={slotOptions[selectedSlot]}
                   defaultSelectedItem={slotOptions[selectedSlot]}
-                  onSelectionChange={onSlotSelection}
+                  onSelectionChange={(item) => {
+                    if (item) {
+                      const slot = item.value as SaveSlot;
+                      setSelectedSlot(slot);
+                      updateSingleTarget(
+                        selectedChapter,
+                        slot,
+                        isCompletionSave,
+                      );
+                    }
+                  }}
                 />
               </div>
               <Checkbox
                 label={t('ui.field.completionSave', 'Completion save')}
                 checked={isCompletionSave}
-                onChange={setIsCompletionSave}
+                onChange={(completion) => {
+                  setIsCompletionSave(completion);
+                  updateSingleTarget(selectedChapter, selectedSlot, completion);
+                }}
               />
             </motion.div>
           )}
@@ -564,7 +951,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={transition}
-              className="flex flex-col gap-3"
+              className="absolute inset-0 flex flex-col gap-3 whitespace-pre-wrap"
             >
               <p className="ui-danger">{uploadError}</p>
             </motion.div>

@@ -96,28 +96,55 @@ export default defineConfig({
     port: 4545,
   },
   build: {
-    rollupOptions: {
+    rolldownOptions: {
       output: {
         chunkFileNames: 'assets/chunk-[name]-[hash].js',
         entryFileNames: 'assets/entry-[name]-[hash].js',
         assetFileNames: 'assets/[name]-[hash][extname]',
-        manualChunks(id) {
-          if (id.includes('node_modules')) {
-            if (id.includes('zustand')) {
-              return 'zustand';
-            }
-            if (id.includes('tailwind')) {
-              return 'tailwind';
-            }
-            if (
-              id.includes('react') ||
-              id.includes('framer-motion') ||
-              id.includes('downshift')
-            ) {
-              return 'react';
-            }
-            return 'vendor';
-          }
+        codeSplitting: {
+          groups: [
+            {
+              name: 'react',
+              test: /node_modules[/\\](react|react-dom|scheduler)[/\\]/,
+              priority: 30,
+              maxSize: 400 * 1024,
+            },
+            {
+              name: 'motion',
+              test: /node_modules[/\\]framer-motion[/\\]/,
+              priority: 20,
+              maxSize: 400 * 1024,
+            },
+            {
+              name: 'downshift',
+              test: /node_modules[/\\]downshift[/\\]/,
+              priority: 20,
+              maxSize: 400 * 1024,
+            },
+            {
+              name: 'zustand',
+              test: /node_modules[/\\]zustand[/\\]/,
+              priority: 20,
+            },
+            {
+              name: 'tailwind',
+              test: /node_modules[/\\]tailwind/,
+              priority: 20,
+            },
+            {
+              name: 'vendor',
+              test: /node_modules[/\\]/,
+              priority: 10,
+              maxSize: 400 * 1024,
+            },
+            {
+              name: 'common',
+              minShareCount: 2,
+              minSize: 20 * 1024,
+              maxSize: 400 * 1024,
+              priority: 5,
+            },
+          ],
         },
       },
     },

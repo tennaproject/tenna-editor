@@ -61,7 +61,7 @@ export function HelpTip({ title, children }: HelpTipProps) {
         setOpen={setIsOpen}
         onClose={onClose}
         title={title ?? t('ui.common.help', 'Help')}
-        size="content"
+        variant="compact"
       >
         <div className="ui-prose-muted">{children}</div>
       </ModalLayout>

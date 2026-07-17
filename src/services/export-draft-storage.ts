@@ -38,8 +38,7 @@ async function get(): Promise<ExportDraft | null> {
   try {
     const db = await browserDatabase;
     const draft = (await db.get(EXPORT_DRAFTS_STORE, DRAFT_KEY)) as
-      | ExportDraft
-      | undefined;
+      ExportDraft | undefined;
     return draft?.version === EXPORT_DRAFT_VERSION ? draft : null;
   } catch (error) {
     console.error('export-draft-storage: get failed', error);

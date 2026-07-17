@@ -108,7 +108,7 @@ export function Modal({
           >
             <div
               className={mergeClass(
-                'pointer-events-auto relative border border-border bg-surface-2 shadow-lg shadow-surface-1/50',
+                'pointer-events-auto relative border border-border bg-surface-2 shadow-lg shadow-surface-1/50 transition-[width,height,max-width,max-height] duration-200 ease-in-out motion-reduce:transition-none',
                 panelClassName,
               )}
             >

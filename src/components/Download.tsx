@@ -14,6 +14,11 @@ import {
   ModalLayout,
   ModalFooter,
   SaveSourceBadge,
+  ResponsiveTable,
+  ResponsiveTableFields,
+  ResponsiveTableMobileLabel,
+  ResponsiveTableRow,
+  type ResponsiveTableSort,
 } from '@components';
 import {
   exportDraftStorage,
@@ -114,6 +119,25 @@ function createExportTimestamp(): string {
   return new Date().toISOString().replace(/[:.]/g, '-');
 }
 
+function getImportedDrIni(targets: SaveExportTarget[]) {
+  for (const target of targets) {
+    const source = target.save.meta.source;
+    if (source?.platform === 'pc' && source.drIni) return source.drIni;
+    if (source?.platform === 'switch') {
+      const drIniKey = Object.keys(source.container).find(
+        (key) => key.toLowerCase() === 'dr.ini',
+      );
+      if (drIniKey) {
+        return {
+          fileName: `${source.fileName} — dr.ini`,
+          content: source.container[drIniKey],
+        };
+      }
+    }
+  }
+  return undefined;
+}
+
 export function Download({ isOpen, setOpen }: DownloadProps) {
   const { t } = useTranslation();
   const reducedMotion = useReducedMotion();
@@ -134,6 +158,8 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
   const [exportTimestamp] = useState(createExportTimestamp);
   const [fileNames, setFileNames] = useState<ExportFileNames>({});
   const [storedSaves, setStoredSaves] = useState<Save[]>([]);
+  const [saveTableSort, setSaveTableSort] =
+    useState<ResponsiveTableSort | null>(null);
   const [selections, setSelections] = useState<Map<string, SaveSelection>>(
     () => new Map(),
   );
@@ -162,6 +188,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
       isCompletionSave:
         sel.completionOverride ?? sel.save.meta.isCompletionSave,
     }));
+  const importedDrIni = getImportedDrIni(selectedExportTargets);
 
   const duplicates = findDuplicateExportTargets(selectedExportTargets);
   const hasDuplicateError = duplicates.length > 0;
@@ -188,6 +215,56 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
     ...item,
     label: `${t('ui.field.slot', 'Slot')} ${index + 1}`,
   }));
+
+  const displayedStoredSaves = getDisplayedStoredSaves();
+
+  function getDisplayedStoredSaves(): Save[] {
+    if (!saveTableSort) return storedSaves;
+
+    const getValue = (storedSave: Save): string | number => {
+      const selection = selections.get(storedSave.meta.id);
+      const slot = selection?.slotOverride ?? storedSave.meta.slot;
+      const completion =
+        selection?.completionOverride ?? storedSave.meta.isCompletionSave;
+
+      switch (saveTableSort.columnId) {
+        case 'name':
+          return storedSave.meta.name.toLocaleLowerCase();
+        case 'chapter':
+          return storedSave.meta.chapter;
+        case 'slot':
+          return slot;
+        case 'complete':
+          return Number(completion);
+        case 'target':
+          return getTargetKey({
+            chapter: storedSave.meta.chapter,
+            slot,
+            isCompletionSave: completion,
+          });
+        case 'source':
+          return `${storedSave.meta.source?.platform ?? ''}:${storedSave.meta.source?.fileName ?? ''}`.toLocaleLowerCase();
+        default:
+          return 0;
+      }
+    };
+    const direction = saveTableSort.direction === 'asc' ? 1 : -1;
+
+    return storedSaves
+      .map((storedSave, index) => ({ storedSave, index }))
+      .sort((left, right) => {
+        const leftValue = getValue(left.storedSave);
+        const rightValue = getValue(right.storedSave);
+        const comparison =
+          typeof leftValue === 'number' && typeof rightValue === 'number'
+            ? leftValue - rightValue
+            : String(leftValue).localeCompare(String(rightValue));
+        return comparison === 0
+          ? left.index - right.index
+          : comparison * direction;
+      })
+      .map(({ storedSave }) => storedSave);
+  }
 
   function onSlotSelection(item: SelectItem | null) {
     if (item) {
@@ -266,17 +343,30 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
 
   function getDownloadPayload(save: Save): string | Uint8Array {
     if (exportScope === 'set') {
-      if (exportMode === 'switch')
-        return buildSwitchExportSet(selectedExportTargets, baseContainer);
-      return buildPcExportFromTargets(selectedExportTargets, baseDrIni);
+      if (exportMode === 'switch') {
+        const importedBase = importedDrIni
+          ? { 'dr.ini': importedDrIni.content }
+          : undefined;
+        return buildSwitchExportSet(
+          selectedExportTargets,
+          baseContainer ?? importedBase,
+        );
+      }
+      return buildPcExportFromTargets(
+        selectedExportTargets,
+        baseDrIni || importedDrIni?.content,
+      );
     }
 
     const target = getSingleExportTarget(save);
     if (exportMode === 'switch') {
+      const source = save.meta.source;
       const base =
-        save.meta.source?.platform === 'switch'
-          ? save.meta.source.container
-          : undefined;
+        source?.platform === 'switch'
+          ? source.container
+          : source?.drIni
+            ? { 'dr.ini': source.drIni.content }
+            : undefined;
       return buildSwitchExportSet([target], base);
     }
 
@@ -505,12 +595,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
           ? t('ui.download.downloadMultipleSaves', 'Download multiple saves')
           : t('ui.download.downloadSave', 'Download Save')
       }
-      size="tall"
-      panelClassName={
-        exportScope === 'set'
-          ? 'w-[min(100%,64rem)] h-auto max-h-[calc(100dvh-2rem)]'
-          : ''
-      }
+      variant={exportScope === 'set' ? 'workspace' : 'standard'}
       bodyClassName="min-h-0 overflow-hidden gap-5 flex-1"
       footer={
         <ModalFooter
@@ -568,136 +653,118 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
         </ModalFooter>
       }
     >
-      <AnimatePresence mode="wait">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: reducedMotion ? 0 : 0.2 }}
-          className={mergeClass('flex flex-col gap-5 min-h-0 flex-1')}
-        >
-          <div className="shrink-0 flex flex-wrap items-end gap-3">
-            <div className="w-56 max-w-full">
-              <div className="flex items-center justify-between gap-2">
-                <TextLabel>{t('ui.download.exportAs', 'Export as')}</TextLabel>
-                {exportMode === 'switch' && (
-                  <Badge
-                    tone="yellow"
-                    size="sm"
-                    className="h-5 px-1.5 text-[0.65rem] opacity-80"
-                    title={t(
-                      'ui.download.switchExperimentalNotice',
-                      'Switch export is experimental.',
-                    )}
-                  >
-                    {t('ui.download.experimental', 'Experimental')}
-                  </Badge>
-                )}
-              </div>
-              <Select
-                items={EXPORT_OPTIONS.map((item) => ({
-                  ...item,
-                  label:
-                    item.id === 'pc'
-                      ? t('ui.download.pcSaveFile', 'PC save file')
-                      : t('ui.download.switchContainer', 'Switch container'),
-                }))}
-                placeholder={t(
-                  'ui.download.selectExportType',
-                  'Select export type',
-                )}
-                className="w-full"
-                selectedItem={
-                  EXPORT_OPTIONS.find((option) => option.id === exportMode) ??
-                  EXPORT_OPTIONS[0]
-                }
-                defaultSelectedItem={
-                  EXPORT_OPTIONS.find((option) => option.id === exportMode) ??
-                  EXPORT_OPTIONS[0]
-                }
-                onSelectionChange={onExportModeSelection}
-              />
-            </div>
-            <div className="flex h-10 items-center">
-              <Checkbox
-                label={
-                  <span className="inline-flex items-center gap-2">
-                    <span>
-                      {t('ui.download.multipleSaves', 'Multiple saves')}
-                    </span>
-                    {exportScope === 'set' && (
-                      <Badge
-                        tone="yellow"
-                        size="sm"
-                        className="h-5 px-1.5 text-[0.65rem] opacity-80"
-                        title={t(
-                          'ui.download.multipleSavesExperimentalNotice',
-                          'Multiple-save export is experimental.',
-                        )}
-                      >
-                        {t('ui.download.experimental', 'Experimental')}
-                      </Badge>
-                    )}
-                  </span>
-                }
-                checked={exportScope === 'set'}
-                onChange={(checked) =>
-                  setExportScope(checked ? 'set' : 'single')
-                }
-              />
-            </div>
-            {exportScope === 'single' && (
-              <div className="w-36 max-w-full">
-                <TextLabel>
-                  {t('ui.download.inGameSlot', 'In-game slot')}
-                </TextLabel>
+      <div className="relative min-h-0 flex-1">
+        <AnimatePresence initial={false}>
+          <motion.div
+            key={exportScope}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: reducedMotion ? 0 : 0.2 }}
+            className="absolute inset-0 flex min-h-0 flex-col gap-5"
+          >
+            <div className="shrink-0 flex flex-wrap items-end gap-3">
+              <div className="w-56 max-w-full">
+                <div className="flex items-center justify-between gap-2">
+                  <TextLabel>
+                    {t('ui.download.exportAs', 'Export as')}
+                  </TextLabel>
+                  {exportMode === 'switch' && (
+                    <Badge
+                      tone="yellow"
+                      size="sm"
+                      className="h-5 px-1.5 text-[0.65rem] opacity-80"
+                      title={t(
+                        'ui.download.switchExperimentalNotice',
+                        'Switch export is experimental.',
+                      )}
+                    >
+                      {t('ui.download.experimental', 'Experimental')}
+                    </Badge>
+                  )}
+                </div>
                 <Select
-                  items={slotOptions}
-                  placeholder={t('ui.field.selectSlot', 'Select slot')}
+                  items={EXPORT_OPTIONS.map((item) => ({
+                    ...item,
+                    label:
+                      item.id === 'pc'
+                        ? t('ui.download.pcSaveFile', 'PC save file')
+                        : t('ui.download.switchContainer', 'Switch container'),
+                  }))}
+                  placeholder={t(
+                    'ui.download.selectExportType',
+                    'Select export type',
+                  )}
                   className="w-full"
-                  selectedItem={slotOptions[selectedSlot]}
-                  defaultSelectedItem={slotOptions[selectedSlot]}
-                  onSelectionChange={onSlotSelection}
+                  selectedItem={
+                    EXPORT_OPTIONS.find((option) => option.id === exportMode) ??
+                    EXPORT_OPTIONS[0]
+                  }
+                  defaultSelectedItem={
+                    EXPORT_OPTIONS.find((option) => option.id === exportMode) ??
+                    EXPORT_OPTIONS[0]
+                  }
+                  onSelectionChange={onExportModeSelection}
                 />
               </div>
-            )}
-            {exportScope === 'single' && (
               <div className="flex h-10 items-center">
                 <Checkbox
-                  label={t('ui.field.completionSave', 'Completion save')}
-                  checked={isCompletionSave}
-                  onChange={setIsCompletionSave}
+                  label={
+                    <span className="inline-flex items-center gap-2">
+                      <span>
+                        {t('ui.download.multipleSaves', 'Multiple saves')}
+                      </span>
+                      {exportScope === 'set' && (
+                        <Badge
+                          tone="yellow"
+                          size="sm"
+                          className="h-5 px-1.5 text-[0.65rem] opacity-80"
+                          title={t(
+                            'ui.download.multipleSavesExperimentalNotice',
+                            'Multiple-save export is experimental.',
+                          )}
+                        >
+                          {t('ui.download.experimental', 'Experimental')}
+                        </Badge>
+                      )}
+                    </span>
+                  }
+                  checked={exportScope === 'set'}
+                  onChange={(checked) =>
+                    setExportScope(checked ? 'set' : 'single')
+                  }
                 />
               </div>
-            )}
-          </div>
-
-          {exportScope === 'set' ? (
-            <div className="flex flex-col gap-2 min-h-0 flex-1">
-              <div className="flex flex-wrap items-end gap-3">
-                <TextLabel className="w-full">
-                  {t('ui.download.saveSlots', 'Save slots')}
-                </TextLabel>
-                {exportMode === 'pc' && (
-                  <label className="inline-flex min-w-0 cursor-pointer items-center gap-2 border border-border bg-surface-3 px-3 py-2 text-sm text-text-2 hover:bg-surface-3-hover focus-within:ring-2 focus-within:ring-red/30 focus-within:ring-offset-1">
-                    <span className="shrink-0">
-                      {t('ui.download.baseDrIni', 'Base dr.ini')}
-                    </span>
-                    <span className="ui-field-mono max-w-52 truncate">
-                      {baseDrIniName || t('ui.common.none', 'None')}
-                    </span>
-                    <input
-                      type="file"
-                      accept=".ini,text/plain"
-                      className="sr-only"
-                      onChange={(event) => {
-                        const file = event.target.files?.[0];
-                        if (file) readBaseDrIni(file);
-                      }}
-                    />
-                  </label>
-                )}
-                {baseDrIniName && exportMode === 'pc' && (
+              {exportScope === 'set' && exportMode === 'pc' && (
+                <label
+                  className="inline-flex h-10 min-w-0 cursor-pointer items-center gap-2 border border-border bg-surface-3 px-3 text-sm text-text-2 hover:bg-surface-3-hover focus-within:ring-2 focus-within:ring-red/30 focus-within:ring-offset-1"
+                  title={t(
+                    'ui.download.baseDrIniDescription',
+                    'An imported dr.ini is used automatically. Optionally choose another file to override it.',
+                  )}
+                >
+                  <span className="shrink-0">
+                    {t('ui.download.baseDrIni', 'Base dr.ini')}
+                  </span>
+                  <span className="ui-field-mono max-w-40 truncate">
+                    {baseDrIniName ||
+                      importedDrIni?.fileName ||
+                      t('ui.common.none', 'None')}
+                  </span>
+                  <input
+                    type="file"
+                    accept=".ini,text/plain"
+                    className="sr-only"
+                    onChange={(event) => {
+                      const file = event.target.files?.[0];
+                      if (file) readBaseDrIni(file);
+                    }}
+                  />
+                </label>
+              )}
+              {exportScope === 'set' &&
+                exportMode === 'pc' &&
+                baseDrIniName && (
                   <Button
                     size="sm"
                     variant="ghost"
@@ -709,26 +776,36 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
                     {t('ui.download.clearBase', 'Clear base')}
                   </Button>
                 )}
-                {exportMode === 'switch' && (
-                  <label className="inline-flex min-w-0 cursor-pointer items-center gap-2 border border-border bg-surface-3 px-3 py-2 text-sm text-text-2 hover:bg-surface-3-hover focus-within:ring-2 focus-within:ring-red/30 focus-within:ring-offset-1">
-                    <span className="shrink-0">
-                      {t('ui.download.baseContainer', 'Base container')}
-                    </span>
-                    <span className="ui-field-mono max-w-52 truncate">
-                      {baseContainerName || t('ui.common.none', 'None')}
-                    </span>
-                    <input
-                      type="file"
-                      accept=".sav"
-                      className="sr-only"
-                      onChange={(event) => {
-                        const file = event.target.files?.[0];
-                        if (file) readBaseContainer(file);
-                      }}
-                    />
-                  </label>
-                )}
-                {baseContainerName && exportMode === 'switch' && (
+              {exportScope === 'set' && exportMode === 'switch' && (
+                <label
+                  className="inline-flex h-10 min-w-0 cursor-pointer items-center gap-2 border border-border bg-surface-3 px-3 text-sm text-text-2 hover:bg-surface-3-hover focus-within:ring-2 focus-within:ring-red/30 focus-within:ring-offset-1"
+                  title={t(
+                    'ui.download.baseContainerDescription',
+                    'Imported dr.ini metadata is used automatically. Optionally choose a container to preserve other entries.',
+                  )}
+                >
+                  <span className="shrink-0">
+                    {t('ui.download.baseContainer', 'Base container')}
+                  </span>
+                  <span className="ui-field-mono max-w-40 truncate">
+                    {baseContainerName ||
+                      importedDrIni?.fileName ||
+                      t('ui.common.none', 'None')}
+                  </span>
+                  <input
+                    type="file"
+                    accept=".sav"
+                    className="sr-only"
+                    onChange={(event) => {
+                      const file = event.target.files?.[0];
+                      if (file) readBaseContainer(file);
+                    }}
+                  />
+                </label>
+              )}
+              {exportScope === 'set' &&
+                exportMode === 'switch' &&
+                baseContainerName && (
                   <Button
                     size="sm"
                     variant="ghost"
@@ -740,23 +817,41 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
                     {t('ui.download.clearBase', 'Clear base')}
                   </Button>
                 )}
-                <p className="w-full text-xs text-text-2">
-                  {exportMode === 'pc'
-                    ? t(
-                        'ui.download.baseDrIniDescription',
-                        'Optional: choose your existing dr.ini to preserve metadata that is not stored in save files.',
-                      )
-                    : t(
-                        'ui.download.baseContainerDescription',
-                        'Optional: choose an existing container to preserve entries that are not selected below.',
-                      )}
-                </p>
-              </div>
-              <div className="min-h-5 shrink-0">
+              {exportScope === 'single' && (
+                <div className="w-36 max-w-full">
+                  <TextLabel>
+                    {t('ui.download.inGameSlot', 'In-game slot')}
+                  </TextLabel>
+                  <Select
+                    items={slotOptions}
+                    placeholder={t('ui.field.selectSlot', 'Select slot')}
+                    className="w-full"
+                    selectedItem={slotOptions[selectedSlot]}
+                    defaultSelectedItem={slotOptions[selectedSlot]}
+                    onSelectionChange={onSlotSelection}
+                  />
+                </div>
+              )}
+              {exportScope === 'single' && (
+                <div className="flex h-10 items-center">
+                  <Checkbox
+                    label={t('ui.field.completionSave', 'Completion save')}
+                    checked={isCompletionSave}
+                    onChange={setIsCompletionSave}
+                  />
+                </div>
+              )}
+            </div>
+
+            {exportScope === 'set' ? (
+              <div className="flex flex-col gap-2 min-h-0 flex-1">
+                <TextLabel>
+                  {t('ui.download.saveSlots', 'Save slots')}
+                </TextLabel>
                 {hasDuplicateError && (
                   <p
                     role="alert"
-                    className="max-h-10 overflow-y-auto text-sm leading-5 text-red"
+                    className="max-h-10 shrink-0 overflow-y-auto text-sm leading-5 text-red"
                   >
                     {formatTranslation(
                       t(
@@ -767,188 +862,220 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
                     )}
                   </p>
                 )}
-              </div>
-              <div className="min-h-0 flex-1 max-h-[min(50vh,24rem)] overflow-auto border border-border bg-surface-2">
-                <div className="ui-section-label sticky top-0 z-10 hidden md:grid grid-cols-[3rem_1fr_6rem_8rem_6rem_8rem_6rem] gap-3 items-center border-b border-border bg-surface-3 px-4 py-2">
-                  <span />
-                  <span>{t('ui.download.name', 'Name')}</span>
-                  <span className="text-center">
-                    {t('ui.upload.chapter', 'Chapter')}
-                  </span>
-                  <span>{t('ui.field.slot', 'Slot')}</span>
-                  <span className="text-center">
-                    {t('ui.field.completionSave', 'Complete')}
-                  </span>
-                  <span>{t('ui.download.target', 'Target')}</span>
-                  <span className="text-center">
-                    {t('ui.download.source', 'Source')}
-                  </span>
-                </div>
-                {storedSaves.length === 0 ? (
-                  <p className="p-4 text-sm text-text-2 text-center">
-                    {t(
-                      'ui.download.noStoredSaves',
-                      'No stored saves available.',
-                    )}
-                  </p>
-                ) : (
-                  storedSaves.map((storedSave) => {
-                    const sel = selections.get(storedSave.meta.id);
-                    const isSelected = sel?.selected ?? false;
-                    const effectiveSlot =
-                      sel?.slotOverride ?? storedSave.meta.slot;
-                    const effectiveCompletion =
-                      sel?.completionOverride ??
-                      storedSave.meta.isCompletionSave;
-                    const targetKey = getTargetKey({
-                      chapter: storedSave.meta.chapter,
-                      slot: effectiveSlot,
-                      isCompletionSave: effectiveCompletion,
-                    });
-                    const isDuplicate =
-                      isSelected && duplicates.includes(targetKey);
-                    return (
-                      <div
-                        key={storedSave.meta.id}
-                        className={mergeClass(
-                          'grid grid-cols-[3rem_1fr] md:grid-cols-[3rem_1fr_6rem_8rem_6rem_8rem_6rem] gap-3 items-center border-b border-border px-4 py-3 relative',
-                          isDuplicate && 'bg-red-soft',
-                        )}
-                      >
-                        <div
-                          className={mergeClass(
-                            'flex justify-center',
-                            !isSelected && 'opacity-60',
-                          )}
+                <ResponsiveTable
+                  layout="export-selection"
+                  className="max-h-[min(50vh,24rem)] flex-1"
+                  ariaLabel={t(
+                    'ui.download.downloadMultipleSaves',
+                    'Download multiple saves',
+                  )}
+                  sort={saveTableSort}
+                  onSortChange={setSaveTableSort}
+                  headers={[
+                    { id: 'select' },
+                    {
+                      id: 'name',
+                      content: t('ui.download.name', 'Name'),
+                      sortable: true,
+                    },
+                    {
+                      id: 'chapter',
+                      content: t('ui.upload.chapter', 'Chapter'),
+                      sortable: true,
+                      align: 'center',
+                    },
+                    {
+                      id: 'slot',
+                      content: t('ui.field.slot', 'Slot'),
+                      sortable: true,
+                    },
+                    {
+                      id: 'complete',
+                      content: t('ui.field.completionSave', 'Complete'),
+                      sortable: true,
+                      align: 'center',
+                    },
+                    {
+                      id: 'target',
+                      content: t('ui.download.target', 'Target'),
+                      sortable: true,
+                    },
+                    {
+                      id: 'source',
+                      content: t('ui.download.source', 'Source'),
+                      sortable: true,
+                      align: 'center',
+                    },
+                  ]}
+                >
+                  {storedSaves.length === 0 ? (
+                    <p className="p-4 text-sm text-text-2 text-center">
+                      {t(
+                        'ui.download.noStoredSaves',
+                        'No stored saves available.',
+                      )}
+                    </p>
+                  ) : (
+                    displayedStoredSaves.map((storedSave) => {
+                      const sel = selections.get(storedSave.meta.id);
+                      const isSelected = sel?.selected ?? false;
+                      const effectiveSlot =
+                        sel?.slotOverride ?? storedSave.meta.slot;
+                      const effectiveCompletion =
+                        sel?.completionOverride ??
+                        storedSave.meta.isCompletionSave;
+                      const targetKey = getTargetKey({
+                        chapter: storedSave.meta.chapter,
+                        slot: effectiveSlot,
+                        isCompletionSave: effectiveCompletion,
+                      });
+                      const isDuplicate =
+                        isSelected && duplicates.includes(targetKey);
+                      return (
+                        <ResponsiveTableRow
+                          key={storedSave.meta.id}
+                          className={isDuplicate ? 'bg-red-soft' : undefined}
                         >
-                          <Checkbox
-                            ariaLabel={formatTranslation(
-                              t('ui.download.selectNamedSave', 'Select {name}'),
-                              { name: storedSave.meta.name },
-                            )}
-                            checked={isSelected}
-                            onChange={(checked) =>
-                              updateSelection(storedSave.meta.id, {
-                                selected: checked,
-                              })
-                            }
-                          />
-                        </div>
-
-                        <div className="flex flex-col gap-2 md:contents">
                           <div
                             className={mergeClass(
-                              'truncate text-sm font-bold text-text-1 md:font-normal',
+                              'flex justify-center',
                               !isSelected && 'opacity-60',
                             )}
                           >
-                            {storedSave.meta.name}
-                          </div>
-
-                          <div
-                            className={mergeClass(
-                              'flex items-center gap-2 md:justify-center',
-                              !isSelected && 'opacity-60',
-                            )}
-                          >
-                            <span className="text-xs uppercase text-text-3 md:hidden">
-                              {t('ui.upload.chapter', 'Chapter')}:
-                            </span>
-                            <span className="font-mono text-xs text-text-2">
-                              {storedSave.meta.chapter}
-                            </span>
-                          </div>
-
-                          <div className="flex items-center gap-2">
-                            <span className="text-xs uppercase text-text-3 w-16 shrink-0 md:hidden">
-                              {t('ui.field.slot', 'Slot')}:
-                            </span>
-                            <div className="w-36 md:w-full">
-                              <Select
-                                items={slotOptions}
-                                className="w-full h-8 min-h-0"
-                                selectedItem={slotOptions[effectiveSlot]}
-                                defaultSelectedItem={slotOptions[effectiveSlot]}
-                                onSelectionChange={(item) => {
-                                  if (item) {
-                                    updateSelection(storedSave.meta.id, {
-                                      slotOverride: (parseInt(item.id, 10) -
-                                        1) as SaveSlot,
-                                    });
-                                  }
-                                }}
-                              />
-                            </div>
-                          </div>
-
-                          <div
-                            className={mergeClass(
-                              'flex items-center gap-2 md:justify-center',
-                              !isSelected && 'opacity-60',
-                            )}
-                          >
-                            <span className="text-xs uppercase text-text-3 w-16 shrink-0 md:hidden">
-                              {t('ui.field.completionSave', 'Complete')}:
-                            </span>
                             <Checkbox
-                              ariaLabel={`${t(
-                                'ui.field.completionSave',
-                                'Completion save',
-                              )}: ${storedSave.meta.name}`}
-                              checked={effectiveCompletion}
+                              ariaLabel={formatTranslation(
+                                t(
+                                  'ui.download.selectNamedSave',
+                                  'Select {name}',
+                                ),
+                                { name: storedSave.meta.name },
+                              )}
+                              checked={isSelected}
                               onChange={(checked) =>
                                 updateSelection(storedSave.meta.id, {
-                                  completionOverride: checked,
+                                  selected: checked,
                                 })
                               }
                             />
                           </div>
 
-                          <div
-                            className={mergeClass(
-                              'flex items-center gap-2',
-                              !isSelected && 'opacity-60',
-                            )}
-                          >
-                            <span className="text-xs uppercase text-text-3 w-16 shrink-0 md:hidden">
-                              {t('ui.download.target', 'Target')}:
-                            </span>
-                            <span className="font-mono text-xs text-text-2">
-                              {targetKey}
-                            </span>
-                          </div>
+                          <ResponsiveTableFields>
+                            <div
+                              className={mergeClass(
+                                'truncate text-sm font-bold text-text-1 md:font-normal',
+                                !isSelected && 'opacity-60',
+                              )}
+                            >
+                              {storedSave.meta.name}
+                            </div>
 
-                          <div
-                            className={mergeClass(
-                              'flex items-center gap-2 md:justify-center',
-                              !isSelected && 'opacity-60',
-                            )}
-                          >
-                            <span className="text-xs uppercase text-text-3 w-16 shrink-0 md:hidden">
-                              {t('ui.download.source', 'Source')}:
-                            </span>
-                            <SaveSourceBadge save={storedSave} />
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })
-                )}
+                            <div
+                              className={mergeClass(
+                                'flex items-center gap-2 md:justify-center',
+                                !isSelected && 'opacity-60',
+                              )}
+                            >
+                              <ResponsiveTableMobileLabel>
+                                {t('ui.upload.chapter', 'Chapter')}
+                              </ResponsiveTableMobileLabel>
+                              <span className="font-mono text-xs text-text-2">
+                                {storedSave.meta.chapter}
+                              </span>
+                            </div>
+
+                            <div className="flex items-center gap-2">
+                              <ResponsiveTableMobileLabel>
+                                {t('ui.field.slot', 'Slot')}
+                              </ResponsiveTableMobileLabel>
+                              <div className="w-36 md:w-full">
+                                <Select
+                                  items={slotOptions}
+                                  className="w-full h-8 min-h-0"
+                                  selectedItem={slotOptions[effectiveSlot]}
+                                  defaultSelectedItem={
+                                    slotOptions[effectiveSlot]
+                                  }
+                                  onSelectionChange={(item) => {
+                                    if (item) {
+                                      updateSelection(storedSave.meta.id, {
+                                        slotOverride: (parseInt(item.id, 10) -
+                                          1) as SaveSlot,
+                                      });
+                                    }
+                                  }}
+                                />
+                              </div>
+                            </div>
+
+                            <div
+                              className={mergeClass(
+                                'flex items-center gap-2 md:justify-center',
+                                !isSelected && 'opacity-60',
+                              )}
+                            >
+                              <ResponsiveTableMobileLabel>
+                                {t('ui.field.completionSave', 'Complete')}
+                              </ResponsiveTableMobileLabel>
+                              <Checkbox
+                                ariaLabel={`${t(
+                                  'ui.field.completionSave',
+                                  'Completion save',
+                                )}: ${storedSave.meta.name}`}
+                                checked={effectiveCompletion}
+                                onChange={(checked) =>
+                                  updateSelection(storedSave.meta.id, {
+                                    completionOverride: checked,
+                                  })
+                                }
+                              />
+                            </div>
+
+                            <div
+                              className={mergeClass(
+                                'flex items-center gap-2',
+                                !isSelected && 'opacity-60',
+                              )}
+                            >
+                              <ResponsiveTableMobileLabel>
+                                {t('ui.download.target', 'Target')}
+                              </ResponsiveTableMobileLabel>
+                              <span className="font-mono text-xs text-text-2">
+                                {targetKey}
+                              </span>
+                            </div>
+
+                            <div
+                              className={mergeClass(
+                                'flex items-center gap-2 md:justify-center',
+                                !isSelected && 'opacity-60',
+                              )}
+                            >
+                              <ResponsiveTableMobileLabel>
+                                {t('ui.download.source', 'Source')}
+                              </ResponsiveTableMobileLabel>
+                              <SaveSourceBadge save={storedSave} />
+                            </div>
+                          </ResponsiveTableFields>
+                        </ResponsiveTableRow>
+                      );
+                    })
+                  )}
+                </ResponsiveTable>
               </div>
-            </div>
-          ) : save ? (
-            <div className="flex flex-col gap-2 min-h-0 flex-1 overflow-hidden">
-              <TextLabel>
-                {t(
-                  'ui.download.changesSinceBaseline',
-                  'Changes since last upload or download',
-                )}
-              </TextLabel>
-              <DownloadChanges key={baselineRevision} fill />
-            </div>
-          ) : null}
-        </motion.div>
-      </AnimatePresence>
+            ) : save ? (
+              <div className="flex flex-col gap-2 min-h-0 flex-1 overflow-hidden">
+                <TextLabel>
+                  {t(
+                    'ui.download.changesSinceBaseline',
+                    'Changes since last upload or download',
+                  )}
+                </TextLabel>
+                <DownloadChanges key={baselineRevision} fill />
+              </div>
+            ) : null}
+          </motion.div>
+        </AnimatePresence>
+      </div>
     </ModalLayout>
   );
 }

@@ -49,4 +49,9 @@ export const CONTRIBUTORS: Contributor[] = [
     login: 'wryyyong',
     url: 'https://github.com/wryyyong',
   },
+  {
+    displayName: 'Xanderrock98',
+    login: 'Xanderrock98',
+    url: 'https://github.com/Xanderrock98',
+  },
 ];

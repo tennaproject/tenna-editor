@@ -13,6 +13,7 @@ interface TextInputProps {
   className?: string;
   fullWidth?: boolean;
   size?: 'default' | 'small';
+  variant?: 'field' | 'inline';
   autoComplete?: string;
   name?: string;
   id?: string;
@@ -32,6 +33,7 @@ export function TextInput({
   className,
   fullWidth = false,
   size = 'default',
+  variant = 'field',
   autoComplete = 'off',
   name,
   id,
@@ -67,8 +69,17 @@ export function TextInput({
   };
 
   const widthClass = fullWidth ? 'w-full' : 'w-50';
-  const sizeClass =
-    size === 'small' ? 'ui-field h-8 px-2 py-1 text-sm' : 'ui-field';
+  const inputClass =
+    variant === 'inline'
+      ? mergeClass(
+          'border border-transparent bg-transparent leading-none text-text-1 motion-reduce:transition-none transition-colors',
+          'hover:border-border hover:bg-surface-3/60',
+          'focus:border-border focus:bg-surface-3 focus:outline-none focus:ring-1 focus:ring-text-3',
+          size === 'small' ? 'h-8 px-2 py-1 text-sm' : 'h-10 px-3 py-2',
+        )
+      : size === 'small'
+        ? 'ui-field h-8 px-2 py-1 text-sm'
+        : 'ui-field';
   return (
     <div className={mergeClass('relative', widthClass, className)}>
       <input
@@ -82,7 +93,7 @@ export function TextInput({
         placeholder={placeholder}
         autoComplete={autoComplete}
         aria-label={ariaLabel}
-        className={mergeClass(sizeClass, 'w-full appearance-none')}
+        className={mergeClass(inputClass, 'w-full appearance-none')}
         data-lpignore="true"
       />
       {suffix && (

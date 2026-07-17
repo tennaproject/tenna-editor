@@ -3,14 +3,14 @@ import { mergeClass } from '@utils/merge-class';
 import { Heading } from './Heading';
 import { Modal } from './Modal';
 
-export type ModalSize = 'fixed' | 'content' | 'tall';
+export type ModalVariant = 'standard' | 'compact' | 'workspace';
 
 const MODAL_MIN_WIDTH_CLASS = 'min-w-[min(100%,24rem)]';
 
-const MODAL_PANEL_BY_SIZE: Record<ModalSize, string> = {
-  fixed: `${MODAL_MIN_WIDTH_CLASS} w-[min(100%,48rem)] h-[min(90vh,28rem)] flex flex-col overflow-hidden p-0`,
-  content: `${MODAL_MIN_WIDTH_CLASS} w-[min(100%,36rem)] sm:w-auto sm:max-w-[min(100%,36rem)] max-h-[min(90vh,28rem)] h-auto flex flex-col overflow-hidden p-0`,
-  tall: `${MODAL_MIN_WIDTH_CLASS} w-[min(100%,48rem)] h-[min(90vh,36rem)] flex flex-col overflow-hidden p-0`,
+const MODAL_PANEL_BY_VARIANT: Record<ModalVariant, string> = {
+  standard: `${MODAL_MIN_WIDTH_CLASS} w-[min(100%,48rem)] h-[min(90vh,30rem)] flex flex-col overflow-hidden p-0`,
+  compact: `${MODAL_MIN_WIDTH_CLASS} w-[min(100%,36rem)] sm:w-auto sm:max-w-[min(100%,36rem)] max-h-[min(90vh,28rem)] h-auto flex flex-col overflow-hidden p-0`,
+  workspace: `${MODAL_MIN_WIDTH_CLASS} w-[min(100%,56rem)] h-[min(90vh,38rem)] flex flex-col overflow-hidden p-0`,
 };
 
 interface ModalLayoutProps {
@@ -20,7 +20,7 @@ interface ModalLayoutProps {
   title: ReactNode;
   children: ReactNode;
   footer?: ReactNode;
-  size?: ModalSize;
+  variant?: ModalVariant;
   panelClassName?: string;
   bodyClassName?: string;
 }
@@ -32,23 +32,26 @@ export function ModalLayout({
   title,
   children,
   footer,
-  size = 'fixed',
+  variant = 'standard',
   panelClassName,
   bodyClassName,
 }: ModalLayoutProps) {
-  const isContentSized = size === 'content';
+  const isCompact = variant === 'compact';
 
   return (
     <Modal
       isOpen={isOpen}
       setOpen={setOpen}
       onClose={onClose}
-      panelClassName={mergeClass(MODAL_PANEL_BY_SIZE[size], panelClassName)}
+      panelClassName={mergeClass(
+        MODAL_PANEL_BY_VARIANT[variant],
+        panelClassName,
+      )}
     >
       <div
         className={mergeClass(
           'flex flex-col select-none',
-          isContentSized ? 'max-h-[min(90vh,28rem)]' : 'min-h-0 h-full',
+          isCompact ? 'max-h-[min(90vh,28rem)]' : 'min-h-0 h-full',
         )}
       >
         <div className="shrink-0 px-6 pt-6 pb-4 pr-12">
@@ -62,9 +65,7 @@ export function ModalLayout({
         <div
           className={mergeClass(
             'flex flex-col px-6',
-            isContentSized
-              ? 'overflow-y-auto'
-              : 'min-h-0 flex-1 overflow-y-auto',
+            isCompact ? 'overflow-y-auto' : 'min-h-0 flex-1 overflow-y-auto',
             footer ? 'pb-5' : 'pb-6',
             bodyClassName,
           )}

@@ -378,4 +378,26 @@
   .ui-divider-row {
     @apply border-b border-divider last:border-b-0;
   }
+
+  @media (width >= 48rem) {
+    .responsive-table[data-layout='import-review'] .responsive-table-header {
+      grid-template-columns:
+        3rem minmax(0, 1fr) minmax(10rem, 14rem)
+        8rem 6rem 5rem;
+    }
+
+    .responsive-table[data-layout='import-review'] .responsive-table-fields {
+      grid-template-columns:
+        minmax(0, 1fr) minmax(10rem, 14rem)
+        8rem 6rem 5rem;
+    }
+
+    .responsive-table[data-layout='export-selection'] .responsive-table-header {
+      grid-template-columns: 3rem minmax(0, 1fr) 6rem 8rem 6rem 8rem 6rem;
+    }
+
+    .responsive-table[data-layout='export-selection'] .responsive-table-fields {
+      grid-template-columns: minmax(0, 1fr) 6rem 8rem 6rem 8rem 6rem;
+    }
+  }
 }
