@@ -24,6 +24,24 @@ export const FLAG_BITFIELDS = {
   CASTLE_CLIMB_CUTSCENE5_CHOICE: 'CASTLE_CLIMB_CUTSCENE5_CHOICE',
   CASTLE_CLIMB_CUTSCENE6: 'CASTLE_CLIMB_CUTSCENE6',
   CASTLE_CLIMB_CUTSCENE9: 'CASTLE_CLIMB_CUTSCENE9',
+  NEWDASH_LEAFPILE0: 'NEWDASH_LEAFPILE0',
+  NEWDASH_LEAFPILE1: 'NEWDASH_LEAFPILE1',
+  NEWDASH_LEAFPILE2: 'NEWDASH_LEAFPILE2',
+  NEWDASH_LEAFPILE3: 'NEWDASH_LEAFPILE3',
+  NEWDASH_LEAFPILE4: 'NEWDASH_LEAFPILE4',
+  NEWDASH_LEAFPILE5: 'NEWDASH_LEAFPILE5',
+  NEWDASH_LEAFPILE6: 'NEWDASH_LEAFPILE6',
+  NEWDASH_LEAFPILE7: 'NEWDASH_LEAFPILE7',
+  NEWDASH_LEAFPILE8: 'NEWDASH_LEAFPILE8',
+  NEWDASH_LEAFPILE9: 'NEWDASH_LEAFPILE9',
+  NEWDASH_LEAFPILE10: 'NEWDASH_LEAFPILE10',
+  FIRSTDASH_LEAFPILES: 'FIRSTDASH_LEAFPILES',
+  NEWDASH_LEAFPILE12: 'NEWDASH_LEAFPILE12',
+  NEWDASH_LEAFPILE13: 'NEWDASH_LEAFPILE13',
+  NEWDASH_LEAFPILE16: 'NEWDASH_LEAFPILE16',
+  NEWDASH_DESTOYEDTEA: 'NEWDASH_DESTOYEDTEA',
+  IDEAL_DINER_TALKED_TO_YELLOW: 'IDEAL_DINER_TALKED_TO_YELLOW',
+  IDEAL_DINER_CHECKED_REGISTER: 'IDEAL_DINER_CHECKED_REGISTER',
   PLATFORMING_INTRO_JUMP_TUTORIAL: 'PLATFORMING_INTRO_JUMP_TUTORIAL',
   PLATFORMING_INTRO_ACT_TUTORIAL: 'PLATFORMING_INTRO_ACT_TUTORIAL',
   PLATFORMING_INTRO_TREE_SMASHED: 'PLATFORMING_INTRO_TREE_SMASHED',
@@ -47,11 +65,56 @@ export const FLAG_BITFIELDS = {
     'PLATFORMING_INTRO_BELL_AQUAHOLE_LEFT2',
   PLATFORMING_INTRO_BELL_AQUAHOLE_LEFT3:
     'PLATFORMING_INTRO_BELL_AQUAHOLE_LEFT3',
+  GARDEN_AQUADASH_PLAT_COIN1: 'GARDEN_AQUADASH_PLAT_COIN1',
+  GARDEN_AQUADASH_PLAT_COIN2: 'GARDEN_AQUADASH_PLAT_COIN2',
+  GARDEN_AQUADASH_PLAT_COIN3: 'GARDEN_AQUADASH_PLAT_COIN3',
+  GARDEN_AQUADASH_PLAT_COIN4: 'GARDEN_AQUADASH_PLAT_COIN4',
+  GARDEN_AQUADASH_PLAT_COIN5: 'GARDEN_AQUADASH_PLAT_COIN5',
+  GARDEN_AQUADASH_PLAT_COIN6: 'GARDEN_AQUADASH_PLAT_COIN6',
+  GARDEN_AQUADASH_PLAT_COIN7: 'GARDEN_AQUADASH_PLAT_COIN7',
+  GARDEN_AQUADASH_PLAT_COIN8: 'GARDEN_AQUADASH_PLAT_COIN8',
+  GARDEN_AQUADASH_PLAT_COIN9: 'GARDEN_AQUADASH_PLAT_COIN9',
+  GARDEN_AQUADASH_PLAT_COIN10: 'GARDEN_AQUADASH_PLAT_COIN10',
+  GARDEN_AQUADASH_PLAT_COIN11: 'GARDEN_AQUADASH_PLAT_COIN11',
+  GARDEN_AQUADASH_PLAT_COIN12: 'GARDEN_AQUADASH_PLAT_COIN12',
+  GARDEN_AQUADASH_PLAT_COIN13: 'GARDEN_AQUADASH_PLAT_COIN13',
+  GARDEN_AQUADASH_PLAT_COIN14: 'GARDEN_AQUADASH_PLAT_COIN14',
+  GARDEN_AQUADASH_PLAT_COIN15: 'GARDEN_AQUADASH_PLAT_COIN15',
+  GARDEN_AQUADASH_PLAT_COIN16: 'GARDEN_AQUADASH_PLAT_COIN16',
+  GARDEN_AQUADASH_PLAT_COIN17: 'GARDEN_AQUADASH_PLAT_COIN17',
+  GARDEN_AQUADASH_PLAT_COIN18: 'GARDEN_AQUADASH_PLAT_COIN18',
+  GARDEN_AQUADASH_PLAT_COIN19: 'GARDEN_AQUADASH_PLAT_COIN19',
+  GARDEN_AQUADASH_PLAT_COIN20: 'GARDEN_AQUADASH_PLAT_COIN20',
+  GARDEN_AQUADASH_PLAT_COIN21: 'GARDEN_AQUADASH_PLAT_COIN21',
+  GARDEN_AQUADASH_PLAT_COIN22: 'GARDEN_AQUADASH_PLAT_COIN22',
+  GARDEN_AQUADASH_PLAT_COIN23: 'GARDEN_AQUADASH_PLAT_COIN23',
+  GARDEN_AQUADASH_PLAT_COIN24: 'GARDEN_AQUADASH_PLAT_COIN24',
+  GARDEN_AQUADASH_PLAT_COIN25: 'GARDEN_AQUADASH_PLAT_COIN25',
+  GARDEN_AQUADASH_PLAT_COIN26: 'GARDEN_AQUADASH_PLAT_COIN26',
+  GARDEN_AQUADASH_PLAT_COIN27: 'GARDEN_AQUADASH_PLAT_COIN27',
+  GARDEN_AQUADASH_PLAT_COIN28: 'GARDEN_AQUADASH_PLAT_COIN28',
+  GARDEN_AQUADASH_PLAT_COIN29: 'GARDEN_AQUADASH_PLAT_COIN29',
+  GARDEN_AQUADASH_PLAT_AQUA_BULLETPATTERNS:
+    'GARDEN_AQUADASH_PLAT_AQUA_BULLETPATTERNS',
+  GARDEN_AQUADASH_PLAT_PINKCOIN: 'GARDEN_AQUADASH_PLAT_PINKCOIN',
   SCISSORS_PUZZLE_SHAPED_BUSH_CUT: 'SCISSORS_PUZZLE_SHAPED_BUSH_CUT',
   SCISSORS_PUZZLE_FLOWERY_FACE_PATH_CUT:
     'SCISSORS_PUZZLE_FLOWERY_FACE_PATH_CUT',
   RALSEI_HOLD_Z_HINT: 'RALSEI_HOLD_Z_HINT',
   HOPSCHEF_PROGRESS: 'HOPSCHEF_PROGRESS',
+  HOPSCHEF_REWARDS: 'HOPSCHEF_REWARDS',
+  FERROLL_SMASHED_PARTY: 'FERROLL_SMASHED_PARTY',
+  FERROLL_SMASHED_MONEY: 'FERROLL_SMASHED_MONEY',
+  CLIFFS_CUTDOWN_TUTORIAL_BULLETPATTERN:
+    'CLIFFS_CUTDOWN_TUTORIAL_BULLETPATTERN',
+  CLIFFS_CUTDOWN_TUTORIAL_GRASSRIGHT1: 'CLIFFS_CUTDOWN_TUTORIAL_GRASSRIGHT1',
+  CLIFFS_CUTDOWN_TUTORIAL_GRASSRIGHT2: 'CLIFFS_CUTDOWN_TUTORIAL_GRASSRIGHT2',
+  CLIFFS_CUTDOWN_TUTORIAL_GRASSLEFT1: 'CLIFFS_CUTDOWN_TUTORIAL_GRASSLEFT1',
+  CLIFFS_CUTDOWN_TUTORIAL_GRASSLEFT2: 'CLIFFS_CUTDOWN_TUTORIAL_GRASSLEFT2',
+  CLIFFS_CUTDOWN_TUTORIAL_GRASSLEFT3: 'CLIFFS_CUTDOWN_TUTORIAL_GRASSLEFT3',
+  CLIFFS_CUTDOWN_TUTORIAL_PINKBELL: 'CLIFFS_CUTDOWN_TUTORIAL_PINKBELL',
+  CLIFFS_BONUSCOMBAT_PINKBELL: 'CLIFFS_BONUSCOMBAT_PINKBELL',
+  CLIFFS_BONUSCOMBAT_BULLETPATTERN: 'CLIFFS_BONUSCOMBAT_BULLETPATTERN',
   ASGORE_DOCUMENT_TOTALREAD: 'ASGORE_DOCUMENT_TOTALREAD',
   ASGORE_DOCUMENT_LEFTFIRST: 'ASGORE_DOCUMENT_LEFTFIRST',
   ASGORE_DOCUMENT_RIGHTFIRST: 'ASGORE_DOCUMENT_RIGHTFIRST',
@@ -61,6 +124,7 @@ export const FLAG_BITFIELDS = {
   TERAKOTA_PUZZLE_STATUE4: 'TERAKOTA_PUZZLE_STATUE4',
   TERAKOTA_PUZZLE_STATUE5: 'TERAKOTA_PUZZLE_STATUE5',
   TERAKOTA_PUZZLE_SOLVED: 'TERAKOTA_PUZZLE_SOLVED',
+  DEFEATED_FIRST_ORANGE_BP: 'DEFEATED_FIRST_ORANGE_BP',
   FOXHUNT_FIRST_TERAKOTA: 'FOXHUNT_FIRST_TERAKOTA',
   FOXHUNT_FOX1: 'FOXHUNT_FOX1',
   FOXHUNT_FOX2: 'FOXHUNT_FOX2',
@@ -156,7 +220,24 @@ export const FLAG_BITFIELDS = {
     'SHADOW_PLATFORM_Y_FCASTLE_SIDEPUZZLE1',
   SHADOW_PLATFORM_Y_FCASTLE_SIDEPUZZLE2:
     'SHADOW_PLATFORM_Y_FCASTLE_SIDEPUZZLE2',
+  FCASTLE_BOUNCE1_BELL1: 'FCASTLE_BOUNCE1_BELL1',
+  FCASTLE_BOUNCE1_BELL2: 'FCASTLE_BOUNCE1_BELL2',
+  FCASTLE_BOUNCE1_BELL3: 'FCASTLE_BOUNCE1_BELL3',
+  FCASTLE_BOUNCE1_BELL4: 'FCASTLE_BOUNCE1_BELL4',
+  FCASTLE_BOUNCE3_GOLDCOIN: 'FCASTLE_BOUNCE3_GOLDCOIN',
+  FCASTLE_RIGHT_PUZZLE_COIN1: 'FCASTLE_RIGHT_PUZZLE_COIN1',
+  FCASTLE_RIGHT_PUZZLE_GOLDCOIN: 'FCASTLE_RIGHT_PUZZLE_GOLDCOIN',
+  FCASTLE_RIGHT_PUZZLE_COIN2: 'FCASTLE_RIGHT_PUZZLE_COIN2',
+  FCASTLE_SIDEPUZZLE_GOLDCOIN1: 'FCASTLE_SIDEPUZZLE_GOLDCOIN1',
+  FCASTLE_SIDEPUZZLE_GOLDCOIN2: 'FCASTLE_SIDEPUZZLE_GOLDCOIN2',
+  DANGEROUS_PLATFORMING_JUMPS: 'DANGEROUS_PLATFORMING_JUMPS',
+  DANGEROUS_PLATFORMING_CHUTE: 'DANGEROUS_PLATFORMING_CHUTE',
+  DANGEROUS_PLATFORMING_PAYOFF: 'DANGEROUS_PLATFORMING_PAYOFF',
+  DANGEROUS_PLATFORMING_AQUASETH: 'DANGEROUS_PLATFORMING_AQUASETH',
   SAW_FINAL_STARWALKER: 'SAW_FINAL_STARWALKER',
+  PLATCONTROLS_HIGHLIGHTED: 'PLATCONTROLS_HIGHLIGHTED',
+  SAW_FERROLL: 'SAW_FERROLL',
+  ENCOUNTERED_SHI_SANDPIT: 'ENCOUNTERED_SHI_SANDPIT',
 } as const;
 
 export type FlagBitfieldName = keyof typeof FLAG_BITFIELDS;
@@ -239,7 +320,152 @@ export const FLAG_BITFIELDS_META: Record<
     index: 7,
     displayName: 'Saw Rouxls & Mizzle cutscene a second time',
     description:
-      'Whether you the Rouxls & Mizzle cutscene a second time. (over 5 minutes)',
+      'Whether you saw the Rouxls & Mizzle cutscene a second time. (over 5 minutes)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.NEWDASH_LEAFPILE0]: {
+    parent: FLAGS.DASH_LEAFPILE_FLAGS,
+    index: 0,
+    displayName: 'Destroyed third middle leaf pile',
+    description:
+      'Whether you destroyed the third leaf pile in the middle section of the second dash room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.NEWDASH_LEAFPILE1]: {
+    parent: FLAGS.DASH_LEAFPILE_FLAGS,
+    index: 1,
+    displayName: 'Destroyed first left leaf wall pile',
+    description:
+      'Whether you destroyed the first leaf pile of the left leaf wall in the bottom section of the second dash room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.NEWDASH_LEAFPILE2]: {
+    parent: FLAGS.DASH_LEAFPILE_FLAGS,
+    index: 2,
+    displayName: 'Destroyed second left leaf wall pile',
+    description:
+      'Whether you destroyed the second leaf pile of the left leaf wall in the bottom section of the second dash room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.NEWDASH_LEAFPILE3]: {
+    parent: FLAGS.DASH_LEAFPILE_FLAGS,
+    index: 3,
+    displayName: 'Destroyed third left leaf wall pile',
+    description:
+      'Whether you destroyed the third leaf pile of the left leaf wall in the bottom section of the second dash room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.NEWDASH_LEAFPILE4]: {
+    parent: FLAGS.DASH_LEAFPILE_FLAGS,
+    index: 4,
+    displayName: 'Destroyed fourth left leaf wall pile',
+    description:
+      'Whether you destroyed the fourth leaf pile of the left leaf wall in the bottom section of the second dash room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.NEWDASH_LEAFPILE5]: {
+    parent: FLAGS.DASH_LEAFPILE_FLAGS,
+    index: 5,
+    displayName: 'Destroyed bottom left leaf pile',
+    description:
+      'Whether you destroyed the left leaf pile inbetween the leaf walls in the bottom section of the second dash room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.NEWDASH_LEAFPILE6]: {
+    parent: FLAGS.DASH_LEAFPILE_FLAGS,
+    index: 6,
+    displayName: 'Destroyed bottom right leaf pile',
+    description:
+      'Whether you destroyed the right leaf pile inbetween the leaf walls in the bottom section of the second dash room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.NEWDASH_LEAFPILE7]: {
+    parent: FLAGS.DASH_LEAFPILE_FLAGS,
+    index: 7,
+    displayName: 'Destroyed second right leaf wall pile',
+    description:
+      'Whether you destroyed the second leaf pile of the right leaf wall in the bottom section of the second dash room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.NEWDASH_LEAFPILE8]: {
+    parent: FLAGS.DASH_LEAFPILE_FLAGS,
+    index: 8,
+    displayName: 'Destroyed first right leaf wall pile',
+    description:
+      'Whether you destroyed the first leaf pile of the right leaf wall in the bottom section of the second dash room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.NEWDASH_LEAFPILE9]: {
+    parent: FLAGS.DASH_LEAFPILE_FLAGS,
+    index: 9,
+    displayName: 'Destroyed third right leaf wall pile',
+    description:
+      'Whether you destroyed the third leaf pile of the right leaf wall in the bottom section of the second dash room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.NEWDASH_LEAFPILE10]: {
+    parent: FLAGS.DASH_LEAFPILE_FLAGS,
+    index: 10,
+    displayName: 'Destroyed fourth right leaf wall pile',
+    description:
+      'Whether you destroyed the fourth leaf pile of the right leaf wall in the bottom section of the second dash room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.FIRSTDASH_LEAFPILES]: {
+    parent: FLAGS.DASH_LEAFPILE_FLAGS,
+    index: 11,
+    displayName: 'Destroyed leaf piles',
+    description:
+      'Whether you destroyed the leaf piles at the end of the first dash room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.NEWDASH_LEAFPILE12]: {
+    parent: FLAGS.DASH_LEAFPILE_FLAGS,
+    index: 12,
+    displayName: 'Destroyed first middle leaf pile',
+    description:
+      'Whether you destroyed the first leaf pile in the middle section of the second dash room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.NEWDASH_LEAFPILE13]: {
+    parent: FLAGS.DASH_LEAFPILE_FLAGS,
+    index: 13,
+    displayName: 'Destroyed second middle leaf pile',
+    description:
+      'Whether you destroyed the second leaf pile in the middle section of the second dash room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.NEWDASH_DESTOYEDTEA]: {
+    parent: FLAGS.DASH_LEAFPILE_FLAGS,
+    index: 15,
+    displayName: 'Crashed tea party',
+    description:
+      'Whether you crashed the Floradinn tea party in the second dash room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.NEWDASH_LEAFPILE16]: {
+    parent: FLAGS.DASH_LEAFPILE_FLAGS,
+    index: 16,
+    displayName: 'Destroyed fourth middle leaf pile',
+    description:
+      'Whether you destroyed the fourth leaf pile in the middle section of the second dash room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.IDEAL_DINER_TALKED_TO_YELLOW]: {
+    parent: FLAGS.IDEAL_DINER_FLAGS,
+    index: 0,
+    width: 2,
+    displayName: 'Talked to Yellow',
+    description: 'Whether you talked to Yellow in the Ideal Diner.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.IDEAL_DINER_CHECKED_REGISTER]: {
+    parent: FLAGS.IDEAL_DINER_FLAGS,
+    index: 1,
+    width: 2,
+    displayName: 'Took money from cash register',
+    description:
+      'Whether you checked the cash register in the Ideal Diner and took 1 Flowery Dollar from it.',
     valueType: 'boolean',
   },
   [FLAG_BITFIELDS.PLATFORMING_INTRO_JUMP_TUTORIAL]: {
@@ -308,7 +534,7 @@ export const FLAG_BITFIELDS_META: Record<
     index: 9,
     displayName: 'Got Pink Coin',
     description:
-      'Whether you destroyed the pink coin bell in the platforming tutorial room.',
+      'Whether you destroyed the Pink Coin bell in the platforming tutorial room.',
     valueType: 'boolean',
   },
   [FLAG_BITFIELDS.PLATFORMING_INTRO_BELL_AQUAPLATFORMING1]: {
@@ -359,6 +585,253 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the third bell in the Shrine fast travel door room.',
     valueType: 'boolean',
   },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN1]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS1,
+    index: 13,
+    displayName: 'Collected 1st coin',
+    description:
+      'Whether you collected the 1st coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN2]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS1,
+    index: 12,
+    displayName: 'Collected 2nd coin',
+    description:
+      'Whether you collected the 2nd coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN3]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS1,
+    index: 11,
+    displayName: 'Collected 3rd coin',
+    description:
+      'Whether you collected the 3rd coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN4]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS1,
+    index: 10,
+    displayName: 'Collected 4th coin',
+    description:
+      'Whether you collected the 4th coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN5]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS1,
+    index: 9,
+    displayName: 'Collected 5th coin',
+    description:
+      'Whether you collected the 5th coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN6]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS1,
+    index: 8,
+    displayName: 'Collected 6th coin',
+    description:
+      'Whether you collected the 6th coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN7]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS1,
+    index: 7,
+    displayName: 'Collected 7th coin',
+    description:
+      'Whether you collected the 7th coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN8]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS1,
+    index: 6,
+    displayName: 'Collected 8th coin',
+    description:
+      'Whether you collected the 8th coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN9]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS1,
+    index: 5,
+    displayName: 'Collected 9th coin',
+    description:
+      'Whether you collected the 9th coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN10]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS1,
+    index: 4,
+    displayName: 'Collected 10th coin',
+    description:
+      'Whether you collected the 10th coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN11]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS1,
+    index: 3,
+    displayName: 'Collected 11th coin',
+    description:
+      'Whether you collected the 11th coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN12]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS1,
+    index: 2,
+    displayName: 'Collected 12th coin',
+    description:
+      'Whether you collected the 12th coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN13]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS1,
+    index: 1,
+    displayName: 'Collected 13th coin',
+    description:
+      'Whether you collected the 13th coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN14]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
+    index: 17,
+    displayName: 'Collected 14th coin',
+    description:
+      'Whether you collected the 14th coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN15]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
+    index: 16,
+    displayName: 'Collected 15th coin',
+    description:
+      'Whether you collected the 15th coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN16]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
+    index: 15,
+    displayName: 'Collected 16th coin',
+    description:
+      'Whether you collected the 16th coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN17]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
+    index: 14,
+    displayName: 'Collected 17th coin',
+    description:
+      'Whether you collected the 17th coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN18]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
+    index: 13,
+    displayName: 'Collected 18th coin',
+    description:
+      'Whether you collected the 18th coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN19]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
+    index: 12,
+    displayName: 'Collected 19th coin',
+    description:
+      'Whether you collected the 19th coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN20]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
+    index: 11,
+    displayName: 'Collected 20th coin',
+    description:
+      'Whether you collected the 20th coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN21]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
+    index: 10,
+    displayName: 'Collected 21st coin',
+    description:
+      'Whether you collected the 21st coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN22]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
+    index: 9,
+    displayName: 'Collected 22nd coin',
+    description:
+      'Whether you collected the 22nd coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN23]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
+    index: 8,
+    displayName: 'Collected 23rd coin',
+    description:
+      'Whether you collected the 23rd coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN24]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
+    index: 7,
+    displayName: 'Collected 24th coin',
+    description:
+      'Whether you collected the 24th coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN25]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
+    index: 6,
+    displayName: 'Collected 25th coin',
+    description:
+      'Whether you collected the 25th coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN26]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
+    index: 5,
+    displayName: 'Collected 26th coin',
+    description:
+      'Whether you collected the 26th coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN27]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
+    index: 4,
+    displayName: 'Collected 27th coin',
+    description:
+      'Whether you collected the 27th coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN28]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
+    index: 3,
+    displayName: 'Collected 28th coin',
+    description:
+      'Whether you collected the 28th coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN29]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
+    index: 2,
+    displayName: 'Collected 29th coin',
+    description:
+      'Whether you collected the 29th coin in the dash section of End of Garden. (Ordered right to left)',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_AQUA_BULLETPATTERNS]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
+    index: 1,
+    displayName: "Defeated Aqua's bullet patterns",
+    description:
+      "Whether you defeated Aqua's bullet patterns in End of Garden.",
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_PINKCOIN]: {
+    parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
+    index: 0,
+    displayName: 'Got Pink Coin',
+    description: 'Whether you destroyed the Pink Coin bell in End of Garden.',
+    valueType: 'boolean',
+  },
   [FLAG_BITFIELDS.SCISSORS_PUZZLE_SHAPED_BUSH_CUT]: {
     parent: FLAGS.SCISSORS_PUZZLE_FLAGS,
     index: 8,
@@ -385,8 +858,8 @@ export const FLAG_BITFIELDS_META: Record<
     parent: FLAGS.HOPSCHEF_PROGRESS_FLAG,
     index: 0,
     width: 2,
-    displayName: 'Hop Chef progress',
-    description: 'Progress state for the Hop Chef challenge.',
+    displayName: 'Hopschef progress',
+    description: 'Progress state for the Hopschef challenge.',
     valueType: 'map',
     valueRules: {
       map: {
@@ -395,6 +868,110 @@ export const FLAG_BITFIELDS_META: Record<
         2: 'Completed challenge',
       },
     },
+  },
+  [FLAG_BITFIELDS.HOPSCHEF_REWARDS]: {
+    parent: FLAGS.HOPSCHEF_PROGRESS_FLAG,
+    index: 1,
+    width: 3,
+    displayName: 'Hopschef highest reward',
+    description: 'The highest reward you have gotten from Hopschef.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: '10 F$ (15 seconds or less)',
+        2: '20 F$ (12 seconds or less)',
+        3: '40 F$ (8 seconds or less)',
+        4: '40 F$ in all big coins (5 seconds or less)',
+      },
+    },
+  },
+  [FLAG_BITFIELDS.FERROLL_SMASHED_PARTY]: {
+    parent: FLAGS.FERROLL_SMASHED_FLAGS,
+    index: 0,
+    width: 4,
+    displayName: 'Smashed party',
+    description: 'Whether Ferroll smashed your party members.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.FERROLL_SMASHED_MONEY]: {
+    parent: FLAGS.FERROLL_SMASHED_FLAGS,
+    index: 1,
+    width: 4,
+    displayName: 'Smashed money',
+    description: 'Whether Ferroll smashed your money.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.CLIFFS_CUTDOWN_TUTORIAL_BULLETPATTERN]: {
+    parent: FLAGS.CLIFFS_CUTDOWN_TUTORIAL_FLAGS,
+    index: 10,
+    displayName: "Defeated Seth's bullet pattern",
+    description: "Whether you defeated Seth's bullet pattern.",
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.CLIFFS_CUTDOWN_TUTORIAL_GRASSRIGHT2]: {
+    parent: FLAGS.CLIFFS_CUTDOWN_TUTORIAL_FLAGS,
+    index: 11,
+    displayName: 'Cut second right grass',
+    description:
+      'Whether you cut the second piece of grass on the right side of the room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.CLIFFS_CUTDOWN_TUTORIAL_GRASSRIGHT1]: {
+    parent: FLAGS.CLIFFS_CUTDOWN_TUTORIAL_FLAGS,
+    index: 12,
+    displayName: 'Cut first right grass',
+    description:
+      'Whether you cut the first piece of grass on the right side of the room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.CLIFFS_CUTDOWN_TUTORIAL_GRASSLEFT1]: {
+    parent: FLAGS.CLIFFS_CUTDOWN_TUTORIAL_FLAGS,
+    index: 13,
+    displayName: 'Cut first left grass',
+    description:
+      'Whether you cut the first piece of grass on the left side of the room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.CLIFFS_CUTDOWN_TUTORIAL_GRASSLEFT2]: {
+    parent: FLAGS.CLIFFS_CUTDOWN_TUTORIAL_FLAGS,
+    index: 14,
+    displayName: 'Cut second left grass',
+    description:
+      'Whether you cut the second piece of grass on the left side of the room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.CLIFFS_CUTDOWN_TUTORIAL_GRASSLEFT3]: {
+    parent: FLAGS.CLIFFS_CUTDOWN_TUTORIAL_FLAGS,
+    index: 15,
+    displayName: 'Cut third left grass',
+    description:
+      'Whether you cut the third piece of grass on the left side of the room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.CLIFFS_CUTDOWN_TUTORIAL_PINKBELL]: {
+    parent: FLAGS.CLIFFS_CUTDOWN_TUTORIAL_FLAGS,
+    index: 16,
+    displayName: 'Got Pink Coin',
+    description:
+      'Whether you destroyed the Pink Coin bell in the Cliffs First Climb platforming room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.CLIFFS_BONUSCOMBAT_PINKBELL]: {
+    parent: FLAGS.CLIFFS_CUTDOWN_TUTORIAL_FLAGS,
+    index: 17,
+    displayName: 'Got Pink Coin',
+    description:
+      'Whether you destroyed the Pink Coin bell in the Cliffs Windstruggler room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.CLIFFS_BONUSCOMBAT_BULLETPATTERN]: {
+    parent: FLAGS.CLIFFS_CUTDOWN_TUTORIAL_FLAGS,
+    index: 18,
+    displayName: "Defeated Seth's bullet pattern",
+    description:
+      "Whether you defeated Seth's bullet pattern in the Cliffs Windstruggler room.",
+    valueType: 'boolean',
   },
   [FLAG_BITFIELDS.ASGORE_DOCUMENT_TOTALREAD]: {
     parent: FLAGS.ASGORE_DOCUMENT_PROGRESS,
@@ -464,6 +1041,14 @@ export const FLAG_BITFIELDS_META: Record<
     index: 10,
     displayName: 'Puzzle solved',
     description: 'Whether you solved the Terakota statue puzzle.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.DEFEATED_FIRST_ORANGE_BP]: {
+    parent: FLAGS.DEFEATED_FIRST_ORANGE_BP_FLAG,
+    index: 10,
+    width: 1,
+    displayName: "Defeated Orange's first bullet pattern",
+    description: "Whether you defeated Orange's first bullet pattern.",
     valueType: 'boolean',
   },
   [FLAG_BITFIELDS.FOXHUNT_FIRST_TERAKOTA]: {
@@ -1240,12 +1825,158 @@ export const FLAG_BITFIELDS_META: Record<
       'Y position of the small shadow platform in the second shadow platform puzzle room.',
     valueType: 'number',
   },
+  [FLAG_BITFIELDS.FCASTLE_BOUNCE1_BELL1]: {
+    parent: FLAGS.FCASTLE_BELLS_FLAGS,
+    index: 0,
+    displayName: 'Destroyed first bell',
+    description:
+      'Whether you destroyed the first bell in the right section of the first bounce flower room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.FCASTLE_BOUNCE1_BELL2]: {
+    parent: FLAGS.FCASTLE_BELLS_FLAGS,
+    index: 1,
+    displayName: 'Destroyed second bell',
+    description:
+      'Whether you destroyed the second bell in the right section of the first bounce flower room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.FCASTLE_BOUNCE1_BELL3]: {
+    parent: FLAGS.FCASTLE_BELLS_FLAGS,
+    index: 2,
+    displayName: 'Destroyed third bell',
+    description:
+      'Whether you destroyed the third bell in the right section of the first bounce flower room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.FCASTLE_BOUNCE1_BELL4]: {
+    parent: FLAGS.FCASTLE_BELLS_FLAGS,
+    index: 3,
+    displayName: 'Destroyed large bell',
+    description:
+      'Whether you destroyed the large bell at the top of the first bounce flower room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.FCASTLE_BOUNCE3_GOLDCOIN]: {
+    parent: FLAGS.FCASTLE_BELLS_FLAGS,
+    index: 4,
+    displayName: 'Collected gold coin',
+    description:
+      'Whether you collected the gold coin in the right section of the punishment zone platforming room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.FCASTLE_RIGHT_PUZZLE_COIN1]: {
+    parent: FLAGS.FCASTLE_BELLS_FLAGS,
+    index: 10,
+    displayName: 'Collected left silver coin',
+    description:
+      'Whether you collected the left silver coin in the first shadow platform puzzle room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.FCASTLE_RIGHT_PUZZLE_GOLDCOIN]: {
+    parent: FLAGS.FCASTLE_BELLS_FLAGS,
+    index: 11,
+    displayName: 'Collected gold coin',
+    description:
+      'Whether you collected the gold coin in the first shadow platform puzzle room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.FCASTLE_RIGHT_PUZZLE_COIN2]: {
+    parent: FLAGS.FCASTLE_BELLS_FLAGS,
+    index: 12,
+    displayName: 'Collected right silver coin',
+    description:
+      'Whether you collected the right silver coin in the first shadow platform puzzle room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.FCASTLE_SIDEPUZZLE_GOLDCOIN1]: {
+    parent: FLAGS.FCASTLE_BELLS_FLAGS,
+    index: 14,
+    displayName: 'Collected first gold coin',
+    description:
+      'Whether you collected the first gold coin in the second shadow platform puzzle room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.FCASTLE_SIDEPUZZLE_GOLDCOIN2]: {
+    parent: FLAGS.FCASTLE_BELLS_FLAGS,
+    index: 15,
+    displayName: 'Collected second gold coin',
+    description:
+      'Whether you collected the second gold coin in the second shadow platform puzzle room.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.DANGEROUS_PLATFORMING_JUMPS]: {
+    parent: FLAGS.DANGEROUS_PLATFORMING_CHUTE_FLAGS,
+    index: 0,
+    width: 4,
+    displayName: 'Wall jump attempts',
+    description:
+      'The amount of times you tried to jump over the wall. Used for dialogue that appears when trying to jump over it a certain amount of times. Ends up getting reset to 1 if you try jumping in the jail chute after Yellow does, possible by mistake an an unused bitfield labelled as "CHUTE" exists.',
+    valueType: 'number',
+  },
+  [FLAG_BITFIELDS.DANGEROUS_PLATFORMING_CHUTE]: {
+    parent: FLAGS.DANGEROUS_PLATFORMING_CHUTE_FLAGS,
+    index: 4,
+    displayName: 'Chute jumps',
+    description:
+      'Unused bitfield likely intended to be used when you tried jumping in the jail chute, however the bitfield for trying to jump over the wall is used instead.',
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.DANGEROUS_PLATFORMING_PAYOFF]: {
+    parent: FLAGS.DANGEROUS_PLATFORMING_CHUTE_FLAGS,
+    index: 5,
+    displayName: 'Managed to get over the wall',
+    description:
+      "Whether you got over the wall using Blue's cloud platform after trying to jump over it beforehand.",
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.DANGEROUS_PLATFORMING_AQUASETH]: {
+    parent: FLAGS.DANGEROUS_PLATFORMING_CHUTE_FLAGS,
+    index: 6,
+    displayName: 'Saw Aqua and Seth scene',
+    description:
+      'Whether you saw the scene of Aqua running after Yellow to also get blown up.',
+    valueType: 'boolean',
+  },
   [FLAG_BITFIELDS.SAW_FINAL_STARWALKER]: {
     parent: FLAGS.FINAL_STARWALKER_FLAG,
     index: 0,
     displayName: 'Final Starwalker scene',
     description:
       "Saw Original Starwalker's final Starwalker scene at the top of the Castle; enables Kris's Walkerstar title.",
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.PLATCONTROLS_HIGHLIGHTED]: {
+    parent: FLAGS.MISC_BITFIELD_FLAGS,
+    index: 0,
+    width: 2,
+    displayName: 'Platformer controls highlighted',
+    description:
+      'Handles whether the controls for platformer mode in the settings are highlighted.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Highlighted',
+        1: 'Selected; in the process of being unhighlighted',
+        2: 'Unhighlighted',
+      },
+    },
+  },
+  [FLAG_BITFIELDS.SAW_FERROLL]: {
+    parent: FLAGS.MISC_BITFIELD_FLAGS,
+    index: 1,
+    width: 2,
+    displayName: 'Met Ferroll',
+    description:
+      "Whether you have talked to Ferroll. This applies to both when he is in the cave and when he is in Pink's room.",
+    valueType: 'boolean',
+  },
+  [FLAG_BITFIELDS.ENCOUNTERED_SHI_SANDPIT]: {
+    parent: FLAGS.MISC_BITFIELD_FLAGS,
+    index: 2,
+    width: 2,
+    displayName: 'Encountered Shi',
+    description: 'Whether you encountered the Shi in the sand trap.',
     valueType: 'boolean',
   },
 };

@@ -115,6 +115,7 @@ export const FLAGS = {
   X_SLOWING_DISABLED: 22,
   CAN_CLIMB: 23,
   OBTAINED_PETAL_FEATHER: 24,
+  PETAL_FEATHER_CONTROLS: 25,
   SUSIE_SHOW_EYES: 29,
   RALSEI_HAT_STATE: 30,
   LOUD_STEPS_DISABLED: 31,
@@ -1093,8 +1094,17 @@ export const FLAGS = {
   STRENGTH_TESTER_DOGARESSA: 1381,
   STRENGTH_TESTER_CHOICE: 1382,
   STRENGTH_TESTER_NOELLE_TIMING: 1383,
+  DASH_LEAFPILE_FLAGS: 1384,
+  GARDEN_AQUADASH_PLAT_COINS1: 1385,
   AMOUNT_OF_GIANT_TEACUPS: 1390,
   VOICE_CLIPS_ENABLED: 1391,
+  RALSEIS_ENABLED: 1392,
+  ALVIN_CONFIDED: 1393,
+  PUT_HANDS_IN_EYEBALL_BOWL: 1394,
+  SUSIE_SCARED_BY_MUMMY: 1395,
+  NOELLE_SCARED_BY_ALPHYS: 1396,
+  TALKED_TO_CATTI_FESTIVAL: 1397,
+  DRANK_HAUNTED_BLOOD: 1398,
   HOPSCHEF_PROGRESS_FLAG: 1399,
   TOOK_TREE_CAKE: 1400,
   SHEARY_CUT_AMOUNT: 1401,
@@ -1108,14 +1118,28 @@ export const FLAGS = {
   TALKED_TO_MILKLOOKER_AFTER_PIZZAPANTS: 1409,
   WATCHED_GARDEN_INTRO: 1410,
   FLOWERY_DOLLARS: 1411,
+  INFINITE_FLOWERY_DOLLARS_CHEST: 1412,
+  WATCHED_WATERING_CAN_CUTSCENE: 1413,
+  IDEAL_DINER_FLAGS: 1414,
   POST_PIZZAPANTS_BRATTY_BLUE_EARS: 1415,
   UNHAPPY_SUSIE_NOELLE: 1416,
+  READ_HAUNTED_POEM: 1417,
+  TALKED_TO_CATTI_EYEBALL_BOWL: 1418,
+  NOELLE_EXPLAINED_CATTIS_HATRED: 1419,
+  SHAKING_NOELLE_PORTRAIT: 1420,
   // Chapter 5 Thrash Fit
   THRASH_FIT_HAIR: 1421,
   THRASH_FIT_SHIRT: 1422,
   THRASH_FIT_PANTS: 1423,
   THRASH_FIT_HAT: 1424,
   THRASH_FIT_SHOES: 1425,
+  THRASH_FIT_TALKED_TO_QUEEN: 1427,
+  THRASH_FIT_TALKED_TO_LANCER: 1428,
+  THRASH_FIT_TALKED_TO_TENNA: 1429,
+  GARDEN_GLOW_TILE_PUZZLE1_COMPLETE: 1431,
+  GARDEN_GLOW_TILE_PUZZLE2_COMPLETE: 1432,
+  GARDEN_GLOW_TILE_PUZZLE2_SEEN: 1433,
+  FERROLL_SMASHED_FLAGS: 1434,
   TALKED_TORIEL_TOAST_REQUEST: 1435,
   TORIEL_TOAST_REQUEST_TOILET_FLUSH: 1436,
   PUT_TOAST_IN_MICROWAVE: 1437,
@@ -1146,6 +1170,22 @@ export const FLAGS = {
   ATE_HONEY_TOAST: 1467,
   TALKED_TO_SWATCH_CH5: 1468,
   DOJO_WEATHER: 1469,
+  // Chapter 5 encounters
+  FLORADINN_FLOWERY_LEFT_ENCOUNTER_OUTCOME: 1471,
+  FLORADINN_FLOWERY_RIGHT_ENCOUNTER_OUTCOME: 1472,
+  LEAFLING_ENCOUNTER_OUTCOME: 1473,
+  NETSKIE_TREASURE_ENCOUNTER_OUTCOME: 1474,
+  SHI_ENCOUNTER_OUTCOME: 1475,
+  KAWKAW_ENCOUNTER_OUTCOME: 1476,
+  FLORADINN_KNIGHT_ENCOUNTER_OUTCOME: 1477,
+  SHI_SANDTRAP_ENCOUNTER_OUTCOME: 1478,
+  SHI_NOTANENEMY_ENCOUNTER_OUTCOME: 1479,
+  TERAKOTA_ENCOUNTER_OUTCOME: 1480,
+  SHINOBEETLE_ENCOUNTER_OUTCOME: 1481,
+  SHINOBEETLE_SETH_ENCOUNTER_OUTCOME: 1482,
+  FLORADINN_ENCOUNTER_OUTCOME: 1483,
+  FLORADINN_ULTRADASH_ENCOUNTER_OUTCOME: 1484,
+  NETSKIE_TREASURE_GARDEN_ENCOUNTER_OUTCOME: 1485,
   // Chapter 4 Dark Sanctuary
   MONEYFOUNTAIN_DONATION_OVER_100: 1500,
   CANDY_BOWL_PROGRESS: 1501,
@@ -1329,7 +1369,13 @@ export const FLAGS = {
   OBTAINED_TV_ZONE_3_CHEST: 1703,
   KRIS_NOELLE_ESCAPE_WEIRD_ABORT: 1704,
   FOURD_SANCTUARY_FULL_CLEAR: 1705,
+  PINK_BATTLE_DID_DATE1: 1706,
+  PINK_BATTLE_DID_DATE2: 1707,
+  PINK_BATTLE_DID_DATE3: 1708,
+  TALKED_TO_RUDY_FESTIVAL: 1709,
+  TRIED_TO_DROP_TOAST: 1710,
   PINK_FRIEND_INTERACTION: 1711,
+  DEFEATED_FIRST_ORANGE_BP_FLAG: 1715,
   LISTENED_TO_CAPN_DOJO: 1720,
   TALKED_TO_JIGSAW_JOE_BAKERY: 1721,
   LOOKED_IN_KRIS_WARDROBE: 1722,
@@ -1341,6 +1387,7 @@ export const FLAGS = {
   RALSEI_RANCHER_LOCKED_AGAIN: 1728,
   THOUGHTS_ON_RALSEI_TRYING_DIFFERENT_DRINKS: 1729,
   PILLOW_FIGHT: 1730,
+  CLIFFS_CUTDOWN_TUTORIAL_FLAGS: 1731,
   YELLOWCAVE_FLOWERYDOLLARS: 1732,
   // More Chapter 5 Festival flags, along with other minor dark world flags
   TRIED_TO_ENTER_BEACH_NO_ICECREAM_WEIRDROUTE: 1733,
@@ -1369,6 +1416,7 @@ export const FLAGS = {
   THOUGHTS_ON_SANS: 1759,
   INTERACTED_WITH_GIANT_TEACUP: 1760,
   SANS_SIGN_INTERACTION_CH5: 1761,
+  MISC_BITFIELD_FLAGS: 1762,
   RIGHT_PUZZLE_SHADOW_PLATFORM_X: 1763,
   RIGHT_PUZZLE_SHADOW_PLATFORM_Y: 1764,
   SECOND_DINER_SAVEPOINT: 1765,
@@ -1425,7 +1473,14 @@ export const FLAGS = {
   UNLOCKED_PINK_BREAKS: 1816,
   ASGORE_DOCUMENT_PROGRESS: 1817,
   PINK_DOOR_FLAGS: 1818,
+  GARDEN_VINE_CUTSCENE: 1819,
+  SUSIE_TEMMIE_ART_RESPONSE_WEIRDROUTE: 1820,
+  SUSIE_TEMMIE_COLLEGE_RESPONSE_WEIRDROUTE: 1821,
   STRENGTH_TESTER_WEIRDROUTE: 1822,
+  SAW_PILLAR_TO_LIGHTWORLD_FCASTLE: 1823,
+  RALSEI_BUTLER_STATE: 1824,
+  GARDEN_AQUADASH_PLAT_COINS2: 1825,
+  OBTAINED_NETSKIEHAT_GARDEN: 1826,
   RIVER_PINKCOIN: 1827,
   OBTAINED_GREENTEA_SHEARYDODGE: 1828,
   OBTAINED_REVIVEMINT_CH5: 1829,
@@ -1437,14 +1492,20 @@ export const FLAGS = {
   TERAKOTA_BONUS_PINKCOIN: 1835,
   HELD_MUSHROOM_PINKCOIN: 1836,
   OBTAINED_TENSIONMAX_ZEN: 1837,
+  DANGEROUS_PLATFORMING_CHUTE_FLAGS: 1838,
+  CASTLE_JAIL_SAVEPOINT: 1839,
   FOXHUNT_PINKCOIN: 1840,
   FOXHUNT_FLOWERYDOLLARS: 1841,
+  GARDEN_MUSHROOM_PUZZLE: 1842,
   PINK_PROGRESS: 1846,
   VOUCHER_CHOSEN: 1850,
   FINAL_STARWALKER_FLAG: 1851,
   LEFTCASTLE_SHINOBEETLE_FLOWERYDOLLARS: 1853,
   INTERACTED_WITH_MIKE_DOOR_WITHOUT_MIKE_BATTLE: 1854,
   UNLOCKED_BREAK_CHARACTERS_PRECAFE: 1856,
+  HOPSCHEF_HIGH_SCORE: 1858,
+  FLOWERYFIGHT_ENDED: 1864,
+  FLOWERYFIGHT_ATTEMPTS: 1865,
   OBTAINED_DOGDOLLAR_CH5: 1866,
   BOUGHT_BREAKS1: 1430,
   BOUGHT_BREAKS2: 1892,
@@ -1452,6 +1513,7 @@ export const FLAGS = {
   WATCHED_BREAKS2: 1893,
   ENTERED_DOG_BALLOON_ROOM: 1872,
   TERAKOTA_PUZZLE_PINKCOIN: 1875,
+  SUSIE_TOLD_NOELLE_ABOUT_KRIS_PIANO: 1876,
   FREE_DRINK_OUTCOME: 1879,
   DOJO_WEATHER_STARWALKER: 1882,
   SUSIE_FLOWER_CROWN_WEIRDROUTE: 1883,
@@ -1460,11 +1522,26 @@ export const FLAGS = {
   TRAMPLED_BLUES_FLOWERS: 1886,
   PRESSURE_PLATE_PUZZLE_DOOR: 1887,
   USED_PARTY_ACTION_CH5: 1888,
+  GARDEN_VINE_CUTSCENE_PETALFEATHER: 1889,
+  TIMES_LOOKED_AT_PHONE: 1890,
+  FCASTLE_BELLS_FLAGS: 1891,
+  FLOWERYFIGHT_TRIAL: 1894,
   FRIEND_INTERACTED: 1895,
+  SAW_GOLD_AQUA_BP: 1896,
+  LEVEL_UP_COUNT_CH5: 1897,
+  AT_MAGIC_GAIN_COUNT_CH5: 1898,
+  CLIFFS_BONUSCOMBAT_DESTROYED_CHEESE: 1899,
   TALKED_TO_MILKLOOKER_BEFORE_PIZZAPANTS: 1900,
+  FCASTLE_TOP_ASCENT_FAILURES: 1901,
+  FCASTLE_TOP_ASCENT_FAILURE_ROOM: 1902,
+  FCASTLE_TOP_ASCENT_RALSEI_LONG: 1903,
   PLATMODE_JUMP_COUNT: 1904,
   PLATMODE_SWING_COUNT: 1905,
+  ATTACKED_AQUA_OR_SETH: 1906,
+  OBTAINED_SHADOW_CRYSTAL_CH5: 1907,
   DEFEATED_PINK: 1908,
+  OBTAINED_SPINCAKE_CH5: 1909,
+  GOT_SUSIE_HEAL_BOOST_CH5: 1915,
 } as const;
 
 export type FlagIndex = (typeof FLAGS)[keyof typeof FLAGS];
@@ -1594,6 +1671,17 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     description:
       'Whether you can enter platformer mode with Mysterious Statues using the Petal Feather.',
     valueType: 'boolean',
+  },
+  [FLAGS.PETAL_FEATHER_CONTROLS]: {
+    displayName: 'Petal Feather controls',
+    description: 'The controls you set for platforming with the Petal Feather.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Jump: Cancel, Attack: Confirm',
+        1: 'Jump: Confirm, Attack: Cancel',
+      },
+    },
   },
   [FLAGS.SUSIE_SHOW_EYES]: {
     displayName: 'Susie shows eyes',
@@ -2931,7 +3019,7 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.OBTAINED_SPINCAKE_CH2]: {
     displayName: 'Got SpinCake (fresh)',
-    description: 'Whether you received a fresh Spincake since Chapter 2.',
+    description: 'Whether you received a fresh SpinCake since Chapter 2.',
     valueType: 'boolean',
   },
   [FLAGS.MR_SOCIETY_LEFT]: {
@@ -8293,6 +8381,12 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
       'Whether you interacted with the Michaeldoor in Chapter 5 without battling them in Chapter 4.',
     valueType: 'boolean',
   },
+  [FLAGS.HOPSCHEF_HIGH_SCORE]: {
+    displayName: 'High score',
+    description:
+      'Your high score in the Hopschef challenge, in frames. Divide by 30 to get the time in seconds.',
+    valueType: 'number',
+  },
   [FLAGS.UNLOCKED_BREAK_CHARACTERS_PRECAFE]: {
     displayName: 'Pre-Cafe break character unlocks',
     description:
@@ -8368,9 +8462,9 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     valueType: 'boolean',
   },
   [FLAGS.PRESSURE_PLATE_PUZZLE_DOOR]: {
-    displayName: 'Interacted with pressure plate puzzle door',
+    displayName: 'Interacted with second glow tile puzzle door',
     description:
-      'Whether you interacted with the door for the pressure plate puzzle in the Garden.',
+      'Whether you interacted with the door for the second glow tile puzzle in the Garden.',
     valueType: 'boolean',
   },
   [FLAGS.TALKED_TO_SWATCH_CH5]: {
@@ -8403,6 +8497,86 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
         writeFalse: 1,
       },
     },
+  },
+  [FLAGS.RALSEIS_ENABLED]: {
+    displayName: 'Enabled/Disabled Ralseis and your thoughts on Flowery',
+    description:
+      'If you had disabled Ralseis in the settings. Later set to your thoughts on Flowery when Ralsei asks about him.',
+    valueType: 'boolean',
+    valueRules: {
+      map: {
+        0: 'Enabled Ralseis',
+        1: 'Disabled Ralseis',
+        5: "Let's be his friend",
+        6: 'Wait and see',
+        7: 'He sucks',
+      },
+    },
+  },
+  [FLAGS.ALVIN_CONFIDED]: {
+    displayName: 'Alvin confided about the church',
+    description:
+      "Whether you talked to Father Alvin and he told you about the church being in shambles and reading Susie's note.",
+    valueType: 'boolean',
+  },
+  [FLAGS.PUT_HANDS_IN_EYEBALL_BOWL]: {
+    displayName: 'Put hands in eyeball bowl',
+    description:
+      'Whether you, Susie, and Noelle put your hands in the eyeball bowl.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SUSIE_SCARED_BY_MUMMY]: {
+    displayName: 'Susie got scared by mummy',
+    description:
+      'Whether you interacted with the mummy coffin, causing Susie to get scared by it.',
+    valueType: 'boolean',
+  },
+  [FLAGS.NOELLE_SCARED_BY_ALPHYS]: {
+    displayName: 'Noelle got scared by Alphys',
+    description:
+      'Whether you interacted with the sparkle in the corner of the room, causing Noelle to get jumpscared by Alphys.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_TO_CATTI_FESTIVAL]: {
+    displayName: 'Catti talked to Kris',
+    description:
+      'Whether Catti talked to Kris about letting Noelle go out with Susie.',
+    valueType: 'boolean',
+  },
+  [FLAGS.DRANK_HAUNTED_BLOOD]: {
+    displayName: 'Drank cool haunted blood',
+    description: 'Whether you drank the cool haunted blood with Susie.',
+    valueType: 'boolean',
+  },
+  [FLAGS.READ_HAUNTED_POEM]: {
+    displayName: 'Read haunted poem',
+    description: 'Whether you read the haunted poem.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_TO_CATTI_EYEBALL_BOWL]: {
+    displayName: 'Catti scolded Susie and Noelle for breaking the sacred rule',
+    description:
+      'Whether you talked to Catti after Susie and Noelle held hands in the eyeball bowl.',
+    valueType: 'boolean',
+  },
+  [FLAGS.NOELLE_EXPLAINED_CATTIS_HATRED]: {
+    displayName: "Noelle explained Catti's hatred of Susie",
+    description:
+      "Whether you interacted with Catti's stand after she left, causing Noelle to explain why Catti dislikes Susie.",
+    valueType: 'boolean',
+  },
+  [FLAGS.SUSIE_TOLD_NOELLE_ABOUT_KRIS_PIANO]: {
+    displayName: 'Susie told Noelle about Kris playing the piano',
+    description:
+      'Whether you interacted with the doors to the choir room, causing Susie to tell Noelle about Kris playing the piano if you had told her you would play it again in Chapter 4.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SHAKING_NOELLE_PORTRAIT]: {
+    displayName: 'Shaking Noelle portrait',
+    volatile: true,
+    description:
+      "Volatile. Causes Noelle's talking portrait to shake. Set during the cutscene where Noelle gets scared by Alphys, before being set back afterwards. Also set to be disabled when leaving the church.",
+    valueType: 'boolean',
   },
   [FLAGS.STRONGEST_AQUA_ATTACK]: {
     displayName: 'Strongest Aqua attack',
@@ -8875,6 +9049,30 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     description: 'Your amount of Flowery Dollars.',
     valueType: 'number',
   },
+  [FLAGS.INFINITE_FLOWERY_DOLLARS_CHEST]: {
+    displayName: '"Infinite money" chest state',
+    description: 'Tracks the state of the "infinite money" chest.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Opened chest at least once',
+        2: 'Found out the dollars were actually Flowery Dollars',
+      },
+    },
+  },
+  [FLAGS.WATCHED_WATERING_CAN_CUTSCENE]: {
+    displayName: 'Watched watering can cutscene',
+    description:
+      "Whether you've watched the cutscene that plays when you first pick up a watering can.",
+    valueType: 'boolean',
+  },
+  [FLAGS.IDEAL_DINER_FLAGS]: {
+    displayName: 'Ideal Diner flags',
+    description: 'Raw bitfield state the Ideal Diner.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
   [FLAGS.WATCHED_GARDEN_INTRO]: {
     displayName: 'Watched Garden of Hopes and Dreams intro',
     description:
@@ -9089,6 +9287,27 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
       "Whether you looked through Catti's window and saw her sister licking her face clean.",
     valueType: 'boolean',
   },
+  [FLAGS.DASH_LEAFPILE_FLAGS]: {
+    displayName: 'Leaf pile flags',
+    description:
+      'Raw bitfield state handling the destruction status of leaf piles in Garden dash sections.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.GARDEN_AQUADASH_PLAT_COINS1]: {
+    displayName: 'End of Garden dash coins 1',
+    description:
+      'Raw bitfield state handling the first half of collectables in the platforming dash section of the End of Garden area.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.GARDEN_AQUADASH_PLAT_COINS2]: {
+    displayName: 'End of Garden dash coins 2',
+    description:
+      'Raw bitfield state handling the second half of collectables in the platforming dash section of the End of Garden area.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
   [FLAGS.CASTLE_LEFT_PLOT]: {
     displayName: 'Plot',
     description: 'Plot of the left wing of flower castle.',
@@ -9278,6 +9497,47 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
       },
     },
   },
+  [FLAGS.THRASH_FIT_TALKED_TO_QUEEN]: {
+    displayName: 'Talked to Queen',
+    description:
+      'Whether you talked to Queen in Castle 1F after creating the Thrash Outfit.',
+    valueType: 'boolean',
+  },
+  [FLAGS.THRASH_FIT_TALKED_TO_LANCER]: {
+    displayName: 'Talked to Lancer',
+    description:
+      'Whether you talked to Lancer in Castle 1F after creating the Thrash Outfit.',
+    valueType: 'boolean',
+  },
+  [FLAGS.THRASH_FIT_TALKED_TO_TENNA]: {
+    displayName: 'Talked to Tenna',
+    description:
+      'Whether you talked to Tenna in Castle 1F after creating the Thrash Outfit.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GARDEN_GLOW_TILE_PUZZLE1_COMPLETE]: {
+    displayName: 'Completed first glow tile puzzle',
+    description: 'Whether you completed the first glow tile puzzle.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GARDEN_GLOW_TILE_PUZZLE2_SEEN]: {
+    displayName: 'Saw second glow tile puzzle',
+    description:
+      'Whether you saw the cutscene for starting the second glow tile puzzle.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GARDEN_GLOW_TILE_PUZZLE2_COMPLETE]: {
+    displayName: 'Completed second glow tile puzzle',
+    description:
+      'Unused flag for completing the second glow tile puzzle without the help of Flowery, which is normally impossible. The flag is never set to another value, and is only used so the game knows which glow tile puzzle is the impossible one.',
+    valueType: 'boolean',
+  },
+  [FLAGS.FERROLL_SMASHED_FLAGS]: {
+    displayName: 'Ferroll smashed flags',
+    description: 'Raw bitfield state what Ferroll has smashed.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
   [FLAGS.TALKED_TORIEL_HOW_YOU_SLEPT]: {
     displayName: 'Talked with Toriel about your sleep',
     description: 'Talked with Toriel about how you slept.',
@@ -9306,7 +9566,7 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   [FLAGS.KNOCK_TOGETHER]: {
     displayName: 'Knocked together',
     description:
-      'Did a team knock on the apartment door with Susie and Noelle.',
+      'Whether you did a team knock on the apartment door with Susie and Noelle.',
     valueType: 'boolean',
   },
   [FLAGS.TRASHY_TRIO_NPC_INTERACTIONS]: {
@@ -9431,6 +9691,12 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
         2: 'Susie changed sign to say "NOPE" during Weird Route',
       },
     },
+  },
+  [FLAGS.MISC_BITFIELD_FLAGS]: {
+    displayName: 'Miscellaneous bitfield flags',
+    description: 'Raw bitfield state handling 3 miscellaneous flags.',
+    valueType: 'number',
+    valueRules: { min: 0 },
   },
   [FLAGS.TEM_DRAW_CARICATURE]: {
     displayName: 'Tem draw caricature',
@@ -9701,6 +9967,12 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     valueType: 'number',
     valueRules: { min: 0 },
   },
+  [FLAGS.OBTAINED_NETSKIEHAT_GARDEN]: {
+    displayName: 'Got NetskieHat',
+    description:
+      'Whether you got the NetskieHat in the mushroom room of Garden.',
+    valueType: 'boolean',
+  },
   [FLAGS.RIVER_PINKCOIN]: {
     displayName: 'Got river Pink Coin',
     description: 'Whether you got the Pink Coin in the river room.',
@@ -9753,6 +10025,25 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     description: 'Whether you got the TensionMax in the zen room.',
     valueType: 'boolean',
   },
+  [FLAGS.DANGEROUS_PLATFORMING_CHUTE_FLAGS]: {
+    displayName: 'Jail chute flags',
+    description:
+      'Raw bitfield state handling special dialogue in the All Punishments Worse Than Burying room.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.CASTLE_JAIL_SAVEPOINT]: {
+    displayName: 'Save point state',
+    description: 'State of interacting with save points after escaping jail.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Interacted with first save point',
+        2: 'Interacted with second save point after having interacted with the first',
+      },
+    },
+  },
   [FLAGS.OBTAINED_DOGDOLLAR_CH5]: {
     displayName: 'Got DogDollar',
     description: 'Whether you got the DogDollar in the Laddery room.',
@@ -9766,6 +10057,11 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   [FLAGS.FOXHUNT_FLOWERYDOLLARS]: {
     displayName: 'Got 10 Flowery Dollars',
     description: 'Whether you got the 10 Flowery Dollars in the fox hunt room.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GARDEN_MUSHROOM_PUZZLE]: {
+    displayName: 'Solved mushroom box puzzle',
+    description: 'Whether you solved the mushroom box puzzle in Garden.',
     valueType: 'boolean',
   },
   [FLAGS.LEFTCASTLE_SHINOBEETLE_FLOWERYDOLLARS]: {
@@ -9786,6 +10082,82 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
       "Used S-Action or R-Action on an enemy in Garden or Cliffs, or was reminded if you didn't.",
     valueType: 'boolean',
   },
+  [FLAGS.GARDEN_VINE_CUTSCENE]: {
+    displayName: 'Watched beanstalk cutscene',
+    description:
+      'Whether you watched the cutscene between Flowery and Asgore in the climb to Cliffs.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GARDEN_VINE_CUTSCENE_PETALFEATHER]: {
+    displayName: 'Had Petal Feather when watching cutscene',
+    description:
+      'Whether you had the Petal Feather while watching the beanstalk cutscene.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: "Didn't have the Petal Feather",
+        2: 'Had the Petal Feather or attempted to climb the beanstalk without the Petal Feather',
+      },
+    },
+  },
+  [FLAGS.SUSIE_TEMMIE_ART_RESPONSE_WEIRDROUTE]: {
+    displayName: "Response to Susie talking about Temmie's art",
+    description:
+      "Your response to when Susie says that Temmie's art is crazy good during the Weird Route.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'I like your art too',
+        2: "Yeah she's a genius",
+      },
+    },
+  },
+  [FLAGS.SUSIE_TEMMIE_COLLEGE_RESPONSE_WEIRDROUTE]: {
+    displayName: 'Response to Susie talking about you going to College',
+    description:
+      "Your response to when Susie asks if you're going to college when you say Temmie is a genius during the Weird Route.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: "Not if you don't",
+        2: 'Beats me',
+      },
+    },
+  },
+  [FLAGS.SAW_PILLAR_TO_LIGHTWORLD_FCASTLE]: {
+    displayName: 'Pillar back to Light World state',
+    description: 'Handles the pillar back to the Light World in Flower Castle.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Saw the pillar',
+        2: 'Tried to go back to the Light World',
+      },
+    },
+  },
+  [FLAGS.RALSEI_BUTLER_STATE]: {
+    displayName: 'Butler Ralsei',
+    description:
+      'Handles the dialogue after Ralsei gets rid of his butler outfit.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Susie asked Ralsei if he liked being a butler',
+        2: 'Butler outfit goes through the drains',
+      },
+    },
+  },
+  [FLAGS.TIMES_LOOKED_AT_PHONE]: {
+    displayName: 'Times you tried to look at your phone',
+    description:
+      'The amount of times you tried looking at your phone at the end of the chapter.',
+    valueType: 'number',
+  },
   [FLAGS.FRIEND_INTERACTED]: {
     displayName: 'Acted on Friend',
     description: 'Whether you acted on and was damaged by Friend in Chapter 5.',
@@ -9801,9 +10173,47 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     description: "Kris's swing count in platform mode.",
     valueType: 'number',
   },
+  [FLAGS.ATTACKED_AQUA_OR_SETH]: {
+    displayName: 'Attacked Aqua or Seth',
+    description:
+      'Whether you attacked Aqua or Seth in their battle together. Doing this causes you to lose the ability to have breaks with Seth.',
+    valueType: 'boolean',
+    valueRules: {
+      booleanMap: {
+        trueValues: [-1],
+        falseValues: [0],
+        writeTrue: -1,
+        writeFalse: 0,
+      },
+    },
+  },
+  [FLAGS.OBTAINED_SHADOW_CRYSTAL_CH5]: {
+    displayName: 'Got the Shadow Crystal',
+    description: 'Obtained the Shadow Crystal from Pink in Chapter 5.',
+    valueType: 'boolean',
+  },
   [FLAGS.DEFEATED_PINK]: {
     displayName: 'Defeated Pink',
     description: 'Whether you defeated Pink.',
+    valueType: 'boolean',
+    valueRules: {
+      booleanMap: {
+        trueValues: [2],
+        falseValues: [0],
+        writeTrue: 2,
+        writeFalse: 0,
+      },
+    },
+  },
+  [FLAGS.OBTAINED_SPINCAKE_CH5]: {
+    displayName: 'Got SpinCake',
+    description: 'Whether you received a SpinCake in Chapter 5.',
+    valueType: 'boolean',
+  },
+  [FLAGS.GOT_SUSIE_HEAL_BOOST_CH5]: {
+    displayName: "Got Susie's magic boost",
+    description:
+      "Whether Susie's base magic was boosted by 4 points for beating Hammer of Justice or Sound of Justice in Chapter 4 as part of the 0.0.250 patch.",
     valueType: 'boolean',
   },
   [FLAGS.MONEYFOUNTAIN_DONATION_OVER_100]: {
@@ -9910,9 +10320,7 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.WILL_KRIS_PLAY_AGAIN]: {
     displayName: 'Piano story response',
-    unused: true,
-    description:
-      'What you told Susie after her piano story. Unaccessed as of chapter 4.',
+    description: 'What you told Susie after her piano story.',
     valueType: 'map',
     valueRules: {
       map: {
@@ -10387,7 +10795,7 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     valueType: 'number',
   },
   [FLAGS.LEVEL_UP_COUNT_CH4]: {
-    displayName: 'Times Leveled',
+    displayName: 'Level-ups',
     description:
       'The number of times you have leveled up by violently defeating an encounter. Used for certain increases that only occur every 2, 4, or 10 encounters.',
     valueType: 'number',
@@ -10651,7 +11059,7 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     valueType: 'boolean',
   },
   [FLAGS.AT_MAGIC_GAIN_COUNT_CH4]: {
-    displayName: 'Times Gained AT',
+    displayName: 'AT/Magic gains',
     description:
       'The number of times your AT and Magic have increased due to leveling up (every ten encounters).',
     valueType: 'number',
@@ -10821,22 +11229,22 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.OBTAINED_SHADOW_CRYSTAL_CH1]: {
     displayName: 'Got the Shadow Crystal',
-    description: 'Obtained the Shadow Crystal from Jevil in chapter 1.',
+    description: 'Obtained the Shadow Crystal from Jevil in Chapter 1.',
     valueType: 'boolean',
   },
   [FLAGS.OBTAINED_SHADOW_CRYSTAL_CH2]: {
     displayName: 'Got the Shadow Crystal',
-    description: 'Obtained the Shadow Crystal from Spamton NEO in chapter 2.',
+    description: 'Obtained the Shadow Crystal from Spamton NEO in Chapter 2.',
     valueType: 'boolean',
   },
   [FLAGS.OBTAINED_SHADOW_CRYSTAL_CH3]: {
     displayName: 'Got the Shadow Crystal',
-    description: 'Obtained the Shadow Crystal from the Knight in chapter 3.',
+    description: 'Obtained the Shadow Crystal from the Knight in Chapter 3.',
     valueType: 'boolean',
   },
   [FLAGS.OBTAINED_SHADOW_CRYSTAL_CH4]: {
     displayName: 'Got the Shadow Crystal',
-    description: 'Obtained the Shadow Crystal from Gerson in chapter 4.',
+    description: 'Obtained the Shadow Crystal from Gerson in Chapter 4.',
     valueType: 'boolean',
   },
   [FLAGS.TALKED_TO_CUP_STACK_DURING_FINAL_CLIMB]: {
@@ -11073,157 +11481,6 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
       },
     },
   },
-  [FLAGS.FOURD_SANCTUARY_FULL_CLEAR]: {
-    displayName: '4rd Sanctuary full clear',
-    description: 'Whether you full cleared 4rd Sanctuary.',
-    valueType: 'boolean',
-    valueRules: {
-      booleanMap: {
-        trueValues: [2], // values 1 and 3 are also referenced in the code, where this is set to 3 if you perfect clear 4rd sanctuary with this flag set to 1, however as far as I know it's not possible for this flag to be set to 1 normally
-        falseValues: [0],
-        writeTrue: 2,
-        writeFalse: 0,
-      },
-    },
-  },
-  [FLAGS.PINK_FRIEND_INTERACTION]: {
-    displayName: 'Friend bite cutscene',
-    description:
-      'Whether Pink talked to you about a cat bite after interacting with Friend.',
-    valueType: 'boolean',
-  },
-  [FLAGS.LISTENED_TO_CAPN_DOJO]: {
-    displayName: "Listened to Cap'n",
-    description: "Whether you listened to Cap'n in the Love Dojo.",
-    valueType: 'boolean',
-  },
-  [FLAGS.TALKED_TO_JIGSAW_JOE_BAKERY]: {
-    displayName: 'Talked to Jigsaw Joe',
-    description: 'Whether you talked to Jigsaw Joe in the bakery.',
-    valueType: 'boolean',
-  },
-  [FLAGS.LOOKED_IN_KRIS_WARDROBE]: {
-    displayName: "Looked in Kris's wardrobe",
-    description: "Whether you looked in Kris's wardrobe.",
-    valueType: 'boolean',
-  },
-  [FLAGS.KRIS_LAMP]: {
-    displayName: 'Kris lamp',
-    description:
-      'Whether you interacted with the lamp, turning it into Kris lamp.',
-    valueType: 'boolean',
-  },
-  [FLAGS.MOSS_TROPHY]: {
-    displayName: 'Interacted with Moss trophy',
-    description: "Whether you interacted with the Moss trophy in Kris's room.",
-    valueType: 'boolean',
-  },
-  [FLAGS.LOOKED_IN_SUSIES_WARDROBE]: {
-    displayName: "Looked in Susie's wardrobe",
-    description:
-      "Whether you looked in Susie's wardrobe and saw Queen with the duck costume.",
-    valueType: 'boolean',
-  },
-  [FLAGS.WHAT_NOELLE_LIKES]: {
-    displayName: 'What Noelle likes',
-    description: 'Your response to Susie asking what Noelle likes',
-    valueType: 'map',
-    valueRules: {
-      map: {
-        0: 'Default state',
-        1: 'Likes statues',
-        2: 'Something else',
-      },
-    },
-  },
-  [FLAGS.NUZZLED_SUSIE_DOLL]: {
-    displayName: 'Nuzzled Susie doll',
-    description: "Whether you nuzzled the Susie doll in Susie's room.",
-    valueType: 'boolean',
-  },
-  [FLAGS.SAW_RALSEI_ROOM_CH5]: {
-    displayName: "Saw Ralsei's room for the first time",
-    description:
-      "Whether you entered Ralsei's room after having not entered it previously in Chapter 4.",
-    valueType: 'boolean',
-  },
-  [FLAGS.ENTERED_RALSEI_ROOM]: {
-    displayName: "Entered Ralsei's room",
-    description:
-      "Whether you entered Ralsei's room after having entered it previously in Chapter 4.",
-    valueType: 'boolean',
-  },
-  [FLAGS.RALSEI_RANCHER_LOCKED_AGAIN]: {
-    displayName: 'Ralsei Rancher locked (again)',
-    description:
-      "Whether you opened the Ralsei Rancher wardrobe in Ralsei's room.",
-    valueType: 'boolean',
-  },
-  [FLAGS.THOUGHTS_ON_RALSEI_TRYING_DIFFERENT_DRINKS]: {
-    displayName: 'Your thoughts on Ralsei trying other drinks',
-    description: 'Your response to Ralsei saying he wants to try other drinks.',
-    valueType: 'map',
-    valueRules: {
-      map: {
-        0: 'Default state',
-        1: 'Sounds nice',
-        2: 'You like tea',
-      },
-    },
-  },
-  [FLAGS.PILLOW_FIGHT]: {
-    displayName: 'Pillow Fight',
-    description: "Whether Susie attacked the pillow in Ralsei's room.",
-    valueType: 'boolean',
-  },
-  [FLAGS.YELLOWCAVE_FLOWERYDOLLARS]: {
-    displayName: "Got 50 Flowery Dollars from Yellow's cave",
-    description:
-      'Whether you got 50 Flowery Dollars from the Yellow cave room.',
-    valueType: 'boolean',
-  },
-  [FLAGS.TRIED_TO_ENTER_BEACH_NO_ICECREAM_WEIRDROUTE]: {
-    displayName: 'Tried to go to beach without ice cream',
-    description:
-      'Whether you tried to go to the beach before getting ice cream during the Weird Route.',
-    valueType: 'boolean',
-  },
-  [FLAGS.TRIED_TO_ENTER_CHURCH_WEIRDROUTE]: {
-    displayName: 'Tried to enter church',
-    description:
-      'Whether you tried to enter the church during the Weird Route.',
-    valueType: 'boolean',
-  },
-  [FLAGS.RODE_FERRIS_WHEEL_WEIRDROUTE]: {
-    displayName: 'Rode the ferris wheel',
-    description:
-      'Whether you rode the ferris wheel with Susie during the Weird Route.',
-    valueType: 'map',
-    valueRules: {
-      map: {
-        0: 'Default state',
-        1: 'Rode the wheel',
-        2: "Didn't ride the wheel",
-      },
-    },
-  },
-  [FLAGS.TRIED_TO_ENTER_SCHOOL_WEIRDROUTE]: {
-    displayName: 'Tried to enter school',
-    description:
-      'Whether you tried to enter the school during the Weird Route.',
-    valueType: 'boolean',
-  },
-  [FLAGS.FOXHUNT_FLAGS]: {
-    displayName: 'Fox hunt flags',
-    description: 'Raw bitfield state for the fox hunt.',
-    valueType: 'number',
-    valueRules: { min: 0 },
-  },
-  [FLAGS.ASKED_CATTY_DAD_KINGQUEEN]: {
-    displayName: "Asked Catty's dad",
-    description: "Asked Catty's dad about the Festival King and Queen vote.",
-    valueType: 'boolean',
-  },
   [FLAGS.BALTHIZARD_ENCOUNTER_OUTCOME]: {
     displayName: 'Balthizard',
     description:
@@ -11389,6 +11646,409 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     displayName: 'Miss Mizzle',
     description:
       'Tracks the state of the Mizzle encounter in the watercooler room.',
+    valueType: 'map',
+    valueRules: {
+      map: ENCOUNTER_OUTCOMES,
+    },
+  },
+  [FLAGS.FOURD_SANCTUARY_FULL_CLEAR]: {
+    displayName: '4rd Sanctuary full clear',
+    description: 'Whether you full cleared 4rd Sanctuary.',
+    valueType: 'boolean',
+    valueRules: {
+      booleanMap: {
+        trueValues: [2], // values 1 and 3 are also referenced in the code, where this is set to 3 if you perfect clear 4rd sanctuary with this flag set to 1, however as far as I know it's not possible for this flag to be set to 1 normally
+        falseValues: [0],
+        writeTrue: 2,
+        writeFalse: 0,
+      },
+    },
+  },
+  [FLAGS.PINK_BATTLE_DID_DATE1]: {
+    displayName: 'Did first Pink date',
+    volatile: true,
+    description:
+      'Volatile. Whether you did the first date in the Pink battle and then died and started the battle again in a single session. Resets to 0 if you reload the game and start the battle again.',
+    valueType: 'boolean',
+  },
+  [FLAGS.PINK_BATTLE_DID_DATE2]: {
+    displayName: 'Did second Pink date',
+    volatile: true,
+    description:
+      'Volatile. Whether you did the second date in the Pink battle and then died and started the battle again in a single session. Resets to 0 if you reload the game and start the battle again.',
+    valueType: 'boolean',
+  },
+  [FLAGS.PINK_BATTLE_DID_DATE3]: {
+    displayName: 'Did third Pink date',
+    volatile: true,
+    description:
+      'Volatile. Whether you did the third date in the Pink battle and then died and started the battle again in a single session. Resets to 0 if you reload the game and start the battle again.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_TO_RUDY_FESTIVAL]: {
+    displayName: 'Talked to Rudy',
+    description: 'Whether you talked to Rudy during the Festival.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TRIED_TO_DROP_TOAST]: {
+    displayName: 'Tried to drop honey toast',
+    description: 'Whether you tried to drop the honey toast.',
+    valueType: 'boolean',
+  },
+  [FLAGS.PINK_FRIEND_INTERACTION]: {
+    displayName: 'Friend bite cutscene',
+    description:
+      'Whether Pink talked to you about a cat bite after interacting with Friend.',
+    valueType: 'boolean',
+  },
+  [FLAGS.DEFEATED_FIRST_ORANGE_BP_FLAG]: {
+    displayName: 'Orange first bullet pattern flag',
+    description:
+      "Raw bitfield state for defeating Orange's first bullet pattern.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.LISTENED_TO_CAPN_DOJO]: {
+    displayName: "Listened to Cap'n",
+    description: "Whether you listened to Cap'n in the Love Dojo.",
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_TO_JIGSAW_JOE_BAKERY]: {
+    displayName: 'Talked to Jigsaw Joe',
+    description: 'Whether you talked to Jigsaw Joe in the bakery.',
+    valueType: 'boolean',
+  },
+  [FLAGS.LOOKED_IN_KRIS_WARDROBE]: {
+    displayName: "Looked in Kris's wardrobe",
+    description: "Whether you looked in Kris's wardrobe.",
+    valueType: 'boolean',
+  },
+  [FLAGS.KRIS_LAMP]: {
+    displayName: 'Kris lamp',
+    description:
+      'Whether you interacted with the lamp, turning it into Kris lamp.',
+    valueType: 'boolean',
+  },
+  [FLAGS.MOSS_TROPHY]: {
+    displayName: 'Interacted with Moss trophy',
+    description: "Whether you interacted with the Moss trophy in Kris's room.",
+    valueType: 'boolean',
+  },
+  [FLAGS.LOOKED_IN_SUSIES_WARDROBE]: {
+    displayName: "Looked in Susie's wardrobe",
+    description:
+      "Whether you looked in Susie's wardrobe and saw Queen with the duck costume.",
+    valueType: 'boolean',
+  },
+  [FLAGS.WHAT_NOELLE_LIKES]: {
+    displayName: 'What Noelle likes',
+    description: 'Your response to Susie asking what Noelle likes',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Likes statues',
+        2: 'Something else',
+      },
+    },
+  },
+  [FLAGS.NUZZLED_SUSIE_DOLL]: {
+    displayName: 'Nuzzled Susie doll',
+    description: "Whether you nuzzled the Susie doll in Susie's room.",
+    valueType: 'boolean',
+  },
+  [FLAGS.SAW_RALSEI_ROOM_CH5]: {
+    displayName: "Saw Ralsei's room for the first time",
+    description:
+      "Whether you entered Ralsei's room after having not entered it previously in Chapter 4.",
+    valueType: 'boolean',
+  },
+  [FLAGS.ENTERED_RALSEI_ROOM]: {
+    displayName: "Entered Ralsei's room",
+    description:
+      "Whether you entered Ralsei's room after having entered it previously in Chapter 4.",
+    valueType: 'boolean',
+  },
+  [FLAGS.RALSEI_RANCHER_LOCKED_AGAIN]: {
+    displayName: 'Ralsei Rancher locked (again)',
+    description:
+      "Whether you opened the Ralsei Rancher wardrobe in Ralsei's room.",
+    valueType: 'boolean',
+  },
+  [FLAGS.THOUGHTS_ON_RALSEI_TRYING_DIFFERENT_DRINKS]: {
+    displayName: 'Your thoughts on Ralsei trying other drinks',
+    description: 'Your response to Ralsei saying he wants to try other drinks.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Sounds nice',
+        2: 'You like tea',
+      },
+    },
+  },
+  [FLAGS.PILLOW_FIGHT]: {
+    displayName: 'Pillow Fight',
+    description: "Whether Susie attacked the pillow in Ralsei's room.",
+    valueType: 'boolean',
+  },
+  [FLAGS.CLIFFS_CUTDOWN_TUTORIAL_FLAGS]: {
+    displayName: 'Cliffs cutdown flags',
+    description:
+      'Raw bitfield state for the first platforming room of First Climb as well as the Cliffs Windstruggler room.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.YELLOWCAVE_FLOWERYDOLLARS]: {
+    displayName: "Got 50 Flowery Dollars from Yellow's cave",
+    description:
+      'Whether you got 50 Flowery Dollars from the Yellow cave room.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TRIED_TO_ENTER_BEACH_NO_ICECREAM_WEIRDROUTE]: {
+    displayName: 'Tried to go to beach without ice cream',
+    description:
+      'Whether you tried to go to the beach before getting ice cream during the Weird Route.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TRIED_TO_ENTER_CHURCH_WEIRDROUTE]: {
+    displayName: 'Tried to enter church',
+    description:
+      'Whether you tried to enter the church during the Weird Route.',
+    valueType: 'boolean',
+  },
+  [FLAGS.RODE_FERRIS_WHEEL_WEIRDROUTE]: {
+    displayName: 'Rode the ferris wheel',
+    description:
+      'Whether you rode the ferris wheel with Susie during the Weird Route.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Rode the wheel',
+        2: "Didn't ride the wheel",
+      },
+    },
+  },
+  [FLAGS.TRIED_TO_ENTER_SCHOOL_WEIRDROUTE]: {
+    displayName: 'Tried to enter school',
+    description:
+      'Whether you tried to enter the school during the Weird Route.',
+    valueType: 'boolean',
+  },
+  [FLAGS.FOXHUNT_FLAGS]: {
+    displayName: 'Fox hunt flags',
+    description: 'Raw bitfield state for the fox hunt.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.FCASTLE_BELLS_FLAGS]: {
+    displayName: 'Various Flower Castle collection flags',
+    description:
+      'Raw bitfield state for bells and coins in the two shadow platform puzzle rooms in the right wing and the bounce flower platforming rooms in the left wing of Flower Castle.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.FLOWERYFIGHT_ENDED]: {
+    displayName: 'Flowery battle ended',
+    description:
+      'Whether the Flowery battle was ended in some way, either by losing to him or beating him.',
+    valueType: 'boolean',
+  },
+  [FLAGS.FLOWERYFIGHT_ATTEMPTS]: {
+    displayName: 'Flowery attempts',
+    description:
+      "The amount of attempts against Flowery you've had in a single session. Resets if you reload the game and start the battle again.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'One attempt',
+        2: 'Two or more attempts',
+      },
+    },
+  },
+  [FLAGS.FLOWERYFIGHT_TRIAL]: {
+    displayName: 'Did the Flowery trial',
+    volatile: true,
+    description:
+      'Volatile. Determines whether you already did the trial in the Flowery fight. Resets if you reload the game and start the battle again.',
+    valueType: 'boolean',
+  },
+  [FLAGS.SAW_GOLD_AQUA_BP]: {
+    displayName: 'Saw golden Aqua bullet pattern',
+    description:
+      'Whether you saw the golden Aqua bullet pattern that appears to the right of the Shrine.',
+    valueType: 'boolean',
+  },
+  [FLAGS.LEVEL_UP_COUNT_CH5]: {
+    displayName: 'Level-ups',
+    description:
+      'The number of times you have leveled up by violently defeating an encounter. Used for certain increases that only occur every 2, 4, or 10 encounters.',
+    valueType: 'number',
+  },
+  [FLAGS.AT_MAGIC_GAIN_COUNT_CH5]: {
+    displayName: 'AT/Magic gains',
+    description:
+      'The number of times your AT and Magic have increased due to leveling up (every ten encounters).',
+    valueType: 'number',
+  },
+  [FLAGS.CLIFFS_BONUSCOMBAT_DESTROYED_CHEESE]: {
+    displayName: "Destroyed Wind Struggler's abandonded cheese",
+    description: 'Whether you destroyed the cheese after Wind Struggler left.',
+    valueType: 'boolean',
+  },
+  [FLAGS.FCASTLE_TOP_ASCENT_FAILURES]: {
+    displayName: 'Ascent failures',
+    description:
+      'The number of times you failed the Top of Castle ascent platforming segment.',
+    valueType: 'number',
+  },
+  [FLAGS.FCASTLE_TOP_ASCENT_FAILURE_ROOM]: {
+    displayName: 'Unlocked failure room',
+    description:
+      'Whether you unlocked the failure room by failing the platforming segment 10 times.',
+    valueType: 'boolean',
+  },
+  [FLAGS.FCASTLE_TOP_ASCENT_RALSEI_LONG]: {
+    displayName: 'Ralsei is long',
+    description:
+      'Whether Ralsei was long when you left the failure room. This will make him start out as long if you hook him to the pumpkin again.',
+    valueType: 'boolean',
+  },
+  [FLAGS.ASKED_CATTY_DAD_KINGQUEEN]: {
+    displayName: "Asked Catty's dad",
+    description: "Asked Catty's dad about the Festival King and Queen vote.",
+    valueType: 'boolean',
+  },
+  [FLAGS.FLORADINN_FLOWERY_LEFT_ENCOUNTER_OUTCOME]: {
+    displayName: 'Left Floradinn',
+    description:
+      'Tracks the state of the left Floradinn encounter in the room where Flowery joins your party.',
+    valueType: 'map',
+    valueRules: {
+      map: ENCOUNTER_OUTCOMES,
+    },
+  },
+  [FLAGS.FLORADINN_FLOWERY_RIGHT_ENCOUNTER_OUTCOME]: {
+    displayName: 'Right Floradinn',
+    description:
+      'Tracks the state of the right Floradinn encounter in the room where Flowery joins your party.',
+    valueType: 'map',
+    valueRules: {
+      map: ENCOUNTER_OUTCOMES,
+    },
+  },
+  [FLAGS.LEAFLING_ENCOUNTER_OUTCOME]: {
+    displayName: 'Leafling',
+    description: 'Tracks the state of the Leafling encounter in Cliffs.',
+    valueType: 'map',
+    valueRules: {
+      map: ENCOUNTER_OUTCOMES,
+    },
+  },
+  [FLAGS.NETSKIE_TREASURE_ENCOUNTER_OUTCOME]: {
+    displayName: 'Netskie',
+    description:
+      'Tracks the state of the Netskie chest encounter in the Netskie Climb section of Cliffs.',
+    valueType: 'map',
+    valueRules: {
+      map: ENCOUNTER_OUTCOMES,
+    },
+  },
+  [FLAGS.SHI_ENCOUNTER_OUTCOME]: {
+    displayName: 'Shi',
+    description:
+      'Tracks the state of the Shi encounter at the start of Cliffs.',
+    valueType: 'map',
+    valueRules: {
+      map: ENCOUNTER_OUTCOMES,
+    },
+  },
+  [FLAGS.KAWKAW_ENCOUNTER_OUTCOME]: {
+    displayName: 'Kawkaw',
+    description: 'Tracks the state of the Kawkaw encounter in Cliffs.',
+    valueType: 'map',
+    valueRules: {
+      map: ENCOUNTER_OUTCOMES,
+    },
+  },
+  [FLAGS.FLORADINN_KNIGHT_ENCOUNTER_OUTCOME]: {
+    displayName: 'Floradinn and Knight',
+    description:
+      'Unset flag for the fight Flowery gets in with the Roaring Knight and a Floradinn.',
+    valueType: 'map',
+    valueRules: {
+      map: ENCOUNTER_OUTCOMES,
+    },
+  },
+  [FLAGS.SHI_SANDTRAP_ENCOUNTER_OUTCOME]: {
+    displayName: 'Shi',
+    description:
+      'Tracks the state of the Shi encounter in the sand trap room of Flower Castle left wing.',
+    valueType: 'map',
+    valueRules: {
+      map: ENCOUNTER_OUTCOMES,
+    },
+  },
+  [FLAGS.SHI_NOTANENEMY_ENCOUNTER_OUTCOME]: {
+    displayName: '"Not an enemey" Shi',
+    description:
+      'Tracks the state of the "not an enemy" Shi encounter in Cliffs.',
+    valueType: 'map',
+    valueRules: {
+      map: ENCOUNTER_OUTCOMES,
+    },
+  },
+  [FLAGS.TERAKOTA_ENCOUNTER_OUTCOME]: {
+    displayName: 'Terakota',
+    description:
+      'Tracks the state of the Terakota encounter at the start of Flower Castle right wing.',
+    valueType: 'map',
+    valueRules: {
+      map: ENCOUNTER_OUTCOMES,
+    },
+  },
+  [FLAGS.SHINOBEETLE_ENCOUNTER_OUTCOME]: {
+    displayName: 'Shinobeetle',
+    description:
+      'Tracks the state of the Shinobeetle encounter at the start of Flower Castle left wing.',
+    valueType: 'map',
+    valueRules: {
+      map: ENCOUNTER_OUTCOMES,
+    },
+  },
+  [FLAGS.SHINOBEETLE_SETH_ENCOUNTER_OUTCOME]: {
+    displayName: 'Shinobeetle',
+    description:
+      'Tracks the state of the Shinobeetle encounter with Seth in Castle Top.',
+    valueType: 'map',
+    valueRules: {
+      map: ENCOUNTER_OUTCOMES,
+    },
+  },
+  [FLAGS.FLORADINN_ENCOUNTER_OUTCOME]: {
+    displayName: 'Floradinn',
+    description:
+      'Tracks the state of the Floradinn encounter at the start of Garden.',
+    valueType: 'map',
+    valueRules: {
+      map: ENCOUNTER_OUTCOMES,
+    },
+  },
+  [FLAGS.FLORADINN_ULTRADASH_ENCOUNTER_OUTCOME]: {
+    displayName: 'Floradinn',
+    description:
+      'Tracks the state of the Floradinn encounter at the end of the dash section in Castle Top.',
+    valueType: 'map',
+    valueRules: {
+      map: ENCOUNTER_OUTCOMES,
+    },
+  },
+  [FLAGS.NETSKIE_TREASURE_GARDEN_ENCOUNTER_OUTCOME]: {
+    displayName: 'Netskie',
+    description:
+      'Tracks the state of the Netskie chest encounter in the Garden tea party room.',
     valueType: 'map',
     valueRules: {
       map: ENCOUNTER_OUTCOMES,
