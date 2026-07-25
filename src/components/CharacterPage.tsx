@@ -106,11 +106,8 @@ export function CharacterPage({
         </InlineGroup>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-3 lg:h-[90%] lg:max-h-[900px]">
-        <Section
-          id="main"
-          className="flex flex-col flex-1 lg:min-h-[700px] min-h-[700px]"
-        >
+      <div className="flex flex-col gap-3 lg:flex-row lg:items-stretch">
+        <Section id="main" className="flex min-h-175 flex-1 flex-col">
           <Card className="flex flex-col justify-between flex-1">
             <div className="flex flex-col">
               <CharacterHeader character={character} icon={icon} />
@@ -189,9 +186,9 @@ export function CharacterPage({
 
         <Section
           id="spells"
-          className="flex flex-7/16 lg:min-h-[700px] min-h-[800px]"
+          className="flex min-h-175 flex-7/16 lg:min-h-175"
         >
-          <Card className="flex-1 p-6 flex gap-3 flex-col">
+          <Card className="flex flex-1 flex-col gap-3 p-6">
             <Heading level={3}>{t('ui.party.spells', 'Spells')}</Heading>
             <div className="text-text-2">
               <p>
