@@ -1,5 +1,17 @@
-import { Select, type SelectItem, FieldWrapper } from '@components';
-import { type CharacterIndex, type WeaponIndex, type ArmorIndex } from '@data';
+import {
+  Select,
+  type SelectItem,
+  FieldWrapper,
+  EquipmentIcon,
+  InlineGroup,
+} from '@components';
+import {
+  EQUIPMENT_EFFECTS_META,
+  type CharacterIndex,
+  type WeaponIndex,
+  type ArmorIndex,
+  type EquipmentIconIndex,
+} from '@data';
 import { useCharacterOverrideInputs } from '@hooks';
 import { useSave } from '@store';
 import { getChapterLoadoutOptions } from '@utils/chapter-options';
@@ -11,6 +23,7 @@ import {
 } from '@utils/data-helpers';
 import {
   getArmorTranslationKeyPrefix,
+  getEquipmentEffectTranslationKeyPrefix,
   getWeaponTranslationKeyPrefix,
   translateMeta,
   useTranslation,
@@ -39,6 +52,10 @@ interface LoadoutFieldProps {
   recalculateStats: boolean;
 }
 
+function renderEquipmentIcon(icon: EquipmentIconIndex | undefined) {
+  return icon !== undefined ? <EquipmentIcon icon={icon} /> : undefined;
+}
+
 export function LoadoutField({
   id,
   type,
@@ -59,10 +76,12 @@ export function LoadoutField({
     optionType === 'weapon' ? 'weapons' : 'armors'
   ] as Set<number>;
 
-  const elementMeta =
-    type === 'weapon'
-      ? weaponHelpers.getById(current as WeaponIndex)
-      : armorHelpers.getById(current as ArmorIndex);
+  const getElementMeta = (value: number) =>
+    optionType === 'weapon'
+      ? weaponHelpers.getById(value as WeaponIndex)
+      : armorHelpers.getById(value as ArmorIndex);
+
+  const elementMeta = getElementMeta(current as number);
   const isExisting = !!(
     elementMeta && (elementMeta as { displayName?: string }).displayName
   );
@@ -82,6 +101,7 @@ export function LoadoutField({
     allowedElementsOverride,
   ).map((item) => ({
     ...item,
+    icon: renderEquipmentIcon(getElementMeta(item.value as number)?.icon),
     label: translateMeta(
       optionType === 'weapon'
         ? getWeaponTranslationKeyPrefix(item.value as number)
@@ -97,6 +117,7 @@ export function LoadoutField({
       ...baseItems,
       {
         id: `${current}`,
+        icon: renderEquipmentIcon(isExisting ? elementMeta.icon : undefined),
         label: isExisting
           ? translateMeta(
               optionType === 'weapon'
@@ -120,6 +141,24 @@ export function LoadoutField({
     optionType === 'weapon' ? 'ui.field.selectWeapon' : 'ui.field.selectArmor';
   const placeholderFallback =
     optionType === 'weapon' ? 'Select a weapon...' : 'Select an armor...';
+
+  const effectId = isExisting ? elementMeta.effect : undefined;
+  const effectMeta =
+    effectId !== undefined ? EQUIPMENT_EFFECTS_META[effectId] : undefined;
+  const effectName = effectMeta
+    ? translateMeta(
+        getEquipmentEffectTranslationKeyPrefix(effectId as number),
+        effectMeta,
+        t,
+      ).displayName
+    : '';
+  const effectRow = effectMeta ? (
+    <InlineGroup>
+      <EquipmentIcon icon={effectMeta.icon} />
+      <span className="text-sm text-text-2">{effectName}</span>
+    </InlineGroup>
+  ) : null;
+
   return (
     <FieldWrapper id={id} className="w-full" title={label} label>
       <Select
@@ -148,6 +187,7 @@ export function LoadoutField({
         items={selectItems}
         className="w-full"
       />
+      {effectRow}
     </FieldWrapper>
   );
 }

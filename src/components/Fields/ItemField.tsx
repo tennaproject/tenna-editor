@@ -1,7 +1,14 @@
-import { Section, TextLabel, Select, type SelectItem } from '@components';
+import {
+  Section,
+  TextLabel,
+  Select,
+  type SelectItem,
+  EquipmentIcon,
+} from '@components';
 import {
   type ArmorIndex,
   type ConsumableIndex,
+  type EquipmentIconIndex,
   type KeyItemIndex,
   type LightWorldItemIndex,
   type PhoneContactIndex,
@@ -87,6 +94,21 @@ function getTranslatedDisplayName(
   ).displayName;
 }
 
+function getIcon(type: ItemType, id: number): EquipmentIconIndex | undefined {
+  switch (type) {
+    case 'weapon':
+      return weaponHelpers.getById(id as WeaponIndex)?.icon;
+    case 'armor':
+      return armorHelpers.getById(id as ArmorIndex)?.icon;
+    default:
+      return undefined;
+  }
+}
+
+function renderEquipmentIcon(icon: EquipmentIconIndex | undefined) {
+  return icon !== undefined ? <EquipmentIcon icon={icon} /> : undefined;
+}
+
 function getPlaceholder(type: ItemType): string {
   switch (type) {
     case 'consumable':
@@ -131,6 +153,7 @@ export function ItemField({ type, slot, label }: ItemFieldProps) {
   const placeholder = t(getPlaceholderKey(type), getPlaceholder(type));
   const baseItems = getChapterItemOptions(chapter, type).map((item) => ({
     ...item,
+    icon: renderEquipmentIcon(getIcon(type, item.value as number)),
     label: getTranslatedDisplayName(type, item.value as number, item.label, t),
   }));
   const chapterContent = chapterHelpers.getById(chapter).content;
@@ -172,6 +195,7 @@ export function ItemField({ type, slot, label }: ItemFieldProps) {
       ...baseItems,
       {
         id: `${currentValue}`,
+        icon: renderEquipmentIcon(getIcon(type, currentValue)),
         label: metaDisplay || t('ui.common.unknown', 'Unknown'),
         value: currentValue,
         invalid: true,

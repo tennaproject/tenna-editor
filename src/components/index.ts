@@ -33,6 +33,7 @@ export * from './ThrashMachine';
 export * from './ThrashFit';
 export * from './CharacterHeader';
 export * from './CharacterPage';
+export * from './EquipmentIcon';
 export * from './FieldWrapper';
 export * from './InventoryPage';
 export * from './Link';

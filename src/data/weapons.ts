@@ -1,5 +1,7 @@
 import type { BaseProperties, EquipmentStats, WithOverrides } from '@types';
 import type { ChapterIndex } from './chapters';
+import { EQUIPMENT_EFFECTS, EQUIPMENT_ICONS } from './equipment';
+import type { EquipmentEffectIndex, EquipmentIconIndex } from './equipment';
 
 export const WEAPONS = {
   EMPTY: 0,
@@ -52,84 +54,116 @@ interface WeaponProperties
     BaseProperties,
     WithOverrides<WeaponProperties, { chapter: ChapterIndex }> {
   stats: EquipmentStats;
+  icon?: EquipmentIconIndex;
+  effect?: EquipmentEffectIndex;
 }
 
 export const WEAPONS_META: Record<WeaponIndex, WeaponProperties> = {
   [WEAPONS.EMPTY]: {
     displayName: 'Empty',
     stats: { attack: 0, defence: 0, magic: 0 },
+    icon: EQUIPMENT_ICONS.EMPTY,
   },
   [WEAPONS.WOOD_BLADE]: {
     displayName: 'Wood Blade',
     stats: { attack: 0, defence: 0, magic: 0 },
+    icon: EQUIPMENT_ICONS.SWORD,
   },
   [WEAPONS.MANE_AX]: {
     displayName: 'Mane Ax',
     stats: { attack: 0, defence: 0, magic: 0 },
+    icon: EQUIPMENT_ICONS.AXE,
   },
   [WEAPONS.RED_SCARF]: {
     displayName: 'Red Scarf',
     stats: { attack: 0, defence: 0, magic: 0 },
+    icon: EQUIPMENT_ICONS.SCARF,
   },
   [WEAPONS.EVERYBODY_WEAPON]: {
     displayName: 'EverybodyWeapon',
     stats: { attack: 12, defence: 6, magic: 8 },
+    icon: EQUIPMENT_ICONS.EMPTY,
   },
   [WEAPONS.SPOOKYSWORD]: {
     displayName: 'Spookysword',
     stats: { attack: 2, defence: 0, magic: 0 },
+    icon: EQUIPMENT_ICONS.SWORD,
+    effect: EQUIPMENT_EFFECTS.SPOOKINESS_UP,
   },
   [WEAPONS.BRAVE_AX]: {
     displayName: 'Brave Ax',
     stats: { attack: 2, defence: 0, magic: 0 },
+    icon: EQUIPMENT_ICONS.AXE,
+    effect: EQUIPMENT_EFFECTS.GUTS_UP,
   },
   [WEAPONS.DEVILSKNIFE]: {
     displayName: 'Devilsknife',
     stats: { attack: 5, defence: 0, magic: 4 },
+    icon: EQUIPMENT_ICONS.AXE,
+    effect: EQUIPMENT_EFFECTS.BUSTER_TP_DOWN,
   },
   [WEAPONS.TREFOIL]: {
     displayName: 'Trefoil',
     stats: { attack: 4, defence: 0, magic: 0 },
+    icon: EQUIPMENT_ICONS.SWORD,
+    effect: EQUIPMENT_EFFECTS.MONEY_EARNED_UP,
   },
   [WEAPONS.RAGGER]: {
     displayName: 'Ragger',
     stats: { attack: 2, defence: 0, magic: 0 },
+    icon: EQUIPMENT_ICONS.SCARF,
   },
   [WEAPONS.DAINTY_SCARF]: {
     displayName: 'DaintyScarf',
     stats: { attack: 0, defence: 0, magic: 2 },
+    icon: EQUIPMENT_ICONS.SCARF,
+    effect: EQUIPMENT_EFFECTS.FLUFFINESS_UP,
   },
   [WEAPONS.TWISTED_SWD]: {
     displayName: 'TwistedSwd',
     stats: { attack: 16, defence: 0, magic: 0 },
+    icon: EQUIPMENT_ICONS.SWORD,
+    effect: EQUIPMENT_EFFECTS.TRANCE,
   },
   [WEAPONS.SNOW_RING]: {
     displayName: 'SnowRing',
     stats: { attack: 0, defence: 0, magic: 0 },
+    icon: EQUIPMENT_ICONS.RING,
   },
   [WEAPONS.THORN_RING]: {
     displayName: 'ThornRing',
     stats: { attack: 14, defence: 0, magic: 12 },
+    icon: EQUIPMENT_ICONS.RING,
+    effect: EQUIPMENT_EFFECTS.TRANCE_RING,
   },
   [WEAPONS.BOUNCE_BLADE]: {
     displayName: 'BounceBlade',
     stats: { attack: 2, defence: 1, magic: 0 },
+    icon: EQUIPMENT_ICONS.SWORD,
+    effect: EQUIPMENT_EFFECTS.DEFEND_UP,
   },
   [WEAPONS.CHEER_SCARF]: {
     displayName: 'CheerScarf',
     stats: { attack: 1, defence: 0, magic: 2 },
+    icon: EQUIPMENT_ICONS.SCARF,
+    effect: EQUIPMENT_EFFECTS.SMILEY,
   },
   [WEAPONS.MECHA_SABER]: {
     displayName: 'MechaSaber',
     stats: { attack: 4, defence: 0, magic: 0 },
+    icon: EQUIPMENT_ICONS.SWORD,
+    effect: EQUIPMENT_EFFECTS.ANNOYING,
   },
   [WEAPONS.AUTO_AXE]: {
     displayName: 'AutoAxe',
     stats: { attack: 4, defence: 0, magic: 0 },
+    icon: EQUIPMENT_ICONS.AXE,
+    effect: EQUIPMENT_EFFECTS.BAD_IDEA,
   },
   [WEAPONS.FIBER_SCARF]: {
     displayName: 'FiberScarf',
     stats: { attack: 2, defence: 0, magic: 2 },
+    icon: EQUIPMENT_ICONS.SCARF,
     getOverrides: ({ chapter }) => {
       if (chapter === 3) {
         return {
@@ -143,85 +177,118 @@ export const WEAPONS_META: Record<WeaponIndex, WeaponProperties> = {
   [WEAPONS.RAGGER2]: {
     displayName: 'Ragger2',
     stats: { attack: 5, defence: 0, magic: -1 },
+    icon: EQUIPMENT_ICONS.SCARF,
+    effect: EQUIPMENT_EFFECTS.PRICKLY,
   },
   [WEAPONS.BROKEN_SWD]: {
     displayName: 'BrokenSwd',
     stats: { attack: 0, defence: 0, magic: 0 },
+    icon: EQUIPMENT_ICONS.SWORD,
+    effect: EQUIPMENT_EFFECTS.FAILURE,
   },
   [WEAPONS.PUPPET_SCARF]: {
     displayName: 'PuppetScarf',
     stats: { attack: 10, defence: 0, magic: -6 },
+    icon: EQUIPMENT_ICONS.SCARF,
   },
   [WEAPONS.FREEZE_RING]: {
     displayName: 'FreezeRing',
     stats: { attack: 4, defence: 0, magic: 4 },
+    icon: EQUIPMENT_ICONS.RING,
   },
   [WEAPONS.SABER10]: {
     displayName: 'Saber10',
     stats: { attack: 6, defence: 0, magic: 0 },
+    icon: EQUIPMENT_ICONS.SWORD,
   },
   [WEAPONS.TOXIC_AXE]: {
     displayName: 'ToxicAxe',
     stats: { attack: 6, defence: 0, magic: 0 },
+    icon: EQUIPMENT_ICONS.AXE,
   },
   [WEAPONS.FLEX_SCARF]: {
     displayName: 'FlexScarf',
     stats: { attack: 4, defence: 0, magic: 1 },
+    icon: EQUIPMENT_ICONS.SCARF,
   },
   [WEAPONS.BLACK_SHARD]: {
     displayName: 'BlackShard',
     stats: { attack: 16, defence: 0, magic: 0 },
+    icon: EQUIPMENT_ICONS.SHARD,
+    effect: EQUIPMENT_EFFECTS.SLAY_DARK,
   },
   [WEAPONS.JINGLE_BLADE]: {
     displayName: 'JingleBlade',
     stats: { attack: 7, defence: 1, magic: 0 },
+    icon: EQUIPMENT_ICONS.SWORD,
+    effect: EQUIPMENT_EFFECTS.FESTIVE,
   },
   [WEAPONS.SCARF_MARK]: {
     displayName: 'ScarfMark',
     stats: { attack: 4, defence: 1, magic: 1 },
+    icon: EQUIPMENT_ICONS.SCARF,
   },
   [WEAPONS.JUSTICE_AXE]: {
     displayName: 'JusticeAxe',
     stats: { attack: 12, defence: 0, magic: 0 },
+    icon: EQUIPMENT_ICONS.AXE,
+    effect: EQUIPMENT_EFFECTS.UNKNOWN_WEAPON,
   },
   [WEAPONS.WINGLADE]: {
     displayName: 'Winglade',
     stats: { attack: 8, defence: 0, magic: 0 },
+    icon: EQUIPMENT_ICONS.SWORD,
+    effect: EQUIPMENT_EFFECTS.MONEY_5_UP,
   },
   [WEAPONS.ABSORB_AX]: {
     displayName: 'AbsorbAx',
     stats: { attack: 8, defence: 0, magic: 0 },
+    icon: EQUIPMENT_ICONS.AXE,
+    effect: EQUIPMENT_EFFECTS.VAMPIRE,
   },
   [WEAPONS.WOOD_BLADE_2]: {
     displayName: 'WoodBlade2',
     stats: { attack: 10, defence: 0, magic: 0 },
+    icon: EQUIPMENT_ICONS.SWORD,
+    effect: EQUIPMENT_EFFECTS.COOLNESS,
   },
   [WEAPONS.THATCHET]: {
     displayName: 'Thatchet',
     stats: { attack: 10, defence: 0, magic: 0 },
+    icon: EQUIPMENT_ICONS.AXE,
+    effect: EQUIPMENT_EFFECTS.WICKED,
   },
   [WEAPONS.BLUE_SHOES]: {
     displayName: 'BlueShoes',
     stats: { attack: 2, defence: 4, magic: 6 },
+    icon: EQUIPMENT_ICONS.BLUE,
+    effect: EQUIPMENT_EFFECTS.PACIFY_0_TP,
   },
   [WEAPONS.AQUA_KNIFE]: {
     displayName: 'AquaKnife',
     stats: { attack: 10, defence: 2, magic: 0 },
+    icon: EQUIPMENT_ICONS.AQUA,
+    effect: EQUIPMENT_EFFECTS.CRITICAL,
   },
   [WEAPONS.FLOWERY_SCARF]: {
     displayName: 'FloweryScarf',
     stats: { attack: 70, defence: 70, magic: 70 },
+    icon: EQUIPMENT_ICONS.SCARF,
+    effect: EQUIPMENT_EFFECTS.THE_BEST,
   },
   [WEAPONS.BROKEN_SCARF]: {
     displayName: 'BrokenScarf',
     stats: { attack: 0, defence: 0, magic: 0 },
+    icon: EQUIPMENT_ICONS.SCARF,
   },
   [WEAPONS.GILDED_ROSE]: {
     displayName: 'GildedRose',
     stats: { attack: 16, defence: 0, magic: 2 },
+    icon: EQUIPMENT_ICONS.RING,
   },
   [WEAPONS.MISTLE_WP]: {
     displayName: 'MistleWP',
     stats: { attack: 6, defence: 0, magic: 2 },
+    icon: EQUIPMENT_ICONS.SCARF,
   },
 };
