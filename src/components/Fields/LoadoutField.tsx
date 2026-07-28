@@ -15,6 +15,7 @@ import {
   translateMeta,
   useTranslation,
 } from '../../i18n';
+import { syncEquipmentStats as syncStoredEquipmentStats } from '@utils';
 
 type LoadoutType = 'weapon' | 'primaryArmor' | 'secondaryArmor';
 
@@ -35,6 +36,7 @@ interface LoadoutFieldProps {
   type: LoadoutType;
   character: CharacterIndex;
   allowAllElements: boolean;
+  recalculateStats: boolean;
 }
 
 export function LoadoutField({
@@ -42,6 +44,7 @@ export function LoadoutField({
   type,
   character,
   allowAllElements,
+  recalculateStats,
 }: LoadoutFieldProps) {
   const { t } = useTranslation();
   const chapter = useSave((s) => s.save?.meta.chapter) ?? 1;
@@ -131,6 +134,14 @@ export function LoadoutField({
               save.characters[character].weapon = item.value as WeaponIndex;
             } else {
               save.characters[character][type] = item.value as ArmorIndex;
+            }
+
+            if (recalculateStats) {
+              syncStoredEquipmentStats(
+                save.characters[character],
+                type,
+                chapter,
+              );
             }
           });
         }}

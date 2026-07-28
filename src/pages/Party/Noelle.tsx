@@ -6,6 +6,9 @@ import NoelleIcon from '@assets/deltarune/characters/noelle.svg?react';
 
 export function PartyNoelle() {
   const allowAllElements = useUi((s) => s.ui.party.noelle.allowAllElements);
+  const preserveCustomStats = useUi(
+    (s) => s.ui.party.noelle.preserveCustomStats,
+  );
   const updateUi = useUi((s) => s.updateUi);
   const color = getCharacterColor(CHARACTERS.NOELLE);
 
@@ -23,8 +26,12 @@ export function PartyNoelle() {
         </span>
       }
       allowAllElements={allowAllElements}
+      preserveCustomStats={preserveCustomStats}
       setAllowAllElements={(value) =>
         updateUi((ui) => (ui.party.noelle.allowAllElements = value))
+      }
+      setPreserveCustomStats={(value) =>
+        updateUi((ui) => (ui.party.noelle.preserveCustomStats = value))
       }
     />
   );

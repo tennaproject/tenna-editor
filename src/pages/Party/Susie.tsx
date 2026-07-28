@@ -6,6 +6,9 @@ import SusieIcon from '@assets/deltarune/characters/susie.svg?react';
 
 export function PartySusie() {
   const allowAllElements = useUi((s) => s.ui.party.susie.allowAllElements);
+  const preserveCustomStats = useUi(
+    (s) => s.ui.party.susie.preserveCustomStats,
+  );
   const updateUi = useUi((s) => s.updateUi);
   const color = getCharacterColor(CHARACTERS.SUSIE);
 
@@ -23,8 +26,12 @@ export function PartySusie() {
         </span>
       }
       allowAllElements={allowAllElements}
+      preserveCustomStats={preserveCustomStats}
       setAllowAllElements={(value) =>
         updateUi((ui) => (ui.party.susie.allowAllElements = value))
+      }
+      setPreserveCustomStats={(value) =>
+        updateUi((ui) => (ui.party.susie.preserveCustomStats = value))
       }
     />
   );

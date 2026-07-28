@@ -1,4 +1,5 @@
-import type { BaseProperties } from '@types';
+import type { BaseProperties, EquipmentStats, WithOverrides } from '@types';
+import type { ChapterIndex } from './chapters';
 
 export const WEAPONS = {
   EMPTY: 0,
@@ -46,45 +47,181 @@ export const WEAPONS = {
 export type WeaponIndex = (typeof WEAPONS)[keyof typeof WEAPONS];
 export type WeaponName = keyof typeof WEAPONS;
 
-export const WEAPONS_META: Record<WeaponIndex, BaseProperties> = {
-  [WEAPONS.EMPTY]: { displayName: 'Empty' },
-  [WEAPONS.WOOD_BLADE]: { displayName: 'Wood Blade' },
-  [WEAPONS.MANE_AX]: { displayName: 'Mane Ax' },
-  [WEAPONS.RED_SCARF]: { displayName: 'Red Scarf' },
-  [WEAPONS.EVERYBODY_WEAPON]: { displayName: 'EverybodyWeapon' },
-  [WEAPONS.SPOOKYSWORD]: { displayName: 'Spookysword' },
-  [WEAPONS.BRAVE_AX]: { displayName: 'Brave Ax' },
-  [WEAPONS.DEVILSKNIFE]: { displayName: 'Devilsknife' },
-  [WEAPONS.TREFOIL]: { displayName: 'Trefoil' },
-  [WEAPONS.RAGGER]: { displayName: 'Ragger' },
-  [WEAPONS.DAINTY_SCARF]: { displayName: 'DaintyScarf' },
-  [WEAPONS.TWISTED_SWD]: { displayName: 'TwistedSwd' },
-  [WEAPONS.SNOW_RING]: { displayName: 'SnowRing' },
-  [WEAPONS.THORN_RING]: { displayName: 'ThornRing' },
-  [WEAPONS.BOUNCE_BLADE]: { displayName: 'BounceBlade' },
-  [WEAPONS.CHEER_SCARF]: { displayName: 'CheerScarf' },
-  [WEAPONS.MECHA_SABER]: { displayName: 'MechaSaber' },
-  [WEAPONS.AUTO_AXE]: { displayName: 'AutoAxe' },
-  [WEAPONS.FIBER_SCARF]: { displayName: 'FiberScarf' },
-  [WEAPONS.RAGGER2]: { displayName: 'Ragger2' },
-  [WEAPONS.BROKEN_SWD]: { displayName: 'BrokenSwd' },
-  [WEAPONS.PUPPET_SCARF]: { displayName: 'PuppetScarf' },
-  [WEAPONS.FREEZE_RING]: { displayName: 'FreezeRing' },
-  [WEAPONS.SABER10]: { displayName: 'Saber10' },
-  [WEAPONS.TOXIC_AXE]: { displayName: 'ToxicAxe' },
-  [WEAPONS.FLEX_SCARF]: { displayName: 'FlexScarf' },
-  [WEAPONS.BLACK_SHARD]: { displayName: 'BlackShard' },
-  [WEAPONS.JINGLE_BLADE]: { displayName: 'JingleBlade' },
-  [WEAPONS.SCARF_MARK]: { displayName: 'ScarfMark' },
-  [WEAPONS.JUSTICE_AXE]: { displayName: 'JusticeAxe' },
-  [WEAPONS.WINGLADE]: { displayName: 'Winglade' },
-  [WEAPONS.ABSORB_AX]: { displayName: 'AbsorbAx' },
-  [WEAPONS.WOOD_BLADE_2]: { displayName: 'WoodBlade2' },
-  [WEAPONS.THATCHET]: { displayName: 'Thatchet' },
-  [WEAPONS.BLUE_SHOES]: { displayName: 'BlueShoes' },
-  [WEAPONS.AQUA_KNIFE]: { displayName: 'AquaKnife' },
-  [WEAPONS.FLOWERY_SCARF]: { displayName: 'FloweryScarf' },
-  [WEAPONS.BROKEN_SCARF]: { displayName: 'BrokenScarf' },
-  [WEAPONS.GILDED_ROSE]: { displayName: 'GildedRose' },
-  [WEAPONS.MISTLE_WP]: { displayName: 'MistleWP' },
+interface WeaponProperties
+  extends
+    BaseProperties,
+    WithOverrides<WeaponProperties, { chapter: ChapterIndex }> {
+  stats: EquipmentStats;
+}
+
+export const WEAPONS_META: Record<WeaponIndex, WeaponProperties> = {
+  [WEAPONS.EMPTY]: {
+    displayName: 'Empty',
+    stats: { attack: 0, defence: 0, magic: 0 },
+  },
+  [WEAPONS.WOOD_BLADE]: {
+    displayName: 'Wood Blade',
+    stats: { attack: 0, defence: 0, magic: 0 },
+  },
+  [WEAPONS.MANE_AX]: {
+    displayName: 'Mane Ax',
+    stats: { attack: 0, defence: 0, magic: 0 },
+  },
+  [WEAPONS.RED_SCARF]: {
+    displayName: 'Red Scarf',
+    stats: { attack: 0, defence: 0, magic: 0 },
+  },
+  [WEAPONS.EVERYBODY_WEAPON]: {
+    displayName: 'EverybodyWeapon',
+    stats: { attack: 12, defence: 6, magic: 8 },
+  },
+  [WEAPONS.SPOOKYSWORD]: {
+    displayName: 'Spookysword',
+    stats: { attack: 2, defence: 0, magic: 0 },
+  },
+  [WEAPONS.BRAVE_AX]: {
+    displayName: 'Brave Ax',
+    stats: { attack: 2, defence: 0, magic: 0 },
+  },
+  [WEAPONS.DEVILSKNIFE]: {
+    displayName: 'Devilsknife',
+    stats: { attack: 5, defence: 0, magic: 4 },
+  },
+  [WEAPONS.TREFOIL]: {
+    displayName: 'Trefoil',
+    stats: { attack: 4, defence: 0, magic: 0 },
+  },
+  [WEAPONS.RAGGER]: {
+    displayName: 'Ragger',
+    stats: { attack: 2, defence: 0, magic: 0 },
+  },
+  [WEAPONS.DAINTY_SCARF]: {
+    displayName: 'DaintyScarf',
+    stats: { attack: 0, defence: 0, magic: 2 },
+  },
+  [WEAPONS.TWISTED_SWD]: {
+    displayName: 'TwistedSwd',
+    stats: { attack: 16, defence: 0, magic: 0 },
+  },
+  [WEAPONS.SNOW_RING]: {
+    displayName: 'SnowRing',
+    stats: { attack: 0, defence: 0, magic: 0 },
+  },
+  [WEAPONS.THORN_RING]: {
+    displayName: 'ThornRing',
+    stats: { attack: 14, defence: 0, magic: 12 },
+  },
+  [WEAPONS.BOUNCE_BLADE]: {
+    displayName: 'BounceBlade',
+    stats: { attack: 2, defence: 1, magic: 0 },
+  },
+  [WEAPONS.CHEER_SCARF]: {
+    displayName: 'CheerScarf',
+    stats: { attack: 1, defence: 0, magic: 2 },
+  },
+  [WEAPONS.MECHA_SABER]: {
+    displayName: 'MechaSaber',
+    stats: { attack: 4, defence: 0, magic: 0 },
+  },
+  [WEAPONS.AUTO_AXE]: {
+    displayName: 'AutoAxe',
+    stats: { attack: 4, defence: 0, magic: 0 },
+  },
+  [WEAPONS.FIBER_SCARF]: {
+    displayName: 'FiberScarf',
+    stats: { attack: 2, defence: 0, magic: 2 },
+    getOverrides: ({ chapter }) => {
+      if (chapter === 3) {
+        return {
+          stats: { attack: 3, defence: 0, magic: 2 },
+        };
+      }
+
+      return {};
+    },
+  },
+  [WEAPONS.RAGGER2]: {
+    displayName: 'Ragger2',
+    stats: { attack: 5, defence: 0, magic: -1 },
+  },
+  [WEAPONS.BROKEN_SWD]: {
+    displayName: 'BrokenSwd',
+    stats: { attack: 0, defence: 0, magic: 0 },
+  },
+  [WEAPONS.PUPPET_SCARF]: {
+    displayName: 'PuppetScarf',
+    stats: { attack: 10, defence: 0, magic: -6 },
+  },
+  [WEAPONS.FREEZE_RING]: {
+    displayName: 'FreezeRing',
+    stats: { attack: 4, defence: 0, magic: 4 },
+  },
+  [WEAPONS.SABER10]: {
+    displayName: 'Saber10',
+    stats: { attack: 6, defence: 0, magic: 0 },
+  },
+  [WEAPONS.TOXIC_AXE]: {
+    displayName: 'ToxicAxe',
+    stats: { attack: 6, defence: 0, magic: 0 },
+  },
+  [WEAPONS.FLEX_SCARF]: {
+    displayName: 'FlexScarf',
+    stats: { attack: 4, defence: 0, magic: 1 },
+  },
+  [WEAPONS.BLACK_SHARD]: {
+    displayName: 'BlackShard',
+    stats: { attack: 16, defence: 0, magic: 0 },
+  },
+  [WEAPONS.JINGLE_BLADE]: {
+    displayName: 'JingleBlade',
+    stats: { attack: 7, defence: 1, magic: 0 },
+  },
+  [WEAPONS.SCARF_MARK]: {
+    displayName: 'ScarfMark',
+    stats: { attack: 4, defence: 1, magic: 1 },
+  },
+  [WEAPONS.JUSTICE_AXE]: {
+    displayName: 'JusticeAxe',
+    stats: { attack: 12, defence: 0, magic: 0 },
+  },
+  [WEAPONS.WINGLADE]: {
+    displayName: 'Winglade',
+    stats: { attack: 8, defence: 0, magic: 0 },
+  },
+  [WEAPONS.ABSORB_AX]: {
+    displayName: 'AbsorbAx',
+    stats: { attack: 8, defence: 0, magic: 0 },
+  },
+  [WEAPONS.WOOD_BLADE_2]: {
+    displayName: 'WoodBlade2',
+    stats: { attack: 10, defence: 0, magic: 0 },
+  },
+  [WEAPONS.THATCHET]: {
+    displayName: 'Thatchet',
+    stats: { attack: 10, defence: 0, magic: 0 },
+  },
+  [WEAPONS.BLUE_SHOES]: {
+    displayName: 'BlueShoes',
+    stats: { attack: 2, defence: 4, magic: 6 },
+  },
+  [WEAPONS.AQUA_KNIFE]: {
+    displayName: 'AquaKnife',
+    stats: { attack: 10, defence: 2, magic: 0 },
+  },
+  [WEAPONS.FLOWERY_SCARF]: {
+    displayName: 'FloweryScarf',
+    stats: { attack: 70, defence: 70, magic: 70 },
+  },
+  [WEAPONS.BROKEN_SCARF]: {
+    displayName: 'BrokenScarf',
+    stats: { attack: 0, defence: 0, magic: 0 },
+  },
+  [WEAPONS.GILDED_ROSE]: {
+    displayName: 'GildedRose',
+    stats: { attack: 16, defence: 0, magic: 2 },
+  },
+  [WEAPONS.MISTLE_WP]: {
+    displayName: 'MistleWP',
+    stats: { attack: 6, defence: 0, magic: 2 },
+  },
 };

@@ -6,6 +6,7 @@ import KrisIcon from '@assets/deltarune/characters/kris.svg?react';
 
 export function PartyKris() {
   const allowAllElements = useUi((s) => s.ui.party.kris.allowAllElements);
+  const preserveCustomStats = useUi((s) => s.ui.party.kris.preserveCustomStats);
   const updateUi = useUi((s) => s.updateUi);
   const color = getCharacterColor(CHARACTERS.KRIS);
 
@@ -23,8 +24,12 @@ export function PartyKris() {
         </span>
       }
       allowAllElements={allowAllElements}
+      preserveCustomStats={preserveCustomStats}
       setAllowAllElements={(value) =>
         updateUi((ui) => (ui.party.kris.allowAllElements = value))
+      }
+      setPreserveCustomStats={(value) =>
+        updateUi((ui) => (ui.party.kris.preserveCustomStats = value))
       }
     />
   );

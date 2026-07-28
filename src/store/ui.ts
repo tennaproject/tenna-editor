@@ -4,7 +4,7 @@ import { immer } from 'zustand/middleware/immer';
 import { STORE_NAMESPACE } from './schema';
 import { createDebouncedJSONStorage } from 'zustand-debounce';
 
-export const UI_VERSION = 7;
+export const UI_VERSION = 8;
 
 export type UiLocale = 'en' | 'ko' | 'it';
 
@@ -25,15 +25,19 @@ export interface Ui {
     allowNonStandardParty: boolean;
     kris: {
       allowAllElements: boolean;
+      preserveCustomStats: boolean;
     };
     susie: {
       allowAllElements: boolean;
+      preserveCustomStats: boolean;
     };
     ralsei: {
       allowAllElements: boolean;
+      preserveCustomStats: boolean;
     };
     noelle: {
       allowAllElements: boolean;
+      preserveCustomStats: boolean;
     };
   };
   recruits: {
@@ -66,15 +70,19 @@ export const useUi = create<UiState>()(
           allowNonStandardParty: false,
           kris: {
             allowAllElements: false,
+            preserveCustomStats: false,
           },
           susie: {
             allowAllElements: false,
+            preserveCustomStats: false,
           },
           ralsei: {
             allowAllElements: false,
+            preserveCustomStats: false,
           },
           noelle: {
             allowAllElements: false,
+            preserveCustomStats: false,
           },
         },
         recruits: {
@@ -142,15 +150,19 @@ export const useUi = create<UiState>()(
                 allowNonStandardParty: allowNonStandardParty ?? false,
                 kris: {
                   allowAllElements: allowKrisAllElements ?? false,
+                  preserveCustomStats: false,
                 },
                 susie: {
                   allowAllElements: allowSusieAllElements ?? false,
+                  preserveCustomStats: false,
                 },
                 ralsei: {
                   allowAllElements: allowRalseiAllElements ?? false,
+                  preserveCustomStats: false,
                 },
                 noelle: {
                   allowAllElements: allowNoelleAllElements ?? false,
+                  preserveCustomStats: false,
                 },
               },
               recruits: {
@@ -196,6 +208,16 @@ export const useUi = create<UiState>()(
           const current = nextState as { ui: Partial<Ui> };
           if ((current.ui.locale as string) === 'ja') {
             current.ui.locale = 'en';
+          }
+        }
+
+        if (version < 8) {
+          const current = nextState as { ui: Partial<Ui> };
+          if (current.ui?.party) {
+            current.ui.party.kris.preserveCustomStats = false;
+            current.ui.party.susie.preserveCustomStats = false;
+            current.ui.party.ralsei.preserveCustomStats = false;
+            current.ui.party.noelle.preserveCustomStats = false;
           }
         }
 

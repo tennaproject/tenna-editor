@@ -21,3 +21,4 @@ export * from './format-date';
 export * from './flag-bitfields';
 export * from './flag-helpers';
 export * from './environment';
+export * from './character-stats';

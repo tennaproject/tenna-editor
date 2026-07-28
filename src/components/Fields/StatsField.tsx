@@ -1,6 +1,7 @@
 import { NumberField } from '@components';
 import type { CharacterIndex } from '@data';
 import { useSave } from '@store';
+import { getEffectiveCharacterStats } from '@utils';
 import { useTranslation } from '../../i18n';
 
 type StatsType = 'attack' | 'defence' | 'magic' | 'health' | 'maxHealth';
@@ -27,19 +28,37 @@ interface StatFieldProps {
   character: CharacterIndex;
 }
 
+function isCoreStat(type: StatsType): type is 'attack' | 'defence' | 'magic' {
+  return type === 'attack' || type === 'defence' || type === 'magic';
+}
+
 export function StatsField({ id, type, character }: StatFieldProps) {
   const { t } = useTranslation();
-  const current =
-    useSave((s) => {
-      if (s.save) {
-        return s.save.characters[character][type];
-      }
-    }) ?? 0;
+  const savedCharacter = useSave((s) => s.save?.characters[character]);
   const updateSave = useSave((s) => s.updateSave);
+  const coreStat = isCoreStat(type);
+  const equipmentBonus =
+    savedCharacter && coreStat
+      ? getEffectiveCharacterStats(savedCharacter)[type] - savedCharacter[type]
+      : 0;
+  const current = savedCharacter
+    ? coreStat
+      ? getEffectiveCharacterStats(savedCharacter)[type]
+      : savedCharacter[type]
+    : 0;
 
   function onChange(value: number) {
     updateSave((save) => {
-      save.characters[character][type] = value;
+      const savedCharacter = save.characters[character];
+
+      if (isCoreStat(type)) {
+        const equipmentBonus =
+          getEffectiveCharacterStats(savedCharacter)[type] -
+          savedCharacter[type];
+        savedCharacter[type] = value - equipmentBonus;
+      } else {
+        savedCharacter[type] = value;
+      }
     });
   }
 
@@ -50,8 +69,8 @@ export function StatsField({ id, type, character }: StatFieldProps) {
       title={t(STATS_TITLE_KEYS[type], STATS_TITLES[type])}
       value={current}
       placeholder={t('ui.stats.enterValue', 'Enter value...')}
-      min={0}
-      max={9999}
+      min={coreStat ? equipmentBonus : 0}
+      max={coreStat ? 9999 + equipmentBonus : 9999}
       onChange={onChange}
       fullWidth
     />

@@ -274,6 +274,7 @@ export function HomeOverview() {
               </div>
               <div className="flex-1 flex flex-col gap-3">
                 <MoneyField id="money" />
+                <MoneyField id="money" world="light" />
                 <FlagField id="points" flag={FLAGS.POINTS_CH3} />
                 <FlagField id="pink-coins" flag={FLAGS.PINK_COINS} />
                 <FlagField id="flowery-dollars" flag={FLAGS.FLOWERY_DOLLARS} />

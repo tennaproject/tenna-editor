@@ -393,6 +393,12 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.inventory.storage': 'Storage',
   'ui.party.allowNonCharacterEquipment':
     "Allow non-{name}'s weapons, armors and spells",
+  'ui.party.preserveCustomStats': 'Keep custom stats when changing equipment',
+  'ui.party.preserveCustomStatsDescription':
+    'When enabled, changing a weapon or armor keeps the existing AT, DF and MAG instead of recalculating them for the new equipment.',
+  'ui.party.resetStats': 'Reset stats',
+  'ui.party.resetStatsDescription':
+    'Reset stats restores the normal AT, DF and MAG for this chapter and the currently equipped items.',
   'ui.party.spells': 'Spells',
   'ui.party.unobtainableSpellsWarning':
     'Some of the spells are unobtainable in game. They are often unfinished, broken and can cause issues.',

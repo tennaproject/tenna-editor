@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Added copyable links for editor sections. Hold Shift to reveal link targets and copy controls. Opening a link scrolls to and highlights the requested section.
+- Added equipment stat metadata and automatic attack, defence, and magic recalculation when changing party loadouts, with controls to reset chapter defaults or preserve custom stats.
 
 ## [0.12.0] - 2026-07-18
 

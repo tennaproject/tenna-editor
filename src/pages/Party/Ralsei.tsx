@@ -6,6 +6,9 @@ import RalseiIcon from '@assets/deltarune/characters/ralsei.svg?react';
 
 export function PartyRalsei() {
   const allowAllElements = useUi((s) => s.ui.party.ralsei.allowAllElements);
+  const preserveCustomStats = useUi(
+    (s) => s.ui.party.ralsei.preserveCustomStats,
+  );
   const updateUi = useUi((s) => s.updateUi);
   const color = getCharacterColor(CHARACTERS.RALSEI);
 
@@ -23,8 +26,12 @@ export function PartyRalsei() {
         </span>
       }
       allowAllElements={allowAllElements}
+      preserveCustomStats={preserveCustomStats}
       setAllowAllElements={(value) =>
         updateUi((ui) => (ui.party.ralsei.allowAllElements = value))
+      }
+      setPreserveCustomStats={(value) =>
+        updateUi((ui) => (ui.party.ralsei.preserveCustomStats = value))
       }
     />
   );
