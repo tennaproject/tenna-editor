@@ -1,5 +1,5 @@
-import { NumberField } from '@components';
-import type { CharacterIndex } from '@data';
+import { EquipmentIcon, NumberField } from '@components';
+import { EQUIPMENT_STAT_ICONS, type CharacterIndex } from '@data';
 import { useSave } from '@store';
 import { getEffectiveCharacterStats } from '@utils';
 import { useTranslation } from '../../i18n';
@@ -67,6 +67,11 @@ export function StatsField({ id, type, character }: StatFieldProps) {
       id={id}
       className="flex-1"
       title={t(STATS_TITLE_KEYS[type], STATS_TITLES[type])}
+      titleIcon={
+        coreStat ? (
+          <EquipmentIcon icon={EQUIPMENT_STAT_ICONS[type]} />
+        ) : undefined
+      }
       value={current}
       placeholder={t('ui.stats.enterValue', 'Enter value...')}
       min={coreStat ? equipmentBonus : 0}

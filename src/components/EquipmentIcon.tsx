@@ -97,7 +97,10 @@ export function EquipmentIcon({ icon, className }: EquipmentIconProps) {
       src={EQUIPMENT_ICON_SOURCES[icon]}
       alt=""
       draggable={false}
-      className={mergeClass('block h-[24px] w-[20px] [image-rendering:pixelated]', className)}
+      className={mergeClass(
+        'block h-[24px] w-[20px] [image-rendering:pixelated]',
+        className,
+      )}
     />
   );
 }

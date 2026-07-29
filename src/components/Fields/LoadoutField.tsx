@@ -7,6 +7,7 @@ import {
 } from '@components';
 import {
   EQUIPMENT_EFFECTS_META,
+  EQUIPMENT_STAT_ICONS,
   type CharacterIndex,
   type WeaponIndex,
   type ArmorIndex,
@@ -28,9 +29,15 @@ import {
   translateMeta,
   useTranslation,
 } from '../../i18n';
-import { syncEquipmentStats as syncStoredEquipmentStats } from '@utils';
+import {
+  getEquipmentStats,
+  mergeClass,
+  syncEquipmentStats as syncStoredEquipmentStats,
+} from '@utils';
 
 type LoadoutType = 'weapon' | 'primaryArmor' | 'secondaryArmor';
+
+const STAT_ORDER = ['attack', 'defence', 'magic'] as const;
 
 const LOADOUT_TITLES: Record<LoadoutType, string> = {
   weapon: 'Weapon',
@@ -157,7 +164,45 @@ export function LoadoutField({
       <EquipmentIcon icon={effectMeta.icon} />
       <span className="text-sm text-text-2">{effectName}</span>
     </InlineGroup>
+  ) : (
+    <InlineGroup>
+      <span className="text-sm text-text-3">(No ability.)</span>
+    </InlineGroup>
+  );
+
+  const stats = getEquipmentStats(type, current as WeaponIndex, chapter);
+  const statsRow = stats ? (
+    <InlineGroup className="gap-3 ml-auto">
+      {STAT_ORDER.map((stat) => {
+        const noStats = stats[stat] <= 0;
+
+        return (
+          <InlineGroup key={stat} className="gap-1">
+            <EquipmentIcon
+              icon={EQUIPMENT_STAT_ICONS[stat]}
+              className={noStats ? 'opacity-30' : undefined}
+            />
+            <span
+              className={mergeClass(
+                'text-base',
+                noStats ? 'text-text-3' : 'text-text-2',
+              )}
+            >
+              {stats[stat]}
+            </span>
+          </InlineGroup>
+        );
+      })}
+    </InlineGroup>
   ) : null;
+
+  const detailsRow =
+    effectRow || statsRow ? (
+      <InlineGroup className="gap-3">
+        {effectRow}
+        {statsRow}
+      </InlineGroup>
+    ) : null;
 
   return (
     <FieldWrapper id={id} className="w-full" title={label} label>
@@ -187,7 +232,7 @@ export function LoadoutField({
         items={selectItems}
         className="w-full"
       />
-      {effectRow}
+      {detailsRow}
     </FieldWrapper>
   );
 }

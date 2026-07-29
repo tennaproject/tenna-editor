@@ -1,4 +1,4 @@
-import type { BaseProperties } from '@types';
+import type { BaseProperties, EquipmentStats } from '@types';
 
 export const EQUIPMENT_ICONS = {
   EMPTY: 0,
@@ -45,6 +45,15 @@ export const EQUIPMENT_ICONS = {
 export type EquipmentIconIndex =
   (typeof EQUIPMENT_ICONS)[keyof typeof EQUIPMENT_ICONS];
 export type EquipmentIconName = keyof typeof EQUIPMENT_ICONS;
+
+export const EQUIPMENT_STAT_ICONS: Record<
+  keyof EquipmentStats,
+  EquipmentIconIndex
+> = {
+  attack: EQUIPMENT_ICONS.SWORD,
+  defence: EQUIPMENT_ICONS.ARMOR,
+  magic: EQUIPMENT_ICONS.MAGIC,
+};
 
 export const EQUIPMENT_EFFECTS = {
   // Weapons
