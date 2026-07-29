@@ -39,6 +39,13 @@ type LoadoutType = 'weapon' | 'primaryArmor' | 'secondaryArmor';
 
 const STAT_ORDER = ['attack', 'defence', 'magic'] as const;
 
+// Colours an option's stat relative to the same stat on the equipped item.
+function getComparisonClass(delta: number) {
+  if (delta > 0) return 'text-green';
+  if (delta < 0) return 'text-red';
+  return 'text-text-2';
+}
+
 const LOADOUT_TITLES: Record<LoadoutType, string> = {
   weapon: 'Weapon',
   primaryArmor: 'Armor I',
@@ -100,6 +107,31 @@ export function LoadoutField({
       ? overrides?.allowedWeapons
       : overrides?.allowedArmors;
 
+  const stats = getEquipmentStats(type, current as WeaponIndex, chapter);
+
+  const renderOptionStats = (value: number) => {
+    const optionStats = getEquipmentStats(type, value as WeaponIndex, chapter);
+    if (!optionStats) return undefined;
+
+    return (
+      <InlineGroup className="gap-2">
+        {STAT_ORDER.map((stat) => (
+          <InlineGroup key={stat} className="gap-1">
+            <EquipmentIcon icon={EQUIPMENT_STAT_ICONS[stat]} />
+            <span
+              className={mergeClass(
+                'text-sm',
+                getComparisonClass(optionStats[stat] - (stats?.[stat] ?? 0)),
+              )}
+            >
+              {optionStats[stat]}
+            </span>
+          </InlineGroup>
+        ))}
+      </InlineGroup>
+    );
+  };
+
   const baseItems = getChapterLoadoutOptions(
     chapter,
     optionType,
@@ -109,6 +141,7 @@ export function LoadoutField({
   ).map((item) => ({
     ...item,
     icon: renderEquipmentIcon(getElementMeta(item.value as number)?.icon),
+    trailing: renderOptionStats(item.value as number),
     label: translateMeta(
       optionType === 'weapon'
         ? getWeaponTranslationKeyPrefix(item.value as number)
@@ -125,6 +158,7 @@ export function LoadoutField({
       {
         id: `${current}`,
         icon: renderEquipmentIcon(isExisting ? elementMeta.icon : undefined),
+        trailing: renderOptionStats(current as number),
         label: isExisting
           ? translateMeta(
               optionType === 'weapon'
@@ -170,7 +204,6 @@ export function LoadoutField({
     </InlineGroup>
   );
 
-  const stats = getEquipmentStats(type, current as WeaponIndex, chapter);
   const statsRow = stats ? (
     <InlineGroup className="gap-3 ml-auto">
       {STAT_ORDER.map((stat) => {

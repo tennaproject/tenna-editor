@@ -84,7 +84,7 @@ export function LightWorldRoot() {
                 <GlowBar bg={THEME.bg} shadow={THEME.shadow} />
               </Card>
             </Section>
-            <div className="flex flex-col flex-7/16 gap-3 lg:min-h-[700px] min-h-[700px]">
+            <div className="flex flex-col flex-6/16 gap-3 lg:min-h-[700px] min-h-[700px]">
               <Section id="items" className="flex flex-1">
                 <Card className="flex-1 p-6 flex gap-3 flex-col">
                   <Section>

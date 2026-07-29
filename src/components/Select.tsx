@@ -10,6 +10,7 @@ export interface SelectItem {
   id: string;
   label: string;
   icon?: ReactNode;
+  trailing?: ReactNode;
   value?: unknown;
   invalid?: boolean;
 }
@@ -358,6 +359,11 @@ export function Select({
                     <span className="break-words flex-1 min-w-0">
                       {item.label}
                     </span>
+                    {item.trailing ? (
+                      <span className="shrink-0" aria-hidden>
+                        {item.trailing}
+                      </span>
+                    ) : null}
                     <div
                       className="ml-2 text-xs text-red flex items-center gap-1 font-bold"
                       aria-hidden={!item.invalid}
