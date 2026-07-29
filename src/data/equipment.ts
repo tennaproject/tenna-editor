@@ -55,6 +55,12 @@ export const EQUIPMENT_STAT_ICONS: Record<
   magic: EQUIPMENT_ICONS.MAGIC,
 };
 
+export const EQUIPMENT_STAT_ORDER = [
+  'attack',
+  'defence',
+  'magic',
+] as const satisfies readonly (keyof EquipmentStats)[];
+
 export const EQUIPMENT_ABILITIES = {
   // Weapons
   SPOOKINESS_UP: 0,

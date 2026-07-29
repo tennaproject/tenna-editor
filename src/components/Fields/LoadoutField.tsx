@@ -8,6 +8,7 @@ import {
 import {
   EQUIPMENT_ABILITIES_META,
   EQUIPMENT_STAT_ICONS,
+  EQUIPMENT_STAT_ORDER,
   type CharacterIndex,
   type WeaponIndex,
   type ArmorIndex,
@@ -36,8 +37,6 @@ import {
 } from '@utils';
 
 type LoadoutType = 'weapon' | 'primaryArmor' | 'secondaryArmor';
-
-const STAT_ORDER = ['attack', 'defence', 'magic'] as const;
 
 // Colours an option's stat relative to the same stat on the equipped item.
 function getComparisonClass(delta: number) {
@@ -115,7 +114,7 @@ export function LoadoutField({
 
     return (
       <InlineGroup className="gap-2">
-        {STAT_ORDER.map((stat) => (
+        {EQUIPMENT_STAT_ORDER.map((stat) => (
           <InlineGroup key={stat} className="gap-1">
             <EquipmentIcon icon={EQUIPMENT_STAT_ICONS[stat]} />
             <span
@@ -206,7 +205,7 @@ export function LoadoutField({
 
   const statsRow = stats ? (
     <InlineGroup className="gap-3 ml-auto">
-      {STAT_ORDER.map((stat) => {
+      {EQUIPMENT_STAT_ORDER.map((stat) => {
         const noStats = stats[stat] <= 0;
 
         return (

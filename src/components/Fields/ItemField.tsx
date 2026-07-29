@@ -4,9 +4,13 @@ import {
   Select,
   type SelectItem,
   EquipmentIcon,
+  InlineGroup,
 } from '@components';
 import {
+  EQUIPMENT_STAT_ICONS,
+  EQUIPMENT_STAT_ORDER,
   type ArmorIndex,
+  type ChapterIndex,
   type ConsumableIndex,
   type EquipmentIconIndex,
   type KeyItemIndex,
@@ -32,6 +36,7 @@ import {
   phoneContactHelpers,
   weaponHelpers,
 } from '@utils/data-helpers';
+import { getEquipmentStats, mergeClass } from '@utils';
 
 export type ItemType =
   | 'consumable'
@@ -109,6 +114,46 @@ function renderEquipmentIcon(icon: EquipmentIconIndex | undefined) {
   return icon !== undefined ? <EquipmentIcon icon={icon} /> : undefined;
 }
 
+function renderEquipmentStats(
+  type: ItemType,
+  id: number,
+  chapter: ChapterIndex,
+) {
+  if (type !== 'weapon' && type !== 'armor') return undefined;
+
+  const stats = getEquipmentStats(
+    type === 'weapon' ? 'weapon' : 'primaryArmor',
+    id as WeaponIndex,
+    chapter,
+  );
+  if (!stats) return undefined;
+
+  return (
+    <InlineGroup className="gap-2">
+      {EQUIPMENT_STAT_ORDER.map((stat) => {
+        const noStats = stats[stat] <= 0;
+
+        return (
+          <InlineGroup key={stat} className="gap-1">
+            <EquipmentIcon
+              icon={EQUIPMENT_STAT_ICONS[stat]}
+              className={noStats ? 'opacity-30' : undefined}
+            />
+            <span
+              className={mergeClass(
+                'text-sm',
+                noStats ? 'text-text-3' : 'text-text-2',
+              )}
+            >
+              {stats[stat]}
+            </span>
+          </InlineGroup>
+        );
+      })}
+    </InlineGroup>
+  );
+}
+
 function getPlaceholder(type: ItemType): string {
   switch (type) {
     case 'consumable':
@@ -154,6 +199,7 @@ export function ItemField({ type, slot, label }: ItemFieldProps) {
   const baseItems = getChapterItemOptions(chapter, type).map((item) => ({
     ...item,
     icon: renderEquipmentIcon(getIcon(type, item.value as number)),
+    trailing: renderEquipmentStats(type, item.value as number, chapter),
     label: getTranslatedDisplayName(type, item.value as number, item.label, t),
   }));
   const chapterContent = chapterHelpers.getById(chapter).content;
@@ -196,6 +242,7 @@ export function ItemField({ type, slot, label }: ItemFieldProps) {
       {
         id: `${currentValue}`,
         icon: renderEquipmentIcon(getIcon(type, currentValue)),
+        trailing: renderEquipmentStats(type, currentValue, chapter),
         label: metaDisplay || t('ui.common.unknown', 'Unknown'),
         value: currentValue,
         invalid: true,
