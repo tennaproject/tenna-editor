@@ -282,6 +282,7 @@ export function Select({
           placeholder={translatedPlaceholder}
           data-lpignore="true"
           autoComplete="off"
+          spellCheck={false}
         />
         <div
           className="absolute right-9 top-1/2 -translate-y-1/2 text-xs text-red font-bold flex items-center gap-1 pointer-events-none"
