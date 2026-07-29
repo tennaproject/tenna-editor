@@ -1,6 +1,7 @@
 import {
   Card,
   Checkbox,
+  EquipmentIcon,
   Heading,
   HelpTip,
   InlineGroup,
@@ -8,15 +9,23 @@ import {
   Select,
   GlowBar,
 } from '@components';
-import { CHAPTERS, CHARACTERS, type CharacterIndex } from '@data';
+import {
+  CHAPTERS,
+  CHARACTERS,
+  type ArmorIndex,
+  type CharacterIndex,
+  type WeaponIndex,
+} from '@data';
 import { useCharacterOverrideInputs } from '@hooks';
 import { useSave, useUi } from '@store';
 import {
+  armorHelpers,
   chapterHelpers,
   characterHelpers,
   getPartySlotBaseOptions,
   mergeClass,
   getCharacterColor,
+  weaponHelpers,
 } from '@utils';
 import type { ComponentType, SVGProps } from 'react';
 import KrisIcon from '@assets/deltarune/characters/kris.svg?react';
@@ -25,8 +34,10 @@ import RalseiIcon from '@assets/deltarune/characters/ralsei.svg?react';
 import NoelleIcon from '@assets/deltarune/characters/noelle.svg?react';
 import {
   formatTranslation,
+  getArmorTranslationKeyPrefix,
   getCharacterTitleTranslationKeyPrefix,
   getCharacterTranslationKeyPrefix,
+  getWeaponTranslationKeyPrefix,
   translateMeta,
   useTranslation,
 } from '../../i18n';
@@ -39,6 +50,36 @@ const BATTLE_ICONS: Partial<
   [CHARACTERS.RALSEI]: RalseiIcon,
   [CHARACTERS.NOELLE]: NoelleIcon,
 };
+
+interface EquipmentRowProps {
+  type: 'weapon' | 'armor';
+  id: number;
+}
+
+function EquipmentRow({ type, id }: EquipmentRowProps) {
+  const { t } = useTranslation();
+
+  const meta =
+    type === 'weapon'
+      ? weaponHelpers.getById(id as WeaponIndex)
+      : armorHelpers.getById(id as ArmorIndex);
+  const keyPrefix =
+    type === 'weapon'
+      ? getWeaponTranslationKeyPrefix(id)
+      : getArmorTranslationKeyPrefix(id);
+  const displayName = translateMeta(
+    keyPrefix,
+    { displayName: meta?.displayName ?? t('ui.common.unknown', 'Unknown') },
+    t,
+  ).displayName;
+
+  return (
+    <InlineGroup className="gap-1">
+      {meta?.icon !== undefined && <EquipmentIcon icon={meta.icon} />}
+      <span className="text-text-2 text-sm">{displayName}</span>
+    </InlineGroup>
+  );
+}
 
 interface CharacterCardProps {
   slot: number;
@@ -54,6 +95,7 @@ function CharacterCard({
   const { t } = useTranslation();
   const party = useSave((s) => s.save?.party) as CharacterIndex[] | undefined;
   const setField = useSave((s) => s.setSaveField);
+  const savedCharacter = useSave((s) => s.save?.characters[character]);
   const { chapter, plot, flags, hasEgg, weapon, room } =
     useCharacterOverrideInputs(character);
 
@@ -214,6 +256,23 @@ function CharacterCard({
             <p className="text-text-2 text-sm text-center max-w-xs">
               {titleDescription}
             </p>
+            <div
+              className={mergeClass(
+                'flex flex-col items-left mt-4',
+                !character || !isExisting ? 'opacity-0' : '',
+              )}
+              aria-hidden={!character || !isExisting}
+            >
+              <EquipmentRow type="weapon" id={savedCharacter?.weapon ?? 0} />
+              <EquipmentRow
+                type="armor"
+                id={savedCharacter?.primaryArmor ?? 0}
+              />
+              <EquipmentRow
+                type="armor"
+                id={savedCharacter?.secondaryArmor ?? 0}
+              />
+            </div>
           </div>
 
           <Select
