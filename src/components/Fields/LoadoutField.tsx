@@ -6,7 +6,7 @@ import {
   InlineGroup,
 } from '@components';
 import {
-  EQUIPMENT_EFFECTS_META,
+  EQUIPMENT_ABILITIES_META,
   EQUIPMENT_STAT_ICONS,
   type CharacterIndex,
   type WeaponIndex,
@@ -24,7 +24,7 @@ import {
 } from '@utils/data-helpers';
 import {
   getArmorTranslationKeyPrefix,
-  getEquipmentEffectTranslationKeyPrefix,
+  getEquipmentAbilityTranslationKeyPrefix,
   getWeaponTranslationKeyPrefix,
   translateMeta,
   useTranslation,
@@ -149,20 +149,20 @@ export function LoadoutField({
   const placeholderFallback =
     optionType === 'weapon' ? 'Select a weapon...' : 'Select an armor...';
 
-  const effectId = isExisting ? elementMeta.effect : undefined;
-  const effectMeta =
-    effectId !== undefined ? EQUIPMENT_EFFECTS_META[effectId] : undefined;
-  const effectName = effectMeta
+  const abilityId = isExisting ? elementMeta.ability : undefined;
+  const abilityMeta =
+    abilityId !== undefined ? EQUIPMENT_ABILITIES_META[abilityId] : undefined;
+  const abilityName = abilityMeta
     ? translateMeta(
-        getEquipmentEffectTranslationKeyPrefix(effectId as number),
-        effectMeta,
+        getEquipmentAbilityTranslationKeyPrefix(abilityId as number),
+        abilityMeta,
         t,
       ).displayName
     : '';
-  const effectRow = effectMeta ? (
+  const abilityRow = abilityMeta ? (
     <InlineGroup>
-      <EquipmentIcon icon={effectMeta.icon} />
-      <span className="text-sm text-text-2">{effectName}</span>
+      <EquipmentIcon icon={abilityMeta.icon} />
+      <span className="text-sm text-text-2">{abilityName}</span>
     </InlineGroup>
   ) : (
     <InlineGroup>
@@ -197,9 +197,9 @@ export function LoadoutField({
   ) : null;
 
   const detailsRow =
-    effectRow || statsRow ? (
+    abilityRow || statsRow ? (
       <InlineGroup className="gap-3">
-        {effectRow}
+        {abilityRow}
         {statsRow}
       </InlineGroup>
     ) : null;

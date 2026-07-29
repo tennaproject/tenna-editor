@@ -1,7 +1,7 @@
 import type { BaseProperties, EquipmentStats, WithOverrides } from '@types';
 import type { ChapterIndex } from './chapters';
-import { EQUIPMENT_EFFECTS, EQUIPMENT_ICONS } from './equipment';
-import type { EquipmentEffectIndex, EquipmentIconIndex } from './equipment';
+import { EQUIPMENT_ABILITIES, EQUIPMENT_ICONS } from './equipment';
+import type { EquipmentAbilityIndex, EquipmentIconIndex } from './equipment';
 
 export const ARMORS = {
   EMPTY: 0,
@@ -57,7 +57,7 @@ interface ArmorProperties
     WithOverrides<ArmorProperties, { chapter: ChapterIndex }> {
   stats: EquipmentStats;
   icon?: EquipmentIconIndex;
-  effect?: EquipmentEffectIndex;
+  ability?: EquipmentAbilityIndex;
 }
 
 export const ARMORS_META: Record<ArmorIndex, ArmorProperties> = {
@@ -80,13 +80,13 @@ export const ARMORS_META: Record<ArmorIndex, ArmorProperties> = {
     displayName: 'Pink Ribbon',
     stats: { attack: 0, defence: 1, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
-    effect: EQUIPMENT_EFFECTS.GRAZE_AREA,
+    ability: EQUIPMENT_ABILITIES.GRAZE_AREA,
   },
   [ARMORS.WHITE_RIBBON]: {
     displayName: 'White Ribbon',
     stats: { attack: 0, defence: 2, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
-    effect: EQUIPMENT_EFFECTS.CUTENESS,
+    ability: EQUIPMENT_ABILITIES.CUTENESS,
   },
   [ARMORS.IRON_SHACKLE]: {
     displayName: 'Iron Shackle',
@@ -107,13 +107,13 @@ export const ARMORS_META: Record<ArmorIndex, ArmorProperties> = {
     displayName: 'Silver Card',
     stats: { attack: 0, defence: 2, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
-    effect: EQUIPMENT_EFFECTS.MONEY_5_UP,
+    ability: EQUIPMENT_ABILITIES.MONEY_5_UP,
   },
   [ARMORS.TWIN_RIBBON]: {
     displayName: 'TwinRibbon',
     stats: { attack: 0, defence: 3, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
-    effect: EQUIPMENT_EFFECTS.GRAZE_AREA,
+    ability: EQUIPMENT_ABILITIES.GRAZE_AREA,
   },
   [ARMORS.GLOW_WRIST]: {
     displayName: 'GlowWrist',
@@ -139,19 +139,19 @@ export const ARMORS_META: Record<ArmorIndex, ArmorProperties> = {
     displayName: 'Silver Watch',
     stats: { attack: 0, defence: 2, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
-    effect: EQUIPMENT_EFFECTS.GRAZE_TIME,
+    ability: EQUIPMENT_ABILITIES.GRAZE_TIME,
   },
   [ARMORS.TENSION_BOW]: {
     displayName: 'TensionBow',
     stats: { attack: 0, defence: 2, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
-    effect: EQUIPMENT_EFFECTS.TP_GAIN,
+    ability: EQUIPMENT_ABILITIES.TP_GAIN,
   },
   [ARMORS.MANNEQUIN]: {
     displayName: 'Mannequin',
     stats: { attack: 0, defence: 0, magic: 0 },
     icon: EQUIPMENT_ICONS.EMPTY,
-    effect: EQUIPMENT_EFFECTS.UNKNOWN_ARMOR,
+    ability: EQUIPMENT_ABILITIES.UNKNOWN_ARMOR,
   },
   // Sets an ability icon (ARROW_UP_RIGHT) but a blank ability string
   [ARMORS.DARK_GOLD_BAND]: {
@@ -163,13 +163,13 @@ export const ARMORS_META: Record<ArmorIndex, ArmorProperties> = {
     displayName: 'SkyMantle',
     stats: { attack: 0, defence: 1, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
-    effect: EQUIPMENT_EFFECTS.ELEC_HOLY,
+    ability: EQUIPMENT_ABILITIES.ELEC_HOLY,
   },
   [ARMORS.SPIKE_SHACKLE]: {
     displayName: 'SpikeShackle',
     stats: { attack: 3, defence: 1, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
-    effect: EQUIPMENT_EFFECTS.ATTACK_UP,
+    ability: EQUIPMENT_ABILITIES.ATTACK_UP,
   },
   [ARMORS.FRAYED_BOWTIE]: {
     displayName: 'FrayedBowtie',
@@ -180,7 +180,7 @@ export const ARMORS_META: Record<ArmorIndex, ArmorProperties> = {
     displayName: 'Dealmaker',
     stats: { attack: 0, defence: 5, magic: 5 },
     icon: EQUIPMENT_ICONS.ARMOR,
-    effect: EQUIPMENT_EFFECTS.MONEY_30_UP,
+    ability: EQUIPMENT_ABILITIES.MONEY_30_UP,
   },
   [ARMORS.ROYAL_PIN]: {
     displayName: 'RoyalPin',
@@ -191,7 +191,7 @@ export const ARMORS_META: Record<ArmorIndex, ArmorProperties> = {
     displayName: 'ShadowMantle',
     stats: { attack: 0, defence: 5, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
-    effect: EQUIPMENT_EFFECTS.DARK_STAR,
+    ability: EQUIPMENT_ABILITIES.DARK_STAR,
     getOverrides: ({ chapter }) => ({
       stats: { attack: 0, defence: chapter, magic: 0 },
     }),
@@ -200,7 +200,7 @@ export const ARMORS_META: Record<ArmorIndex, ArmorProperties> = {
     displayName: 'LodeStone',
     stats: { attack: 0, defence: 2, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
-    effect: EQUIPMENT_EFFECTS.TP_GAIN,
+    ability: EQUIPMENT_ABILITIES.TP_GAIN,
   },
   [ARMORS.GINGER_GUARD]: {
     displayName: 'GingerGuard',
@@ -211,7 +211,7 @@ export const ARMORS_META: Record<ArmorIndex, ArmorProperties> = {
     displayName: 'BlueRibbon',
     stats: { attack: 0, defence: 1, magic: 1 },
     icon: EQUIPMENT_ICONS.ARMOR,
-    effect: EQUIPMENT_EFFECTS.HEAL_UP,
+    ability: EQUIPMENT_ABILITIES.HEAL_UP,
   },
   [ARMORS.TENNA_TIE]: {
     displayName: 'TennaTie',
@@ -237,31 +237,31 @@ export const ARMORS_META: Record<ArmorIndex, ArmorProperties> = {
     displayName: 'PrincessRBN',
     stats: { attack: 2, defence: 4, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
-    effect: EQUIPMENT_EFFECTS.ELEGANCE,
+    ability: EQUIPMENT_ABILITIES.ELEGANCE,
   },
   [ARMORS.GOLD_WIDOW]: {
     displayName: 'GoldWidow',
     stats: { attack: 1, defence: 5, magic: 1 },
     icon: EQUIPMENT_ICONS.ARMOR,
-    effect: EQUIPMENT_EFFECTS.MONEY_10_DOWN,
+    ability: EQUIPMENT_ABILITIES.MONEY_10_DOWN,
   },
   [ARMORS.MONARCH_RBN]: {
     displayName: 'MonarchRBN',
     stats: { attack: 0, defence: 6, magic: 2 },
     icon: EQUIPMENT_ICONS.ARMOR,
-    effect: EQUIPMENT_EFFECTS.HAS_ANTENNA,
+    ability: EQUIPMENT_ABILITIES.HAS_ANTENNA,
   },
   [ARMORS.TRUE_TIE]: {
     displayName: 'TrueTie',
     stats: { attack: 1, defence: 5, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
-    effect: EQUIPMENT_EFFECTS.CAT_DEFEND,
+    ability: EQUIPMENT_ABILITIES.CAT_DEFEND,
   },
   [ARMORS.DOG_WIDOW]: {
     displayName: 'DogWidow',
     stats: { attack: 0, defence: 6, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
-    effect: EQUIPMENT_EFFECTS.MONEY_90_DOWN,
+    ability: EQUIPMENT_ABILITIES.MONEY_90_DOWN,
   },
   [ARMORS.RED_RIBBON]: {
     displayName: 'RedRibbon',
@@ -277,24 +277,24 @@ export const ARMORS_META: Record<ArmorIndex, ArmorProperties> = {
     displayName: 'SethSpecs',
     stats: { attack: 0, defence: 4, magic: 6 },
     icon: EQUIPMENT_ICONS.SETH,
-    effect: EQUIPMENT_EFFECTS.INV_TIME_UP,
+    ability: EQUIPMENT_ABILITIES.INV_TIME_UP,
   },
   [ARMORS.YELLOW_HAT]: {
     displayName: 'YellowHat',
     stats: { attack: 4, defence: 4, magic: 4 },
     icon: EQUIPMENT_ICONS.YELLOW,
-    effect: EQUIPMENT_EFFECTS.SKILL_20_PERCENT,
+    ability: EQUIPMENT_ABILITIES.SKILL_20_PERCENT,
   },
   [ARMORS.O_GLOVE]: {
     displayName: 'O.Glove',
     stats: { attack: 4, defence: 8, magic: 0 },
     icon: EQUIPMENT_ICONS.ORANGE,
-    effect: EQUIPMENT_EFFECTS.SCYTHE_TP_DOWN,
+    ability: EQUIPMENT_ABILITIES.SCYTHE_TP_DOWN,
   },
   [ARMORS.GREEN_APRON]: {
     displayName: 'GreenApron',
     stats: { attack: 0, defence: 7, magic: 0 },
     icon: EQUIPMENT_ICONS.GREEN,
-    effect: EQUIPMENT_EFFECTS.DEFEND_HEAL,
+    ability: EQUIPMENT_ABILITIES.DEFEND_HEAL,
   },
 };
