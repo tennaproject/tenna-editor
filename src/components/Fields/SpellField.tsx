@@ -1,4 +1,9 @@
-import { Select, type SelectItem, FieldWrapper } from '@components';
+import {
+  Select,
+  type SelectItem,
+  FieldWrapper,
+  SpellTooltipContent,
+} from '@components';
 import { SPELLS, type SpellIndex, type CharacterIndex } from '@data';
 import { useSave } from '@store';
 import { getChapterSpellOptions } from '@utils/chapter-options';
@@ -108,6 +113,11 @@ export function SpellField({
         }}
         items={selectItems}
         className="w-full"
+        tooltip={
+          isExisting && currentSpell !== SPELLS.EMPTY ? (
+            <SpellTooltipContent spell={currentSpell} character={character} />
+          ) : undefined
+        }
       />
     </FieldWrapper>
   );

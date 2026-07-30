@@ -23,6 +23,8 @@ import {
   PHONECONTACTS_META,
   ENEMIES,
   ENEMIES_META,
+  type ArmorIndex,
+  type WeaponIndex,
 } from '@data';
 import type { BaseProperties } from '@types';
 import type { ChapterIndex } from '../data/chapters';
@@ -72,14 +74,30 @@ export function getStaticSpellDisplayName(spell: SpellIndex) {
   return spellHelpers.getById(spell)?.displayName ?? String(spell);
 }
 
+export interface SpellEquipment {
+  weapon: WeaponIndex;
+  armors: readonly ArmorIndex[];
+}
+
+const EMPTY_SPELL_EQUIPMENT: SpellEquipment = {
+  weapon: WEAPONS.EMPTY,
+  armors: [],
+};
+
 export function getSpellDisplayName(
   spell: SpellIndex,
   chapter: ChapterIndex,
   plot: number,
   flags: readonly unknown[],
+  equipment: SpellEquipment = EMPTY_SPELL_EQUIPMENT,
 ) {
   const meta = spellHelpers.getById(spell);
-  const overrides = meta?.getOverrides?.({ chapter, plot, flags });
+  const overrides = meta?.getOverrides?.({
+    chapter,
+    plot,
+    flags,
+    ...equipment,
+  });
   return overrides?.displayName ?? getStaticSpellDisplayName(spell);
 }
 

@@ -12,7 +12,6 @@ import {
   type ChapterIndex,
   type CharacterIndex,
   type EquipmentAbilityIndex,
-  type EquipmentIconIndex,
   type WeaponIndex,
 } from '@data';
 import type { AbilityValues, EquipmentStats } from '@types';
@@ -24,6 +23,7 @@ import {
   weaponHelpers,
 } from '@utils/data-helpers';
 import { getCharacterColor } from '@utils/get-character-color';
+import { WIKI_ABILITIES_URL, getWikiUrl } from '@utils/wiki-url';
 import { mergeClass } from '@utils/merge-class';
 import {
   formatTranslation,
@@ -36,6 +36,7 @@ import {
 import { EquipmentIcon } from './EquipmentIcon';
 import { InlineGroup } from './InlineGroup';
 import { Tooltip } from './Tooltip';
+import { TooltipHeading } from './TooltipHeading';
 
 type EquipmentType = 'weapon' | 'armor';
 
@@ -133,37 +134,6 @@ interface EquipmentAbilityTooltipProps {
   children: ReactNode;
   className?: string;
   focusable?: boolean;
-}
-
-const WIKI_BASE = 'https://deltarune.wiki/w/';
-
-// Abilities have no pages of their own, only a section on the Equipment page.
-const WIKI_ABILITIES_URL = `${WIKI_BASE}Equipment#Abilities`;
-
-function getWikiUrl(displayName: string) {
-  return `${WIKI_BASE}${encodeURIComponent(displayName.trim().replace(/\s+/g, '_'))}`;
-}
-
-interface TooltipHeadingProps {
-  icon?: EquipmentIconIndex;
-  name: string;
-  href: string;
-}
-
-function TooltipHeading({ icon, name, href }: TooltipHeadingProps) {
-  return (
-    <InlineGroup className="gap-1">
-      {icon !== undefined && <EquipmentIcon icon={icon} />}
-      <a
-        href={href}
-        target="_blank"
-        rel="noreferrer noopener"
-        className="text-sm text-text-1 underline hover:text-text-2"
-      >
-        {name}
-      </a>
-    </InlineGroup>
-  );
 }
 
 function resolveAbility(
