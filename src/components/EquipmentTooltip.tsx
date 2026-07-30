@@ -135,16 +135,33 @@ interface EquipmentAbilityTooltipProps {
   focusable?: boolean;
 }
 
+const WIKI_BASE = 'https://deltarune.wiki/w/';
+
+// Abilities have no pages of their own, only a section on the Equipment page.
+const WIKI_ABILITIES_URL = `${WIKI_BASE}Equipment#Abilities`;
+
+function getWikiUrl(displayName: string) {
+  return `${WIKI_BASE}${encodeURIComponent(displayName.trim().replace(/\s+/g, '_'))}`;
+}
+
 interface TooltipHeadingProps {
   icon?: EquipmentIconIndex;
   name: string;
+  href: string;
 }
 
-function TooltipHeading({ icon, name }: TooltipHeadingProps) {
+function TooltipHeading({ icon, name, href }: TooltipHeadingProps) {
   return (
     <InlineGroup className="gap-1">
       {icon !== undefined && <EquipmentIcon icon={icon} />}
-      <span className="text-sm text-text-1">{name}</span>
+      <a
+        href={href}
+        target="_blank"
+        rel="noreferrer noopener"
+        className="text-sm text-text-1 underline hover:text-text-2"
+      >
+        {name}
+      </a>
     </InlineGroup>
   );
 }
@@ -230,7 +247,11 @@ export function EquipmentTooltipContent({
     <div className="flex flex-col gap-2">
       <div className="flex justify-between items-start gap-3">
         <div className="flex flex-col gap-2">
-          <TooltipHeading icon={meta.icon} name={translated.displayName} />
+          <TooltipHeading
+            icon={meta.icon}
+            name={translated.displayName}
+            href={getWikiUrl(meta.displayName)}
+          />
 
           {ability ? (
             <InlineGroup className="gap-1">
@@ -239,7 +260,7 @@ export function EquipmentTooltipContent({
             </InlineGroup>
           ) : (
             <span className="text-sm text-text-3">
-              {t('ui.tooltip.noAbility', 'No ability.')}
+              {t('ui.tooltip.noAbility', '(No ability.)')}
             </span>
           )}
         </div>
@@ -318,7 +339,11 @@ export function EquipmentAbilityTooltip({
   // No tooltips for abilities without description
   const content = resolved?.description ? (
     <div className="flex flex-col gap-2">
-      <TooltipHeading icon={resolved.meta.icon} name={resolved.displayName} />
+      <TooltipHeading
+        icon={resolved.meta.icon}
+        name={resolved.displayName}
+        href={WIKI_ABILITIES_URL}
+      />
       {renderDescription(resolved.description, t)}
     </div>
   ) : undefined;

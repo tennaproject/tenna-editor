@@ -4,6 +4,7 @@ import {
   Select,
   type SelectItem,
   EquipmentIcon,
+  EquipmentTooltipContent,
   InlineGroup,
 } from '@components';
 import {
@@ -253,6 +254,15 @@ export function ItemField({ type, slot, label }: ItemFieldProps) {
   const selectedItem =
     selectItems.find((item) => item.value === currentValue) ?? null;
 
+  const equipmentMeta =
+    currentValue === 0
+      ? undefined
+      : type === 'weapon'
+        ? weaponHelpers.getById(currentValue as WeaponIndex)
+        : type === 'armor'
+          ? armorHelpers.getById(currentValue as ArmorIndex)
+          : undefined;
+
   return (
     <Section id={`${type}s-slot${slot}`} className="w-full">
       <TextLabel>
@@ -289,6 +299,14 @@ export function ItemField({ type, slot, label }: ItemFieldProps) {
         }}
         items={selectItems}
         className="w-full"
+        tooltip={
+          equipmentMeta?.displayName ? (
+            <EquipmentTooltipContent
+              type={type as 'weapon' | 'armor'}
+              id={currentValue}
+            />
+          ) : undefined
+        }
       />
     </Section>
   );

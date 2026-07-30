@@ -278,7 +278,7 @@ export function LoadoutField({
         items={selectItems}
         className="w-full"
         tooltip={
-          isExisting ? (
+          isExisting && current !== 0 ? (
             <EquipmentTooltipContent type={optionType} id={current as number} />
           ) : undefined
         }
