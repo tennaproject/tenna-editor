@@ -4,6 +4,8 @@ import {
   FieldWrapper,
   EquipmentIcon,
   InlineGroup,
+  EquipmentTooltipContent,
+  EquipmentAbilityTooltip,
 } from '@components';
 import {
   EQUIPMENT_ABILITIES_META,
@@ -94,7 +96,10 @@ export function LoadoutField({
       ? weaponHelpers.getById(value as WeaponIndex)
       : armorHelpers.getById(value as ArmorIndex);
 
-  const elementMeta = getElementMeta(current as number);
+  const baseElementMeta = getElementMeta(current as number);
+  const elementMeta = baseElementMeta
+    ? { ...baseElementMeta, ...baseElementMeta.getOverrides?.({ chapter }) }
+    : baseElementMeta;
   const isExisting = !!(
     elementMeta && (elementMeta as { displayName?: string }).displayName
   );
@@ -183,8 +188,12 @@ export function LoadoutField({
     optionType === 'weapon' ? 'Select a weapon...' : 'Select an armor...';
 
   const abilityId = isExisting ? elementMeta.ability : undefined;
-  const abilityMeta =
+  const abilityBase =
     abilityId !== undefined ? EQUIPMENT_ABILITIES_META[abilityId] : undefined;
+  // same with the tooltip, which resolves chapter overrides as well.
+  const abilityMeta = abilityBase
+    ? { ...abilityBase, ...abilityBase.getOverrides?.({ chapter }) }
+    : undefined;
   const abilityName = abilityMeta
     ? translateMeta(
         getEquipmentAbilityTranslationKeyPrefix(abilityId as number),
@@ -193,10 +202,15 @@ export function LoadoutField({
       ).displayName
     : '';
   const abilityRow = abilityMeta ? (
-    <InlineGroup>
-      <EquipmentIcon icon={abilityMeta.icon} />
-      <span className="text-sm text-text-2">{abilityName}</span>
-    </InlineGroup>
+    <EquipmentAbilityTooltip
+      ability={abilityId}
+      values={isExisting ? elementMeta.abilityValues : undefined}
+    >
+      <InlineGroup>
+        <EquipmentIcon icon={abilityMeta.icon} />
+        <span className="text-sm text-text-2">{abilityName}</span>
+      </InlineGroup>
+    </EquipmentAbilityTooltip>
   ) : (
     <InlineGroup>
       <span className="text-sm text-text-3">(No ability.)</span>
@@ -263,6 +277,11 @@ export function LoadoutField({
         }}
         items={selectItems}
         className="w-full"
+        tooltip={
+          isExisting ? (
+            <EquipmentTooltipContent type={optionType} id={current as number} />
+          ) : undefined
+        }
       />
       {detailsRow}
     </FieldWrapper>

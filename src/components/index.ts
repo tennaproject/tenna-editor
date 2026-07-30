@@ -34,6 +34,8 @@ export * from './ThrashFit';
 export * from './CharacterHeader';
 export * from './CharacterPage';
 export * from './EquipmentIcon';
+export * from './EquipmentTooltip';
+export * from './Tooltip';
 export * from './FieldWrapper';
 export * from './InventoryPage';
 export * from './Link';

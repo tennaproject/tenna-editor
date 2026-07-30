@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
 import { mergeClass } from '@utils/merge-class';
 import { useTranslation } from '../i18n';
+import { Tooltip } from './Tooltip';
 
 export interface SelectItem {
   id: string;
@@ -24,6 +25,7 @@ interface SelectProps {
   selectedItem?: SelectItem | null;
   className?: string;
   strict?: boolean;
+  tooltip?: ReactNode;
 }
 
 export function Select({
@@ -35,6 +37,7 @@ export function Select({
   selectedItem = null,
   className = '',
   strict = true,
+  tooltip,
 }: SelectProps) {
   const { t } = useTranslation();
   const translatedPlaceholder =
@@ -248,66 +251,72 @@ export function Select({
           {label}
         </label>
       )}
-      <div className="relative w-full h-10 bg-surface-3 hover:bg-surface-3-hover motion-reduce:transition-none transition-all duration-200 border border-border">
-        {selectedItem?.icon ? (
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
-            {selectedItem.icon}
-          </span>
-        ) : null}
-        <input
-          {...getInputProps({
-            ref: inputRef,
-            onFocus: (event) => {
-              computePosition();
-              if (isShowingSelectedValue) setInputItems(items);
-              selectInputValue(event.currentTarget);
-            },
-            onMouseUp: (event) => {
-              if (!preserveSelectionOnMouseUpRef.current) return;
-              event.preventDefault();
-              preserveSelectionOnMouseUpRef.current = false;
-            },
-            onClick: (event) => {
-              selectInputValue(event.currentTarget);
-            },
-          })}
-          type="search"
-          className={mergeClass(
-            'w-full h-full px-3 pr-10 bg-transparent border-none outline-none placeholder:text-text-2 focus:outline-none focus:ring-1 motion-reduce:transition-colors transition-colors focus:ring-text-3 selection:bg-surface-3',
-            selectedItem?.icon && 'pl-14',
-            selectedItem?.label === 'Empty'
-              ? 'text-text-2 selection:text-text-2'
-              : 'text-text-1 selection:text-text-1',
-          )}
-          placeholder={translatedPlaceholder}
-          data-lpignore="true"
-          autoComplete="off"
-          spellCheck={false}
-        />
-        <div
-          className="absolute right-9 top-1/2 -translate-y-1/2 text-xs text-red font-bold flex items-center gap-1 pointer-events-none"
-          aria-hidden={!selectedItem?.invalid}
-        >
-          {selectedItem?.invalid ? (
-            <span className="h-5 w-5">
-              <WarningIcon />
+      <Tooltip
+        content={isOpen ? undefined : tooltip}
+        focusable={false}
+        className="w-full"
+      >
+        <div className="relative w-full h-10 bg-surface-3 hover:bg-surface-3-hover motion-reduce:transition-none transition-all duration-200 border border-border">
+          {selectedItem?.icon ? (
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
+              {selectedItem.icon}
             </span>
           ) : null}
-          {selectedItem?.invalid ? t('ui.common.invalid', 'Invalid') : ''}
+          <input
+            {...getInputProps({
+              ref: inputRef,
+              onFocus: (event) => {
+                computePosition();
+                if (isShowingSelectedValue) setInputItems(items);
+                selectInputValue(event.currentTarget);
+              },
+              onMouseUp: (event) => {
+                if (!preserveSelectionOnMouseUpRef.current) return;
+                event.preventDefault();
+                preserveSelectionOnMouseUpRef.current = false;
+              },
+              onClick: (event) => {
+                selectInputValue(event.currentTarget);
+              },
+            })}
+            type="search"
+            className={mergeClass(
+              'w-full h-full px-3 pr-10 bg-transparent border-none outline-none placeholder:text-text-2 focus:outline-none focus:ring-1 motion-reduce:transition-colors transition-colors focus:ring-text-3 selection:bg-surface-3',
+              selectedItem?.icon && 'pl-14',
+              selectedItem?.label === 'Empty'
+                ? 'text-text-2 selection:text-text-2'
+                : 'text-text-1 selection:text-text-1',
+            )}
+            placeholder={translatedPlaceholder}
+            data-lpignore="true"
+            autoComplete="off"
+            spellCheck={false}
+          />
+          <div
+            className="absolute right-9 top-1/2 -translate-y-1/2 text-xs text-red font-bold flex items-center gap-1 pointer-events-none"
+            aria-hidden={!selectedItem?.invalid}
+          >
+            {selectedItem?.invalid ? (
+              <span className="h-5 w-5">
+                <WarningIcon />
+              </span>
+            ) : null}
+            {selectedItem?.invalid ? t('ui.common.invalid', 'Invalid') : ''}
+          </div>
+          <button
+            {...getToggleButtonProps({
+              onClick: () => {
+                computePosition();
+                if (isShowingSelectedValue) setInputItems(items);
+              },
+            })}
+            className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center text-text-2 "
+            type="button"
+          >
+            <ChevronDownIcon />
+          </button>
         </div>
-        <button
-          {...getToggleButtonProps({
-            onClick: () => {
-              computePosition();
-              if (isShowingSelectedValue) setInputItems(items);
-            },
-          })}
-          className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center text-text-2 "
-          type="button"
-        >
-          <ChevronDownIcon />
-        </button>
-      </div>
+      </Tooltip>
 
       <ul
         {...getMenuProps({}, { suppressRefError: true })}

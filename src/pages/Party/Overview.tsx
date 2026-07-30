@@ -2,6 +2,7 @@ import {
   Card,
   Checkbox,
   EquipmentIcon,
+  EquipmentTooltip,
   Heading,
   HelpTip,
   InlineGroup,
@@ -74,10 +75,12 @@ function EquipmentRow({ type, id }: EquipmentRowProps) {
   ).displayName;
 
   return (
-    <InlineGroup className="gap-1">
-      {meta?.icon !== undefined && <EquipmentIcon icon={meta.icon} />}
-      <span className="text-text-2 text-sm">{displayName}</span>
-    </InlineGroup>
+    <EquipmentTooltip type={type} id={id}>
+      <InlineGroup className="gap-1">
+        {meta?.icon !== undefined && <EquipmentIcon icon={meta.icon} />}
+        <span className="text-text-2 text-sm">{displayName}</span>
+      </InlineGroup>
+    </EquipmentTooltip>
   );
 }
 
