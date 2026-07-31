@@ -184,10 +184,7 @@ export function CharacterPage({
           </Card>
         </Section>
 
-        <Section
-          id="spells"
-          className="flex min-h-175 flex-7/16 lg:min-h-175"
-        >
+        <Section id="spells" className="flex min-h-175 flex-7/16 lg:min-h-175">
           <Card className="flex flex-1 flex-col gap-3 p-6">
             <Heading level={3}>{t('ui.party.spells', 'Spells')}</Heading>
             <div className="text-text-2">
