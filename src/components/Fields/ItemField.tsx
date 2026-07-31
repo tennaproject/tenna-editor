@@ -3,6 +3,7 @@ import {
   TextLabel,
   Select,
   type SelectItem,
+  ConsumableTooltipContent,
   EquipmentIcon,
   EquipmentTooltipContent,
   InlineGroup,
@@ -19,6 +20,7 @@ import {
   type PhoneContactIndex,
   type WeaponIndex,
 } from '@data';
+import type { SaveSlot } from '@types';
 import { useSaveItemSlot } from '@hooks';
 import { useSave } from '@store';
 import { getChapterItemOptions } from '@utils/chapter-options';
@@ -32,6 +34,7 @@ import {
   chapterHelpers,
   consumableHelpers,
   formatItemLabel,
+  resolveChapterMeta,
   keyItemHelpers,
   lightWorldItemHelpers,
   phoneContactHelpers,
@@ -54,12 +57,21 @@ interface ItemFieldProps {
   label?: string;
 }
 
-function getDisplayName(type: ItemType, id: number): string {
+// Chapter-aware, currently just for Dark Candy <-> Darker Candy
+function getDisplayName(
+  type: ItemType,
+  id: number,
+  chapter: ChapterIndex,
+  saveSlot: SaveSlot,
+): string {
   switch (type) {
     case 'consumable':
     case 'storage':
       return formatItemLabel(
-        consumableHelpers.getById(id as ConsumableIndex),
+        resolveChapterMeta(consumableHelpers.getById(id as ConsumableIndex), {
+          chapter,
+          saveSlot,
+        }),
         'Unknown',
       );
     case 'keyItem':
@@ -69,11 +81,18 @@ function getDisplayName(type: ItemType, id: number): string {
       );
     case 'weapon':
       return formatItemLabel(
-        weaponHelpers.getById(id as WeaponIndex),
+        resolveChapterMeta(weaponHelpers.getById(id as WeaponIndex), {
+          chapter,
+        }),
         'Unknown',
       );
     case 'armor':
-      return formatItemLabel(armorHelpers.getById(id as ArmorIndex), 'Unknown');
+      return formatItemLabel(
+        resolveChapterMeta(armorHelpers.getById(id as ArmorIndex), {
+          chapter,
+        }),
+        'Unknown',
+      );
     case 'lightWorldItem':
       return formatItemLabel(
         lightWorldItemHelpers.getById(id as LightWorldItemIndex),
@@ -192,17 +211,25 @@ function getPlaceholderKey(type: ItemType): string {
 export function ItemField({ type, slot, label }: ItemFieldProps) {
   const { t } = useTranslation();
   const chapter = useSave((s) => s.save?.meta.chapter ?? 1);
+  const saveSlot = useSave((s) => s.save?.meta.slot ?? 0);
   const updateSave = useSave((s) => s.updateSave);
   const currentValue = useSaveItemSlot(type, slot);
 
   const selectLabel = label ?? t('ui.field.slot', 'Slot');
   const placeholder = t(getPlaceholderKey(type), getPlaceholder(type));
-  const baseItems = getChapterItemOptions(chapter, type).map((item) => ({
-    ...item,
-    icon: renderEquipmentIcon(getIcon(type, item.value as number)),
-    trailing: renderEquipmentStats(type, item.value as number, chapter),
-    label: getTranslatedDisplayName(type, item.value as number, item.label, t),
-  }));
+  const baseItems = getChapterItemOptions(chapter, type, saveSlot).map(
+    (item) => ({
+      ...item,
+      icon: renderEquipmentIcon(getIcon(type, item.value as number)),
+      trailing: renderEquipmentStats(type, item.value as number, chapter),
+      label: getTranslatedDisplayName(
+        type,
+        item.value as number,
+        item.label,
+        t,
+      ),
+    }),
+  );
   const chapterContent = chapterHelpers.getById(chapter).content;
 
   let availableSet: Set<number>;
@@ -231,7 +258,7 @@ export function ItemField({ type, slot, label }: ItemFieldProps) {
   const metaDisplay = getTranslatedDisplayName(
     type,
     currentValue,
-    getDisplayName(type, currentValue),
+    getDisplayName(type, currentValue, chapter, saveSlot),
     t,
   );
   const isValid = !!metaDisplay && availableSet.has(currentValue);
@@ -254,14 +281,31 @@ export function ItemField({ type, slot, label }: ItemFieldProps) {
   const selectedItem =
     selectItems.find((item) => item.value === currentValue) ?? null;
 
-  const equipmentMeta =
-    currentValue === 0
-      ? undefined
-      : type === 'weapon'
-        ? weaponHelpers.getById(currentValue as WeaponIndex)
-        : type === 'armor'
-          ? armorHelpers.getById(currentValue as ArmorIndex)
-          : undefined;
+  const tooltip = (() => {
+    if (currentValue === 0) return undefined;
+
+    if (type === 'weapon' || type === 'armor') {
+      const meta =
+        type === 'weapon'
+          ? weaponHelpers.getById(currentValue as WeaponIndex)
+          : armorHelpers.getById(currentValue as ArmorIndex);
+
+      return meta?.displayName ? (
+        <EquipmentTooltipContent type={type} id={currentValue} />
+      ) : undefined;
+    }
+
+    // Storage holds consumables, so it gets the same tooltip.
+    if (type === 'consumable' || type === 'storage') {
+      const meta = consumableHelpers.getById(currentValue as ConsumableIndex);
+
+      return meta?.displayName ? (
+        <ConsumableTooltipContent id={currentValue as ConsumableIndex} />
+      ) : undefined;
+    }
+
+    return undefined;
+  })();
 
   return (
     <Section id={`${type}s-slot${slot}`} className="w-full">
@@ -299,14 +343,7 @@ export function ItemField({ type, slot, label }: ItemFieldProps) {
         }}
         items={selectItems}
         className="w-full"
-        tooltip={
-          equipmentMeta?.displayName ? (
-            <EquipmentTooltipContent
-              type={type as 'weapon' | 'armor'}
-              id={currentValue}
-            />
-          ) : undefined
-        }
+        tooltip={tooltip}
       />
     </Section>
   );

@@ -1,10 +1,7 @@
-import type { ComponentType, ReactNode, SVGProps } from 'react';
-import KrisIcon from '@assets/deltarune/characters/kris.svg?react';
-import SusieIcon from '@assets/deltarune/characters/susie.svg?react';
-import RalseiIcon from '@assets/deltarune/characters/ralsei.svg?react';
-import NoelleIcon from '@assets/deltarune/characters/noelle.svg?react';
+import type { ReactNode } from 'react';
 import {
   CHARACTERS,
+  PARTY_MEMBERS,
   EQUIPMENT_ABILITIES_META,
   EQUIPMENT_STAT_ICONS,
   EQUIPMENT_STAT_ORDER,
@@ -33,6 +30,7 @@ import {
   translateMeta,
   useTranslation,
 } from '../i18n';
+import { CharacterIcon } from './CharacterIcon';
 import { EquipmentIcon } from './EquipmentIcon';
 import { InlineGroup } from './InlineGroup';
 import { Tooltip } from './Tooltip';
@@ -41,20 +39,6 @@ import { TooltipHeading } from './TooltipHeading';
 type EquipmentType = 'weapon' | 'armor';
 
 type Translate = (key: string, fallback: string) => string;
-
-const PARTY_ICONS: Record<number, ComponentType<SVGProps<SVGSVGElement>>> = {
-  [CHARACTERS.KRIS]: KrisIcon,
-  [CHARACTERS.SUSIE]: SusieIcon,
-  [CHARACTERS.RALSEI]: RalseiIcon,
-  [CHARACTERS.NOELLE]: NoelleIcon,
-};
-
-const PARTY_MEMBERS = [
-  CHARACTERS.KRIS,
-  CHARACTERS.SUSIE,
-  CHARACTERS.RALSEI,
-  CHARACTERS.NOELLE,
-] as const;
 
 function useEquippableBy(type: EquipmentType, id: number) {
   const inputs: Record<
@@ -88,9 +72,6 @@ function EquippableRow({ entries, t }: EquippableRowProps) {
   return (
     <InlineGroup className="gap-2">
       {entries.map(({ character, canEquip }) => {
-        const Icon = PARTY_ICONS[character];
-        if (!Icon) return null;
-
         const name = characterHelpers.getById(character).displayName;
 
         return (
@@ -108,7 +89,7 @@ function EquippableRow({ entries, t }: EquippableRowProps) {
                 : 'text-text-3 grayscale',
             )}
           >
-            <Icon className="h-full w-full" />
+            <CharacterIcon character={character} />
           </span>
         );
       })}

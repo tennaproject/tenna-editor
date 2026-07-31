@@ -16,6 +16,13 @@ export const CHARACTERS = {
 export type CharacterIndex = (typeof CHARACTERS)[keyof typeof CHARACTERS];
 export type CharacterName = keyof typeof CHARACTERS;
 
+export const PARTY_MEMBERS = [
+  CHARACTERS.KRIS,
+  CHARACTERS.SUSIE,
+  CHARACTERS.RALSEI,
+  CHARACTERS.NOELLE,
+] as const;
+
 const RIBBON_ARMORS = new Set<ArmorIndex>([
   ARMORS.PINK_RIBBON,
   ARMORS.WHITE_RIBBON,

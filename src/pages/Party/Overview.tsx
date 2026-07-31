@@ -1,5 +1,6 @@
 import {
   Card,
+  CharacterIcon,
   Checkbox,
   EquipmentIcon,
   EquipmentTooltip,
@@ -28,11 +29,6 @@ import {
   getCharacterColor,
   weaponHelpers,
 } from '@utils';
-import type { ComponentType, SVGProps } from 'react';
-import KrisIcon from '@assets/deltarune/characters/kris.svg?react';
-import SusieIcon from '@assets/deltarune/characters/susie.svg?react';
-import RalseiIcon from '@assets/deltarune/characters/ralsei.svg?react';
-import NoelleIcon from '@assets/deltarune/characters/noelle.svg?react';
 import {
   formatTranslation,
   getArmorTranslationKeyPrefix,
@@ -42,15 +38,6 @@ import {
   translateMeta,
   useTranslation,
 } from '../../i18n';
-
-const BATTLE_ICONS: Partial<
-  Record<CharacterIndex, ComponentType<SVGProps<SVGSVGElement>>>
-> = {
-  [CHARACTERS.KRIS]: KrisIcon,
-  [CHARACTERS.SUSIE]: SusieIcon,
-  [CHARACTERS.RALSEI]: RalseiIcon,
-  [CHARACTERS.NOELLE]: NoelleIcon,
-};
 
 interface EquipmentRowProps {
   type: 'weapon' | 'armor';
@@ -202,7 +189,6 @@ function CharacterCard({
     selectItems.find((it) => parseInt(it.id, 10) === party[slot]) ?? null;
 
   const color = getCharacterColor(character);
-  const Icon = BATTLE_ICONS[character];
   const translatedCharacter = translateMeta(
     getCharacterTranslationKeyPrefix(character),
     characterMeta,
@@ -229,7 +215,7 @@ function CharacterCard({
           <div className="flex flex-col justify-center items-center gap-2">
             <Heading level={1}>{slot + 1}</Heading>
             <Heading level={5}>{t('ui.party.member', 'MEMBER')}</Heading>
-            {isExisting && isInChapter && Icon && (
+            {isExisting && isInChapter && (
               <span
                 className={mergeClass(
                   'inline-flex h-24 w-24 shrink-0 items-center justify-center',
@@ -237,7 +223,7 @@ function CharacterCard({
                 )}
                 aria-hidden
               >
-                <Icon className="h-full w-full" />
+                <CharacterIcon character={character} />
               </span>
             )}
             <Heading level={3} className={mergeClass('uppercase', color.text)}>

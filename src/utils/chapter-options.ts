@@ -1,4 +1,5 @@
 import type { SelectItem } from '@components';
+import type { SaveSlot } from '@types';
 import type { ItemType } from '@components/Fields/ItemField';
 import type {
   ArmorIndex,
@@ -19,6 +20,7 @@ import {
   characterHelpers,
   consumableHelpers,
   formatItemLabel,
+  resolveChapterMeta,
   keyItemHelpers,
   lightWorldItemHelpers,
   phoneContactHelpers,
@@ -56,8 +58,10 @@ type LightWorldLoadoutType = 'weapon' | 'armor';
 export function getChapterItemOptions(
   chapter: ChapterIndex,
   type: ItemType,
+  // Part of the cache key: consumable overrides can read it too.
+  saveSlot: SaveSlot,
 ): SelectItem[] {
-  const key = `${chapter}:${type}`;
+  const key = `${chapter}:${type}:${saveSlot}`;
   const cached = itemOptionsCache.get(key);
   if (cached) return cached;
 
@@ -71,7 +75,10 @@ export function getChapterItemOptions(
       availableIds = chapterContent.consumables as Set<number>;
       getDisplayName = (id) =>
         formatItemLabel(
-          consumableHelpers.getById(id as ConsumableIndex),
+          resolveChapterMeta(consumableHelpers.getById(id as ConsumableIndex), {
+            chapter,
+            saveSlot,
+          }),
           'Unknown',
         );
       break;
@@ -83,12 +90,22 @@ export function getChapterItemOptions(
     case 'weapon':
       availableIds = chapterContent.weapons as Set<number>;
       getDisplayName = (id) =>
-        formatItemLabel(weaponHelpers.getById(id as WeaponIndex), 'Unknown');
+        formatItemLabel(
+          resolveChapterMeta(weaponHelpers.getById(id as WeaponIndex), {
+            chapter,
+          }),
+          'Unknown',
+        );
       break;
     case 'armor':
       availableIds = chapterContent.armors as Set<number>;
       getDisplayName = (id) =>
-        formatItemLabel(armorHelpers.getById(id as ArmorIndex), 'Unknown');
+        formatItemLabel(
+          resolveChapterMeta(armorHelpers.getById(id as ArmorIndex), {
+            chapter,
+          }),
+          'Unknown',
+        );
       break;
     case 'lightWorldItem':
       availableIds = chapterContent.lightWorld.items as Set<number>;
@@ -197,10 +214,10 @@ export function getChapterLoadoutOptions(
       : armorHelpers.getById(value as ArmorIndex);
 
   const items = [...availableElements].map((value) => {
-    const meta = getMeta(value);
+    const meta = resolveChapterMeta(getMeta(value), { chapter });
     return {
       id: `${value}`,
-      label: meta.displayName,
+      label: meta?.displayName ?? 'Unknown',
       value,
     };
   });

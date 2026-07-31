@@ -26,7 +26,7 @@ import {
   type ArmorIndex,
   type WeaponIndex,
 } from '@data';
-import type { BaseProperties } from '@types';
+import type { BaseProperties, WithOverrides } from '@types';
 import type { ChapterIndex } from '../data/chapters';
 import type { FlagIndex, FlagProperties } from '../data/flags';
 import type { SpellIndex } from '../data/spells';
@@ -68,6 +68,15 @@ export function formatItemLabel(
   fallback: string,
 ) {
   return meta?.displayName ?? fallback;
+}
+
+export function resolveChapterMeta<
+  A extends { chapter: ChapterIndex },
+  T extends WithOverrides<T, A>,
+>(meta: T | undefined, args: A): T | undefined {
+  if (!meta) return undefined;
+
+  return { ...meta, ...meta.getOverrides?.(args) };
 }
 
 export function getStaticSpellDisplayName(spell: SpellIndex) {
