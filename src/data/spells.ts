@@ -38,7 +38,10 @@ interface SpellProperties
 }
 
 const susieHealPractice = (flags: readonly unknown[]) =>
-  Math.min(Math.max(Number(flags[FLAGS.SUSIE_HEAL_PRACTICE_COUNT]) || 0, 0), 15);
+  Math.min(
+    Math.max(Number(flags[FLAGS.SUSIE_HEAL_PRACTICE_COUNT]) || 0, 0),
+    15,
+  );
 
 const ULTRA_HEAL_TP_COSTS = [
   90, 89, 88, 86, 86, 85, 84, 82, 82, 81, 80, 78, 78, 77, 76, 74,
@@ -50,13 +53,15 @@ export const SPELLS_META: Record<SpellIndex, SpellProperties> = {
   },
   [SPELLS.RUDE_SWORD]: {
     displayName: 'Rude Sword',
-    description: 'Deals moderate Rude-elemental damage to\none foe. Depends on Attack & Magic.',
+    description:
+      'Deals moderate Rude-elemental damage to\none foe. Depends on Attack & Magic.',
     tpCost: 50,
     unused: true,
   },
   [SPELLS.HEAL_PRAYER]: {
     displayName: 'Heal Prayer',
-    description: 'Heavenly light restores a little HP to\none party member. Depends on Magic.',
+    description:
+      'Heavenly light restores a little HP to\none party member. Depends on Magic.',
     tpCost: 32,
   },
   [SPELLS.PACIFY]: {
@@ -73,7 +78,8 @@ export const SPELLS_META: Record<SpellIndex, SpellProperties> = {
   },
   [SPELLS.RUDE_BUSTER]: {
     displayName: 'Rude Buster',
-    description: 'Deals moderate Rude-elemental damage to\none foe. Depends on Attack & Magic.',
+    description:
+      'Deals moderate Rude-elemental damage to\none foe. Depends on Attack & Magic.',
     tpCost: 50,
     getOverrides: ({ weapon }) => {
       if (weapon === WEAPONS.DEVILSKNIFE) {
@@ -96,7 +102,7 @@ export const SPELLS_META: Record<SpellIndex, SpellProperties> = {
       if (chapter >= 4) {
         return {
           description: 'Heal party',
-          tpCost: 16
+          tpCost: 16,
         };
       }
 
@@ -105,27 +111,26 @@ export const SPELLS_META: Record<SpellIndex, SpellProperties> = {
   },
   [SPELLS.ACT]: {
     displayName: 'ACT',
-    description: 'Do all sorts of things.\nIt isn\'t magic.',
+    description: "Do all sorts of things.\nIt isn't magic.",
     tpCost: 0,
     getOverrides: ({ chapter }) => {
       if (chapter === 2) {
         return {
-          description: 'You can do many things.\nDon\'t confuse it with magic.',
+          description: "You can do many things.\nDon't confuse it with magic.",
         };
-      }
-      else if (chapter === 3) {
+      } else if (chapter === 3) {
         return {
-          description: 'Many different skills.\nIt has nothing to do with magic.',
+          description:
+            'Many different skills.\nIt has nothing to do with magic.',
         };
-      }
-      else if (chapter === 4) {
+      } else if (chapter === 4) {
         return {
-          description: 'Execute various behaviors.\nIt can\'t be considered magic.',
+          description:
+            "Execute various behaviors.\nIt can't be considered magic.",
         };
-      }
-      else if (chapter === 5) {
+      } else if (chapter === 5) {
         return {
-          description: 'It\'s not magic, is it?\nNo, not something like this.',
+          description: "It's not magic, is it?\nNo, not something like this.",
         };
       }
 
@@ -163,7 +168,7 @@ export const SPELLS_META: Record<SpellIndex, SpellProperties> = {
   },
   [SPELLS.SUSIE_HEAL]: {
     displayName: 'UltimatHeal',
-    description: 'Heals 1 party member to the\nbest of Susie\'s ability.',
+    description: "Heals 1 party member to the\nbest of Susie's ability.",
     tpCost: 100,
     getOverrides: ({ chapter, plot, flags }) => {
       const practice = susieHealPractice(flags);
@@ -175,7 +180,8 @@ export const SPELLS_META: Record<SpellIndex, SpellProperties> = {
       ) {
         return {
           displayName: 'BetterHeal',
-          description: 'A healing spell that has grown\nwith practice and confidence.',
+          description:
+            'A healing spell that has grown\nwith practice and confidence.',
           tpCost: 80 - Math.ceil(practice / 3),
         };
       }
@@ -187,7 +193,7 @@ export const SPELLS_META: Record<SpellIndex, SpellProperties> = {
       ) {
         return {
           displayName: 'Heal',
-          description: 'It seems the user doesn\'t\nwant to use this spell.',
+          description: "It seems the user doesn't\nwant to use this spell.",
           tpCost: 102,
         };
       }
@@ -195,7 +201,8 @@ export const SPELLS_META: Record<SpellIndex, SpellProperties> = {
       if (chapter >= 4) {
         return {
           displayName: 'OKHeal',
-          description: 'It\'s not the best healing spell, but\nit may have its uses.',
+          description:
+            "It's not the best healing spell, but\nit may have its uses.",
           tpCost: 85 - Math.ceil(practice / 3),
         };
       }
@@ -213,12 +220,14 @@ export const SPELLS_META: Record<SpellIndex, SpellProperties> = {
   },
   [SPELLS.REVIVE_SONG]: {
     displayName: 'ReviveSong',
-    description: 'Revives a DOWNed ally and heals them.\nOtherwise, heals a lot of HP.',
+    description:
+      'Revives a DOWNed ally and heals them.\nOtherwise, heals a lot of HP.',
     tpCost: 84,
   },
   [SPELLS.SCYTHEMARE]: {
     displayName: 'Scythemare',
-    description: 'Inflicts all enemies with bad dreams.\nAll TIRED enemies will be SPAREd.',
+    description:
+      'Inflicts all enemies with bad dreams.\nAll TIRED enemies will be SPAREd.',
     tpCost: 40,
     getOverrides: ({ armors }) => {
       if (armors.includes(ARMORS.O_GLOVE)) {

@@ -115,8 +115,8 @@ export type EquipmentAbilityName = keyof typeof EQUIPMENT_ABILITIES;
 
 interface EquipmentAbilityProperties
   extends
-  BaseProperties,
-  WithOverrides<EquipmentAbilityProperties, { chapter: ChapterIndex; }> {
+    BaseProperties,
+    WithOverrides<EquipmentAbilityProperties, { chapter: ChapterIndex }> {
   icon: EquipmentIconIndex;
 }
 
@@ -134,29 +134,33 @@ export const EQUIPMENT_ABILITIES_META: Record<
   },
   [EQUIPMENT_ABILITIES.BUSTER_TP_DOWN]: {
     displayName: 'Buster TP DOWN',
-    description: 'Reduces the cost of Susie\'s Rude Buster spell by 10% TP.',
+    description: "Reduces the cost of Susie's Rude Buster spell by 10% TP.",
     icon: EQUIPMENT_ICONS.ABILITY_ARROW_DOWN_RIGHT,
   },
   [EQUIPMENT_ABILITIES.MONEY_EARNED_UP]: {
     displayName: 'Money Earned UP',
-    description: 'Increases the amount of Dark Dollars earned at the end of battles by 5%.',
+    description:
+      'Increases the amount of Dark Dollars earned at the end of battles by 5%.',
     icon: EQUIPMENT_ICONS.ABILITY_ARROW_UP_RIGHT,
   },
   [EQUIPMENT_ABILITIES.FLUFFINESS_UP]: {
     displayName: 'Fluffiness UP',
-    description: 'Increases Ralsei\'s Fluffiness stat from 1 fluff to 2 fluff in Chapter 1.',
+    description:
+      "Increases Ralsei's Fluffiness stat from 1 fluff to 2 fluff in Chapter 1.",
     icon: EQUIPMENT_ICONS.ABILITY_ARROW_UP_RIGHT,
   },
   // TwistedSwd
   [EQUIPMENT_ABILITIES.TRANCE]: {
     displayName: 'Trance',
-    description: 'Full effect unimplemented/unknown.\nIncreases damage against Dark element enemies.',
+    description:
+      'Full effect unimplemented/unknown.\nIncreases damage against Dark element enemies.',
     icon: EQUIPMENT_ICONS.ABILITY_ARROW_DOWN_RIGHT,
   },
   // ThornRing
   [EQUIPMENT_ABILITIES.TRANCE_RING]: {
     displayName: 'Trance',
-    description: 'When in battle, rapidly reduces HP to one third of maximum HP (rounded down).\nHalves the TP cost of Noelle\'s IceShock and SnowGrave.',
+    description:
+      "When in battle, rapidly reduces HP to one third of maximum HP (rounded down).\nHalves the TP cost of Noelle's IceShock and SnowGrave.",
     icon: EQUIPMENT_ICONS.ABILITY_RING,
   },
   [EQUIPMENT_ABILITIES.DEFENSE]: {
@@ -166,7 +170,8 @@ export const EQUIPMENT_ABILITIES_META: Record<
   },
   [EQUIPMENT_ABILITIES.SMILEY]: {
     displayName: 'Smiley',
-    description: 'Does not increase TP gained from critical attacks as stated in CheerScarf\'s Check description.',
+    description:
+      "Does not increase TP gained from critical attacks as stated in CheerScarf's Check description.",
     icon: EQUIPMENT_ICONS.ABILITY_SMILE,
   },
   [EQUIPMENT_ABILITIES.ANNOYING]: {
@@ -187,7 +192,8 @@ export const EQUIPMENT_ABILITIES_META: Record<
   },
   [EQUIPMENT_ABILITIES.SLAY_DARK]: {
     displayName: 'SlayDark',
-    description: 'Increases damage against Dark element enemies and changes the attack animation visual to be red/black instead of white.',
+    description:
+      'Increases damage against Dark element enemies and changes the attack animation visual to be red/black instead of white.',
     icon: EQUIPMENT_ICONS.ABILITY_SHARD,
   },
   [EQUIPMENT_ABILITIES.COOLNESS]: {
@@ -200,7 +206,7 @@ export const EQUIPMENT_ABILITIES_META: Record<
   },
   [EQUIPMENT_ABILITIES.PACIFY_0_TP]: {
     displayName: 'Pacify0TP',
-    description: 'Makes Ralsei\'s Pacify cost 0 TP.',
+    description: "Makes Ralsei's Pacify cost 0 TP.",
     icon: EQUIPMENT_ICONS.ABILITY_PACIFY,
   },
   [EQUIPMENT_ABILITIES.CRITICAL]: {
@@ -224,27 +230,31 @@ export const EQUIPMENT_ABILITIES_META: Record<
   // Winglade, Silver Card
   [EQUIPMENT_ABILITIES.MONEY_5_UP]: {
     displayName: '$ +5%',
-    description: 'Increases the amount of Dark Dollars earned at the end of battles by 5%.',
+    description:
+      'Increases the amount of Dark Dollars earned at the end of battles by 5%.',
     icon: EQUIPMENT_ICONS.ABILITY_ARROW_UP_RIGHT,
   },
   [EQUIPMENT_ABILITIES.VAMPIRE]: {
     displayName: 'Vampire',
-    description: 'Attacking heals for 10% of maximum HP (except when fighting the Hammer of Justice, where it heals 2 HP).',
+    description:
+      'Attacking heals for 10% of maximum HP (except when fighting the Hammer of Justice, where it heals 2 HP).',
     icon: EQUIPMENT_ICONS.ABILITY_RUDE,
   },
   [EQUIPMENT_ABILITIES.GRAZE_AREA]: {
     displayName: 'GrazeArea',
-    description: 'Increases the range of how close bullets have to be to the SOUL in order to graze by {value}%.',
+    description:
+      'Increases the range of how close bullets have to be to the SOUL in order to graze by {value}%.',
     icon: EQUIPMENT_ICONS.ABILITY_ARROW_UP_RIGHT,
     getOverrides: ({ chapter }) => {
       if (chapter >= 3) {
         return {
-          description: 'Increases the range of how close bullets have to be to the SOUL in order to graze by {value}%. Also reduces TP gain and graze time by {value}%.',
+          description:
+            'Increases the range of how close bullets have to be to the SOUL in order to graze by {value}%. Also reduces TP gain and graze time by {value}%.',
         };
       }
 
       return {};
-    }
+    },
   },
   [EQUIPMENT_ABILITIES.CUTENESS]: {
     displayName: 'Cuteness',
@@ -252,12 +262,14 @@ export const EQUIPMENT_ABILITIES_META: Record<
   },
   [EQUIPMENT_ABILITIES.GRAZE_TIME]: {
     displayName: 'GrazeTime',
-    description: 'Increases the amount that grazing bullets reduces turn length by 10%.',
+    description:
+      'Increases the amount that grazing bullets reduces turn length by 10%.',
     icon: EQUIPMENT_ICONS.ABILITY_ARROW_UP_RIGHT,
   },
   [EQUIPMENT_ABILITIES.TP_GAIN]: {
     displayName: 'TPGain',
-    description: 'Increases the amount of TP earned from grazing bullets by {value}%.',
+    description:
+      'Increases the amount of TP earned from grazing bullets by {value}%.',
     icon: EQUIPMENT_ICONS.ABILITY_ARROW_UP_RIGHT,
   },
   // Mannequin
@@ -268,12 +280,13 @@ export const EQUIPMENT_ABILITIES_META: Record<
     getOverrides: ({ chapter }) => {
       if (chapter === 5) {
         return {
-          description: 'Reduces damage taken from Puppet/Cat element attacks by 20%.',
+          description:
+            'Reduces damage taken from Puppet/Cat element attacks by 20%.',
         };
       }
 
       return {};
-    }
+    },
   },
   [EQUIPMENT_ABILITIES.ELEC_HOLY]: {
     displayName: 'Elec/Holy',
@@ -287,22 +300,26 @@ export const EQUIPMENT_ABILITIES_META: Record<
   },
   [EQUIPMENT_ABILITIES.MONEY_30_UP]: {
     displayName: '$ +30%',
-    description: 'Increases the amount of Dark Dollars earned at the end of battles by 30%.',
+    description:
+      'Increases the amount of Dark Dollars earned at the end of battles by 30%.',
     icon: EQUIPMENT_ICONS.ABILITY_ARROW_UP_RIGHT,
   },
   [EQUIPMENT_ABILITIES.DARK_STAR]: {
     displayName: 'Dark/Star',
-    description: 'Reduces damage taken from Dark/Star element attacks by 66%, and provides variable damage reduction against specific attacks.',
+    description:
+      'Reduces damage taken from Dark/Star element attacks by 66%, and provides variable damage reduction against specific attacks.',
     icon: EQUIPMENT_ICONS.ABILITY_ARMOR,
   },
   [EQUIPMENT_ABILITIES.HEAL_UP]: {
     displayName: 'Heal+',
-    description: 'Increases outgoing healing effectiveness from all sources by 12.5%, including items used.',
+    description:
+      'Increases outgoing healing effectiveness from all sources by 12.5%, including items used.',
     icon: EQUIPMENT_ICONS.ABILITY_ARROW_UP_RIGHT,
   },
   [EQUIPMENT_ABILITIES.HAS_ANTENNA]: {
     displayName: 'HasAntenna',
-    description: 'Increases outgoing healing effectiveness from all sources by 12.5%, including items used.',
+    description:
+      'Increases outgoing healing effectiveness from all sources by 12.5%, including items used.',
     icon: EQUIPMENT_ICONS.ABILITY_SMILE,
   },
   [EQUIPMENT_ABILITIES.CAT_DEFEND]: {
@@ -312,7 +329,8 @@ export const EQUIPMENT_ABILITIES_META: Record<
   },
   [EQUIPMENT_ABILITIES.MONEY_90_DOWN]: {
     displayName: '$ -90%',
-    description: 'Decreases the amount of Dark Dollars earned at the end of battles by 90%.',
+    description:
+      'Decreases the amount of Dark Dollars earned at the end of battles by 90%.',
     icon: EQUIPMENT_ICONS.ABILITY_ARROW_DOWN_RIGHT,
   },
   [EQUIPMENT_ABILITIES.INV_TIME_UP]: {
@@ -327,7 +345,7 @@ export const EQUIPMENT_ABILITIES_META: Record<
   },
   [EQUIPMENT_ABILITIES.SCYTHE_TP_DOWN]: {
     displayName: 'ScytheTP-',
-    description: 'Makes Susie\'s Scythemare cost half of its original TP.',
+    description: "Makes Susie's Scythemare cost half of its original TP.",
     icon: EQUIPMENT_ICONS.ABILITY_ARROW_DOWN_RIGHT,
   },
   [EQUIPMENT_ABILITIES.DEFEND_HEAL]: {
@@ -341,7 +359,8 @@ export const EQUIPMENT_ABILITIES_META: Record<
   },
   [EQUIPMENT_ABILITIES.MONEY_10_DOWN]: {
     displayName: '$ -10%',
-    description: 'Decreases the amount of Dark Dollars earned at the end of battles by 10%.',
+    description:
+      'Decreases the amount of Dark Dollars earned at the end of battles by 10%.',
     icon: EQUIPMENT_ICONS.ABILITY_ARROW_DOWN_RIGHT,
   },
 };

@@ -57,7 +57,7 @@ export type WeaponName = keyof typeof WEAPONS;
 interface WeaponProperties
   extends
     BaseProperties,
-    WithOverrides<WeaponProperties, { chapter: ChapterIndex; }> {
+    WithOverrides<WeaponProperties, { chapter: ChapterIndex }> {
   stats: EquipmentStats;
   icon?: EquipmentIconIndex;
   ability?: EquipmentAbilityIndex;
@@ -78,7 +78,7 @@ export const WEAPONS_META: Record<WeaponIndex, WeaponProperties> = {
   },
   [WEAPONS.MANE_AX]: {
     displayName: 'Mane Ax',
-    description: 'Beginner\'s ax forged from the\nmane of a dragon whelp.',
+    description: "Beginner's ax forged from the\nmane of a dragon whelp.",
     stats: { attack: 0, defence: 0, magic: 0 },
     icon: EQUIPMENT_ICONS.AXE,
   },
@@ -110,7 +110,7 @@ export const WEAPONS_META: Record<WeaponIndex, WeaponProperties> = {
   },
   [WEAPONS.DEVILSKNIFE]: {
     displayName: 'Devilsknife',
-    description: 'Skull-emblazoned scythe-ax.\nReduces Rudebuster\'s cost by 10',
+    description: "Skull-emblazoned scythe-ax.\nReduces Rudebuster's cost by 10",
     stats: { attack: 5, defence: 0, magic: 4 },
     icon: EQUIPMENT_ICONS.AXE,
     ability: EQUIPMENT_ABILITIES.BUSTER_TP_DOWN,
@@ -130,7 +130,8 @@ export const WEAPONS_META: Record<WeaponIndex, WeaponProperties> = {
   },
   [WEAPONS.DAINTY_SCARF]: {
     displayName: 'DaintyScarf',
-    description: 'Delicate scarf that increases healing\npower but has no attack.',
+    description:
+      'Delicate scarf that increases healing\npower but has no attack.',
     stats: { attack: 0, defence: 0, magic: 2 },
     icon: EQUIPMENT_ICONS.SCARF,
     ability: EQUIPMENT_ABILITIES.FLUFFINESS_UP,
@@ -150,21 +151,24 @@ export const WEAPONS_META: Record<WeaponIndex, WeaponProperties> = {
   },
   [WEAPONS.THORN_RING]: {
     displayName: 'ThornRing',
-    description: 'Wearer takes damage from pain\nReduces the TP cost of ice spells',
+    description:
+      'Wearer takes damage from pain\nReduces the TP cost of ice spells',
     stats: { attack: 14, defence: 0, magic: 12 },
     icon: EQUIPMENT_ICONS.RING,
     ability: EQUIPMENT_ABILITIES.TRANCE_RING,
   },
   [WEAPONS.BOUNCE_BLADE]: {
     displayName: 'BounceBlade',
-    description: 'A pink saber with a rubber blade.\nWeak, but increases defence.',
+    description:
+      'A pink saber with a rubber blade.\nWeak, but increases defence.',
     stats: { attack: 2, defence: 1, magic: 0 },
     icon: EQUIPMENT_ICONS.SWORD,
     ability: EQUIPMENT_ABILITIES.DEFENSE,
   },
   [WEAPONS.CHEER_SCARF]: {
     displayName: 'CheerScarf',
-    description: 'A scarf with colorful you-can-do-it\nimagery. Gains more TP from criticals.',
+    description:
+      'A scarf with colorful you-can-do-it\nimagery. Gains more TP from criticals.',
     stats: { attack: 1, defence: 0, magic: 2 },
     icon: EQUIPMENT_ICONS.SCARF,
     ability: EQUIPMENT_ABILITIES.SMILEY,
@@ -207,14 +211,16 @@ export const WEAPONS_META: Record<WeaponIndex, WeaponProperties> = {
   },
   [WEAPONS.BROKEN_SWD]: {
     displayName: 'BrokenSwd',
-    description: 'A rejected sword cut into 2 pieces.\nNot even you can equip this...',
+    description:
+      'A rejected sword cut into 2 pieces.\nNot even you can equip this...',
     stats: { attack: 0, defence: 0, magic: 0 },
     icon: EQUIPMENT_ICONS.SWORD,
     ability: EQUIPMENT_ABILITIES.FAILURE,
   },
   [WEAPONS.PUPPET_SCARF]: {
     displayName: 'PuppetScarf',
-    description: 'A scarf made of strange strings.\nFor those that abandon healing.',
+    description:
+      'A scarf made of strange strings.\nFor those that abandon healing.',
     stats: { attack: 10, defence: 0, magic: -6 },
     icon: EQUIPMENT_ICONS.SCARF,
   },
@@ -226,114 +232,131 @@ export const WEAPONS_META: Record<WeaponIndex, WeaponProperties> = {
   },
   [WEAPONS.SABER10]: {
     displayName: 'Saber10',
-    description: 'A saber made of 10 cactus needles.\nFortunately, can deal more than 10 damage.',
+    description:
+      'A saber made of 10 cactus needles.\nFortunately, can deal more than 10 damage.',
     stats: { attack: 6, defence: 0, magic: 0 },
     icon: EQUIPMENT_ICONS.SWORD,
   },
   [WEAPONS.TOXIC_AXE]: {
     displayName: 'ToxicAxe',
-    description: 'An axe used to clear wastelands\nin a fetid swamp. Not poison, but gross.',
+    description:
+      'An axe used to clear wastelands\nin a fetid swamp. Not poison, but gross.',
     stats: { attack: 6, defence: 0, magic: 0 },
     icon: EQUIPMENT_ICONS.AXE,
   },
   [WEAPONS.FLEX_SCARF]: {
     displayName: 'FlexScarf',
-    description: 'A scarf that is warm and fuzzy, but with\na metal core that lets it keep its shape.',
+    description:
+      'A scarf that is warm and fuzzy, but with\na metal core that lets it keep its shape.',
     stats: { attack: 4, defence: 0, magic: 1 },
     icon: EQUIPMENT_ICONS.SCARF,
   },
   [WEAPONS.BLACK_SHARD]: {
     displayName: 'BlackShard',
-    description: 'A dagger-like shard of the Black Knife.\nStrikes the weakness of dark-element enemies.',
+    description:
+      'A dagger-like shard of the Black Knife.\nStrikes the weakness of dark-element enemies.',
     stats: { attack: 16, defence: 0, magic: 0 },
     icon: EQUIPMENT_ICONS.SHARD,
     ability: EQUIPMENT_ABILITIES.SLAY_DARK,
   },
   [WEAPONS.JINGLE_BLADE]: {
     displayName: 'JingleBlade',
-    description: 'A lance-like sword with red-and-white stripes.\nPerfect for jousting.',
+    description:
+      'A lance-like sword with red-and-white stripes.\nPerfect for jousting.',
     stats: { attack: 7, defence: 1, magic: 0 },
     icon: EQUIPMENT_ICONS.SWORD,
     ability: EQUIPMENT_ABILITIES.FESTIVE,
   },
   [WEAPONS.SCARF_MARK]: {
     displayName: 'ScarfMark',
-    description: 'A thin scarf with a deep sheen. Holy writing has\nbeen pressed into it, imbuing it with magic.',
+    description:
+      'A thin scarf with a deep sheen. Holy writing has\nbeen pressed into it, imbuing it with magic.',
     stats: { attack: 4, defence: 1, magic: 1 },
     icon: EQUIPMENT_ICONS.SCARF,
   },
   [WEAPONS.JUSTICE_AXE]: {
     displayName: 'JusticeAxe',
-    description: 'It has no special powers. However, in order to\nattain this item, you became much stronger!',
+    description:
+      'It has no special powers. However, in order to\nattain this item, you became much stronger!',
     stats: { attack: 12, defence: 0, magic: 0 },
     icon: EQUIPMENT_ICONS.AXE,
     ability: EQUIPMENT_ABILITIES.UNKNOWN_WEAPON,
   },
   [WEAPONS.WINGLADE]: {
     displayName: 'Winglade',
-    description: 'A majestic sword with a white feathered hilt.\nSlightly increases money won.',
+    description:
+      'A majestic sword with a white feathered hilt.\nSlightly increases money won.',
     stats: { attack: 8, defence: 0, magic: 0 },
     icon: EQUIPMENT_ICONS.SWORD,
     ability: EQUIPMENT_ABILITIES.MONEY_5_UP,
   },
   [WEAPONS.ABSORB_AX]: {
     displayName: 'AbsorbAx',
-    description: 'A long, curved axe with an indent.\nScoop up HP when you attack.',
+    description:
+      'A long, curved axe with an indent.\nScoop up HP when you attack.',
     stats: { attack: 8, defence: 0, magic: 0 },
     icon: EQUIPMENT_ICONS.AXE,
     ability: EQUIPMENT_ABILITIES.VAMPIRE,
   },
   [WEAPONS.WOOD_BLADE_2]: {
     displayName: 'WoodBlade2',
-    description: 'A sword that is arbitrarily stronger\nbecause it fits the setting of Chapter 5.',
+    description:
+      'A sword that is arbitrarily stronger\nbecause it fits the setting of Chapter 5.',
     stats: { attack: 10, defence: 0, magic: 0 },
     icon: EQUIPMENT_ICONS.SWORD,
     ability: EQUIPMENT_ABILITIES.COOLNESS,
   },
   [WEAPONS.THATCHET]: {
     displayName: 'Thatchet',
-    description: 'An axe made of brambles. It\'s rumored its\nwickedness infects anything it touches.',
+    description:
+      "An axe made of brambles. It's rumored its\nwickedness infects anything it touches.",
     stats: { attack: 10, defence: 0, magic: 0 },
     icon: EQUIPMENT_ICONS.AXE,
     ability: EQUIPMENT_ABILITIES.WICKED,
   },
   [WEAPONS.BLUE_SHOES]: {
     displayName: 'BlueShoes',
-    description: 'Shoes from a prestigious dancer.\nRalsei\'s PACIFY costs 0% TP.',
+    description:
+      "Shoes from a prestigious dancer.\nRalsei's PACIFY costs 0% TP.",
     stats: { attack: 2, defence: 4, magic: 6 },
     icon: EQUIPMENT_ICONS.BLUE,
     ability: EQUIPMENT_ABILITIES.PACIFY_0_TP,
   },
   [WEAPONS.AQUA_KNIFE]: {
     displayName: 'AquaKnife',
-    description: 'A mischievous blade. Attacks with this\nweapon are easier to make critical.',
+    description:
+      'A mischievous blade. Attacks with this\nweapon are easier to make critical.',
     stats: { attack: 10, defence: 2, magic: 0 },
     icon: EQUIPMENT_ICONS.AQUA,
     ability: EQUIPMENT_ABILITIES.CRITICAL,
   },
   [WEAPONS.FLOWERY_SCARF]: {
     displayName: 'FloweryScarf',
-    description: 'A scarf which says "I <3 Flowery" on it.\nIt\'s the perfect size for Ralsei.',
+    description:
+      'A scarf which says "I <3 Flowery" on it.\nIt\'s the perfect size for Ralsei.',
     stats: { attack: 70, defence: 70, magic: 70 },
     icon: EQUIPMENT_ICONS.SCARF,
     ability: EQUIPMENT_ABILITIES.THE_BEST,
   },
   [WEAPONS.BROKEN_SCARF]: {
     displayName: 'BrokenScarf',
-    description: 'A scarf that was torn to pieces in the\nbattle, revealing it was all for show.',
+    description:
+      'A scarf that was torn to pieces in the\nbattle, revealing it was all for show.',
     stats: { attack: 0, defence: 0, magic: 0 },
     icon: EQUIPMENT_ICONS.SCARF,
   },
   [WEAPONS.GILDED_ROSE]: {
     displayName: 'GildedRose',
-    description: 'Armour rings with a rose motif. Any thorns are\npointed outwards so you don\'t hurt yourself.',
+    description:
+      "Armour rings with a rose motif. Any thorns are\npointed outwards so you don't hurt yourself.",
     stats: { attack: 16, defence: 0, magic: 2 },
     icon: EQUIPMENT_ICONS.RING,
   },
   // Sets an ability icon (ARROW_UP_RIGHT) but a blank ability string
   [WEAPONS.MISTLE_WP]: {
     displayName: 'MistleWP',
-    description: 'A parasitic ivy whip with a nature\'s power.\nOnly experts can use it as a scarf.',
+    description:
+      "A parasitic ivy whip with a nature's power.\nOnly experts can use it as a scarf.",
     stats: { attack: 6, defence: 0, magic: 2 },
     icon: EQUIPMENT_ICONS.SCARF,
   },

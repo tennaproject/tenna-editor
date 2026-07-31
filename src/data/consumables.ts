@@ -64,31 +64,32 @@ export const CONSUMABLES = {
 export type ConsumableIndex = (typeof CONSUMABLES)[keyof typeof CONSUMABLES];
 export type ConsumableName = keyof typeof CONSUMABLES;
 
+export interface HealAmounts {
+  heal?: number;
+  healByCharacter?: Partial<Record<CharacterIndex, number>>;
+  healPercent?: number;
+  healPercentByCharacter?: Partial<Record<CharacterIndex, number>>;
+}
+
 interface ConsumableProperties
   extends
     BaseProperties,
+    HealAmounts,
     WithOverrides<
       ConsumableProperties,
       { chapter: ChapterIndex; saveSlot: SaveSlot }
     > {
-  // HP restored to anyone. Omit for items that do not heal.
-  heal?: number;
-  // HP restored to specific characters, for items whose effect depends on who
-  // consumes them. Anyone absent here falls back to `heal`.
-  healByCharacter?: Partial<Record<CharacterIndex, number>>;
-  // Heals the whole active party rather than a single target.
   healsParty?: boolean;
-  // TP restored, as a percentage of the bar.
   tpGain?: number;
-  // Heals this percentage of the target's max HP, rather than a flat amount.
   revivePercent?: number;
-  // A smaller amount that spills over to a second character when `host`
-  // consumes the item. Drawn as a miniature icon tucked under the host's.
+  // Used for a few items when used on Noelle in the overworld
   extraHeal?: {
     host: CharacterIndex;
     character: CharacterIndex;
     amount: number;
   };
+  // anything omitted falls back to the in-battle value
+  overworld?: HealAmounts;
 }
 
 export const CONSUMABLES_META: Record<ConsumableIndex, ConsumableProperties> = {
@@ -182,13 +183,14 @@ export const CONSUMABLES_META: Record<ConsumableIndex, ConsumableProperties> = {
     displayName: 'LancerCookie',
     description:
       "A cookie shaped like Lancer's face.\nMaybe not a cookie. Heals 5 HP?",
-    heal: 4,
+    heal: 50,
+    overworld: { heal: 4 },
     getOverrides: ({ chapter }) => {
       if (chapter >= 2) {
         return {
           description:
             "A cookie shaped like Lancer's face.\nMaybe not a cookie. Heals 1 HP?",
-          heal: 1,
+          overworld: { heal: 1 },
         };
       }
 
@@ -224,22 +226,77 @@ export const CONSUMABLES_META: Record<ConsumableIndex, ConsumableProperties> = {
     displayName: 'HeartsDonut',
     description:
       "Hearts, don't it!? It's filled with\ndivisive, clotty red jam. +??HP",
+    overworld: {
+      healByCharacter: {
+        [CHARACTERS.KRIS]: 20,
+        [CHARACTERS.SUSIE]: 80,
+        [CHARACTERS.RALSEI]: 50,
+        [CHARACTERS.NOELLE]: 30,
+      },
+    },
     healByCharacter: {
-      [CHARACTERS.KRIS]: 20,
-      [CHARACTERS.SUSIE]: 80,
-      [CHARACTERS.RALSEI]: 50,
-      [CHARACTERS.NOELLE]: 30,
+      [CHARACTERS.KRIS]: 10,
+      [CHARACTERS.SUSIE]: 90,
+      [CHARACTERS.RALSEI]: 60,
+    },
+    getOverrides: ({ chapter }) => {
+      if (chapter >= 2) {
+        return {
+          overworld: {},
+          healByCharacter: {
+            [CHARACTERS.KRIS]: 20,
+            [CHARACTERS.SUSIE]: 80,
+            [CHARACTERS.RALSEI]: 50,
+            [CHARACTERS.NOELLE]: 30,
+          },
+        };
+      }
+
+      return {};
     },
   },
-  // Noelle splits it, healing herself and Kris 35 each.
   [CONSUMABLES.CHOCODIAMOND]: {
     displayName: 'ChocDiamond',
     description: "It's quite small, but some\npeople REALLY like it. +??HP",
+    overworld: {
+      healByCharacter: {
+        [CHARACTERS.KRIS]: 80,
+        [CHARACTERS.SUSIE]: 20,
+        [CHARACTERS.RALSEI]: 50,
+        [CHARACTERS.NOELLE]: 35,
+      },
+    },
+    extraHeal: {
+      host: CHARACTERS.NOELLE,
+      character: CHARACTERS.KRIS,
+      amount: 35,
+    },
     healByCharacter: {
       [CHARACTERS.KRIS]: 80,
-      [CHARACTERS.SUSIE]: 20,
-      [CHARACTERS.RALSEI]: 50,
-      [CHARACTERS.NOELLE]: 35,
+      [CHARACTERS.SUSIE]: 30,
+      [CHARACTERS.RALSEI]: 30,
+    },
+    getOverrides: ({ chapter }) => {
+      if (chapter >= 2) {
+        return {
+          overworld: {
+            healByCharacter: {
+              [CHARACTERS.KRIS]: 80,
+              [CHARACTERS.SUSIE]: 20,
+              [CHARACTERS.RALSEI]: 50,
+              [CHARACTERS.NOELLE]: 35,
+            },
+          },
+          healByCharacter: {
+            [CHARACTERS.KRIS]: 80,
+            [CHARACTERS.SUSIE]: 20,
+            [CHARACTERS.RALSEI]: 30,
+            [CHARACTERS.NOELLE]: 70,
+          },
+        };
+      }
+
+      return {};
     },
   },
   [CONSUMABLES.FAVSANDWICH]: {
@@ -252,6 +309,18 @@ export const CONSUMABLES_META: Record<ConsumableIndex, ConsumableProperties> = {
     description:
       'A dark roux with a delicate aroma.\nAlso... has worms in it. +50HP',
     heal: 50,
+    getOverrides: ({ chapter }) => {
+      if (chapter === 1) {
+        return {
+          overworld: {
+            heal: 50,
+          },
+          heal: 60,
+        };
+      }
+
+      return {};
+    },
   },
   [CONSUMABLES.CD_BAGEL]: {
     displayName: 'CD Bagel',
@@ -407,6 +476,9 @@ export const CONSUMABLES_META: Record<ConsumableIndex, ConsumableProperties> = {
     displayName: 'ReviveDust',
     description:
       'A minty powder that revives all\nfallen party members to 25% HP.',
+    overworld: {
+      heal: 50,
+    },
     heal: 10,
     healsParty: true,
     revivePercent: 25,
@@ -423,15 +495,17 @@ export const CONSUMABLES_META: Record<ConsumableIndex, ConsumableProperties> = {
     displayName: 'S.POISON',
     description:
       'A strange concoction made of\ncolorful squares. Will poison you.',
-    heal: -20,
-    healByCharacter: { [CHARACTERS.NOELLE]: 0 },
+    heal: 60,
+    overworld: {
+      heal: -20,
+      healByCharacter: { [CHARACTERS.NOELLE]: 0 },
+    },
   },
   [CONSUMABLES.DOGDOLLAR]: {
     displayName: 'DogDollar',
     description:
       'A dollar with a certain dog on it.\nIts value decreases each Chapter.',
   },
-  // The description changes with the save slot the file is in.
   [CONSUMABLES.TVDINNER]: {
     displayName: 'TVDinner',
     description:
@@ -498,7 +572,6 @@ export const CONSUMABLES_META: Record<ConsumableIndex, ConsumableProperties> = {
       "A smooth, silvery drink. It sounds like\nwhispered singing as it's poured. +115 HP.",
     heal: 115,
   },
-  // Noelle's share spills 5 HP over to Kris.
   [CONSUMABLES.SCARLIXIR]: {
     displayName: 'Scarlixir',
     description:
@@ -579,12 +652,15 @@ export const CONSUMABLES_META: Record<ConsumableIndex, ConsumableProperties> = {
     healByCharacter: { [CHARACTERS.SUSIE]: 200 },
     tpGain: 16,
   },
-  // Ralsei refuses to drink it, so he cannot use it at all.
   [CONSUMABLES.FLOWERY_SODA]: {
     displayName: 'FlowerySoda',
     description:
       "Embarrassingly white lactose flavor.\nSaid to be Ralsei's favorite on the bottle.",
+    overworld: {
+      healByCharacter: { [CHARACTERS.RALSEI]: 0 },
+    },
     heal: 50,
+    healByCharacter: { [CHARACTERS.RALSEI]: 200 },
   },
   [CONSUMABLES.SHIKA_COLA]: {
     displayName: 'Shikacola',

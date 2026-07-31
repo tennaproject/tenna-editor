@@ -1,8 +1,9 @@
-import type { ReactNode } from 'react';
+import { Fragment, type ReactNode } from 'react';
 import {
   PARTY_MEMBERS,
   type CharacterIndex,
   type ConsumableIndex,
+  type HealAmounts,
 } from '@data';
 import { useSave } from '@store';
 import {
@@ -50,7 +51,58 @@ interface HealRowProps {
   showAmounts: boolean;
 }
 
-// Exclusive to using Scarlixir on Noelle
+interface HealContext {
+  label: string;
+  entries: HealEntry[];
+}
+
+interface HealGridProps {
+  contexts: HealContext[];
+  extraHeal?: ExtraHeal;
+}
+
+function HealGrid({ contexts, extraHeal }: HealGridProps) {
+  return (
+    <div className="grid grid-cols-[repeat(4,2.75rem)] items-center justify-center gap-x-2 gap-y-1">
+      {PARTY_MEMBERS.map((character) => (
+        <span
+          key={character}
+          title={characterHelpers.getById(character).displayName}
+          className={mergeClass(
+            'relative inline-flex h-10 w-10 shrink-0 items-center justify-center justify-self-center',
+            getCharacterColor(character).text,
+          )}
+        >
+          <CharacterIcon character={character} />
+          {extraHeal?.host === character && (
+            <ExtraHealBadge extraHeal={extraHeal} />
+          )}
+        </span>
+      ))}
+
+      {contexts.map(({ label, entries }) => (
+        <Fragment key={label}>
+          <span className="col-span-4 pt-1 text-center text-sm text-text-1">
+            {label}
+          </span>
+          {entries.map(({ character, amount }) => (
+            <span
+              key={character}
+              className={mergeClass(
+                'text-sm justify-self-center',
+                amount ? getCharacterColor(character).text : 'text-text-3',
+              )}
+            >
+              {amount ?? 0}
+            </span>
+          ))}
+        </Fragment>
+      ))}
+    </div>
+  );
+}
+
+// Used for a few items when used on Noelle in the overworld
 function ExtraHealBadge({ extraHeal }: { extraHeal: ExtraHeal }) {
   const color = getCharacterColor(extraHeal.character).text;
   const name = characterHelpers.getById(extraHeal.character).displayName;
@@ -135,36 +187,113 @@ export function ConsumableTooltipContent({
 
   if (!meta || !translated) return null;
 
-  const healEntries = PARTY_MEMBERS.map((character) => {
-    const heal = meta.healByCharacter?.[character] ?? meta.heal;
-    const amount =
-      heal !== undefined
-        ? heal >= 999
-          ? 'MAX'
-          : `${heal}`
-        : meta.revivePercent !== undefined
-          ? `${meta.revivePercent}%`
-          : undefined;
+  const resolveAmount = (
+    amounts: HealAmounts | undefined,
+    character: CharacterIndex,
+  ) => {
+    if (!amounts) return undefined;
 
-    return { character, amount };
-  });
-  const restoresAnyone = healEntries.some((entry) => entry.amount);
+    const characterPercent = amounts.healPercentByCharacter?.[character];
+    if (characterPercent !== undefined)
+      return { value: characterPercent, percent: true };
 
-  const heals = meta.heal !== undefined || !!meta.healByCharacter;
+    const characterFlat = amounts.healByCharacter?.[character];
+    if (characterFlat !== undefined)
+      return { value: characterFlat, percent: false };
+
+    if (amounts.healPercent !== undefined)
+      return { value: amounts.healPercent, percent: true };
+
+    if (amounts.heal !== undefined)
+      return { value: amounts.heal, percent: false };
+
+    return undefined;
+  };
+
+  const format = (amount: ReturnType<typeof resolveAmount>) => {
+    if (!amount)
+      return meta.revivePercent !== undefined
+        ? `${meta.revivePercent}%`
+        : undefined;
+
+    if (amount.percent) return `${amount.value}%`;
+
+    return amount.value >= 999 ? 'MAX' : `${amount.value}`;
+  };
+
+  const healEntries = PARTY_MEMBERS.map((character) => ({
+    character,
+    amount: format(resolveAmount(meta, character)),
+  }));
+
+  const resolvedOverworld = meta.overworld
+    ? PARTY_MEMBERS.map((character) => ({
+        character,
+        amount: format(
+          resolveAmount(meta.overworld, character) ??
+            resolveAmount(meta, character),
+        ),
+      }))
+    : undefined;
+
+  const overworldEntries = resolvedOverworld?.some(
+    (entry, index) => entry.amount !== healEntries[index].amount,
+  )
+    ? resolvedOverworld
+    : undefined;
+
+  const contexts: HealContext[] = overworldEntries
+    ? [
+        {
+          label: t('ui.tooltip.overworld', 'Overworld'),
+          entries: overworldEntries,
+        },
+        { label: t('ui.tooltip.inBattle', 'In Battle'), entries: healEntries },
+      ]
+    : [{ label: '', entries: healEntries }];
+
+  const restoresAnyone = contexts.some((context) =>
+    context.entries.some((entry) => entry.amount),
+  );
+
+  const heals =
+    meta.heal !== undefined ||
+    !!meta.healByCharacter ||
+    meta.healPercent !== undefined ||
+    !!meta.healPercentByCharacter;
   const revives = meta.revivePercent !== undefined;
+  // Uniform means every character gets the same value
   const isUniform =
-    healEntries.every((entry) => entry.amount === healEntries[0].amount) &&
-    !meta.extraHeal &&
-    !(heals && revives);
+    contexts.every((context) =>
+      context.entries.every(
+        (entry) => entry.amount === context.entries[0].amount,
+      ),
+    ) && !meta.extraHeal;
 
-  const uniformLine =
+  const healsLabel = meta.healsParty
+    ? t('ui.tooltip.healsTeam', 'Heals team')
+    : t('ui.tooltip.heals', 'Heals');
+  const revivesLabel = meta.healsParty
+    ? t('ui.tooltip.revivesTeam', 'Revives team')
+    : t('ui.tooltip.revives', 'Revives');
+
+  const formatAmount = (amount: string | undefined) => {
+    if (revives && !heals) return `${revivesLabel} ${meta.revivePercent}% HP`;
+
+    if (amount === 'MAX') return `${healsLabel} MAX HP`;
+    if (amount?.endsWith('%')) return `${healsLabel} ${amount} HP`;
+
+    return `${healsLabel} ${amount}HP`;
+  };
+
+  const uniformLines =
     restoresAnyone && isUniform
-      ? revives
-        ? `${t('ui.tooltip.revives', 'Revives to')} ${meta.revivePercent}% HP`
-        : healEntries[0].amount === 'MAX'
-          ? `${t('ui.tooltip.heals', 'Heals')} MAX HP`
-          : `${t('ui.tooltip.heals', 'Heals')} ${healEntries[0].amount}HP`
-      : undefined;
+      ? contexts.map(({ label, entries }) => ({
+          key: label,
+          label,
+          text: formatAmount(entries[0].amount),
+        }))
+      : [];
 
   return (
     <div className="flex flex-col gap-2">
@@ -181,21 +310,27 @@ export function ConsumableTooltipContent({
         )}
       </div>
 
-      {restoresAnyone && (
-        <HealRow
-          entries={healEntries}
-          extraHeal={meta.extraHeal}
-          showAmounts={!uniformLine}
-        />
-      )}
+      {restoresAnyone &&
+        (overworldEntries && !uniformLines.length ? (
+          <HealGrid contexts={contexts} extraHeal={meta.extraHeal} />
+        ) : (
+          <HealRow
+            entries={healEntries}
+            extraHeal={meta.extraHeal}
+            showAmounts={!uniformLines.length}
+          />
+        ))}
 
-      {uniformLine && (
-        <span className="text-sm text-green text-center">{uniformLine}</span>
-      )}
+      {uniformLines.map(({ key, label, text }) => (
+        <div key={key} className="flex flex-col items-center">
+          {label && <span className="text-xs text-text-2">{label}</span>}
+          <span className="text-sm text-green">{text}</span>
+        </div>
+      ))}
 
-      {!uniformLine && meta.revivePercent !== undefined && (
+      {revives && (heals || !uniformLines.length) && (
         <span className="text-sm text-green text-center">
-          {t('ui.tooltip.revives', 'Revives to')} {meta.revivePercent}% HP
+          {revivesLabel} {meta.revivePercent}% HP
         </span>
       )}
 

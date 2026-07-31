@@ -59,7 +59,7 @@ export type ArmorName = keyof typeof ARMORS;
 interface ArmorProperties
   extends
     BaseProperties,
-    WithOverrides<ArmorProperties, { chapter: ChapterIndex; }> {
+    WithOverrides<ArmorProperties, { chapter: ChapterIndex }> {
   stats: EquipmentStats;
   icon?: EquipmentIconIndex;
   ability?: EquipmentAbilityIndex;
@@ -86,7 +86,8 @@ export const ARMORS_META: Record<ArmorIndex, ArmorProperties> = {
   },
   [ARMORS.PINK_RIBBON]: {
     displayName: 'Pink Ribbon',
-    description: 'A cute hair ribbon that increases\nthe range bullets increase tension.',
+    description:
+      'A cute hair ribbon that increases\nthe range bullets increase tension.',
     stats: { attack: 0, defence: 1, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
     ability: EQUIPMENT_ABILITIES.GRAZE_AREA,
@@ -94,7 +95,8 @@ export const ARMORS_META: Record<ArmorIndex, ArmorProperties> = {
     getOverrides: ({ chapter }) => {
       if (chapter === 3) {
         return {
-          description: 'A cute hair ribbon. Increases the range\nat which bullets raise tension.',
+          description:
+            'A cute hair ribbon. Increases the range\nat which bullets raise tension.',
         };
       }
 
@@ -116,13 +118,15 @@ export const ARMORS_META: Record<ArmorIndex, ArmorProperties> = {
   },
   [ARMORS.MOUSE_TOKEN]: {
     displayName: 'MouseToken',
-    description: 'A golden coin with a once-powerful mousewizard engraved on it.',
+    description:
+      'A golden coin with a once-powerful mousewizard engraved on it.',
     stats: { attack: 0, defence: 0, magic: 2 },
     icon: EQUIPMENT_ICONS.ARMOR,
     getOverrides: ({ chapter }) => {
       if (chapter === 3) {
         return {
-          description: 'A golden coin with a once-powerful mouse\nwizard engraved on it.',
+          description:
+            'A golden coin with a once-powerful mouse\nwizard engraved on it.',
         };
       }
 
@@ -144,7 +148,7 @@ export const ARMORS_META: Record<ArmorIndex, ArmorProperties> = {
   },
   [ARMORS.TWIN_RIBBON]: {
     displayName: 'TwinRibbon',
-    description: 'Two ribbons. You\'ll have to put\nyour hair into pigtails.',
+    description: "Two ribbons. You'll have to put\nyour hair into pigtails.",
     stats: { attack: 0, defence: 3, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
     ability: EQUIPMENT_ABILITIES.GRAZE_AREA,
@@ -152,25 +156,29 @@ export const ARMORS_META: Record<ArmorIndex, ArmorProperties> = {
   },
   [ARMORS.GLOW_WRIST]: {
     displayName: 'GlowWrist',
-    description: 'A tough bracelet made of green wires,\nand studded with sharp glowing lights.',
+    description:
+      'A tough bracelet made of green wires,\nand studded with sharp glowing lights.',
     stats: { attack: 0, defence: 2, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
   },
   [ARMORS.CHAIN_MAIL]: {
     displayName: 'ChainMail',
-    description: 'Chain-armor. Send it to 10 others\nor it\'ll lose its defensive rating',
+    description:
+      "Chain-armor. Send it to 10 others\nor it'll lose its defensive rating",
     stats: { attack: 0, defence: 3, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
   },
   [ARMORS.B_SHOT_BOWTIE]: {
     displayName: 'B.ShotBowtie',
-    description: 'A handsome bowtie. Looks like the brand\nname has been cut off.',
+    description:
+      'A handsome bowtie. Looks like the brand\nname has been cut off.',
     stats: { attack: 0, defence: 2, magic: 1 },
     icon: EQUIPMENT_ICONS.ARMOR,
   },
   [ARMORS.SPIKE_BAND]: {
     displayName: 'SpikeBand',
-    description: 'A black wristband covered in spikes.\nHas the tendency to get stuck to itself.',
+    description:
+      'A black wristband covered in spikes.\nHas the tendency to get stuck to itself.',
     stats: { attack: 2, defence: 1, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
   },
@@ -191,7 +199,8 @@ export const ARMORS_META: Record<ArmorIndex, ArmorProperties> = {
   },
   [ARMORS.MANNEQUIN]: {
     displayName: 'Mannequin',
-    description: 'It\'s a mannequin with the clothes\npermanently attached. Useless',
+    description:
+      "It's a mannequin with the clothes\npermanently attached. Useless",
     stats: { attack: 0, defence: 0, magic: 0 },
     icon: EQUIPMENT_ICONS.EMPTY,
     ability: EQUIPMENT_ABILITIES.UNKNOWN_ARMOR,
@@ -205,7 +214,8 @@ export const ARMORS_META: Record<ArmorIndex, ArmorProperties> = {
   },
   [ARMORS.SKY_MANTLE]: {
     displayName: 'SkyMantle',
-    description: 'A cape that shimmers fluorescently.\nProtects against Elec and Holy attacks.',
+    description:
+      'A cape that shimmers fluorescently.\nProtects against Elec and Holy attacks.',
     stats: { attack: 0, defence: 1, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
     ability: EQUIPMENT_ABILITIES.ELEC_HOLY,
@@ -219,26 +229,30 @@ export const ARMORS_META: Record<ArmorIndex, ArmorProperties> = {
   },
   [ARMORS.FRAYED_BOWTIE]: {
     displayName: 'FrayedBowtie',
-    description: 'An old bowtie. It seems to have\nlost much of its defensive value.',
+    description:
+      'An old bowtie. It seems to have\nlost much of its defensive value.',
     stats: { attack: 1, defence: 1, magic: 1 },
     icon: EQUIPMENT_ICONS.ARMOR,
   },
   [ARMORS.DEALMAKER]: {
     displayName: 'Dealmaker',
-    description: 'Fashionable pink and yellow glasses.\nGreatly increase $ gained, and...?',
+    description:
+      'Fashionable pink and yellow glasses.\nGreatly increase $ gained, and...?',
     stats: { attack: 0, defence: 5, magic: 5 },
     icon: EQUIPMENT_ICONS.ARMOR,
     ability: EQUIPMENT_ABILITIES.MONEY_30_UP,
   },
   [ARMORS.ROYAL_PIN]: {
     displayName: 'RoyalPin',
-    description: 'A brooch engraved with Queen\'s face.\nCareful of the sharp part.',
+    description:
+      "A brooch engraved with Queen's face.\nCareful of the sharp part.",
     stats: { attack: 0, defence: 3, magic: 1 },
     icon: EQUIPMENT_ICONS.ARMOR,
   },
   [ARMORS.SHADOW_MANTLE]: {
     displayName: 'ShadowMantle',
-    description: 'Shadows slip off like water.\nGreatly protects against Dark and Star attacks.',
+    description:
+      'Shadows slip off like water.\nGreatly protects against Dark and Star attacks.',
     stats: { attack: 0, defence: 5, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
     ability: EQUIPMENT_ABILITIES.DARK_STAR,
@@ -248,7 +262,8 @@ export const ARMORS_META: Record<ArmorIndex, ArmorProperties> = {
   },
   [ARMORS.LODE_STONE]: {
     displayName: 'LodeStone',
-    description: 'A lodestone token shaped like a snail\'s shell.\nEnemy bullets give a bit more TP.',
+    description:
+      "A lodestone token shaped like a snail's shell.\nEnemy bullets give a bit more TP.",
     stats: { attack: 0, defence: 2, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
     ability: EQUIPMENT_ABILITIES.TP_GAIN,
@@ -256,91 +271,105 @@ export const ARMORS_META: Record<ArmorIndex, ArmorProperties> = {
   },
   [ARMORS.GINGER_GUARD]: {
     displayName: 'GingerGuard',
-    description: 'A steel bangle tempered by extreme flame.\nIts shape is humanoid in nature.',
+    description:
+      'A steel bangle tempered by extreme flame.\nIts shape is humanoid in nature.',
     stats: { attack: 0, defence: 3, magic: 0 },
     icon: EQUIPMENT_ICONS.GINGER,
   },
   [ARMORS.BLUE_RIBBON]: {
     displayName: 'BlueRibbon',
-    description: 'A blue cheer bow. When the user uses a\nhealing move, it recovers slightly more HP.',
+    description:
+      'A blue cheer bow. When the user uses a\nhealing move, it recovers slightly more HP.',
     stats: { attack: 0, defence: 1, magic: 1 },
     icon: EQUIPMENT_ICONS.ARMOR,
     ability: EQUIPMENT_ABILITIES.HEAL_UP,
   },
   [ARMORS.TENNA_TIE]: {
     displayName: 'TennaTie',
-    description: 'A giant, heavy-duty, bullet-proof tie.\nHow to even wear it...?',
+    description:
+      'A giant, heavy-duty, bullet-proof tie.\nHow to even wear it...?',
     stats: { attack: 0, defence: 5, magic: -2 },
     icon: EQUIPMENT_ICONS.ARMOR,
   },
   [ARMORS.WAFERGUARD]: {
     displayName: 'Waferguard',
-    description: 'Although it looks brittle, it contains a magical\nenergy that blunts damage on impact. +4DF',
+    description:
+      'Although it looks brittle, it contains a magical\nenergy that blunts damage on impact. +4DF',
     stats: { attack: 0, defence: 4, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
   },
   [ARMORS.MYSTIC_BAND]: {
     displayName: 'MysticBand',
-    description: 'A silver armlet stained with amber.\nIncreases magic only. MAG +4',
+    description:
+      'A silver armlet stained with amber.\nIncreases magic only. MAG +4',
     stats: { attack: 0, defence: 0, magic: 4 },
     icon: EQUIPMENT_ICONS.ARMOR,
   },
   [ARMORS.POWER_BAND]: {
     displayName: 'PowerBand',
-    description: 'A silver armlet stained with red essence.\nIncreases strength only. ATK +4',
+    description:
+      'A silver armlet stained with red essence.\nIncreases strength only. ATK +4',
     stats: { attack: 4, defence: 0, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
   },
   [ARMORS.PRINCESS_RBN]: {
     displayName: 'PrincessRBN',
-    description: 'Elegant lace ribbon with gloves,\ndelicate enough to see through. +4 DEF +2 ATK',
+    description:
+      'Elegant lace ribbon with gloves,\ndelicate enough to see through. +4 DEF +2 ATK',
     stats: { attack: 2, defence: 4, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
     ability: EQUIPMENT_ABILITIES.ELEGANCE,
   },
   [ARMORS.GOLD_WIDOW]: {
     displayName: 'GoldWidow',
-    description: 'A spider made of gold. It gathers coins\ninto it, reducing $ gained.',
+    description:
+      'A spider made of gold. It gathers coins\ninto it, reducing $ gained.',
     stats: { attack: 1, defence: 5, magic: 1 },
     icon: EQUIPMENT_ICONS.ARMOR,
     ability: EQUIPMENT_ABILITIES.MONEY_10_DOWN,
   },
   [ARMORS.MONARCH_RBN]: {
     displayName: 'MonarchRBN',
-    description: 'A ribbon like the wings of a butterfly.\nIncreases healing ability when equipped.',
+    description:
+      'A ribbon like the wings of a butterfly.\nIncreases healing ability when equipped.',
     stats: { attack: 0, defence: 6, magic: 2 },
     icon: EQUIPMENT_ICONS.ARMOR,
     ability: EQUIPMENT_ABILITIES.HAS_ANTENNA,
   },
   [ARMORS.TRUE_TIE]: {
     displayName: 'TrueTie',
-    description: 'The genuine tie worn by a forgotten TV star.\nDefends against the Puppet&Cat element.',
+    description:
+      'The genuine tie worn by a forgotten TV star.\nDefends against the Puppet&Cat element.',
     stats: { attack: 1, defence: 5, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
     ability: EQUIPMENT_ABILITIES.CAT_DEFEND,
   },
   [ARMORS.DOG_WIDOW]: {
     displayName: 'DogWidow',
-    description: 'A brooch in the shape of a golden pooch.\nYou lose almost all money after battle.',
+    description:
+      'A brooch in the shape of a golden pooch.\nYou lose almost all money after battle.',
     stats: { attack: 0, defence: 6, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
     ability: EQUIPMENT_ABILITIES.MONEY_90_DOWN,
   },
   [ARMORS.RED_RIBBON]: {
     displayName: 'RedRibbon',
-    description: 'A ribbon with an inscription to drive\naway resident spirits, if they don\'t pay.',
+    description:
+      "A ribbon with an inscription to drive\naway resident spirits, if they don't pay.",
     stats: { attack: 0, defence: 4, magic: 1 },
     icon: EQUIPMENT_ICONS.ARMOR,
   },
   [ARMORS.NETSKIE_HAT]: {
     displayName: 'NetskieHat',
-    description: 'A white-yellow hat for someone with fox\nears. Somehow you can wear more than one.',
+    description:
+      'A white-yellow hat for someone with fox\nears. Somehow you can wear more than one.',
     stats: { attack: 0, defence: 6, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
   },
   [ARMORS.SETH_SPECS]: {
     displayName: 'SethSpecs',
-    description: 'A tactician\'s glasses. Become invulnerable for\nlonger after being damaged.',
+    description:
+      "A tactician's glasses. Become invulnerable for\nlonger after being damaged.",
     stats: { attack: 0, defence: 4, magic: 6 },
     icon: EQUIPMENT_ICONS.SETH,
     ability: EQUIPMENT_ABILITIES.INV_TIME_UP,
@@ -354,14 +383,16 @@ export const ARMORS_META: Record<ArmorIndex, ArmorProperties> = {
   },
   [ARMORS.O_GLOVE]: {
     displayName: 'O.Glove',
-    description: 'The glove of a brave fighter.\nSusie\'s SCYTHEMARE will cost less TP. ', // Trailing space from the game's string
+    description:
+      "The glove of a brave fighter.\nSusie's SCYTHEMARE will cost less TP. ", // Trailing space from the game's string
     stats: { attack: 4, defence: 8, magic: 0 },
     icon: EQUIPMENT_ICONS.ORANGE,
     ability: EQUIPMENT_ABILITIES.SCYTHE_TP_DOWN,
   },
   [ARMORS.GREEN_APRON]: {
     displayName: 'GreenApron',
-    description: 'The apron of a kind chef. The wearer\nrecovers 16% of their max HP after defending.',
+    description:
+      'The apron of a kind chef. The wearer\nrecovers 16% of their max HP after defending.',
     stats: { attack: 0, defence: 7, magic: 0 },
     icon: EQUIPMENT_ICONS.GREEN,
     ability: EQUIPMENT_ABILITIES.DEFEND_HEAL,
