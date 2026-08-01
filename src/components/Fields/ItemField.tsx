@@ -7,6 +7,7 @@ import {
   EquipmentIcon,
   EquipmentTooltipContent,
   InlineGroup,
+  KeyItemTooltipContent,
 } from '@components';
 import {
   EQUIPMENT_STAT_ICONS,
@@ -301,6 +302,14 @@ export function ItemField({ type, slot, label }: ItemFieldProps) {
 
       return meta?.displayName ? (
         <ConsumableTooltipContent id={currentValue as ConsumableIndex} />
+      ) : undefined;
+    }
+
+    if (type === 'keyItem') {
+      const meta = keyItemHelpers.getById(currentValue as KeyItemIndex);
+
+      return meta?.displayName ? (
+        <KeyItemTooltipContent id={currentValue as KeyItemIndex} />
       ) : undefined;
     }
 

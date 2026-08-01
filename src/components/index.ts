@@ -37,6 +37,7 @@ export * from './EquipmentIcon';
 export * from './CharacterIcon';
 export * from './ConsumableTooltip';
 export * from './EquipmentTooltip';
+export * from './KeyItemTooltip';
 export * from './SpellTooltip';
 export * from './Tooltip';
 export * from './FieldWrapper';
