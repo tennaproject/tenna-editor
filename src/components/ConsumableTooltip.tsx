@@ -1,14 +1,10 @@
 import { Fragment, type ReactNode } from 'react';
-import {
-  PARTY_MEMBERS,
-  type CharacterIndex,
-  type ConsumableIndex,
-  type HealAmounts,
-} from '@data';
+import type { CharacterIndex, ConsumableIndex, HealAmounts } from '@data';
 import { useSave } from '@store';
 import {
   characterHelpers,
   consumableHelpers,
+  getChapterPartyMembers,
   resolveChapterMeta,
 } from '@utils/data-helpers';
 import { getCharacterColor } from '@utils/get-character-color';
@@ -62,9 +58,14 @@ interface HealGridProps {
 }
 
 function HealGrid({ contexts, extraHeal }: HealGridProps) {
+  const members = contexts[0].entries.map((entry) => entry.character);
+
   return (
-    <div className="grid grid-cols-[repeat(4,2.75rem)] items-center justify-center gap-x-2 gap-y-1">
-      {PARTY_MEMBERS.map((character) => (
+    <div
+      className="grid items-center justify-center gap-x-2 gap-y-1"
+      style={{ gridTemplateColumns: `repeat(${members.length}, 2.75rem)` }}
+    >
+      {members.map((character) => (
         <span
           key={character}
           title={characterHelpers.getById(character).displayName}
@@ -82,7 +83,10 @@ function HealGrid({ contexts, extraHeal }: HealGridProps) {
 
       {contexts.map(({ label, entries }) => (
         <Fragment key={label}>
-          <span className="col-span-4 pt-1 text-center text-sm text-text-1">
+          <span
+            className="pt-1 text-center text-sm text-text-1"
+            style={{ gridColumn: `span ${members.length}` }}
+          >
             {label}
           </span>
           {entries.map(({ character, amount }) => (
@@ -221,13 +225,15 @@ export function ConsumableTooltipContent({
     return amount.value >= 999 ? 'MAX' : `${amount.value}`;
   };
 
-  const healEntries = PARTY_MEMBERS.map((character) => ({
+  const members = getChapterPartyMembers(chapter);
+
+  const healEntries = members.map((character) => ({
     character,
     amount: format(resolveAmount(meta, character)),
   }));
 
   const resolvedOverworld = meta.overworld
-    ? PARTY_MEMBERS.map((character) => ({
+    ? members.map((character) => ({
         character,
         amount: format(
           resolveAmount(meta.overworld, character) ??

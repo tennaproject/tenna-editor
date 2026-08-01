@@ -23,6 +23,7 @@ import {
   PHONECONTACTS_META,
   ENEMIES,
   ENEMIES_META,
+  PARTY_MEMBERS,
   type ArmorIndex,
   type WeaponIndex,
 } from '@data';
@@ -120,6 +121,13 @@ export const roomHelpers = createDataHelpers(ROOMS, ROOMS_META);
 
 // Characters
 export const characterHelpers = createDataHelpers(CHARACTERS, CHARACTERS_META);
+
+export function getChapterPartyMembers(chapter: ChapterIndex) {
+  const characters = chapterHelpers.getById(chapter).content.characters;
+
+  return PARTY_MEMBERS.filter((character) => characters.has(character));
+}
+
 export const spellHelpers = createDataHelpers(SPELLS, SPELLS_META);
 export const enemyHelpers = createDataHelpers(ENEMIES, ENEMIES_META);
 

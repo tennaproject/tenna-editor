@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react';
 import {
   CHARACTERS,
-  PARTY_MEMBERS,
   EQUIPMENT_ABILITIES_META,
   EQUIPMENT_STAT_ICONS,
   EQUIPMENT_STAT_ORDER,
@@ -17,6 +16,7 @@ import { useSave } from '@store';
 import {
   armorHelpers,
   characterHelpers,
+  getChapterPartyMembers,
   weaponHelpers,
 } from '@utils/data-helpers';
 import { getCharacterColor } from '@utils/get-character-color';
@@ -40,7 +40,11 @@ type EquipmentType = 'weapon' | 'armor';
 
 type Translate = (key: string, fallback: string) => string;
 
-function useEquippableBy(type: EquipmentType, id: number) {
+function useEquippableBy(
+  type: EquipmentType,
+  id: number,
+  chapter: ChapterIndex,
+) {
   const inputs: Record<
     number,
     ReturnType<typeof useCharacterOverrideInputs>
@@ -51,7 +55,7 @@ function useEquippableBy(type: EquipmentType, id: number) {
     [CHARACTERS.NOELLE]: useCharacterOverrideInputs(CHARACTERS.NOELLE),
   };
 
-  return PARTY_MEMBERS.map((character) => {
+  return getChapterPartyMembers(chapter).map((character) => {
     const meta = characterHelpers.getById(character);
     const overrides = meta.getOverrides?.(inputs[character]);
     const allowed =
@@ -190,7 +194,7 @@ export function EquipmentTooltipContent({
     meta?.abilityValues,
   );
 
-  const equippableBy = useEquippableBy(type, id);
+  const equippableBy = useEquippableBy(type, id, chapter);
 
   if (!meta || !translated) return null;
 
