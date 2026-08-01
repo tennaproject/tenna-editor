@@ -38,6 +38,7 @@ export * from './CharacterIcon';
 export * from './ConsumableTooltip';
 export * from './EquipmentTooltip';
 export * from './KeyItemTooltip';
+export * from './LightWorldItemTooltip';
 export * from './SpellTooltip';
 export * from './Tooltip';
 export * from './FieldWrapper';

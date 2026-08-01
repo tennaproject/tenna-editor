@@ -8,6 +8,7 @@ import {
   EquipmentTooltipContent,
   InlineGroup,
   KeyItemTooltipContent,
+  LightWorldItemTooltipContent,
 } from '@components';
 import {
   EQUIPMENT_STAT_ICONS,
@@ -310,6 +311,18 @@ export function ItemField({ type, slot, label }: ItemFieldProps) {
 
       return meta?.displayName ? (
         <KeyItemTooltipContent id={currentValue as KeyItemIndex} />
+      ) : undefined;
+    }
+
+    if (type === 'lightWorldItem') {
+      const meta = lightWorldItemHelpers.getById(
+        currentValue as LightWorldItemIndex,
+      );
+
+      return meta?.displayName ? (
+        <LightWorldItemTooltipContent
+          id={currentValue as LightWorldItemIndex}
+        />
       ) : undefined;
     }
 

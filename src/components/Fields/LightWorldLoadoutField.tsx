@@ -1,4 +1,9 @@
-import { Select, type SelectItem, FieldWrapper } from '@components';
+import {
+  Select,
+  type SelectItem,
+  FieldWrapper,
+  LightWorldItemTooltipContent,
+} from '@components';
 import { type LightWorldItemIndex } from '@data';
 import { useSave } from '@store';
 import { getLightWorldLoadoutOptions } from '@utils/chapter-options';
@@ -95,6 +100,11 @@ export function LightWorldLoadoutField({
         }}
         items={selectItems}
         className="w-full"
+        tooltip={
+          isExisting && current !== 0 ? (
+            <LightWorldItemTooltipContent id={current as LightWorldItemIndex} />
+          ) : undefined
+        }
       />
     </FieldWrapper>
   );
