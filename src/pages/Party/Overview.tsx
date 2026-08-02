@@ -14,6 +14,8 @@ import {
 import {
   CHAPTERS,
   CHARACTERS,
+  EQUIPMENT_STAT_ICONS,
+  EQUIPMENT_STAT_ORDER,
   type ArmorIndex,
   type CharacterIndex,
   type WeaponIndex,
@@ -24,6 +26,7 @@ import {
   armorHelpers,
   chapterHelpers,
   characterHelpers,
+  getEffectiveCharacterStats,
   getPartySlotBaseOptions,
   mergeClass,
   getCharacterColor,
@@ -61,13 +64,57 @@ function EquipmentRow({ type, id }: EquipmentRowProps) {
     t,
   ).displayName;
 
+  const isEmpty = id === 0;
+
   return (
     <EquipmentTooltip type={type} id={id}>
       <InlineGroup className="gap-1">
         {meta?.icon !== undefined && <EquipmentIcon icon={meta.icon} />}
-        <span className="text-text-2 text-sm">{displayName}</span>
+        <span
+          className={mergeClass(
+            'text-base',
+            isEmpty ? 'text-text-3' : 'text-text-2',
+          )}
+        >
+          {displayName}
+        </span>
       </InlineGroup>
     </EquipmentTooltip>
+  );
+}
+
+interface PartyStatsRowProps {
+  attack: number;
+  defence: number;
+  magic: number;
+}
+
+function PartyStatsRow({ attack, defence, magic }: PartyStatsRowProps) {
+  const stats = { attack, defence, magic };
+
+  return (
+    <InlineGroup className="gap-3">
+      {EQUIPMENT_STAT_ORDER.map((stat) => {
+        const noStat = stats[stat] <= 0;
+
+        return (
+          <InlineGroup key={stat} className="gap-1">
+            <EquipmentIcon
+              icon={EQUIPMENT_STAT_ICONS[stat]}
+              className={noStat ? 'opacity-30' : undefined}
+            />
+            <span
+              className={mergeClass(
+                'text-sm',
+                noStat ? 'text-text-3' : 'text-text-2',
+              )}
+            >
+              {stats[stat]}
+            </span>
+          </InlineGroup>
+        );
+      })}
+    </InlineGroup>
   );
 }
 
@@ -204,6 +251,10 @@ function CharacterCard({
   const titleDescription = titleKeyPrefix
     ? t(`${titleKeyPrefix}.description`, characterMeta.title.description)
     : characterMeta.title.description;
+  const stats = savedCharacter
+    ? getEffectiveCharacterStats(savedCharacter)
+    : undefined;
+  const hidden = !character || !isExisting;
 
   return (
     <Section
@@ -211,7 +262,7 @@ function CharacterCard({
       className="flex flex-col h-[450px] lg:h-full min-h-[450px] max-h-[900px] w-full"
     >
       <Card className="flex flex-col flex-1">
-        <div className="flex flex-col flex-1 py-6 lg:py-10 justify-between items-center">
+        <div className="flex flex-col flex-1 py-6 lg:py-10 items-center gap-4">
           <div className="flex flex-col justify-center items-center gap-2">
             <Heading level={1}>{slot + 1}</Heading>
             <Heading level={5}>{t('ui.party.member', 'MEMBER')}</Heading>
@@ -230,27 +281,40 @@ function CharacterCard({
               {translatedCharacter.displayName}
             </Heading>
           </div>
-          <div className="flex flex-col justify-between items-center">
-            <Heading
-              level={4}
-              className={mergeClass(
-                !character || !isExisting ? 'opacity-0' : '',
-              )}
+
+          <div className="flex flex-col items-center gap-9 -mt-2">
+            <div className="flex flex-col items-center gap-1">
+              <Heading
+                level={4}
+                className={mergeClass(hidden ? 'opacity-0' : '')}
+              >
+                {formatTranslation(t('ui.party.level', 'LV{level}'), {
+                  level: characterMeta.lv,
+                })}{' '}
+                {titleName}
+              </Heading>
+              <p className="text-text-2 text-sm text-center max-w-xs">
+                {titleDescription}
+              </p>
+            </div>
+
+            <div
+              className={mergeClass(hidden ? 'opacity-0' : '')}
+              aria-hidden={hidden}
             >
-              {formatTranslation(t('ui.party.level', 'LV{level}'), {
-                level: characterMeta.lv,
-              })}{' '}
-              {titleName}
-            </Heading>
-            <p className="text-text-2 text-sm text-center max-w-xs">
-              {titleDescription}
-            </p>
+              <PartyStatsRow
+                attack={stats?.attack ?? 0}
+                defence={stats?.defence ?? 0}
+                magic={stats?.magic ?? 0}
+              />
+            </div>
+
             <div
               className={mergeClass(
-                'flex flex-col items-left mt-4',
-                !character || !isExisting ? 'opacity-0' : '',
+                'flex flex-col items-start gap-1',
+                hidden ? 'opacity-0' : '',
               )}
-              aria-hidden={!character || !isExisting}
+              aria-hidden={hidden}
             >
               <EquipmentRow type="weapon" id={savedCharacter?.weapon ?? 0} />
               <EquipmentRow
@@ -262,9 +326,21 @@ function CharacterCard({
                 id={savedCharacter?.secondaryArmor ?? 0}
               />
             </div>
+
+            <span
+              className={mergeClass(
+                'text-lg text-text-2',
+                hidden ? 'opacity-0' : '',
+              )}
+              aria-hidden={hidden}
+            >
+              {t('ui.stats.hp', 'HP')}{': '}
+              {savedCharacter?.health} / {savedCharacter?.maxHealth}
+            </span>
           </div>
 
           <Select
+            className="mt-auto"
             label={formatTranslation(t('ui.party.slot', 'Slot {slot}'), {
               slot: slot + 1,
             })}

@@ -87,7 +87,7 @@ function EquippableRow({ entries, t }: EquippableRowProps) {
                 : `${name} — ${t('ui.tooltip.cannotEquip', 'cannot equip')}`
             }
             className={mergeClass(
-              'inline-flex h-7 w-7 shrink-0 items-center justify-center',
+              'inline-flex h-8 w-8 shrink-0 items-center justify-center',
               canEquip
                 ? getCharacterColor(character).text
                 : 'text-text-3 grayscale',

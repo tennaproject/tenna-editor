@@ -93,7 +93,12 @@ export const ARMORS_META: Record<ArmorIndex, ArmorProperties> = {
     ability: EQUIPMENT_ABILITIES.GRAZE_AREA,
     abilityValues: { value: 20 },
     getOverrides: ({ chapter }) => {
-      if (chapter === 3) {
+      if (chapter === 1) {
+        return {
+          unused: true,
+        };
+      }
+      else if (chapter === 3) {
         return {
           description:
             'A cute hair ribbon. Increases the range\nat which bullets raise tension.',

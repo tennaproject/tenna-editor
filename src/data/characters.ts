@@ -45,7 +45,7 @@ export const CHARACTER_TITLES: Record<
   EMPTY: {
     EMPTY: {
       name: 'Empty',
-      description: 'This is empty slot',
+      description: 'This is an empty slot',
     },
   },
   KRIS: {
