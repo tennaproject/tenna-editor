@@ -114,7 +114,6 @@ interface EquipmentTooltipProps extends EquipmentTooltipContentProps {
 
 interface EquipmentAbilityTooltipProps {
   ability: EquipmentAbilityIndex | undefined;
-  // Values from the item granting the ability; see resolveAbility.
   values?: AbilityValues;
   children: ReactNode;
   className?: string;
@@ -125,8 +124,6 @@ function resolveAbility(
   ability: EquipmentAbilityIndex | undefined,
   chapter: ChapterIndex,
   t: Translate,
-  // Supplied by whichever item granted the ability. Items sharing an ability at
-  // different values can each fill the same {token} with their own number.
   values?: AbilityValues,
 ) {
   if (ability === undefined) return undefined;
@@ -144,7 +141,6 @@ function resolveAbility(
   return {
     meta,
     displayName: translated.displayName,
-    // Interpolate after translating, so localised text keeps the same tokens.
     description:
       translated.description && values
         ? formatTranslation(translated.description, values)
