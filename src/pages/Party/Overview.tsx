@@ -334,7 +334,8 @@ function CharacterCard({
               )}
               aria-hidden={hidden}
             >
-              {t('ui.stats.hp', 'HP')}{': '}
+              {t('ui.stats.hp', 'HP')}
+              {': '}
               {savedCharacter?.health} / {savedCharacter?.maxHealth}
             </span>
           </div>

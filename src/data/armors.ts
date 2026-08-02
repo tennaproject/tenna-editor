@@ -97,8 +97,7 @@ export const ARMORS_META: Record<ArmorIndex, ArmorProperties> = {
         return {
           unused: true,
         };
-      }
-      else if (chapter === 3) {
+      } else if (chapter === 3) {
         return {
           description:
             'A cute hair ribbon. Increases the range\nat which bullets raise tension.',
