@@ -594,7 +594,6 @@ export const CONSUMABLES_META: Record<ConsumableIndex, ConsumableProperties> = {
     displayName: 'BitterTear',
     description:
       'Bitter water that fell in droplets from the sky.\nRecovers all HP.',
-    revivePercent: 100,
     heal: 999,
   },
   [CONSUMABLES.PUNCH_BOWL]: {
