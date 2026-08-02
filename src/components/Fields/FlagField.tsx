@@ -19,6 +19,7 @@ import {
   getGameColor,
   mergeClass,
   readFlagBitfield,
+  unusedLast,
   writeFlagBitfield,
 } from '@utils';
 import Markdown from 'react-markdown';
@@ -168,6 +169,7 @@ export function FlagField(props: FlagFieldProps) {
           id: `${value}`,
           label,
           value,
+          unused: valueRules.unusedValues?.has(Number(value)),
         });
       });
 
@@ -175,7 +177,8 @@ export function FlagField(props: FlagFieldProps) {
         (itemA, itemB) => Number(itemA.value) - Number(itemB.value),
       );
 
-      const selectedItem = selectItems.find(
+      const orderedItems = unusedLast(selectItems);
+      const selectedItem = orderedItems.find(
         (item) => Number(item.value) === currentValue,
       );
 
@@ -189,7 +192,7 @@ export function FlagField(props: FlagFieldProps) {
           label
         >
           <Select
-            items={selectItems}
+            items={orderedItems}
             placeholder={t('ui.flag.mapPlaceholder', 'Select value...')}
             label={description}
             defaultSelectedItem={selectedItem}

@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import {
   Card,
   Checkbox,
@@ -20,6 +21,70 @@ import {
 interface RecruitFieldProps {
   id: string;
   enemy: EnemyIndex;
+}
+
+const RECRUIT_MEDIA = import.meta.glob<string>(
+  '../../assets/deltarune/recruits/*.{png,gif,jpg,jpeg,webp}',
+  { eager: true, import: 'default', query: '?url' },
+);
+
+function getRecruitMediaSrc(enemyName: string): string | undefined {
+  const suffix = `/${enemyName.toLowerCase()}.`;
+  const path = Object.keys(RECRUIT_MEDIA).find((p) => p.includes(suffix));
+  return path ? RECRUIT_MEDIA[path] : undefined;
+}
+
+interface RecruitImageProps {
+  src: string;
+  recruited: boolean;
+}
+
+function RecruitImage({ src, recruited }: RecruitImageProps) {
+  const [scaledWidth, setScaledWidth] = useState<number>();
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const isAnimatable = /\.(gif|webp)$/i.test(src);
+  const freezeFrame = isAnimatable && !recruited;
+
+  useEffect(() => {
+    if (!freezeFrame) return;
+
+    const image = new Image();
+    image.onload = () => {
+      setScaledWidth(image.naturalWidth);
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      canvas.width = image.naturalWidth;
+      canvas.height = image.naturalHeight;
+      canvas.getContext('2d')?.drawImage(image, 0, 0);
+    };
+    image.src = src;
+  }, [src, freezeFrame]);
+
+  const sharedProps = {
+    style: scaledWidth ? { width: scaledWidth } : undefined,
+    className: mergeClass(
+      'max-w-none [image-rendering:pixelated]',
+      !recruited && 'grayscale opacity-50',
+    ),
+  };
+
+  return (
+    <div className="flex min-w-0 flex-1 items-end justify-center">
+      {freezeFrame ? (
+        <canvas ref={canvasRef} aria-hidden {...sharedProps} />
+      ) : (
+        <img
+          src={src}
+          alt=""
+          aria-hidden
+          onLoad={(event) => {
+            setScaledWidth(event.currentTarget.naturalWidth);
+          }}
+          {...sharedProps}
+        />
+      )}
+    </div>
+  );
 }
 
 const STATUS_COLORS = {
@@ -76,6 +141,7 @@ export function RecruitField({ id, enemy }: RecruitFieldProps) {
     t,
   );
   const flag = useSaveFlag(meta.recruitFlag as FlagIndex) as number;
+  const mediaSrc = getRecruitMediaSrc(enemyHelpers.getName(enemy));
 
   /* Flag values:
     -1 for lost,
@@ -91,6 +157,7 @@ export function RecruitField({ id, enemy }: RecruitFieldProps) {
     }
   }
 
+  const isRecruited = currentlyRecruited === recruitCount;
   const status = getRecruitStatus(currentlyRecruited, recruitCount);
   const colors = STATUS_COLORS[status.key];
   const statusLabel =
@@ -115,26 +182,40 @@ export function RecruitField({ id, enemy }: RecruitFieldProps) {
         )}
       >
         <div className="flex flex-col gap-3 p-4 flex-1">
-          <div className="flex flex-col gap-1 min-h-12">
-            <Heading level={5} className={mergeClass('uppercase', colors.text)}>
-              {meta.displayName}
-            </Heading>
-            <span className="text-xs uppercase tracking-wide text-text-3">
-              {statusLabel}
-              {!meta.recruitable && ` · ${t('ui.recruits.unused', 'Unused')}`}
-            </span>
-          </div>
+          <div className="flex h-28 gap-3">
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-1 min-h-12">
+                <Heading
+                  level={5}
+                  className={mergeClass('uppercase', colors.text)}
+                >
+                  {meta.displayName}
+                </Heading>
+                <span className="text-xs uppercase tracking-wide text-text-3">
+                  {statusLabel}
+                  {!meta.recruitable &&
+                    ` · ${t('ui.recruits.unused', 'Unused')}`}
+                </span>
+              </div>
 
-          <Checkbox
-            label={t('ui.field.recruited', 'Recruited')}
-            checked={currentlyRecruited === recruitCount}
-            onChange={(state) => {
-              updateSave(
-                (save) =>
-                  (save.flags[meta.recruitFlag as FlagIndex] = state ? 1 : 0),
-              );
-            }}
-          />
+              <Checkbox
+                label={t('ui.field.recruited', 'Recruited')}
+                checked={isRecruited}
+                onChange={(state) => {
+                  updateSave(
+                    (save) =>
+                      (save.flags[meta.recruitFlag as FlagIndex] = state
+                        ? 1
+                        : 0),
+                  );
+                }}
+              />
+            </div>
+
+            {mediaSrc && (
+              <RecruitImage src={mediaSrc} recruited={isRecruited} />
+            )}
+          </div>
 
           <div className="flex flex-col gap-1">
             <span className="text-xs text-text-2">{countLabel}</span>

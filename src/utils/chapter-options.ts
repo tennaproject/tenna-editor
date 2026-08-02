@@ -46,7 +46,7 @@ const plotOptionsCache = new Map<ChapterIndex, SelectItem[]>();
 
 // Entries the game never hands out sink below the rest, keeping the list a
 // player actually needs at the top. Relative order is otherwise preserved.
-function unusedLast(items: SelectItem[]): SelectItem[] {
+export function unusedLast(items: SelectItem[]): SelectItem[] {
   return [
     ...items.filter((item) => !item.unused),
     ...items.filter((item) => item.unused),
