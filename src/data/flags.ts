@@ -9734,6 +9734,7 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
         1: 'Knocked lightly on Michaeldoor',
         2: 'Knocked gloobily',
         3: 'Can enter the room',
+        4: 'Entered Nagasagi Kikky Park room',
       },
     },
   },
