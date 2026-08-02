@@ -60,13 +60,11 @@ export const LIGHTWORLDITEMS_META: Record<
   [LIGHTWORLDITEMS.EMPTY]: { displayName: 'Empty' },
   [LIGHTWORLDITEMS.HOT_CHOCOLATE]: {
     displayName: 'Hot Chocolate',
-    description:
-      'Topped with home-made marshmallows in the shape of bunnies.',
+    description: 'Topped with home-made marshmallows in the shape of bunnies.',
   },
   [LIGHTWORLDITEMS.PENCIL]: {
     displayName: 'Pencil',
-    description:
-      'Mightier than a sword?\nMaybe equal at best.',
+    description: 'Mightier than a sword?\nMaybe equal at best.',
     weapon: true,
     attack: 1,
     darkWorldWeapon: WEAPONS.WOOD_BLADE,
@@ -84,13 +82,12 @@ export const LIGHTWORLDITEMS_META: Record<
   },
   [LIGHTWORLDITEMS.BALL_OF_JUNK]: {
     displayName: 'Ball of Junk',
-    description:
-      'A small ball of accumulated things in your pocket.',
+    description: 'A small ball of accumulated things in your pocket.',
     getOverrides: ({ items }) => {
       if (items.includes(CONSUMABLES.DARK_CANDY)) {
         return {
           description:
-            'A small ball of accumulated things in your pocket.\nIt smells like scratch\'n\'sniff marshmallow stickers.',
+            "A small ball of accumulated things in your pocket.\nIt smells like scratch'n'sniff marshmallow stickers.",
         };
       }
 
@@ -99,19 +96,18 @@ export const LIGHTWORLDITEMS_META: Record<
   },
   [LIGHTWORLDITEMS.HALLOWEEN_PENCIL]: {
     displayName: 'Halloween Pencil',
-    description:
-      'Orange with black bats on it.',
+    description: 'Orange with black bats on it.',
     weapon: true,
     attack: 1,
     darkWorldWeapon: WEAPONS.SPOOKYSWORD,
   },
   [LIGHTWORLDITEMS.LUCKY_PENCIL]: {
     displayName: 'Lucky Pencil',
-    description:
-      'Covered in green clovers and rainbows.',
+    description: 'Covered in green clovers and rainbows.',
     weapon: true,
     attack: 1,
     darkWorldWeapon: WEAPONS.TREFOIL,
+    unused: true,
   },
   [LIGHTWORLDITEMS.EGG]: {
     displayName: 'Egg',
@@ -132,40 +128,35 @@ export const LIGHTWORLDITEMS_META: Record<
   },
   [LIGHTWORLDITEMS.ERASER]: {
     displayName: 'Eraser',
-    description:
-      'Pink, it bounces when thrown on the ground.',
+    description: 'Pink, it bounces when thrown on the ground.',
     weapon: true,
     attack: 1,
     darkWorldWeapon: WEAPONS.BOUNCE_BLADE,
   },
   [LIGHTWORLDITEMS.MECH_PENCIL]: {
     displayName: 'Mech. Pencil',
-    description:
-      "It's tempting to click it repeatedly.",
+    description: "It's tempting to click it repeatedly.",
     weapon: true,
     attack: 1,
     darkWorldWeapon: WEAPONS.MECHA_SABER,
   },
   [LIGHTWORLDITEMS.WRISTWATCH]: {
     displayName: 'Wristwatch',
-    description:
-      'Maybe an expensive antique.\nStuck before half past noon.',
+    description: 'Maybe an expensive antique.\nStuck before half past noon.',
     armor: true,
     defence: 1,
     darkWorldArmor: ARMORS.SILVER_WATCH,
   },
   [LIGHTWORLDITEMS.HOLIDAY_PENCIL]: {
     displayName: 'Holiday Pencil',
-    description:
-      'A festive candycane pencil.\nDo not eat.',
+    description: 'A festive candycane pencil.\nDo not eat.',
     weapon: true,
     attack: 1,
     darkWorldWeapon: WEAPONS.JINGLE_BLADE,
   },
   [LIGHTWORLDITEMS.CACTUSNEEDLE]: {
     displayName: 'CactusNeedle',
-    description:
-      "Ouch! ... It's somewhat sentimental in a way.",
+    description: "Ouch! ... It's somewhat sentimental in a way.",
     weapon: true,
     attack: 2,
     darkWorldWeapon: WEAPONS.SABER10,
@@ -191,8 +182,7 @@ export const LIGHTWORLDITEMS_META: Record<
   },
   [LIGHTWORLDITEMS.BREAD]: {
     displayName: 'Bread',
-    description:
-      'A loaf of bread. Tends to leave crumbs wherever it goes.',
+    description: 'A loaf of bread. Tends to leave crumbs wherever it goes.',
   },
   [LIGHTWORLDITEMS.SEEDS]: {
     displayName: 'Seeds',
@@ -200,16 +190,14 @@ export const LIGHTWORLDITEMS_META: Record<
   },
   [LIGHTWORLDITEMS.PENCIL2]: {
     displayName: 'Pencil2',
-    description:
-      "It's a No. 2 Pencil. ... that\ndoesn't make it any stronger.",
+    description: "It's a No. 2 Pencil. ... that\ndoesn't make it any stronger.",
     weapon: true,
     attack: 2,
     darkWorldWeapon: WEAPONS.WOOD_BLADE_2,
   },
   [LIGHTWORLDITEMS.PETAL]: {
     displayName: 'Petal',
-    description:
-      "A cyan colored petal. It's not\na weapon, but it's nice.",
+    description: "A cyan colored petal. It's not\na weapon, but it's nice.",
     weapon: true,
     attack: 0,
     darkWorldWeapon: WEAPONS.AQUA_KNIFE,

@@ -140,6 +140,7 @@ export const CONSUMABLES_META: Record<ConsumableIndex, ConsumableProperties> = {
     description:
       'Though broken, it seethes with power.\nA master smith could fix it.',
     heal: 20,
+    unused: true,
   },
   [CONSUMABLES.TOPCAKE]: {
     displayName: 'Top Cake',
@@ -203,6 +204,7 @@ export const CONSUMABLES_META: Record<ConsumableIndex, ConsumableProperties> = {
       "An enormous salad... but, it's just\nlettuce, so it's worthless. +4HP",
     heal: 4,
     healByCharacter: { [CHARACTERS.NOELLE]: 90 },
+    unused: true,
   },
   [CONSUMABLES.CLUBSSANDWICH]: {
     displayName: 'ClubsSandwich',
@@ -303,6 +305,7 @@ export const CONSUMABLES_META: Record<ConsumableIndex, ConsumableProperties> = {
     displayName: 'FavSandwich',
     description: "You'd think it tastes perfect.\nHeals 500HP.",
     heal: 500,
+    unused: true,
   },
   [CONSUMABLES.ROUXLSROUX]: {
     displayName: 'RouxlsRoux',
@@ -332,6 +335,7 @@ export const CONSUMABLES_META: Record<ConsumableIndex, ConsumableProperties> = {
     displayName: 'Mannequin',
     description:
       "It's a mannequin with the clothes\npermanently attached. Useless",
+    unused: true,
   },
   [CONSUMABLES.KRIS_TEA]: {
     displayName: 'Kris Tea',
@@ -456,6 +460,7 @@ export const CONSUMABLES_META: Record<ConsumableIndex, ConsumableProperties> = {
       'A coffee-and-chocolate flavored cookie.\nWords spark out when you bite it.',
     heal: 90,
     healByCharacter: { [CHARACTERS.KRIS]: 100 },
+    unused: true,
   },
   [CONSUMABLES.TENSIONBIT]: {
     displayName: 'TensionBit',
@@ -490,6 +495,7 @@ export const CONSUMABLES_META: Record<ConsumableIndex, ConsumableProperties> = {
     heal: 50,
     healsParty: true,
     revivePercent: 100,
+    unused: true,
   },
   [CONSUMABLES.S_POISON]: {
     displayName: 'S.POISON',
@@ -622,6 +628,7 @@ export const CONSUMABLES_META: Record<ConsumableIndex, ConsumableProperties> = {
       'A hunk of bread laden with sauer regrets.\nRecovers 200 HP to all.',
     heal: 200,
     healsParty: true,
+    unused: true,
   },
   [CONSUMABLES.TREE_CAKE]: {
     displayName: 'TreeCake',

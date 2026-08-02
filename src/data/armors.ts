@@ -132,6 +132,7 @@ export const ARMORS_META: Record<ArmorIndex, ArmorProperties> = {
 
       return {};
     },
+    unused: true,
   },
   [ARMORS.JEVILSTAIL]: {
     displayName: 'Jevilstail',
@@ -205,12 +206,12 @@ export const ARMORS_META: Record<ArmorIndex, ArmorProperties> = {
     icon: EQUIPMENT_ICONS.EMPTY,
     ability: EQUIPMENT_ABILITIES.UNKNOWN_ARMOR,
   },
-  // Sets an ability icon (ARROW_UP_RIGHT) but a blank ability string
   [ARMORS.DARK_GOLD_BAND]: {
     displayName: 'DarkGoldBand',
     description: 'A black metal with a golden shine.',
     stats: { attack: 0, defence: 0, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
+    unused: true,
   },
   [ARMORS.SKY_MANTLE]: {
     displayName: 'SkyMantle',
@@ -219,13 +220,14 @@ export const ARMORS_META: Record<ArmorIndex, ArmorProperties> = {
     stats: { attack: 0, defence: 1, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
     ability: EQUIPMENT_ABILITIES.ELEC_HOLY,
+    unused: true,
   },
-  // The game stores a blank description for this armor
   [ARMORS.SPIKE_SHACKLE]: {
     displayName: 'SpikeShackle',
     stats: { attack: 3, defence: 1, magic: 0 },
     icon: EQUIPMENT_ICONS.ARMOR,
     ability: EQUIPMENT_ABILITIES.ATTACK,
+    unused: true,
   },
   [ARMORS.FRAYED_BOWTIE]: {
     displayName: 'FrayedBowtie',

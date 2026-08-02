@@ -14,6 +14,36 @@ export interface SelectItem {
   trailing?: ReactNode;
   value?: unknown;
   invalid?: boolean;
+  unused?: boolean;
+}
+
+interface StatusBadgesProps {
+  invalid?: boolean;
+  unused?: boolean;
+  t: (key: string, fallback: string) => string;
+}
+
+function StatusBadges({ invalid, unused, t }: StatusBadgesProps) {
+  return (
+    <>
+      {invalid ? (
+        <span className="text-xs text-red font-bold flex items-center gap-1">
+          <span className="h-5 w-5">
+            <WarningIcon />
+          </span>
+          {t('ui.common.invalid', 'Invalid')}
+        </span>
+      ) : null}
+      {unused ? (
+        <span className="text-xs text-yellow font-bold flex items-center gap-1">
+          <span className="h-5 w-5">
+            <WarningIcon />
+          </span>
+          {t('ui.common.unused', 'Unused')}
+        </span>
+      ) : null}
+    </>
+  );
 }
 
 interface SelectProps {
@@ -293,15 +323,14 @@ export function Select({
             spellCheck={false}
           />
           <div
-            className="absolute right-9 top-1/2 -translate-y-1/2 text-xs text-red font-bold flex items-center gap-1 pointer-events-none"
-            aria-hidden={!selectedItem?.invalid}
+            className="absolute right-9 top-1/2 -translate-y-1/2 flex items-center gap-2 pointer-events-none"
+            aria-hidden={!selectedItem?.invalid && !selectedItem?.unused}
           >
-            {selectedItem?.invalid ? (
-              <span className="h-5 w-5">
-                <WarningIcon />
-              </span>
-            ) : null}
-            {selectedItem?.invalid ? t('ui.common.invalid', 'Invalid') : ''}
+            <StatusBadges
+              invalid={selectedItem?.invalid}
+              unused={selectedItem?.unused}
+              t={t}
+            />
           </div>
           <button
             {...getToggleButtonProps({
@@ -375,15 +404,14 @@ export function Select({
                       </span>
                     ) : null}
                     <div
-                      className="ml-2 text-xs text-red flex items-center gap-1 font-bold"
-                      aria-hidden={!item.invalid}
+                      className="ml-2 flex items-center gap-2"
+                      aria-hidden={!item.invalid && !item.unused}
                     >
-                      {item.invalid ? (
-                        <span className="h-5 w-5">
-                          <WarningIcon />
-                        </span>
-                      ) : null}
-                      {item.invalid ? t('ui.common.invalid', 'Invalid') : ''}
+                      <StatusBadges
+                        invalid={item.invalid}
+                        unused={item.unused}
+                        t={t}
+                      />
                     </div>
                   </div>
                 </li>

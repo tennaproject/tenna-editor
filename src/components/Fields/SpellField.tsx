@@ -87,6 +87,7 @@ export function SpellField({
         ).displayName,
         value: currentSpell,
         invalid: true,
+        unused: spellMeta?.unused,
       },
     ];
   }

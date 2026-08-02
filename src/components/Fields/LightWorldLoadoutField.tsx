@@ -71,6 +71,7 @@ export function LightWorldLoadoutField({
           : t('ui.common.unknown', 'Unknown'),
         value: current as number,
         invalid: true,
+        unused: elementMeta?.unused,
       },
     ];
   }

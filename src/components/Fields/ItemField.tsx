@@ -108,6 +108,24 @@ function getDisplayName(
   }
 }
 
+function getUnused(type: ItemType, id: number): boolean | undefined {
+  switch (type) {
+    case 'consumable':
+    case 'storage':
+      return consumableHelpers.getById(id as ConsumableIndex)?.unused;
+    case 'keyItem':
+      return keyItemHelpers.getById(id as KeyItemIndex)?.unused;
+    case 'weapon':
+      return weaponHelpers.getById(id as WeaponIndex)?.unused;
+    case 'armor':
+      return armorHelpers.getById(id as ArmorIndex)?.unused;
+    case 'lightWorldItem':
+      return lightWorldItemHelpers.getById(id as LightWorldItemIndex)?.unused;
+    case 'phoneContact':
+      return phoneContactHelpers.getById(id as PhoneContactIndex)?.unused;
+  }
+}
+
 function getTranslatedDisplayName(
   type: ItemType,
   id: number,
@@ -276,6 +294,7 @@ export function ItemField({ type, slot, label }: ItemFieldProps) {
         label: metaDisplay || t('ui.common.unknown', 'Unknown'),
         value: currentValue,
         invalid: true,
+        unused: getUnused(type, currentValue),
       },
     ];
   }

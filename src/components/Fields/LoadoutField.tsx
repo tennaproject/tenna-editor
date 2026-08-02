@@ -174,6 +174,7 @@ export function LoadoutField({
           : t('ui.common.unknown', 'Unknown'),
         value: current as number,
         invalid: true,
+        unused: isExisting ? elementMeta.unused : undefined,
       },
     ];
   }

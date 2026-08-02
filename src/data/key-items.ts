@@ -230,6 +230,7 @@ export const KEYITEMS_META: Record<KeyItemIndex, KeyItemProperties> = {
   [KEYITEMS.PURE_CRYSTAL]: {
     displayName: 'PureCrystal',
     description: 'The shadow purified by the cat',
+    unused: true,
   },
   [KEYITEMS.ODD_CONTROLLER]: {
     displayName: 'OddController',
@@ -240,6 +241,7 @@ export const KEYITEMS_META: Record<KeyItemIndex, KeyItemProperties> = {
     displayName: 'BackstagePass',
     description:
       'A pass for big shots allowed backstage.\nShow it to Ramb in front of the door.',
+    unused: true,
   },
   [KEYITEMS.TRIP_TICKET]: {
     displayName: 'TripTicket',

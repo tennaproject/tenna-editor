@@ -93,6 +93,7 @@ export const WEAPONS_META: Record<WeaponIndex, WeaponProperties> = {
     description: 'It felt right for everyone.',
     stats: { attack: 12, defence: 6, magic: 8 },
     icon: EQUIPMENT_ICONS.EMPTY,
+    unused: true,
   },
   [WEAPONS.SPOOKYSWORD]: {
     displayName: 'Spookysword',
@@ -121,6 +122,7 @@ export const WEAPONS_META: Record<WeaponIndex, WeaponProperties> = {
     stats: { attack: 4, defence: 0, magic: 0 },
     icon: EQUIPMENT_ICONS.SWORD,
     ability: EQUIPMENT_ABILITIES.MONEY_EARNED_UP,
+    unused: true,
   },
   [WEAPONS.RAGGER]: {
     displayName: 'Ragger',
@@ -142,6 +144,7 @@ export const WEAPONS_META: Record<WeaponIndex, WeaponProperties> = {
     stats: { attack: 16, defence: 0, magic: 0 },
     icon: EQUIPMENT_ICONS.SWORD,
     ability: EQUIPMENT_ABILITIES.TRANCE,
+    unused: true,
   },
   [WEAPONS.SNOW_RING]: {
     displayName: 'SnowRing',
@@ -172,6 +175,7 @@ export const WEAPONS_META: Record<WeaponIndex, WeaponProperties> = {
     stats: { attack: 1, defence: 0, magic: 2 },
     icon: EQUIPMENT_ICONS.SCARF,
     ability: EQUIPMENT_ABILITIES.SMILEY,
+    unused: true,
   },
   [WEAPONS.MECHA_SABER]: {
     displayName: 'MechaSaber',
@@ -351,8 +355,8 @@ export const WEAPONS_META: Record<WeaponIndex, WeaponProperties> = {
       "Armour rings with a rose motif. Any thorns are\npointed outwards so you don't hurt yourself.",
     stats: { attack: 16, defence: 0, magic: 2 },
     icon: EQUIPMENT_ICONS.RING,
+    unused: true,
   },
-  // Sets an ability icon (ARROW_UP_RIGHT) but a blank ability string
   [WEAPONS.MISTLE_WP]: {
     displayName: 'MistleWP',
     description:
