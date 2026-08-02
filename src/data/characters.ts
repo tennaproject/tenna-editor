@@ -868,9 +868,6 @@ export const CHARACTERS_META: Record<CharacterIndex, CharacterProperties> = {
       WEAPONS.EVERYBODY_WEAPON,
       WEAPONS.BLACK_SHARD,
       WEAPONS.JINGLE_BLADE,
-      WEAPONS.WOOD_BLADE_2,
-      WEAPONS.AQUA_KNIFE,
-      WEAPONS.BROKEN_SCARF,
       WEAPONS.GILDED_ROSE,
     ]),
     allowedArmors: new Set<ArmorIndex>([
