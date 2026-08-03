@@ -1,9 +1,9 @@
 import {
-  FLAG_BITFIELDS_META,
   type FlagBitfieldId,
   type FlagIndex,
   type FlagProperties,
 } from '@data';
+import { FLAG_BITFIELDS_META } from '@data/flag-bitfields';
 import { useChapterFlags } from '@contexts';
 import { useSaveFlag } from '@hooks';
 import { useSave } from '@store';

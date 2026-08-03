@@ -1,11 +1,10 @@
 import {
   FLAGS,
-  FLAG_BITFIELDS,
-  FLAG_BITFIELDS_META,
   type FlagBitfieldId,
   type FlagBitfieldProperties,
   type FlagIndex,
 } from '@data';
+import { FLAG_BITFIELDS, FLAG_BITFIELDS_META } from '@data/flag-bitfields';
 import { flagHelpers } from './data-helpers';
 
 export const FLAG_NAMES = Object.fromEntries(
