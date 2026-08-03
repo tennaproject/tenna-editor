@@ -8,7 +8,7 @@ export function InventoryConsumables() {
   const chapter = useSave((s) => s.save?.meta.chapter) || 1;
   const meta = chapterHelpers.getById(chapter).content.meta;
   const consumableSlots = meta.consumablesSize;
-  const storageSlots = meta.storagesSize;
+  const storageSlots = meta.storageSize;
 
   return (
     <div className="page flex-auto">
