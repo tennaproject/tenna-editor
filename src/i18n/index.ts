@@ -11,8 +11,6 @@ import {
   CONSUMABLES_META,
   ENEMIES,
   ENEMIES_META,
-  FLAG_BITFIELDS,
-  FLAG_BITFIELDS_META,
   FLAGS,
   FLAGS_META,
   KEYITEMS,
@@ -28,6 +26,7 @@ import {
   WEAPONS,
   WEAPONS_META,
 } from '@data';
+import { FLAG_BITFIELDS, FLAG_BITFIELDS_META } from '@data/flag-bitfields';
 import ko from './locales/ko.json';
 import it from './locales/it.json';
 

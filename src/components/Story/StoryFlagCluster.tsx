@@ -1,5 +1,6 @@
 import { Heading, Section } from '@components';
-import { FLAG_BITFIELDS, FLAGS } from '@data';
+import { FLAGS } from '@data';
+import { FLAG_BITFIELDS } from '@data/flag-bitfields';
 import type { StoryFieldName } from '@data';
 import { StoryFlagField } from './StoryFlagField';
 
