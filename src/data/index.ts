@@ -4,7 +4,11 @@ export * from './consumables';
 export * from './contributors';
 export * from './equipment';
 export * from './flags';
-export * from './flag-bitfields';
+export type {
+  FlagBitfieldId,
+  FlagBitfieldName,
+  FlagBitfieldProperties,
+} from './flag-bitfields';
 export * from './key-items';
 export * from './light-world-items';
 export * from './phone-contacts';

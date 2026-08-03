@@ -1,6 +1,7 @@
 import { ProgressiveMount } from '@components/ProgressiveMount';
 import { useFieldSearch } from '@contexts';
-import { FLAG_BITFIELDS, FLAG_BITFIELDS_META, type FlagName } from '@data';
+import type { FlagName } from '@data';
+import { FLAG_BITFIELDS, FLAG_BITFIELDS_META } from '@data/flag-bitfields';
 import {
   STORY_SECTIONS,
   type StoryChapterNumber,
