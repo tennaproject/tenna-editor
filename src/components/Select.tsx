@@ -3,6 +3,7 @@ import ChevronDownIcon from '@assets/icons/chevron-down.svg?react';
 import WarningIcon from '@assets/icons/alert.svg?react';
 import { useState, useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
+import { useCanHover } from '@hooks';
 import { mergeClass } from '@utils/merge-class';
 import { useTranslation } from '../i18n';
 
@@ -36,6 +37,7 @@ export function Select({
   strict = true,
 }: SelectProps) {
   const { t } = useTranslation();
+  const canHover = useCanHover();
   const translatedPlaceholder =
     placeholder ?? t('ui.common.selectOption', 'Select an option...');
   const [inputItems, setInputItems] = useState(items);
@@ -64,7 +66,7 @@ export function Select({
   }, [items, selectedLabel]);
 
   function selectInputValue(input: HTMLInputElement) {
-    if (!input.value || !isShowingSelectedValue) return;
+    if (!canHover || !input.value || !isShowingSelectedValue) return;
     requestAnimationFrame(() => {
       input.select();
       preserveSelectionOnMouseUpRef.current = true;
@@ -279,6 +281,8 @@ export function Select({
               : 'text-text-1 selection:text-text-1',
           )}
           placeholder={translatedPlaceholder}
+          readOnly={!canHover}
+          inputMode={canHover ? 'search' : 'none'}
           data-lpignore="true"
           autoComplete="off"
         />
