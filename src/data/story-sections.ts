@@ -111,7 +111,11 @@ export const STORY_SECTIONS = {
         {
           id: 'clover',
           title: 'Clover',
-          flags: ['SOLVED_CLOVER_PUZZLE', 'CLOVER_VIOLENCE'],
+          flags: [
+            'SOLVED_CLOVER_PUZZLE',
+            'TALKED_TO_ALL_CLOVER_HEADS',
+            'CLOVER_VIOLENCE',
+          ],
         },
         {
           id: 'bake-sale',
@@ -180,6 +184,7 @@ export const STORY_SECTIONS = {
             'JEVIL_PROGRESS',
             'JEVIL_REWARD_CHEST_ITEM',
             'OBTAINED_JEVIL_REWARD',
+            'SHADOW_CRYSTAL_USE_CH1',
           ],
         },
         {
@@ -221,6 +226,11 @@ export const STORY_SECTIONS = {
       id: 'light-world-to-ending',
       title: 'Light World to Ending',
       clusters: [
+        {
+          id: 'light-world-items',
+          title: 'Light World Items',
+          flags: ['GLASS_USE_ALONE_CH1'],
+        },
         {
           id: 'hospital',
           title: 'Hospital',
