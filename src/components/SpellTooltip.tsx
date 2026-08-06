@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import type { CharacterIndex, SpellIndex } from '@data';
 import { useSave } from '@store';
-import { spellHelpers } from '@utils/data-helpers';
+import { resolveChapterMeta, spellHelpers } from '@utils/data-helpers';
 import {
   getSpellTranslationKeyPrefix,
   translateMeta,
@@ -36,20 +36,13 @@ export function SpellTooltipContent({
   const secondaryArmor =
     useSave((s) => s.save?.characters[character]?.secondaryArmor) ?? 0;
 
-  const base = spellHelpers.getById(spell);
-
-  const meta = base
-    ? {
-        ...base,
-        ...base.getOverrides?.({
-          chapter,
-          plot,
-          flags,
-          weapon,
-          armors: [primaryArmor, secondaryArmor],
-        }),
-      }
-    : undefined;
+  const meta = resolveChapterMeta(spellHelpers.getById(spell), {
+    chapter,
+    plot,
+    flags,
+    weapon,
+    armors: [primaryArmor, secondaryArmor],
+  });
 
   const translated = meta
     ? translateMeta(getSpellTranslationKeyPrefix(spell), meta, t)

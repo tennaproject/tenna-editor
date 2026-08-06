@@ -2,8 +2,6 @@ import type { ReactNode } from 'react';
 import {
   CHARACTERS,
   EQUIPMENT_ABILITIES_META,
-  EQUIPMENT_STAT_ICONS,
-  EQUIPMENT_STAT_ORDER,
   type ArmorIndex,
   type ChapterIndex,
   type CharacterIndex,
@@ -17,6 +15,7 @@ import {
   armorHelpers,
   characterHelpers,
   getChapterPartyMembers,
+  resolveChapterMeta,
   weaponHelpers,
 } from '@utils/data-helpers';
 import { getCharacterColor } from '@utils/get-character-color';
@@ -32,6 +31,7 @@ import {
 } from '../i18n';
 import { CharacterIcon } from './CharacterIcon';
 import { EquipmentIcon } from './EquipmentIcon';
+import { EquipmentStatsRow } from './EquipmentStatsRow';
 import { InlineGroup } from './InlineGroup';
 import { Tooltip } from './Tooltip';
 import { TooltipHeading } from './TooltipHeading';
@@ -58,12 +58,12 @@ function useEquippableBy(
   return getChapterPartyMembers(chapter).map((character) => {
     const meta = characterHelpers.getById(character);
     const overrides = meta.getOverrides?.(inputs[character]);
-    const allowed =
+    const allowed: ReadonlySet<number> =
       type === 'weapon'
         ? (overrides?.allowedWeapons ?? meta.allowedWeapons)
         : (overrides?.allowedArmors ?? meta.allowedArmors);
 
-    return { character, canEquip: allowed.has(id as never) };
+    return { character, canEquip: allowed.has(id) };
   });
 }
 
@@ -104,6 +104,7 @@ function EquippableRow({ entries, t }: EquippableRowProps) {
 interface EquipmentTooltipContentProps {
   type: EquipmentType;
   id: number;
+  compareTo?: EquipmentStats;
 }
 
 interface EquipmentTooltipProps extends EquipmentTooltipContentProps {
@@ -128,10 +129,11 @@ function resolveAbility(
 ) {
   if (ability === undefined) return undefined;
 
-  const base = EQUIPMENT_ABILITIES_META[ability];
-  if (!base) return undefined;
+  const meta = resolveChapterMeta(EQUIPMENT_ABILITIES_META[ability], {
+    chapter,
+  });
+  if (!meta) return undefined;
 
-  const meta = { ...base, ...base.getOverrides?.({ chapter }) };
   const translated = translateMeta(
     getEquipmentAbilityTranslationKeyPrefix(ability),
     meta,
@@ -159,6 +161,7 @@ function renderDescription(description: string | undefined, t: Translate) {
 export function EquipmentTooltipContent({
   type,
   id,
+  compareTo,
 }: EquipmentTooltipContentProps) {
   const { t } = useTranslation();
   const chapter = useSave((s) => s.save?.meta.chapter) ?? 1;
@@ -169,9 +172,7 @@ export function EquipmentTooltipContent({
       : armorHelpers.getById(id as ArmorIndex);
 
   // A chapter can override the stats and the description
-  const meta = baseMeta
-    ? { ...baseMeta, ...baseMeta.getOverrides?.({ chapter }) }
-    : undefined;
+  const meta = resolveChapterMeta(baseMeta, { chapter });
 
   const translated = meta
     ? translateMeta(
@@ -196,8 +197,8 @@ export function EquipmentTooltipContent({
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex justify-between items-start gap-3">
-        <div className="flex flex-col gap-2">
+      <div className="flex min-w-0 items-start gap-3">
+        <div className="flex min-w-0 flex-1 flex-col gap-2">
           <TooltipHeading
             icon={meta.icon}
             name={translated.displayName}
@@ -216,45 +217,14 @@ export function EquipmentTooltipContent({
           )}
         </div>
 
-        <div className="flex flex-col items-end gap-2">
+        <div className="flex shrink-0 flex-col items-end gap-2">
           <EquippableRow entries={equippableBy} t={t} />
-          <StatsRow stats={meta.stats} />
+          <EquipmentStatsRow stats={meta.stats} compareTo={compareTo} />
         </div>
       </div>
 
       {renderDescription(translated.description, t)}
     </div>
-  );
-}
-
-interface StatsRowProps {
-  stats: EquipmentStats;
-}
-
-function StatsRow({ stats }: StatsRowProps) {
-  return (
-    <InlineGroup className="gap-3">
-      {EQUIPMENT_STAT_ORDER.map((stat) => {
-        const noStats = stats[stat] <= 0;
-
-        return (
-          <InlineGroup key={stat} className="gap-1">
-            <EquipmentIcon
-              icon={EQUIPMENT_STAT_ICONS[stat]}
-              className={noStats ? 'opacity-30' : undefined}
-            />
-            <span
-              className={mergeClass(
-                'text-sm',
-                noStats ? 'text-text-3' : 'text-text-2',
-              )}
-            >
-              {stats[stat]}
-            </span>
-          </InlineGroup>
-        );
-      })}
-    </InlineGroup>
   );
 }
 
