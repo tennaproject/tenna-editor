@@ -1,6 +1,7 @@
 import {
   Select,
   type SelectItem,
+  type InvalidReason,
   FieldWrapper,
   LightWorldItemTooltipContent,
 } from '@components';
@@ -49,12 +50,20 @@ export function LightWorldLoadoutField({
 
   const baseItems = getLightWorldLoadoutOptions(chapter, type).map((item) => ({
     ...item,
+    tooltip:
+      item.value !== 0 ? (
+        <LightWorldItemTooltipContent id={item.value as LightWorldItemIndex} />
+      ) : undefined,
     label: translateMeta(
       getItemTranslationKeyPrefix('lightWorldItem', item.value as number),
       { displayName: item.label },
       t,
     ).displayName,
   }));
+
+  const invalidReasons: InvalidReason[] = [];
+  if (!isExisting) invalidReasons.push('unknown');
+  if (!isInChapter) invalidReasons.push('notInChapter');
 
   let selectItems: SelectItem[] = baseItems;
   if (!isValid || !baseItems.some((item) => item.value === current)) {
@@ -70,7 +79,7 @@ export function LightWorldLoadoutField({
             ).displayName
           : t('ui.common.unknown', 'Unknown'),
         value: current as number,
-        invalid: true,
+        invalidReasons,
         unused: elementMeta?.unused,
       },
     ];

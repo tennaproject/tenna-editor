@@ -1,11 +1,28 @@
 import { useCombobox } from 'downshift';
 import ChevronDownIcon from '@assets/icons/chevron-down.svg?react';
-import WarningIcon from '@assets/icons/alert.svg?react';
-import { useState, useEffect, useRef } from 'react';
+import InvalidIcon from '@assets/icons/alert.svg?react';
+import UnusedIcon from '@assets/icons/hidden.svg?react';
+import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
+import { useCanHover } from '@hooks';
 import { mergeClass } from '@utils/merge-class';
 import { useTranslation } from '../i18n';
 import { Tooltip } from './Tooltip';
+
+export type InvalidReason = 'unknown' | 'notInChapter' | 'notAvailableTo';
+
+const INVALID_REASON_TEXT: Record<InvalidReason, [key: string, text: string]> =
+  {
+    unknown: ['ui.common.invalidUnknown', 'Not a known item'],
+    notInChapter: [
+      'ui.common.invalidNotInChapter',
+      'Not available in this chapter',
+    ],
+    notAvailableTo: [
+      'ui.common.invalidNotAvailableTo',
+      'Not available to this character',
+    ],
+  };
 
 export interface SelectItem {
   id: string;
@@ -13,9 +30,18 @@ export interface SelectItem {
   icon?: ReactNode;
   trailing?: ReactNode;
   value?: unknown;
-  invalid?: boolean;
+  invalidReasons?: InvalidReason[];
   unused?: boolean;
+  tooltip?: ReactNode;
 }
+
+const DETAIL_PANEL_WIDTH = 336;
+const DETAIL_PANEL_CLASS = 'w-84';
+const DETAIL_PANEL_MARGIN = 8;
+// scrollHeight rounds up, rects don't, so an exact fit reads as overflow
+const FIT_TOLERANCE_PX = 2;
+// widest icon is a 32px
+const ICON_SLOT_CLASS = 'flex h-6 w-8 shrink-0 items-center justify-center';
 
 interface StatusBadgesProps {
   invalid?: boolean;
@@ -24,25 +50,71 @@ interface StatusBadgesProps {
 }
 
 function StatusBadges({ invalid, unused, t }: StatusBadgesProps) {
+  const invalidLabel = t('ui.common.invalid', 'Invalid');
+  const unusedLabel = t('ui.common.unused', 'Unused');
+
   return (
     <>
       {invalid ? (
-        <span className="text-xs text-red font-bold flex items-center gap-1">
-          <span className="h-5 w-5">
-            <WarningIcon />
-          </span>
-          {t('ui.common.invalid', 'Invalid')}
+        <span className="h-5 w-5 shrink-0 text-red">
+          <InvalidIcon />
+          <span className="sr-only">{invalidLabel}</span>
         </span>
       ) : null}
       {unused ? (
-        <span className="text-xs text-yellow font-bold flex items-center gap-1">
-          <span className="h-5 w-5">
-            <WarningIcon />
-          </span>
-          {t('ui.common.unused', 'Unused')}
+        <span className="h-5 w-5 shrink-0 text-yellow">
+          <UnusedIcon />
+          <span className="sr-only">{unusedLabel}</span>
         </span>
       ) : null}
     </>
+  );
+}
+
+interface StatusNoteProps {
+  invalidReasons?: InvalidReason[];
+  unused?: boolean;
+  t: (key: string, fallback: string) => string;
+  divided?: boolean;
+}
+
+function StatusNote({ invalidReasons, unused, t, divided }: StatusNoteProps) {
+  if (!invalidReasons?.length && !unused) return null;
+
+  return (
+    <div
+      className={mergeClass(
+        'flex flex-col gap-1',
+        divided && 'border-b border-divider pb-2 mb-2',
+      )}
+    >
+      {invalidReasons?.map((reason) => {
+        const [key, text] = INVALID_REASON_TEXT[reason];
+
+        return (
+          <span
+            key={reason}
+            className="flex items-center gap-2 text-xs text-red"
+          >
+            <span className="h-4 w-4 shrink-0">
+              <InvalidIcon />
+            </span>
+            {t(key, text)}
+          </span>
+        );
+      })}
+      {unused ? (
+        <span className="flex items-center gap-2 text-xs text-yellow">
+          <span className="h-4 w-4 shrink-0">
+            <UnusedIcon />
+          </span>
+          {t(
+            'ui.common.unusedExplained',
+            'Exists in the game files, but is never obtainable',
+          )}
+        </span>
+      ) : null}
+    </div>
   );
 }
 
@@ -70,12 +142,22 @@ export function Select({
   tooltip,
 }: SelectProps) {
   const { t } = useTranslation();
+  const canHover = useCanHover();
   const translatedPlaceholder =
     placeholder ?? t('ui.common.selectOption', 'Select an option...');
   const [inputItems, setInputItems] = useState(items);
   const [shouldOpenUp, setShouldOpenUp] = useState(false);
+  const [detailOnLeft, setDetailOnLeft] = useState(false);
+  const [isDetailHovered, setIsDetailHovered] = useState(false);
+  const [detailPosition, setDetailPosition] = useState<{
+    top: number;
+    maxHeight: number;
+  } | null>(null);
+  const lastDetailRef = useRef<SelectItem | undefined>(undefined);
   const containerRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
+  const detailBoxRef = useRef<HTMLDivElement>(null);
+  const boundaryRef = useRef({ top: 0, bottom: 0 });
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState(
     defaultSelectedItem ? defaultSelectedItem.label : '',
@@ -229,6 +311,8 @@ export function Select({
     } else {
       // eslint-disable-next-line @eslint-react/set-state-in-effect
       setMenuVisible(false);
+      // eslint-disable-next-line @eslint-react/set-state-in-effect
+      setIsDetailHovered(false);
       // after fade-out completes, unmount to save work
       timeoutId = setTimeout(() => {
         setMenuMounted(false);
@@ -264,12 +348,79 @@ export function Select({
       parent = parent.parentElement;
     }
 
+    boundaryRef.current = { top: boundaryTop, bottom: boundaryBottom };
+
     const spaceBelow = boundaryBottom - rect.bottom;
     const spaceAbove = rect.top - boundaryTop;
     setShouldOpenUp(spaceBelow < 250 && spaceAbove > spaceBelow);
+
+    const spaceRight = window.innerWidth - rect.right;
+    setDetailOnLeft(spaceRight < DETAIL_PANEL_WIDTH && rect.left > spaceRight);
   }
 
   const displayItems = isShowingSelectedValue ? items : inputItems;
+
+  const hasIcons = displayItems.some((item) => item.icon);
+
+  const highlightedItem =
+    menuVisible && highlightedIndex >= 0
+      ? displayItems[highlightedIndex]
+      : undefined;
+
+  useEffect(() => {
+    if (highlightedItem) lastDetailRef.current = highlightedItem;
+  }, [highlightedItem]);
+
+  const detailItem = !canHover
+    ? undefined
+    : (highlightedItem ??
+      (isDetailHovered && menuVisible ? lastDetailRef.current : undefined));
+
+  useLayoutEffect(() => {
+    if (!menuVisible) {
+      // eslint-disable-next-line @eslint-react/set-state-in-effect
+      setDetailPosition(null);
+      return;
+    }
+
+    if (highlightedIndex < 0) return;
+
+    const container = containerRef.current;
+    const list = listRef.current;
+    const row = list?.children[highlightedIndex] as HTMLElement | undefined;
+    const box = detailBoxRef.current;
+    if (!container || !list || !row || !box) return;
+
+    const containerRect = container.getBoundingClientRect();
+    const rowTop = row.getBoundingClientRect().top;
+    const menuRect = list.getBoundingClientRect();
+    const { top: boundaryTop, bottom: boundaryBottom } = boundaryRef.current;
+
+    const capTop = Math.max(menuRect.top, boundaryTop + DETAIL_PANEL_MARGIN);
+    const capBottom = Math.min(
+      menuRect.bottom,
+      boundaryBottom - DETAIL_PANEL_MARGIN,
+    );
+
+    // scrollHeight skips borders, max-height doesn't
+    const naturalHeight = box.scrollHeight + box.clientTop * 2;
+    const maxHeight = Math.max(
+      Math.ceil(Math.min(naturalHeight, capBottom - capTop + FIT_TOLERANCE_PX)),
+      0,
+    );
+    const shownHeight = Math.min(naturalHeight, maxHeight);
+
+    let top = Math.min(rowTop, capBottom - shownHeight);
+    top = Math.max(top, capTop);
+
+    const next = { top: top - containerRect.top, maxHeight };
+    // eslint-disable-next-line @eslint-react/set-state-in-effect
+    setDetailPosition((prev) =>
+      prev && prev.top === next.top && prev.maxHeight === next.maxHeight
+        ? prev
+        : next,
+    );
+  }, [highlightedIndex, menuVisible, detailItem?.id]);
 
   return (
     <div
@@ -288,7 +439,14 @@ export function Select({
       >
         <div className="relative w-full h-10 bg-surface-3 hover:bg-surface-3-hover motion-reduce:transition-none transition-all duration-200 border border-border">
           {selectedItem?.icon ? (
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
+            <span
+              className={mergeClass(
+                'absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none',
+                ICON_SLOT_CLASS,
+                selectedItem?.label === 'Empty' ? 'text-text-2' : 'text-text-1',
+              )}
+              aria-hidden
+            >
               {selectedItem.icon}
             </span>
           ) : null}
@@ -312,7 +470,12 @@ export function Select({
             type="search"
             className={mergeClass(
               'w-full h-full px-3 pr-10 bg-transparent border-none outline-none placeholder:text-text-2 focus:outline-none focus:ring-1 motion-reduce:transition-colors transition-colors focus:ring-text-3 selection:bg-surface-3',
-              selectedItem?.icon && 'pl-14',
+              selectedItem?.icon && 'pl-13',
+              selectedItem?.invalidReasons?.length && selectedItem?.unused
+                ? 'pr-22'
+                : (selectedItem?.invalidReasons?.length ||
+                    selectedItem?.unused) &&
+                    'pr-16',
               selectedItem?.label === 'Empty'
                 ? 'text-text-2 selection:text-text-2'
                 : 'text-text-1 selection:text-text-1',
@@ -324,10 +487,12 @@ export function Select({
           />
           <div
             className="absolute right-9 top-1/2 -translate-y-1/2 flex items-center gap-2 pointer-events-none"
-            aria-hidden={!selectedItem?.invalid && !selectedItem?.unused}
+            aria-hidden={
+              !selectedItem?.invalidReasons?.length && !selectedItem?.unused
+            }
           >
             <StatusBadges
-              invalid={selectedItem?.invalid}
+              invalid={!!selectedItem?.invalidReasons?.length}
               unused={selectedItem?.unused}
               t={t}
             />
@@ -390,8 +555,11 @@ export function Select({
                           : 'bg-surface-4 hover:bg-surface-4-hover',
                     )}
                   >
-                    {item.icon ? (
-                      <span className="shrink-0" aria-hidden>
+                    {hasIcons ? (
+                      <span
+                        className={mergeClass(ICON_SLOT_CLASS, 'mr-1')}
+                        aria-hidden
+                      >
                         {item.icon}
                       </span>
                     ) : null}
@@ -405,10 +573,10 @@ export function Select({
                     ) : null}
                     <div
                       className="ml-2 flex items-center gap-2"
-                      aria-hidden={!item.invalid && !item.unused}
+                      aria-hidden={!item.invalidReasons?.length && !item.unused}
                     >
                       <StatusBadges
-                        invalid={item.invalid}
+                        invalid={!!item.invalidReasons?.length}
                         unused={item.unused}
                         t={t}
                       />
@@ -420,6 +588,40 @@ export function Select({
           )
         ) : null}
       </ul>
+
+      {detailItem &&
+      (detailItem.tooltip ||
+        detailItem.invalidReasons?.length ||
+        detailItem.unused) ? (
+        <div
+          className={mergeClass(
+            'absolute z-50',
+            detailItem.tooltip ? DETAIL_PANEL_CLASS : 'w-max max-w-3xs',
+            detailOnLeft ? 'right-full pr-2' : 'left-full pl-2',
+          )}
+          style={{
+            top: detailPosition?.top,
+            visibility: detailPosition ? 'visible' : 'hidden',
+          }}
+          onMouseEnter={() => setIsDetailHovered(true)}
+          onMouseLeave={() => setIsDetailHovered(false)}
+          onMouseDown={(event) => event.preventDefault()}
+        >
+          <div
+            ref={detailBoxRef}
+            style={{ maxHeight: detailPosition?.maxHeight }}
+            className="overflow-y-auto border border-border bg-surface-3 px-3 py-2 text-left shadow-lg"
+          >
+            <StatusNote
+              invalidReasons={detailItem.invalidReasons}
+              unused={detailItem.unused}
+              t={t}
+              divided={!!detailItem.tooltip}
+            />
+            {detailItem.tooltip}
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

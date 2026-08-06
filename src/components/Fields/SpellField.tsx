@@ -1,6 +1,7 @@
 import {
   Select,
   type SelectItem,
+  type InvalidReason,
   FieldWrapper,
   SpellTooltipContent,
 } from '@components';
@@ -59,6 +60,13 @@ export function SpellField({
 
     return {
       ...item,
+      tooltip:
+        item.value !== SPELLS.EMPTY ? (
+          <SpellTooltipContent
+            spell={item.value as SpellIndex}
+            character={character}
+          />
+        ) : undefined,
       label: translateMeta(
         getSpellTranslationKeyPrefix(item.value as number),
         { displayName: label },
@@ -67,8 +75,15 @@ export function SpellField({
     };
   });
 
+  const isOffered = baseItems.some((item) => item.value === currentSpell);
+  const invalidReasons: InvalidReason[] = [];
+  if (!isExisting) invalidReasons.push('unknown');
+  if (!isInChapter) invalidReasons.push('notInChapter');
+  if (isExisting && isInChapter && !isOffered)
+    invalidReasons.push('notAvailableTo');
+
   let selectItems: SelectItem[] = baseItems;
-  if (!isValid || !baseItems.some((item) => item.value === currentSpell)) {
+  if (!isValid || !isOffered) {
     selectItems = [
       ...baseItems,
       {
@@ -86,7 +101,7 @@ export function SpellField({
           t,
         ).displayName,
         value: currentSpell,
-        invalid: true,
+        invalidReasons,
         unused: spellMeta?.unused,
       },
     ];

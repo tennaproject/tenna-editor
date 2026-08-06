@@ -1,18 +1,17 @@
+import type { ReactNode } from 'react';
 import {
   Section,
   TextLabel,
   Select,
   type SelectItem,
+  type InvalidReason,
   ConsumableTooltipContent,
   EquipmentIcon,
   EquipmentTooltipContent,
-  InlineGroup,
   KeyItemTooltipContent,
   LightWorldItemTooltipContent,
 } from '@components';
 import {
-  EQUIPMENT_STAT_ICONS,
-  EQUIPMENT_STAT_ORDER,
   type ArmorIndex,
   type ChapterIndex,
   type ConsumableIndex,
@@ -42,7 +41,6 @@ import {
   phoneContactHelpers,
   weaponHelpers,
 } from '@utils/data-helpers';
-import { getEquipmentStats, mergeClass } from '@utils';
 
 export type ItemType =
   | 'consumable'
@@ -150,48 +148,43 @@ function getIcon(type: ItemType, id: number): EquipmentIconIndex | undefined {
   }
 }
 
-function renderEquipmentIcon(icon: EquipmentIconIndex | undefined) {
-  return icon !== undefined ? <EquipmentIcon icon={icon} /> : undefined;
+function getItemTooltip(type: ItemType, id: number): ReactNode {
+  if (id === 0) return undefined;
+  if (!getDisplayNameOrUndefined(type, id)) return undefined;
+
+  switch (type) {
+    case 'weapon':
+    case 'armor':
+      return <EquipmentTooltipContent type={type} id={id} />;
+    case 'consumable':
+    case 'storage':
+      return <ConsumableTooltipContent id={id as ConsumableIndex} />;
+    case 'keyItem':
+      return <KeyItemTooltipContent id={id as KeyItemIndex} />;
+    case 'lightWorldItem':
+      return <LightWorldItemTooltipContent id={id as LightWorldItemIndex} />;
+    case 'phoneContact':
+      return undefined;
+  }
 }
 
-function renderEquipmentStats(
-  type: ItemType,
-  id: number,
-  chapter: ChapterIndex,
-) {
-  if (type !== 'weapon' && type !== 'armor') return undefined;
-
-  const stats = getEquipmentStats(
-    type === 'weapon' ? 'weapon' : 'primaryArmor',
-    id as WeaponIndex,
-    chapter,
-  );
-  if (!stats) return undefined;
-
-  return (
-    <InlineGroup className="gap-2">
-      {EQUIPMENT_STAT_ORDER.map((stat) => {
-        const noStats = stats[stat] <= 0;
-
-        return (
-          <InlineGroup key={stat} className="gap-1">
-            <EquipmentIcon
-              icon={EQUIPMENT_STAT_ICONS[stat]}
-              className={noStats ? 'opacity-30' : undefined}
-            />
-            <span
-              className={mergeClass(
-                'text-sm',
-                noStats ? 'text-text-3' : 'text-text-2',
-              )}
-            >
-              {stats[stat]}
-            </span>
-          </InlineGroup>
-        );
-      })}
-    </InlineGroup>
-  );
+function getDisplayNameOrUndefined(type: ItemType, id: number) {
+  switch (type) {
+    case 'consumable':
+    case 'storage':
+      return consumableHelpers.getById(id as ConsumableIndex)?.displayName;
+    case 'keyItem':
+      return keyItemHelpers.getById(id as KeyItemIndex)?.displayName;
+    case 'weapon':
+      return weaponHelpers.getById(id as WeaponIndex)?.displayName;
+    case 'armor':
+      return armorHelpers.getById(id as ArmorIndex)?.displayName;
+    case 'lightWorldItem':
+      return lightWorldItemHelpers.getById(id as LightWorldItemIndex)
+        ?.displayName;
+    case 'phoneContact':
+      return phoneContactHelpers.getById(id as PhoneContactIndex)?.displayName;
+  }
 }
 
 function getPlaceholder(type: ItemType): string {
@@ -238,17 +231,21 @@ export function ItemField({ type, slot, label }: ItemFieldProps) {
   const selectLabel = label ?? t('ui.field.slot', 'Slot');
   const placeholder = t(getPlaceholderKey(type), getPlaceholder(type));
   const baseItems = getChapterItemOptions(chapter, type, saveSlot).map(
-    (item) => ({
-      ...item,
-      icon: renderEquipmentIcon(getIcon(type, item.value as number)),
-      trailing: renderEquipmentStats(type, item.value as number, chapter),
-      label: getTranslatedDisplayName(
-        type,
-        item.value as number,
-        item.label,
-        t,
-      ),
-    }),
+    (item) => {
+      const icon = getIcon(type, item.value as number);
+
+      return {
+        ...item,
+        icon: icon !== undefined ? <EquipmentIcon icon={icon} /> : undefined,
+        tooltip: getItemTooltip(type, item.value as number),
+        label: getTranslatedDisplayName(
+          type,
+          item.value as number,
+          item.label,
+          t,
+        ),
+      };
+    },
   );
   const chapterContent = chapterHelpers.getById(chapter).content;
 
@@ -283,17 +280,26 @@ export function ItemField({ type, slot, label }: ItemFieldProps) {
   );
   const isValid = !!metaDisplay && availableSet.has(currentValue);
 
+  const invalidReasons: InvalidReason[] = [];
+  if (!metaDisplay) invalidReasons.push('unknown');
+  if (!availableSet.has(currentValue)) invalidReasons.push('notInChapter');
+
+  const currentIcon = getIcon(type, currentValue);
+
   let selectItems: SelectItem[] = baseItems;
   if (!isValid || !availableSet.has(currentValue)) {
     selectItems = [
       ...baseItems,
       {
         id: `${currentValue}`,
-        icon: renderEquipmentIcon(getIcon(type, currentValue)),
-        trailing: renderEquipmentStats(type, currentValue, chapter),
+        icon:
+          currentIcon !== undefined ? (
+            <EquipmentIcon icon={currentIcon} />
+          ) : undefined,
+        tooltip: getItemTooltip(type, currentValue),
         label: metaDisplay || t('ui.common.unknown', 'Unknown'),
         value: currentValue,
-        invalid: true,
+        invalidReasons,
         unused: getUnused(type, currentValue),
       },
     ];
@@ -302,51 +308,7 @@ export function ItemField({ type, slot, label }: ItemFieldProps) {
   const selectedItem =
     selectItems.find((item) => item.value === currentValue) ?? null;
 
-  const tooltip = (() => {
-    if (currentValue === 0) return undefined;
-
-    if (type === 'weapon' || type === 'armor') {
-      const meta =
-        type === 'weapon'
-          ? weaponHelpers.getById(currentValue as WeaponIndex)
-          : armorHelpers.getById(currentValue as ArmorIndex);
-
-      return meta?.displayName ? (
-        <EquipmentTooltipContent type={type} id={currentValue} />
-      ) : undefined;
-    }
-
-    // Storage holds consumables, so it gets the same tooltip.
-    if (type === 'consumable' || type === 'storage') {
-      const meta = consumableHelpers.getById(currentValue as ConsumableIndex);
-
-      return meta?.displayName ? (
-        <ConsumableTooltipContent id={currentValue as ConsumableIndex} />
-      ) : undefined;
-    }
-
-    if (type === 'keyItem') {
-      const meta = keyItemHelpers.getById(currentValue as KeyItemIndex);
-
-      return meta?.displayName ? (
-        <KeyItemTooltipContent id={currentValue as KeyItemIndex} />
-      ) : undefined;
-    }
-
-    if (type === 'lightWorldItem') {
-      const meta = lightWorldItemHelpers.getById(
-        currentValue as LightWorldItemIndex,
-      );
-
-      return meta?.displayName ? (
-        <LightWorldItemTooltipContent
-          id={currentValue as LightWorldItemIndex}
-        />
-      ) : undefined;
-    }
-
-    return undefined;
-  })();
+  const tooltip = getItemTooltip(type, currentValue);
 
   return (
     <Section id={`${type}s-slot${slot}`} className="w-full">

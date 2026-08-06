@@ -227,7 +227,7 @@ function CharacterCard({
           t,
         ).displayName,
         value: character,
-        invalid: true,
+        invalidReasons: ['notInChapter'],
       },
     ];
   }

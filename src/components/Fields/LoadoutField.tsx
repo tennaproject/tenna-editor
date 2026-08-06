@@ -1,20 +1,19 @@
 import {
   Select,
   type SelectItem,
+  type InvalidReason,
   FieldWrapper,
   EquipmentIcon,
+  EquipmentStatsRow,
   InlineGroup,
   EquipmentTooltipContent,
   EquipmentAbilityTooltip,
 } from '@components';
 import {
   EQUIPMENT_ABILITIES_META,
-  EQUIPMENT_STAT_ICONS,
-  EQUIPMENT_STAT_ORDER,
   type CharacterIndex,
   type WeaponIndex,
   type ArmorIndex,
-  type EquipmentIconIndex,
 } from '@data';
 import { useCharacterOverrideInputs } from '@hooks';
 import { useSave } from '@store';
@@ -23,6 +22,7 @@ import {
   armorHelpers,
   chapterHelpers,
   characterHelpers,
+  resolveChapterMeta,
   weaponHelpers,
 } from '@utils/data-helpers';
 import {
@@ -34,18 +34,10 @@ import {
 } from '../../i18n';
 import {
   getEquipmentStats,
-  mergeClass,
   syncEquipmentStats as syncStoredEquipmentStats,
 } from '@utils';
 
 type LoadoutType = 'weapon' | 'primaryArmor' | 'secondaryArmor';
-
-// Colours an option's stat relative to the same stat on the equipped item.
-function getComparisonClass(delta: number) {
-  if (delta > 0) return 'text-green';
-  if (delta < 0) return 'text-red';
-  return 'text-text-2';
-}
 
 const LOADOUT_TITLES: Record<LoadoutType, string> = {
   weapon: 'Weapon',
@@ -65,10 +57,6 @@ interface LoadoutFieldProps {
   character: CharacterIndex;
   allowAllElements: boolean;
   recalculateStats: boolean;
-}
-
-function renderEquipmentIcon(icon: EquipmentIconIndex | undefined) {
-  return icon !== undefined ? <EquipmentIcon icon={icon} /> : undefined;
 }
 
 export function LoadoutField({
@@ -97,9 +85,7 @@ export function LoadoutField({
       : armorHelpers.getById(value as ArmorIndex);
 
   const baseElementMeta = getElementMeta(current as number);
-  const elementMeta = baseElementMeta
-    ? { ...baseElementMeta, ...baseElementMeta.getOverrides?.({ chapter }) }
-    : baseElementMeta;
+  const elementMeta = resolveChapterMeta(baseElementMeta, { chapter });
   const isExisting = !!(
     elementMeta && (elementMeta as { displayName?: string }).displayName
   );
@@ -112,29 +98,7 @@ export function LoadoutField({
       : overrides?.allowedArmors;
 
   const stats = getEquipmentStats(type, current as WeaponIndex, chapter);
-
-  const renderOptionStats = (value: number) => {
-    const optionStats = getEquipmentStats(type, value as WeaponIndex, chapter);
-    if (!optionStats) return undefined;
-
-    return (
-      <InlineGroup className="gap-2">
-        {EQUIPMENT_STAT_ORDER.map((stat) => (
-          <InlineGroup key={stat} className="gap-1">
-            <EquipmentIcon icon={EQUIPMENT_STAT_ICONS[stat]} />
-            <span
-              className={mergeClass(
-                'text-sm',
-                getComparisonClass(optionStats[stat] - (stats?.[stat] ?? 0)),
-              )}
-            >
-              {optionStats[stat]}
-            </span>
-          </InlineGroup>
-        ))}
-      </InlineGroup>
-    );
-  };
+  const equippedStats = stats ?? { attack: 0, defence: 0, magic: 0 };
 
   const baseItems = getChapterLoadoutOptions(
     chapter,
@@ -142,27 +106,55 @@ export function LoadoutField({
     character,
     allowAllElements,
     allowedElementsOverride,
-  ).map((item) => ({
-    ...item,
-    icon: renderEquipmentIcon(getElementMeta(item.value as number)?.icon),
-    trailing: renderOptionStats(item.value as number),
-    label: translateMeta(
-      optionType === 'weapon'
-        ? getWeaponTranslationKeyPrefix(item.value as number)
-        : getArmorTranslationKeyPrefix(item.value as number),
-      { displayName: item.label },
-      t,
-    ).displayName,
-  }));
+  ).map((item) => {
+    const icon = getElementMeta(item.value as number)?.icon;
+
+    return {
+      ...item,
+      icon: icon !== undefined ? <EquipmentIcon icon={icon} /> : undefined,
+      tooltip:
+        item.value !== 0 ? (
+          <EquipmentTooltipContent
+            type={optionType}
+            id={item.value as number}
+            compareTo={equippedStats}
+          />
+        ) : undefined,
+      label: translateMeta(
+        optionType === 'weapon'
+          ? getWeaponTranslationKeyPrefix(item.value as number)
+          : getArmorTranslationKeyPrefix(item.value as number),
+        { displayName: item.label },
+        t,
+      ).displayName,
+    };
+  });
+
+  const isOffered = baseItems.some((item) => item.value === current);
+  const invalidReasons: InvalidReason[] = [];
+  if (!isExisting) invalidReasons.push('unknown');
+  if (!isInChapter) invalidReasons.push('notInChapter');
+  if (isExisting && isInChapter && !isOffered)
+    invalidReasons.push('notAvailableTo');
 
   let selectItems: SelectItem[] = baseItems;
-  if (!isValid || !baseItems.some((item) => item.value === current)) {
+  if (!isValid || !isOffered) {
     selectItems = [
       ...baseItems,
       {
         id: `${current}`,
-        icon: renderEquipmentIcon(isExisting ? elementMeta.icon : undefined),
-        trailing: renderOptionStats(current as number),
+        icon:
+          isExisting && elementMeta.icon !== undefined ? (
+            <EquipmentIcon icon={elementMeta.icon} />
+          ) : undefined,
+        tooltip:
+          isExisting && current !== 0 ? (
+            <EquipmentTooltipContent
+              type={optionType}
+              id={current as number}
+              compareTo={equippedStats}
+            />
+          ) : undefined,
         label: isExisting
           ? translateMeta(
               optionType === 'weapon'
@@ -173,7 +165,7 @@ export function LoadoutField({
             ).displayName
           : t('ui.common.unknown', 'Unknown'),
         value: current as number,
-        invalid: true,
+        invalidReasons,
         unused: isExisting ? elementMeta.unused : undefined,
       },
     ];
@@ -192,9 +184,7 @@ export function LoadoutField({
   const abilityBase =
     abilityId !== undefined ? EQUIPMENT_ABILITIES_META[abilityId] : undefined;
   // same with the tooltip, which resolves chapter overrides as well.
-  const abilityMeta = abilityBase
-    ? { ...abilityBase, ...abilityBase.getOverrides?.({ chapter }) }
-    : undefined;
+  const abilityMeta = resolveChapterMeta(abilityBase, { chapter });
   const abilityName = abilityMeta
     ? translateMeta(
         getEquipmentAbilityTranslationKeyPrefix(abilityId as number),
@@ -214,42 +204,22 @@ export function LoadoutField({
     </EquipmentAbilityTooltip>
   ) : (
     <InlineGroup>
-      <span className="text-sm text-text-3">(No ability.)</span>
+      <span className="text-sm text-text-3">
+        {t('ui.tooltip.noAbility', '(No ability.)')}
+      </span>
     </InlineGroup>
   );
 
   const statsRow = stats ? (
-    <InlineGroup className="gap-3 ml-auto">
-      {EQUIPMENT_STAT_ORDER.map((stat) => {
-        const noStats = stats[stat] <= 0;
-
-        return (
-          <InlineGroup key={stat} className="gap-1">
-            <EquipmentIcon
-              icon={EQUIPMENT_STAT_ICONS[stat]}
-              className={noStats ? 'opacity-30' : undefined}
-            />
-            <span
-              className={mergeClass(
-                'text-base',
-                noStats ? 'text-text-3' : 'text-text-2',
-              )}
-            >
-              {stats[stat]}
-            </span>
-          </InlineGroup>
-        );
-      })}
-    </InlineGroup>
+    <EquipmentStatsRow stats={stats} className="ml-auto text-base" />
   ) : null;
 
-  const detailsRow =
-    abilityRow || statsRow ? (
-      <InlineGroup className="gap-3">
-        {abilityRow}
-        {statsRow}
-      </InlineGroup>
-    ) : null;
+  const detailsRow = (
+    <InlineGroup className="gap-3">
+      {abilityRow}
+      {statsRow}
+    </InlineGroup>
+  );
 
   return (
     <FieldWrapper id={id} className="w-full" title={label} label>
