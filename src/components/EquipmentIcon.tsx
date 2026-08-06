@@ -37,8 +37,9 @@ import EquipmentIcon35 from '@assets/deltarune/equipment/equipment-icon-35.png';
 import EquipmentIcon36 from '@assets/deltarune/equipment/equipment-icon-36.png';
 import EquipmentIcon37 from '@assets/deltarune/equipment/equipment-icon-37.png';
 import EquipmentIcon38 from '@assets/deltarune/equipment/equipment-icon-38.png';
+import MinusIcon from '@assets/icons/minus.svg?react';
 
-import type { EquipmentIconIndex } from '@data';
+import { EQUIPMENT_ICONS, type EquipmentIconIndex } from '@data';
 import { mergeClass } from '@utils/merge-class';
 
 // Keyed by sprite number rather than by EQUIPMENT_ICONS name so that renaming
@@ -92,6 +93,21 @@ interface EquipmentIconProps {
 
 // icons scaled up by 2x
 export function EquipmentIcon({ icon, className }: EquipmentIconProps) {
+  if (icon === EQUIPMENT_ICONS.EMPTY) {
+    return (
+      <span
+        aria-hidden
+        className={mergeClass(
+          'inline-flex h-[24px] w-[20px] items-center justify-center -space-x-px',
+          className,
+        )}
+      >
+        <MinusIcon className="size-2.5" />
+        <MinusIcon className="size-2.5" />
+      </span>
+    );
+  }
+
   return (
     <img
       src={EQUIPMENT_ICON_SOURCES[icon]}
