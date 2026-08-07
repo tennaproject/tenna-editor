@@ -5,6 +5,7 @@ import {
   EquipmentIcon,
   EquipmentStatsRow,
   EquipmentTooltip,
+  FitToViewport,
   Heading,
   HelpTip,
   InlineGroup,
@@ -232,14 +233,14 @@ function CharacterCard({
       className="flex flex-col min-h-[450px] w-full lg:h-full lg:max-h-[900px]"
     >
       <Card className="flex flex-col flex-1">
-        <div className="flex flex-col flex-1 py-6 lg:py-10 short:py-6 items-center gap-4">
+        <div className="flex flex-col flex-1 items-center gap-4 py-6 lg:py-10">
           <div className="flex flex-col justify-center items-center gap-2">
             <Heading level={1}>{slot + 1}</Heading>
             <Heading level={5}>{t('ui.party.member', 'MEMBER')}</Heading>
             {isExisting && isInChapter && (
               <span
                 className={mergeClass(
-                  'inline-flex h-24 w-24 short:h-16 short:w-16 shrink-0 items-center justify-center',
+                  'inline-flex h-24 w-24 shrink-0 items-center justify-center',
                   color.text,
                 )}
                 aria-hidden
@@ -252,7 +253,7 @@ function CharacterCard({
             </Heading>
           </div>
 
-          <div className="flex flex-col items-center gap-9 short:gap-6 -mt-2">
+          <div className="-mt-2 flex flex-col items-center gap-9">
             <div className="flex flex-col items-center gap-1">
               <Heading
                 level={4}
@@ -345,7 +346,7 @@ export function PartyOverview() {
   if (!party) return null;
 
   return (
-    <div className="page lg:min-h-full">
+    <FitToViewport className="page">
       <InlineGroup>
         <Checkbox
           label={t(
@@ -394,6 +395,6 @@ export function PartyOverview() {
           allowNonStandardParty={allowNonStandardParty}
         />
       </div>
-    </div>
+    </FitToViewport>
   );
 }
