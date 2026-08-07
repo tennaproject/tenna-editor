@@ -111,7 +111,10 @@ export function LoadoutField({
 
     return {
       ...item,
-      icon: icon !== undefined ? <EquipmentIcon icon={icon} /> : undefined,
+      icon:
+        icon !== undefined ? (
+          <EquipmentIcon icon={icon} unknownArt={item.value !== 0} />
+        ) : undefined,
       tooltip:
         item.value !== 0 ? (
           <EquipmentTooltipContent
@@ -145,7 +148,7 @@ export function LoadoutField({
         id: `${current}`,
         icon:
           isExisting && elementMeta.icon !== undefined ? (
-            <EquipmentIcon icon={elementMeta.icon} />
+            <EquipmentIcon icon={elementMeta.icon} unknownArt={current !== 0} />
           ) : undefined,
         tooltip:
           isExisting && current !== 0 ? (

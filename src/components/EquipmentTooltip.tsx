@@ -203,6 +203,7 @@ export function EquipmentTooltipContent({
             icon={meta.icon}
             name={translated.displayName}
             href={getWikiUrl(meta.displayName)}
+            unknownArt={id !== 0}
           />
 
           {ability ? (

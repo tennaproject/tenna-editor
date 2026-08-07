@@ -68,7 +68,13 @@ function EquipmentRow({ type, id }: EquipmentRowProps) {
 
   const content = (
     <InlineGroup className="gap-1">
-      {meta?.icon !== undefined && <EquipmentIcon icon={meta.icon} />}
+      {meta?.icon !== undefined && (
+        <EquipmentIcon
+          className={mergeClass(isEmpty ? 'text-text-3' : '')}
+          icon={meta.icon}
+          unknownArt={!isEmpty}
+        />
+      )}
       <span
         className={mergeClass(
           'text-base',

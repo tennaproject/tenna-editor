@@ -38,6 +38,7 @@ import EquipmentIcon36 from '@assets/deltarune/equipment/equipment-icon-36.png';
 import EquipmentIcon37 from '@assets/deltarune/equipment/equipment-icon-37.png';
 import EquipmentIcon38 from '@assets/deltarune/equipment/equipment-icon-38.png';
 import MinusIcon from '@assets/icons/minus.svg?react';
+import QuestionIcon from '@assets/icons/question.svg?react';
 
 import { EQUIPMENT_ICONS, type EquipmentIconIndex } from '@data';
 import { mergeClass } from '@utils/merge-class';
@@ -89,11 +90,31 @@ const EQUIPMENT_ICON_SOURCES: Record<EquipmentIconIndex, string> = {
 interface EquipmentIconProps {
   icon: EquipmentIconIndex;
   className?: string;
+  // Marks an item that has no artwork of its own. Empty slots keep the dashes.
+  unknownArt?: boolean;
 }
 
 // icons scaled up by 2x
-export function EquipmentIcon({ icon, className }: EquipmentIconProps) {
+export function EquipmentIcon({
+  icon,
+  className,
+  unknownArt,
+}: EquipmentIconProps) {
   if (icon === EQUIPMENT_ICONS.EMPTY) {
+    if (unknownArt) {
+      return (
+        <span
+          aria-hidden
+          className={mergeClass(
+            'inline-flex h-[24px] w-[20px] items-center justify-center',
+            className,
+          )}
+        >
+          <QuestionIcon className="size-5" />
+        </span>
+      );
+    }
+
     return (
       <span
         aria-hidden

@@ -236,7 +236,10 @@ export function ItemField({ type, slot, label }: ItemFieldProps) {
 
       return {
         ...item,
-        icon: icon !== undefined ? <EquipmentIcon icon={icon} /> : undefined,
+        icon:
+          icon !== undefined ? (
+            <EquipmentIcon icon={icon} unknownArt={item.value !== 0} />
+          ) : undefined,
         tooltip: getItemTooltip(type, item.value as number),
         label: getTranslatedDisplayName(
           type,
@@ -294,7 +297,7 @@ export function ItemField({ type, slot, label }: ItemFieldProps) {
         id: `${currentValue}`,
         icon:
           currentIcon !== undefined ? (
-            <EquipmentIcon icon={currentIcon} />
+            <EquipmentIcon icon={currentIcon} unknownArt={currentValue !== 0} />
           ) : undefined,
         tooltip: getItemTooltip(type, currentValue),
         label: metaDisplay || t('ui.common.unknown', 'Unknown'),

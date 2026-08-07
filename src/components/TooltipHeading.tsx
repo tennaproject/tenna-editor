@@ -6,12 +6,20 @@ interface TooltipHeadingProps {
   icon?: EquipmentIconIndex;
   name: string;
   href: string;
+  unknownArt?: boolean;
 }
 
-export function TooltipHeading({ icon, name, href }: TooltipHeadingProps) {
+export function TooltipHeading({
+  icon,
+  name,
+  href,
+  unknownArt,
+}: TooltipHeadingProps) {
   return (
     <InlineGroup className="min-w-0 gap-1">
-      {icon !== undefined && <EquipmentIcon icon={icon} />}
+      {icon !== undefined && (
+        <EquipmentIcon icon={icon} unknownArt={unknownArt} />
+      )}
       <a
         href={href}
         target="_blank"
