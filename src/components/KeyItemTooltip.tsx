@@ -54,7 +54,7 @@ export function KeyItemTooltipContent({ id }: KeyItemTooltipContentProps) {
         href={getWikiUrl(meta.displayName)}
       />
 
-      <p className="ui-prose-muted overflow-hidden border-t border-divider pt-2 whitespace-pre">
+      <p className="ui-prose-muted border-t border-divider pt-2 whitespace-pre-wrap">
         {description ?? t('ui.tooltip.noDescription', '(No description.)')}
       </p>
     </div>

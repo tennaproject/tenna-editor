@@ -1,4 +1,15 @@
-import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type FocusEvent,
+  type KeyboardEvent as ReactKeyboardEvent,
+  type ReactNode,
+} from 'react';
+import { createPortal } from 'react-dom';
 import { mergeClass } from '@utils/merge-class';
 
 interface TooltipProps {
@@ -10,10 +21,27 @@ interface TooltipProps {
 }
 
 const OPEN_DELAY_MS = 250;
-// Grace period for mouse hover
 const CLOSE_DELAY_MS = 100;
-const ESTIMATED_HEIGHT = 180;
-const PANEL_WIDTH = 'w-80';
+const PANEL_WIDTH = 'w-84';
+const GAP_PX = 8;
+const VIEWPORT_MARGIN_PX = 8;
+const FIT_TOLERANCE_PX = 2;
+
+// portalled to body so tab skips it
+const FOCUSABLE_SELECTOR =
+  'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+function getFocusable(root: HTMLElement | null) {
+  if (!root) return [];
+  return Array.from(root.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR));
+}
+
+interface PanelPosition {
+  top: number;
+  left: number;
+  maxHeight: number;
+  openUp: boolean;
+}
 
 export function Tooltip({
   content,
@@ -24,12 +52,73 @@ export function Tooltip({
 }: TooltipProps) {
   const tooltipId = useId();
   const [isOpen, setIsOpen] = useState(false);
-  const [shouldOpenUp, setShouldOpenUp] = useState(false);
+  const [position, setPosition] = useState<PanelPosition | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
   const openTimerRef = useRef<number | null>(null);
   const closeTimerRef = useRef<number | null>(null);
 
   const isEnabled = !!content;
+  const isVisible = isEnabled && isOpen;
+
+  const updatePosition = useCallback(() => {
+    const trigger = containerRef.current;
+    const panel = panelRef.current;
+    if (!trigger || !panel) return;
+
+    const rect = trigger.getBoundingClientRect();
+    const panelWidth = panel.offsetWidth;
+    const panelHeight = panel.scrollHeight + panel.clientTop * 2;
+
+    const spaceBelow =
+      window.innerHeight - rect.bottom - GAP_PX - VIEWPORT_MARGIN_PX;
+    const spaceAbove = rect.top - GAP_PX - VIEWPORT_MARGIN_PX;
+
+    let openUp: boolean;
+    if (panelHeight <= spaceBelow + FIT_TOLERANCE_PX) {
+      openUp = false;
+    } else if (panelHeight <= spaceAbove + FIT_TOLERANCE_PX) {
+      openUp = true;
+    } else {
+      openUp = spaceAbove > spaceBelow;
+    }
+
+    const maxHeight = Math.max(
+      Math.ceil((openUp ? spaceAbove : spaceBelow) + FIT_TOLERANCE_PX),
+      96,
+    );
+    const shownHeight = Math.min(panelHeight, maxHeight);
+
+    const adjacentTop = openUp ? rect.top - shownHeight - GAP_PX : rect.bottom;
+
+    const top = Math.min(
+      Math.max(adjacentTop, VIEWPORT_MARGIN_PX),
+      Math.max(
+        window.innerHeight - shownHeight - VIEWPORT_MARGIN_PX,
+        VIEWPORT_MARGIN_PX,
+      ),
+    );
+    const left = Math.min(
+      Math.max(rect.left + rect.width / 2 - panelWidth / 2, VIEWPORT_MARGIN_PX),
+      Math.max(
+        window.innerWidth - panelWidth - VIEWPORT_MARGIN_PX,
+        VIEWPORT_MARGIN_PX,
+      ),
+    );
+
+    const next = { top, left, maxHeight, openUp };
+    // eslint-disable-next-line @eslint-react/set-state-in-effect
+    setPosition((prev) =>
+      prev &&
+      prev.top === next.top &&
+      prev.left === next.left &&
+      prev.maxHeight === next.maxHeight &&
+      prev.openUp === next.openUp
+        ? prev
+        : next,
+    );
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -37,6 +126,36 @@ export function Tooltip({
       if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current);
     };
   }, []);
+
+  useLayoutEffect(() => {
+    if (!isVisible) {
+      // eslint-disable-next-line @eslint-react/set-state-in-effect
+      setPosition(null);
+      return;
+    }
+
+    updatePosition();
+
+    const panel = panelRef.current;
+    const observer = new ResizeObserver(updatePosition);
+    if (panel) observer.observe(panel);
+
+    let frame = 0;
+    function onScrollOrResize() {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(updatePosition);
+    }
+
+    window.addEventListener('scroll', onScrollOrResize, true);
+    window.addEventListener('resize', onScrollOrResize);
+
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', onScrollOrResize, true);
+      window.removeEventListener('resize', onScrollOrResize);
+    };
+  }, [isVisible, updatePosition]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -47,7 +166,7 @@ export function Tooltip({
 
     // Touch also opens the tooltip
     function onPointerDownOutside(event: PointerEvent) {
-      if (containerRef.current?.contains(event.target as Node)) return;
+      if (contains(event.target as Node)) return;
       setIsOpen(false);
     }
 
@@ -60,17 +179,16 @@ export function Tooltip({
     };
   }, [isOpen]);
 
-  const isVisible = isEnabled && isOpen;
+  function contains(node: Node | null) {
+    if (!node) return false;
+    return (
+      !!containerRef.current?.contains(node) ||
+      !!wrapperRef.current?.contains(node)
+    );
+  }
 
   function open() {
     if (!isEnabled) return;
-
-    const rect = containerRef.current?.getBoundingClientRect();
-    if (rect) {
-      const spaceBelow = window.innerHeight - rect.bottom;
-      setShouldOpenUp(spaceBelow < ESTIMATED_HEIGHT && rect.top > spaceBelow);
-    }
-
     setIsOpen(true);
   }
 
@@ -98,6 +216,54 @@ export function Tooltip({
     setIsOpen(false);
   }
 
+  function onBlur(event: FocusEvent) {
+    if (contains(event.relatedTarget)) return;
+    close();
+  }
+
+  function focusAfterTrigger() {
+    const trigger = containerRef.current;
+    if (!trigger) return;
+
+    const order = getFocusable(document.body).filter(
+      (element) => !wrapperRef.current?.contains(element),
+    );
+    const index = order.indexOf(trigger);
+    if (index >= 0) order[index + 1]?.focus();
+  }
+
+  function onTriggerKeyDown(event: ReactKeyboardEvent) {
+    if (event.key !== 'Tab' || event.shiftKey) return;
+    if (!isVisible || event.target !== containerRef.current) return;
+
+    const [first] = getFocusable(wrapperRef.current);
+    if (!first) return;
+
+    event.preventDefault();
+    first.focus();
+  }
+
+  function onPanelKeyDown(event: ReactKeyboardEvent) {
+    if (event.key !== 'Tab') return;
+
+    const focusables = getFocusable(wrapperRef.current);
+    if (!focusables.length) return;
+
+    const active = document.activeElement;
+
+    if (event.shiftKey && active === focusables[0]) {
+      event.preventDefault();
+      containerRef.current?.focus();
+      return;
+    }
+
+    if (!event.shiftKey && active === focusables[focusables.length - 1]) {
+      event.preventDefault();
+      close();
+      focusAfterTrigger();
+    }
+  }
+
   return (
     <div
       ref={containerRef}
@@ -107,16 +273,8 @@ export function Tooltip({
       onMouseEnter={scheduleOpen}
       onMouseLeave={scheduleClose}
       onFocus={focusable ? open : undefined}
-      onBlur={
-        focusable
-          ? (event) => {
-              // Keep it open while focus moves to something inside it, so the
-              // panel's own links stay reachable by keyboard.
-              if (containerRef.current?.contains(event.relatedTarget)) return;
-              close();
-            }
-          : undefined
-      }
+      onBlur={focusable ? onBlur : undefined}
+      onKeyDown={focusable ? onTriggerKeyDown : undefined}
       onPointerDown={(event) => {
         if (event.pointerType !== 'touch') return;
         if (isOpen) {
@@ -128,26 +286,38 @@ export function Tooltip({
     >
       {children}
 
-      {isVisible && (
-        <div
-          className={mergeClass(
-            'absolute left-1/2 -translate-x-1/2 z-[70] max-w-[90vw]',
-            widthClassName ?? PANEL_WIDTH,
-            shouldOpenUp ? 'bottom-full pb-2' : 'top-full pt-2',
-          )}
-          // A tap inside the panel should not hit the container's touch toggle.
-          onPointerDown={(event) => event.stopPropagation()}
-          onMouseEnter={scheduleOpen}
-        >
+      {isVisible &&
+        createPortal(
           <div
-            id={tooltipId}
-            role="tooltip"
-            className="cursor-default border border-border bg-surface-3 px-3 py-2 text-left shadow-lg"
+            ref={wrapperRef}
+            className={mergeClass(
+              'fixed z-[70] max-w-[calc(100vw-16px)]',
+              widthClassName ?? PANEL_WIDTH,
+              position?.openUp ? 'pb-2' : 'pt-2',
+            )}
+            style={{
+              top: position?.top ?? 0,
+              left: position?.left ?? 0,
+              visibility: position ? 'visible' : 'hidden',
+            }}
+            onPointerDown={(event) => event.stopPropagation()}
+            onMouseEnter={clearTimers}
+            onMouseLeave={scheduleClose}
+            onBlur={onBlur}
+            onKeyDown={onPanelKeyDown}
           >
-            {content}
-          </div>
-        </div>
-      )}
+            <div
+              ref={panelRef}
+              id={tooltipId}
+              role="tooltip"
+              style={{ maxHeight: position?.maxHeight }}
+              className="cursor-default overflow-y-auto border border-border bg-surface-3 px-3 py-2 text-left shadow-lg"
+            >
+              {content}
+            </div>
+          </div>,
+          document.body,
+        )}
     </div>
   );
 }
