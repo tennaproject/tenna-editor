@@ -137,7 +137,6 @@ export default defineConfig({
               name: 'common',
               minShareCount: 2,
               minSize: 20 * 1024,
-              maxSize: 400 * 1024,
               priority: 5,
             },
           ],
