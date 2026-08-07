@@ -1,5 +1,20 @@
-import { Select, type SelectItem, FieldWrapper } from '@components';
-import { type CharacterIndex, type WeaponIndex, type ArmorIndex } from '@data';
+import {
+  Select,
+  type SelectItem,
+  type InvalidReason,
+  FieldWrapper,
+  EquipmentIcon,
+  EquipmentStatsRow,
+  InlineGroup,
+  EquipmentTooltipContent,
+  EquipmentAbilityTooltip,
+} from '@components';
+import {
+  EQUIPMENT_ABILITIES_META,
+  type CharacterIndex,
+  type WeaponIndex,
+  type ArmorIndex,
+} from '@data';
 import { useCharacterOverrideInputs } from '@hooks';
 import { useSave } from '@store';
 import { getChapterLoadoutOptions } from '@utils/chapter-options';
@@ -7,15 +22,20 @@ import {
   armorHelpers,
   chapterHelpers,
   characterHelpers,
+  resolveChapterMeta,
   weaponHelpers,
 } from '@utils/data-helpers';
 import {
   getArmorTranslationKeyPrefix,
+  getEquipmentAbilityTranslationKeyPrefix,
   getWeaponTranslationKeyPrefix,
   translateMeta,
   useTranslation,
 } from '../../i18n';
-import { syncEquipmentStats as syncStoredEquipmentStats } from '@utils';
+import {
+  getEquipmentStats,
+  syncEquipmentStats as syncStoredEquipmentStats,
+} from '@utils';
 
 type LoadoutType = 'weapon' | 'primaryArmor' | 'secondaryArmor';
 
@@ -59,10 +79,13 @@ export function LoadoutField({
     optionType === 'weapon' ? 'weapons' : 'armors'
   ] as Set<number>;
 
-  const elementMeta =
-    type === 'weapon'
-      ? weaponHelpers.getById(current as WeaponIndex)
-      : armorHelpers.getById(current as ArmorIndex);
+  const getElementMeta = (value: number) =>
+    optionType === 'weapon'
+      ? weaponHelpers.getById(value as WeaponIndex)
+      : armorHelpers.getById(value as ArmorIndex);
+
+  const baseElementMeta = getElementMeta(current as number);
+  const elementMeta = resolveChapterMeta(baseElementMeta, { chapter });
   const isExisting = !!(
     elementMeta && (elementMeta as { displayName?: string }).displayName
   );
@@ -74,29 +97,67 @@ export function LoadoutField({
       ? overrides?.allowedWeapons
       : overrides?.allowedArmors;
 
+  const stats = getEquipmentStats(type, current as WeaponIndex, chapter);
+  const equippedStats = stats ?? { attack: 0, defence: 0, magic: 0 };
+
   const baseItems = getChapterLoadoutOptions(
     chapter,
     optionType,
     character,
     allowAllElements,
     allowedElementsOverride,
-  ).map((item) => ({
-    ...item,
-    label: translateMeta(
-      optionType === 'weapon'
-        ? getWeaponTranslationKeyPrefix(item.value as number)
-        : getArmorTranslationKeyPrefix(item.value as number),
-      { displayName: item.label },
-      t,
-    ).displayName,
-  }));
+  ).map((item) => {
+    const icon = getElementMeta(item.value as number)?.icon;
+
+    return {
+      ...item,
+      icon:
+        icon !== undefined ? (
+          <EquipmentIcon icon={icon} unknownArt={item.value !== 0} />
+        ) : undefined,
+      tooltip:
+        item.value !== 0 ? (
+          <EquipmentTooltipContent
+            type={optionType}
+            id={item.value as number}
+            compareTo={equippedStats}
+          />
+        ) : undefined,
+      label: translateMeta(
+        optionType === 'weapon'
+          ? getWeaponTranslationKeyPrefix(item.value as number)
+          : getArmorTranslationKeyPrefix(item.value as number),
+        { displayName: item.label },
+        t,
+      ).displayName,
+    };
+  });
+
+  const isOffered = baseItems.some((item) => item.value === current);
+  const invalidReasons: InvalidReason[] = [];
+  if (!isExisting) invalidReasons.push('unknown');
+  if (!isInChapter) invalidReasons.push('notInChapter');
+  if (isExisting && isInChapter && !isOffered)
+    invalidReasons.push('notAvailableTo');
 
   let selectItems: SelectItem[] = baseItems;
-  if (!isValid || !baseItems.some((item) => item.value === current)) {
+  if (!isValid || !isOffered) {
     selectItems = [
       ...baseItems,
       {
         id: `${current}`,
+        icon:
+          isExisting && elementMeta.icon !== undefined ? (
+            <EquipmentIcon icon={elementMeta.icon} unknownArt={current !== 0} />
+          ) : undefined,
+        tooltip:
+          isExisting && current !== 0 ? (
+            <EquipmentTooltipContent
+              type={optionType}
+              id={current as number}
+              compareTo={equippedStats}
+            />
+          ) : undefined,
         label: isExisting
           ? translateMeta(
               optionType === 'weapon'
@@ -107,7 +168,8 @@ export function LoadoutField({
             ).displayName
           : t('ui.common.unknown', 'Unknown'),
         value: current as number,
-        invalid: true,
+        invalidReasons,
+        unused: isExisting ? elementMeta.unused : undefined,
       },
     ];
   }
@@ -120,6 +182,48 @@ export function LoadoutField({
     optionType === 'weapon' ? 'ui.field.selectWeapon' : 'ui.field.selectArmor';
   const placeholderFallback =
     optionType === 'weapon' ? 'Select a weapon...' : 'Select an armor...';
+
+  const abilityId = isExisting ? elementMeta.ability : undefined;
+  const abilityBase =
+    abilityId !== undefined ? EQUIPMENT_ABILITIES_META[abilityId] : undefined;
+  // same with the tooltip, which resolves chapter overrides as well.
+  const abilityMeta = resolveChapterMeta(abilityBase, { chapter });
+  const abilityName = abilityMeta
+    ? translateMeta(
+        getEquipmentAbilityTranslationKeyPrefix(abilityId as number),
+        abilityMeta,
+        t,
+      ).displayName
+    : '';
+  const abilityRow = abilityMeta ? (
+    <EquipmentAbilityTooltip
+      ability={abilityId}
+      values={isExisting ? elementMeta.abilityValues : undefined}
+    >
+      <InlineGroup>
+        <EquipmentIcon icon={abilityMeta.icon} />
+        <span className="text-sm text-text-2">{abilityName}</span>
+      </InlineGroup>
+    </EquipmentAbilityTooltip>
+  ) : (
+    <InlineGroup>
+      <span className="text-sm text-text-3">
+        {t('ui.tooltip.noAbility', '(No ability.)')}
+      </span>
+    </InlineGroup>
+  );
+
+  const statsRow = stats ? (
+    <EquipmentStatsRow stats={stats} className="ml-auto text-base" />
+  ) : null;
+
+  const detailsRow = (
+    <InlineGroup className="gap-3">
+      {abilityRow}
+      {statsRow}
+    </InlineGroup>
+  );
+
   return (
     <FieldWrapper id={id} className="w-full" title={label} label>
       <Select
@@ -147,7 +251,13 @@ export function LoadoutField({
         }}
         items={selectItems}
         className="w-full"
+        tooltip={
+          isExisting && current !== 0 ? (
+            <EquipmentTooltipContent type={optionType} id={current as number} />
+          ) : undefined
+        }
       />
+      {detailsRow}
     </FieldWrapper>
   );
 }

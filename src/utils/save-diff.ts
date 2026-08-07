@@ -13,7 +13,7 @@ import {
   type RoomIndex,
   type SpellIndex,
 } from '@data';
-import type { SaveBaseline, SaveGamePayload } from '@types';
+import type { SaveBaseline, SaveGamePayload, SaveSlot } from '@types';
 import {
   armorHelpers,
   characterHelpers,
@@ -21,6 +21,7 @@ import {
   keyItemHelpers,
   lightWorldItemHelpers,
   phoneContactHelpers,
+  resolveChapterMeta,
   roomHelpers,
   getSpellDisplayName,
   weaponHelpers,
@@ -157,6 +158,13 @@ function formatItemId(
   return resolveName(id) ?? String(id);
 }
 
+interface ItemNameInputs {
+  chapter: ChapterIndex;
+  plot: number;
+  flags: SaveGamePayload['flags'];
+  saveSlot: SaveSlot;
+}
+
 function diffIndexedArray(
   changes: DiffEntry[],
   pathPrefix: string,
@@ -270,28 +278,20 @@ function diffCharacter(
 
     if (key === 'weapon') {
       label = 'Weapon';
-      beforeVal = formatItemId(
-        b as number,
-        (id) => weaponHelpers.getById(id as never)?.displayName,
-        WEAPONS.EMPTY,
-      );
-      afterVal = formatItemId(
-        a as number,
-        (id) => weaponHelpers.getById(id as never)?.displayName,
-        WEAPONS.EMPTY,
-      );
+      const resolveWeapon = (id: number) =>
+        resolveChapterMeta(weaponHelpers.getById(id as never), { chapter })
+          ?.displayName;
+
+      beforeVal = formatItemId(b as number, resolveWeapon, WEAPONS.EMPTY);
+      afterVal = formatItemId(a as number, resolveWeapon, WEAPONS.EMPTY);
     } else if (key === 'primaryArmor' || key === 'secondaryArmor') {
       label = key === 'primaryArmor' ? 'Primary armor' : 'Secondary armor';
-      beforeVal = formatItemId(
-        b as number,
-        (id) => armorHelpers.getById(id as never)?.displayName,
-        ARMORS.EMPTY,
-      );
-      afterVal = formatItemId(
-        a as number,
-        (id) => armorHelpers.getById(id as never)?.displayName,
-        ARMORS.EMPTY,
-      );
+      const resolveArmor = (id: number) =>
+        resolveChapterMeta(armorHelpers.getById(id as never), { chapter })
+          ?.displayName;
+
+      beforeVal = formatItemId(b as number, resolveArmor, ARMORS.EMPTY);
+      afterVal = formatItemId(a as number, resolveArmor, ARMORS.EMPTY);
     } else if (key === 'weaponStyle') {
       label = 'Weapon style';
     }
@@ -391,8 +391,15 @@ function diffBattle(
 function diffInventory(
   before: SaveGamePayload['inventory'],
   after: SaveGamePayload['inventory'],
+  { chapter, plot, flags, saveSlot }: ItemNameInputs,
 ): DiffSection | null {
   const children: DiffSection[] = [];
+
+  const resolveConsumable = (id: number) =>
+    resolveChapterMeta(consumableHelpers.getById(id as never), {
+      chapter,
+      saveSlot,
+    })?.displayName;
 
   const groups: {
     id: string;
@@ -406,28 +413,37 @@ function diffInventory(
       title: 'Consumables',
       key: 'consumables',
       empty: CONSUMABLES.EMPTY,
-      resolveName: (id) => consumableHelpers.getById(id as never)?.displayName,
+      resolveName: resolveConsumable,
     },
     {
       id: 'keyItems',
       title: 'Key items',
       key: 'keyItems',
       empty: KEYITEMS.EMPTY,
-      resolveName: (id) => keyItemHelpers.getById(id as never)?.displayName,
+      resolveName: (id) =>
+        resolveChapterMeta(keyItemHelpers.getById(id as never), {
+          chapter,
+          plot,
+          flags,
+        })?.displayName,
     },
     {
       id: 'weapons',
       title: 'Weapons',
       key: 'weapons',
       empty: WEAPONS.EMPTY,
-      resolveName: (id) => weaponHelpers.getById(id as never)?.displayName,
+      resolveName: (id) =>
+        resolveChapterMeta(weaponHelpers.getById(id as never), { chapter })
+          ?.displayName,
     },
     {
       id: 'armors',
       title: 'Armors',
       key: 'armors',
       empty: ARMORS.EMPTY,
-      resolveName: (id) => armorHelpers.getById(id as never)?.displayName,
+      resolveName: (id) =>
+        resolveChapterMeta(armorHelpers.getById(id as never), { chapter })
+          ?.displayName,
     },
   ];
 
@@ -454,12 +470,7 @@ function diffInventory(
       'Storage slot',
       (before as { storage: ConsumableIndex[] }).storage,
       (after as { storage: ConsumableIndex[] }).storage,
-      (id) =>
-        formatItemId(
-          id,
-          (itemId) => consumableHelpers.getById(itemId as never)?.displayName,
-          CONSUMABLES.EMPTY,
-        ),
+      (id) => formatItemId(id, resolveConsumable, CONSUMABLES.EMPTY),
     );
     if (changes.length) {
       children.push({ id: 'storage', title: 'Storage', changes });
@@ -599,6 +610,7 @@ export function computeSaveDiff(
   current: SaveGamePayload,
   baseline: SaveBaseline,
   chapter: ChapterIndex,
+  saveSlot: SaveSlot,
 ): SaveDiffResult {
   const before = baseline.payload;
 
@@ -645,7 +657,12 @@ export function computeSaveDiff(
   const battleSection = diffBattle(before.battle, current.battle);
   if (battleSection) sections.push(battleSection);
 
-  const inventorySection = diffInventory(before.inventory, current.inventory);
+  const inventorySection = diffInventory(before.inventory, current.inventory, {
+    chapter,
+    plot: current.plot,
+    flags: current.flags,
+    saveSlot,
+  });
   if (inventorySection) sections.push(inventorySection);
 
   const lightWorldSection = diffLightWorld(

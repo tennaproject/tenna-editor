@@ -1,12 +1,27 @@
-import { Section, TextLabel, Select, type SelectItem } from '@components';
+import type { ReactNode } from 'react';
+import {
+  Section,
+  TextLabel,
+  Select,
+  type SelectItem,
+  type InvalidReason,
+  ConsumableTooltipContent,
+  EquipmentIcon,
+  EquipmentTooltipContent,
+  KeyItemTooltipContent,
+  LightWorldItemTooltipContent,
+} from '@components';
 import {
   type ArmorIndex,
+  type ChapterIndex,
   type ConsumableIndex,
+  type EquipmentIconIndex,
   type KeyItemIndex,
   type LightWorldItemIndex,
   type PhoneContactIndex,
   type WeaponIndex,
 } from '@data';
+import type { SaveSlot } from '@types';
 import { useSaveItemSlot } from '@hooks';
 import { useSave } from '@store';
 import { getChapterItemOptions } from '@utils/chapter-options';
@@ -20,6 +35,7 @@ import {
   chapterHelpers,
   consumableHelpers,
   formatItemLabel,
+  resolveChapterMeta,
   keyItemHelpers,
   lightWorldItemHelpers,
   phoneContactHelpers,
@@ -41,12 +57,21 @@ interface ItemFieldProps {
   label?: string;
 }
 
-function getDisplayName(type: ItemType, id: number): string {
+// Chapter-aware, currently just for Dark Candy <-> Darker Candy
+function getDisplayName(
+  type: ItemType,
+  id: number,
+  chapter: ChapterIndex,
+  saveSlot: SaveSlot,
+): string {
   switch (type) {
     case 'consumable':
     case 'storage':
       return formatItemLabel(
-        consumableHelpers.getById(id as ConsumableIndex),
+        resolveChapterMeta(consumableHelpers.getById(id as ConsumableIndex), {
+          chapter,
+          saveSlot,
+        }),
         'Unknown',
       );
     case 'keyItem':
@@ -56,11 +81,18 @@ function getDisplayName(type: ItemType, id: number): string {
       );
     case 'weapon':
       return formatItemLabel(
-        weaponHelpers.getById(id as WeaponIndex),
+        resolveChapterMeta(weaponHelpers.getById(id as WeaponIndex), {
+          chapter,
+        }),
         'Unknown',
       );
     case 'armor':
-      return formatItemLabel(armorHelpers.getById(id as ArmorIndex), 'Unknown');
+      return formatItemLabel(
+        resolveChapterMeta(armorHelpers.getById(id as ArmorIndex), {
+          chapter,
+        }),
+        'Unknown',
+      );
     case 'lightWorldItem':
       return formatItemLabel(
         lightWorldItemHelpers.getById(id as LightWorldItemIndex),
@@ -71,6 +103,24 @@ function getDisplayName(type: ItemType, id: number): string {
         phoneContactHelpers.getById(id as PhoneContactIndex),
         'Unknown',
       );
+  }
+}
+
+function getUnused(type: ItemType, id: number): boolean | undefined {
+  switch (type) {
+    case 'consumable':
+    case 'storage':
+      return consumableHelpers.getById(id as ConsumableIndex)?.unused;
+    case 'keyItem':
+      return keyItemHelpers.getById(id as KeyItemIndex)?.unused;
+    case 'weapon':
+      return weaponHelpers.getById(id as WeaponIndex)?.unused;
+    case 'armor':
+      return armorHelpers.getById(id as ArmorIndex)?.unused;
+    case 'lightWorldItem':
+      return lightWorldItemHelpers.getById(id as LightWorldItemIndex)?.unused;
+    case 'phoneContact':
+      return phoneContactHelpers.getById(id as PhoneContactIndex)?.unused;
   }
 }
 
@@ -85,6 +135,56 @@ function getTranslatedDisplayName(
     { displayName: fallback },
     t,
   ).displayName;
+}
+
+function getIcon(type: ItemType, id: number): EquipmentIconIndex | undefined {
+  switch (type) {
+    case 'weapon':
+      return weaponHelpers.getById(id as WeaponIndex)?.icon;
+    case 'armor':
+      return armorHelpers.getById(id as ArmorIndex)?.icon;
+    default:
+      return undefined;
+  }
+}
+
+function getItemTooltip(type: ItemType, id: number): ReactNode {
+  if (id === 0) return undefined;
+  if (!getDisplayNameOrUndefined(type, id)) return undefined;
+
+  switch (type) {
+    case 'weapon':
+    case 'armor':
+      return <EquipmentTooltipContent type={type} id={id} />;
+    case 'consumable':
+    case 'storage':
+      return <ConsumableTooltipContent id={id as ConsumableIndex} />;
+    case 'keyItem':
+      return <KeyItemTooltipContent id={id as KeyItemIndex} />;
+    case 'lightWorldItem':
+      return <LightWorldItemTooltipContent id={id as LightWorldItemIndex} />;
+    case 'phoneContact':
+      return undefined;
+  }
+}
+
+function getDisplayNameOrUndefined(type: ItemType, id: number) {
+  switch (type) {
+    case 'consumable':
+    case 'storage':
+      return consumableHelpers.getById(id as ConsumableIndex)?.displayName;
+    case 'keyItem':
+      return keyItemHelpers.getById(id as KeyItemIndex)?.displayName;
+    case 'weapon':
+      return weaponHelpers.getById(id as WeaponIndex)?.displayName;
+    case 'armor':
+      return armorHelpers.getById(id as ArmorIndex)?.displayName;
+    case 'lightWorldItem':
+      return lightWorldItemHelpers.getById(id as LightWorldItemIndex)
+        ?.displayName;
+    case 'phoneContact':
+      return phoneContactHelpers.getById(id as PhoneContactIndex)?.displayName;
+  }
 }
 
 function getPlaceholder(type: ItemType): string {
@@ -124,15 +224,32 @@ function getPlaceholderKey(type: ItemType): string {
 export function ItemField({ type, slot, label }: ItemFieldProps) {
   const { t } = useTranslation();
   const chapter = useSave((s) => s.save?.meta.chapter ?? 1);
+  const saveSlot = useSave((s) => s.save?.meta.slot ?? 0);
   const updateSave = useSave((s) => s.updateSave);
   const currentValue = useSaveItemSlot(type, slot);
 
   const selectLabel = label ?? t('ui.field.slot', 'Slot');
   const placeholder = t(getPlaceholderKey(type), getPlaceholder(type));
-  const baseItems = getChapterItemOptions(chapter, type).map((item) => ({
-    ...item,
-    label: getTranslatedDisplayName(type, item.value as number, item.label, t),
-  }));
+  const baseItems = getChapterItemOptions(chapter, type, saveSlot).map(
+    (item) => {
+      const icon = getIcon(type, item.value as number);
+
+      return {
+        ...item,
+        icon:
+          icon !== undefined ? (
+            <EquipmentIcon icon={icon} unknownArt={item.value !== 0} />
+          ) : undefined,
+        tooltip: getItemTooltip(type, item.value as number),
+        label: getTranslatedDisplayName(
+          type,
+          item.value as number,
+          item.label,
+          t,
+        ),
+      };
+    },
+  );
   const chapterContent = chapterHelpers.getById(chapter).content;
 
   let availableSet: Set<number>;
@@ -161,10 +278,16 @@ export function ItemField({ type, slot, label }: ItemFieldProps) {
   const metaDisplay = getTranslatedDisplayName(
     type,
     currentValue,
-    getDisplayName(type, currentValue),
+    getDisplayName(type, currentValue, chapter, saveSlot),
     t,
   );
   const isValid = !!metaDisplay && availableSet.has(currentValue);
+
+  const invalidReasons: InvalidReason[] = [];
+  if (!metaDisplay) invalidReasons.push('unknown');
+  if (!availableSet.has(currentValue)) invalidReasons.push('notInChapter');
+
+  const currentIcon = getIcon(type, currentValue);
 
   let selectItems: SelectItem[] = baseItems;
   if (!isValid || !availableSet.has(currentValue)) {
@@ -172,15 +295,23 @@ export function ItemField({ type, slot, label }: ItemFieldProps) {
       ...baseItems,
       {
         id: `${currentValue}`,
+        icon:
+          currentIcon !== undefined ? (
+            <EquipmentIcon icon={currentIcon} unknownArt={currentValue !== 0} />
+          ) : undefined,
+        tooltip: getItemTooltip(type, currentValue),
         label: metaDisplay || t('ui.common.unknown', 'Unknown'),
         value: currentValue,
-        invalid: true,
+        invalidReasons,
+        unused: getUnused(type, currentValue),
       },
     ];
   }
 
   const selectedItem =
     selectItems.find((item) => item.value === currentValue) ?? null;
+
+  const tooltip = getItemTooltip(type, currentValue);
 
   return (
     <Section id={`${type}s-slot${slot}`} className="w-full">
@@ -218,6 +349,7 @@ export function ItemField({ type, slot, label }: ItemFieldProps) {
         }}
         items={selectItems}
         className="w-full"
+        tooltip={tooltip}
       />
     </Section>
   );

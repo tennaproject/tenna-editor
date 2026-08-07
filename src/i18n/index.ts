@@ -11,6 +11,8 @@ import {
   CONSUMABLES_META,
   ENEMIES,
   ENEMIES_META,
+  EQUIPMENT_ABILITIES,
+  EQUIPMENT_ABILITIES_META,
   FLAGS,
   FLAGS_META,
   KEYITEMS,
@@ -63,6 +65,7 @@ const CHARACTER_NAMES_BY_ID = getNamesById(CHARACTERS);
 const CHAPTER_NAMES_BY_ID = getNamesById(CHAPTERS);
 const CONSUMABLE_NAMES_BY_ID = getNamesById(CONSUMABLES);
 const ENEMY_NAMES_BY_ID = getNamesById(ENEMIES);
+const EQUIPMENT_ABILITY_NAMES_BY_ID = getNamesById(EQUIPMENT_ABILITIES);
 const KEYITEM_NAMES_BY_ID = getNamesById(KEYITEMS);
 const LIGHT_WORLD_ITEM_NAMES_BY_ID = getNamesById(LIGHTWORLDITEMS);
 const PHONE_CONTACT_NAMES_BY_ID = getNamesById(PHONECONTACTS);
@@ -541,6 +544,11 @@ const SOURCE_TRANSLATIONS = {
   ...getCharacterTitleSourceTranslations(),
   ...getMetaSourceTranslations('chapters', CHAPTERS_META, CHAPTER_NAMES_BY_ID),
   ...getMetaSourceTranslations('enemies', ENEMIES_META, ENEMY_NAMES_BY_ID),
+  ...getMetaSourceTranslations(
+    'equipmentAbilities',
+    EQUIPMENT_ABILITIES_META,
+    EQUIPMENT_ABILITY_NAMES_BY_ID,
+  ),
   ...getMetaSourceTranslations('rooms', ROOMS_META, ROOM_NAMES_BY_ID),
   ...getMetaSourceTranslations('spells', SPELLS_META, SPELL_NAMES_BY_ID),
 };
@@ -689,6 +697,14 @@ export function getConsumableTranslationKeyPrefix(id: number) {
 
 export function getEnemyTranslationKeyPrefix(id: number) {
   return getNamedKeyPrefix('enemies', id, ENEMY_NAMES_BY_ID);
+}
+
+export function getEquipmentAbilityTranslationKeyPrefix(id: number) {
+  return getNamedKeyPrefix(
+    'equipmentAbilities',
+    id,
+    EQUIPMENT_ABILITY_NAMES_BY_ID,
+  );
 }
 
 export function getItemTranslationKeyPrefix(

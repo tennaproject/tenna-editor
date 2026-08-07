@@ -23,8 +23,11 @@ import {
   PHONECONTACTS_META,
   ENEMIES,
   ENEMIES_META,
+  PARTY_MEMBERS,
+  type ArmorIndex,
+  type WeaponIndex,
 } from '@data';
-import type { BaseProperties } from '@types';
+import type { BaseProperties, WithOverrides } from '@types';
 import type { ChapterIndex } from '../data/chapters';
 import type { FlagIndex, FlagProperties } from '../data/flags';
 import type { SpellIndex } from '../data/spells';
@@ -68,18 +71,43 @@ export function formatItemLabel(
   return meta?.displayName ?? fallback;
 }
 
+export function resolveChapterMeta<
+  A extends { chapter: ChapterIndex },
+  T extends WithOverrides<T, A>,
+>(meta: T | undefined, args: A): T | undefined {
+  if (!meta) return undefined;
+
+  return { ...meta, ...meta.getOverrides?.(args) };
+}
+
 export function getStaticSpellDisplayName(spell: SpellIndex) {
   return spellHelpers.getById(spell)?.displayName ?? String(spell);
 }
+
+export interface SpellEquipment {
+  weapon: WeaponIndex;
+  armors: readonly ArmorIndex[];
+}
+
+const EMPTY_SPELL_EQUIPMENT: SpellEquipment = {
+  weapon: WEAPONS.EMPTY,
+  armors: [],
+};
 
 export function getSpellDisplayName(
   spell: SpellIndex,
   chapter: ChapterIndex,
   plot: number,
   flags: readonly unknown[],
+  equipment: SpellEquipment = EMPTY_SPELL_EQUIPMENT,
 ) {
   const meta = spellHelpers.getById(spell);
-  const overrides = meta?.getOverrides?.({ chapter, plot, flags });
+  const overrides = meta?.getOverrides?.({
+    chapter,
+    plot,
+    flags,
+    ...equipment,
+  });
   return overrides?.displayName ?? getStaticSpellDisplayName(spell);
 }
 
@@ -93,6 +121,13 @@ export const roomHelpers = createDataHelpers(ROOMS, ROOMS_META);
 
 // Characters
 export const characterHelpers = createDataHelpers(CHARACTERS, CHARACTERS_META);
+
+export function getChapterPartyMembers(chapter: ChapterIndex) {
+  const characters = chapterHelpers.getById(chapter).content.characters;
+
+  return PARTY_MEMBERS.filter((character) => characters.has(character));
+}
+
 export const spellHelpers = createDataHelpers(SPELLS, SPELLS_META);
 export const enemyHelpers = createDataHelpers(ENEMIES, ENEMIES_META);
 

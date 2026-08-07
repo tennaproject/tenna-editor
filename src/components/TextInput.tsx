@@ -95,6 +95,7 @@ export function TextInput({
         aria-label={ariaLabel}
         className={mergeClass(inputClass, 'w-full appearance-none')}
         data-lpignore="true"
+        spellCheck={false}
       />
       {suffix && (
         <div className="absolute inset-y-0 right-0 flex items-center pr-3">

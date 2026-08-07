@@ -1,4 +1,10 @@
-import { Select, type SelectItem, FieldWrapper } from '@components';
+import {
+  Select,
+  type SelectItem,
+  type InvalidReason,
+  FieldWrapper,
+  LightWorldItemTooltipContent,
+} from '@components';
 import { type LightWorldItemIndex } from '@data';
 import { useSave } from '@store';
 import { getLightWorldLoadoutOptions } from '@utils/chapter-options';
@@ -44,12 +50,20 @@ export function LightWorldLoadoutField({
 
   const baseItems = getLightWorldLoadoutOptions(chapter, type).map((item) => ({
     ...item,
+    tooltip:
+      item.value !== 0 ? (
+        <LightWorldItemTooltipContent id={item.value as LightWorldItemIndex} />
+      ) : undefined,
     label: translateMeta(
       getItemTranslationKeyPrefix('lightWorldItem', item.value as number),
       { displayName: item.label },
       t,
     ).displayName,
   }));
+
+  const invalidReasons: InvalidReason[] = [];
+  if (!isExisting) invalidReasons.push('unknown');
+  if (!isInChapter) invalidReasons.push('notInChapter');
 
   let selectItems: SelectItem[] = baseItems;
   if (!isValid || !baseItems.some((item) => item.value === current)) {
@@ -65,7 +79,8 @@ export function LightWorldLoadoutField({
             ).displayName
           : t('ui.common.unknown', 'Unknown'),
         value: current as number,
-        invalid: true,
+        invalidReasons,
+        unused: elementMeta?.unused,
       },
     ];
   }
@@ -95,6 +110,11 @@ export function LightWorldLoadoutField({
         }}
         items={selectItems}
         className="w-full"
+        tooltip={
+          isExisting && current !== 0 ? (
+            <LightWorldItemTooltipContent id={current as LightWorldItemIndex} />
+          ) : undefined
+        }
       />
     </FieldWrapper>
   );

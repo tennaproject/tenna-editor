@@ -1,6 +1,11 @@
 import {
   Card,
+  CharacterIcon,
   Checkbox,
+  EquipmentIcon,
+  EquipmentStatsRow,
+  EquipmentTooltip,
+  FitToViewport,
   Heading,
   HelpTip,
   InlineGroup,
@@ -8,37 +13,87 @@ import {
   Select,
   GlowBar,
 } from '@components';
-import { CHAPTERS, CHARACTERS, type CharacterIndex } from '@data';
+import {
+  CHAPTERS,
+  CHARACTERS,
+  type ArmorIndex,
+  type CharacterIndex,
+  type WeaponIndex,
+} from '@data';
 import { useCharacterOverrideInputs } from '@hooks';
 import { useSave, useUi } from '@store';
 import {
+  armorHelpers,
   chapterHelpers,
   characterHelpers,
+  getEffectiveCharacterStats,
   getPartySlotBaseOptions,
   mergeClass,
   getCharacterColor,
+  weaponHelpers,
 } from '@utils';
-import type { ComponentType, SVGProps } from 'react';
-import KrisIcon from '@assets/deltarune/characters/kris.svg?react';
-import SusieIcon from '@assets/deltarune/characters/susie.svg?react';
-import RalseiIcon from '@assets/deltarune/characters/ralsei.svg?react';
-import NoelleIcon from '@assets/deltarune/characters/noelle.svg?react';
 import {
   formatTranslation,
+  getArmorTranslationKeyPrefix,
   getCharacterTitleTranslationKeyPrefix,
   getCharacterTranslationKeyPrefix,
+  getWeaponTranslationKeyPrefix,
   translateMeta,
   useTranslation,
 } from '../../i18n';
 
-const BATTLE_ICONS: Partial<
-  Record<CharacterIndex, ComponentType<SVGProps<SVGSVGElement>>>
-> = {
-  [CHARACTERS.KRIS]: KrisIcon,
-  [CHARACTERS.SUSIE]: SusieIcon,
-  [CHARACTERS.RALSEI]: RalseiIcon,
-  [CHARACTERS.NOELLE]: NoelleIcon,
-};
+interface EquipmentRowProps {
+  type: 'weapon' | 'armor';
+  id: number;
+}
+
+function EquipmentRow({ type, id }: EquipmentRowProps) {
+  const { t } = useTranslation();
+
+  const meta =
+    type === 'weapon'
+      ? weaponHelpers.getById(id as WeaponIndex)
+      : armorHelpers.getById(id as ArmorIndex);
+  const keyPrefix =
+    type === 'weapon'
+      ? getWeaponTranslationKeyPrefix(id)
+      : getArmorTranslationKeyPrefix(id);
+  const displayName = translateMeta(
+    keyPrefix,
+    { displayName: meta?.displayName ?? t('ui.common.unknown', 'Unknown') },
+    t,
+  ).displayName;
+
+  const isEmpty = id === 0;
+
+  const content = (
+    <InlineGroup className="gap-1">
+      {meta?.icon !== undefined && (
+        <EquipmentIcon
+          className={mergeClass(isEmpty ? 'text-text-3' : '')}
+          icon={meta.icon}
+          unknownArt={!isEmpty}
+        />
+      )}
+      <span
+        className={mergeClass(
+          'text-base',
+          isEmpty ? 'text-text-3' : 'text-text-2',
+        )}
+      >
+        {displayName}
+      </span>
+    </InlineGroup>
+  );
+
+  if (isEmpty) return content;
+
+  return (
+    <EquipmentTooltip type={type} id={id}>
+      {content}
+    </EquipmentTooltip>
+  );
+}
 
 interface CharacterCardProps {
   slot: number;
@@ -54,6 +109,7 @@ function CharacterCard({
   const { t } = useTranslation();
   const party = useSave((s) => s.save?.party) as CharacterIndex[] | undefined;
   const setField = useSave((s) => s.setSaveField);
+  const savedCharacter = useSave((s) => s.save?.characters[character]);
   const { chapter, plot, flags, hasEgg, weapon, room } =
     useCharacterOverrideInputs(character);
 
@@ -148,7 +204,7 @@ function CharacterCard({
           t,
         ).displayName,
         value: character,
-        invalid: true,
+        invalidReasons: ['notInChapter'],
       },
     ];
   }
@@ -157,7 +213,6 @@ function CharacterCard({
     selectItems.find((it) => parseInt(it.id, 10) === party[slot]) ?? null;
 
   const color = getCharacterColor(character);
-  const Icon = BATTLE_ICONS[character];
   const translatedCharacter = translateMeta(
     getCharacterTranslationKeyPrefix(character),
     characterMeta,
@@ -173,18 +228,22 @@ function CharacterCard({
   const titleDescription = titleKeyPrefix
     ? t(`${titleKeyPrefix}.description`, characterMeta.title.description)
     : characterMeta.title.description;
+  const stats = savedCharacter
+    ? getEffectiveCharacterStats(savedCharacter)
+    : undefined;
+  const hidden = !character || !isExisting;
 
   return (
     <Section
       id={`slot${slot}`}
-      className="flex flex-col h-[450px] lg:h-full min-h-[450px] max-h-[900px] w-full"
+      className="flex flex-col min-h-[450px] w-full lg:h-full lg:max-h-[900px]"
     >
       <Card className="flex flex-col flex-1">
-        <div className="flex flex-col flex-1 py-6 lg:py-10 justify-between items-center">
+        <div className="flex flex-col flex-1 items-center gap-4 py-6 lg:py-10">
           <div className="flex flex-col justify-center items-center gap-2">
             <Heading level={1}>{slot + 1}</Heading>
             <Heading level={5}>{t('ui.party.member', 'MEMBER')}</Heading>
-            {isExisting && isInChapter && Icon && (
+            {isExisting && isInChapter && (
               <span
                 className={mergeClass(
                   'inline-flex h-24 w-24 shrink-0 items-center justify-center',
@@ -192,31 +251,76 @@ function CharacterCard({
                 )}
                 aria-hidden
               >
-                <Icon className="h-full w-full" />
+                <CharacterIcon character={character} />
               </span>
             )}
             <Heading level={3} className={mergeClass('uppercase', color.text)}>
               {translatedCharacter.displayName}
             </Heading>
           </div>
-          <div className="flex flex-col justify-between items-center">
-            <Heading
-              level={4}
-              className={mergeClass(
-                !character || !isExisting ? 'opacity-0' : '',
-              )}
+
+          <div className="-mt-2 flex flex-col items-center gap-9">
+            <div className="flex flex-col items-center gap-1">
+              <Heading
+                level={4}
+                className={mergeClass(hidden ? 'invisible' : '')}
+              >
+                {formatTranslation(t('ui.party.level', 'LV{level}'), {
+                  level: characterMeta.lv,
+                })}{' '}
+                {titleName}
+              </Heading>
+              <p className="text-text-2 text-sm text-center max-w-xs">
+                {titleDescription}
+              </p>
+            </div>
+
+            <div
+              className={mergeClass(hidden ? 'invisible' : '')}
+              aria-hidden={hidden}
             >
-              {formatTranslation(t('ui.party.level', 'LV{level}'), {
-                level: characterMeta.lv,
-              })}{' '}
-              {titleName}
-            </Heading>
-            <p className="text-text-2 text-sm text-center max-w-xs">
-              {titleDescription}
-            </p>
+              <EquipmentStatsRow
+                stats={{
+                  attack: stats?.attack ?? 0,
+                  defence: stats?.defence ?? 0,
+                  magic: stats?.magic ?? 0,
+                }}
+              />
+            </div>
+
+            <div
+              className={mergeClass(
+                'flex flex-col items-start gap-1',
+                hidden ? 'invisible' : '',
+              )}
+              aria-hidden={hidden}
+            >
+              <EquipmentRow type="weapon" id={savedCharacter?.weapon ?? 0} />
+              <EquipmentRow
+                type="armor"
+                id={savedCharacter?.primaryArmor ?? 0}
+              />
+              <EquipmentRow
+                type="armor"
+                id={savedCharacter?.secondaryArmor ?? 0}
+              />
+            </div>
+
+            <span
+              className={mergeClass(
+                'text-lg text-text-2',
+                hidden ? 'invisible' : '',
+              )}
+              aria-hidden={hidden}
+            >
+              {t('ui.stats.hp', 'HP')}
+              {': '}
+              {savedCharacter?.health} / {savedCharacter?.maxHealth}
+            </span>
           </div>
 
           <Select
+            className="mt-auto"
             label={formatTranslation(t('ui.party.slot', 'Slot {slot}'), {
               slot: slot + 1,
             })}
@@ -248,7 +352,7 @@ export function PartyOverview() {
   if (!party) return null;
 
   return (
-    <div className="page lg:h-full">
+    <FitToViewport className="page">
       <InlineGroup>
         <Checkbox
           label={t(
@@ -280,7 +384,7 @@ export function PartyOverview() {
           </p>
         </HelpTip>
       </InlineGroup>
-      <div className="flex flex-col lg:flex-row gap-3 lg:h-[90%]">
+      <div className="flex flex-col lg:flex-row gap-3 lg:flex-1">
         <CharacterCard
           slot={0}
           character={party[0]}
@@ -297,6 +401,6 @@ export function PartyOverview() {
           allowNonStandardParty={allowNonStandardParty}
         />
       </div>
-    </div>
+    </FitToViewport>
   );
 }

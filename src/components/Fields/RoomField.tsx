@@ -65,7 +65,9 @@ export function RoomField({
         id: room.toString(),
         label: translatedLabel,
         value: room,
-        invalid: true,
+        invalidReasons: meta?.displayName
+          ? ['notInChapter']
+          : ['unknown', 'notInChapter'],
       },
     ];
   }

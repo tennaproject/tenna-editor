@@ -85,6 +85,7 @@ export function NumberInput({
         }
         data-lpignore="true"
         autoComplete="off"
+        spellCheck={false}
       />
 
       {isOutOfRange && rangeHint && (

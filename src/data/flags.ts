@@ -96,6 +96,8 @@ export const RECRUITS: Record<number, string> = {
   77: 'Terakota',
 };
 
+export const RECRUIT_UNUSED_VALUES: ReadonlySet<number> = new Set([1, 20]);
+
 export const FLAGS = {
   // Core and battle state
   TEXT_SKIP_DISABLED: 6,
@@ -1557,6 +1559,7 @@ export interface FlagProperties extends BaseProperties {
     max?: number;
     allowedValues?: number[];
     map?: Record<number, string>;
+    unusedValues?: ReadonlySet<number>;
     invertedBoolean?: boolean;
     booleanMap?: {
       trueValues: number[];
@@ -5547,6 +5550,7 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     valueType: 'map',
     valueRules: {
       map: RECRUITS,
+      unusedValues: RECRUIT_UNUSED_VALUES,
     },
   },
   [FLAGS.CAFE_TOP_RIGHT_RECRUIT]: {
@@ -5556,6 +5560,7 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     valueType: 'map',
     valueRules: {
       map: RECRUITS,
+      unusedValues: RECRUIT_UNUSED_VALUES,
     },
   },
   [FLAGS.CAFE_BOTTOM_LEFT_RECRUIT]: {
@@ -5565,6 +5570,7 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     valueType: 'map',
     valueRules: {
       map: RECRUITS,
+      unusedValues: RECRUIT_UNUSED_VALUES,
     },
   },
   [FLAGS.CAFE_BOTTOM_RIGHT_RECRUIT]: {
@@ -5574,6 +5580,7 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     valueType: 'map',
     valueRules: {
       map: RECRUITS,
+      unusedValues: RECRUIT_UNUSED_VALUES,
     },
   },
   [FLAGS.COMPLETED_GRAZING]: {

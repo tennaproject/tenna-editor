@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { NumberInput } from './NumberInput';
 import { FieldWrapper } from './FieldWrapper';
 
@@ -5,6 +6,7 @@ interface NumberFieldProps {
   id?: string;
   className?: string;
   title: string;
+  titleIcon?: ReactNode;
   description?: string;
   flag?: number;
   value: number;
@@ -19,6 +21,7 @@ export function NumberField({
   id,
   className,
   title,
+  titleIcon,
   description,
   flag,
   value,
@@ -33,6 +36,7 @@ export function NumberField({
       id={id}
       className={className}
       title={title}
+      titleIcon={titleIcon}
       description={description}
       flag={flag}
       label

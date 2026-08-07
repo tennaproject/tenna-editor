@@ -328,7 +328,7 @@
 
 @layer components {
   .page {
-    @apply flex flex-col mx-auto p-6 w-full flex-none min-w-0 gap-4 max-w-7xl;
+    @apply flex flex-col mx-auto p-6 pb-12 w-full flex-none min-w-0 gap-4 max-w-7xl;
   }
 
   .ui-focus-ring {

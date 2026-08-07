@@ -60,7 +60,7 @@ export function CharacterPage({
   }
 
   return (
-    <div className="page lg:h-full">
+    <div className="page">
       <div className="flex flex-col gap-2 lg:flex-row lg:gap-5 ">
         <InlineGroup>
           <Checkbox
@@ -107,7 +107,10 @@ export function CharacterPage({
       </div>
 
       <div className="flex flex-col gap-3 lg:flex-row lg:items-stretch">
-        <Section id="main" className="flex min-h-175 flex-1 flex-col">
+        <Section
+          id="main"
+          className="flex min-h-fit flex-none flex-col lg:min-h-175 lg:flex-1"
+        >
           <Card className="flex flex-col justify-between flex-1">
             <div className="flex flex-col">
               <CharacterHeader character={character} icon={icon} />
@@ -184,7 +187,10 @@ export function CharacterPage({
           </Card>
         </Section>
 
-        <Section id="spells" className="flex min-h-175 flex-7/16 lg:min-h-175">
+        <Section
+          id="spells"
+          className="flex min-h-fit flex-none lg:min-h-175 lg:flex-6/16"
+        >
           <Card className="flex flex-1 flex-col gap-3 p-6">
             <Heading level={3}>{t('ui.party.spells', 'Spells')}</Heading>
             <div className="text-text-2">

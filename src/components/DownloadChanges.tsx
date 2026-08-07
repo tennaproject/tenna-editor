@@ -48,6 +48,7 @@ export function DownloadChanges({
       extractGamePayload(save),
       baseline,
       save.meta.chapter,
+      save.meta.slot,
     );
   }, [save, baseline]);
 

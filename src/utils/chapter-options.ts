@@ -1,4 +1,5 @@
 import type { SelectItem } from '@components';
+import type { BaseProperties, SaveSlot } from '@types';
 import type { ItemType } from '@components/Fields/ItemField';
 import type {
   ArmorIndex,
@@ -19,10 +20,12 @@ import {
   characterHelpers,
   consumableHelpers,
   formatItemLabel,
+  resolveChapterMeta,
   keyItemHelpers,
   lightWorldItemHelpers,
   phoneContactHelpers,
   roomHelpers,
+  spellHelpers,
   getStaticSpellDisplayName,
   weaponHelpers,
 } from './data-helpers';
@@ -41,6 +44,15 @@ const partySlotOptionsCache = new Map<string, SelectItem[]>();
 const chapterFlagSetCache = new Map<ChapterIndex, Set<FlagIndex>>();
 const plotOptionsCache = new Map<ChapterIndex, SelectItem[]>();
 
+// Entries the game never hands out sink below the rest, keeping the list a
+// player actually needs at the top. Relative order is otherwise preserved.
+export function unusedLast(items: SelectItem[]): SelectItem[] {
+  return [
+    ...items.filter((item) => !item.unused),
+    ...items.filter((item) => item.unused),
+  ];
+}
+
 export function getChapterFlagSet(chapter: ChapterIndex): Set<FlagIndex> {
   const cached = chapterFlagSetCache.get(chapter);
   if (cached) return cached;
@@ -56,63 +68,67 @@ type LightWorldLoadoutType = 'weapon' | 'armor';
 export function getChapterItemOptions(
   chapter: ChapterIndex,
   type: ItemType,
+  // Part of the cache key: consumable overrides can read it too.
+  saveSlot: SaveSlot,
 ): SelectItem[] {
-  const key = `${chapter}:${type}`;
+  const key = `${chapter}:${type}:${saveSlot}`;
   const cached = itemOptionsCache.get(key);
   if (cached) return cached;
 
   const chapterContent = chapterHelpers.getById(chapter).content;
   let availableIds: Set<number>;
-  let getDisplayName: (id: number) => string;
+  let getMeta: (id: number) => BaseProperties | undefined;
 
   switch (type) {
     case 'consumable':
     case 'storage':
       availableIds = chapterContent.consumables as Set<number>;
-      getDisplayName = (id) =>
-        formatItemLabel(
-          consumableHelpers.getById(id as ConsumableIndex),
-          'Unknown',
-        );
+      getMeta = (id) =>
+        resolveChapterMeta(consumableHelpers.getById(id as ConsumableIndex), {
+          chapter,
+          saveSlot,
+        });
       break;
     case 'keyItem':
       availableIds = chapterContent.keyItems as Set<number>;
-      getDisplayName = (id) =>
-        formatItemLabel(keyItemHelpers.getById(id as KeyItemIndex), 'Unknown');
+      getMeta = (id) => keyItemHelpers.getById(id as KeyItemIndex);
       break;
     case 'weapon':
       availableIds = chapterContent.weapons as Set<number>;
-      getDisplayName = (id) =>
-        formatItemLabel(weaponHelpers.getById(id as WeaponIndex), 'Unknown');
+      getMeta = (id) =>
+        resolveChapterMeta(weaponHelpers.getById(id as WeaponIndex), {
+          chapter,
+        });
       break;
     case 'armor':
       availableIds = chapterContent.armors as Set<number>;
-      getDisplayName = (id) =>
-        formatItemLabel(armorHelpers.getById(id as ArmorIndex), 'Unknown');
+      getMeta = (id) =>
+        resolveChapterMeta(armorHelpers.getById(id as ArmorIndex), {
+          chapter,
+        });
       break;
     case 'lightWorldItem':
       availableIds = chapterContent.lightWorld.items as Set<number>;
-      getDisplayName = (id) =>
-        formatItemLabel(
-          lightWorldItemHelpers.getById(id as LightWorldItemIndex),
-          'Unknown',
-        );
+      getMeta = (id) =>
+        lightWorldItemHelpers.getById(id as LightWorldItemIndex);
       break;
     case 'phoneContact':
       availableIds = chapterContent.lightWorld.phoneContacts as Set<number>;
-      getDisplayName = (id) =>
-        formatItemLabel(
-          phoneContactHelpers.getById(id as PhoneContactIndex),
-          'Unknown',
-        );
+      getMeta = (id) => phoneContactHelpers.getById(id as PhoneContactIndex);
       break;
   }
 
-  const items = Array.from(availableIds).map((value) => ({
-    id: `${value}`,
-    label: getDisplayName(value),
-    value,
-  }));
+  const items = unusedLast(
+    Array.from(availableIds).map((value) => {
+      const meta = getMeta(value);
+      return {
+        id: `${value}`,
+        label: formatItemLabel(meta, 'Unknown'),
+        value,
+        unused: meta?.unused,
+      };
+    }),
+  );
 
   itemOptionsCache.set(key, items);
   return items;
@@ -196,14 +212,17 @@ export function getChapterLoadoutOptions(
       ? weaponHelpers.getById(value as WeaponIndex)
       : armorHelpers.getById(value as ArmorIndex);
 
-  const items = [...availableElements].map((value) => {
-    const meta = getMeta(value);
-    return {
-      id: `${value}`,
-      label: meta.displayName,
-      value,
-    };
-  });
+  const items = unusedLast(
+    [...availableElements].map((value) => {
+      const meta = resolveChapterMeta(getMeta(value), { chapter });
+      return {
+        id: `${value}`,
+        label: meta?.displayName ?? 'Unknown',
+        value,
+        unused: meta?.unused,
+      };
+    }),
+  );
 
   if (canUseCache) {
     loadoutOptionsCache.set(key, items);
@@ -228,11 +247,14 @@ export function getChapterSpellOptions(
     ? chapterSpells
     : characterAllowedSpells.intersection(chapterSpells);
 
-  const items = Array.from(availableSpells).map((spell) => ({
-    id: `${spell}`,
-    label: getStaticSpellDisplayName(spell as SpellIndex),
-    value: spell,
-  }));
+  const items = unusedLast(
+    Array.from(availableSpells).map((spell) => ({
+      id: `${spell}`,
+      label: getStaticSpellDisplayName(spell as SpellIndex),
+      value: spell,
+      unused: spellHelpers.getById(spell as SpellIndex)?.unused,
+    })),
+  );
 
   spellOptionsCache.set(key, items);
   return items;
@@ -249,14 +271,17 @@ export function getLightWorldLoadoutOptions(
   const availableElements = chapterHelpers.getById(chapter).content.lightWorld
     .items as Set<number>;
 
-  const items = [...availableElements].map((value) => {
-    const meta = lightWorldItemHelpers.getById(value as LightWorldItemIndex);
-    return {
-      id: `${value}`,
-      label: meta.displayName,
-      value,
-    };
-  });
+  const items = unusedLast(
+    [...availableElements].map((value) => {
+      const meta = lightWorldItemHelpers.getById(value as LightWorldItemIndex);
+      return {
+        id: `${value}`,
+        label: meta.displayName,
+        value,
+        unused: meta.unused,
+      };
+    }),
+  );
 
   lightWorldLoadoutOptionsCache.set(key, items);
   return items;

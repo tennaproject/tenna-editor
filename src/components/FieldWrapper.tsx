@@ -9,6 +9,7 @@ import Markdown from 'react-markdown';
 interface FieldWrapperProps {
   id?: string;
   title?: string;
+  titleIcon?: ReactNode;
   description?: string;
   flag?: number;
   className?: string | undefined;
@@ -28,6 +29,7 @@ function renderMaybeMarkdown(text: string) {
 export function FieldWrapper({
   id,
   title,
+  titleIcon,
   description,
   flag,
   className,
@@ -47,6 +49,7 @@ export function FieldWrapper({
     <Section id={id} className={mergeClass('flex flex-col gap-2', className)}>
       <InlineGroup>
         {inline && <>{children}</>}
+        {titleIcon}
         {label && (
           <TextLabel htmlFor={id}>
             {title && renderMaybeMarkdown(title)}

@@ -2,6 +2,7 @@ export * from './armors';
 export * from './chapters';
 export * from './consumables';
 export * from './contributors';
+export * from './equipment';
 export * from './flags';
 export type {
   FlagBitfieldId,

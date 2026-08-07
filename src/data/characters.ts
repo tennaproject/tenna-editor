@@ -16,6 +16,13 @@ export const CHARACTERS = {
 export type CharacterIndex = (typeof CHARACTERS)[keyof typeof CHARACTERS];
 export type CharacterName = keyof typeof CHARACTERS;
 
+export const PARTY_MEMBERS = [
+  CHARACTERS.KRIS,
+  CHARACTERS.SUSIE,
+  CHARACTERS.RALSEI,
+  CHARACTERS.NOELLE,
+] as const;
+
 const RIBBON_ARMORS = new Set<ArmorIndex>([
   ARMORS.PINK_RIBBON,
   ARMORS.WHITE_RIBBON,
@@ -38,7 +45,7 @@ export const CHARACTER_TITLES: Record<
   EMPTY: {
     EMPTY: {
       name: 'Empty',
-      description: 'This is empty slot',
+      description: 'This is an empty slot',
     },
   },
   KRIS: {
@@ -861,9 +868,6 @@ export const CHARACTERS_META: Record<CharacterIndex, CharacterProperties> = {
       WEAPONS.EVERYBODY_WEAPON,
       WEAPONS.BLACK_SHARD,
       WEAPONS.JINGLE_BLADE,
-      WEAPONS.WOOD_BLADE_2,
-      WEAPONS.AQUA_KNIFE,
-      WEAPONS.BROKEN_SCARF,
       WEAPONS.GILDED_ROSE,
     ]),
     allowedArmors: new Set<ArmorIndex>([

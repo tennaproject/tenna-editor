@@ -9,6 +9,7 @@ export * from './save-parser';
 export * from './save-serializer';
 export * from './switch-save-container';
 export * from './merge-class';
+export * from './wiki-url';
 export * from './get-character-color';
 export * from './time';
 export * from './get-game-color';

@@ -10,6 +10,9 @@ export interface EquipmentStats {
   magic: number;
 }
 
+// Fills {token} placeholders in a shared ability description
+export type AbilityValues = Record<string, string | number>;
+
 export interface WithOverrides<T, A = unknown> {
   getOverrides?: (args: A) => Partial<T>;
 }
