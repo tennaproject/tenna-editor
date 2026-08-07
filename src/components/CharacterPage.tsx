@@ -60,7 +60,7 @@ export function CharacterPage({
   }
 
   return (
-    <div className="page lg:h-full">
+    <div className="page">
       <div className="flex flex-col gap-2 lg:flex-row lg:gap-5 ">
         <InlineGroup>
           <Checkbox

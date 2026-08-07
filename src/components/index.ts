@@ -43,6 +43,7 @@ export * from './LightWorldItemTooltip';
 export * from './SpellTooltip';
 export * from './Tooltip';
 export * from './FieldWrapper';
+export * from './FitToViewport';
 export * from './InventoryPage';
 export * from './Link';
 export * from './ProgressiveMount';

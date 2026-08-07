@@ -26,12 +26,9 @@ export function LightWorldRoot() {
     <Page>
       <Page.TopBar title={t('ui.nav.lightWorld', 'Light World')} />
       <Page.Content>
-        <div className="page lg:h-full">
-          <div className="flex flex-col lg:flex-row gap-3 lg:h-full lg:max-h-[900px]">
-            <Section
-              id="main"
-              className="flex flex-col flex-1 lg:min-h-[700px] min-h-[700px]"
-            >
+        <div className="page">
+          <div className="flex flex-col lg:flex-row gap-3 lg:items-stretch">
+            <Section id="main" className="flex min-h-fit flex-1 flex-col">
               <Card className="flex flex-col justify-between flex-1">
                 <div className="flex flex-col">
                   <Section
@@ -84,8 +81,8 @@ export function LightWorldRoot() {
                 <GlowBar bg={THEME.bg} shadow={THEME.shadow} />
               </Card>
             </Section>
-            <div className="flex flex-col flex-6/16 gap-3 lg:min-h-[700px] min-h-[700px]">
-              <Section id="items" className="flex flex-1">
+            <div className="flex min-h-fit flex-6/16 flex-col gap-3">
+              <Section id="items" className="flex">
                 <Card className="flex-1 p-6 flex gap-3 flex-col">
                   <Section>
                     <Heading level={4}>
