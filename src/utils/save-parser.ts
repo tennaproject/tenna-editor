@@ -71,6 +71,23 @@ function readFlags(cursor: LineCursor, minFlagCount: number): unknown[] {
   return flags;
 }
 
+function nextNumberOrString(cursor: LineCursor): number | string {
+  const value = cursor.nextString().trim();
+  const normalized = value.toLowerCase();
+
+  if (
+    normalized === '' ||
+    normalized === 'null' ||
+    normalized === 'undefined' ||
+    normalized === 'nan'
+  ) {
+    return 0;
+  }
+
+  const numericValue = Number(value);
+  return Number.isNaN(numericValue) ? value : numericValue;
+}
+
 function parseSaveV1(cursor: LineCursor): SaveV1 {
   const playerName = cursor.nextString();
   const vesselName = cursor.nextString();
@@ -262,7 +279,7 @@ function parseSaveV2(cursor: LineCursor): SaveV2 {
     const weapon = cursor.nextNumber() as WeaponIndex;
     const primaryArmor = cursor.nextNumber() as ArmorIndex;
     const secondaryArmor = cursor.nextNumber() as ArmorIndex;
-    const weaponStyle = cursor.nextNumber();
+    const weaponStyle = nextNumberOrString(cursor);
 
     const weaponStats = [];
     for (let j = 0; j < 4; j += 1) {
