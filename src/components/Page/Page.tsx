@@ -12,7 +12,7 @@ export function Page({ children }: PageProps) {
 
   useEffect(() => {
     const syncSectionLinks = (event: KeyboardEvent) => {
-      setSectionLinksVisible(event.shiftKey);
+      setSectionLinksVisible(event.ctrlKey);
     };
     const hideSectionLinks = () => setSectionLinksVisible(false);
 

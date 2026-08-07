@@ -44,7 +44,7 @@ interface ChapterContent {
   plotPoints: Set<number>;
   meta: {
     consumablesSize: number;
-    storagesSize: number;
+    storageSize: number;
     keyItemsSize: number;
     weaponsSize: number;
     armorsSize: number;
@@ -54,7 +54,7 @@ interface ChapterContent {
 const CH1_CONTENT: ChapterContent = {
   meta: {
     consumablesSize: 12,
-    storagesSize: 0,
+    storageSize: 0,
     keyItemsSize: 12,
     weaponsSize: 12,
     armorsSize: 12,
@@ -470,7 +470,7 @@ const CH1_CONTENT: ChapterContent = {
 const CH2_CONTENT: ChapterContent = {
   meta: {
     consumablesSize: 12,
-    storagesSize: 24,
+    storageSize: 24,
     keyItemsSize: 12,
     weaponsSize: 48,
     armorsSize: 48,
@@ -1172,7 +1172,7 @@ const CH2_CONTENT: ChapterContent = {
 const CH3_CONTENT: ChapterContent = {
   meta: {
     consumablesSize: 12,
-    storagesSize: 24,
+    storageSize: 24,
     keyItemsSize: 12,
     weaponsSize: 48,
     armorsSize: 48,
@@ -1732,7 +1732,7 @@ const CH3_CONTENT: ChapterContent = {
 const CH4_CONTENT: ChapterContent = {
   meta: {
     consumablesSize: 12,
-    storagesSize: 36,
+    storageSize: 36,
     keyItemsSize: 12,
     weaponsSize: 48,
     armorsSize: 48,
@@ -2413,7 +2413,7 @@ const CH4_CONTENT: ChapterContent = {
 const CH5_CONTENT: ChapterContent = {
   meta: {
     consumablesSize: 12,
-    storagesSize: 36,
+    storageSize: 48,
     keyItemsSize: 12,
     weaponsSize: 48,
     armorsSize: 48,

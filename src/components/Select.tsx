@@ -180,7 +180,7 @@ export function Select({
   }, [items, selectedLabel]);
 
   function selectInputValue(input: HTMLInputElement) {
-    if (!input.value || !isShowingSelectedValue) return;
+    if (!canHover || !input.value || !isShowingSelectedValue) return;
     requestAnimationFrame(() => {
       input.select();
       preserveSelectionOnMouseUpRef.current = true;
@@ -481,6 +481,8 @@ export function Select({
                 : 'text-text-1 selection:text-text-1',
             )}
             placeholder={translatedPlaceholder}
+            readOnly={!canHover}
+            inputMode={canHover ? 'search' : 'none'}
             data-lpignore="true"
             autoComplete="off"
             spellCheck={false}
