@@ -3,20 +3,21 @@ import ArrowDownIcon from '@assets/icons/chevron-down.svg?react';
 import { mergeClass } from '@utils/merge-class';
 import { useMemo } from 'react';
 import { useTranslation } from '../i18n';
+type InputInteger = number | bigint;
 
-interface NumberInputProps {
-  value: number;
-  onChange?: (value: number) => void;
+interface NumberInputProps<T extends InputInteger> {
+  value: T;
+  onChange?: (value: T) => void;
   placeholder?: string;
   disabled?: boolean;
   suffix?: string;
-  min?: number;
-  max?: number;
+  min?: T;
+  max?: T;
   className?: string;
   fullWidth?: boolean;
 }
 
-export function NumberInput({
+export function NumberInput<T extends InputInteger>({
   value,
   onChange,
   placeholder,
@@ -26,36 +27,39 @@ export function NumberInput({
   max,
   className,
   fullWidth = false,
-}: NumberInputProps) {
+}: NumberInputProps<T>) {
   const { t } = useTranslation();
-  const clamp = (v: number) => {
+  const clamp = (v: T) => {
     let next = v;
-    if (typeof min === 'number') next = Math.max(next, min);
-    if (typeof max === 'number') next = Math.min(next, max);
+    if (min !== undefined && next < min) next = min;
+    if (max !== undefined && next > max) next = max;
     return next;
   };
 
-  const changeBy = (delta: number) => {
+  const changeBy = (delta: -1 | 1) => {
     if (disabled) return;
-    const next = clamp(Number(value || 0) + delta);
+    const next = clamp(
+      (typeof value === 'bigint'
+        ? value + BigInt(delta)
+        : Number(value || 0) + delta) as T,
+    );
     onChange?.(next);
   };
 
-  const canDecrement = typeof min !== 'number' ? true : value > min;
-  const canIncrement = typeof max !== 'number' ? true : value < max;
+  const canDecrement = min === undefined ? true : value > min;
+  const canIncrement = max === undefined ? true : value < max;
 
   const isOutOfRange = useMemo(() => {
-    if (typeof min === 'number' && value < min) return true;
-    if (typeof max === 'number' && value > max) return true;
+    if (min !== undefined && value < min) return true;
+    if (max !== undefined && value > max) return true;
     return false;
   }, [value, min, max]);
 
   const rangeHint = useMemo(() => {
     if (!isOutOfRange) return null;
-    if (typeof min === 'number' && typeof max === 'number')
-      return `${min}–${max}`;
-    if (typeof min === 'number') return `≥ ${min}`;
-    if (typeof max === 'number') return `≤ ${max}`;
+    if (min !== undefined && max !== undefined) return `${min}–${max}`;
+    if (min !== undefined) return `≥ ${min}`;
+    if (max !== undefined) return `≤ ${max}`;
     return null;
   }, [isOutOfRange, min, max]);
 
@@ -66,12 +70,18 @@ export function NumberInput({
       <input
         type="search"
         inputMode="numeric"
-        value={value}
-        onChange={(e) => onChange?.(clamp(parseInt(e.target.value || '0', 10)))}
+        value={value.toString()}
+        onChange={(e) => {
+          const input = e.target.value || '0';
+          if (!/^-?\d+$/.test(input)) return;
+          const next =
+            typeof value === 'bigint' ? BigInt(input) : parseInt(input, 10);
+          onChange?.(clamp(next as T));
+        }}
         disabled={disabled}
         placeholder={placeholder}
-        min={min}
-        max={max}
+        min={min?.toString()}
+        max={max?.toString()}
         className={mergeClass(
           'ui-field',
           'appearance-none',

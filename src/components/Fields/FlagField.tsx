@@ -5,7 +5,6 @@ import {
 } from '@data';
 import { FLAG_BITFIELDS_META } from '@data/flag-bitfields';
 import { useChapterFlags } from '@contexts';
-import { useSaveFlag } from '@hooks';
 import { useSave } from '@store';
 import {
   getFlagBitfieldTranslationKeyPrefix,
@@ -22,6 +21,12 @@ import {
   unusedLast,
   writeFlagBitfield,
 } from '@utils';
+import {
+  compactBigInt,
+  type IntegerValue,
+  MAX_GAME_INTEGER,
+  toBigInt,
+} from '@utils/big-integer';
 import Markdown from 'react-markdown';
 import {
   Checkbox,
@@ -50,8 +55,8 @@ type FlagFieldProps = FlagFieldBaseProps &
 
 interface ResolvedField {
   meta: FlagProperties;
-  currentValue: number;
-  updateValue: (value: number) => void;
+  currentValue: IntegerValue;
+  updateValue: (value: IntegerValue) => void;
 }
 
 export function FlagField(props: FlagFieldProps) {
@@ -59,7 +64,9 @@ export function FlagField(props: FlagFieldProps) {
   const { t } = useTranslation();
   const updateSave = useSave((s) => s.updateSave);
   const sourceFlag = props.flag ?? FLAG_BITFIELDS_META[props.bitfield]?.parent;
-  const currentFlagValue = useSaveFlag(sourceFlag);
+  const currentFlagValue = useSave((s) =>
+    sourceFlag === undefined ? 0 : (s.save?.flags[sourceFlag] ?? 0),
+  ) as IntegerValue;
   const resolvedField = (() => {
     if (props.flag !== undefined) {
       const meta = flagHelpers.getById(props.flag);
@@ -68,7 +75,7 @@ export function FlagField(props: FlagFieldProps) {
       return {
         meta,
         currentValue: currentFlagValue,
-        updateValue: (value: number) => {
+        updateValue: (value: IntegerValue) => {
           updateSave((save) => {
             save.flags[props.flag] = value;
           });
@@ -82,9 +89,10 @@ export function FlagField(props: FlagFieldProps) {
     return {
       meta: bitfield,
       currentValue: readFlagBitfield(currentFlagValue, bitfield),
-      updateValue: (value: number) => {
+      updateValue: (value: IntegerValue) => {
         updateSave((save) => {
-          const parentValue = Number(save.flags[bitfield.parent]) || 0;
+          const parentValue = (save.flags[bitfield.parent] ??
+            0) as IntegerValue;
           save.flags[bitfield.parent] = writeFlagBitfield(
             parentValue,
             bitfield,
@@ -116,7 +124,7 @@ export function FlagField(props: FlagFieldProps) {
   if (valueType === 'boolean') {
     const booleanMap = valueRules?.booleanMap;
     const checked = booleanMap
-      ? booleanMap.trueValues.includes(currentValue)
+      ? booleanMap.trueValues.includes(Number(currentValue))
       : valueRules?.invertedBoolean
         ? !currentValue
         : !!currentValue;
@@ -153,11 +161,15 @@ export function FlagField(props: FlagFieldProps) {
         title={displayName}
         description={description}
         flag={sourceFlag}
-        value={(currentValue as number) ?? 0}
+        value={toBigInt(currentValue)}
         placeholder={t('ui.flag.numberPlaceholder', 'Enter number...')}
-        min={valueRules?.min ?? 0}
-        max={valueRules?.max ?? 999999999}
-        onChange={updateValue}
+        min={BigInt(valueRules?.min ?? 0)}
+        max={
+          valueRules?.max === undefined
+            ? MAX_GAME_INTEGER
+            : BigInt(valueRules.max)
+        }
+        onChange={(value) => updateValue(compactBigInt(value))}
       />
     );
   } else if (valueType === 'map') {
@@ -179,7 +191,7 @@ export function FlagField(props: FlagFieldProps) {
 
       const orderedItems = unusedLast(selectItems);
       const selectedItem = orderedItems.find(
-        (item) => Number(item.value) === currentValue,
+        (item) => Number(item.value) === Number(currentValue),
       );
 
       return (
@@ -225,7 +237,9 @@ export function FlagField(props: FlagFieldProps) {
               key={colorIndex}
               className={mergeClass(
                 'w-8 h-8 cursor-pointer border-2',
-                colorIndex === currentValue ? 'border-text-1' : 'border-border',
+                colorIndex === Number(currentValue)
+                  ? 'border-text-1'
+                  : 'border-border',
               )}
               style={{ backgroundColor: getGameColor(colorIndex) }}
               onClick={() => {

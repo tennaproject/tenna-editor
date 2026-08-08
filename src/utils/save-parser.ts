@@ -66,7 +66,7 @@ function readFlags(cursor: LineCursor, minFlagCount: number): unknown[] {
 
   const flags: unknown[] = [];
   for (let i = 0; i < flagCount; i += 1) {
-    flags.push(cursor.nextNumber());
+    flags.push(cursor.nextInteger());
   }
   return flags;
 }
@@ -105,11 +105,11 @@ function parseSaveV1(cursor: LineCursor): SaveV1 {
 
   const characters = [];
   for (let i = 0; i < 4; i += 1) {
-    const health = cursor.nextNumber();
-    const maxHealth = cursor.nextNumber();
-    const attack = cursor.nextNumber();
-    const defence = cursor.nextNumber();
-    const magic = cursor.nextNumber();
+    const health = cursor.nextInteger() as number;
+    const maxHealth = cursor.nextInteger() as number;
+    const attack = cursor.nextInteger() as number;
+    const defence = cursor.nextInteger() as number;
+    const magic = cursor.nextInteger() as number;
     const guts = cursor.nextNumber();
     const weapon = cursor.nextNumber() as WeaponIndex;
     const primaryArmor = cursor.nextNumber() as ArmorIndex;
@@ -190,13 +190,13 @@ function parseSaveV1(cursor: LineCursor): SaveV1 {
   const lightWorld = {
     weapon: cursor.nextNumber(),
     armor: cursor.nextNumber(),
-    experience: cursor.nextNumber(),
-    level: cursor.nextNumber(),
+    experience: cursor.nextInteger() as number,
+    level: cursor.nextInteger() as number,
     money: cursor.nextNumber(),
-    health: cursor.nextNumber(),
-    maxHealth: cursor.nextNumber(),
-    attack: cursor.nextNumber(),
-    defence: cursor.nextNumber(),
+    health: cursor.nextInteger() as number,
+    maxHealth: cursor.nextInteger() as number,
+    attack: cursor.nextInteger() as number,
+    defence: cursor.nextInteger() as number,
     weaponStrength: cursor.nextNumber(),
     armorDefence: cursor.nextNumber(),
     items: [] as number[],
@@ -270,11 +270,11 @@ function parseSaveV2(cursor: LineCursor): SaveV2 {
 
   const characters = [];
   for (let i = 0; i < 5; i += 1) {
-    const health = cursor.nextNumber();
-    const maxHealth = cursor.nextNumber();
-    const attack = cursor.nextNumber();
-    const defence = cursor.nextNumber();
-    const magic = cursor.nextNumber();
+    const health = cursor.nextInteger() as number;
+    const maxHealth = cursor.nextInteger() as number;
+    const attack = cursor.nextInteger() as number;
+    const defence = cursor.nextInteger() as number;
+    const magic = cursor.nextInteger() as number;
     const guts = cursor.nextNumber();
     const weapon = cursor.nextNumber() as WeaponIndex;
     const primaryArmor = cursor.nextNumber() as ArmorIndex;
@@ -362,13 +362,13 @@ function parseSaveV2(cursor: LineCursor): SaveV2 {
   const lightWorld = {
     weapon: cursor.nextNumber(),
     armor: cursor.nextNumber(),
-    experience: cursor.nextNumber(),
-    level: cursor.nextNumber(),
+    experience: cursor.nextInteger() as number,
+    level: cursor.nextInteger() as number,
     money: cursor.nextNumber(),
-    health: cursor.nextNumber(),
-    maxHealth: cursor.nextNumber(),
-    attack: cursor.nextNumber(),
-    defence: cursor.nextNumber(),
+    health: cursor.nextInteger() as number,
+    maxHealth: cursor.nextInteger() as number,
+    attack: cursor.nextInteger() as number,
+    defence: cursor.nextInteger() as number,
     weaponStrength: cursor.nextNumber(),
     armorDefence: cursor.nextNumber(),
     items: [] as number[],

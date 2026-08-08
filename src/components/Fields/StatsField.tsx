@@ -3,6 +3,7 @@ import { EQUIPMENT_STAT_ICONS, type CharacterIndex } from '@data';
 import { useSave } from '@store';
 import { getEffectiveCharacterStats } from '@utils';
 import { useTranslation } from '../../i18n';
+import { compactBigInt, MAX_GAME_INTEGER, toBigInt } from '@utils/big-integer';
 
 type StatsType = 'attack' | 'defence' | 'magic' | 'health' | 'maxHealth';
 
@@ -39,25 +40,26 @@ export function StatsField({ id, type, character }: StatFieldProps) {
   const coreStat = isCoreStat(type);
   const equipmentBonus =
     savedCharacter && coreStat
-      ? getEffectiveCharacterStats(savedCharacter)[type] - savedCharacter[type]
-      : 0;
+      ? toBigInt(getEffectiveCharacterStats(savedCharacter)[type]) -
+        toBigInt(savedCharacter[type])
+      : 0n;
   const current = savedCharacter
     ? coreStat
-      ? getEffectiveCharacterStats(savedCharacter)[type]
-      : savedCharacter[type]
-    : 0;
+      ? toBigInt(savedCharacter[type]) + equipmentBonus
+      : toBigInt(savedCharacter[type])
+    : 0n;
 
-  function onChange(value: number) {
+  function onChange(value: bigint) {
     updateSave((save) => {
       const savedCharacter = save.characters[character];
 
       if (isCoreStat(type)) {
-        const equipmentBonus =
-          getEffectiveCharacterStats(savedCharacter)[type] -
-          savedCharacter[type];
-        savedCharacter[type] = value - equipmentBonus;
+        const equipmentBonus = savedCharacter.weaponStats
+          .slice(0, 3)
+          .reduce((total, stats) => total + BigInt(stats[type]), 0n);
+        savedCharacter[type] = compactBigInt(value - equipmentBonus) as number;
       } else {
-        savedCharacter[type] = value;
+        savedCharacter[type] = compactBigInt(value) as number;
       }
     });
   }
@@ -74,8 +76,8 @@ export function StatsField({ id, type, character }: StatFieldProps) {
       }
       value={current}
       placeholder={t('ui.stats.enterValue', 'Enter value...')}
-      min={coreStat ? equipmentBonus : 0}
-      max={coreStat ? 9999 + equipmentBonus : 9999}
+      min={coreStat ? equipmentBonus : 0n}
+      max={MAX_GAME_INTEGER}
       onChange={onChange}
       fullWidth
     />

@@ -1,6 +1,7 @@
 import type { Save, SaveV1, SaveV2 } from '@types';
 
-export function serializeNumber(value: number): string {
+export function serializeNumber(value: number | string): string {
+  if (typeof value === 'string') return value;
   if (value >= 1e6) {
     // Fix scientific notation format: e+6 -> e+06
     return value.toExponential().replace(/e\+(\d)$/, 'e+0$1');
@@ -90,7 +91,12 @@ function serializeSaveV1(save: SaveV1): string {
   }
 
   for (let i = 0; i < save.flags.length; i += 1) {
-    lines.push(serializeNumber(Number(save.flags[i]) || 0));
+    const value = save.flags[i];
+    lines.push(
+      serializeNumber(
+        typeof value === 'string' || typeof value === 'number' ? value : 0,
+      ),
+    );
   }
 
   lines.push(serializeNumber(save.plot));
@@ -199,7 +205,12 @@ function serializeSaveV2(save: SaveV2): string {
   }
 
   for (let i = 0; i < save.flags.length; i += 1) {
-    lines.push(serializeNumber(Number(save.flags[i]) || 0));
+    const value = save.flags[i];
+    lines.push(
+      serializeNumber(
+        typeof value === 'string' || typeof value === 'number' ? value : 0,
+      ),
+    );
   }
 
   lines.push(serializeNumber(save.plot));

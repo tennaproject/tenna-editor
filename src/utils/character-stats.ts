@@ -8,6 +8,7 @@ import {
   type WeaponIndex,
 } from '@data';
 import type { CharacterV1, EquipmentStats } from '@types';
+import { compactBigInt, toBigInt } from './big-integer';
 
 export type LoadoutEquipmentType = 'weapon' | 'primaryArmor' | 'secondaryArmor';
 
@@ -75,12 +76,19 @@ export function getEffectiveCharacterStats(
   };
 
   for (const stats of character.weaponStats.slice(0, 3)) {
-    effective.attack += stats.attack;
-    effective.defence += stats.defence;
-    effective.magic += stats.magic;
+    effective.attack = addStat(effective.attack, stats.attack);
+    effective.defence = addStat(effective.defence, stats.defence);
+    effective.magic = addStat(effective.magic, stats.magic);
   }
 
   return effective;
+}
+
+function addStat(value: number, bonus: number): number {
+  if (typeof value !== 'number') {
+    return compactBigInt(toBigInt(value) + BigInt(bonus)) as number;
+  }
+  return value + bonus;
 }
 
 export function resetCharacterCoreStats(

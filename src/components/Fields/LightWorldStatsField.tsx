@@ -1,6 +1,7 @@
 import { NumberField } from '@components';
 import { useSave } from '@store';
 import { useTranslation } from '../../i18n';
+import { compactBigInt, MAX_GAME_INTEGER, toBigInt } from '@utils/big-integer';
 
 type LightWorldStatsType =
   'attack' | 'defence' | 'experience' | 'health' | 'maxHealth' | 'level';
@@ -38,9 +39,9 @@ export function LightWorldStatsField({ id, type }: LightWorldStatsFieldProps) {
     }) ?? 0;
   const updateSave = useSave((s) => s.updateSave);
 
-  function onChange(value: number) {
+  function onChange(value: bigint) {
     updateSave((save) => {
-      save.lightWorld[type] = value;
+      save.lightWorld[type] = compactBigInt(value) as number;
     });
   }
 
@@ -49,10 +50,10 @@ export function LightWorldStatsField({ id, type }: LightWorldStatsFieldProps) {
       id={id}
       className="flex-1"
       title={t(STATS_TITLE_KEYS[type], STATS_TITLES[type])}
-      value={current}
+      value={toBigInt(current)}
       placeholder={t('ui.stats.enterValue', 'Enter value...')}
-      min={0}
-      max={9999}
+      min={0n}
+      max={MAX_GAME_INTEGER}
       onChange={onChange}
       fullWidth
     />

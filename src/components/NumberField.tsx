@@ -1,23 +1,24 @@
 import type { ReactNode } from 'react';
 import { NumberInput } from './NumberInput';
 import { FieldWrapper } from './FieldWrapper';
+type InputInteger = number | bigint;
 
-interface NumberFieldProps {
+interface NumberFieldProps<T extends InputInteger> {
   id?: string;
   className?: string;
   title: string;
   titleIcon?: ReactNode;
   description?: string;
   flag?: number;
-  value: number;
+  value: T;
   placeholder?: string;
-  min?: number;
-  max?: number;
+  min?: T;
+  max?: T;
   fullWidth?: boolean;
-  onChange: (value: number) => void;
+  onChange: (value: T) => void;
 }
 
-export function NumberField({
+export function NumberField<T extends InputInteger>({
   id,
   className,
   title,
@@ -30,7 +31,7 @@ export function NumberField({
   max,
   fullWidth,
   onChange,
-}: NumberFieldProps) {
+}: NumberFieldProps<T>) {
   return (
     <FieldWrapper
       id={id}

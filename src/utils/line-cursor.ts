@@ -61,6 +61,33 @@ export class LineCursor {
     return parsed;
   }
 
+  nextInteger(): number | string {
+    const line = this.nextLine();
+    const trimmed = line.trim().toLowerCase();
+    if (
+      trimmed === '' ||
+      trimmed === 'null' ||
+      trimmed === 'undefined' ||
+      trimmed === 'nan'
+    ) {
+      return 0;
+    }
+    if (!/^-?\d+$/.test(trimmed)) {
+      const parsed = Number(line);
+      if (!Number.isFinite(parsed)) {
+        throw new Error(
+          `Failed to parse integer from line ${this.position}: "${line}"`,
+        );
+      }
+      return parsed;
+    }
+    const parsed = BigInt(trimmed);
+    return parsed >= BigInt(Number.MIN_SAFE_INTEGER) &&
+      parsed <= BigInt(Number.MAX_SAFE_INTEGER)
+      ? Number(parsed)
+      : parsed.toString();
+  }
+
   private nextLine(): string {
     if (this.isAtEnd) {
       throw new Error(`Unexpected end of file at line ${this.position + 1}`);
