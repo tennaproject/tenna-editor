@@ -10,7 +10,13 @@ import { ROOMS, type RoomIndex } from './rooms';
 import { SPELLS, type SpellIndex } from './spells';
 import { WEAPONS, type WeaponIndex } from './weapons';
 import { ENEMIES, type EnemyIndex } from './enemies';
-import { CH1_PLOT, CH2_PLOT, CH3_PLOT, CH4_PLOT } from './plot-points';
+import {
+  CH1_PLOT,
+  CH2_PLOT,
+  CH3_PLOT,
+  CH4_PLOT,
+  CH5_PLOT,
+} from './plot-points';
 
 export const CHAPTERS = {
   CH1: 1,
@@ -3071,7 +3077,7 @@ const CH5_CONTENT: ChapterContent = {
     ENEMIES.MULTIBOSS_EXAMPLE,
     ENEMIES.MULTIBOSS_C_EXAMPLE,
   ]),
-  plotPoints: new Set<number>(),
+  plotPoints: new Set<number>(Object.values(CH5_PLOT)),
 };
 
 export const CHAPTERS_META: Record<ChapterIndex, ChapterProperties> = {
