@@ -1,6 +1,7 @@
 import type { ChapterIndex } from '@data';
 import type { PcDrIniSource, Save, SaveSlot } from '@types';
 import { detectChapter } from './detection';
+import { normalizeLegacyRoomId } from './room-id';
 import { parseSave } from './save-parser';
 import {
   parseSwitchSaveContainer,
@@ -211,13 +212,18 @@ function createCandidate(
 ): ImportCandidate {
   const displayKey = options?.displayKey ?? file.displayKey;
   const slot = getSlotMetadata(displayKey);
-  const detection = save ? detectChapter(save, displayKey) : null;
+  let detection = save ? detectChapter(save, displayKey) : null;
+  let chapter = detection?.chapter ?? save?.meta.chapter ?? 1;
+  if (save) {
+    save.room = normalizeLegacyRoomId(save.room, chapter, save.flags);
+    detection = detectChapter(save, displayKey);
+    chapter = detection.chapter ?? chapter;
+  }
   const detectionError =
     save && detection && !detection.supported
       ? 'Unsupported chapter or save format detected.'
       : null;
   const finalError = error ?? detectionError;
-  const chapter = detection?.chapter ?? save?.meta.chapter ?? 1;
   const defaultName = save
     ? getGeneratedSaveName(
         chapter,

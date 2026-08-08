@@ -1,11 +1,11 @@
 import { parseSave } from './save-parser';
 import type { Save } from '@types';
-import { ROOMS } from '@data';
+import type { ChapterIndex } from '@data';
+import { normalizeLegacyRoomId } from './room-id';
 
 const FILECH_PATTERN = /^filech(\d+)_(\d+)(?:_b)?$/;
 const DS_LIST_HEADER = '2F010000';
 const DS_LIST_HEADERS = new Set(['2E010000', DS_LIST_HEADER]);
-const ROOM_IDS = new Set<number>(Object.values(ROOMS));
 
 interface SwitchSaveLayout {
   chapter: number;
@@ -265,15 +265,6 @@ function valueAt(values: string[], index: number): string {
   return values[index] ?? '0';
 }
 
-function expandShortRoomId(chapter: number, value: string): string {
-  const roomId = Number(value.trim());
-  if (!Number.isInteger(roomId) || roomId <= 0 || roomId >= 10000) return value;
-  if (ROOM_IDS.has(roomId)) return value;
-
-  const expandedRoomId = chapter * 10000 + roomId;
-  return ROOM_IDS.has(expandedRoomId) ? String(expandedRoomId) : value;
-}
-
 export function parseSwitchSaveContainer(
   content: string,
 ): SwitchSaveContainer | null {
@@ -373,7 +364,7 @@ export function switchEntryToPcSaveText(key: string, entry: string): string {
   }
 
   out.push(src.take());
-  out.push(expandShortRoomId(layout.chapter, src.take()));
+  out.push(src.take());
   out.push(src.take());
   if (src.remaining > 0) {
     throw new Error(`Switch save had ${src.remaining} unread lines`);
@@ -478,5 +469,11 @@ export function parseSwitchSaveEntry(
   if (typeof entry !== 'string') {
     throw new Error(`Switch container does not include ${entryKey}`);
   }
-  return parseSave(switchEntryToPcSaveText(entryKey, entry));
+  const save = parseSave(switchEntryToPcSaveText(entryKey, entry));
+  save.room = normalizeLegacyRoomId(
+    save.room,
+    detectLayout(entryKey).chapter as ChapterIndex,
+    save.flags,
+  );
+  return save;
 }
