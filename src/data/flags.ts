@@ -10168,7 +10168,8 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.FRIEND_INTERACTED]: {
     displayName: 'Acted on Friend',
-    description: 'Whether you acted on and were damaged by Friend in Chapter 5.',
+    description:
+      'Whether you acted on and were damaged by Friend in Chapter 5.',
     valueType: 'boolean',
   },
   [FLAGS.PLATMODE_JUMP_COUNT]: {

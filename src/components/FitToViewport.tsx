@@ -62,7 +62,7 @@ export function FitToViewport({
     resizeObserver.observe(viewport);
     desktop.addEventListener('change', scheduleMeasure);
     window.addEventListener('resize', scheduleMeasure);
-    measure();
+    scheduleMeasure();
 
     return () => {
       window.cancelAnimationFrame(animationFrame);
