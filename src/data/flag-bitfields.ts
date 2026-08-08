@@ -524,7 +524,7 @@ export const FLAG_BITFIELDS_META: Record<
   [FLAG_BITFIELDS.PLATFORMING_INTRO_ATTACK_WALL]: {
     parent: FLAGS.PLATFORMING_INTRO_FLAGS,
     index: 8,
-    displayName: 'Attack wall',
+    displayName: 'Attacked wall',
     description:
       'Whether you attacked a wall, prompting Ralsei to tell you how to jump.',
     valueType: 'boolean',
