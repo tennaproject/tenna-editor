@@ -31,8 +31,8 @@ const ALPHABET: Record<number, string> = {
 
 const ENCOUNTER_OUTCOMES: Record<number, string> = {
   0: 'Default state',
-  1: 'Violenced (includes SnowGrave)',
-  2: 'Spared',
+  1: 'Spared',
+  2: 'Violenced (includes SnowGrave)',
   3: 'Pacified',
   4: 'In combat (Ch. 1)',
   5: 'Violenced by uncontrolled Susie (unused in demo due to a bug)',
@@ -10168,7 +10168,7 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.FRIEND_INTERACTED]: {
     displayName: 'Acted on Friend',
-    description: 'Whether you acted on and was damaged by Friend in Chapter 5.',
+    description: 'Whether you acted on and were damaged by Friend in Chapter 5.',
     valueType: 'boolean',
   },
   [FLAGS.PLATMODE_JUMP_COUNT]: {
