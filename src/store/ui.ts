@@ -4,7 +4,7 @@ import { immer } from 'zustand/middleware/immer';
 import { STORE_NAMESPACE } from './schema';
 import { createDebouncedJSONStorage } from 'zustand-debounce';
 
-export const UI_VERSION = 8;
+export const UI_VERSION = 9;
 
 export type UiLocale = 'en' | 'ko' | 'it';
 
@@ -50,45 +50,49 @@ interface UiState {
   updateUi: (updater: (draft: Ui) => void) => void;
 }
 
+function createDefaultUi(): Ui {
+  return {
+    locale: 'en',
+    devmode: false,
+    uploadedSaves: 1,
+    sidebar: {
+      open: false,
+      retracted: false,
+    },
+    home: {
+      allowAllSaves: false,
+      showDogcheckedRooms: false,
+      allowManualPlotEntry: false,
+    },
+    party: {
+      allowNonStandardParty: false,
+      kris: {
+        allowAllElements: false,
+        preserveCustomStats: false,
+      },
+      susie: {
+        allowAllElements: false,
+        preserveCustomStats: false,
+      },
+      ralsei: {
+        allowAllElements: false,
+        preserveCustomStats: false,
+      },
+      noelle: {
+        allowAllElements: false,
+        preserveCustomStats: false,
+      },
+    },
+    recruits: {
+      showNonRecruitableEnemies: false,
+    },
+  };
+}
+
 export const useUi = create<UiState>()(
   persist(
     immer((set) => ({
-      ui: {
-        locale: 'en',
-        devmode: false,
-        uploadedSaves: 1,
-        sidebar: {
-          open: false,
-          retracted: false,
-        },
-        home: {
-          allowAllSaves: false,
-          showDogcheckedRooms: false,
-          allowManualPlotEntry: false,
-        },
-        party: {
-          allowNonStandardParty: false,
-          kris: {
-            allowAllElements: false,
-            preserveCustomStats: false,
-          },
-          susie: {
-            allowAllElements: false,
-            preserveCustomStats: false,
-          },
-          ralsei: {
-            allowAllElements: false,
-            preserveCustomStats: false,
-          },
-          noelle: {
-            allowAllElements: false,
-            preserveCustomStats: false,
-          },
-        },
-        recruits: {
-          showNonRecruitableEnemies: false,
-        },
-      },
+      ui: createDefaultUi(),
 
       updateUi: (updater: (draft: Ui) => void) =>
         set((state) => {
@@ -219,6 +223,14 @@ export const useUi = create<UiState>()(
             current.ui.party.ralsei.preserveCustomStats = false;
             current.ui.party.noelle.preserveCustomStats = false;
           }
+        }
+
+        if (version < 9) {
+          const current = nextState as { ui?: Partial<Ui> };
+          const defaults = createDefaultUi();
+
+          current.ui ??= defaults;
+          current.ui.home ??= defaults.home;
         }
 
         return nextState;
