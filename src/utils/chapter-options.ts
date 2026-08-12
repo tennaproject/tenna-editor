@@ -245,7 +245,9 @@ export function getChapterSpellOptions(
 
   const availableSpells = allowAllItems
     ? chapterSpells
-    : characterAllowedSpells.intersection(chapterSpells);
+    : new Set(
+        [...characterAllowedSpells].filter((spell) => chapterSpells.has(spell)),
+      );
 
   const items = unusedLast(
     Array.from(availableSpells).map((spell) => ({
