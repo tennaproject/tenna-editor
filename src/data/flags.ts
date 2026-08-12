@@ -1506,6 +1506,9 @@ export const FLAGS = {
   INTERACTED_WITH_MIKE_DOOR_WITHOUT_MIKE_BATTLE: 1854,
   UNLOCKED_BREAK_CHARACTERS_PRECAFE: 1856,
   HOPSCHEF_HIGH_SCORE: 1858,
+  RALSEI_ROOM_FLOWERY_PILLOW: 1861,
+  RALSEI_ROOM_FLOWERY_SIGN: 1862,
+  RALSEI_ROOM_LADDERY: 1863,
   FLOWERYFIGHT_ENDED: 1864,
   FLOWERYFIGHT_ATTEMPTS: 1865,
   OBTAINED_DOGDOLLAR_CH5: 1866,
@@ -11857,6 +11860,47 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
       'Raw bitfield state for bells and coins in the two shadow platform puzzle rooms in the right wing and the bounce flower platforming rooms in the left wing of Flower Castle.',
     valueType: 'number',
     valueRules: { min: 0 },
+  },
+  [FLAGS.RALSEI_ROOM_FLOWERY_PILLOW]: {
+    displayName: "Ralsei's Flowery pillow",
+    description:
+      "Whether the Flowery pillow was taken for Ralsei's room, or found before seeing his room.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: "Taken for Ralsei's room",
+        3: "Found before seeing Ralsei's room",
+      },
+    },
+  },
+  [FLAGS.RALSEI_ROOM_FLOWERY_SIGN]: {
+    displayName: "Ralsei's Flowery sign",
+    description:
+      "Whether Flowery's sign was taken for Kris's or Ralsei's room, or found before seeing Ralsei's room.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: "Taken for Kris's room",
+        2: "Taken for Ralsei's room",
+        3: "Found before seeing Ralsei's room",
+      },
+    },
+  },
+  [FLAGS.RALSEI_ROOM_LADDERY]: {
+    displayName: "Ralsei's Laddery",
+    description:
+      "Whether Laddery was taken for Ralsei's room, including whether the room already had a ladder, or found before seeing Ralsei's room.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Taken as an upgrade to the existing ladder',
+        2: 'Taken when the room had no ladder',
+        3: "Found before seeing Ralsei's room",
+      },
+    },
   },
   [FLAGS.FLOWERYFIGHT_ENDED]: {
     displayName: 'Flowery battle ended',

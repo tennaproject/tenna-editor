@@ -1729,6 +1729,9 @@ export const STORY_SECTIONS = {
             'THOUGHTS_ON_RALSEI_TRYING_DIFFERENT_DRINKS',
             'PILLOW_FIGHT',
             'SAW_RALSEI_ROOM_CH5',
+            'RALSEI_ROOM_FLOWERY_PILLOW',
+            'RALSEI_ROOM_FLOWERY_SIGN',
+            'RALSEI_ROOM_LADDERY',
           ],
         },
         {
