@@ -2521,7 +2521,7 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
         0: 'Default state',
         1: 'Talked to JEVIL',
         5: 'Opened door',
-        6: 'Fought',
+        6: 'Defeated by fighting',
         7: 'Spared',
       },
     },
@@ -9635,8 +9635,8 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     valueType: 'boolean',
   },
   [FLAGS.TERRACOTA_BATTLE_TALK]: {
-    displayName: 'Terracota talked during battle',
-    description: 'If Terracota talked once during a battle.',
+    displayName: 'Terakota talked during battle',
+    description: 'If Terakota talked once during a battle.',
     valueType: 'boolean',
   },
   [FLAGS.NETSKIE_BATTLE_TALK]: {
