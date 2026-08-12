@@ -29,4 +29,6 @@ dev-dist
 .vscode
 .cache
 
+# GitHub files
 LICENSE
+.github
