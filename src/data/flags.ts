@@ -31,8 +31,8 @@ const ALPHABET: Record<number, string> = {
 
 const ENCOUNTER_OUTCOMES: Record<number, string> = {
   0: 'Default state',
-  1: 'Spared',
-  2: 'Violenced (includes SnowGrave)',
+  1: 'Violenced',
+  2: 'Spared (includes SnowGrave)',
   3: 'Pacified',
   4: 'In combat (Ch. 1)',
   5: 'Violenced by uncontrolled Susie (unused in demo due to a bug)',
@@ -4514,7 +4514,7 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   [FLAGS.SPAMTON_NEO_ENCOUNTER_OUTCOME]: {
     displayName: 'Spamton NEO',
     description:
-      "For some reason doesn't use 'encounterflag' but tracks the state of Spamton NEO in case that's ever needed later. There are already like 2 flags for him anyway.",
+      'Tracks how the Spamton NEO fight ended. The SnowGrave route sets this to Spared, the same value as a peaceful win, because the fight does not end by depleting his HP. On the normal route, a value of Violenced also gives the DealMaker instead of the PuppetScarf.',
     valueType: 'map',
     valueRules: {
       map: ENCOUNTER_OUTCOMES,
