@@ -6056,7 +6056,7 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     valueRules: {
       map: {
         0: 'Bald',
-        1: 'Kris-like',
+        1: 'Frisk-like',
         2: 'Left lock',
         3: 'Middle part',
         4: 'Thick hair',
