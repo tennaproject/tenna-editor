@@ -515,8 +515,7 @@ export function Select({
       </Tooltip>
 
       <ul
-        {...getMenuProps({}, { suppressRefError: true })}
-        ref={listRef}
+        {...getMenuProps({ ref: listRef })}
         className={mergeClass(
           'absolute left-0 z-50 w-full bg-surface-4 border border-border shadow-lg py-1 px-1 max-h-60 overflow-auto duration-200 motion-reduce:transition-none transition-opacity',
           shouldOpenUp
