@@ -134,6 +134,11 @@ export default defineConfig({
               priority: 10,
             },
             {
+              name: 'gamedata',
+              test: /src[/\\]data[/\\]/,
+              priority: 8,
+            },
+            {
               name: 'common',
               minShareCount: 2,
               minSize: 20 * 1024,
