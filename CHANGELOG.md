@@ -7,10 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.13.0] - 2026-08-13
+
+This release significantly changes the UI. Equipment stats and item information are now visible when editing them, and the party tabs display more information. Chapter 5 flag coverage has been expanded. Many bugs were fixed.
+
 ### Added
 
-- Added copyable links for editor sections. Hold Shift to reveal link targets and copy controls. Opening a link scrolls to and highlights the requested section.
-- Added equipment stat metadata and automatic attack, defence, and magic recalculation when changing party loadouts, with controls to reset chapter defaults or preserve custom stats.
+- Added equipment stats throughout the editor. Weapons and armor now have stat metadata with icons and abilities. Attack, defense, and magic recalculate automatically when you change a loadout. The stats appear in the inventory dropdown, the party menus, and the Overview tab. There is also a button for resetting stats to their defaults. Thanks [Araraura](https://github.com/Araraura) for the substantial contribution!
+- Added tooltips for consumables, spells, key items, light world items, and equipment, along with details for the currently selected entry. Thanks [Araraura](https://github.com/Araraura)!
+- Added copyable links for editor sections. Hold Ctrl to reveal link targets and copy controls. Opening a link will scroll to and highlight the requested section. This feature existed before, but it has been significantly improved and made easier to use.
+- Added the flag number to help popups, which gives more context about specific entries in Story tab. Thanks [Araraura](https://github.com/Araraura)! ([PR #114](https://github.com/tennaproject/tenna-editor/pull/114))
+- Expanded the Story editor with more Chapter 5 and Chapter 1 flags. Thanks [Xanderrock98](https://github.com/Xanderrock98) and [Frisktaker](https://github.com/Frisktaker) for the continued Chapter 5 research, and to everyone who requested missing flags! ([Issue #124](https://github.com/tennaproject/tenna-editor/issues/124))
+
+### Changed
+
+- Updated the Chapter 5 storage size. Thanks [JKBSunshine](https://github.com/JKBSunshine) for reporting! ([Issue #126](https://github.com/tennaproject/tenna-editor/issues/126))
+- Expanded and corrected the Korean and Italian translations. Thanks [newhajinyoon](https://github.com/newhajinyoon) and [lori2012real](https://github.com/lori2012real)!
+
+### Fixed
+
+- Fixed several problems on mobile devices, including party stats failing to open, save switching, and selector behaviour. Thanks [luizeduardom096](https://github.com/luizeduardom096), [baskinelijah51-code](https://github.com/baskinelijah51-code), and [ElijahVallette](https://github.com/ElijahVallette) for reporting! ([Issue #119](https://github.com/tennaproject/tenna-editor/issues/119), [Issue #125](https://github.com/tennaproject/tenna-editor/issues/125), [Issue #116](https://github.com/tennaproject/tenna-editor/issues/116))
+- Fixed the Chapter 5 plot point selector. Thanks [MacroTutku](https://github.com/MacroTutku) for reporting! ([Issue #123](https://github.com/tennaproject/tenna-editor/issues/123))
+- Fixed saves that failed to load, including Demo saves showing an invalid room ID and saves storing "Normal" values. Thanks [lori2012real](https://github.com/lori2012real) for reporting! ([Issue #131](https://github.com/tennaproject/tenna-editor/issues/131))
+- Corrected flag labels, equipment availability, and typos across the editor, including the Spamton NEO encounter values. Thanks [nmotsch789](https://github.com/nmotsch789) and [pacmastermeow](https://github.com/pacmastermeow) for reporting! ([Issue #133](https://github.com/tennaproject/tenna-editor/issues/133), [Issue #136](https://github.com/tennaproject/tenna-editor/issues/136), [Issue #137](https://github.com/tennaproject/tenna-editor/issues/137), [Issue #138](https://github.com/tennaproject/tenna-editor/issues/138))
 
 ## [0.12.0] - 2026-07-18
 
