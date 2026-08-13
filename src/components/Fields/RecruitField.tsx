@@ -48,8 +48,9 @@ interface RecruitImageProps {
 function RecruitImage({ src, recruited }: RecruitImageProps) {
   const [scaledWidth, setScaledWidth] = useState<number>();
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const isAnimatable = /\.(gif|webp)$/i.test(src);
-  const freezeFrame = isAnimatable && !recruited;
+  /* Freeze regardless of the format. Small assets are inlined as data URIs in
+     production builds, so the file extension is not reliable here. */
+  const freezeFrame = !recruited;
 
   useEffect(() => {
     if (!freezeFrame) return;
