@@ -1048,13 +1048,19 @@ export const FLAGS = {
   SWORDROUTE_SODA: 1278,
   RAISE_BAT_HARD_HISCORE: 1279,
   RAISE_BAT_HARD_HIRANK: 1280,
+  GARDEN_AQUAPLATFORMING_FLAGS: 1300,
+  RALSEI_CASTLE_BASKETBALL_FLAGS: 1302,
+  GARDEN_FINAL_PLATFORMING_FLAGS: 1303,
   TROPICAL_STARWALKER_PINKCOIN: 1304,
+  GARDEN_HOSPITAL_VISITS: 1305,
   SPAWNED_TROPICAL_STARWALKER: 1309,
   RALSEI_HAT_STATE_CH5: 1311,
   PINK_COINS: 1312,
   STRONGEST_AQUA_ATTACK: 1313,
+  CLIFF_NETSKIE_CLIMB_FLAGS: 1314,
   WATCHED_FLOWERY_ASGORE_FISHING: 1315,
   WATCHED_COWBOY_SHOW: 1319,
+  CLIFF_FINAL_DASH_FLAGS: 1321,
   // Chapter 5 Festival
   SUSIES_OUTFIT_OPINION: 1322,
   ADVENTURES_EXPLANATION: 1323,
@@ -1082,6 +1088,7 @@ export const FLAGS = {
   NOELLE_ATE_ONIONSAN: 1346,
   KRIS_ATE_ONIONSAN: 1347,
   PLAYED_DUNK_TANK: 1348,
+  CLIFF_FINAL_DASH_FLAGS_2: 1349,
   TALKED_TO_VULKIN: 1350,
   SCARED_CHILD_RABBIT: 1351,
   WHO_RODE_FERRIS_WHEEL: 1352,
@@ -1090,14 +1097,21 @@ export const FLAGS = {
   KRIS_SUSIE_FERRIS_WHEEL_CHOICE: 1355,
   SUSIE_NOELLE_FERRIS_WHEEL_CHOICE: 1356,
   FLOWER_KING_DARK_WORLD_LEAVE_ATTEMPTS: 1358,
+  CLIFF_TWIRLFLOWER_FLAGS: 1361,
   SCISSORS_PUZZLE_FLAGS: 1365,
   KOOBY_DEVELOPED: 1372,
+  COLLECTED_ALL_CLIFF_ITEMS: 1375,
+  USED_GLASS_AT_TORIELS_HOUSE_CH5: 1376,
+  USED_GLASS_AT_FESTIVAL_CH5: 1377,
+  USED_SHADOW_CRYSTAL_IN_GARDEN: 1378,
+  USED_SHADOW_CRYSTAL_ELSEWHERE_CH5: 1379,
   STRENGTH_TESTER_DOGAMY: 1380,
   STRENGTH_TESTER_DOGARESSA: 1381,
   STRENGTH_TESTER_CHOICE: 1382,
   STRENGTH_TESTER_NOELLE_TIMING: 1383,
   DASH_LEAFPILE_FLAGS: 1384,
   GARDEN_AQUADASH_PLAT_COINS1: 1385,
+  ASKED_RUDY_ABOUT_CAROL: 1388,
   AMOUNT_OF_GIANT_TEACUPS: 1390,
   VOICE_CLIPS_ENABLED: 1391,
   RALSEIS_ENABLED: 1392,
@@ -1500,12 +1514,18 @@ export const FLAGS = {
   FOXHUNT_FLOWERYDOLLARS: 1841,
   GARDEN_MUSHROOM_PUZZLE: 1842,
   PINK_PROGRESS: 1846,
+  TALKED_TO_ASGORE_ABOUT_KRIS_AT_FOUNTAIN: 1847,
+  TALKED_TO_ASGORE_ABOUT_SUSIE_AT_FOUNTAIN: 1848,
+  TALKED_TO_ASGORE_ABOUT_RALSEI_AT_FOUNTAIN: 1849,
   VOUCHER_CHOSEN: 1850,
   FINAL_STARWALKER_FLAG: 1851,
+  FLOWERY_FINAL_BLOW_OUTCOME: 1852,
   LEFTCASTLE_SHINOBEETLE_FLOWERYDOLLARS: 1853,
   INTERACTED_WITH_MIKE_DOOR_WITHOUT_MIKE_BATTLE: 1854,
   UNLOCKED_BREAK_CHARACTERS_PRECAFE: 1856,
+  MIZZLE_AND_RUDINN_RAN_AWAY: 1857,
   HOPSCHEF_HIGH_SCORE: 1858,
+  PINK_SHOP_PURCHASE_FLAGS: 1860,
   RALSEI_ROOM_FLOWERY_PILLOW: 1861,
   RALSEI_ROOM_FLOWERY_SIGN: 1862,
   RALSEI_ROOM_LADDERY: 1863,
@@ -1517,9 +1537,13 @@ export const FLAGS = {
   WATCHED_BREAKS1: 1855,
   WATCHED_BREAKS2: 1893,
   ENTERED_DOG_BALLOON_ROOM: 1872,
+  MISTOOK_ONSEN_WALL_FOR_STAIRS: 1871,
   TERAKOTA_PUZZLE_PINKCOIN: 1875,
   SUSIE_TOLD_NOELLE_ABOUT_KRIS_PIANO: 1876,
+  FLOWERY_PRE_FIGHT_TRIGGER: 1877,
+  FLOWER_CASTLE_SHORTCUT_FLAGS: 1878,
   FREE_DRINK_OUTCOME: 1879,
+  FLOWERY_LOSS_COUNT: 1881,
   DOJO_WEATHER_STARWALKER: 1882,
   SUSIE_FLOWER_CROWN_WEIRDROUTE: 1883,
   SIDEPUZZLE_SHADOW_PLATFORM_X: 1884,
@@ -1546,7 +1570,10 @@ export const FLAGS = {
   OBTAINED_SHADOW_CRYSTAL_CH5: 1907,
   DEFEATED_PINK: 1908,
   OBTAINED_SPINCAKE_CH5: 1909,
+  USED_FLOWERY_HAIR_CLIP_AFTER_GAME_OVER: 1912,
+  PINK_BATTLE_DIFFICULTY: 1914,
   GOT_SUSIE_HEAL_BOOST_CH5: 1915,
+  TERAKOTA_ATTACK_STAGE: 1916,
 } as const;
 
 export type FlagIndex = (typeof FLAGS)[keyof typeof FLAGS];
@@ -10227,6 +10254,200 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     description:
       "Whether Susie's base magic was boosted by 4 points for beating Hammer of Justice or Sound of Justice in Chapter 4 as part of the 0.0.250 patch.",
     valueType: 'boolean',
+  },
+  [FLAGS.GARDEN_AQUAPLATFORMING_FLAGS]: {
+    displayName: 'Garden aqua platforming flags',
+    description:
+      'Raw bitfield state for grass and the optional battle in the first Garden aqua platforming room.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.RALSEI_CASTLE_BASKETBALL_FLAGS]: {
+    displayName: 'Castle Town basketball flags',
+    description:
+      'Raw bitfield state for the basketball interaction in Castle Town during Chapter 5.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.GARDEN_FINAL_PLATFORMING_FLAGS]: {
+    displayName: 'Garden final platforming flags',
+    description:
+      'Raw bitfield state for the statue and bell in the final Garden platforming room.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.GARDEN_HOSPITAL_VISITS]: {
+    displayName: 'Times revived in the Garden',
+    description:
+      'Number of times the party woke up in the Garden recovery room. The first visit is part of the story. Later visits happen after a game over.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.CLIFF_NETSKIE_CLIMB_FLAGS]: {
+    displayName: 'Netskie Climb flags',
+    description:
+      'Raw bitfield state for the stairs and foxes in the Netskie Climb room.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.CLIFF_FINAL_DASH_FLAGS]: {
+    displayName: 'Cliffs final dash flags 1',
+    description:
+      'Raw bitfield state for grass and the first 17 coins in the final Cliffs dash.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.CLIFF_FINAL_DASH_FLAGS_2]: {
+    displayName: 'Cliffs final dash flags 2',
+    description:
+      'Raw bitfield state for coins 18 through 27 in the final Cliffs dash.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.CLIFF_TWIRLFLOWER_FLAGS]: {
+    displayName: 'Twirlflower platforming flags',
+    description:
+      "Raw bitfield state for Susie's comments and collectables in the Cliffs twirlflower rooms.",
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.COLLECTED_ALL_CLIFF_ITEMS]: {
+    displayName: 'Collected all Cliffs items',
+    description:
+      'Whether all uncollected Cliffs items were retrieved from the Castle Town cliff.',
+    valueType: 'boolean',
+  },
+  [FLAGS.USED_GLASS_AT_TORIELS_HOUSE_CH5]: {
+    displayName: "Used Glass at Toriel's house",
+    description:
+      "Whether the Glass was used at Toriel's house during Chapter 5, revealing a vision of her holding someone else.",
+    valueType: 'boolean',
+  },
+  [FLAGS.USED_GLASS_AT_FESTIVAL_CH5]: {
+    displayName: 'Used Glass at the Festival',
+    description:
+      'Whether the Glass was used in the Light World during the Festival, revealing a vision of Susie in a distant window.',
+    valueType: 'boolean',
+  },
+  [FLAGS.USED_SHADOW_CRYSTAL_IN_GARDEN]: {
+    displayName: 'Used Shadow Crystal in Garden',
+    description:
+      'Whether a Shadow Crystal was used in Garden, revealing a vision of Noelle holding flowers.',
+    valueType: 'boolean',
+  },
+  [FLAGS.USED_SHADOW_CRYSTAL_ELSEWHERE_CH5]: {
+    displayName: 'Used Shadow Crystal elsewhere',
+    description:
+      'Whether a Shadow Crystal was used elsewhere in Chapter 5, where it reveals nothing.',
+    valueType: 'boolean',
+  },
+  [FLAGS.ASKED_RUDY_ABOUT_CAROL]: {
+    displayName: "Asked Rudy about Noelle's mother",
+    description:
+      "Whether Rudy was asked about Noelle's mother in the church during the Festival.",
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_TO_ASGORE_ABOUT_KRIS_AT_FOUNTAIN]: {
+    displayName: 'Asked Asgore about Kris',
+    description:
+      'Whether Asgore was asked about Kris at the Flower Castle fountain.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_TO_ASGORE_ABOUT_SUSIE_AT_FOUNTAIN]: {
+    displayName: 'Asked Asgore about Susie',
+    description:
+      'Whether Asgore was asked about Susie at the Flower Castle fountain.',
+    valueType: 'boolean',
+  },
+  [FLAGS.TALKED_TO_ASGORE_ABOUT_RALSEI_AT_FOUNTAIN]: {
+    displayName: 'Asked Asgore about Ralsei',
+    description:
+      'Whether Asgore was asked about Ralsei at the Flower Castle fountain.',
+    valueType: 'boolean',
+  },
+  [FLAGS.FLOWERY_FINAL_BLOW_OUTCOME]: {
+    displayName: 'Final blow against Flowery',
+    description:
+      'Whether the final sword strike against Flowery missed or landed.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Missed',
+        2: 'Landed',
+      },
+    },
+  },
+  [FLAGS.MIZZLE_AND_RUDINN_RAN_AWAY]: {
+    displayName: 'Mizzle and Rudinn ran away',
+    description:
+      'Whether the Castle Town scene where Mizzle and Rudinn run away was completed.',
+    valueType: 'boolean',
+  },
+  [FLAGS.PINK_SHOP_PURCHASE_FLAGS]: {
+    displayName: 'Pink shop purchases',
+    description:
+      'Raw bitfield state for unique equipment purchased from the Pink shop.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.MISTOOK_ONSEN_WALL_FOR_STAIRS]: {
+    displayName: 'Tried to climb the fake stairs',
+    description:
+      'Whether the party tried to climb what looks like stairs at the left end of Flower Castle. The game answers that it is not stairs.',
+    valueType: 'boolean',
+  },
+  [FLAGS.FLOWERY_PRE_FIGHT_TRIGGER]: {
+    displayName: 'Flowery pre-fight trigger',
+    description: 'Progress through the two pre-fight Flowery triggers.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Default state',
+        1: 'Saw the first trigger',
+        2: 'Saw the second trigger',
+      },
+    },
+  },
+  [FLAGS.FLOWER_CASTLE_SHORTCUT_FLAGS]: {
+    displayName: 'Flower Castle shortcut flags',
+    description:
+      'Raw bitfield state for unlocked Flower Castle shortcut doors.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.FLOWERY_LOSS_COUNT]: {
+    displayName: 'Flowery losses',
+    description:
+      'Number of times the party lost the Flowery battle. The game increases this value after each game over, and uses it to select the game over scene.',
+    valueType: 'number',
+    valueRules: { min: 0 },
+  },
+  [FLAGS.USED_FLOWERY_HAIR_CLIP_AFTER_GAME_OVER]: {
+    displayName: "Used Flowery's hair clip",
+    description:
+      "Whether Flowery's hair clip was used after a game over to re-enable and play voice clips.",
+    valueType: 'boolean',
+  },
+  [FLAGS.PINK_BATTLE_DIFFICULTY]: {
+    displayName: 'Pink battle difficulty',
+    description:
+      'Difficulty selected using the bomb in the Pink shop before fighting Pink.',
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Normal',
+        1: 'Easy',
+        2: 'Hard',
+      },
+    },
+  },
+  [FLAGS.TERAKOTA_ATTACK_STAGE]: {
+    displayName: 'Terakota attack stage',
+    description:
+      'Stage of the cycling pot attack used by Terakota, capped at 3.',
+    valueType: 'number',
+    valueRules: { min: 0, max: 3 },
   },
   [FLAGS.MONEYFOUNTAIN_DONATION_OVER_100]: {
     displayName: '$100 Reward',
