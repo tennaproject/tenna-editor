@@ -4541,7 +4541,7 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   [FLAGS.SPAMTON_NEO_ENCOUNTER_OUTCOME]: {
     displayName: 'Spamton NEO',
     description:
-      'Tracks how the Spamton NEO fight ended. The SnowGrave route sets this to Spared, the same value as a peaceful win, because the fight does not end by depleting his HP. On the normal route, a value of Violenced also gives the DealMaker instead of the PuppetScarf.',
+      'Tracks how the Spamton NEO fight ended. The SnowGrave route sets this to Spared, the same value as a peaceful win, because the fight does not end by depleting his HP. A value of Violenced also makes the Spamton chest give the PuppetScarf weapon instead of the DealMaker armor.',
     valueType: 'map',
     valueRules: {
       map: ENCOUNTER_OUTCOMES,
