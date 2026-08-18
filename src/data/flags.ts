@@ -10957,10 +10957,11 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
       'Pressed the switch making a bridge at the end of the Second Sanctuary.',
     valueType: 'boolean',
   },
+  // TODO: translators, the description changed. Italian and Korean translation strings still describe the pre update behavior
   [FLAGS.SUSIE_LEARNED_BETTER_HEAL]: {
     displayName: 'Taught Susie BetterHeal',
     description:
-      "Whether Susie's OKHeal spell improved to BetterHeal, by winning against Gerson or starting the fight against the Sound of Justice.",
+      "Whether Susie's OKHeal spell improved to BetterHeal. Only a win against Gerson sets this flag. In older game versions, the start of the fight against the Sound of Justice also set it.",
     valueType: 'boolean',
   },
   [FLAGS.INTERACTED_WITH_ITEM_FOUNTAIN]: {
