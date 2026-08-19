@@ -4,7 +4,7 @@ import {
   type FlagBitfieldProperties,
   type FlagIndex,
 } from '@data';
-import { FLAG_BITFIELDS, FLAG_BITFIELDS_META } from '@data/flag-bitfields';
+import { FLAG_BITFIELDS_META } from '@data/flag-bitfields';
 import { flagHelpers } from './data-helpers';
 
 export const FLAG_NAMES = Object.fromEntries(
@@ -17,10 +17,12 @@ export interface KnownBitfield {
 }
 
 export function getKnownBitfields(parent: FlagIndex): KnownBitfield[] {
-  return Object.values(FLAG_BITFIELDS).flatMap((id) => {
-    const bitfield = FLAG_BITFIELDS_META[id];
-    return bitfield.parent === parent ? [{ id, bitfield }] : [];
-  });
+  return (Object.keys(FLAG_BITFIELDS_META) as FlagBitfieldId[]).flatMap(
+    (id) => {
+      const bitfield: FlagBitfieldProperties = FLAG_BITFIELDS_META[id];
+      return bitfield.parent === parent ? [{ id, bitfield }] : [];
+    },
+  );
 }
 
 export interface PreparedFlag {

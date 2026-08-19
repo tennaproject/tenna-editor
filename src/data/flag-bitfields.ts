@@ -14,304 +14,15 @@ export interface FlagBitfieldProperties extends BaseProperties {
   valueRules?: FlagProperties['valueRules'];
 }
 
-export const FLAG_BITFIELDS = {
-  CASTLE_CLIMB_CUTSCENE0: 'CASTLE_CLIMB_CUTSCENE0',
-  CASTLE_CLIMB_CUTSCENE1: 'CASTLE_CLIMB_CUTSCENE1',
-  CASTLE_CLIMB_CUTSCENE2: 'CASTLE_CLIMB_CUTSCENE2',
-  CASTLE_CLIMB_CUTSCENE3: 'CASTLE_CLIMB_CUTSCENE3',
-  CASTLE_CLIMB_CUTSCENE4: 'CASTLE_CLIMB_CUTSCENE4',
-  CASTLE_CLIMB_CUTSCENE5: 'CASTLE_CLIMB_CUTSCENE5',
-  CASTLE_CLIMB_CUTSCENE5_CHOICE: 'CASTLE_CLIMB_CUTSCENE5_CHOICE',
-  CASTLE_CLIMB_CUTSCENE6: 'CASTLE_CLIMB_CUTSCENE6',
-  CASTLE_CLIMB_CUTSCENE9: 'CASTLE_CLIMB_CUTSCENE9',
-  NEWDASH_LEAFPILE0: 'NEWDASH_LEAFPILE0',
-  NEWDASH_LEAFPILE1: 'NEWDASH_LEAFPILE1',
-  NEWDASH_LEAFPILE2: 'NEWDASH_LEAFPILE2',
-  NEWDASH_LEAFPILE3: 'NEWDASH_LEAFPILE3',
-  NEWDASH_LEAFPILE4: 'NEWDASH_LEAFPILE4',
-  NEWDASH_LEAFPILE5: 'NEWDASH_LEAFPILE5',
-  NEWDASH_LEAFPILE6: 'NEWDASH_LEAFPILE6',
-  NEWDASH_LEAFPILE7: 'NEWDASH_LEAFPILE7',
-  NEWDASH_LEAFPILE8: 'NEWDASH_LEAFPILE8',
-  NEWDASH_LEAFPILE9: 'NEWDASH_LEAFPILE9',
-  NEWDASH_LEAFPILE10: 'NEWDASH_LEAFPILE10',
-  FIRSTDASH_LEAFPILES: 'FIRSTDASH_LEAFPILES',
-  NEWDASH_LEAFPILE12: 'NEWDASH_LEAFPILE12',
-  NEWDASH_LEAFPILE13: 'NEWDASH_LEAFPILE13',
-  NEWDASH_LEAFPILE16: 'NEWDASH_LEAFPILE16',
-  NEWDASH_DESTOYEDTEA: 'NEWDASH_DESTOYEDTEA',
-  IDEAL_DINER_TALKED_TO_YELLOW: 'IDEAL_DINER_TALKED_TO_YELLOW',
-  IDEAL_DINER_CHECKED_REGISTER: 'IDEAL_DINER_CHECKED_REGISTER',
-  PLATFORMING_INTRO_JUMP_TUTORIAL: 'PLATFORMING_INTRO_JUMP_TUTORIAL',
-  PLATFORMING_INTRO_ACT_TUTORIAL: 'PLATFORMING_INTRO_ACT_TUTORIAL',
-  PLATFORMING_INTRO_TREE_SMASHED: 'PLATFORMING_INTRO_TREE_SMASHED',
-  PLATFORMING_INTRO_TREE_FRUIT1_SMASHED:
-    'PLATFORMING_INTRO_TREE_FRUIT1_SMASHED',
-  PLATFORMING_INTRO_TREE_FRUIT2_SMASHED:
-    'PLATFORMING_INTRO_TREE_FRUIT2_SMASHED',
-  PLATFORMING_INTRO_TREE_FRUIT3_SMASHED:
-    'PLATFORMING_INTRO_TREE_FRUIT3_SMASHED',
-  PLATFORMING_INTRO_BRAMBLES_ACTED: 'PLATFORMING_INTRO_BRAMBLES_ACTED',
-  PLATFORMING_INTRO_ATTACK_WALL: 'PLATFORMING_INTRO_ATTACK_WALL',
-  PLATFORMING_INTRO_PINKBELL: 'PLATFORMING_INTRO_PINKBELL',
-  PLATFORMING_INTRO_BELL_AQUAPLATFORMING1:
-    'PLATFORMING_INTRO_BELL_AQUAPLATFORMING1',
-  PLATFORMING_INTRO_BELL_AQUAPLATFORMING2:
-    'PLATFORMING_INTRO_BELL_AQUAPLATFORMING2',
-  PLATFORMING_INTRO_BELL_AQUAHOLE: 'PLATFORMING_INTRO_BELL_AQUAHOLE',
-  PLATFORMING_INTRO_BELL_AQUAHOLE_LEFT1:
-    'PLATFORMING_INTRO_BELL_AQUAHOLE_LEFT1',
-  PLATFORMING_INTRO_BELL_AQUAHOLE_LEFT2:
-    'PLATFORMING_INTRO_BELL_AQUAHOLE_LEFT2',
-  PLATFORMING_INTRO_BELL_AQUAHOLE_LEFT3:
-    'PLATFORMING_INTRO_BELL_AQUAHOLE_LEFT3',
-  GARDEN_AQUADASH_PLAT_COIN1: 'GARDEN_AQUADASH_PLAT_COIN1',
-  GARDEN_AQUADASH_PLAT_COIN2: 'GARDEN_AQUADASH_PLAT_COIN2',
-  GARDEN_AQUADASH_PLAT_COIN3: 'GARDEN_AQUADASH_PLAT_COIN3',
-  GARDEN_AQUADASH_PLAT_COIN4: 'GARDEN_AQUADASH_PLAT_COIN4',
-  GARDEN_AQUADASH_PLAT_COIN5: 'GARDEN_AQUADASH_PLAT_COIN5',
-  GARDEN_AQUADASH_PLAT_COIN6: 'GARDEN_AQUADASH_PLAT_COIN6',
-  GARDEN_AQUADASH_PLAT_COIN7: 'GARDEN_AQUADASH_PLAT_COIN7',
-  GARDEN_AQUADASH_PLAT_COIN8: 'GARDEN_AQUADASH_PLAT_COIN8',
-  GARDEN_AQUADASH_PLAT_COIN9: 'GARDEN_AQUADASH_PLAT_COIN9',
-  GARDEN_AQUADASH_PLAT_COIN10: 'GARDEN_AQUADASH_PLAT_COIN10',
-  GARDEN_AQUADASH_PLAT_COIN11: 'GARDEN_AQUADASH_PLAT_COIN11',
-  GARDEN_AQUADASH_PLAT_COIN12: 'GARDEN_AQUADASH_PLAT_COIN12',
-  GARDEN_AQUADASH_PLAT_COIN13: 'GARDEN_AQUADASH_PLAT_COIN13',
-  GARDEN_AQUADASH_PLAT_COIN14: 'GARDEN_AQUADASH_PLAT_COIN14',
-  GARDEN_AQUADASH_PLAT_COIN15: 'GARDEN_AQUADASH_PLAT_COIN15',
-  GARDEN_AQUADASH_PLAT_COIN16: 'GARDEN_AQUADASH_PLAT_COIN16',
-  GARDEN_AQUADASH_PLAT_COIN17: 'GARDEN_AQUADASH_PLAT_COIN17',
-  GARDEN_AQUADASH_PLAT_COIN18: 'GARDEN_AQUADASH_PLAT_COIN18',
-  GARDEN_AQUADASH_PLAT_COIN19: 'GARDEN_AQUADASH_PLAT_COIN19',
-  GARDEN_AQUADASH_PLAT_COIN20: 'GARDEN_AQUADASH_PLAT_COIN20',
-  GARDEN_AQUADASH_PLAT_COIN21: 'GARDEN_AQUADASH_PLAT_COIN21',
-  GARDEN_AQUADASH_PLAT_COIN22: 'GARDEN_AQUADASH_PLAT_COIN22',
-  GARDEN_AQUADASH_PLAT_COIN23: 'GARDEN_AQUADASH_PLAT_COIN23',
-  GARDEN_AQUADASH_PLAT_COIN24: 'GARDEN_AQUADASH_PLAT_COIN24',
-  GARDEN_AQUADASH_PLAT_COIN25: 'GARDEN_AQUADASH_PLAT_COIN25',
-  GARDEN_AQUADASH_PLAT_COIN26: 'GARDEN_AQUADASH_PLAT_COIN26',
-  GARDEN_AQUADASH_PLAT_COIN27: 'GARDEN_AQUADASH_PLAT_COIN27',
-  GARDEN_AQUADASH_PLAT_COIN28: 'GARDEN_AQUADASH_PLAT_COIN28',
-  GARDEN_AQUADASH_PLAT_COIN29: 'GARDEN_AQUADASH_PLAT_COIN29',
-  GARDEN_AQUADASH_PLAT_AQUA_BULLETPATTERNS:
-    'GARDEN_AQUADASH_PLAT_AQUA_BULLETPATTERNS',
-  GARDEN_AQUADASH_PLAT_PINKCOIN: 'GARDEN_AQUADASH_PLAT_PINKCOIN',
-  SCISSORS_PUZZLE_SHAPED_BUSH_CUT: 'SCISSORS_PUZZLE_SHAPED_BUSH_CUT',
-  SCISSORS_PUZZLE_FLOWERY_FACE_PATH_CUT:
-    'SCISSORS_PUZZLE_FLOWERY_FACE_PATH_CUT',
-  RALSEI_HOLD_Z_HINT: 'RALSEI_HOLD_Z_HINT',
-  HOPSCHEF_PROGRESS: 'HOPSCHEF_PROGRESS',
-  HOPSCHEF_REWARDS: 'HOPSCHEF_REWARDS',
-  FERROLL_SMASHED_PARTY: 'FERROLL_SMASHED_PARTY',
-  FERROLL_SMASHED_MONEY: 'FERROLL_SMASHED_MONEY',
-  CLIFFS_CUTDOWN_TUTORIAL_BULLETPATTERN:
-    'CLIFFS_CUTDOWN_TUTORIAL_BULLETPATTERN',
-  CLIFFS_CUTDOWN_TUTORIAL_GRASSRIGHT1: 'CLIFFS_CUTDOWN_TUTORIAL_GRASSRIGHT1',
-  CLIFFS_CUTDOWN_TUTORIAL_GRASSRIGHT2: 'CLIFFS_CUTDOWN_TUTORIAL_GRASSRIGHT2',
-  CLIFFS_CUTDOWN_TUTORIAL_GRASSLEFT1: 'CLIFFS_CUTDOWN_TUTORIAL_GRASSLEFT1',
-  CLIFFS_CUTDOWN_TUTORIAL_GRASSLEFT2: 'CLIFFS_CUTDOWN_TUTORIAL_GRASSLEFT2',
-  CLIFFS_CUTDOWN_TUTORIAL_GRASSLEFT3: 'CLIFFS_CUTDOWN_TUTORIAL_GRASSLEFT3',
-  CLIFFS_CUTDOWN_TUTORIAL_PINKBELL: 'CLIFFS_CUTDOWN_TUTORIAL_PINKBELL',
-  CLIFFS_BONUSCOMBAT_PINKBELL: 'CLIFFS_BONUSCOMBAT_PINKBELL',
-  CLIFFS_BONUSCOMBAT_BULLETPATTERN: 'CLIFFS_BONUSCOMBAT_BULLETPATTERN',
-  ASGORE_DOCUMENT_TOTALREAD: 'ASGORE_DOCUMENT_TOTALREAD',
-  ASGORE_DOCUMENT_LEFTFIRST: 'ASGORE_DOCUMENT_LEFTFIRST',
-  ASGORE_DOCUMENT_RIGHTFIRST: 'ASGORE_DOCUMENT_RIGHTFIRST',
-  TERAKOTA_PUZZLE_STATUE1: 'TERAKOTA_PUZZLE_STATUE1',
-  TERAKOTA_PUZZLE_STATUE2: 'TERAKOTA_PUZZLE_STATUE2',
-  TERAKOTA_PUZZLE_STATUE3: 'TERAKOTA_PUZZLE_STATUE3',
-  TERAKOTA_PUZZLE_STATUE4: 'TERAKOTA_PUZZLE_STATUE4',
-  TERAKOTA_PUZZLE_STATUE5: 'TERAKOTA_PUZZLE_STATUE5',
-  TERAKOTA_PUZZLE_SOLVED: 'TERAKOTA_PUZZLE_SOLVED',
-  DEFEATED_FIRST_ORANGE_BP: 'DEFEATED_FIRST_ORANGE_BP',
-  FOXHUNT_FIRST_TERAKOTA: 'FOXHUNT_FIRST_TERAKOTA',
-  FOXHUNT_FOX1: 'FOXHUNT_FOX1',
-  FOXHUNT_FOX2: 'FOXHUNT_FOX2',
-  FOXHUNT_FOX3: 'FOXHUNT_FOX3',
-  FOXHUNT_FOX4: 'FOXHUNT_FOX4',
-  FOXHUNT_FOX5: 'FOXHUNT_FOX5',
-  FOXHUNT_AQUA: 'FOXHUNT_AQUA',
-  FOXHUNT_TERAKOTA_PUSHED: 'FOXHUNT_TERAKOTA_PUSHED',
-  FOXHUNT_OPENDOOR: 'FOXHUNT_OPENDOOR',
-  FOXHUNT_TERASKIP: 'FOXHUNT_TERASKIP',
-  FOXHUNT_CHAOS_AQUA: 'FOXHUNT_CHAOS_AQUA',
-  FOXHUNT_CHAOS_SETH: 'FOXHUNT_CHAOS_SETH',
-  FOXHUNT_CHAOS_WATER: 'FOXHUNT_CHAOS_WATER',
-  FOXHUNT_CHAOS_DOG: 'FOXHUNT_CHAOS_DOG',
-  PINK_DOOR_SHORTCUT_UNLOCKED: 'PINK_DOOR_SHORTCUT_UNLOCKED',
-  PINK_DOOR_SHORTCUT_CUTSCENE: 'PINK_DOOR_SHORTCUT_CUTSCENE',
-  PINK_DOOR_INTERACTED_NO_KEY: 'PINK_DOOR_INTERACTED_NO_KEY',
-  PINK_DOOR_PINKCOIN: 'PINK_DOOR_PINKCOIN',
-  UNLOCKED_SETH_BREAKS_PRECAFE: 'UNLOCKED_SETH_BREAKS_PRECAFE',
-  UNLOCKED_YELLOW_BREAKS_PRECAFE: 'UNLOCKED_YELLOW_BREAKS_PRECAFE',
-  UNLOCKED_GREEN_BREAKS_PRECAFE: 'UNLOCKED_GREEN_BREAKS_PRECAFE',
-  UNLOCKED_AQUA_BREAKS_PRECAFE: 'UNLOCKED_AQUA_BREAKS_PRECAFE',
-  UNLOCKED_BLUE_BREAKS_PRECAFE: 'UNLOCKED_BLUE_BREAKS_PRECAFE',
-  UNLOCKED_ORANGE_BREAKS_PRECAFE: 'UNLOCKED_ORANGE_BREAKS_PRECAFE',
-  UNLOCKED_PINK_BREAKS_PRECAFE: 'UNLOCKED_PINK_BREAKS_PRECAFE',
-  BREAKBOUGHT_AQUA_KRIS: 'BREAKBOUGHT_AQUA_KRIS',
-  BREAKBOUGHT_AQUA_SETH: 'BREAKBOUGHT_AQUA_SETH',
-  BREAKBOUGHT_AQUA_YELLOW: 'BREAKBOUGHT_AQUA_YELLOW',
-  BREAKBOUGHT_AQUA_GREEN: 'BREAKBOUGHT_AQUA_GREEN',
-  BREAKBOUGHT_AQUA_BLUE: 'BREAKBOUGHT_AQUA_BLUE',
-  BREAKBOUGHT_AQUA_ORANGE: 'BREAKBOUGHT_AQUA_ORANGE',
-  BREAKBOUGHT_SETH_RALSEI: 'BREAKBOUGHT_SETH_RALSEI',
-  BREAKBOUGHT_SETH_SUSIE: 'BREAKBOUGHT_SETH_SUSIE',
-  BREAKBOUGHT_SETH_YELLOW: 'BREAKBOUGHT_SETH_YELLOW',
-  BREAKBOUGHT_SETH_GREEN: 'BREAKBOUGHT_SETH_GREEN',
-  BREAKBOUGHT_SETH_BLUE: 'BREAKBOUGHT_SETH_BLUE',
-  BREAKBOUGHT_SETH_ORANGE: 'BREAKBOUGHT_SETH_ORANGE',
-  BREAKBOUGHT_YELLOW_RALSEI: 'BREAKBOUGHT_YELLOW_RALSEI',
-  BREAKBOUGHT_YELLOW_GREEN: 'BREAKBOUGHT_YELLOW_GREEN',
-  BREAKBOUGHT_YELLOW_BLUE: 'BREAKBOUGHT_YELLOW_BLUE',
-  BREAKBOUGHT_YELLOW_ORANGE: 'BREAKBOUGHT_YELLOW_ORANGE',
-  BREAKBOUGHT_GREEN: 'BREAKBOUGHT_GREEN',
-  BREAKBOUGHT_GREEN_ORANGE: 'BREAKBOUGHT_GREEN_ORANGE',
-  BREAKBOUGHT_BLUE_SUSIE: 'BREAKBOUGHT_BLUE_SUSIE',
-  BREAKBOUGHT_BLUE_ORANGE: 'BREAKBOUGHT_BLUE_ORANGE',
-  BREAKBOUGHT_BLUE_ORANGE2: 'BREAKBOUGHT_BLUE_ORANGE2',
-  BREAKBOUGHT_BLUE_ORANGE3: 'BREAKBOUGHT_BLUE_ORANGE3',
-  BREAKBOUGHT_BLUE_GREEN: 'BREAKBOUGHT_BLUE_GREEN',
-  BREAKBOUGHT_ORANGE_SUSIE: 'BREAKBOUGHT_ORANGE_SUSIE',
-  BREAKBOUGHT_ORANGE_RALSEI: 'BREAKBOUGHT_ORANGE_RALSEI',
-  BREAKBOUGHT_PINK_ORANGE: 'BREAKBOUGHT_PINK_ORANGE',
-  BREAKBOUGHT_PINK_KRIS: 'BREAKBOUGHT_PINK_KRIS',
-  BREAKWATCHED_AQUA_KRIS: 'BREAKWATCHED_AQUA_KRIS',
-  BREAKWATCHED_AQUA_SETH: 'BREAKWATCHED_AQUA_SETH',
-  BREAKWATCHED_AQUA_YELLOW: 'BREAKWATCHED_AQUA_YELLOW',
-  BREAKWATCHED_AQUA_GREEN: 'BREAKWATCHED_AQUA_GREEN',
-  BREAKWATCHED_AQUA_BLUE: 'BREAKWATCHED_AQUA_BLUE',
-  BREAKWATCHED_AQUA_ORANGE: 'BREAKWATCHED_AQUA_ORANGE',
-  BREAKWATCHED_SETH_RALSEI: 'BREAKWATCHED_SETH_RALSEI',
-  BREAKWATCHED_SETH_SUSIE: 'BREAKWATCHED_SETH_SUSIE',
-  BREAKWATCHED_SETH_YELLOW: 'BREAKWATCHED_SETH_YELLOW',
-  BREAKWATCHED_SETH_GREEN: 'BREAKWATCHED_SETH_GREEN',
-  BREAKWATCHED_SETH_BLUE: 'BREAKWATCHED_SETH_BLUE',
-  BREAKWATCHED_SETH_ORANGE: 'BREAKWATCHED_SETH_ORANGE',
-  BREAKWATCHED_YELLOW_RALSEI: 'BREAKWATCHED_YELLOW_RALSEI',
-  BREAKWATCHED_YELLOW_GREEN: 'BREAKWATCHED_YELLOW_GREEN',
-  BREAKWATCHED_YELLOW_BLUE: 'BREAKWATCHED_YELLOW_BLUE',
-  BREAKWATCHED_YELLOW_ORANGE: 'BREAKWATCHED_YELLOW_ORANGE',
-  BREAKWATCHED_GREEN: 'BREAKWATCHED_GREEN',
-  BREAKWATCHED_GREEN_ORANGE: 'BREAKWATCHED_GREEN_ORANGE',
-  BREAKWATCHED_BLUE_SUSIE: 'BREAKWATCHED_BLUE_SUSIE',
-  BREAKWATCHED_BLUE_ORANGE: 'BREAKWATCHED_BLUE_ORANGE',
-  BREAKWATCHED_BLUE_ORANGE2: 'BREAKWATCHED_BLUE_ORANGE2',
-  BREAKWATCHED_BLUE_ORANGE3: 'BREAKWATCHED_BLUE_ORANGE3',
-  BREAKWATCHED_BLUE_GREEN: 'BREAKWATCHED_BLUE_GREEN',
-  BREAKWATCHED_ORANGE_SUSIE: 'BREAKWATCHED_ORANGE_SUSIE',
-  BREAKWATCHED_ORANGE_RALSEI: 'BREAKWATCHED_ORANGE_RALSEI',
-  BREAKWATCHED_PINK_ORANGE: 'BREAKWATCHED_PINK_ORANGE',
-  BREAKWATCHED_PINK_KRIS: 'BREAKWATCHED_PINK_KRIS',
-  SHADOW_PLATFORM_X_FCASTLE_RIGHT_PUZZLE1:
-    'SHADOW_PLATFORM_X_FCASTLE_RIGHT_PUZZLE1',
-  SHADOW_PLATFORM_X_FCASTLE_RIGHT_PUZZLE2:
-    'SHADOW_PLATFORM_X_FCASTLE_RIGHT_PUZZLE2',
-  SHADOW_PLATFORM_X_FCASTLE_SIDEPUZZLE1:
-    'SHADOW_PLATFORM_X_FCASTLE_SIDEPUZZLE1',
-  SHADOW_PLATFORM_X_FCASTLE_SIDEPUZZLE2:
-    'SHADOW_PLATFORM_X_FCASTLE_SIDEPUZZLE2',
-  SHADOW_PLATFORM_Y_FCASTLE_RIGHT_PUZZLE1:
-    'SHADOW_PLATFORM_Y_FCASTLE_RIGHT_PUZZLE1',
-  SHADOW_PLATFORM_Y_FCASTLE_RIGHT_PUZZLE2:
-    'SHADOW_PLATFORM_Y_FCASTLE_RIGHT_PUZZLE2',
-  SHADOW_PLATFORM_Y_FCASTLE_SIDEPUZZLE1:
-    'SHADOW_PLATFORM_Y_FCASTLE_SIDEPUZZLE1',
-  SHADOW_PLATFORM_Y_FCASTLE_SIDEPUZZLE2:
-    'SHADOW_PLATFORM_Y_FCASTLE_SIDEPUZZLE2',
-  FCASTLE_BOUNCE1_BELL1: 'FCASTLE_BOUNCE1_BELL1',
-  FCASTLE_BOUNCE1_BELL2: 'FCASTLE_BOUNCE1_BELL2',
-  FCASTLE_BOUNCE1_BELL3: 'FCASTLE_BOUNCE1_BELL3',
-  FCASTLE_BOUNCE1_BELL4: 'FCASTLE_BOUNCE1_BELL4',
-  FCASTLE_BOUNCE3_GOLDCOIN: 'FCASTLE_BOUNCE3_GOLDCOIN',
-  FCASTLE_RIGHT_PUZZLE_COIN1: 'FCASTLE_RIGHT_PUZZLE_COIN1',
-  FCASTLE_RIGHT_PUZZLE_GOLDCOIN: 'FCASTLE_RIGHT_PUZZLE_GOLDCOIN',
-  FCASTLE_RIGHT_PUZZLE_COIN2: 'FCASTLE_RIGHT_PUZZLE_COIN2',
-  FCASTLE_SIDEPUZZLE_GOLDCOIN1: 'FCASTLE_SIDEPUZZLE_GOLDCOIN1',
-  FCASTLE_SIDEPUZZLE_GOLDCOIN2: 'FCASTLE_SIDEPUZZLE_GOLDCOIN2',
-  DANGEROUS_PLATFORMING_JUMPS: 'DANGEROUS_PLATFORMING_JUMPS',
-  DANGEROUS_PLATFORMING_CHUTE: 'DANGEROUS_PLATFORMING_CHUTE',
-  DANGEROUS_PLATFORMING_PAYOFF: 'DANGEROUS_PLATFORMING_PAYOFF',
-  DANGEROUS_PLATFORMING_AQUASETH: 'DANGEROUS_PLATFORMING_AQUASETH',
-  SAW_FINAL_STARWALKER: 'SAW_FINAL_STARWALKER',
-  PLATCONTROLS_HIGHLIGHTED: 'PLATCONTROLS_HIGHLIGHTED',
-  SAW_FERROLL: 'SAW_FERROLL',
-  ENCOUNTERED_SHI_SANDPIT: 'ENCOUNTERED_SHI_SANDPIT',
-  GARDEN_AQUAPLATFORMING_BATTLE: 'GARDEN_AQUAPLATFORMING_BATTLE',
-  GARDEN_AQUAPLATFORMING_GRASS1: 'GARDEN_AQUAPLATFORMING_GRASS1',
-  GARDEN_AQUAPLATFORMING_GRASS2: 'GARDEN_AQUAPLATFORMING_GRASS2',
-  GARDEN_AQUAPLATFORMING_GRASS3: 'GARDEN_AQUAPLATFORMING_GRASS3',
-  GARDEN_AQUAPLATFORMING_GRASS4: 'GARDEN_AQUAPLATFORMING_GRASS4',
-  RALSEI_CASTLE_BASKETBALL_QUEEN_CUTSCENE:
-    'RALSEI_CASTLE_BASKETBALL_QUEEN_CUTSCENE',
-  GARDEN_FINAL_PLATFORMING_STATUE: 'GARDEN_FINAL_PLATFORMING_STATUE',
-  GARDEN_FINAL_PLATFORMING_PINK_BELL: 'GARDEN_FINAL_PLATFORMING_PINK_BELL',
-  CLIFF_NETSKIE_CLIMB_STAIRS: 'CLIFF_NETSKIE_CLIMB_STAIRS',
-  CLIFF_NETSKIE_CLIMB_FOXES_FLED: 'CLIFF_NETSKIE_CLIMB_FOXES_FLED',
-  CLIFF_FINAL_DASH_GRASS: 'CLIFF_FINAL_DASH_GRASS',
-  CLIFF_FINAL_DASH_COIN1: 'CLIFF_FINAL_DASH_COIN1',
-  CLIFF_FINAL_DASH_COIN2: 'CLIFF_FINAL_DASH_COIN2',
-  CLIFF_FINAL_DASH_COIN3: 'CLIFF_FINAL_DASH_COIN3',
-  CLIFF_FINAL_DASH_COIN4: 'CLIFF_FINAL_DASH_COIN4',
-  CLIFF_FINAL_DASH_COIN5: 'CLIFF_FINAL_DASH_COIN5',
-  CLIFF_FINAL_DASH_COIN6: 'CLIFF_FINAL_DASH_COIN6',
-  CLIFF_FINAL_DASH_COIN7: 'CLIFF_FINAL_DASH_COIN7',
-  CLIFF_FINAL_DASH_COIN8: 'CLIFF_FINAL_DASH_COIN8',
-  CLIFF_FINAL_DASH_COIN9: 'CLIFF_FINAL_DASH_COIN9',
-  CLIFF_FINAL_DASH_COIN10: 'CLIFF_FINAL_DASH_COIN10',
-  CLIFF_FINAL_DASH_COIN11: 'CLIFF_FINAL_DASH_COIN11',
-  CLIFF_FINAL_DASH_COIN12: 'CLIFF_FINAL_DASH_COIN12',
-  CLIFF_FINAL_DASH_COIN13: 'CLIFF_FINAL_DASH_COIN13',
-  CLIFF_FINAL_DASH_COIN14: 'CLIFF_FINAL_DASH_COIN14',
-  CLIFF_FINAL_DASH_COIN15: 'CLIFF_FINAL_DASH_COIN15',
-  CLIFF_FINAL_DASH_COIN16: 'CLIFF_FINAL_DASH_COIN16',
-  CLIFF_FINAL_DASH_COIN17: 'CLIFF_FINAL_DASH_COIN17',
-  CLIFF_FINAL_DASH_COIN18: 'CLIFF_FINAL_DASH_COIN18',
-  CLIFF_FINAL_DASH_COIN19: 'CLIFF_FINAL_DASH_COIN19',
-  CLIFF_FINAL_DASH_COIN20: 'CLIFF_FINAL_DASH_COIN20',
-  CLIFF_FINAL_DASH_COIN21: 'CLIFF_FINAL_DASH_COIN21',
-  CLIFF_FINAL_DASH_COIN22: 'CLIFF_FINAL_DASH_COIN22',
-  CLIFF_FINAL_DASH_COIN23: 'CLIFF_FINAL_DASH_COIN23',
-  CLIFF_FINAL_DASH_COIN24: 'CLIFF_FINAL_DASH_COIN24',
-  CLIFF_FINAL_DASH_COIN25: 'CLIFF_FINAL_DASH_COIN25',
-  CLIFF_FINAL_DASH_COIN26: 'CLIFF_FINAL_DASH_COIN26',
-  CLIFF_FINAL_DASH_COIN27: 'CLIFF_FINAL_DASH_COIN27',
-  CLIFF_TWIRLFLOWER_SUSIE_COMMENT: 'CLIFF_TWIRLFLOWER_SUSIE_COMMENT',
-  CLIFF_TWIRLFLOWER_BELL_LOWER_LEFT: 'CLIFF_TWIRLFLOWER_BELL_LOWER_LEFT',
-  CLIFF_TWIRLFLOWER_BELL_LOWER_RIGHT: 'CLIFF_TWIRLFLOWER_BELL_LOWER_RIGHT',
-  CLIFF_TWIRLFLOWER_BELL_UPPER: 'CLIFF_TWIRLFLOWER_BELL_UPPER',
-  CLIFF_TWIRLFLOWER_SETH_AQUA_BATTLE: 'CLIFF_TWIRLFLOWER_SETH_AQUA_BATTLE',
-  CLIFF_TWIRLFLOWER_WIND_BELL: 'CLIFF_TWIRLFLOWER_WIND_BELL',
-  CLIFF_TWIRLFLOWER_BELL_BUNCH: 'CLIFF_TWIRLFLOWER_BELL_BUNCH',
-  PINK_SHOP_BOUGHT_SETH_SPECS: 'PINK_SHOP_BOUGHT_SETH_SPECS',
-  PINK_SHOP_BOUGHT_BLUE_SHOES: 'PINK_SHOP_BOUGHT_BLUE_SHOES',
-  PINK_SHOP_BOUGHT_AQUA_KNIFE: 'PINK_SHOP_BOUGHT_AQUA_KNIFE',
-  PINK_SHOP_BOUGHT_YELLOW_HAT: 'PINK_SHOP_BOUGHT_YELLOW_HAT',
-  PINK_SHOP_BOUGHT_ORANGE_GLOVE: 'PINK_SHOP_BOUGHT_ORANGE_GLOVE',
-  PINK_SHOP_BOUGHT_GREEN_APRON: 'PINK_SHOP_BOUGHT_GREEN_APRON',
-  PINK_SHOP_BOUGHT_FLOWERY_SCARF: 'PINK_SHOP_BOUGHT_FLOWERY_SCARF',
-  SHORTCUT_HOPSCHEF: 'SHORTCUT_HOPSCHEF',
-  SHORTCUT_PINK_DOOR: 'SHORTCUT_PINK_DOOR',
-  SHORTCUT_LAST_ROOM: 'SHORTCUT_LAST_ROOM',
-  SHORTCUT_TOP_OF_CASTLE: 'SHORTCUT_TOP_OF_CASTLE',
-} as const;
-
-export type FlagBitfieldName = keyof typeof FLAG_BITFIELDS;
-export type FlagBitfieldId = (typeof FLAG_BITFIELDS)[FlagBitfieldName];
-
-export const FLAG_BITFIELDS_META: Record<
-  FlagBitfieldId,
-  FlagBitfieldProperties
-> = {
-  [FLAG_BITFIELDS.CASTLE_CLIMB_CUTSCENE0]: {
+const FLAG_BITFIELD_ENTRIES = {
+  CASTLE_CLIMB_CUTSCENE0: {
     parent: FLAGS.CASTLE_CLIMB_CUTSCENES,
     index: 0,
     displayName: 'Saw Rouxls & Mizzle cutscene',
     description: 'Whether the Rouxls & Mizzle cutscene. (over 5 minutes)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CASTLE_CLIMB_CUTSCENE1]: {
+  CASTLE_CLIMB_CUTSCENE1: {
     parent: FLAGS.CASTLE_CLIMB_CUTSCENES,
     index: 1,
     displayName: 'Saw Rouxls looking for extra darlings cutscene',
@@ -319,7 +30,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you saw the Rouxls looking for extra darlings cutscene. (26.7 seconds to 5 minutes)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CASTLE_CLIMB_CUTSCENE2]: {
+  CASTLE_CLIMB_CUTSCENE2: {
     parent: FLAGS.CASTLE_CLIMB_CUTSCENES,
     index: 4,
     displayName: 'Saw Rouxls looking for extra darlings cutscene a second time',
@@ -327,7 +38,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you saw the Rouxls looking for extra darlings cutscene a second time. (26.7 seconds to 5 minutes)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CASTLE_CLIMB_CUTSCENE3]: {
+  CASTLE_CLIMB_CUTSCENE3: {
     parent: FLAGS.CASTLE_CLIMB_CUTSCENES,
     index: 5,
     displayName: 'Saw Shadowguy sock cutscene',
@@ -335,7 +46,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you saw the Shadowguy sock cutscene. (25 to 26.6 seconds)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CASTLE_CLIMB_CUTSCENE4]: {
+  CASTLE_CLIMB_CUTSCENE4: {
     parent: FLAGS.CASTLE_CLIMB_CUTSCENES,
     index: 6,
     displayName: 'Saw sad Iconman cutscene',
@@ -343,7 +54,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you saw the sad Iconman cutscene. (23.3 to 24.9 seconds)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CASTLE_CLIMB_CUTSCENE5]: {
+  CASTLE_CLIMB_CUTSCENE5: {
     parent: FLAGS.CASTLE_CLIMB_CUTSCENES,
     index: 2,
     displayName: 'Saw Princess Ralsei cutscene',
@@ -351,7 +62,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you saw the Princess Ralsei cutscene. (under 23.3 seconds)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CASTLE_CLIMB_CUTSCENE5_CHOICE]: {
+  CASTLE_CLIMB_CUTSCENE5_CHOICE: {
     parent: FLAGS.CASTLE_CLIMB_CUTSCENES,
     index: 3,
     displayName: 'Princess Ralsei choice',
@@ -364,7 +75,7 @@ export const FLAG_BITFIELDS_META: Record<
       },
     },
   },
-  [FLAG_BITFIELDS.CASTLE_CLIMB_CUTSCENE6]: {
+  CASTLE_CLIMB_CUTSCENE6: {
     parent: FLAGS.CASTLE_CLIMB_CUTSCENES,
     index: 8,
     displayName: 'Saw Princess Ralsei cutscene a second time',
@@ -372,7 +83,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you saw the Princess Ralsei cutscene a second time. (under 23.3 seconds)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CASTLE_CLIMB_CUTSCENE9]: {
+  CASTLE_CLIMB_CUTSCENE9: {
     parent: FLAGS.CASTLE_CLIMB_CUTSCENES,
     index: 7,
     displayName: 'Saw Rouxls & Mizzle cutscene a second time',
@@ -380,7 +91,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you saw the Rouxls & Mizzle cutscene a second time. (over 5 minutes)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.NEWDASH_LEAFPILE0]: {
+  NEWDASH_LEAFPILE0: {
     parent: FLAGS.DASH_LEAFPILE_FLAGS,
     index: 0,
     displayName: 'Destroyed third middle leaf pile',
@@ -388,7 +99,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the third leaf pile in the middle section of the second dash room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.NEWDASH_LEAFPILE1]: {
+  NEWDASH_LEAFPILE1: {
     parent: FLAGS.DASH_LEAFPILE_FLAGS,
     index: 1,
     displayName: 'Destroyed first left leaf wall pile',
@@ -396,7 +107,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the first leaf pile of the left leaf wall in the bottom section of the second dash room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.NEWDASH_LEAFPILE2]: {
+  NEWDASH_LEAFPILE2: {
     parent: FLAGS.DASH_LEAFPILE_FLAGS,
     index: 2,
     displayName: 'Destroyed second left leaf wall pile',
@@ -404,7 +115,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the second leaf pile of the left leaf wall in the bottom section of the second dash room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.NEWDASH_LEAFPILE3]: {
+  NEWDASH_LEAFPILE3: {
     parent: FLAGS.DASH_LEAFPILE_FLAGS,
     index: 3,
     displayName: 'Destroyed third left leaf wall pile',
@@ -412,7 +123,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the third leaf pile of the left leaf wall in the bottom section of the second dash room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.NEWDASH_LEAFPILE4]: {
+  NEWDASH_LEAFPILE4: {
     parent: FLAGS.DASH_LEAFPILE_FLAGS,
     index: 4,
     displayName: 'Destroyed fourth left leaf wall pile',
@@ -420,7 +131,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the fourth leaf pile of the left leaf wall in the bottom section of the second dash room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.NEWDASH_LEAFPILE5]: {
+  NEWDASH_LEAFPILE5: {
     parent: FLAGS.DASH_LEAFPILE_FLAGS,
     index: 5,
     displayName: 'Destroyed bottom left leaf pile',
@@ -428,7 +139,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the left leaf pile inbetween the leaf walls in the bottom section of the second dash room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.NEWDASH_LEAFPILE6]: {
+  NEWDASH_LEAFPILE6: {
     parent: FLAGS.DASH_LEAFPILE_FLAGS,
     index: 6,
     displayName: 'Destroyed bottom right leaf pile',
@@ -436,7 +147,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the right leaf pile inbetween the leaf walls in the bottom section of the second dash room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.NEWDASH_LEAFPILE7]: {
+  NEWDASH_LEAFPILE7: {
     parent: FLAGS.DASH_LEAFPILE_FLAGS,
     index: 7,
     displayName: 'Destroyed second right leaf wall pile',
@@ -444,7 +155,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the second leaf pile of the right leaf wall in the bottom section of the second dash room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.NEWDASH_LEAFPILE8]: {
+  NEWDASH_LEAFPILE8: {
     parent: FLAGS.DASH_LEAFPILE_FLAGS,
     index: 8,
     displayName: 'Destroyed first right leaf wall pile',
@@ -452,7 +163,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the first leaf pile of the right leaf wall in the bottom section of the second dash room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.NEWDASH_LEAFPILE9]: {
+  NEWDASH_LEAFPILE9: {
     parent: FLAGS.DASH_LEAFPILE_FLAGS,
     index: 9,
     displayName: 'Destroyed third right leaf wall pile',
@@ -460,7 +171,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the third leaf pile of the right leaf wall in the bottom section of the second dash room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.NEWDASH_LEAFPILE10]: {
+  NEWDASH_LEAFPILE10: {
     parent: FLAGS.DASH_LEAFPILE_FLAGS,
     index: 10,
     displayName: 'Destroyed fourth right leaf wall pile',
@@ -468,7 +179,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the fourth leaf pile of the right leaf wall in the bottom section of the second dash room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.FIRSTDASH_LEAFPILES]: {
+  FIRSTDASH_LEAFPILES: {
     parent: FLAGS.DASH_LEAFPILE_FLAGS,
     index: 11,
     displayName: 'Destroyed leaf piles',
@@ -476,7 +187,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the leaf piles at the end of the first dash room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.NEWDASH_LEAFPILE12]: {
+  NEWDASH_LEAFPILE12: {
     parent: FLAGS.DASH_LEAFPILE_FLAGS,
     index: 12,
     displayName: 'Destroyed first middle leaf pile',
@@ -484,7 +195,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the first leaf pile in the middle section of the second dash room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.NEWDASH_LEAFPILE13]: {
+  NEWDASH_LEAFPILE13: {
     parent: FLAGS.DASH_LEAFPILE_FLAGS,
     index: 13,
     displayName: 'Destroyed second middle leaf pile',
@@ -492,7 +203,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the second leaf pile in the middle section of the second dash room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.NEWDASH_DESTOYEDTEA]: {
+  NEWDASH_DESTOYEDTEA: {
     parent: FLAGS.DASH_LEAFPILE_FLAGS,
     index: 15,
     displayName: 'Crashed tea party',
@@ -500,7 +211,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you crashed the Floradinn tea party in the second dash room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.NEWDASH_LEAFPILE16]: {
+  NEWDASH_LEAFPILE16: {
     parent: FLAGS.DASH_LEAFPILE_FLAGS,
     index: 16,
     displayName: 'Destroyed fourth middle leaf pile',
@@ -508,7 +219,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the fourth leaf pile in the middle section of the second dash room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.IDEAL_DINER_TALKED_TO_YELLOW]: {
+  IDEAL_DINER_TALKED_TO_YELLOW: {
     parent: FLAGS.IDEAL_DINER_FLAGS,
     index: 0,
     width: 2,
@@ -516,7 +227,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Whether you talked to Yellow in the Ideal Diner.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.IDEAL_DINER_CHECKED_REGISTER]: {
+  IDEAL_DINER_CHECKED_REGISTER: {
     parent: FLAGS.IDEAL_DINER_FLAGS,
     index: 1,
     width: 2,
@@ -525,28 +236,28 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you checked the cash register in the Ideal Diner and took 1 Flowery Dollar from it.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.PLATFORMING_INTRO_JUMP_TUTORIAL]: {
+  PLATFORMING_INTRO_JUMP_TUTORIAL: {
     parent: FLAGS.PLATFORMING_INTRO_FLAGS,
     index: 1,
     displayName: 'Jump tutorial',
     description: 'Whether you completed the jump tutorial.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.PLATFORMING_INTRO_ACT_TUTORIAL]: {
+  PLATFORMING_INTRO_ACT_TUTORIAL: {
     parent: FLAGS.PLATFORMING_INTRO_FLAGS,
     index: 2,
     displayName: 'Act tutorial',
     description: 'Whether you completed the act tutorial.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.PLATFORMING_INTRO_TREE_SMASHED]: {
+  PLATFORMING_INTRO_TREE_SMASHED: {
     parent: FLAGS.PLATFORMING_INTRO_FLAGS,
     index: 3,
     displayName: 'Tree knocked over',
     description: 'Whether you used Rude Buster on the tree, knocking it over.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.PLATFORMING_INTRO_TREE_FRUIT1_SMASHED]: {
+  PLATFORMING_INTRO_TREE_FRUIT1_SMASHED: {
     parent: FLAGS.PLATFORMING_INTRO_FLAGS,
     index: 4,
     displayName: 'Fruit 1 destroyed',
@@ -554,7 +265,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you used Rude Buster on the first tree fruit, destroying it.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.PLATFORMING_INTRO_TREE_FRUIT2_SMASHED]: {
+  PLATFORMING_INTRO_TREE_FRUIT2_SMASHED: {
     parent: FLAGS.PLATFORMING_INTRO_FLAGS,
     index: 5,
     displayName: 'Fruit 2 destroyed',
@@ -562,7 +273,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you used Rude Buster on the second tree fruit, destroying it.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.PLATFORMING_INTRO_TREE_FRUIT3_SMASHED]: {
+  PLATFORMING_INTRO_TREE_FRUIT3_SMASHED: {
     parent: FLAGS.PLATFORMING_INTRO_FLAGS,
     index: 6,
     displayName: 'Fruit 3 destroyed',
@@ -570,7 +281,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you used Rude Buster on the third tree fruit, destroying it.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.PLATFORMING_INTRO_BRAMBLES_ACTED]: {
+  PLATFORMING_INTRO_BRAMBLES_ACTED: {
     parent: FLAGS.PLATFORMING_INTRO_FLAGS,
     index: 7,
     displayName: 'Acted on vines',
@@ -578,7 +289,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you tried acting on the vines, prompting Susie to tell you to use your sword.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.PLATFORMING_INTRO_ATTACK_WALL]: {
+  PLATFORMING_INTRO_ATTACK_WALL: {
     parent: FLAGS.PLATFORMING_INTRO_FLAGS,
     index: 8,
     displayName: 'Attacked wall',
@@ -586,7 +297,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you attacked a wall, prompting Ralsei to tell you how to jump.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.PLATFORMING_INTRO_PINKBELL]: {
+  PLATFORMING_INTRO_PINKBELL: {
     parent: FLAGS.PLATFORMING_INTRO_FLAGS,
     index: 9,
     displayName: 'Got Pink Coin',
@@ -594,7 +305,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the Pink Coin bell in the platforming tutorial room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.PLATFORMING_INTRO_BELL_AQUAPLATFORMING1]: {
+  PLATFORMING_INTRO_BELL_AQUAPLATFORMING1: {
     parent: FLAGS.PLATFORMING_INTRO_FLAGS,
     index: 10,
     displayName: 'Destroyed tutorial bell',
@@ -602,7 +313,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the bell in the platforming tutorial room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.PLATFORMING_INTRO_BELL_AQUAPLATFORMING2]: {
+  PLATFORMING_INTRO_BELL_AQUAPLATFORMING2: {
     parent: FLAGS.PLATFORMING_INTRO_FLAGS,
     index: 11,
     displayName: 'Destroyed long tutorial bell',
@@ -610,7 +321,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the long bell in the platforming tutorial room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.PLATFORMING_INTRO_BELL_AQUAHOLE]: {
+  PLATFORMING_INTRO_BELL_AQUAHOLE: {
     parent: FLAGS.PLATFORMING_INTRO_FLAGS,
     index: 12,
     displayName: 'Destroyed pre-Shrine bell',
@@ -618,7 +329,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the bell in the room before the Shrine.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.PLATFORMING_INTRO_BELL_AQUAHOLE_LEFT1]: {
+  PLATFORMING_INTRO_BELL_AQUAHOLE_LEFT1: {
     parent: FLAGS.PLATFORMING_INTRO_FLAGS,
     index: 13,
     displayName: 'Destroyed first Shrine door bell',
@@ -626,7 +337,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the first bell in the Shrine fast travel door room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.PLATFORMING_INTRO_BELL_AQUAHOLE_LEFT2]: {
+  PLATFORMING_INTRO_BELL_AQUAHOLE_LEFT2: {
     parent: FLAGS.PLATFORMING_INTRO_FLAGS,
     index: 14,
     displayName: 'Destroyed second Shrine door bell',
@@ -634,7 +345,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the second bell in the Shrine fast travel door room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.PLATFORMING_INTRO_BELL_AQUAHOLE_LEFT3]: {
+  PLATFORMING_INTRO_BELL_AQUAHOLE_LEFT3: {
     parent: FLAGS.PLATFORMING_INTRO_FLAGS,
     index: 15,
     displayName: 'Destroyed third Shrine door bell',
@@ -642,7 +353,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the third bell in the Shrine fast travel door room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN1]: {
+  GARDEN_AQUADASH_PLAT_COIN1: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS1,
     index: 13,
     displayName: 'Collected 1st coin',
@@ -650,7 +361,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 1st coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN2]: {
+  GARDEN_AQUADASH_PLAT_COIN2: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS1,
     index: 12,
     displayName: 'Collected 2nd coin',
@@ -658,7 +369,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 2nd coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN3]: {
+  GARDEN_AQUADASH_PLAT_COIN3: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS1,
     index: 11,
     displayName: 'Collected 3rd coin',
@@ -666,7 +377,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 3rd coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN4]: {
+  GARDEN_AQUADASH_PLAT_COIN4: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS1,
     index: 10,
     displayName: 'Collected 4th coin',
@@ -674,7 +385,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 4th coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN5]: {
+  GARDEN_AQUADASH_PLAT_COIN5: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS1,
     index: 9,
     displayName: 'Collected 5th coin',
@@ -682,7 +393,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 5th coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN6]: {
+  GARDEN_AQUADASH_PLAT_COIN6: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS1,
     index: 8,
     displayName: 'Collected 6th coin',
@@ -690,7 +401,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 6th coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN7]: {
+  GARDEN_AQUADASH_PLAT_COIN7: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS1,
     index: 7,
     displayName: 'Collected 7th coin',
@@ -698,7 +409,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 7th coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN8]: {
+  GARDEN_AQUADASH_PLAT_COIN8: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS1,
     index: 6,
     displayName: 'Collected 8th coin',
@@ -706,7 +417,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 8th coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN9]: {
+  GARDEN_AQUADASH_PLAT_COIN9: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS1,
     index: 5,
     displayName: 'Collected 9th coin',
@@ -714,7 +425,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 9th coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN10]: {
+  GARDEN_AQUADASH_PLAT_COIN10: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS1,
     index: 4,
     displayName: 'Collected 10th coin',
@@ -722,7 +433,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 10th coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN11]: {
+  GARDEN_AQUADASH_PLAT_COIN11: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS1,
     index: 3,
     displayName: 'Collected 11th coin',
@@ -730,7 +441,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 11th coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN12]: {
+  GARDEN_AQUADASH_PLAT_COIN12: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS1,
     index: 2,
     displayName: 'Collected 12th coin',
@@ -738,7 +449,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 12th coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN13]: {
+  GARDEN_AQUADASH_PLAT_COIN13: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS1,
     index: 1,
     displayName: 'Collected 13th coin',
@@ -746,7 +457,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 13th coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN14]: {
+  GARDEN_AQUADASH_PLAT_COIN14: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
     index: 17,
     displayName: 'Collected 14th coin',
@@ -754,7 +465,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 14th coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN15]: {
+  GARDEN_AQUADASH_PLAT_COIN15: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
     index: 16,
     displayName: 'Collected 15th coin',
@@ -762,7 +473,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 15th coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN16]: {
+  GARDEN_AQUADASH_PLAT_COIN16: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
     index: 15,
     displayName: 'Collected 16th coin',
@@ -770,7 +481,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 16th coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN17]: {
+  GARDEN_AQUADASH_PLAT_COIN17: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
     index: 14,
     displayName: 'Collected 17th coin',
@@ -778,7 +489,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 17th coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN18]: {
+  GARDEN_AQUADASH_PLAT_COIN18: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
     index: 13,
     displayName: 'Collected 18th coin',
@@ -786,7 +497,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 18th coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN19]: {
+  GARDEN_AQUADASH_PLAT_COIN19: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
     index: 12,
     displayName: 'Collected 19th coin',
@@ -794,7 +505,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 19th coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN20]: {
+  GARDEN_AQUADASH_PLAT_COIN20: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
     index: 11,
     displayName: 'Collected 20th coin',
@@ -802,7 +513,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 20th coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN21]: {
+  GARDEN_AQUADASH_PLAT_COIN21: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
     index: 10,
     displayName: 'Collected 21st coin',
@@ -810,7 +521,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 21st coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN22]: {
+  GARDEN_AQUADASH_PLAT_COIN22: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
     index: 9,
     displayName: 'Collected 22nd coin',
@@ -818,7 +529,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 22nd coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN23]: {
+  GARDEN_AQUADASH_PLAT_COIN23: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
     index: 8,
     displayName: 'Collected 23rd coin',
@@ -826,7 +537,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 23rd coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN24]: {
+  GARDEN_AQUADASH_PLAT_COIN24: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
     index: 7,
     displayName: 'Collected 24th coin',
@@ -834,7 +545,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 24th coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN25]: {
+  GARDEN_AQUADASH_PLAT_COIN25: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
     index: 6,
     displayName: 'Collected 25th coin',
@@ -842,7 +553,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 25th coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN26]: {
+  GARDEN_AQUADASH_PLAT_COIN26: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
     index: 5,
     displayName: 'Collected 26th coin',
@@ -850,7 +561,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 26th coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN27]: {
+  GARDEN_AQUADASH_PLAT_COIN27: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
     index: 4,
     displayName: 'Collected 27th coin',
@@ -858,7 +569,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 27th coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN28]: {
+  GARDEN_AQUADASH_PLAT_COIN28: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
     index: 3,
     displayName: 'Collected 28th coin',
@@ -866,7 +577,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 28th coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_COIN29]: {
+  GARDEN_AQUADASH_PLAT_COIN29: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
     index: 2,
     displayName: 'Collected 29th coin',
@@ -874,7 +585,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the 29th coin in the dash section of End of Garden. (Ordered right to left)',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_AQUA_BULLETPATTERNS]: {
+  GARDEN_AQUADASH_PLAT_AQUA_BULLETPATTERNS: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
     index: 1,
     displayName: "Defeated Aqua's bullet patterns",
@@ -882,21 +593,21 @@ export const FLAG_BITFIELDS_META: Record<
       "Whether you defeated Aqua's bullet patterns in End of Garden.",
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUADASH_PLAT_PINKCOIN]: {
+  GARDEN_AQUADASH_PLAT_PINKCOIN: {
     parent: FLAGS.GARDEN_AQUADASH_PLAT_COINS2,
     index: 0,
     displayName: 'Got Pink Coin',
     description: 'Whether you destroyed the Pink Coin bell in End of Garden.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.SCISSORS_PUZZLE_SHAPED_BUSH_CUT]: {
+  SCISSORS_PUZZLE_SHAPED_BUSH_CUT: {
     parent: FLAGS.SCISSORS_PUZZLE_FLAGS,
     index: 8,
     displayName: 'Cut the shaped bush',
     description: 'Whether the scissors puzzle shaped bush was cut.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.SCISSORS_PUZZLE_FLOWERY_FACE_PATH_CUT]: {
+  SCISSORS_PUZZLE_FLOWERY_FACE_PATH_CUT: {
     parent: FLAGS.SCISSORS_PUZZLE_FLAGS,
     index: 10,
     displayName: 'Cut the Flowery-face path bush',
@@ -904,14 +615,14 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether the scissors puzzle bush leading to the Flowery face room was cut.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.RALSEI_HOLD_Z_HINT]: {
+  RALSEI_HOLD_Z_HINT: {
     parent: FLAGS.SCISSORS_PUZZLE_FLAGS,
     index: 11,
     displayName: 'Ralsei hold-Z hint',
     description: 'Whether Ralsei told Kris that they can hold Z.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.HOPSCHEF_PROGRESS]: {
+  HOPSCHEF_PROGRESS: {
     parent: FLAGS.HOPSCHEF_PROGRESS_FLAG,
     index: 0,
     width: 2,
@@ -926,7 +637,7 @@ export const FLAG_BITFIELDS_META: Record<
       },
     },
   },
-  [FLAG_BITFIELDS.HOPSCHEF_REWARDS]: {
+  HOPSCHEF_REWARDS: {
     parent: FLAGS.HOPSCHEF_PROGRESS_FLAG,
     index: 1,
     width: 3,
@@ -943,7 +654,7 @@ export const FLAG_BITFIELDS_META: Record<
       },
     },
   },
-  [FLAG_BITFIELDS.FERROLL_SMASHED_PARTY]: {
+  FERROLL_SMASHED_PARTY: {
     parent: FLAGS.FERROLL_SMASHED_FLAGS,
     index: 0,
     width: 4,
@@ -951,7 +662,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Whether Ferroll smashed your party members.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.FERROLL_SMASHED_MONEY]: {
+  FERROLL_SMASHED_MONEY: {
     parent: FLAGS.FERROLL_SMASHED_FLAGS,
     index: 1,
     width: 4,
@@ -959,14 +670,14 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Whether Ferroll smashed your money.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFFS_CUTDOWN_TUTORIAL_BULLETPATTERN]: {
+  CLIFFS_CUTDOWN_TUTORIAL_BULLETPATTERN: {
     parent: FLAGS.CLIFFS_CUTDOWN_TUTORIAL_FLAGS,
     index: 10,
     displayName: "Defeated Seth's bullet pattern",
     description: "Whether you defeated Seth's bullet pattern.",
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFFS_CUTDOWN_TUTORIAL_GRASSRIGHT2]: {
+  CLIFFS_CUTDOWN_TUTORIAL_GRASSRIGHT2: {
     parent: FLAGS.CLIFFS_CUTDOWN_TUTORIAL_FLAGS,
     index: 11,
     displayName: 'Cut second right grass',
@@ -974,7 +685,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you cut the second piece of grass on the right side of the room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFFS_CUTDOWN_TUTORIAL_GRASSRIGHT1]: {
+  CLIFFS_CUTDOWN_TUTORIAL_GRASSRIGHT1: {
     parent: FLAGS.CLIFFS_CUTDOWN_TUTORIAL_FLAGS,
     index: 12,
     displayName: 'Cut first right grass',
@@ -982,7 +693,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you cut the first piece of grass on the right side of the room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFFS_CUTDOWN_TUTORIAL_GRASSLEFT1]: {
+  CLIFFS_CUTDOWN_TUTORIAL_GRASSLEFT1: {
     parent: FLAGS.CLIFFS_CUTDOWN_TUTORIAL_FLAGS,
     index: 13,
     displayName: 'Cut first left grass',
@@ -990,7 +701,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you cut the first piece of grass on the left side of the room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFFS_CUTDOWN_TUTORIAL_GRASSLEFT2]: {
+  CLIFFS_CUTDOWN_TUTORIAL_GRASSLEFT2: {
     parent: FLAGS.CLIFFS_CUTDOWN_TUTORIAL_FLAGS,
     index: 14,
     displayName: 'Cut second left grass',
@@ -998,7 +709,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you cut the second piece of grass on the left side of the room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFFS_CUTDOWN_TUTORIAL_GRASSLEFT3]: {
+  CLIFFS_CUTDOWN_TUTORIAL_GRASSLEFT3: {
     parent: FLAGS.CLIFFS_CUTDOWN_TUTORIAL_FLAGS,
     index: 15,
     displayName: 'Cut third left grass',
@@ -1006,7 +717,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you cut the third piece of grass on the left side of the room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFFS_CUTDOWN_TUTORIAL_PINKBELL]: {
+  CLIFFS_CUTDOWN_TUTORIAL_PINKBELL: {
     parent: FLAGS.CLIFFS_CUTDOWN_TUTORIAL_FLAGS,
     index: 16,
     displayName: 'Got Pink Coin',
@@ -1014,7 +725,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the Pink Coin bell in the Cliffs First Climb platforming room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFFS_BONUSCOMBAT_PINKBELL]: {
+  CLIFFS_BONUSCOMBAT_PINKBELL: {
     parent: FLAGS.CLIFFS_CUTDOWN_TUTORIAL_FLAGS,
     index: 17,
     displayName: 'Got Pink Coin',
@@ -1022,7 +733,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the Pink Coin bell in the Cliffs Windstruggler room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFFS_BONUSCOMBAT_BULLETPATTERN]: {
+  CLIFFS_BONUSCOMBAT_BULLETPATTERN: {
     parent: FLAGS.CLIFFS_CUTDOWN_TUTORIAL_FLAGS,
     index: 18,
     displayName: "Defeated Seth's bullet pattern",
@@ -1030,7 +741,7 @@ export const FLAG_BITFIELDS_META: Record<
       "Whether you defeated Seth's bullet pattern in the Cliffs Windstruggler room.",
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.ASGORE_DOCUMENT_TOTALREAD]: {
+  ASGORE_DOCUMENT_TOTALREAD: {
     parent: FLAGS.ASGORE_DOCUMENT_PROGRESS,
     index: 0,
     width: 2,
@@ -1040,7 +751,7 @@ export const FLAG_BITFIELDS_META: Record<
     valueType: 'number',
     valueRules: { min: 0 },
   },
-  [FLAG_BITFIELDS.ASGORE_DOCUMENT_LEFTFIRST]: {
+  ASGORE_DOCUMENT_LEFTFIRST: {
     parent: FLAGS.ASGORE_DOCUMENT_PROGRESS,
     index: 2,
     width: 1,
@@ -1049,7 +760,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you read the documents on the left side of Flower Castle before the documents on the right side.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.ASGORE_DOCUMENT_RIGHTFIRST]: {
+  ASGORE_DOCUMENT_RIGHTFIRST: {
     parent: FLAGS.ASGORE_DOCUMENT_PROGRESS,
     index: 3,
     width: 1,
@@ -1058,49 +769,49 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you read the documents on the right side of Flower Castle before the documents on the left side.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.TERAKOTA_PUZZLE_STATUE1]: {
+  TERAKOTA_PUZZLE_STATUE1: {
     parent: FLAGS.TERAKOTA_PUZZLE_FLAGS,
     index: 0,
     displayName: 'Pushed statue 1',
     description: 'Whether you pushed the first Terakota statue off.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.TERAKOTA_PUZZLE_STATUE2]: {
+  TERAKOTA_PUZZLE_STATUE2: {
     parent: FLAGS.TERAKOTA_PUZZLE_FLAGS,
     index: 2,
     displayName: 'Pushed statue 2',
     description: 'Whether you pushed the second Terakota statue off.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.TERAKOTA_PUZZLE_STATUE3]: {
+  TERAKOTA_PUZZLE_STATUE3: {
     parent: FLAGS.TERAKOTA_PUZZLE_FLAGS,
     index: 6,
     displayName: 'Pushed statue 3',
     description: 'Whether you pushed the third Terakota statue off.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.TERAKOTA_PUZZLE_STATUE4]: {
+  TERAKOTA_PUZZLE_STATUE4: {
     parent: FLAGS.TERAKOTA_PUZZLE_FLAGS,
     index: 3,
     displayName: 'Pushed statue 4',
     description: 'Whether you pushed the fourth Terakota statue off.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.TERAKOTA_PUZZLE_STATUE5]: {
+  TERAKOTA_PUZZLE_STATUE5: {
     parent: FLAGS.TERAKOTA_PUZZLE_FLAGS,
     index: 8,
     displayName: 'Pushed statue 5',
     description: 'Whether you pushed the fifth Terakota statue off.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.TERAKOTA_PUZZLE_SOLVED]: {
+  TERAKOTA_PUZZLE_SOLVED: {
     parent: FLAGS.TERAKOTA_PUZZLE_FLAGS,
     index: 10,
     displayName: 'Puzzle solved',
     description: 'Whether you solved the Terakota statue puzzle.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.DEFEATED_FIRST_ORANGE_BP]: {
+  DEFEATED_FIRST_ORANGE_BP: {
     parent: FLAGS.DEFEATED_FIRST_ORANGE_BP_FLAG,
     index: 10,
     width: 1,
@@ -1108,7 +819,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: "Whether you defeated Orange's first bullet pattern.",
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.FOXHUNT_FIRST_TERAKOTA]: {
+  FOXHUNT_FIRST_TERAKOTA: {
     parent: FLAGS.FOXHUNT_FLAGS,
     index: 0,
     width: 1,
@@ -1117,7 +828,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you pushed the Terakota statue at the entrance of the Terakota room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.FOXHUNT_FOX1]: {
+  FOXHUNT_FOX1: {
     parent: FLAGS.FOXHUNT_FLAGS,
     index: 1,
     width: 1,
@@ -1126,7 +837,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you got the fox running between Terakota statues for the fox hunt.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.FOXHUNT_FOX2]: {
+  FOXHUNT_FOX2: {
     parent: FLAGS.FOXHUNT_FLAGS,
     index: 2,
     width: 1,
@@ -1135,7 +846,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you got the fox hidden between paw bullets for the fox hunt.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.FOXHUNT_FOX3]: {
+  FOXHUNT_FOX3: {
     parent: FLAGS.FOXHUNT_FLAGS,
     index: 3,
     width: 1,
@@ -1143,7 +854,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Whether you got the fox in the chaos room for the fox hunt.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.FOXHUNT_FOX4]: {
+  FOXHUNT_FOX4: {
     parent: FLAGS.FOXHUNT_FLAGS,
     index: 4,
     width: 1,
@@ -1152,7 +863,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you got the fox hidden under a Terakota statue for the fox hunt.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.FOXHUNT_FOX5]: {
+  FOXHUNT_FOX5: {
     parent: FLAGS.FOXHUNT_FLAGS,
     index: 5,
     width: 1,
@@ -1160,7 +871,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Whether you got fox in the sock room for the fox hunt.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.FOXHUNT_AQUA]: {
+  FOXHUNT_AQUA: {
     parent: FLAGS.FOXHUNT_FLAGS,
     index: 7,
     width: 1,
@@ -1168,7 +879,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Whether you beat the Netskie that disguised itself as Aqua.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.FOXHUNT_TERAKOTA_PUSHED]: {
+  FOXHUNT_TERAKOTA_PUSHED: {
     parent: FLAGS.FOXHUNT_FLAGS,
     index: 7,
     width: 2,
@@ -1185,7 +896,7 @@ export const FLAG_BITFIELDS_META: Record<
       },
     },
   },
-  [FLAG_BITFIELDS.FOXHUNT_OPENDOOR]: {
+  FOXHUNT_OPENDOOR: {
     parent: FLAGS.FOXHUNT_FLAGS,
     index: 8,
     width: 1,
@@ -1193,7 +904,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Whether you opened the door that requires five foxes.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.FOXHUNT_TERASKIP]: {
+  FOXHUNT_TERASKIP: {
     parent: FLAGS.FOXHUNT_FLAGS,
     index: 9,
     width: 1,
@@ -1202,7 +913,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you fought the Terakota in the Terakota statues room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.FOXHUNT_CHAOS_AQUA]: {
+  FOXHUNT_CHAOS_AQUA: {
     parent: FLAGS.FOXHUNT_FLAGS,
     index: 10,
     width: 1,
@@ -1210,7 +921,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Whether you picked up Aqua in the chaos room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.FOXHUNT_CHAOS_SETH]: {
+  FOXHUNT_CHAOS_SETH: {
     parent: FLAGS.FOXHUNT_FLAGS,
     index: 11,
     width: 1,
@@ -1218,7 +929,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Whether you picked up Seth in the chaos room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.FOXHUNT_CHAOS_WATER]: {
+  FOXHUNT_CHAOS_WATER: {
     parent: FLAGS.FOXHUNT_FLAGS,
     index: 12,
     width: 1,
@@ -1226,7 +937,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Whether you picked up the bottle of water in the chaos room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.FOXHUNT_CHAOS_DOG]: {
+  FOXHUNT_CHAOS_DOG: {
     parent: FLAGS.FOXHUNT_FLAGS,
     index: 13,
     width: 1,
@@ -1234,7 +945,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Whether you picked up the Annoying Dog in the chaos room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.PINK_DOOR_SHORTCUT_UNLOCKED]: {
+  PINK_DOOR_SHORTCUT_UNLOCKED: {
     parent: FLAGS.PINK_DOOR_FLAGS,
     index: 0,
     width: 1,
@@ -1243,7 +954,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether the shortcut leading from the start of Top of Castle to the Pink Door has been unlocked.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.PINK_DOOR_SHORTCUT_CUTSCENE]: {
+  PINK_DOOR_SHORTCUT_CUTSCENE: {
     parent: FLAGS.PINK_DOOR_FLAGS,
     index: 1,
     width: 1,
@@ -1252,7 +963,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you have watched the cutscene of the shortcut to the Pink Door being created.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.PINK_DOOR_INTERACTED_NO_KEY]: {
+  PINK_DOOR_INTERACTED_NO_KEY: {
     parent: FLAGS.PINK_DOOR_FLAGS,
     index: 2,
     width: 1,
@@ -1260,7 +971,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Whether you interacted the Pink Door without having the key.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.PINK_DOOR_PINKCOIN]: {
+  PINK_DOOR_PINKCOIN: {
     parent: FLAGS.PINK_DOOR_FLAGS,
     index: 10,
     width: 1,
@@ -1268,7 +979,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Whether you got the Pink Coin in the Pink Door room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.UNLOCKED_SETH_BREAKS_PRECAFE]: {
+  UNLOCKED_SETH_BREAKS_PRECAFE: {
     parent: FLAGS.UNLOCKED_BREAK_CHARACTERS_PRECAFE,
     index: 0,
     width: 2,
@@ -1284,7 +995,7 @@ export const FLAG_BITFIELDS_META: Record<
       },
     },
   },
-  [FLAG_BITFIELDS.UNLOCKED_YELLOW_BREAKS_PRECAFE]: {
+  UNLOCKED_YELLOW_BREAKS_PRECAFE: {
     parent: FLAGS.UNLOCKED_BREAK_CHARACTERS_PRECAFE,
     index: 1,
     width: 2,
@@ -1300,7 +1011,7 @@ export const FLAG_BITFIELDS_META: Record<
       },
     },
   },
-  [FLAG_BITFIELDS.UNLOCKED_GREEN_BREAKS_PRECAFE]: {
+  UNLOCKED_GREEN_BREAKS_PRECAFE: {
     parent: FLAGS.UNLOCKED_BREAK_CHARACTERS_PRECAFE,
     index: 2,
     width: 2,
@@ -1316,7 +1027,7 @@ export const FLAG_BITFIELDS_META: Record<
       },
     },
   },
-  [FLAG_BITFIELDS.UNLOCKED_AQUA_BREAKS_PRECAFE]: {
+  UNLOCKED_AQUA_BREAKS_PRECAFE: {
     parent: FLAGS.UNLOCKED_BREAK_CHARACTERS_PRECAFE,
     index: 3,
     width: 2,
@@ -1331,7 +1042,7 @@ export const FLAG_BITFIELDS_META: Record<
       },
     },
   },
-  [FLAG_BITFIELDS.UNLOCKED_BLUE_BREAKS_PRECAFE]: {
+  UNLOCKED_BLUE_BREAKS_PRECAFE: {
     parent: FLAGS.UNLOCKED_BREAK_CHARACTERS_PRECAFE,
     index: 4,
     width: 2,
@@ -1347,7 +1058,7 @@ export const FLAG_BITFIELDS_META: Record<
       },
     },
   },
-  [FLAG_BITFIELDS.UNLOCKED_ORANGE_BREAKS_PRECAFE]: {
+  UNLOCKED_ORANGE_BREAKS_PRECAFE: {
     parent: FLAGS.UNLOCKED_BREAK_CHARACTERS_PRECAFE,
     index: 5,
     width: 2,
@@ -1363,7 +1074,7 @@ export const FLAG_BITFIELDS_META: Record<
       },
     },
   },
-  [FLAG_BITFIELDS.UNLOCKED_PINK_BREAKS_PRECAFE]: {
+  UNLOCKED_PINK_BREAKS_PRECAFE: {
     parent: FLAGS.UNLOCKED_BREAK_CHARACTERS_PRECAFE,
     index: 6,
     width: 2,
@@ -1378,7 +1089,7 @@ export const FLAG_BITFIELDS_META: Record<
       },
     },
   },
-  [FLAG_BITFIELDS.BREAKBOUGHT_AQUA_KRIS]: {
+  BREAKBOUGHT_AQUA_KRIS: {
     parent: FLAGS.BOUGHT_BREAKS1,
     index: 0,
     width: 1,
@@ -1386,7 +1097,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Bought status of the Aqua & Kris break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKBOUGHT_AQUA_SETH]: {
+  BREAKBOUGHT_AQUA_SETH: {
     parent: FLAGS.BOUGHT_BREAKS1,
     index: 1,
     width: 1,
@@ -1394,7 +1105,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Bought status of the Aqua & Seth break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKBOUGHT_AQUA_YELLOW]: {
+  BREAKBOUGHT_AQUA_YELLOW: {
     parent: FLAGS.BOUGHT_BREAKS1,
     index: 2,
     width: 1,
@@ -1402,7 +1113,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Bought status of the Aqua & Yellow break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKBOUGHT_AQUA_GREEN]: {
+  BREAKBOUGHT_AQUA_GREEN: {
     parent: FLAGS.BOUGHT_BREAKS1,
     index: 4,
     width: 1,
@@ -1410,7 +1121,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Bought status of the Aqua & Green break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKBOUGHT_AQUA_BLUE]: {
+  BREAKBOUGHT_AQUA_BLUE: {
     parent: FLAGS.BOUGHT_BREAKS1,
     index: 5,
     width: 1,
@@ -1418,7 +1129,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Bought status of the Aqua & Blue break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKBOUGHT_AQUA_ORANGE]: {
+  BREAKBOUGHT_AQUA_ORANGE: {
     parent: FLAGS.BOUGHT_BREAKS1,
     index: 6,
     width: 1,
@@ -1426,7 +1137,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Bought status of the Aqua & Orange break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKBOUGHT_SETH_RALSEI]: {
+  BREAKBOUGHT_SETH_RALSEI: {
     parent: FLAGS.BOUGHT_BREAKS1,
     index: 7,
     width: 1,
@@ -1434,7 +1145,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Bought status of the Seth & Ralsei break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKBOUGHT_SETH_SUSIE]: {
+  BREAKBOUGHT_SETH_SUSIE: {
     parent: FLAGS.BOUGHT_BREAKS1,
     index: 8,
     width: 1,
@@ -1442,7 +1153,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Bought status of the Seth & Susie break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKBOUGHT_SETH_YELLOW]: {
+  BREAKBOUGHT_SETH_YELLOW: {
     parent: FLAGS.BOUGHT_BREAKS1,
     index: 9,
     width: 1,
@@ -1450,7 +1161,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Bought status of the Seth & Yellow break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKBOUGHT_SETH_GREEN]: {
+  BREAKBOUGHT_SETH_GREEN: {
     parent: FLAGS.BOUGHT_BREAKS1,
     index: 10,
     width: 1,
@@ -1458,7 +1169,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Bought status of the Seth & Green break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKBOUGHT_SETH_BLUE]: {
+  BREAKBOUGHT_SETH_BLUE: {
     parent: FLAGS.BOUGHT_BREAKS1,
     index: 11,
     width: 1,
@@ -1466,7 +1177,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Bought status of the Seth & Blue break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKBOUGHT_SETH_ORANGE]: {
+  BREAKBOUGHT_SETH_ORANGE: {
     parent: FLAGS.BOUGHT_BREAKS1,
     index: 12,
     width: 1,
@@ -1474,7 +1185,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Bought status of the Seth & Orange break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKBOUGHT_YELLOW_RALSEI]: {
+  BREAKBOUGHT_YELLOW_RALSEI: {
     parent: FLAGS.BOUGHT_BREAKS1,
     index: 13,
     width: 1,
@@ -1482,7 +1193,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Bought status of the Yellow & Ralsei break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKBOUGHT_YELLOW_GREEN]: {
+  BREAKBOUGHT_YELLOW_GREEN: {
     parent: FLAGS.BOUGHT_BREAKS1,
     index: 14,
     width: 1,
@@ -1490,7 +1201,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Bought status of the Yellow & Green break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKBOUGHT_YELLOW_BLUE]: {
+  BREAKBOUGHT_YELLOW_BLUE: {
     parent: FLAGS.BOUGHT_BREAKS1,
     index: 15,
     width: 1,
@@ -1498,7 +1209,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Bought status of the Yellow & Blue break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKBOUGHT_YELLOW_ORANGE]: {
+  BREAKBOUGHT_YELLOW_ORANGE: {
     parent: FLAGS.BOUGHT_BREAKS2,
     index: 0,
     width: 1,
@@ -1506,7 +1217,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Bought status of the Yellow & Orange break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKBOUGHT_GREEN]: {
+  BREAKBOUGHT_GREEN: {
     parent: FLAGS.BOUGHT_BREAKS2,
     index: 1,
     width: 1,
@@ -1514,7 +1225,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Bought status of the Green break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKBOUGHT_GREEN_ORANGE]: {
+  BREAKBOUGHT_GREEN_ORANGE: {
     parent: FLAGS.BOUGHT_BREAKS2,
     index: 2,
     width: 1,
@@ -1522,7 +1233,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Bought status of the Green & Orange break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKBOUGHT_BLUE_SUSIE]: {
+  BREAKBOUGHT_BLUE_SUSIE: {
     parent: FLAGS.BOUGHT_BREAKS2,
     index: 3,
     width: 1,
@@ -1530,7 +1241,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Bought status of the Blue & Susie break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKBOUGHT_BLUE_ORANGE]: {
+  BREAKBOUGHT_BLUE_ORANGE: {
     parent: FLAGS.BOUGHT_BREAKS2,
     index: 4,
     width: 1,
@@ -1538,7 +1249,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Bought status of the Blue & Orange break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKBOUGHT_BLUE_ORANGE2]: {
+  BREAKBOUGHT_BLUE_ORANGE2: {
     parent: FLAGS.BOUGHT_BREAKS2,
     index: 5,
     width: 1,
@@ -1546,7 +1257,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Bought status of the Blue & Orange 2 break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKBOUGHT_BLUE_ORANGE3]: {
+  BREAKBOUGHT_BLUE_ORANGE3: {
     parent: FLAGS.BOUGHT_BREAKS2,
     index: 6,
     width: 1,
@@ -1554,7 +1265,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Bought status of the Blue & Orange 3 break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKBOUGHT_BLUE_GREEN]: {
+  BREAKBOUGHT_BLUE_GREEN: {
     parent: FLAGS.BOUGHT_BREAKS2,
     index: 7,
     width: 1,
@@ -1562,7 +1273,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Bought status of the Blue & Green break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKBOUGHT_ORANGE_SUSIE]: {
+  BREAKBOUGHT_ORANGE_SUSIE: {
     parent: FLAGS.BOUGHT_BREAKS2,
     index: 8,
     width: 1,
@@ -1570,7 +1281,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Bought status of the Orange & Susie break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKBOUGHT_ORANGE_RALSEI]: {
+  BREAKBOUGHT_ORANGE_RALSEI: {
     parent: FLAGS.BOUGHT_BREAKS2,
     index: 9,
     width: 1,
@@ -1578,7 +1289,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Bought status of the Orange & Ralsei break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKBOUGHT_PINK_ORANGE]: {
+  BREAKBOUGHT_PINK_ORANGE: {
     parent: FLAGS.BOUGHT_BREAKS2,
     index: 10,
     width: 1,
@@ -1586,7 +1297,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Bought status of the Pink & Orange break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKBOUGHT_PINK_KRIS]: {
+  BREAKBOUGHT_PINK_KRIS: {
     parent: FLAGS.BOUGHT_BREAKS2,
     index: 11,
     width: 1,
@@ -1594,7 +1305,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Bought status of the Pink & Kris break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKWATCHED_AQUA_KRIS]: {
+  BREAKWATCHED_AQUA_KRIS: {
     parent: FLAGS.WATCHED_BREAKS1,
     index: 0,
     width: 1,
@@ -1602,7 +1313,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Watched status of the Aqua & Kris break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKWATCHED_AQUA_SETH]: {
+  BREAKWATCHED_AQUA_SETH: {
     parent: FLAGS.WATCHED_BREAKS1,
     index: 1,
     width: 1,
@@ -1610,7 +1321,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Watched status of the Aqua & Seth break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKWATCHED_AQUA_YELLOW]: {
+  BREAKWATCHED_AQUA_YELLOW: {
     parent: FLAGS.WATCHED_BREAKS1,
     index: 2,
     width: 1,
@@ -1618,7 +1329,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Watched status of the Aqua & Yellow break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKWATCHED_AQUA_GREEN]: {
+  BREAKWATCHED_AQUA_GREEN: {
     parent: FLAGS.WATCHED_BREAKS1,
     index: 4,
     width: 1,
@@ -1626,7 +1337,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Watched status of the Aqua & Green break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKWATCHED_AQUA_BLUE]: {
+  BREAKWATCHED_AQUA_BLUE: {
     parent: FLAGS.WATCHED_BREAKS1,
     index: 5,
     width: 1,
@@ -1634,7 +1345,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Watched status of the Aqua & Blue break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKWATCHED_AQUA_ORANGE]: {
+  BREAKWATCHED_AQUA_ORANGE: {
     parent: FLAGS.WATCHED_BREAKS1,
     index: 6,
     width: 1,
@@ -1642,7 +1353,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Watched status of the Aqua & Orange break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKWATCHED_SETH_RALSEI]: {
+  BREAKWATCHED_SETH_RALSEI: {
     parent: FLAGS.WATCHED_BREAKS1,
     index: 7,
     width: 1,
@@ -1650,7 +1361,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Watched status of the Seth & Ralsei break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKWATCHED_SETH_SUSIE]: {
+  BREAKWATCHED_SETH_SUSIE: {
     parent: FLAGS.WATCHED_BREAKS1,
     index: 8,
     width: 1,
@@ -1658,7 +1369,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Watched status of the Seth & Susie break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKWATCHED_SETH_YELLOW]: {
+  BREAKWATCHED_SETH_YELLOW: {
     parent: FLAGS.WATCHED_BREAKS1,
     index: 9,
     width: 1,
@@ -1666,7 +1377,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Watched status of the Seth & Yellow break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKWATCHED_SETH_GREEN]: {
+  BREAKWATCHED_SETH_GREEN: {
     parent: FLAGS.WATCHED_BREAKS1,
     index: 10,
     width: 1,
@@ -1674,7 +1385,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Watched status of the Seth & Green break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKWATCHED_SETH_BLUE]: {
+  BREAKWATCHED_SETH_BLUE: {
     parent: FLAGS.WATCHED_BREAKS1,
     index: 11,
     width: 1,
@@ -1682,7 +1393,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Watched status of the Seth & Blue break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKWATCHED_SETH_ORANGE]: {
+  BREAKWATCHED_SETH_ORANGE: {
     parent: FLAGS.WATCHED_BREAKS1,
     index: 12,
     width: 1,
@@ -1690,7 +1401,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Watched status of the Seth & Orange break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKWATCHED_YELLOW_RALSEI]: {
+  BREAKWATCHED_YELLOW_RALSEI: {
     parent: FLAGS.WATCHED_BREAKS1,
     index: 13,
     width: 1,
@@ -1698,7 +1409,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Watched status of the Yellow & Ralsei break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKWATCHED_YELLOW_GREEN]: {
+  BREAKWATCHED_YELLOW_GREEN: {
     parent: FLAGS.WATCHED_BREAKS1,
     index: 14,
     width: 1,
@@ -1706,7 +1417,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Watched status of the Yellow & Green break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKWATCHED_YELLOW_BLUE]: {
+  BREAKWATCHED_YELLOW_BLUE: {
     parent: FLAGS.WATCHED_BREAKS1,
     index: 15,
     width: 1,
@@ -1714,7 +1425,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Watched status of the Yellow & Blue break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKWATCHED_YELLOW_ORANGE]: {
+  BREAKWATCHED_YELLOW_ORANGE: {
     parent: FLAGS.WATCHED_BREAKS2,
     index: 0,
     width: 1,
@@ -1722,7 +1433,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Watched status of the Yellow & Orange break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKWATCHED_GREEN]: {
+  BREAKWATCHED_GREEN: {
     parent: FLAGS.WATCHED_BREAKS2,
     index: 1,
     width: 1,
@@ -1730,7 +1441,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Watched status of the Green break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKWATCHED_GREEN_ORANGE]: {
+  BREAKWATCHED_GREEN_ORANGE: {
     parent: FLAGS.WATCHED_BREAKS2,
     index: 2,
     width: 1,
@@ -1738,7 +1449,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Watched status of the Green & Orange break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKWATCHED_BLUE_SUSIE]: {
+  BREAKWATCHED_BLUE_SUSIE: {
     parent: FLAGS.WATCHED_BREAKS2,
     index: 3,
     width: 1,
@@ -1746,7 +1457,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Watched status of the Blue & Susie break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKWATCHED_BLUE_ORANGE]: {
+  BREAKWATCHED_BLUE_ORANGE: {
     parent: FLAGS.WATCHED_BREAKS2,
     index: 4,
     width: 1,
@@ -1754,7 +1465,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Watched status of the Blue & Orange break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKWATCHED_BLUE_ORANGE2]: {
+  BREAKWATCHED_BLUE_ORANGE2: {
     parent: FLAGS.WATCHED_BREAKS2,
     index: 5,
     width: 1,
@@ -1762,7 +1473,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Watched status of the Blue & Orange 2 break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKWATCHED_BLUE_ORANGE3]: {
+  BREAKWATCHED_BLUE_ORANGE3: {
     parent: FLAGS.WATCHED_BREAKS2,
     index: 6,
     width: 1,
@@ -1770,7 +1481,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Watched status of the Blue & Orange 3 break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKWATCHED_BLUE_GREEN]: {
+  BREAKWATCHED_BLUE_GREEN: {
     parent: FLAGS.WATCHED_BREAKS2,
     index: 7,
     width: 1,
@@ -1778,7 +1489,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Watched status of the Blue & Green break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKWATCHED_ORANGE_SUSIE]: {
+  BREAKWATCHED_ORANGE_SUSIE: {
     parent: FLAGS.WATCHED_BREAKS2,
     index: 8,
     width: 1,
@@ -1786,7 +1497,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Watched status of the Orange & Susie break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKWATCHED_ORANGE_RALSEI]: {
+  BREAKWATCHED_ORANGE_RALSEI: {
     parent: FLAGS.WATCHED_BREAKS2,
     index: 9,
     width: 1,
@@ -1794,7 +1505,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Watched status of the Orange & Ralsei break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKWATCHED_PINK_ORANGE]: {
+  BREAKWATCHED_PINK_ORANGE: {
     parent: FLAGS.WATCHED_BREAKS2,
     index: 10,
     width: 1,
@@ -1802,7 +1513,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Watched status of the Pink & Orange break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.BREAKWATCHED_PINK_KRIS]: {
+  BREAKWATCHED_PINK_KRIS: {
     parent: FLAGS.WATCHED_BREAKS2,
     index: 11,
     width: 1,
@@ -1810,7 +1521,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Watched status of the Pink & Kris break.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.SHADOW_PLATFORM_X_FCASTLE_RIGHT_PUZZLE1]: {
+  SHADOW_PLATFORM_X_FCASTLE_RIGHT_PUZZLE1: {
     parent: FLAGS.RIGHT_PUZZLE_SHADOW_PLATFORM_X,
     index: 0,
     width: 5,
@@ -1819,7 +1530,7 @@ export const FLAG_BITFIELDS_META: Record<
       'X position of the vertical shadow platform in the first shadow platform puzzle room.',
     valueType: 'number',
   },
-  [FLAG_BITFIELDS.SHADOW_PLATFORM_X_FCASTLE_RIGHT_PUZZLE2]: {
+  SHADOW_PLATFORM_X_FCASTLE_RIGHT_PUZZLE2: {
     parent: FLAGS.RIGHT_PUZZLE_SHADOW_PLATFORM_X,
     index: 1,
     width: 5,
@@ -1828,7 +1539,7 @@ export const FLAG_BITFIELDS_META: Record<
       'X position of the horizontal shadow platform in the first shadow platform puzzle room.',
     valueType: 'number',
   },
-  [FLAG_BITFIELDS.SHADOW_PLATFORM_Y_FCASTLE_RIGHT_PUZZLE1]: {
+  SHADOW_PLATFORM_Y_FCASTLE_RIGHT_PUZZLE1: {
     parent: FLAGS.RIGHT_PUZZLE_SHADOW_PLATFORM_Y,
     index: 0,
     width: 5,
@@ -1837,7 +1548,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Y position of the vertical shadow platform in the first shadow platform puzzle room.',
     valueType: 'number',
   },
-  [FLAG_BITFIELDS.SHADOW_PLATFORM_Y_FCASTLE_RIGHT_PUZZLE2]: {
+  SHADOW_PLATFORM_Y_FCASTLE_RIGHT_PUZZLE2: {
     parent: FLAGS.RIGHT_PUZZLE_SHADOW_PLATFORM_Y,
     index: 1,
     width: 5,
@@ -1846,7 +1557,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Y position of the horizontal shadow platform in the first shadow platform puzzle room.',
     valueType: 'number',
   },
-  [FLAG_BITFIELDS.SHADOW_PLATFORM_X_FCASTLE_SIDEPUZZLE1]: {
+  SHADOW_PLATFORM_X_FCASTLE_SIDEPUZZLE1: {
     parent: FLAGS.SIDEPUZZLE_SHADOW_PLATFORM_X,
     index: 0,
     width: 5,
@@ -1855,7 +1566,7 @@ export const FLAG_BITFIELDS_META: Record<
       'X position of the large shadow platform in the second shadow platform puzzle room.',
     valueType: 'number',
   },
-  [FLAG_BITFIELDS.SHADOW_PLATFORM_X_FCASTLE_SIDEPUZZLE2]: {
+  SHADOW_PLATFORM_X_FCASTLE_SIDEPUZZLE2: {
     parent: FLAGS.SIDEPUZZLE_SHADOW_PLATFORM_X,
     index: 1,
     width: 5,
@@ -1864,7 +1575,7 @@ export const FLAG_BITFIELDS_META: Record<
       'X position of the small shadow platform in the second shadow platform puzzle room.',
     valueType: 'number',
   },
-  [FLAG_BITFIELDS.SHADOW_PLATFORM_Y_FCASTLE_SIDEPUZZLE1]: {
+  SHADOW_PLATFORM_Y_FCASTLE_SIDEPUZZLE1: {
     parent: FLAGS.SIDEPUZZLE_SHADOW_PLATFORM_Y,
     index: 0,
     width: 5,
@@ -1873,7 +1584,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Y position of the large shadow platform in the second shadow platform puzzle room.',
     valueType: 'number',
   },
-  [FLAG_BITFIELDS.SHADOW_PLATFORM_Y_FCASTLE_SIDEPUZZLE2]: {
+  SHADOW_PLATFORM_Y_FCASTLE_SIDEPUZZLE2: {
     parent: FLAGS.SIDEPUZZLE_SHADOW_PLATFORM_Y,
     index: 1,
     width: 5,
@@ -1882,7 +1593,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Y position of the small shadow platform in the second shadow platform puzzle room.',
     valueType: 'number',
   },
-  [FLAG_BITFIELDS.FCASTLE_BOUNCE1_BELL1]: {
+  FCASTLE_BOUNCE1_BELL1: {
     parent: FLAGS.FCASTLE_BELLS_FLAGS,
     index: 0,
     displayName: 'Destroyed first bell',
@@ -1890,7 +1601,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the first bell in the right section of the first bounce flower room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.FCASTLE_BOUNCE1_BELL2]: {
+  FCASTLE_BOUNCE1_BELL2: {
     parent: FLAGS.FCASTLE_BELLS_FLAGS,
     index: 1,
     displayName: 'Destroyed second bell',
@@ -1898,7 +1609,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the second bell in the right section of the first bounce flower room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.FCASTLE_BOUNCE1_BELL3]: {
+  FCASTLE_BOUNCE1_BELL3: {
     parent: FLAGS.FCASTLE_BELLS_FLAGS,
     index: 2,
     displayName: 'Destroyed third bell',
@@ -1906,7 +1617,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the third bell in the right section of the first bounce flower room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.FCASTLE_BOUNCE1_BELL4]: {
+  FCASTLE_BOUNCE1_BELL4: {
     parent: FLAGS.FCASTLE_BELLS_FLAGS,
     index: 3,
     displayName: 'Destroyed large bell',
@@ -1914,7 +1625,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you destroyed the large bell at the top of the first bounce flower room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.FCASTLE_BOUNCE3_GOLDCOIN]: {
+  FCASTLE_BOUNCE3_GOLDCOIN: {
     parent: FLAGS.FCASTLE_BELLS_FLAGS,
     index: 4,
     displayName: 'Collected gold coin',
@@ -1922,7 +1633,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the gold coin in the right section of the punishment zone platforming room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.FCASTLE_RIGHT_PUZZLE_COIN1]: {
+  FCASTLE_RIGHT_PUZZLE_COIN1: {
     parent: FLAGS.FCASTLE_BELLS_FLAGS,
     index: 10,
     displayName: 'Collected left silver coin',
@@ -1930,7 +1641,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the left silver coin in the first shadow platform puzzle room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.FCASTLE_RIGHT_PUZZLE_GOLDCOIN]: {
+  FCASTLE_RIGHT_PUZZLE_GOLDCOIN: {
     parent: FLAGS.FCASTLE_BELLS_FLAGS,
     index: 11,
     displayName: 'Collected gold coin',
@@ -1938,7 +1649,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the gold coin in the first shadow platform puzzle room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.FCASTLE_RIGHT_PUZZLE_COIN2]: {
+  FCASTLE_RIGHT_PUZZLE_COIN2: {
     parent: FLAGS.FCASTLE_BELLS_FLAGS,
     index: 12,
     displayName: 'Collected right silver coin',
@@ -1946,7 +1657,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the right silver coin in the first shadow platform puzzle room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.FCASTLE_SIDEPUZZLE_GOLDCOIN1]: {
+  FCASTLE_SIDEPUZZLE_GOLDCOIN1: {
     parent: FLAGS.FCASTLE_BELLS_FLAGS,
     index: 14,
     displayName: 'Collected first gold coin',
@@ -1954,7 +1665,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the first gold coin in the second shadow platform puzzle room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.FCASTLE_SIDEPUZZLE_GOLDCOIN2]: {
+  FCASTLE_SIDEPUZZLE_GOLDCOIN2: {
     parent: FLAGS.FCASTLE_BELLS_FLAGS,
     index: 15,
     displayName: 'Collected second gold coin',
@@ -1962,7 +1673,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you collected the second gold coin in the second shadow platform puzzle room.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.DANGEROUS_PLATFORMING_JUMPS]: {
+  DANGEROUS_PLATFORMING_JUMPS: {
     parent: FLAGS.DANGEROUS_PLATFORMING_CHUTE_FLAGS,
     index: 0,
     width: 4,
@@ -1971,7 +1682,7 @@ export const FLAG_BITFIELDS_META: Record<
       'The amount of times you tried to jump over the wall. Used for dialogue that appears when trying to jump over it a certain amount of times. Ends up getting reset to 1 if you try jumping in the jail chute after Yellow does, possible by mistake an an unused bitfield labelled as "CHUTE" exists.',
     valueType: 'number',
   },
-  [FLAG_BITFIELDS.DANGEROUS_PLATFORMING_CHUTE]: {
+  DANGEROUS_PLATFORMING_CHUTE: {
     parent: FLAGS.DANGEROUS_PLATFORMING_CHUTE_FLAGS,
     index: 4,
     displayName: 'Chute jumps',
@@ -1979,7 +1690,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Unused bitfield likely intended to be used when you tried jumping in the jail chute, however the bitfield for trying to jump over the wall is used instead.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.DANGEROUS_PLATFORMING_PAYOFF]: {
+  DANGEROUS_PLATFORMING_PAYOFF: {
     parent: FLAGS.DANGEROUS_PLATFORMING_CHUTE_FLAGS,
     index: 5,
     displayName: 'Managed to get over the wall',
@@ -1987,7 +1698,7 @@ export const FLAG_BITFIELDS_META: Record<
       "Whether you got over the wall using Blue's cloud platform after trying to jump over it beforehand.",
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.DANGEROUS_PLATFORMING_AQUASETH]: {
+  DANGEROUS_PLATFORMING_AQUASETH: {
     parent: FLAGS.DANGEROUS_PLATFORMING_CHUTE_FLAGS,
     index: 6,
     displayName: 'Saw Aqua and Seth scene',
@@ -1995,7 +1706,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether you saw the scene of Aqua running after Yellow to also get blown up.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.SAW_FINAL_STARWALKER]: {
+  SAW_FINAL_STARWALKER: {
     parent: FLAGS.FINAL_STARWALKER_FLAG,
     index: 0,
     displayName: 'Final Starwalker scene',
@@ -2003,7 +1714,7 @@ export const FLAG_BITFIELDS_META: Record<
       "Saw Original Starwalker's final Starwalker scene at the top of the Castle; enables Kris's Walkerstar title.",
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.PLATCONTROLS_HIGHLIGHTED]: {
+  PLATCONTROLS_HIGHLIGHTED: {
     parent: FLAGS.MISC_BITFIELD_FLAGS,
     index: 0,
     width: 2,
@@ -2019,7 +1730,7 @@ export const FLAG_BITFIELDS_META: Record<
       },
     },
   },
-  [FLAG_BITFIELDS.SAW_FERROLL]: {
+  SAW_FERROLL: {
     parent: FLAGS.MISC_BITFIELD_FLAGS,
     index: 1,
     width: 2,
@@ -2028,7 +1739,7 @@ export const FLAG_BITFIELDS_META: Record<
       "Whether you have talked to Ferroll. This applies to both when he is in the cave and when he is in Pink's room.",
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.ENCOUNTERED_SHI_SANDPIT]: {
+  ENCOUNTERED_SHI_SANDPIT: {
     parent: FLAGS.MISC_BITFIELD_FLAGS,
     index: 2,
     width: 2,
@@ -2036,7 +1747,7 @@ export const FLAG_BITFIELDS_META: Record<
     description: 'Whether you encountered the Shi in the sand trap.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUAPLATFORMING_BATTLE]: {
+  GARDEN_AQUAPLATFORMING_BATTLE: {
     parent: FLAGS.GARDEN_AQUAPLATFORMING_FLAGS,
     index: 1,
     displayName: 'Completed optional battle',
@@ -2044,7 +1755,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether the optional battle in the first Garden aqua platforming room was completed.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUAPLATFORMING_GRASS1]: {
+  GARDEN_AQUAPLATFORMING_GRASS1: {
     parent: FLAGS.GARDEN_AQUAPLATFORMING_FLAGS,
     index: 5,
     displayName: 'Cut grass 1',
@@ -2052,7 +1763,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether the first tracked patch of grass in the room was cut.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUAPLATFORMING_GRASS2]: {
+  GARDEN_AQUAPLATFORMING_GRASS2: {
     parent: FLAGS.GARDEN_AQUAPLATFORMING_FLAGS,
     index: 6,
     displayName: 'Cut grass 2',
@@ -2060,7 +1771,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether the second tracked patch of grass in the room was cut.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUAPLATFORMING_GRASS3]: {
+  GARDEN_AQUAPLATFORMING_GRASS3: {
     parent: FLAGS.GARDEN_AQUAPLATFORMING_FLAGS,
     index: 7,
     displayName: 'Cut grass 3',
@@ -2068,7 +1779,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether the third tracked patch of grass in the room was cut.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_AQUAPLATFORMING_GRASS4]: {
+  GARDEN_AQUAPLATFORMING_GRASS4: {
     parent: FLAGS.GARDEN_AQUAPLATFORMING_FLAGS,
     index: 8,
     displayName: 'Cut grass 4',
@@ -2076,7 +1787,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether the fourth tracked patch of grass in the room was cut.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.RALSEI_CASTLE_BASKETBALL_QUEEN_CUTSCENE]: {
+  RALSEI_CASTLE_BASKETBALL_QUEEN_CUTSCENE: {
     parent: FLAGS.RALSEI_CASTLE_BASKETBALL_FLAGS,
     index: 0,
     width: 2,
@@ -2085,7 +1796,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether the Chapter 5 Castle Town basketball cutscene with Queen was seen.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_FINAL_PLATFORMING_STATUE]: {
+  GARDEN_FINAL_PLATFORMING_STATUE: {
     parent: FLAGS.GARDEN_FINAL_PLATFORMING_FLAGS,
     index: 0,
     displayName: 'Transformed statue',
@@ -2093,7 +1804,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether the statue in the final Garden platforming room was transformed.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.GARDEN_FINAL_PLATFORMING_PINK_BELL]: {
+  GARDEN_FINAL_PLATFORMING_PINK_BELL: {
     parent: FLAGS.GARDEN_FINAL_PLATFORMING_FLAGS,
     index: 2,
     displayName: 'Destroyed Pink Coin bell',
@@ -2101,217 +1812,217 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether the Pink Coin bell in the final Garden platforming room was destroyed.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_NETSKIE_CLIMB_STAIRS]: {
+  CLIFF_NETSKIE_CLIMB_STAIRS: {
     parent: FLAGS.CLIFF_NETSKIE_CLIMB_FLAGS,
     index: 1,
     displayName: 'Created fox stairs',
     description: 'Whether the foxes in Netskie Climb formed a set of stairs.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_NETSKIE_CLIMB_FOXES_FLED]: {
+  CLIFF_NETSKIE_CLIMB_FOXES_FLED: {
     parent: FLAGS.CLIFF_NETSKIE_CLIMB_FLAGS,
     index: 2,
     displayName: 'Foxes fled',
     description: 'Whether the foxes in Netskie Climb fled.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_GRASS]: {
+  CLIFF_FINAL_DASH_GRASS: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS,
     index: 0,
     displayName: 'Cut grass',
     description: 'Whether the tracked grass in the final Cliffs dash was cut.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_COIN1]: {
+  CLIFF_FINAL_DASH_COIN1: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS,
     index: 1,
     displayName: 'Collected coin 1',
     description: 'Whether coin 1 in the final Cliffs dash was collected.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_COIN2]: {
+  CLIFF_FINAL_DASH_COIN2: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS,
     index: 2,
     displayName: 'Collected coin 2',
     description: 'Whether coin 2 in the final Cliffs dash was collected.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_COIN3]: {
+  CLIFF_FINAL_DASH_COIN3: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS,
     index: 3,
     displayName: 'Collected coin 3',
     description: 'Whether coin 3 in the final Cliffs dash was collected.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_COIN4]: {
+  CLIFF_FINAL_DASH_COIN4: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS,
     index: 4,
     displayName: 'Collected coin 4',
     description: 'Whether coin 4 in the final Cliffs dash was collected.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_COIN5]: {
+  CLIFF_FINAL_DASH_COIN5: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS,
     index: 5,
     displayName: 'Collected coin 5',
     description: 'Whether coin 5 in the final Cliffs dash was collected.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_COIN6]: {
+  CLIFF_FINAL_DASH_COIN6: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS,
     index: 6,
     displayName: 'Collected coin 6',
     description: 'Whether coin 6 in the final Cliffs dash was collected.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_COIN7]: {
+  CLIFF_FINAL_DASH_COIN7: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS,
     index: 7,
     displayName: 'Collected coin 7',
     description: 'Whether coin 7 in the final Cliffs dash was collected.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_COIN8]: {
+  CLIFF_FINAL_DASH_COIN8: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS,
     index: 8,
     displayName: 'Collected coin 8',
     description: 'Whether coin 8 in the final Cliffs dash was collected.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_COIN9]: {
+  CLIFF_FINAL_DASH_COIN9: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS,
     index: 9,
     displayName: 'Collected coin 9',
     description: 'Whether coin 9 in the final Cliffs dash was collected.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_COIN10]: {
+  CLIFF_FINAL_DASH_COIN10: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS,
     index: 10,
     displayName: 'Collected coin 10',
     description: 'Whether coin 10 in the final Cliffs dash was collected.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_COIN11]: {
+  CLIFF_FINAL_DASH_COIN11: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS,
     index: 11,
     displayName: 'Collected coin 11',
     description: 'Whether coin 11 in the final Cliffs dash was collected.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_COIN12]: {
+  CLIFF_FINAL_DASH_COIN12: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS,
     index: 12,
     displayName: 'Collected coin 12',
     description: 'Whether coin 12 in the final Cliffs dash was collected.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_COIN13]: {
+  CLIFF_FINAL_DASH_COIN13: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS,
     index: 13,
     displayName: 'Collected coin 13',
     description: 'Whether coin 13 in the final Cliffs dash was collected.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_COIN14]: {
+  CLIFF_FINAL_DASH_COIN14: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS,
     index: 14,
     displayName: 'Collected coin 14',
     description: 'Whether coin 14 in the final Cliffs dash was collected.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_COIN15]: {
+  CLIFF_FINAL_DASH_COIN15: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS,
     index: 15,
     displayName: 'Collected coin 15',
     description: 'Whether coin 15 in the final Cliffs dash was collected.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_COIN16]: {
+  CLIFF_FINAL_DASH_COIN16: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS,
     index: 16,
     displayName: 'Collected coin 16',
     description: 'Whether coin 16 in the final Cliffs dash was collected.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_COIN17]: {
+  CLIFF_FINAL_DASH_COIN17: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS,
     index: 17,
     displayName: 'Collected coin 17',
     description: 'Whether coin 17 in the final Cliffs dash was collected.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_COIN18]: {
+  CLIFF_FINAL_DASH_COIN18: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS_2,
     index: 0,
     displayName: 'Collected coin 18',
     description: 'Whether coin 18 in the final Cliffs dash was collected.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_COIN19]: {
+  CLIFF_FINAL_DASH_COIN19: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS_2,
     index: 1,
     displayName: 'Collected coin 19',
     description: 'Whether coin 19 in the final Cliffs dash was collected.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_COIN20]: {
+  CLIFF_FINAL_DASH_COIN20: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS_2,
     index: 2,
     displayName: 'Collected coin 20',
     description: 'Whether coin 20 in the final Cliffs dash was collected.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_COIN21]: {
+  CLIFF_FINAL_DASH_COIN21: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS_2,
     index: 3,
     displayName: 'Collected coin 21',
     description: 'Whether coin 21 in the final Cliffs dash was collected.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_COIN22]: {
+  CLIFF_FINAL_DASH_COIN22: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS_2,
     index: 4,
     displayName: 'Collected coin 22',
     description: 'Whether coin 22 in the final Cliffs dash was collected.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_COIN23]: {
+  CLIFF_FINAL_DASH_COIN23: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS_2,
     index: 5,
     displayName: 'Collected coin 23',
     description: 'Whether coin 23 in the final Cliffs dash was collected.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_COIN24]: {
+  CLIFF_FINAL_DASH_COIN24: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS_2,
     index: 6,
     displayName: 'Collected coin 24',
     description: 'Whether coin 24 in the final Cliffs dash was collected.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_COIN25]: {
+  CLIFF_FINAL_DASH_COIN25: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS_2,
     index: 7,
     displayName: 'Collected coin 25',
     description: 'Whether coin 25 in the final Cliffs dash was collected.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_COIN26]: {
+  CLIFF_FINAL_DASH_COIN26: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS_2,
     index: 8,
     displayName: 'Collected coin 26',
     description: 'Whether coin 26 in the final Cliffs dash was collected.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_FINAL_DASH_COIN27]: {
+  CLIFF_FINAL_DASH_COIN27: {
     parent: FLAGS.CLIFF_FINAL_DASH_FLAGS_2,
     index: 9,
     displayName: 'Collected coin 27',
     description: 'Whether coin 27 in the final Cliffs dash was collected.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_TWIRLFLOWER_SUSIE_COMMENT]: {
+  CLIFF_TWIRLFLOWER_SUSIE_COMMENT: {
     parent: FLAGS.CLIFF_TWIRLFLOWER_FLAGS,
     index: 1,
     width: 2,
@@ -2327,7 +2038,7 @@ export const FLAG_BITFIELDS_META: Record<
       },
     },
   },
-  [FLAG_BITFIELDS.CLIFF_TWIRLFLOWER_BELL_LOWER_LEFT]: {
+  CLIFF_TWIRLFLOWER_BELL_LOWER_LEFT: {
     parent: FLAGS.CLIFF_TWIRLFLOWER_FLAGS,
     index: 10,
     displayName: 'Destroyed lower-left bell',
@@ -2335,7 +2046,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether the lower-left bell in the twirlflower platforming room was destroyed.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_TWIRLFLOWER_BELL_LOWER_RIGHT]: {
+  CLIFF_TWIRLFLOWER_BELL_LOWER_RIGHT: {
     parent: FLAGS.CLIFF_TWIRLFLOWER_FLAGS,
     index: 11,
     displayName: 'Destroyed lower-right bell',
@@ -2343,7 +2054,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether the lower-right bell in the twirlflower platforming room was destroyed.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_TWIRLFLOWER_BELL_UPPER]: {
+  CLIFF_TWIRLFLOWER_BELL_UPPER: {
     parent: FLAGS.CLIFF_TWIRLFLOWER_FLAGS,
     index: 12,
     displayName: 'Destroyed upper bell',
@@ -2351,7 +2062,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether the upper bell in the twirlflower platforming room was destroyed.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_TWIRLFLOWER_SETH_AQUA_BATTLE]: {
+  CLIFF_TWIRLFLOWER_SETH_AQUA_BATTLE: {
     parent: FLAGS.CLIFF_TWIRLFLOWER_FLAGS,
     index: 15,
     displayName: 'Completed Seth and Aqua battle',
@@ -2359,7 +2070,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether the Seth and Aqua battle connected to the twirlflower area was completed.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_TWIRLFLOWER_WIND_BELL]: {
+  CLIFF_TWIRLFLOWER_WIND_BELL: {
     parent: FLAGS.CLIFF_TWIRLFLOWER_FLAGS,
     index: 16,
     displayName: 'Destroyed wind-room bell',
@@ -2367,7 +2078,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether the tracked bell in the twirlflower wind room was destroyed.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.CLIFF_TWIRLFLOWER_BELL_BUNCH]: {
+  CLIFF_TWIRLFLOWER_BELL_BUNCH: {
     parent: FLAGS.CLIFF_TWIRLFLOWER_FLAGS,
     index: 17,
     displayName: 'Destroyed bell bunch',
@@ -2375,56 +2086,56 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether the tracked bunch of bells in the twirlflower area was destroyed.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.PINK_SHOP_BOUGHT_SETH_SPECS]: {
+  PINK_SHOP_BOUGHT_SETH_SPECS: {
     parent: FLAGS.PINK_SHOP_PURCHASE_FLAGS,
     index: 0,
     displayName: 'Bought SethSpecs',
     description: 'Whether SethSpecs were purchased from the Pink shop.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.PINK_SHOP_BOUGHT_BLUE_SHOES]: {
+  PINK_SHOP_BOUGHT_BLUE_SHOES: {
     parent: FLAGS.PINK_SHOP_PURCHASE_FLAGS,
     index: 1,
     displayName: 'Bought BlueShoes',
     description: 'Whether BlueShoes were purchased from the Pink shop.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.PINK_SHOP_BOUGHT_AQUA_KNIFE]: {
+  PINK_SHOP_BOUGHT_AQUA_KNIFE: {
     parent: FLAGS.PINK_SHOP_PURCHASE_FLAGS,
     index: 2,
     displayName: 'Bought AquaKnife',
     description: 'Whether the AquaKnife was purchased from the Pink shop.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.PINK_SHOP_BOUGHT_YELLOW_HAT]: {
+  PINK_SHOP_BOUGHT_YELLOW_HAT: {
     parent: FLAGS.PINK_SHOP_PURCHASE_FLAGS,
     index: 3,
     displayName: 'Bought YellowHat',
     description: 'Whether the YellowHat was purchased from the Pink shop.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.PINK_SHOP_BOUGHT_ORANGE_GLOVE]: {
+  PINK_SHOP_BOUGHT_ORANGE_GLOVE: {
     parent: FLAGS.PINK_SHOP_PURCHASE_FLAGS,
     index: 4,
     displayName: 'Bought O.Glove',
     description: 'Whether the O.Glove was purchased from the Pink shop.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.PINK_SHOP_BOUGHT_GREEN_APRON]: {
+  PINK_SHOP_BOUGHT_GREEN_APRON: {
     parent: FLAGS.PINK_SHOP_PURCHASE_FLAGS,
     index: 5,
     displayName: 'Bought GreenApron',
     description: 'Whether the GreenApron was purchased from the Pink shop.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.PINK_SHOP_BOUGHT_FLOWERY_SCARF]: {
+  PINK_SHOP_BOUGHT_FLOWERY_SCARF: {
     parent: FLAGS.PINK_SHOP_PURCHASE_FLAGS,
     index: 6,
     displayName: 'Bought FloweryScarf',
     description: 'Whether the FloweryScarf was purchased from the Pink shop.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.SHORTCUT_HOPSCHEF]: {
+  SHORTCUT_HOPSCHEF: {
     parent: FLAGS.FLOWER_CASTLE_SHORTCUT_FLAGS,
     index: 0,
     displayName: 'Unlocked Hopschef shortcut',
@@ -2432,7 +2143,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether the Hopschef shortcut door in Flower Castle was unlocked.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.SHORTCUT_PINK_DOOR]: {
+  SHORTCUT_PINK_DOOR: {
     parent: FLAGS.FLOWER_CASTLE_SHORTCUT_FLAGS,
     index: 2,
     displayName: 'Unlocked Pink Door shortcut',
@@ -2440,7 +2151,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether the Pink Door shortcut in Flower Castle was unlocked.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.SHORTCUT_LAST_ROOM]: {
+  SHORTCUT_LAST_ROOM: {
     parent: FLAGS.FLOWER_CASTLE_SHORTCUT_FLAGS,
     index: 3,
     displayName: 'Unlocked Last Room shortcut',
@@ -2448,7 +2159,7 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether the Last Room shortcut in Flower Castle was unlocked.',
     valueType: 'boolean',
   },
-  [FLAG_BITFIELDS.SHORTCUT_TOP_OF_CASTLE]: {
+  SHORTCUT_TOP_OF_CASTLE: {
     parent: FLAGS.FLOWER_CASTLE_SHORTCUT_FLAGS,
     index: 4,
     displayName: 'Unlocked top-of-castle shortcut',
@@ -2456,7 +2167,20 @@ export const FLAG_BITFIELDS_META: Record<
       'Whether the shortcut to the top of Flower Castle was unlocked.',
     valueType: 'boolean',
   },
-};
+} satisfies Record<string, FlagBitfieldProperties>;
+
+export type FlagBitfieldName = keyof typeof FLAG_BITFIELD_ENTRIES;
+export type FlagBitfieldId = FlagBitfieldName;
+
+// IDs and names are the same string 
+export const FLAG_BITFIELDS = Object.fromEntries(
+  Object.keys(FLAG_BITFIELD_ENTRIES).map((name) => [name, name]),
+) as { [K in FlagBitfieldName]: K };
+
+export const FLAG_BITFIELDS_META: Record<
+  FlagBitfieldId,
+  FlagBitfieldProperties
+> = FLAG_BITFIELD_ENTRIES;
 
 export type SaveFlagRef =
   | { kind: 'flag'; flag: FlagIndex }
