@@ -1780,7 +1780,7 @@ export const STORY_SECTIONS = {
             'WATCHED_FLOWERY_ASGORE_FISHING',
             'WATCHED_COWBOY_SHOW',
             'OBTAINED_NETSKIEHAT_GARDEN',
-            'GARDEN_MUSHROOM_PUZZLE',
+            'GARDEN_MUSHROOM_SPIKE_SWITCH',
           ],
         },
         {
