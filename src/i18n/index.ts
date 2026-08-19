@@ -28,7 +28,7 @@ import {
   WEAPONS,
   WEAPONS_META,
 } from '@data';
-import { FLAG_BITFIELDS, FLAG_BITFIELDS_META } from '@data/flag-bitfields';
+import { type FlagBitfieldId, FLAG_BITFIELDS_META } from '@data/flag-bitfields';
 import ko from './locales/ko.json';
 import it from './locales/it.json';
 
@@ -654,9 +654,7 @@ export function getFlagTranslationKeyPrefix(id: number) {
   return flagName ? `flags.${flagName}` : undefined;
 }
 
-export function getFlagBitfieldTranslationKeyPrefix(
-  id: (typeof FLAG_BITFIELDS)[keyof typeof FLAG_BITFIELDS],
-) {
+export function getFlagBitfieldTranslationKeyPrefix(id: FlagBitfieldId) {
   return `flagBitfields.${id}`;
 }
 
