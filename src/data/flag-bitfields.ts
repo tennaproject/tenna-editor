@@ -2172,7 +2172,7 @@ const FLAG_BITFIELD_ENTRIES = {
 export type FlagBitfieldName = keyof typeof FLAG_BITFIELD_ENTRIES;
 export type FlagBitfieldId = FlagBitfieldName;
 
-// IDs and names are the same string 
+// IDs and names are the same string
 export const FLAG_BITFIELDS = Object.fromEntries(
   Object.keys(FLAG_BITFIELD_ENTRIES).map((name) => [name, name]),
 ) as { [K in FlagBitfieldName]: K };
