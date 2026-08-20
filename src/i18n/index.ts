@@ -133,10 +133,12 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.guard.noSaveLoaded': 'There is no save loaded',
   'ui.guard.wrongChapter': 'This page is not available in this chapter',
   'ui.header.downloadSave': 'Download save',
+  'ui.header.moreActions': 'More actions',
   'ui.header.redo': 'Redo',
   'ui.header.toggleSidebar': 'Toggle sidebar',
   'ui.header.toggleSidebarRetraction': 'Toggle sidebar retraction',
   'ui.header.undo': 'Undo',
+  'ui.header.share': 'Share',
   'ui.header.uploadSave': 'Upload save',
   'ui.download.baseDrIni': 'Base dr.ini',
   'ui.download.baseDrIniDescription':

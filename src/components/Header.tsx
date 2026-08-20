@@ -3,10 +3,12 @@ import SidebarVisibilityIcon from '@assets/icons/menu.svg?react';
 import SidebarRetractionIcon from '@assets/icons/layout-sidebar-left.svg?react';
 import DownloadIcon from '@assets/icons/download.svg?react';
 import UploadIcon from '@assets/icons/upload.svg?react';
+import ShareIcon from '@assets/icons/forward.svg?react';
 import UndoIcon from '@assets/icons/undo.svg?react';
 import RedoIcon from '@assets/icons/redo.svg?react';
 import { lazy, Suspense, useMemo, useState } from 'react';
 import { IconButton } from './IconButton';
+import { OverflowMenu } from './OverflowMenu';
 import { InlineGroup } from './InlineGroup';
 import { SaveSelector } from './SaveSelector';
 import { Badge } from './Badge';
@@ -123,10 +125,38 @@ export function Header() {
           <div className="flex min-w-0 items-center gap-1.5">
             <SaveSelector />
           </div>
+          <OverflowMenu
+            className="sm:hidden"
+            label={t('ui.header.moreActions', 'More actions')}
+            items={[
+              {
+                id: 'undo',
+                label: t('ui.header.undo', 'Undo'),
+                icon: <UndoIcon />,
+                disabled: !hasSave || !canUndo,
+                onSelect: undo,
+              },
+              {
+                id: 'redo',
+                label: t('ui.header.redo', 'Redo'),
+                icon: <RedoIcon />,
+                disabled: !hasSave || !canRedo,
+                onSelect: redo,
+              },
+              {
+                id: 'share',
+                label: t('ui.header.share', 'Share'),
+                icon: <ShareIcon />,
+                disabled: !hasSave,
+                onSelect: () => {},
+              },
+            ]}
+          />
           <IconButton
             accent="neutral"
             label={t('ui.header.undo', 'Undo')}
             icon={<UndoIcon />}
+            className="hidden sm:block"
             disabled={!hasSave || !canUndo}
             onClick={undo}
           />
@@ -134,8 +164,16 @@ export function Header() {
             accent="neutral"
             label={t('ui.header.redo', 'Redo')}
             icon={<RedoIcon />}
+            className="hidden sm:block"
             disabled={!hasSave || !canRedo}
             onClick={redo}
+          />
+          <IconButton
+            accent="purple"
+            label={t('ui.header.share', 'Share')}
+            icon={<ShareIcon />}
+            className="hidden sm:block"
+            disabled={!hasSave}
           />
           <IconButton
             accent="green"
