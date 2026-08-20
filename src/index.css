@@ -104,6 +104,11 @@
   --color-yellow-active: #ebeb00;
   --color-yellow-soft: #ffff0024; /* 14% alpha */
 
+  --color-purple: #af67af; /* susie lightworld */
+  --color-purple-hover: #b674b6;
+  --color-purple-active: #a85aa8;
+  --color-purple-soft: #af67af29; /* 16% alpha */
+
   --color-danger: var(--color-red);
   --color-danger-hover: var(--color-red-hover);
   --color-success: var(--color-green);

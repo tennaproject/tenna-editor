@@ -1,12 +1,13 @@
 import type { ReactNode } from 'react';
 import { mergeClass } from '@utils/merge-class';
 
-type IconButtonAccent = 'green' | 'blue' | 'neutral';
+type IconButtonAccent = 'green' | 'blue' | 'neutral' | 'purple';
 
 const accentClass: Record<IconButtonAccent, string> = {
   green: 'text-green',
   blue: 'text-blue',
   neutral: 'text-text-2',
+  purple: 'text-purple',
 };
 
 interface IconButtonProps {
