@@ -25,4 +25,6 @@ export * from './flag-helpers';
 export * from './environment';
 export * from './character-stats';
 export * from './base64';
+export * from './joaat';
+export * from './random';
 export * from './save-share';
