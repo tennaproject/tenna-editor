@@ -1,5 +1,5 @@
 import React, { Suspense, type JSX } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import {
   RequireChapter,
@@ -198,8 +198,10 @@ const AboutAttributions = React.lazy(() =>
 );
 
 function HomeIndex() {
+  const { hash } = useLocation();
+  const sectionHash = hash.includes('=') ? '' : hash;
   if (getLastSubtab('home') === 'welcome') {
-    return <Navigate to="welcome" replace />;
+    return <Navigate to={`welcome${sectionHash}`} replace />;
   }
   return <HomeOverview />;
 }

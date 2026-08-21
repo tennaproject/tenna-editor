@@ -29,10 +29,21 @@ export function Page({ children }: PageProps) {
   useEffect(() => {
     if (!location.hash) return;
 
+    // Skip /share links, which aren't deep-link targets
+    let fragment = location.hash.startsWith('#')
+      ? location.hash.slice(1)
+      : location.hash;
+    try {
+      fragment = decodeURIComponent(fragment);
+    } catch {
+      return;
+    }
+    if (!fragment || fragment.includes('=')) return;
+
     let highlightTimerId: ReturnType<typeof setTimeout> | null = null;
     let observer: MutationObserver | null = null;
 
-    const id = location.hash.slice(1);
+    const id = fragment;
     const scrollToHash = () => {
       const element = document.getElementById(id);
       if (!element) return false;
@@ -65,8 +76,11 @@ export function Page({ children }: PageProps) {
       observer.observe(document.body, { childList: true, subtree: true });
     }
 
+    const giveUpTimerId = window.setTimeout(() => observer?.disconnect(), 2500);
+
     return () => {
       observer?.disconnect();
+      window.clearTimeout(giveUpTimerId);
       if (highlightTimerId) {
         clearTimeout(highlightTimerId);
       }

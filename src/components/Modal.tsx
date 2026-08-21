@@ -95,20 +95,20 @@ export function Modal({
           />
 
           <motion.div
-            ref={dialogRef}
-            tabIndex={-1}
             className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none"
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.98 }}
             transition={transition}
-            role="dialog"
-            aria-modal="true"
-            aria-hidden={!isOpen}
           >
             <div
+              ref={dialogRef}
+              tabIndex={-1}
+              role="dialog"
+              aria-modal="true"
+              aria-hidden={!isOpen}
               className={mergeClass(
-                'pointer-events-auto relative border border-border bg-surface-2 shadow-lg shadow-surface-1/50 transition-[width,height,max-width,max-height] duration-200 ease-in-out motion-reduce:transition-none',
+                'pointer-events-auto relative border border-border bg-surface-2 shadow-lg shadow-surface-1/50 transition-[width,height,max-width,max-height] duration-200 ease-in-out motion-reduce:transition-none outline-none',
                 panelClassName,
               )}
             >
