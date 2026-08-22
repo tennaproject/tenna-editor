@@ -114,7 +114,8 @@ function parseSaveV1(cursor: LineCursor): SaveV1 {
     const weapon = cursor.nextNumber() as WeaponIndex;
     const primaryArmor = cursor.nextNumber() as ArmorIndex;
     const secondaryArmor = cursor.nextNumber() as ArmorIndex;
-    let weaponStyle = cursor.nextString();
+    // We have to trim it here, otherwise we'll get trailing spaces on every save/load cycle
+    let weaponStyle = cursor.nextString().trim();
 
     // Handle nan values from old demo versions
     if (weaponStyle.trim() === 'nan') {
