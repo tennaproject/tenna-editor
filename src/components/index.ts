@@ -50,3 +50,4 @@ export * from './ProgressiveMount';
 export * from './ErrorBoundary';
 export * from './ResponsiveTable';
 export * from './Story';
+export * from './QrCode';

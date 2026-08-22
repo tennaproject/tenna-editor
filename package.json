@@ -32,6 +32,7 @@
     "framer-motion": "^12.42.2",
     "idb": "^8.0.3",
     "immer": "^11.1.11",
+    "qrcode-generator": "^2.0.4",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-markdown": "^10.1.0",
