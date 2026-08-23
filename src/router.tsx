@@ -355,6 +355,19 @@ export function AppRouter() {
                 <Route path="colors" element={<DevtoolsColors />} />
               </Route>
             )}
+          <Route
+            path="/share"
+            element={
+              <Navigate
+                to={{
+                  pathname:
+                    getLastSubtab('home') === 'welcome' ? '/welcome' : '/',
+                  hash: '',
+                }}
+                replace
+              />
+            }
+          ></Route>
           <Route path="/settings" element={<SettingsRoot />}></Route>
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
