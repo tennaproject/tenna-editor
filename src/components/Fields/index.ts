@@ -5,6 +5,7 @@ export * from './RoomField';
 export * from './InDarkWorldField';
 export * from './SaveSlotField';
 export * from './SaveNameField';
+export * from './PlayerNameField';
 export * from './SaveIsCompletionSaveField';
 export * from './PlotField';
 export * from './ItemField';

@@ -1,6 +1,9 @@
 export * from './Button';
 export * from './IconButton';
+export * from './OverflowMenu';
 export * from './FileInput';
+export * from './Upload';
+export * from './Download';
 export * from './Toast';
 export * from './Page';
 export * from './Sidebar';
@@ -42,6 +45,7 @@ export * from './KeyItemTooltip';
 export * from './LightWorldItemTooltip';
 export * from './SpellTooltip';
 export * from './Tooltip';
+export * from './TooltipHeading';
 export * from './FieldWrapper';
 export * from './FitToViewport';
 export * from './InventoryPage';

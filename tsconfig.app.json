@@ -43,6 +43,8 @@
       "@types/*": ["src/types/*"],
       "@assets": ["src/assets"],
       "@assets/*": ["src/assets/*"],
+      "@i18n": ["src/i18n"],
+      "@i18n/*": ["src/i18n/*"],
       "@hooks": ["src/hooks"],
       "@hooks/*": ["src/hooks/*"],
       "@pages": ["src/pages"],
