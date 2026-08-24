@@ -20,13 +20,15 @@ import {
   Checkbox,
   HelpTip,
   SaveSourceBadge,
+  SaveFingerprint,
+  PlayerNameField,
 } from '@components';
 import { FLAGS } from '@data';
 import { useSave, useUi } from '@store';
 import { chapterHelpers } from '@utils/data-helpers';
+import { FINGERPRINT_ASPECT } from '@utils/save-fingerprint';
 import { formatLocalDateTime } from '@utils/format-date';
 import { saveStorage, toast } from '@services';
-import { PlayerNameField } from '@components/Fields/PlayerNameField';
 import {
   formatTranslation,
   getChapterTranslationKeyPrefix,
@@ -103,6 +105,26 @@ function SaveSource() {
   );
 }
 
+function SavePrint() {
+  const { t } = useTranslation();
+  const save = useSave((s) => s.save);
+
+  if (!save) return null;
+
+  return (
+    <figure className="mx-auto w-42 shrink-0 sm:mx-0">
+      <div
+        className={`w-full border border-border bg-surface-1 ${FINGERPRINT_ASPECT}`}
+      >
+        <SaveFingerprint save={save} />
+      </div>
+      <figcaption className="mt-2 text-center text-sm leading-snug text-text-2">
+        {t('ui.home.saveFingerprint', 'Unique fingerprint')}
+      </figcaption>
+    </figure>
+  );
+}
+
 function DeleteSave() {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
@@ -131,7 +153,7 @@ function DeleteSave() {
   }
 
   return (
-    <div className="flex justify-end">
+    <>
       <Button variant="primary" onClick={() => setIsOpen(true)}>
         {t('ui.home.deleteSave', 'Delete Save')}
       </Button>
@@ -167,7 +189,7 @@ function DeleteSave() {
           </p>
         </div>
       </ModalLayout>
-    </div>
+    </>
   );
 }
 
@@ -293,24 +315,28 @@ export function HomeOverview() {
           </Card>
         </Section>
         <Section id="meta">
-          <Card className="flex flex-col gap-3 p-6 justify-between">
+          <Card className="flex flex-col gap-3 p-6">
             <Heading level={3}>{t('ui.home.meta', 'Meta')}</Heading>
-            <div className="flex flex-col lg:flex-row gap-3">
-              <div className="flex-1 flex flex-col gap-3">
-                <SaveNameField id="save-field" />
-                <SaveSlotField id="save-slot" />
-                <SaveIsCompletionSaveField id="save-is-completion-save" />
-              </div>
-              <div className="flex-1 flex flex-col">
-                <SaveSource />
-                <div className="mt-2">
-                  <SaveId />
-                  <SaveTimestamp />
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch sm:gap-5">
+              <SavePrint />
+              <div className="flex min-w-0 flex-1 flex-col gap-3 lg:flex-row lg:items-stretch">
+                <div className="flex flex-1 flex-col gap-3">
+                  <SaveNameField id="save-field" />
+                  <SaveSlotField id="save-slot" />
+                  <SaveIsCompletionSaveField id="save-is-completion-save" />
+                </div>
+                <div className="flex flex-1 flex-col">
+                  <SaveSource />
+                  <div className="mt-2">
+                    <SaveId />
+                    <SaveTimestamp />
+                  </div>
+                  <div className="mt-auto flex justify-end pt-3">
+                    <DeleteSave />
+                  </div>
                 </div>
               </div>
-              <div className="flex-1 flex flex-col gap-3"></div>
             </div>
-            <DeleteSave />
           </Card>
         </Section>
       </>

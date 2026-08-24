@@ -27,8 +27,9 @@ import {
   SPELLS_META,
   WEAPONS,
   WEAPONS_META,
+  FLAG_BITFIELDS_META,
+  type FlagBitfieldId,
 } from '@data';
-import { type FlagBitfieldId, FLAG_BITFIELDS_META } from '@data/flag-bitfields';
 import ko from './locales/ko.json';
 import it from './locales/it.json';
 
@@ -133,10 +134,44 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.guard.noSaveLoaded': 'There is no save loaded',
   'ui.guard.wrongChapter': 'This page is not available in this chapter',
   'ui.header.downloadSave': 'Download save',
+  'ui.header.moreActions': 'More actions',
   'ui.header.redo': 'Redo',
   'ui.header.toggleSidebar': 'Toggle sidebar',
   'ui.header.toggleSidebarRetraction': 'Toggle sidebar retraction',
   'ui.header.undo': 'Undo',
+  'ui.header.share': 'Share',
+  'ui.share.added': 'Shared save added',
+  'ui.share.addSave': 'Add save',
+  'ui.share.goHome': 'Go to editor',
+  'ui.share.invalidLink': 'This share link is invalid or incomplete.',
+  'ui.share.invalidTitle': 'Cannot Read This Link',
+  'ui.share.playerName': 'Player name',
+  'ui.share.untitled': 'Untitled save',
+  'ui.share.importTitle': 'Add Shared Save',
+  'ui.share.authorLabel': 'Author',
+  'ui.share.descriptionLabel': 'Description',
+  'ui.share.authorPlaceholder': 'Optional',
+  'ui.share.descriptionPlaceholder': 'Optional',
+  'ui.share.copied': 'Share link copied',
+  'ui.share.copyFailed': 'Could not copy the link',
+  'ui.share.copyLink': 'Copy link',
+  'ui.share.playtime': 'Playtime',
+  'ui.share.room': 'Room',
+  'ui.share.sharedAt': 'Shared',
+  'ui.share.completionLabel': 'Completion',
+  'ui.share.yes': 'Yes',
+  'ui.share.no': 'No',
+  'ui.share.plot': 'Plot',
+  'ui.share.name': 'Name',
+  'ui.share.slot': 'Slot',
+  'ui.share.explanation':
+    'The whole save is written into the link, and the code holds that same link. The save data stays on your device — it is never sent to a server. Share the link or the code to load a copy of the save on another device.',
+  'ui.share.revokeWarning':
+    'Once you share this save, you cannot revoke it later.',
+  'ui.share.tooLong':
+    'This link is long enough that some chat apps may cut it short.',
+  'ui.share.title': 'Share Save',
+  'ui.share.defaultName': 'Shared save',
   'ui.header.uploadSave': 'Upload save',
   'ui.download.baseDrIni': 'Base dr.ini',
   'ui.download.baseDrIniDescription':
@@ -258,6 +293,7 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.home.showDogcheckedRooms': 'Show dogchecked rooms',
   'ui.home.showRoomsWithoutSavePoint': 'Show rooms without save point',
   'ui.home.source': 'Source:',
+  'ui.home.saveFingerprint': 'Unique fingerprint',
   'ui.home.unreversible': 'This action cannot be reversed!',
   'ui.home.welcomeTitle': 'Welcome',
   'ui.home.welcomeDescription':

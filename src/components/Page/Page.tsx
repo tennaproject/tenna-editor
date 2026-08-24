@@ -11,15 +11,41 @@ export function Page({ children }: PageProps) {
   const [sectionLinksVisible, setSectionLinksVisible] = useState(false);
 
   useEffect(() => {
-    const syncSectionLinks = (event: KeyboardEvent) => {
-      setSectionLinksVisible(event.ctrlKey);
+    let revealTimerId: ReturnType<typeof setTimeout> | null = null;
+
+    const cancelReveal = () => {
+      if (revealTimerId) {
+        clearTimeout(revealTimerId);
+        revealTimerId = null;
+      }
     };
-    const hideSectionLinks = () => setSectionLinksVisible(false);
+
+    const hideSectionLinks = () => {
+      cancelReveal();
+      setSectionLinksVisible(false);
+    };
+
+    // Don't show section links unless ctrl is held down for bit longer
+    // Not triggered by accidental ctrl presses or shortcuts like ctrl+c, ctrl+v, etc.
+    const syncSectionLinks = (event: KeyboardEvent) => {
+      if (!event.ctrlKey || event.key !== 'Control') {
+        hideSectionLinks();
+        return;
+      }
+
+      if (event.type === 'keydown' && revealTimerId === null) {
+        revealTimerId = setTimeout(() => {
+          revealTimerId = null;
+          setSectionLinksVisible(true);
+        }, 250);
+      }
+    };
 
     window.addEventListener('keydown', syncSectionLinks, true);
     window.addEventListener('keyup', syncSectionLinks, true);
     window.addEventListener('blur', hideSectionLinks);
     return () => {
+      cancelReveal();
       window.removeEventListener('keydown', syncSectionLinks, true);
       window.removeEventListener('keyup', syncSectionLinks, true);
       window.removeEventListener('blur', hideSectionLinks);
@@ -29,10 +55,21 @@ export function Page({ children }: PageProps) {
   useEffect(() => {
     if (!location.hash) return;
 
+    // Skip /share links, which aren't deep-link targets
+    let fragment = location.hash.startsWith('#')
+      ? location.hash.slice(1)
+      : location.hash;
+    try {
+      fragment = decodeURIComponent(fragment);
+    } catch {
+      return;
+    }
+    if (!fragment || fragment.includes('=')) return;
+
     let highlightTimerId: ReturnType<typeof setTimeout> | null = null;
     let observer: MutationObserver | null = null;
 
-    const id = location.hash.slice(1);
+    const id = fragment;
     const scrollToHash = () => {
       const element = document.getElementById(id);
       if (!element) return false;
@@ -65,8 +102,11 @@ export function Page({ children }: PageProps) {
       observer.observe(document.body, { childList: true, subtree: true });
     }
 
+    const giveUpTimerId = window.setTimeout(() => observer?.disconnect(), 2500);
+
     return () => {
       observer?.disconnect();
+      window.clearTimeout(giveUpTimerId);
       if (highlightTimerId) {
         clearTimeout(highlightTimerId);
       }

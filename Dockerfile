@@ -1,4 +1,4 @@
-FROM oven/bun:1.3.14-alpine AS builder
+FROM oven/bun:1.4.0-alpine AS builder
 ARG COMMIT_HASH=unknown
 ARG BRANCH=container
 ENV COMMIT_HASH=${COMMIT_HASH}

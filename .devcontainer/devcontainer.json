@@ -3,7 +3,7 @@
   "build": {
     "dockerfile": "Dockerfile",
     "args": {
-      "BUN_VERSION": "1.3.14"
+      "BUN_VERSION": "1.4.0"
     }
   },
   "init": true,

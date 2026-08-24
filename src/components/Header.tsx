@@ -3,10 +3,12 @@ import SidebarVisibilityIcon from '@assets/icons/menu.svg?react';
 import SidebarRetractionIcon from '@assets/icons/layout-sidebar-left.svg?react';
 import DownloadIcon from '@assets/icons/download.svg?react';
 import UploadIcon from '@assets/icons/upload.svg?react';
+import ShareIcon from '@assets/icons/forward.svg?react';
 import UndoIcon from '@assets/icons/undo.svg?react';
 import RedoIcon from '@assets/icons/redo.svg?react';
 import { lazy, Suspense, useMemo, useState } from 'react';
 import { IconButton } from './IconButton';
+import { OverflowMenu } from './OverflowMenu';
 import { InlineGroup } from './InlineGroup';
 import { SaveSelector } from './SaveSelector';
 import { Badge } from './Badge';
@@ -22,11 +24,15 @@ const Upload = lazy(() =>
 const Download = lazy(() =>
   import('./Download').then((module) => ({ default: module.Download })),
 );
+const Share = lazy(() =>
+  import('./Share').then((module) => ({ default: module.Share })),
+);
 
 export function Header() {
   const { t } = useTranslation();
   const [isUploadOpen, setIsUploadOpen] = useState(false);
   const [isDownloadOpen, setIsDownloadOpen] = useState(false);
+  const [isShareOpen, setIsShareOpen] = useState(false);
   const envLabel = useMemo(() => getAppEnvironment(), []);
   const showEnvBadge = envLabel !== 'PRODUCTION';
   const envTone = useMemo<BadgeTone>(() => {
@@ -123,10 +129,38 @@ export function Header() {
           <div className="flex min-w-0 items-center gap-1.5">
             <SaveSelector />
           </div>
+          <OverflowMenu
+            className="sm:hidden"
+            label={t('ui.header.moreActions', 'More actions')}
+            items={[
+              {
+                id: 'undo',
+                label: t('ui.header.undo', 'Undo'),
+                icon: <UndoIcon />,
+                disabled: !hasSave || !canUndo,
+                onSelect: undo,
+              },
+              {
+                id: 'redo',
+                label: t('ui.header.redo', 'Redo'),
+                icon: <RedoIcon />,
+                disabled: !hasSave || !canRedo,
+                onSelect: redo,
+              },
+              {
+                id: 'share',
+                label: t('ui.header.share', 'Share'),
+                icon: <ShareIcon />,
+                disabled: !hasSave,
+                onSelect: () => setIsShareOpen(true),
+              },
+            ]}
+          />
           <IconButton
             accent="neutral"
             label={t('ui.header.undo', 'Undo')}
             icon={<UndoIcon />}
+            className="hidden sm:block"
             disabled={!hasSave || !canUndo}
             onClick={undo}
           />
@@ -134,13 +168,28 @@ export function Header() {
             accent="neutral"
             label={t('ui.header.redo', 'Redo')}
             icon={<RedoIcon />}
+            className="hidden sm:block"
             disabled={!hasSave || !canRedo}
             onClick={redo}
           />
           <IconButton
+            accent="purple"
+            label={t('ui.header.share', 'Share')}
+            icon={<ShareIcon />}
+            className="hidden sm:block"
+            disabled={!hasSave}
+            onClick={() => setIsShareOpen(true)}
+          />
+          {isShareOpen && (
+            <Suspense fallback={null}>
+              <Share isOpen={isShareOpen} setOpen={setIsShareOpen} />
+            </Suspense>
+          )}
+          <IconButton
             accent="green"
             label={t('ui.header.downloadSave', 'Download save')}
             icon={<DownloadIcon />}
+            disabled={!hasSave}
             onClick={() => setIsDownloadOpen(true)}
           />
           <Suspense fallback={null}>
