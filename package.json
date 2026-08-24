@@ -1,7 +1,7 @@
 {
   "name": "tenna-editor",
   "private": false,
-  "version": "0.13.0",
+  "version": "0.14.0",
   "type": "module",
   "packageManager": "bun@1.4.0",
   "engines": {

@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.14.0] - 2026-08-24
+
+This release adds save sharing through links and QR codes, unique visual save fingerprints, and more Chapter 5 flags.
+
+### Added
+
+- Added save sharing. ([PR #167](https://github.com/tennaproject/tenna-editor/pull/167))
+- Added unique visual fingerprints for each save, shown on the Overview tab and in the share dialog.
+- Added remaining Chapter 5 flags, including garden watering, castle collectibles, platforming rooms, and related bitfields. Thanks [Frisktaker](https://github.com/Frisktaker) for reporting! ([Issue #155](https://github.com/tennaproject/tenna-editor/issues/155), [PR #163](https://github.com/tennaproject/tenna-editor/pull/163))
+
+### Fixed
+
+- Fixed a save parser quirk that added trailing spaces to weapon style on every save/load cycle.
+- Corrected the BetterHeal flag description for current game versions. Fighting the Sound of Justice no longer upgrades the spell. Thanks [nmotsch789](https://github.com/nmotsch789) for reporting! ([Issue #156](https://github.com/tennaproject/tenna-editor/issues/156))
+- Corrected the reversed Spamton NEO chest reward description. A Violenced outcome now correctly notes that the chest gives PuppetScarf instead of DealMaker.
+
 ## [0.13.0] - 2026-08-13
 
 This release significantly changes the UI. Equipment stats and item information are now visible when editing them, and the party tabs display more information. Chapter 5 flag coverage has been expanded. Many bugs were fixed.
