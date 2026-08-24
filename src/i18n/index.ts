@@ -260,6 +260,7 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.home.showDogcheckedRooms': 'Show dogchecked rooms',
   'ui.home.showRoomsWithoutSavePoint': 'Show rooms without save point',
   'ui.home.source': 'Source:',
+  'ui.home.saveFingerprint': 'Unique fingerprint',
   'ui.home.unreversible': 'This action cannot be reversed!',
   'ui.home.welcomeTitle': 'Welcome',
   'ui.home.welcomeDescription':

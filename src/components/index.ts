@@ -55,3 +55,4 @@ export * from './ErrorBoundary';
 export * from './ResponsiveTable';
 export * from './Story';
 export * from './QrCode';
+export * from './SaveFingerprint';
