@@ -2,14 +2,17 @@ import { BrowserRouter } from 'react-router-dom';
 import { Suspense, useEffect } from 'react';
 
 import { AppRouter } from './router';
-import { ErrorBoundary } from '@components/ErrorBoundary';
-import { Header } from '@components/Header';
-import { LastSubtabTracker } from '@components/LastSubtabTracker';
-import { Sidebar } from '@components/Sidebar';
-import { ToastContainer } from '@components/Toast';
+import {
+  ErrorBoundary,
+  Header,
+  LastSubtabTracker,
+  ShareImport,
+  Sidebar,
+  ToastContainer,
+} from '@components';
 import { useSave, useUi } from '@store';
 import { MotionConfig } from 'framer-motion';
-import { translate } from './i18n';
+import { translate } from '@i18n';
 
 export function App() {
   const hasInitialized = useSave((s) => s.hasInitialized);
@@ -28,6 +31,7 @@ export function App() {
     <MotionConfig reducedMotion="user">
       <BrowserRouter>
         <LastSubtabTracker />
+        <ShareImport />
         <ToastContainer />
         <div className="h-full bg-surface-1">
           <main className="h-full flex flex-col overflow-hidden">

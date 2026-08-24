@@ -24,11 +24,15 @@ const Upload = lazy(() =>
 const Download = lazy(() =>
   import('./Download').then((module) => ({ default: module.Download })),
 );
+const Share = lazy(() =>
+  import('./Share').then((module) => ({ default: module.Share })),
+);
 
 export function Header() {
   const { t } = useTranslation();
   const [isUploadOpen, setIsUploadOpen] = useState(false);
   const [isDownloadOpen, setIsDownloadOpen] = useState(false);
+  const [isShareOpen, setIsShareOpen] = useState(false);
   const envLabel = useMemo(() => getAppEnvironment(), []);
   const showEnvBadge = envLabel !== 'PRODUCTION';
   const envTone = useMemo<BadgeTone>(() => {
@@ -148,7 +152,7 @@ export function Header() {
                 label: t('ui.header.share', 'Share'),
                 icon: <ShareIcon />,
                 disabled: !hasSave,
-                onSelect: () => {},
+                onSelect: () => setIsShareOpen(true),
               },
             ]}
           />
@@ -174,11 +178,18 @@ export function Header() {
             icon={<ShareIcon />}
             className="hidden sm:block"
             disabled={!hasSave}
+            onClick={() => setIsShareOpen(true)}
           />
+          {isShareOpen && (
+            <Suspense fallback={null}>
+              <Share isOpen={isShareOpen} setOpen={setIsShareOpen} />
+            </Suspense>
+          )}
           <IconButton
             accent="green"
             label={t('ui.header.downloadSave', 'Download save')}
             icon={<DownloadIcon />}
+            disabled={!hasSave}
             onClick={() => setIsDownloadOpen(true)}
           />
           <Suspense fallback={null}>
