@@ -28,6 +28,7 @@ export * from './base64';
 export * from './joaat';
 export * from './random';
 export * from './save-share';
+export * from './deltasaver';
 export * from './save-fingerprint';
 export * from './big-integer';
 export * from './dr-ini';

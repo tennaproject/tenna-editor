@@ -46,7 +46,7 @@ export function decodeSavePayload(payload: string): string {
   }
 }
 
-function capEncoded(
+export function capEncoded(
   value: string | undefined,
   max: number,
 ): string | undefined {

@@ -5,6 +5,7 @@ import { useSave } from '@store';
 import type { Save } from '@types';
 import {
   chapterHelpers,
+  createDeltasaverImportUrl,
   createShareUrl,
   formatTime,
   getPlotPointLabel,
@@ -87,6 +88,7 @@ export function Share({ isOpen, setOpen }: ShareProps) {
   const debouncedDescription = useDebouncedValue(description, 250);
 
   let url: string | null = null;
+  let deltasaverUrl: string | null = null;
   if (save && isOpen) {
     try {
       url = createShareUrl(save, {
@@ -95,6 +97,14 @@ export function Share({ isOpen, setOpen }: ShareProps) {
       });
     } catch {
       url = null;
+    }
+
+    try {
+      deltasaverUrl = createDeltasaverImportUrl(save, {
+        author: debouncedAuthor,
+      });
+    } catch {
+      deltasaverUrl = null;
     }
   }
 
@@ -106,6 +116,37 @@ export function Share({ isOpen, setOpen }: ShareProps) {
       setOpen(false);
     } catch {
       toast(t('ui.share.copyFailed', 'Could not copy the link'), 'error');
+    }
+  };
+
+  const sendToDeltasaver = () => {
+    if (!deltasaverUrl) return;
+
+    // this is a finicky way to detect if the link was opened
+    const clearHandlerCheck = () => {
+      window.clearTimeout(timer);
+      window.removeEventListener('blur', clearHandlerCheck);
+      document.removeEventListener('visibilitychange', clearHandlerCheck);
+    };
+    const timer = window.setTimeout(() => {
+      clearHandlerCheck();
+      toast(
+        t('ui.share.deltasaverFailed', 'Could not open DELTASAVER'),
+        'error',
+      );
+    }, 1500);
+    window.addEventListener('blur', clearHandlerCheck);
+    document.addEventListener('visibilitychange', clearHandlerCheck);
+
+    try {
+      location.href = deltasaverUrl;
+      setOpen(false);
+    } catch {
+      clearHandlerCheck();
+      toast(
+        t('ui.share.deltasaverFailed', 'Could not open DELTASAVER'),
+        'error',
+      );
     }
   };
 
@@ -134,6 +175,15 @@ export function Share({ isOpen, setOpen }: ShareProps) {
         <ModalFooter>
           <Button variant="secondary" size="lg" onClick={() => setOpen(false)}>
             {t('ui.common.cancel', 'Cancel')}
+          </Button>
+          <Button
+            variant="secondary"
+            size="lg"
+            className="w-full shrink-0 sm:w-auto sm:min-w-52"
+            disabled={!deltasaverUrl}
+            onClick={sendToDeltasaver}
+          >
+            {t('ui.share.sendToDeltasaver', 'Send to DELTASAVER')}
           </Button>
           <Button
             variant="primary"

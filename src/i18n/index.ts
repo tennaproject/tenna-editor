@@ -155,6 +155,8 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.share.copied': 'Share link copied',
   'ui.share.copyFailed': 'Could not copy the link',
   'ui.share.copyLink': 'Copy link',
+  'ui.share.sendToDeltasaver': 'Send to DELTASAVER',
+  'ui.share.deltasaverFailed': 'Could not open DELTASAVER',
   'ui.share.playtime': 'Playtime',
   'ui.share.room': 'Room',
   'ui.share.sharedAt': 'Shared',
