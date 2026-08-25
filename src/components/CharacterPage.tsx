@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import ResetIcon from '@assets/icons/reload.svg?react';
 import { type CharacterIndex } from '@data';
 import DividerIcon from '@assets/icons/minus.svg?react';
 import { characterHelpers } from '@utils/data-helpers';
@@ -152,7 +153,7 @@ export function CharacterPage({
                     />
                   </div>
                   <div className="flex justify-end">
-                    <Button onClick={resetStats} size="sm">
+                    <Button onClick={resetStats} size="sm" icon={<ResetIcon />}>
                       {t('ui.party.resetStats', 'Reset stats')}
                     </Button>
                   </div>

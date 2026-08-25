@@ -1,4 +1,7 @@
 import { useSave } from '@store';
+import ResetIcon from '@assets/icons/reload.svg?react';
+import DownloadIcon from '@assets/icons/download.svg?react';
+import ClearIcon from '@assets/icons/close.svg?react';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import {
@@ -632,6 +635,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
             onClick={resetExportSettings}
             variant="secondary"
             size="lg"
+            icon={<ResetIcon />}
             className="w-full shrink-0 sm:w-auto"
           >
             {t('ui.download.resetSettings', 'Reset settings')}
@@ -640,6 +644,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
             onClick={() => void downloadSave()}
             variant="primary"
             size="lg"
+            icon={<DownloadIcon />}
             className="w-full shrink-0 sm:w-auto sm:min-w-52"
             disabled={hasExportSetError}
           >
@@ -768,6 +773,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
                   <Button
                     size="sm"
                     variant="ghost"
+                    icon={<ClearIcon />}
                     onClick={() => {
                       setBaseDrIni('');
                       setBaseDrIniName('');
@@ -809,6 +815,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
                   <Button
                     size="sm"
                     variant="ghost"
+                    icon={<ClearIcon />}
                     onClick={() => {
                       setBaseContainer(undefined);
                       setBaseContainerName('');

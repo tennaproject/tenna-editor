@@ -1,4 +1,6 @@
 import { useUi } from '@store';
+import ExportIcon from '@assets/icons/download.svg?react';
+import ImportIcon from '@assets/icons/upload.svg?react';
 import {
   Checkbox,
   Page,
@@ -152,6 +154,7 @@ export function SettingsRoot() {
               <div className="flex flex-wrap gap-3 mt-2">
                 <Button
                   variant="primary"
+                  icon={<ExportIcon />}
                   onClick={async () => {
                     try {
                       await exportAllSaves();
@@ -168,6 +171,7 @@ export function SettingsRoot() {
                 </Button>
                 <Button
                   variant="secondary"
+                  icon={<ImportIcon />}
                   onClick={() => fileInputRef.current?.click()}
                 >
                   {t('ui.settings.importSaves', 'Import Saves')}

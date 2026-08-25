@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { mergeClass } from '@utils/merge-class';
 
 const variantClass = {
@@ -9,14 +10,22 @@ const variantClass = {
 };
 
 const sizeClass = {
-  sm: 'px-2 py-1 text-sm',
-  md: 'px-3 py-2 text-sm',
-  lg: 'px-4 py-2 text-base',
+  sm: 'px-2 py-1 text-sm gap-1.5',
+  md: 'px-3 py-2 text-sm gap-2',
+  lg: 'px-4 py-2 text-base gap-2',
+};
+
+const iconSizeClass = {
+  sm: 'w-4 h-4',
+  md: 'w-4 h-4',
+  lg: 'w-5 h-5',
 };
 
 interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
+  icon?: ReactNode;
+  iconPosition?: 'start' | 'end';
   children: React.ReactNode;
   onClick?: () => void;
   className?: string;
@@ -27,6 +36,8 @@ interface ButtonProps {
 export function Button({
   variant = 'ghost',
   size = 'md',
+  icon,
+  iconPosition = 'start',
   children,
   onClick,
   className = '',
@@ -47,7 +58,17 @@ export function Button({
       aria-label={props['aria-label']}
       {...props}
     >
+      {icon && iconPosition === 'start' && (
+        <span className={mergeClass('shrink-0', iconSizeClass[size])}>
+          {icon}
+        </span>
+      )}
       <span className="relative -top-px leading-none">{children}</span>
+      {icon && iconPosition === 'end' && (
+        <span className={mergeClass('shrink-0', iconSizeClass[size])}>
+          {icon}
+        </span>
+      )}
     </button>
   );
 }

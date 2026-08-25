@@ -1,4 +1,6 @@
 import { Button } from './Button';
+import FilesIcon from '@assets/icons/file-multiple.svg?react';
+import FolderIcon from '@assets/icons/folder.svg?react';
 import { mergeClass } from '@utils/merge-class';
 import {
   MAX_IMPORT_ENTRIES,
@@ -270,6 +272,7 @@ export function FileInput({
         <Button
           variant="secondary"
           size="lg"
+          icon={<FilesIcon />}
           onClick={() => fileInputRef.current?.click()}
         >
           {t('ui.upload.chooseFilesArchives', 'Choose files or archives')}
@@ -277,6 +280,7 @@ export function FileInput({
         <Button
           variant="secondary"
           size="lg"
+          icon={<FolderIcon />}
           onClick={() => folderInputRef.current?.click()}
         >
           {t('ui.upload.chooseFolder', 'Choose folder')}

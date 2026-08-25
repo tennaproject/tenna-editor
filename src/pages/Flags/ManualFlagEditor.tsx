@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import ApplyIcon from '@assets/icons/check.svg?react';
 import { Button, Page, Select, TextInput, type SelectItem } from '@components';
 import type { FlagBitfieldId, FlagBitfieldProperties, FlagIndex } from '@data';
 import { useSave } from '@store';
@@ -519,9 +520,10 @@ export function ManualFlagEditor() {
         <Button
           size="sm"
           variant="primary"
+          icon={<ApplyIcon />}
           onClick={handleApply}
           disabled={!!validation.error || nextValue === null}
-          className="h-8 w-full justify-center px-2 whitespace-nowrap sm:w-14 sm:justify-self-end"
+          className="h-8 w-full justify-center px-2 whitespace-nowrap sm:w-auto sm:justify-self-end"
         >
           {t('ui.flags.apply', 'Apply')}
         </Button>
