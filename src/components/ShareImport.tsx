@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import HomeIcon from '@assets/icons/home.svg?react';
+import CancelIcon from '@assets/icons/close.svg?react';
+import AddSaveIcon from '@assets/icons/save.svg?react';
 import { saveStorage, toast } from '@services';
 import { useSave } from '@store';
 import type { Save } from '@types';
@@ -151,7 +154,12 @@ export function ShareImport() {
         title={t('ui.share.invalidTitle', 'Cannot Read This Link')}
         footer={
           <ModalFooter>
-            <Button variant="primary" size="lg" onClick={close}>
+            <Button
+              variant="primary"
+              size="lg"
+              icon={<HomeIcon />}
+              onClick={close}
+            >
               {t('ui.share.goHome', 'Go to editor')}
             </Button>
           </ModalFooter>
@@ -192,12 +200,18 @@ export function ShareImport() {
       bodyClassName="pb-0"
       footer={
         <ModalFooter>
-          <Button variant="secondary" size="lg" onClick={close}>
+          <Button
+            variant="secondary"
+            size="lg"
+            icon={<CancelIcon />}
+            onClick={close}
+          >
             {t('ui.common.cancel', 'Cancel')}
           </Button>
           <Button
             variant="primary"
             size="lg"
+            icon={<AddSaveIcon />}
             className="w-full shrink-0 sm:w-auto sm:min-w-52"
             disabled={isAdding}
             onClick={() => void addSave()}

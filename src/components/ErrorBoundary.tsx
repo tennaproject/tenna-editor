@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import ReloadIcon from '@assets/icons/reload.svg?react';
 import type { ErrorInfo, ReactNode } from 'react';
 
 import { Button } from '@components';
@@ -57,7 +58,11 @@ export class ErrorBoundary extends Component<
             </pre>
           )}
 
-          <Button variant="primary" onClick={() => window.location.reload()}>
+          <Button
+            variant="primary"
+            icon={<ReloadIcon />}
+            onClick={() => window.location.reload()}
+          >
             Reload
           </Button>
         </div>

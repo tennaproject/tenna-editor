@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import CancelIcon from '@assets/icons/close.svg?react';
+import CopyIcon from '@assets/icons/copy.svg?react';
 import { useDebouncedValue } from '@hooks';
 import { toast } from '@services';
 import { useSave } from '@store';
@@ -132,12 +134,18 @@ export function Share({ isOpen, setOpen }: ShareProps) {
       bodyClassName="pb-0"
       footer={
         <ModalFooter>
-          <Button variant="secondary" size="lg" onClick={() => setOpen(false)}>
+          <Button
+            variant="secondary"
+            size="lg"
+            icon={<CancelIcon />}
+            onClick={() => setOpen(false)}
+          >
             {t('ui.common.cancel', 'Cancel')}
           </Button>
           <Button
             variant="primary"
             size="lg"
+            icon={<CopyIcon />}
             className="w-full shrink-0 sm:w-auto sm:min-w-52"
             disabled={!url}
             onClick={() => void copy()}

@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import DeleteIcon from '@assets/icons/trash.svg?react';
+import CancelIcon from '@assets/icons/close.svg?react';
 import {
   Section,
   TextLabel,
@@ -154,7 +156,11 @@ function DeleteSave() {
 
   return (
     <>
-      <Button variant="primary" onClick={() => setIsOpen(true)}>
+      <Button
+        variant="primary"
+        icon={<DeleteIcon />}
+        onClick={() => setIsOpen(true)}
+      >
         {t('ui.home.deleteSave', 'Delete Save')}
       </Button>
       <ModalLayout
@@ -163,13 +169,18 @@ function DeleteSave() {
         title={t('ui.home.deleteSave', 'Delete Save')}
         footer={
           <ModalFooter>
-            <Button onClick={() => setIsOpen(false)} variant="secondary">
+            <Button
+              onClick={() => setIsOpen(false)}
+              variant="secondary"
+              icon={<CancelIcon />}
+            >
               {t('ui.common.cancel', 'Cancel')}
             </Button>
             <Button
               onClick={() => void onDelete()}
               variant="primary"
               size="lg"
+              icon={<DeleteIcon />}
               className="w-full sm:w-auto sm:min-w-36"
             >
               {t('ui.common.delete', 'Delete')}

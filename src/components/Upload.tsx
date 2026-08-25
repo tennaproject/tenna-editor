@@ -1,4 +1,11 @@
 import { useSave, useUi } from '@store';
+import CancelIcon from '@assets/icons/close.svg?react';
+import BackIcon from '@assets/icons/arrow-left.svg?react';
+import NextIcon from '@assets/icons/arrow-right.svg?react';
+import ImportIcon from '@assets/icons/upload.svg?react';
+import RetryIcon from '@assets/icons/reload.svg?react';
+import SelectAllIcon from '@assets/icons/check-double.svg?react';
+import ClearSelectionIcon from '@assets/icons/close-box.svg?react';
 import { extractGamePayload } from '@utils/save-baseline';
 import {
   discoverImportCandidates,
@@ -403,7 +410,12 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
       case 'idle':
         return (
           <ModalFooter>
-            <Button onClick={closeUpload} variant="secondary" size="lg">
+            <Button
+              onClick={closeUpload}
+              variant="secondary"
+              size="lg"
+              icon={<CancelIcon />}
+            >
               {t('ui.common.cancel', 'Cancel')}
             </Button>
           </ModalFooter>
@@ -424,13 +436,18 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
       case 'review':
         return (
           <ModalFooter>
-            <Button onClick={() => changeStage('idle')} variant="secondary">
+            <Button
+              onClick={() => changeStage('idle')}
+              variant="secondary"
+              icon={<BackIcon />}
+            >
               {t('ui.common.back', 'Back')}
             </Button>
             <Button
               onClick={() => void importCandidates(selectedCandidates)}
               variant="primary"
               size="lg"
+              icon={<ImportIcon />}
               className="w-full sm:w-auto sm:min-w-48"
               disabled={selectedCandidates.length === 0 || isImporting}
             >
@@ -449,13 +466,19 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
       case 'chapter':
         return (
           <ModalFooter>
-            <Button onClick={() => changeStage('idle')} variant="secondary">
+            <Button
+              onClick={() => changeStage('idle')}
+              variant="secondary"
+              icon={<BackIcon />}
+            >
               {t('ui.common.back', 'Back')}
             </Button>
             <Button
               onClick={() => changeStage('settings')}
               variant="primary"
               size="lg"
+              icon={<NextIcon />}
+              iconPosition="end"
               className="w-full sm:w-auto sm:min-w-40"
             >
               {t('ui.common.next', 'Next')}
@@ -468,6 +491,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
             <Button
               onClick={() => changeStage(previousUploadStage)}
               variant="secondary"
+              icon={<BackIcon />}
             >
               {t('ui.common.back', 'Back')}
             </Button>
@@ -475,6 +499,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
               onClick={() => void importSingleCandidate()}
               variant="primary"
               size="lg"
+              icon={<ImportIcon />}
               className="w-full sm:w-auto sm:min-w-40"
               disabled={isImporting}
             >
@@ -491,6 +516,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
               onClick={() => changeStage('idle')}
               variant="primary"
               size="lg"
+              icon={<RetryIcon />}
               className="w-full sm:w-auto sm:min-w-40"
             >
               {t('ui.common.tryAgain', 'Try again')}
@@ -746,6 +772,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
                 <div className="flex gap-2">
                   <Button
                     size="sm"
+                    icon={<SelectAllIcon />}
                     onClick={() =>
                       setCandidates((current) =>
                         current.map((candidate) => ({
@@ -760,6 +787,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
                   </Button>
                   <Button
                     size="sm"
+                    icon={<ClearSelectionIcon />}
                     onClick={() =>
                       setCandidates((current) =>
                         current.map((candidate) => ({
