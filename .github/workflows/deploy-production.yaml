@@ -19,6 +19,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       BUILD_DIR: dist
       PREVIEW_BRANCH: main
+      BRANCH: main
 
     steps:
       - uses: actions/checkout@v7
