@@ -32,3 +32,4 @@ dev-dist
 # GitHub files
 LICENSE
 .github
+public/_headers

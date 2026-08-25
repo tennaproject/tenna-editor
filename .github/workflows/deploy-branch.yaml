@@ -1,12 +1,18 @@
-name: Deploy to Cloudflare Pages (Preview)
+name: Deploy to Cloudflare Pages (Branch)
 
 on:
   push:
-    branches: [main]
+    branches-ignore:
+      - main
+      - 'dependabot/**'
   workflow_dispatch:
 
+concurrency:
+  group: deploy-branch-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  deploy-preview:
+  deploy-branch:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -18,8 +24,7 @@ jobs:
       CF_PROJECT: tenna
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       BUILD_DIR: dist
-      PREVIEW_BRANCH: preview
-      BRANCH: preview
+      BRANCH: ${{ github.ref_name }}
 
     steps:
       - uses: actions/checkout@v7
@@ -33,6 +38,7 @@ jobs:
           VITE_DEPLOY_TARGET: preview
 
       - name: deploy with wrangler
+        id: deploy
         uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ env.CF_API_TOKEN }}
@@ -40,4 +46,14 @@ jobs:
           command: >
             pages deploy ${{ env.BUILD_DIR }}
             --project-name=${{ env.CF_PROJECT }}
-            --branch=${{ env.PREVIEW_BRANCH }}
+            --branch=${{ github.ref_name }}
+
+      - name: report url
+        run: |
+          {
+            echo "### Branch preview"
+            echo
+            echo "Branch: \`${{ github.ref_name }}\`"
+            echo
+            echo "Deployment: ${{ steps.deploy.outputs.deployment-url }}"
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -11,12 +11,14 @@ import {
   getChangelog,
   generateSitemap,
   generateRobots,
+  generateHeaders,
 } from './scripts';
 
 const { packageVersion, commitHash, branch } = await getVersion();
 const changelog = await getChangelog();
 await generateSitemap();
 await generateRobots(branch);
+await generateHeaders(branch);
 
 export default defineConfig({
   plugins: [
