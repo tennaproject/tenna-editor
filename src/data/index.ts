@@ -16,3 +16,4 @@ export * from './characters';
 export * from './enemies';
 export * from './story-sections';
 export * from './plot-points';
+export * from './save-templates';

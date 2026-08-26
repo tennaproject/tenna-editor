@@ -305,6 +305,12 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.home.uploadSaveCta': 'Click here to upload save',
   'ui.home.uploadSaveCtaSubtext':
     'or click upload button in the top-right corner',
+  'ui.template.title': 'Start from scratch',
+  'ui.template.description':
+    'No save file at hand? Create a fresh save for a chapter. It works the same way you start in the game without a Completion Save: no items, no Dark Dollars, and the default equipment. But you can edit it right away.',
+  'ui.template.defaultName': 'CH{chapter} New Game',
+  'ui.template.created': 'New game save created.',
+  'ui.template.uploadLabel': 'or start from scratch',
   'ui.home.whereToFindSaves': 'Where to find saves?',
   'ui.home.saveLocationsIntro':
     'Your DELTARUNE save files are typically located in the following directories:',

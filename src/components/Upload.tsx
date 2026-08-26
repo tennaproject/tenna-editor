@@ -13,6 +13,7 @@ import type { Save, SaveSlot } from '@types';
 import { saveStorage, toast } from '@services';
 import {
   TextInput,
+  StartFromTemplate,
   TextLabel,
   Checkbox,
   Badge,
@@ -682,6 +683,9 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
       title={t(STAGE_TITLE_KEYS[uploadStage], STAGE_TITLES[uploadStage])}
       footer={renderFooter()}
       variant={uploadStage === 'review' ? 'workspace' : 'standard'}
+      panelClassName={
+        uploadStage === 'idle' ? 'h-[min(90vh,35rem)]' : undefined
+      }
       bodyClassName={
         uploadStage === 'review'
           ? 'flex min-h-0 flex-1 flex-col overflow-hidden'
@@ -697,7 +701,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={transition}
-              className="absolute inset-0 flex min-h-0 items-stretch"
+              className="absolute inset-0 flex min-h-0 flex-col gap-3"
             >
               <FileInput
                 onFilesSelect={(files) => void onFilesSelect(files)}
@@ -707,6 +711,15 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
                 }}
                 className="min-h-0 flex-1"
               />
+              <div className="flex flex-col gap-2">
+                <TextLabel>
+                  {t('ui.template.uploadLabel', 'or start from scratch')}
+                </TextLabel>
+                <StartFromTemplate
+                  className="flex flex-wrap gap-2"
+                  onCreated={closeUpload}
+                />
+              </div>
             </motion.div>
           )}
 

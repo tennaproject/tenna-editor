@@ -1,4 +1,4 @@
-import { Card, Heading, Section } from '@components';
+import { Card, Heading, Section, StartFromTemplate } from '@components';
 import { lazy, Suspense, useState } from 'react';
 import { formatTranslation, useTranslation } from '../../i18n';
 
@@ -61,6 +61,20 @@ export function HomeWelcome() {
               <Upload isOpen={isUploadOpen} setOpen={setIsUploadOpen} />
             </Suspense>
           )}
+        </Section>
+        <Section id="template" className="flex flex-col gap-2">
+          <Heading level={4}>
+            {t('ui.template.title', 'Start from scratch')}
+          </Heading>
+          <div className="ui-prose-muted">
+            <p>
+              {t(
+                'ui.template.description',
+                'No save file at hand? Create a fresh save for a chapter. It works the same way you start in the game without a Completion Save: no items, no Dark Dollars, and the default equipment. But you can edit it right away.',
+              )}
+            </p>
+          </div>
+          <StartFromTemplate className="flex flex-wrap gap-2" />
         </Section>
         <Section id="filelocation" className="flex flex-col gap-1">
           <Heading level={4}>
