@@ -28,3 +28,7 @@ export function seededRandom(seed: string) {
 
   return next;
 }
+
+export function randomInt(maxInclusive: number): number {
+  return Math.floor(Math.random() * (maxInclusive + 1));
+}

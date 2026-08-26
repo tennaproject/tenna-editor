@@ -1039,5163 +1039,4131 @@ export type RoomName = keyof typeof ROOMS;
 
 export interface RoomProperties extends BaseProperties {
   hasSavePoint: boolean;
-  dogcheck: boolean;
 }
 
 export const ROOMS_META: Record<RoomIndex, RoomProperties> = {
   [ROOMS.KRISROOM]: {
     displayName: "Kris's Room",
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.KRISHALLWAY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TORROOM]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TORHOUSE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TORBATHROOM]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_KRISYARD]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_NORTHWEST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_NORTH]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.BEACH]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_MID]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_APARTMENTS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_SOUTH]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_SCHOOL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_CHURCH]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.GRAVEYARD]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_SHELTER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.HOSPITAL_LOBBY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.HOSPITAL_HALLWAY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.HOSPITAL_RUDY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.HOSPITAL_ROOM2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DINER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWNHALL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FLOWERSHOP_1F]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FLOWERSHOP_2F]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LIBRARY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.ALPHYSALLEY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TORIELCLASS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.SCHOOLLOBBY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.ALPHYSCLASS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.SCHOOLDOOR]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.INSIDECLOSET]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.SCHOOL_UNUSEDROOM]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DARK1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DARK1A]: {
     displayName: '?????? (Dark World)',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DARK2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DARK3]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DARK3A]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DARK_WOBBLES]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DARK_EYEPUZZLE]: {
     displayName: 'Eye Puzzle',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DARK7]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DARK_CHASE1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DARK_CHASE2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CASTLE_OUTSKIRTS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CASTLE_TOWN]: {
     displayName: 'Castle Town',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.CASTLE_FRONT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CASTLE_TUTORIAL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CASTLE_DARKDOOR]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FIELD_START]: {
     displayName: 'Field - Great Door',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.FIELD_FOREST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FIELD1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FIELD2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FIELD2A]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FIELD_TOPCHEF]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FIELD_PUZZLE1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FIELD_MAZE]: {
     displayName: 'Field - Maze of Death',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.FIELD_PUZZLE2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FIELD_GETSUSIE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FIELD_SHOP1]: {
     displayName: "Field - Seam's Shop",
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.FIELD_PUZZLETUTORIAL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FIELD3]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FIELD_BOXPUZZLE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FIELD4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FIELD_SECRET1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FIELD_CHECKERS4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FIELD_CHECKERS2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FIELD_CHECKERS6]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FIELD_CHECKERS3]: {
     displayName: 'Field - Great Board',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.FIELD_CHECKERS1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FIELD_CHECKERS5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FIELD_CHECKERS7]: {
     displayName: 'Field - Great Board 2',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.FIELD_CHECKERSBOSS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FOREST_SAVEPOINT1]: {
     displayName: 'Forest - Entrance',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.FOREST_AREA0]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FOREST_AREA1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FOREST_AREA2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FOREST_AREA2A]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FOREST_PUZZLE1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FOREST_BEFORECLOVER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FOREST_AREA3A]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FOREST_AREA3]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FOREST_SAVEPOINT2]: {
     displayName: 'Forest - Bake Sale',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.FOREST_SMITH]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FOREST_AREA4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FOREST_DANCERS1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FOREST_SECRET1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FOREST_THRASHMAKER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FOREST_STARWALKER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FOREST_AREA5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FOREST_SAVEPOINT_RELAX]: {
     displayName: 'Forest - Before Maze',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.FOREST_MAZE1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FOREST_MAZE_DEADEND]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FOREST_MAZE_SUSIE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FOREST_MAZE2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FOREST_MAZE_DEADEND2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FOREST_SAVEPOINT3]: {
     displayName: 'Forest - After Maze',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.FOREST_FIGHTSUSIE]: {
     displayName: 'Forest - Thrashing Room',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.FOREST_AFTERTHRASH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FOREST_AFTERTHRASH3]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FOREST_AFTERTHRASH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FOREST_CASTLEVIEW]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FOREST_CHASE1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FOREST_CHASE2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FOREST_CASTLEFRONT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_PRISON_CELLS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_PRISONLANCER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_PRISON_TO_ELEVATOR]: {
     displayName: 'Card Castle - ??? (Basement)',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.CC_PRISON2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_PRISONELEVATOR]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_ELEVATOR]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_PRISON_PREJOKER]: {
     displayName: 'Card Castle - Prison',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.CC_JOKER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_ENTRANCE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_1F]: {
     displayName: 'Card Castle - 1F',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.CC_RUDINN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_2F]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_RURUS1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_3F]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_HATHY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_4F]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_RURUS2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_CLOVER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_5F]: {
     displayName: 'Card Castle - 5F',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.CC_LANCER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_6F]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_THRONEROOM]: {
     displayName: 'Card Castle - Throne',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.CC_PREROOF]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_KINGBATTLE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_PREFOUNTAIN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_FOUNTAIN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.EMPTY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.MAN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.PLACE_DOGCHECK2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.INTRO_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_FOUNTAIN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_PREFOUNTAIN]: {
     displayName: '',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DEBUG_CHOICER_LIGHT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DEBUG_SMALLFACE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DEBUG_BATTLE_BALLOON]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DEBUG_SMALLFACE_DARK]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DEBUG_CHOICER_DARK]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.GMS_DEBUG_FAILSAFE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.ROOM_INITIALIZE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TITLE_PLACEHOLDER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.BATTLETEST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CUTSCENE_TESTER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.SOUND_TESTER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.SPRITE_TESTER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.GIF_TESTER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.BULLETTEST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TEACUP_DEMOAUTO]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TEACUP_DEMOBULLETS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.SHAUN_PUZZLE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.GMS2_TEST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CUTSCENE_TESTER_B]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DEBUG_COLOR]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DEBUG_BATTLE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DEBUG_LOC]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.PLACE_CONTACT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.KRISROOM_CH2]: {
     displayName: "Kris's Room",
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.KRISHALLWAY_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TORROOM_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TORHOUSE_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TORBATHROOM_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_KRISYARD_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_NORTHWEST_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_NORTH_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.BEACH_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_MID_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_APARTMENTS_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_SOUTH_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_SCHOOL_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_CHURCH_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.GRAVEYARD_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_SHELTER_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.HOSPITAL_LOBBY_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.HOSPITAL_HALLWAY_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.HOSPITAL_RUDY_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.HOSPITAL_ROOM2_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DINER_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWNHALL_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FLOWERSHOP_1F_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FLOWERSHOP_2F_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LIBRARY_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.ALPHYSALLEY_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_COMPUTER_LAB]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_LIBRARY_UPSTAIRS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_POLICE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_CONBINI]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_ICEE_PIZZA]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TORIELCLASS_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.SCHOOLLOBBY_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.ALPHYSCLASS_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.SCHOOLDOOR_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.INSIDECLOSET_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.SCHOOL_UNUSEDROOM_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CASTLE_TOWN_CH2]: {
     displayName: 'Castle Town',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.CASTLE_TUTORIAL_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_WEST_CLIFF_OLD]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_EAST_DOOR]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_WEST_CLIFF]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_AREA_1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_AREA_2]: {
     displayName: 'Castle Town',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_AREA_2_TRANSFORMED]: {
     displayName: 'My Castle Town',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_RALSEI_CASTLE_FRONT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_RESTAURANT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_CAFE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_DOJO]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_RALSEI_CASTLE_1F]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_RALSEI_CASTLE_2F]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_DUNGEON]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_ROOMS_HALLWAY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_ROOMS_KRIS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_ROOMS_SUSIE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_ROOMS_LANCER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_INTRO_1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_INTRO_CONNECTOR]: {
     displayName: '',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_INTRO_2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_RHYTHM_SLIDE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_SAVEPOINT]: {
     displayName: 'Cyber Field - Entrance',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_BATTLE_MAZE_1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_MUSIC_BULLET]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_TASQUE_BATTLE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_KEYBOARD_PUZZLE_1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_QUEEN_BOXING]: {
     displayName: 'Cyber Field - Arcade Machine',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_MUSICAL_DOOR]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_MAZE_VIROKUN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_KEYBOARD_PUZZLE_2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_BATTLE_MAZE_2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_MUSIC_FINAL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_MUSICAL_SHOP]: {
     displayName: 'Cyber Field - Music Shop',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_TEACUP_FINAL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_ROLLERCOASTER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_MAZE_FIREWORKS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_MAZE_TASQUE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_MAZE_QUEENSCREEN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_VIRO_RING]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_POST_MUSIC_BOSS_SLIDE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_KEYBOARD_PUZZLE_3]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_BATTLE_MAZE_3]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_TEACUP_2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_SHAUNSMUSICALBULLETTUNNEL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_MAZE_RHYTHM]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_ESCALATOR_SLIDE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_NUBERTS_TREASURE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_MUSIC_FIGHT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_KEYBOARDEXAMPLE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_PROTOTYPE_01]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_PROTOTYPE_02]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_SPAMTON_SHOP_EXTERIOR]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_SPAMTON_HOUSE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_INTRO]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_SPLIT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_ENTRANCE]: {
     displayName: 'Cyber City - Entrance',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_TRAFFIC_1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_ROADBLOCK]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_HACKER]: {
     displayName: 'Cyber City - First Alleyway',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_MICE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_BIG_1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_TRAFFIC_2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_BIG_2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_QUEEN_DRUNK]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_SAVEPOINT]: {
     displayName: 'Cyber City - Music Shop',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_BIG_3]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_TRAFFIC_3]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_MICE2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_CHEESEMAZE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_MICE3]: {
     displayName: 'Cyber City - Mouse Alley',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_POPPUP]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_BERDLY]: {
     displayName: 'Cyber City - Second Alleyway',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_TRAFFIC_4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_SPAMTON_ALLEY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_MONOLOGUE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_BASEBALL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_POSTBASEBALL_1]: {
     displayName: 'Cyber City - Heights',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_POSTBASEBALL_2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_POSTBASEBALL_3]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_MANSION_FRONT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_SUSIE_RALSEI_FUN_1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_MIRRORFRIEND]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_TREASURE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_DOG_TRAFFIC]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_MAN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_MOSS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_BIG_3_BACKUP_2EXITS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_TRAFFIC_3_2ENTRANCES]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_CHEESE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_CARNIVAL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_NOELLE_FIGHT_INTRO]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_SPAMTON_SHOP_INTERIOR]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_MONOLOGUE_OLD]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_KRISROOM]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_SUSIEROOM]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_LIGHTNER_HALLWAY]: {
     displayName: "Queen's Mansion - Guest Hall",
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_DARKBULB_1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_DARKBULB_2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_DARKBULB_3]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_DINING_A]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_ENTRANCE]: {
     displayName: "Queen's Mansion - Entrance",
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_FIRE_PAINTINGS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_SINGLE_POT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_POTBALANCE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_TASQUEPAINTINGS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_TRAFFIC]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_1F_E]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_1F_SECRET]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_TEACUP]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_TEACUP_4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_TEACUP_3]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_TEACUP_2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_B_ENTRANCE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_B_STAIRS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_B_CENTRAL]: {
     displayName: "Queen's Mansion - Basement",
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_B_WEST_1F]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_B_WEST_1F_A]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_B_WEST_1F_B]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_B_WEST_2F]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_B_EAST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_B_EAST_A]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_B_EAST_B]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_B_EAST_TRANSFORMED]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_2F_A]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_2F_TRANSFORMED_NEW]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_2F_SHORTCUT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_KITCHEN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_2F_C]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_2F_C_A]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_2F_D]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_3F]: {
     displayName: "Queen's Mansion - 3F",
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_3F_PROJECTION]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_3F_TOILET]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_ACID_TUNNEL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_ACID_TUNNEL_PUZZLE_ENTRANCE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_ACID_TUNNEL_LOOP_ROUXLS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_ACID_TUNNEL_EXIT]: {
     displayName: "Queen's Mansion - Acid Tunnel",
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_4F_B]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_4F_C]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_4F_D]: {
     displayName: "Queen's Mansion - 4F",
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_TOP]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_TOP_POST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_FERRIS_WHEEL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_FERRIS_WHEEL_POST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_NOELLE_ROOM]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_BRIDGES]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_BRIDGES_FUNNY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_MOUSELOTTERY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_HANDS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_DINING3]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_DININGHALL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_DINING_STORAGE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_1F_B]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_2F_C_B]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_TRAFFIC_ORIGINAL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_1F_A]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_2F_TEACUP]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_4F_E]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_4F_A]: {
     displayName: '',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_2F_UFO_OLD]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_1F_D]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_1F_C]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_SPARKS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_ACID_TUNNEL_OLD]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_TOP_POST_OLD]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_ELEVATOR]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.PLACE_DOG]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LEGEND]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LEGEND_NEO]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.SHOP1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.SHOP_CH2_MUSIC]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.SHOP_CH2_SWATCH]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.SHOP_CH2_SPAMTON]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.GAMEOVER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.PLACE_LOGO]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.PLACE_FAILURE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.PLACE_NAMING_JIKKEN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.PLACE_MENU]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.ED]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.EMPTY_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DARKEMPTY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DARKBASE_GMS2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_BATTLE_MAZE_2_OLD]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_KEYBOARD_PUZZLE_1_OLD]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_TASQUE_BATTLE_OG]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_SAVEPOINT_ORIGINAL]: {
     displayName: '',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_BATTLE_MAZE_1_ORIGINAL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_MUSIC_BULLET_ORIGINAL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_MAZE_VIROKUN_BACKUP]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_BATTLE_MAZE_2_TOBY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_BIG_1_ORIGINAL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_TRAFFIC_2_OLD]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_BIG_2_OG]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_MICE2_OG]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_TEACUP_4_OLD]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_TEACUP_1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_VIROMAZE2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_TRAFFIC_5_OLD]: {
     displayName: '',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_DINING_STORAGE_OLD]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CYBER_VIROVIROKUN_FIGHT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_EAST_2F_D_BACKUP]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_TRAFFIC_3_BACKUP]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_LANCER_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_CLOVER_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_FOUNTAIN_CH2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_BIG_3_OG]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_BRIDGESOLD]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CITY_SIDEWAYSCARS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TRANSFORMATION_SEQUENCE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_MANSION_GIGAQUEEN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.MUSICAL_SYNC_TEST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TV_CUTSCENE1G]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_RHYTHM]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_COUCH_OVERWORLD_INTRO]: {
     displayName: 'Dark World',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_COUCH_OVERWORLD_01]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_COUCH_OVERWORLD_02]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_COUCH_OVERWORLD_03]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_COUCH_OVERWORLD_04]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_COUCH_OVERWORLD_05]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_NONDESCRIPT_ROOM]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_NONDESCRIPT_FIELD]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_NONDESCRIPT_HALLWAY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_NONDESCRIPT_CLASSROOM]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_BACKSTAGE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_SNOW_ZONE]: {
     displayName: 'Cold Place',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.TOWN_KRISYARD_DARK]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.BOARD_1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.BOARD_DUNGEON_2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.BOARD_DUNGEON_3]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.BOARD_PRESHADOWMANTLE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.SHADOWMANTLE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.BOARD_PREPOSTSHADOWMANTLE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.BOARD_POSTSHADOWMANTLE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CH3_MAN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.SUSIEZILLA]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.BOARD_INTRO]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TORHOUSE_SEPIA]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CH3_GAMESHOWROOM]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.SHOOTOUT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.BOARD_PRESHADOWMANTLE_REPEAT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GREEN_ROOM]: {
     displayName: 'Green Room',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.BOARD_1_SWORD]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.BOARD_SWORD_INTRO]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.BOARD_1_SWORD_TREES]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHANGING_ROOM]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CONSOLE_ROOM]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.BOARD_2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TV_CLOSET]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.BOARD_3]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_B3BS_INTERSTITIAL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.BOARD_2_SWORD]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.BOARD_EMPTY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_B3BS_ROUXLS_LANINA]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_B3BS_ROUXLS_BOSS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_B3BS_CHEATERPIPPINS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_B3BS_IDCARDPUZZLE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_B3BS_INTRO]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_B3BS_ZAPPER_A]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_B3BS_RABBICK_A]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_B3BS_LANCERGET]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_B3BS_COOLTRASHY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_B3BS_ZAPPER_C]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_B3BS_RABBICK_B]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_B3BS_SADSHADOWGUYS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_B3BS_ZAPPER_B]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_SUSIEZILLA]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_INBETWEEN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_PREVIEW]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHEF]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_PUZZLECLOSET_1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_PUZZLECLOSET_2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHEF_EMPTY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_SUSIEZILLA_EMPTY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_RHYTHM_EMPTY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.BOARD_3B]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_B3BS_JAIL1]: {
     displayName: 'TV World - Goulden Sam',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_B3BS_SHOP]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_B3BS_MYSTERYPUZZLE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_B3BS_WATERCOOLER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_B3BS_JAIL2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_B3BS_ZAPPER_D]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_B3BS_EXTRAPUZZLE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_B3BS_BIBLIOX]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.BOARD_3_SWORD]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_COUCH_POINTS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_COUCH_OVERWORLD_INTRO_LEFT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_COUCH_VIDEO]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_SNOW_ZONE_BATTLE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_PUZZLECLOSET_0]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.BOARD_GSA02_B0]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TV_CURTAIN]: {
     displayName: 'TV World - Before the Show',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_INTRO]: {
     displayName: 'TV World - Entrance',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_LARGE_01]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_LARGE_02]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_COWBOY_ZONE_01_INTRO]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_COWBOY_ZONE_01_AFTER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_WATERCOOLER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_SUSIEZILLA]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_COWBOY_ZONE_02_INTRO]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_COWBOY_ZONE_02_AFTER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_SHADOW_GUYS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_STEALTH_C]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_STEALTH]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_FAILURE_CAGE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_RHYTHM]: {
     displayName: 'TV World - Concert',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_MAZE_POINTS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_MAZE_CHEF]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_MAZE_FINAL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_MAZE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_CHEF]: {
     displayName: 'TV World - Cooking Show',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_CUTSCENE_FINAL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_RIBBICK]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_PREVIEW_SOUTH]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_B3BS_CAMERAREMINDER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_PUZZLECLOSET_3]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_SAMS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_BONUS_ZONE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_AUDIENCEPITS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_LIGHTMAZE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_MAZE_QUIZ]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_RANKING_HUB]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_RANKING_A]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_RANKING_B]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_RANKING_C]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_RANKING_Z]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_RANKING_Z_HALLWAY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_RIBBICKS_A]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_RIBBICKS_B]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_SUSIEBRIDGE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_SHUTTAHMAZE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_STEALTH_D]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_DUST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_TEEVIE_DUST_SOUTH]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CH3_GACHAROOM_UNKNOWN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_RANKING_T]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_PUZZLECLOSET_1A]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_RHYTHM_COUNTDOWN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_SNOW_ZONE_EAST_DOOR]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_INBETWEENHALL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.KRISROOM_CH4]: {
     displayName: "Kris's Room",
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.KRISHALLWAY_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TORROOM_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TORHOUSE_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TORBATHROOM_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_KRISYARD_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_NORTHWEST_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_NORTH_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.BEACH_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_MID_CH4]: {
     displayName: 'Hometown',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.TOWN_APARTMENTS_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_SOUTH_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_SCHOOL_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_CHURCH_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.GRAVEYARD_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_SHELTER_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.HOSPITAL_LOBBY_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.HOSPITAL_HALLWAY_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.HOSPITAL_RUDY_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.HOSPITAL_ROOM2_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DINER_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWNHALL_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FLOWERSHOP_1F_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FLOWERSHOP_2F_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LIBRARY_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.ALPHYSALLEY_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_COMPUTER_LAB_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_LIBRARY_UPSTAIRS_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_POLICE_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_CONBINI_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_ICEE_PIZZA_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_CHURCH_ENTRANCE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_CHURCH_MAIN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_NOELLEHOUSE_MAIN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_NOELLEHOUSE_KITCHEN]: {
     displayName: "Noelle's House",
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.LW_NOELLEHOUSE_BATHROOM]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_NOELLEHOUSE_KEYROOM]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_NOELLEHOUSE_NOELLE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_NOELLEHOUSE_DESS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_NOELLEHOUSE_CLOSET]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TORIELCLASS_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.SCHOOLLOBBY_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.ALPHYSCLASS_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.SCHOOLDOOR_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.INSIDECLOSET_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.SCHOOL_UNUSEDROOM_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CASTLE_TUTORIAL_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_EAST_DOOR_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_WEST_CLIFF_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_AREA_1_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_TOWN_CH4]: {
     displayName: 'My Castle Town',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_RALSEI_CASTLE_FRONT_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_RESTAURANT_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_CAFE_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_DOJO_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_RALSEI_CASTLE_1F_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_RALSEI_CASTLE_2F_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_DUNGEON_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_ROOMS_KRIS_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_ROOMS_SUSIE_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.PLACE_MENU_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_LANCER_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_CLOVER_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_FOUNTAIN_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_SLIDINGBOOKSHELF]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_BELLPLAY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.INTRO_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_CANDLELIGHTING]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_NOELLEHOUSE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_INTRO1]: {
     displayName: 'Dark Sanctuary - Atrium',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_INTRO3]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_INTRO_GUEI]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_LANTERN_HALLWAY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_GERSONSTUDY]: {
     displayName: 'Dark Sanctuary - Study',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_STAIRS_WEST_BELL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_LIBRARYBOOKENEMY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_BOOKSHELFPUZZLE1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_BOOKSHELFPUZZLE2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_WORSHIPROOM]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_SWINGINGBELL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_TALLBOOKCASES]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_LANTERN2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_SMALLBELLS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_CLAW]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_SHELFCLIMB1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_STATUECLIMB]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_OFFERING]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_NPCROOM_SHELFCLIMB]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_STAIRS_STAINEDGLASS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_BELLSAREAWEST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_STAIRS_TOPRIGHT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_POOLSROOM1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_CANDLESROOM1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_SOLOWATERFALL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_STATUEROOM]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_POOLSROOM2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_SHELFCLIMB2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_STATUECLIMB_NPCROOM]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_BELLHALL_WEST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_FOUNTAINCONNECTION]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_STAINEDGLASSPREVIEW]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_STAIRS_TOPLEFT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_NPCROOM_POOLS1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_POOLSROOM1_EAST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_MINORLEGEND]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_BOOKENEMYWEST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_POOLSROOM2SOUTH]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_CHURCH_OFFICE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_BELLHALL_EAST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_BELLHALL_CENTRAL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_RALSEI_CASTLE_3F]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_ROOMS_RALSEI]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_ROTATING_TOWER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.KRISROOM_DARK]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_NOELLEHOUSE_VENTS_WEST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_KRISYARD_DARK_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_ROOMS_QUEEN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_ROOMS_TENNA]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_RIPPLEPUZZLE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_GLASS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_STAIRCASE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_BELLHALL_BOOKROOM]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_BOOKCASE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_SAVEPOINT]: {
     displayName: 'Dark Sanctuary - Lower Left',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_DARK_FIRE_PUZZLE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_TURTLES]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_GUEI]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_JACKENSTEIN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_BELLHALL_CURTAIN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_DOGCLIMB]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_ARENA]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_NONGERSON_POST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_NOELLEHOUSE_VENTS_NORTH]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_NOELLEHOUSE_VENTS_EAST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_NOELLEHOUSE_VENTS_SOUTH]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_CLIMBTUT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_FASTWATER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_CRUMBLETOWER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_TOWER1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_CHURCH_CHOIR]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_BELLCLIMB]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_SHIFTCLIMB]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_INTROPIANO]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_INTRO_GERSON]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_PIANOPIECE_LEFT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_NORTHPROPHECIES]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_DARKMAZE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_QUICKTEST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_PIANOPIECE_RIGHT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_PIANOPUZZLE]: {
     displayName: 'Dark Sanctuary - Small Piano',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_NWCONNECT]: {
     displayName: 'Dark Sanctuary - Library',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_RIGHTCONNECT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_STAIRSPREVIEW]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_TRUECLIMBADVENTURE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_ORGANPUZZLE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_MIZZLEENCOUNTER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_SIDECLIMB]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_SECRETPIANO]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_RIPPLEPUZZLE_POSTGERS]: {
     displayName: 'Dark Sanctuary - Lower Right',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_TALLBOOKCASES_BACKUP]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_FOUNTAIN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_B_INTRO]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHC_FINAL_PROPHECY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_BOOKSHELFPUZZLE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_NOELLEHOUSE_BASEMENT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_BIBLIOXENCOUNTER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_DARKCLIMB]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_MONEYFOUNTAIN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_PIANOPIECE_LEFT_B]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_PIANOPIECE_RIGHTPROPHECY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_SHADOWGERSON]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_HOLYWATERCOOLER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_RIPPLEWORSHIP]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_WATERFALLROOM]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_WATERFALLTEAROOM]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_ROOMS_KRIS_SUSIE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_STAIRCASEINTRO]: {
     displayName: '2nd Sanctuary - Atrium',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_PROPHECYENCOUNTER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_WORSHIPROOM]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_LIBRARYCONNECTOR]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_SAVEPOINT]: {
     displayName: '2nd Sanctuary - Floor',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_ROTATINGTOWER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_BELLROOM]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_ESCHERSTAIRCASE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_PROPHECYMAZE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_ROTATINGTOWER2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_GERSONSTUDY]: {
     displayName: '2nd Sanctuary - Study',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_GERSONCHASE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_EXTINGUISHER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_KNIGHTCLIMB]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_KNIGHTCLIMB_POST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_RHYTHM_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_RHYTHM_COUNTDOWN_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_RHYTHM_EMPTY_CH4]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.RHYTHMGAME_EDITOR]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_RIPPLE1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_RIPPLEPOST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_LIBRARY_ALTERNATE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_MONEYFOUNTAIN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHC_SUPERPROPHECIES]: {
     displayName: '',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHC_ENCOUNTER1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHC_SLIDINGPIANO]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHC_RIPPLESNEAK_POC]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHC_ENCOUNTER2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHC_FINALCLIMB]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHC_ANGELPROPHECY_ENCOUNTER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHC_SAVEPOINT]: {
     displayName: '3rd Sanctuary - Stairs',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHC_DARKSWORDS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHC_PRETITAN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHC_PREPRETITAN]: {
     displayName: '3rd Sanctuary - Last Chamber',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHC_TITANDEFEATED]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_FOUNTAIN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_RIPSEQ1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_RIPSEQ2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHC_TITANCLIMB1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHC_TITANCLIMB2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_NOELLEHOUSE_NORTH]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_NOELLEHOUSE_VENTS_NORTH_WEST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_FIREPLACE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_NONGERSON]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_LIBRARY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_TV_RHYTHM]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_TV]: {
     displayName: 'Castle Town - TV Building',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_WINDOWS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_BOOKSHELF]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_MAN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_GALLERY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_ROTATINGTOWER_OLD]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_DARKCLIMB]: {
     displayName: '2nd Sanctuary - Study (Climbing Area)',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHC_TITANCLIMB1_POST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHC_TITANCLIMB2_POST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHB_DARKCLIMB_SCENE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHC_DODGE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHC_INSIDETITAN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHC_PROPHECIES]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHC_ANGELPROPHECY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCH_BOOKSHELFPUZZLE_REV]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CHURCHC_TREASURECHEST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_TV_ZONE_1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_TV_ZONE_2]: {
     displayName: 'MIKE ZONE',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_TV_ZONE_3]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_TV_ZONE_BATTLE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_TV_ZONE_MINIGAME]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.GMS_DEBUG_FAILSAFE_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: true,
   },
   [ROOMS.ROOM_INITIALIZE_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: true,
   },
   [ROOMS.BATTLETEST_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: true,
   },
   [ROOMS.CUTSCENE_TESTER_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: true,
   },
   [ROOMS.SOUND_TESTER_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: true,
   },
   [ROOMS.SPRITE_TESTER_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: true,
   },
   [ROOMS.GIF_TESTER_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: true,
   },
   [ROOMS.GMS2_TEST_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: true,
   },
   [ROOMS.CUTSCENE_TESTER_B_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: true,
   },
   [ROOMS.DEBUG_COLOR_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: true,
   },
   [ROOMS.DEBUG_BATTLE_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: true,
   },
   [ROOMS.DEBUG_LOC_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: true,
   },
   [ROOMS.PLACE_CONTACT_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.KRISROOM_CH5]: {
     displayName: "Kris's Room",
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.KRISHALLWAY_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TORROOM_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TORHOUSE_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TORBATHROOM_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_KRISYARD_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_NORTHWEST_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_NORTH_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.BEACH_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_MID_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_APARTMENTS_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_SOUTH_CH5]: {
     displayName: 'Hometown',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.TOWN_SCHOOL_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_CHURCH_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.GRAVEYARD_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_SHELTER_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.HOSPITAL_LOBBY_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.HOSPITAL_HALLWAY_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.HOSPITAL_RUDY_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.HOSPITAL_ROOM2_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DINER_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWNHALL_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FLOWERSHOP_1F_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.FLOWERSHOP_2F_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LIBRARY_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.ALPHYSALLEY_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_COMPUTER_LAB_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_LIBRARY_UPSTAIRS_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_POLICE_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_CONBINI_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_ICEE_PIZZA_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TORIELCLASS_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.SCHOOLLOBBY_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.ALPHYSCLASS_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.SCHOOLDOOR_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.INSIDECLOSET_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.SCHOOL_UNUSEDROOM_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CASTLE_TUTORIAL_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_EAST_DOOR_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_WEST_CLIFF_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_AREA_1_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_TOWN]: {
     displayName: 'My Castle Town',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_RALSEI_CASTLE_FRONT_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_RESTAURANT_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_CAFE_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_DOJO_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_RALSEI_CASTLE_1F_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_RALSEI_CASTLE_2F_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_RALSEI_CASTLE_3F_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_DUNGEON_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_ROOMS_KRIS_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_ROOMS_SUSIE_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_ROOMS_RALSEI_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.PLACE_DOG_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LEGEND_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LEGEND_NEO_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.SHOP1_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.SHOP_MUSIC]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.GAMEOVER_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.PLACE_LOGO_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.PLACE_FAILURE_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.PLACE_NAMING_JIKKEN_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.PLACE_MENU_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.ED_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.EMPTY_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DARKEMPTY_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DARKBASE_GMS2_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_LANCER_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_CLOVER_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CC_FOUNTAIN_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.PLACE_DOGCHECK2_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DEBUG_SMALLFACE_DARK_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DEBUG_SMALLFACE_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DEBUG_CHOICER_DARK_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DEBUG_CHOICER_LIGHT_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DEBUG_BATTLEBALLOON]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.OVERWORLDBULLETENEMYTEST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LERPTEST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.BULLETTEST_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.BULLETTEST_NEW]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.ANIMEXAMPLETEST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CLIMBTEST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.CHAPTER_CONTINUE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWERY_TESTER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.ANIMTEST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.PLACE_DOGCHECK_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DARKBULBTEST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_SHADOWPLATFORMTEST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.PLAT_LAB]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_CHURCH_CHOIR_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_CHURCH_ENTRANCE_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_CHURCH_MAIN_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_CHURCH_OFFICE_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.LW_NOELLEHOUSE_DESS_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TOWN_NOELLEHOUSE_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_RHYTHM_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_RHYTHM_COUNTDOWN_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_RHYTHM_EMPTY_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.RHYTHMGAME_EDITOR_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_TV_CH5]: {
     displayName: 'Castle Town - TV Building',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_TV_RHYTHM_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_CHURCH_ENTRANCE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_CHURCH_CLIMB]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_RALSEI_CASTLE_BASKETBALL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.SHOP_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_MEETFLOWERY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_VIDEO]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_INTRO]: {
     displayName: 'Dark World',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_RALSEICUPBOARD]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_FLORADINNENCOUNTER]: {
     displayName: 'Garden - Beginning',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_HOSPITAL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_FISHINGSPOT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_SHEARYDODGE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_HOPSCHEF]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_PLATSHORTCUT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_RIVERCHEST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_ENEMYRUSH]: {
     displayName: 'Garden - Flowery Helped',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_PEDESTAL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_MUSHROOMS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_FLOWERYGARDENING]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_DINER]: {
     displayName: 'Garden - Ideal Diner',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_STARWALKERDASH]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_HARDPRESSUREPLATES]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_AQUA]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_FINALPLATFORMING]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_FINALPLATFORMING_RIGHT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_WATERINGCAN_AQUA]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_AQUADARKNESS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_AQUAHOLE]: {
     displayName: 'Garden - Shrine',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_AQUASHRINE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_AQUAPLATFORMING]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_CLIFFEXIT]: {
     displayName: 'Cliffs - Beginning',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_SUSIECHASE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_NEWDASH]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_SHEARYGUIDE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_PINK_ENCOUNTER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_AQUATRANSITION]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_AQUADASH]: {
     displayName: 'Garden - Way Home',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_AQUAHOLE_LEFT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_FIRSTDASH]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_GARDEN_AQUADASH_PLAT]: {
     displayName: '',
     hasSavePoint: true,
-    dogcheck: true,
   },
   [ROOMS.DW_CLIFF_GARDENTRANSITION_NEW]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CLIFF_CLIMBREFRESHER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CLIFF_CUTDOWN_TUTORIAL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CLIFF_BUNNYFARM]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CLIFF_SILVER_HAMMER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CLIFF_DASH_RUNNER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CLIFF_SETH_MINIBOSS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CLIFF_SHOP]: {
     displayName: 'Cliffs - Shop',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CLIFF_NETSKIECLIMB]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CLIFF_FINALDASH]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CLIFF_YELLOWCAVE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CLIFF_SHICAVE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CLIFF_VERTICALWIND]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CLIFF_VERTICALWIND_POST]: {
     displayName: 'Cliffs - Below Castle',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_CLIFF_NETSKIECLIMB_BEHIND]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CLIFF_EASTCLIFF]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CLIFF_BONUSCOMBAT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CLIFF_TWIRLFLOWERPLATFORMING]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CLIFF_KAWKAWDASH]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CLIFF_PRECIPICE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CLIFF_TWIRLFLOWERWIND]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DOGPLATFORMING]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_ENTRANCE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_CAFE]: {
     displayName: 'Flower Castle - Cafe',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_FOYER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_POST_PARTY_JAIL]: {
     displayName: 'Flower Castle - Jail',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_SHINOBEETLE_ENCOUNTER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_LEFT_WING_FLOWERYSCENE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_BOUNCE_1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_LEFT_TWODOORS]: {
     displayName: 'Flower Castle - Left Doors',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_YELLOW_MINIBOSS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_SANDTRAP]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_DANGEROUS_PLATFORMING]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_BLUEROOM]: {
     displayName: 'Flower Castle - Left Stage',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_YELLOWJAIL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_ONSEN]: {
     displayName: 'Flower Castle - Left End',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_LEFT_PENULTIMATE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FLOWERY_TREE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_BOUNCE_3]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_SHINOBEETLE_3D]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_HELDMUSHROOMS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_FLOWERYDASH]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_PARTYJAIL]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_TERRACOTTA_ENCOUNTER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_TERRACOTTA_BONUS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_RIGHT_WING_FLOWERYSCENE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_ORANGE_PUPPET_INTRODUCTION]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_GLOVES_TOWER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_SECOND_DINER]: {
     displayName: 'Flower Castle - Right Diner',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_OBSCURED_BULLETS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_FOXHUNT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_RIGHT_PENULTIMATE]: {
     displayName: 'Flower Castle - Right View',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_GREEN_ORANGE_BATTLE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_RIGHT_ENDINGSCENE]: {
     displayName: 'Flower Castle - Right End',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_RIGHT_PUZZLE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_MUSIC]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.MAN_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_DOGBALLOON]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_SIDEPUZZLE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_TV_MIKE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_ZENLOOKER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_TRAINROOM]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_POST_FLOWERY_BATTLE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_FLOWERCLIMB]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_TOP_INTRO]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_TOP_STAIRCASE_1]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_ULTRADASH]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_YELLOWBLUE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_TOP_ENTRANCE]: {
     displayName: 'Top of Castle - Beginning',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_TOP_STAIRCASE_2]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_GREEN_CHECKPOINT]: {
     displayName: "Top of Castle - Green's Shop",
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_FINAL_SAVE]: {
     displayName: 'Top of Castle - Castle Top',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_FLOWERY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_SETH_ENCOUNTER]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_TOP_DESCENT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_TOP_PINKDOOR]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_PINKROOM]: {
     displayName: 'Top of Castle - Boss?',
     hasSavePoint: true,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_TOP_FOUNTAIN]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_POST_FOUNTAIN_CLOSE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_PINKSHOP]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_FOXHUNT_TERAKOTA]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_FOXHUNT_SOCKS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_FOXHUNT_CHAOS]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_FOXHUNT_SECRET]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_CASTLE_TV_KIKKY]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_TERRACOTTA_PUZZLE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_BROMIDES]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_TOP_ASCENT]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_TOP_CHALLENGE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_ASGORE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: true,
   },
   [ROOMS.DW_FCASTLE_ORANGE_GAUNTLET]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_FUSUMADODGE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.TITLE_PLACEHOLDER_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: true,
   },
   [ROOMS.INTRO_CH5]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: true,
   },
   [ROOMS.DW_CLIFF_SETHAQUA_BATTLE]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: false,
   },
   [ROOMS.DW_FCASTLE_FLOWERCLIMB_FOR_TILING]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: true,
   },
   [ROOMS.DW_PETALTEST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: true,
   },
   [ROOMS.FLOORTEX_TEST]: {
     displayName: '',
     hasSavePoint: false,
-    dogcheck: true,
   },
 };

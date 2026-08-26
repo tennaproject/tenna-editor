@@ -55,3 +55,4 @@ export * from './Story';
 export * from './QrCode';
 export * from './SaveFingerprint';
 export * from './ShareImport';
+export * from './StartFromTemplate';
