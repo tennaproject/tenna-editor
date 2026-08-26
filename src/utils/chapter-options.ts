@@ -1,4 +1,4 @@
-import type { SelectItem } from '@components';
+import type { InvalidReason, SelectItem } from '@components';
 import type { BaseProperties, SaveSlot } from '@types';
 import type { ItemType } from '@components/Fields/ItemField';
 import type {
@@ -14,6 +14,7 @@ import type {
   SpellIndex,
   WeaponIndex,
 } from '@data';
+import { isDogcheckSafeRoom } from '@data';
 import {
   armorHelpers,
   chapterHelpers,
@@ -153,7 +154,7 @@ export function getChapterRoomOptions(
       roomId,
       name,
       hasSavePoint: meta.hasSavePoint,
-      dogcheck: meta.dogcheck,
+      dogcheck: !isDogcheckSafeRoom(chapter, roomId),
     };
   });
 
@@ -165,10 +166,11 @@ export function getChapterRoomOptions(
     entries = entries.filter((entry) => !entry.dogcheck);
   }
 
-  const items = entries.map(({ roomId, name }) => ({
+  const items = entries.map(({ roomId, name, dogcheck }) => ({
     id: roomId.toString(),
     label: name,
     value: roomId,
+    invalidReasons: dogcheck ? (['dogcheck'] as InvalidReason[]) : undefined,
   }));
 
   roomOptionsCache.set(key, items);

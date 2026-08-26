@@ -9,7 +9,8 @@ import { mergeClass } from '@utils/merge-class';
 import { useTranslation } from '../i18n';
 import { Tooltip } from './Tooltip';
 
-export type InvalidReason = 'unknown' | 'notInChapter' | 'notAvailableTo';
+export type InvalidReason =
+  'unknown' | 'notInChapter' | 'notAvailableTo' | 'dogcheck';
 
 const INVALID_REASON_TEXT: Record<InvalidReason, [key: string, text: string]> =
   {
@@ -21,6 +22,10 @@ const INVALID_REASON_TEXT: Record<InvalidReason, [key: string, text: string]> =
     notAvailableTo: [
       'ui.common.invalidNotAvailableTo',
       'Not available to this character',
+    ],
+    dogcheck: [
+      'ui.common.invalidDogcheck',
+      'The game sends the player to the dog room',
     ],
   };
 

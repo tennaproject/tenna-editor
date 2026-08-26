@@ -2,6 +2,7 @@ export * from './armors';
 export * from './chapters';
 export * from './consumables';
 export * from './contributors';
+export * from './dogcheck';
 export * from './equipment';
 export * from './flags';
 export * from './flag-bitfields';
