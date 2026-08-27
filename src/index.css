@@ -117,7 +117,7 @@
 
   --font-sans: 'Pixel Operator', sans-serif;
   --font-mono: 'Pixel Operator Mono', monospace;
-
+  --font-mono-8: 'Pixel Operator Mono 8', monospace;
   --font-scale: 1.09;
 
   /* cursed but better than the old scaling */
@@ -139,6 +139,7 @@
 :root[data-locale='ko'] {
   --font-sans: 'Pixel Operator', 'Galmuri11', sans-serif;
   --font-mono: 'Pixel Operator Mono', 'Galmuri Mono 11', monospace;
+  --font-mono-8: 'Pixel Operator Mono 8', 'Galmuri Mono 11', monospace;
 }
 
 @font-face {
@@ -168,6 +169,22 @@
 @font-face {
   font-family: 'Pixel Operator Mono';
   src: url('/fonts/PixelOperatorMono-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pixel Operator Mono 8';
+  src: url('/fonts/PixelOperatorMono8.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pixel Operator Mono 8';
+  src: url('/fonts/PixelOperatorMono8-Bold.woff2') format('woff2');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -341,6 +358,30 @@
   }
 }
 
+@utility ui-mono-xs {
+  font-family: var(--font-mono-8);
+  font-size: 8px;
+  line-height: 12px;
+}
+
+@utility ui-mono-sm {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+@utility ui-mono-base {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+@utility ui-mono-xl {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  line-height: 24px;
+}
+
 @layer components {
   .page {
     @apply flex flex-col mx-auto p-6 pb-12 w-full flex-none min-w-0 gap-4 max-w-7xl;
@@ -399,7 +440,7 @@
   }
 
   .section-link-control {
-    @apply invisible absolute top-1 right-1 z-20 inline-flex h-7 w-fit max-w-[45%] translate-y-1 items-center gap-1.5 border border-blue/40 bg-surface-4 px-2 font-mono text-xs leading-none text-blue opacity-0 shadow-md shadow-surface-1/70 pointer-events-none outline-none transition-[opacity,transform,background-color,border-color,color] duration-100 motion-reduce:transition-none focus-visible:ring-1 focus-visible:ring-text-1;
+    @apply invisible absolute top-1 right-1 z-20 inline-flex h-7 w-fit max-w-[45%] translate-y-1 items-center gap-1.5 border border-blue/40 bg-surface-4 px-2 ui-mono-xs text-blue opacity-0 shadow-md shadow-surface-1/70 pointer-events-none outline-none transition-[opacity,transform,background-color,border-color,color] duration-100 motion-reduce:transition-none focus-visible:ring-1 focus-visible:ring-text-1;
   }
 
   .section-link-control:hover {
