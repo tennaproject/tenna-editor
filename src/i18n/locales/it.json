@@ -341,8 +341,6 @@
   "ui.about.specialThanksWikiSuffix": " - per le numerose informazioni utili che hanno notevolmente accelerato il processo di realizzazione di questo progetto.",
   "ui.about.specialThanksUmt": "Undertale Mod Tool - per avermi permesso di analizzare il codice e gli asset del gioco per capire come funzionano le cose.",
   "ui.about.specialThanksUmtSuffix": " - per avermi permesso di analizzare il codice e gli asset del gioco per capire come funzionano le cose.",
-  "ui.about.pixelOperatorAttribution": "Pixel Operator e Pixel Operator Mono — Licenza: SIL Open Font License 1.1 ({license}). Fonte: {source}",
-  "ui.about.pixelOperatorLicensePrefix": "Pixel Operator e Pixel Operator Mono — Licenza: SIL Open Font License 1.1",
   "ui.about.sourcePrefix": "Fonte:",
   "ui.about.pixelarticonsAttribution": "Pixelarticons di Gerrit Halfmann — Licenza: {license}. Sito web: {sito web}",
   "ui.about.pixelarticonsLicensePrefix": "Pixelarticons di Gerrit Halfmann — Licenza:",

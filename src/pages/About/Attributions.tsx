@@ -136,10 +136,12 @@ export function AboutAttributions() {
             <li className="text-text-2">
               {t(
                 'ui.about.pixelOperatorLicensePrefix',
-                'Pixel Operator and Pixel Operator Mono — License: SIL Open Font License 1.1',
+                'Pixel Operator by Jayvee Enaguas (HarvettFox96) — License:',
               )}{' '}
-              (<Link href="https://scripts.sil.org/OFL">OFL</Link>).{' '}
-              {t('ui.about.sourcePrefix', 'Source:')}{' '}
+              <Link href="https://creativecommons.org/publicdomain/zero/1.0/">
+                CC0 1.0
+              </Link>
+              . {t('ui.about.sourcePrefix', 'Source:')}{' '}
               <Link href="https://www.dafont.com/pixel-operator.font">
                 dafont.com/pixel-operator
               </Link>
