@@ -24,7 +24,7 @@ function DiffRow({
       <span className="text-text-1 min-w-0" title={label}>
         {label}
       </span>
-      <div className="flex flex-wrap items-center gap-1.5 font-mono text-xs shrink-0">
+      <div className="flex flex-wrap items-center gap-1.5 ui-mono-xs shrink-0">
         <span className="text-text-2 line-through decoration-text-2/50">
           {before}
         </span>

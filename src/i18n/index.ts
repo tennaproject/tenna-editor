@@ -523,10 +523,8 @@ const UI_FALLBACKS: TranslationDictionary = {
     'Undertale Mod Tool - for allowing me to mine through the game code and assets to understand how things work.',
   'ui.about.specialThanksUmtSuffix':
     ' - for allowing me to mine through the game code and assets to understand how things work.',
-  'ui.about.pixelOperatorAttribution':
-    'Pixel Operator and Pixel Operator Mono — License: SIL Open Font License 1.1 ({license}). Source: {source}',
   'ui.about.pixelOperatorLicensePrefix':
-    'Pixel Operator and Pixel Operator Mono — License: SIL Open Font License 1.1',
+    'Pixel Operator by Jayvee Enaguas (HarvettFox96) - License:',
   'ui.about.sourcePrefix': 'Source:',
   'ui.about.pixelarticonsAttribution':
     'Pixelarticons by Gerrit Halfmann — License: {license}. Website: {website}',

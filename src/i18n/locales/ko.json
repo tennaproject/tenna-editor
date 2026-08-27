@@ -6264,8 +6264,6 @@
   "ui.about.specialThanksJackySuffix": " - 테나 에디터의 데이터 매핑에 큰 도움이 된 세이브 데이터 연구 및 참고 자료를 제공해 주셔서 감사합니다.",
   "ui.about.specialThanksWikiSuffix": " - 본 프로젝트의 제작 과정을 크게 단축시켜 준 유용한 정보를 제공해 주셔서 감사합니다.",
   "ui.about.specialThanksUmtSuffix": " - 작동 방식을 이해하기 위해 게임 코드와 애셋을 살펴볼 수 있게 해 주셔서 감사합니다.",
-  "ui.about.pixelOperatorAttribution": "Pixel Operator 및 Pixel Operator Mono — 라이선스: SIL Open Font License 1.1 ({license}). 출처: {source}",
-  "ui.about.pixelOperatorLicensePrefix": "Pixel Operator 및 Pixel Operator Mono — 라이선스: SIL Open Font License 1.1",
   "ui.about.sourcePrefix": "출처:",
   "ui.about.pixelarticonsAttribution": "Gerrit Halfmann의 Pixelarticons — 라이선스: {license}. 웹사이트: {website}",
   "ui.about.pixelarticonsLicensePrefix": "Gerrit Halfmann의 Pixelarticons — 라이선스:",

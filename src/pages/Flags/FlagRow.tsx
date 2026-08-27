@@ -57,7 +57,7 @@ function FlagRowComponent({
   return (
     <div className="hover:bg-surface-2/50">
       <div className="grid grid-cols-[3.5rem_minmax(0,1fr)_7rem_1.25rem] sm:grid-cols-[3.5rem_minmax(9rem,16rem)_minmax(0,1fr)_7rem_1.25rem] items-center gap-4 px-4 py-2.5">
-        <span className="text-text-3 text-xs font-mono tabular-nums">
+        <span className="text-text-3 ui-mono-xs tabular-nums">
           <span className="select-none">#</span>
           <span className="select-all">{flagIndex}</span>
         </span>
@@ -114,7 +114,7 @@ function FlagRowComponent({
                   <span
                     key={val}
                     className={mergeClass(
-                      'font-mono',
+                      'ui-mono-sm',
                       Number(val) === value ? 'text-accent-1' : 'text-text-2',
                     )}
                   >

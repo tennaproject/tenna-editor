@@ -117,27 +117,29 @@
 
   --font-sans: 'Pixel Operator', sans-serif;
   --font-mono: 'Pixel Operator Mono', monospace;
-
-  /* Scaling all fonts because Pixel Operator is little bit smaller */
+  --font-mono-8: 'Pixel Operator Mono 8', monospace;
   --font-scale: 1.09;
-  --text-xs: calc(0.75rem * var(--font-scale));
-  --text-sm: calc(0.875rem * var(--font-scale));
-  --text-base: calc(1rem * var(--font-scale));
-  --text-lg: calc(1.125rem * var(--font-scale));
-  --text-xl: calc(1.25rem * var(--font-scale));
-  --text-2xl: calc(1.5rem * var(--font-scale));
-  --text-3xl: calc(1.875rem * var(--font-scale));
-  --text-4xl: calc(2.25rem * var(--font-scale));
-  --text-5xl: calc(3rem * var(--font-scale));
-  --text-6xl: calc(3.75rem * var(--font-scale));
-  --text-7xl: calc(4.5rem * var(--font-scale));
-  --text-8xl: calc(6rem * var(--font-scale));
-  --text-9xl: calc(8rem * var(--font-scale));
+
+  /* cursed but better than the old scaling */
+  --text-xs: 14.96px;
+  --text-sm: 16px;
+  --text-base: 18.06px;
+  --text-lg: 21.39px;
+  --text-xl: 23.76px;
+  --text-2xl: 29.94px;
+  --text-3xl: 33.86px;
+  --text-4xl: 42.77px;
+  --text-5xl: 57.03px;
+  --text-6xl: 71.29px;
+  --text-7xl: 80px;
+  --text-8xl: 112px;
+  --text-9xl: 160px;
 }
 
 :root[data-locale='ko'] {
   --font-sans: 'Pixel Operator', 'Galmuri11', sans-serif;
   --font-mono: 'Pixel Operator Mono', 'Galmuri Mono 11', monospace;
+  --font-mono-8: 'Pixel Operator Mono 8', 'Galmuri Mono 11', monospace;
 }
 
 @font-face {
@@ -167,6 +169,22 @@
 @font-face {
   font-family: 'Pixel Operator Mono';
   src: url('/fonts/PixelOperatorMono-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pixel Operator Mono 8';
+  src: url('/fonts/PixelOperatorMono8.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pixel Operator Mono 8';
+  src: url('/fonts/PixelOperatorMono8-Bold.woff2') format('woff2');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -206,13 +224,22 @@
     font-family: var(--font-sans);
     color: var(--color-text-1);
     background-color: var(--color-surface-1);
-    font-size: var(--text-base);
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scrollbar-gutter: stable;
+  }
+
+  /* this is still baseline for spacing */
+  html {
+    font-size: calc(1rem * var(--font-scale));
+  }
+
+  body,
+  #root {
+    font-size: var(--text-base);
   }
 
   button {
@@ -331,6 +358,30 @@
   }
 }
 
+@utility ui-mono-xs {
+  font-family: var(--font-mono-8);
+  font-size: 8px;
+  line-height: 12px;
+}
+
+@utility ui-mono-sm {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+@utility ui-mono-base {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+@utility ui-mono-xl {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  line-height: 24px;
+}
+
 @layer components {
   .page {
     @apply flex flex-col mx-auto p-6 pb-12 w-full flex-none min-w-0 gap-4 max-w-7xl;
@@ -389,7 +440,7 @@
   }
 
   .section-link-control {
-    @apply invisible absolute top-1 right-1 z-20 inline-flex h-7 w-fit max-w-[45%] translate-y-1 items-center gap-1.5 border border-blue/40 bg-surface-4 px-2 font-mono text-xs leading-none text-blue opacity-0 shadow-md shadow-surface-1/70 pointer-events-none outline-none transition-[opacity,transform,background-color,border-color,color] duration-100 motion-reduce:transition-none focus-visible:ring-1 focus-visible:ring-text-1;
+    @apply invisible absolute top-1 right-1 z-20 inline-flex h-7 w-fit max-w-[45%] translate-y-1 items-center gap-1.5 border border-blue/40 bg-surface-4 px-2 ui-mono-xs text-blue opacity-0 shadow-md shadow-surface-1/70 pointer-events-none outline-none transition-[opacity,transform,background-color,border-color,color] duration-100 motion-reduce:transition-none focus-visible:ring-1 focus-visible:ring-text-1;
   }
 
   .section-link-control:hover {
