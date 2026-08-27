@@ -39,7 +39,7 @@ export function FieldWrapper({
 }: FieldWrapperProps) {
   const flagTag =
     flag !== undefined ? (
-      <span className="font-mono text-sm font-normal text-text-3">
+      <span className="ui-mono-sm font-normal text-text-3">
         <span className="select-none">#</span>
         <span className="select-all">{flag}</span>
       </span>

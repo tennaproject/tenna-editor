@@ -140,7 +140,7 @@ export function FlagsRoot() {
         >
           «
         </button>
-        <span className="text-text-2 font-mono text-xs min-w-16 text-center">
+        <span className="text-text-2 ui-mono-xs min-w-16 text-center">
           {currentPage} / {totalPages}
         </span>
         <button

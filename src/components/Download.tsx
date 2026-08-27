@@ -985,7 +985,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
                               <ResponsiveTableMobileLabel>
                                 {t('ui.upload.chapter', 'Chapter')}
                               </ResponsiveTableMobileLabel>
-                              <span className="font-mono text-xs text-text-2">
+                              <span className="ui-mono-xs text-text-2">
                                 {storedSave.meta.chapter}
                               </span>
                             </div>
@@ -1046,7 +1046,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
                               <ResponsiveTableMobileLabel>
                                 {t('ui.download.target', 'Target')}
                               </ResponsiveTableMobileLabel>
-                              <span className="font-mono text-xs text-text-2">
+                              <span className="ui-mono-xs text-text-2">
                                 {targetKey}
                               </span>
                             </div>

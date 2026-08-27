@@ -554,7 +554,7 @@ export function ManualFlagEditor() {
               <code className="text-text-1 text-sm select-all">
                 {name ?? `Flag #${flagIndex}`}
               </code>
-              <span className="text-text-3 font-mono">#{flagIndex}</span>
+              <span className="text-text-3 ui-mono-sm">#{flagIndex}</span>
             </div>
             {meta?.displayName && (
               <span className="text-text-2">{meta.displayName}</span>
@@ -576,7 +576,7 @@ export function ManualFlagEditor() {
                   ? t('ui.flags.applied', 'Applied')
                   : t('ui.flags.pendingChange', 'Pending change')}
               </span>
-              <div className="flex flex-wrap items-center gap-1.5 font-mono text-xs shrink-0">
+              <div className="flex flex-wrap items-center gap-1.5 ui-mono-xs shrink-0">
                 <span className="text-text-2 line-through decoration-text-2/50">
                   {previewBefore}
                 </span>
@@ -592,7 +592,7 @@ export function ManualFlagEditor() {
                 <span
                   key={value}
                   className={mergeClass(
-                    'font-mono',
+                    'ui-mono-sm',
                     Number(value) === currentValue ? 'text-accent-1' : '',
                   )}
                 >
