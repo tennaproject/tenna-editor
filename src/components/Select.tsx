@@ -398,14 +398,10 @@ export function Select({
 
     const containerRect = container.getBoundingClientRect();
     const rowTop = row.getBoundingClientRect().top;
-    const menuRect = list.getBoundingClientRect();
     const { top: boundaryTop, bottom: boundaryBottom } = boundaryRef.current;
 
-    const capTop = Math.max(menuRect.top, boundaryTop + DETAIL_PANEL_MARGIN);
-    const capBottom = Math.min(
-      menuRect.bottom,
-      boundaryBottom - DETAIL_PANEL_MARGIN,
-    );
+    const capTop = boundaryTop + DETAIL_PANEL_MARGIN;
+    const capBottom = boundaryBottom - DETAIL_PANEL_MARGIN;
 
     // scrollHeight skips borders, max-height doesn't
     const naturalHeight = box.scrollHeight + box.clientTop * 2;
