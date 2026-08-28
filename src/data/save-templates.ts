@@ -19,6 +19,13 @@ export interface TemplateLoadout {
   primaryArmor: ArmorIndex;
   secondaryArmor: ArmorIndex;
   spells: SpellIndex[];
+  stats?: {
+    health: number;
+    maxHealth: number;
+    attack: number;
+    defence: number;
+    magic: number;
+  };
 }
 
 export type TemplateParty = Partial<Record<CharacterIndex, TemplateLoadout>>;
@@ -28,6 +35,14 @@ const NOELLE_LOADOUT: TemplateLoadout = {
   primaryArmor: ARMORS.SILVER_WATCH,
   secondaryArmor: ARMORS.ROYAL_PIN,
   spells: [SPELLS.HEAL_PRAYER, SPELLS.SLEEPMIST, SPELLS.ICESHOCK],
+};
+
+const CH3_NOELLE_LOADOUT: TemplateLoadout = {
+  weapon: WEAPONS.WOOD_BLADE,
+  primaryArmor: ARMORS.EMPTY,
+  secondaryArmor: ARMORS.EMPTY,
+  spells: [SPELLS.HEAL_PRAYER, SPELLS.SLEEPMIST, SPELLS.ICESHOCK],
+  stats: { health: 200, maxHealth: 250, attack: 10, defence: 2, magic: 0 },
 };
 
 const CH1_PARTY: TemplateParty = {
@@ -92,7 +107,7 @@ const CH3_PARTY: TemplateParty = {
     secondaryArmor: ARMORS.GLOW_WRIST,
     spells: [SPELLS.PACIFY, SPELLS.HEAL_PRAYER],
   },
-  [CHARACTERS.NOELLE]: NOELLE_LOADOUT,
+  [CHARACTERS.NOELLE]: CH3_NOELLE_LOADOUT,
 };
 
 const CH4_PARTY: TemplateParty = {
