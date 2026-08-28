@@ -1,0 +1,103 @@
+name: Deploy to Cloudflare Pages (Pull Request)
+
+on:
+  workflow_run:
+    workflows: [Check]
+    types: [completed]
+
+concurrency:
+  group: deploy-pr-preview-${{ github.event.workflow_run.pull_requests[0].number }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.pull_requests[0]
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      deployments: write
+      pull-requests: write
+
+    environment:
+      name: pr-${{ github.event.workflow_run.pull_requests[0].number }}
+      url: ${{ steps.deploy.outputs['pages-deployment-alias-url'] }}
+
+    env:
+      CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CF_PROJECT: tenna
+      BUILD_DIR: dist
+      PREVIEW_BRANCH: pr-${{ github.event.workflow_run.pull_requests[0].number }}
+
+    steps:
+      - name: download preview
+        uses: actions/download-artifact@v5
+        with:
+          name: pr-preview
+          path: ${{ env.BUILD_DIR }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: deploy with wrangler
+        id: deploy
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ env.CF_API_TOKEN }}
+          accountId: ${{ env.CF_ACCOUNT_ID }}
+          command: >
+            pages deploy ${{ env.BUILD_DIR }}
+            --project-name=${{ env.CF_PROJECT }}
+            --branch=${{ env.PREVIEW_BRANCH }}
+
+      - name: report url
+        uses: actions/github-script@v8
+        env:
+          DEPLOYMENT_URL: ${{ steps.deploy.outputs['pages-deployment-alias-url'] }}
+        with:
+          script: |
+            const marker = '<!-- tenna-pr-preview -->';
+            const issue_number = context.payload.workflow_run.pull_requests[0].number;
+            const body = [
+              marker,
+              '### PR preview',
+              '',
+              `Deployment: ${process.env.DEPLOYMENT_URL}`,
+              '',
+              '_Updated automatically when the PR changes._',
+            ].join('\n');
+
+            const comments = await github.paginate(
+              github.rest.issues.listComments,
+              { ...context.repo, issue_number, per_page: 100 },
+            );
+            const existing = comments.find(
+              (comment) =>
+                comment.user?.type === 'Bot' && comment.body?.includes(marker),
+            );
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                ...context.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                ...context.repo,
+                issue_number,
+                body,
+              });
+            }
+
+      - name: write job summary
+        run: |
+          {
+            echo '### PR preview'
+            echo
+            echo "Deployment: ${{ steps.deploy.outputs['pages-deployment-alias-url'] }}"
+          } >> "$GITHUB_STEP_SUMMARY"
