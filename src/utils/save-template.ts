@@ -75,10 +75,10 @@ function buildCharacter(
   weaponStyle: number | string,
 ): CharacterV1 {
   const loadout = party[character];
-  const stats = CHARACTERS_META[character].baseStats[chapter];
+  const stats = loadout?.stats ?? CHARACTERS_META[character].baseStats[chapter];
 
   return {
-    health: stats.maxHealth,
+    health: loadout?.stats?.health ?? stats.maxHealth,
     maxHealth: stats.maxHealth,
     attack: stats.attack,
     defence: stats.defence,
