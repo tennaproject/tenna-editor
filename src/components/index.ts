@@ -42,6 +42,8 @@ export * from './EquipmentTooltip';
 export * from './KeyItemTooltip';
 export * from './LightWorldItemTooltip';
 export * from './SpellTooltip';
+export * from './RecruitSprite';
+export * from './RecruitTooltip';
 export * from './Tooltip';
 export * from './TooltipHeading';
 export * from './FieldWrapper';
