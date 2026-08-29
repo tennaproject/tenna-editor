@@ -10396,8 +10396,9 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.OBTAINED_PROPHECYMAZE_CHEST]: {
     displayName: 'Got the prophecy-maze chest',
+    unused: true,
     description:
-      "Got the Scarlixir from the chest in the Second Sanctuary's statue maze room.",
+      'Unused. Intended for the Scarlixir chest in the inaccessible Second Sanctuary prophecy maze.',
     valueType: 'boolean',
   },
   [FLAGS.OPENED_BOOKSHELF_PUZZLE_CHEST]: {

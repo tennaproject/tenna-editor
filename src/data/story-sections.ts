@@ -1365,11 +1365,6 @@ export const STORY_SECTIONS = {
           ],
         },
         {
-          id: 'prophecy-maze',
-          title: 'Prophecy Maze',
-          flags: ['OBTAINED_PROPHECYMAZE_CHEST'],
-        },
-        {
           id: 'second-sanctuary-exit',
           title: 'Second Sanctuary Exit',
           flags: ['PRESSED_KNIGHTCLIMBPOST_SWITCH'],
