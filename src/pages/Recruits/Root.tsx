@@ -52,6 +52,9 @@ export function RecruitsRoot() {
   const showNonRecruitableEnemies = useUi(
     (s) => s.ui.recruits.showNonRecruitableEnemies,
   );
+  const showNonRecruitedInCafe = useUi(
+    (s) => s.ui.recruits.showNonRecruitedInCafe,
+  );
   const updateUi = useUi((s) => s.updateUi);
 
   const chapter = useSave((s) => s.save?.meta.chapter) as ChapterIndex;
@@ -101,6 +104,33 @@ export function RecruitsRoot() {
                   {t(
                     'ui.recruits.showNonRecruitableEnemiesDescription3',
                     'This option allows to set them as recruited.',
+                  )}
+                </p>
+              </HelpTip>
+            </InlineGroup>
+            <InlineGroup>
+              <Checkbox
+                onChange={(state) =>
+                  updateUi(
+                    (ui) => (ui.recruits.showNonRecruitedInCafe = state),
+                  )
+                }
+                checked={showNonRecruitedInCafe}
+                label={t(
+                  'ui.recruits.showNonRecruitedInCafe',
+                  'Show non-recruited recruits in cafe picker',
+                )}
+              />
+              <HelpTip
+                title={t(
+                  'ui.recruits.showNonRecruitedInCafe',
+                  'Show non-recruited recruits in cafe picker',
+                )}
+              >
+                <p>
+                  {t(
+                    'ui.recruits.showNonRecruitedInCafeDescription',
+                    'When off, the cafe seat pickers only list recruits you have fully recruited. Turn this on to also choose non-recruited recruits. Non-recruitable enemies still require “Show non-recruitable enemies”.',
                   )}
                 </p>
               </HelpTip>

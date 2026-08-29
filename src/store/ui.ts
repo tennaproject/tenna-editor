@@ -4,7 +4,7 @@ import { immer } from 'zustand/middleware/immer';
 import { STORE_NAMESPACE } from './schema';
 import { createDebouncedJSONStorage } from 'zustand-debounce';
 
-export const UI_VERSION = 9;
+export const UI_VERSION = 10;
 
 export type UiLocale = 'en' | 'ko' | 'it';
 
@@ -42,6 +42,7 @@ export interface Ui {
   };
   recruits: {
     showNonRecruitableEnemies: boolean;
+    showNonRecruitedInCafe: boolean;
   };
 }
 
@@ -85,6 +86,7 @@ function createDefaultUi(): Ui {
     },
     recruits: {
       showNonRecruitableEnemies: false,
+      showNonRecruitedInCafe: false,
     },
   };
 }
@@ -171,6 +173,7 @@ export const useUi = create<UiState>()(
               },
               recruits: {
                 showNonRecruitableEnemies: showNonRecruitableEnemies ?? false,
+                showNonRecruitedInCafe: false,
               },
             },
           };
@@ -231,6 +234,13 @@ export const useUi = create<UiState>()(
 
           current.ui ??= defaults;
           current.ui.home ??= defaults.home;
+        }
+
+        if (version < 10) {
+          const current = nextState as { ui?: Partial<Ui> };
+          if (current.ui?.recruits) {
+            current.ui.recruits.showNonRecruitedInCafe ??= false;
+          }
         }
 
         return nextState;

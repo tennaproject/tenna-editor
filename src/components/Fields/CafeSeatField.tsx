@@ -10,7 +10,7 @@ import {
 } from '@components';
 import type { EnemyIndex, FlagIndex } from '@data';
 import { RECRUIT_UNUSED_VALUES, RECRUITS } from '@data/flags';
-import { useSave } from '@store';
+import { useSave, useUi } from '@store';
 import { useSaveFlag } from '@hooks';
 import { enemyHelpers, flagHelpers } from '@utils/data-helpers';
 import { getRecruitStatus } from '@utils/recruit-status';
@@ -26,10 +26,34 @@ interface CafeSeatFieldProps {
   flag: FlagIndex;
 }
 
+function isEnemyFullyRecruited(
+  enemy: EnemyIndex,
+  flags: readonly unknown[] | undefined,
+): boolean {
+  const meta = enemyHelpers.getById(enemy);
+  if (!meta?.recruitFlag) return false;
+
+  const flagValue = (flags?.[meta.recruitFlag] as number | undefined) ?? 0;
+  const recruitCount = meta.recruitCount ?? 1;
+  let currentlyRecruited = flagValue;
+  if (recruitCount > 1 && flagValue !== 0 && flagValue !== -1) {
+    currentlyRecruited = flagValue * recruitCount;
+  }
+
+  return getRecruitStatus(currentlyRecruited, recruitCount).key === 'recruited';
+}
+
 export function CafeSeatField({ id, flag }: CafeSeatFieldProps) {
   const { t } = useTranslation();
   const updateSave = useSave((s) => s.updateSave);
   const value = useSave((s) => s.save?.flags[flag] ?? 0) as number;
+  const flags = useSave((s) => s.save?.flags);
+  const showNonRecruitableEnemies = useUi(
+    (s) => s.ui.recruits.showNonRecruitableEnemies,
+  );
+  const showNonRecruitedInCafe = useUi(
+    (s) => s.ui.recruits.showNonRecruitedInCafe,
+  );
   const meta = translateMeta(
     getFlagTranslationKeyPrefix(flag),
     flagHelpers.getById(flag),
@@ -57,6 +81,21 @@ export function CafeSeatField({ id, flag }: CafeSeatFieldProps) {
         unused: RECRUIT_UNUSED_VALUES.has(enemy),
         tooltip: <RecruitTooltipContent enemy={enemy} />,
       };
+    })
+    .filter((item) => {
+      const enemy = Number(item.value) as EnemyIndex;
+      if (enemy === value) return true;
+
+      const enemyMeta = enemyHelpers.getById(enemy);
+      if (!showNonRecruitableEnemies && !enemyMeta?.recruitable) {
+        return false;
+      }
+
+      if (!showNonRecruitedInCafe && !isEnemyFullyRecruited(enemy, flags)) {
+        return false;
+      }
+
+      return true;
     })
     .sort((itemA, itemB) => Number(itemA.value) - Number(itemB.value));
 
