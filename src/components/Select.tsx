@@ -401,11 +401,27 @@ export function Select({
     const menuRect = list.getBoundingClientRect();
     const { top: boundaryTop, bottom: boundaryBottom } = boundaryRef.current;
 
-    const capTop = Math.max(menuRect.top, boundaryTop + DETAIL_PANEL_MARGIN);
-    const capBottom = Math.min(
-      menuRect.bottom,
-      boundaryBottom - DETAIL_PANEL_MARGIN,
-    );
+    const maxMenuHeight =
+      parseFloat(getComputedStyle(list).maxHeight) || menuRect.height;
+
+    let capTop: number;
+    let capBottom: number;
+    if (shouldOpenUp) {
+      capBottom = Math.min(
+        menuRect.bottom,
+        boundaryBottom - DETAIL_PANEL_MARGIN,
+      );
+      capTop = Math.max(
+        capBottom - maxMenuHeight,
+        boundaryTop + DETAIL_PANEL_MARGIN,
+      );
+    } else {
+      capTop = Math.max(menuRect.top, boundaryTop + DETAIL_PANEL_MARGIN);
+      capBottom = Math.min(
+        capTop + maxMenuHeight,
+        boundaryBottom - DETAIL_PANEL_MARGIN,
+      );
+    }
 
     // scrollHeight skips borders, max-height doesn't
     const naturalHeight = box.scrollHeight + box.clientTop * 2;
@@ -425,7 +441,7 @@ export function Select({
         ? prev
         : next,
     );
-  }, [highlightedIndex, menuVisible, detailItem?.id]);
+  }, [highlightedIndex, menuVisible, detailItem?.id, shouldOpenUp]);
 
   return (
     <div
