@@ -16,3 +16,4 @@ export * from './LoadoutField';
 export * from './LightWorldStatsField';
 export * from './LightWorldLoadoutField';
 export * from './RecruitField';
+export * from './CafeSeatField';

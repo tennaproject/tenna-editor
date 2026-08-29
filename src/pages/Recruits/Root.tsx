@@ -1,7 +1,7 @@
 import {
   Card,
+  CafeSeatField,
   Checkbox,
-  FlagField,
   Heading,
   HelpTip,
   InlineGroup,
@@ -123,7 +123,11 @@ export function RecruitsRoot() {
                 </InlineGroup>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-6 mt-3">
                   {CAFE_SEATS.map((seat) => (
-                    <FlagField key={seat.id} id={seat.id} flag={seat.flag} />
+                    <CafeSeatField
+                      key={seat.id}
+                      id={seat.id}
+                      flag={seat.flag}
+                    />
                   ))}
                 </div>
               </div>
