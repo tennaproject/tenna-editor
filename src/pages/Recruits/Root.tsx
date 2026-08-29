@@ -111,9 +111,7 @@ export function RecruitsRoot() {
             <InlineGroup>
               <Checkbox
                 onChange={(state) =>
-                  updateUi(
-                    (ui) => (ui.recruits.showNonRecruitedInCafe = state),
-                  )
+                  updateUi((ui) => (ui.recruits.showNonRecruitedInCafe = state))
                 }
                 checked={showNonRecruitedInCafe}
                 label={t(
