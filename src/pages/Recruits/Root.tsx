@@ -1,7 +1,7 @@
 import {
   Card,
+  CafeSeatField,
   Checkbox,
-  FlagField,
   Heading,
   HelpTip,
   InlineGroup,
@@ -51,6 +51,9 @@ export function RecruitsRoot() {
   const { t } = useTranslation();
   const showNonRecruitableEnemies = useUi(
     (s) => s.ui.recruits.showNonRecruitableEnemies,
+  );
+  const showNonRecruitedInCafe = useUi(
+    (s) => s.ui.recruits.showNonRecruitedInCafe,
   );
   const updateUi = useUi((s) => s.updateUi);
 
@@ -105,6 +108,31 @@ export function RecruitsRoot() {
                 </p>
               </HelpTip>
             </InlineGroup>
+            <InlineGroup>
+              <Checkbox
+                onChange={(state) =>
+                  updateUi((ui) => (ui.recruits.showNonRecruitedInCafe = state))
+                }
+                checked={showNonRecruitedInCafe}
+                label={t(
+                  'ui.recruits.showNonRecruitedInCafe',
+                  'Show non-recruited recruits in cafe picker',
+                )}
+              />
+              <HelpTip
+                title={t(
+                  'ui.recruits.showNonRecruitedInCafe',
+                  'Show non-recruited recruits in cafe picker',
+                )}
+              >
+                <p>
+                  {t(
+                    'ui.recruits.showNonRecruitedInCafeDescription',
+                    'When off, the cafe seat pickers only list recruits you have fully recruited. Turn this on to also choose non-recruited recruits. Non-recruitable enemies still require “Show non-recruitable enemies”.',
+                  )}
+                </p>
+              </HelpTip>
+            </InlineGroup>
           </div>
 
           <Section id="cafe" className="mb-4">
@@ -123,7 +151,11 @@ export function RecruitsRoot() {
                 </InlineGroup>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-6 mt-3">
                   {CAFE_SEATS.map((seat) => (
-                    <FlagField key={seat.id} id={seat.id} flag={seat.flag} />
+                    <CafeSeatField
+                      key={seat.id}
+                      id={seat.id}
+                      flag={seat.flag}
+                    />
                   ))}
                 </div>
               </div>
