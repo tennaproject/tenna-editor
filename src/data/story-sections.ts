@@ -337,6 +337,16 @@ export const STORY_SECTIONS = {
           title: 'Seam & King',
           flags: ['GAVE_JEVIL_CRYSTAL', 'KING_JAIL_DIALOGUE_PROGRESS'],
         },
+        {
+          id: 'town-south',
+          title: 'Town South',
+          flags: ['INTERACTED_WITH_MAN_CAR'],
+        },
+        {
+          id: 'glass',
+          title: 'Glass',
+          flags: ['GLASS_SUSIE_GLARE', 'GLASS_FAILED_CH2'],
+        },
       ],
     },
     {
@@ -347,6 +357,11 @@ export const STORY_SECTIONS = {
           id: 'cyber-field',
           title: 'Cyber Field',
           flags: ['OBTAINED_FIRST_GLOW_WRIST', 'OBTAINED_NUBERT_TREASURE'],
+        },
+        {
+          id: 'shadow-crystal',
+          title: 'Shadow Crystal',
+          flags: ['SHADOW_LAB', 'SHADOW_FAILED_CH2'],
         },
         {
           id: 'hacker-quest',
@@ -460,6 +475,8 @@ export const STORY_SECTIONS = {
             'OBTAINED_ONE_DOLLAR_CHEST',
             'STATUE_SINK_PROGRESS',
             'SWATCHLING_VASE_ROOM_PROGRESS',
+            'SOLVED_MANSION_TRAFFIC',
+            'FOUND_BASEMENT_SWITCH',
             'FOUND_SHORTCUT_OUT',
             'OBTAINED_FOURTH_REVIVE_MINT',
             'OBTAINED_MANSION_GLOWSHARD',
@@ -471,10 +488,14 @@ export const STORY_SECTIONS = {
           title: 'Spamton',
           flags: [
             'SPAMTON_QUEST_PROGRESS',
+            'HEARD_SPAMTON_DEAL_EXPLANATION',
             'ENTERED_BASEMENT_COUNT',
+            'UNLOCKED_EAST_BASEMENT',
+            'PUT_DISK_MANNEQUIN',
             'OBTAINED_DEALMAKER',
             'OBTAINED_SPAMTON_REWARD',
             'TALKED_TO_SPAMTON_BEHIND_BASEMENT_DOOR',
+            'SPAMTON_STRESS_RESPONSE',
           ],
         },
         {
@@ -519,7 +540,11 @@ export const STORY_SECTIONS = {
         {
           id: 'castle-town-return',
           title: 'Castle Town Return',
-          flags: ['SAW_KING_QUEEN_REUNION'],
+          flags: [
+            'FAILED_SPAM_CRYSTAL',
+            'SEAM_TWO_CRYSTALS_DIALOGUE_PROGRESS',
+            'SAW_KING_QUEEN_REUNION',
+          ],
         },
         {
           id: 'party-dojo-return',
@@ -582,6 +607,11 @@ export const STORY_SECTIONS = {
             'COUCH_SKIP_CH3',
             'COUCH_WALKAWAY_CH3',
           ],
+        },
+        {
+          id: 'shadow-crystal',
+          title: 'Shadow Crystal',
+          flags: ['SHADOW_HOME', 'SHADOW_FAILED_CH3'],
         },
         {
           id: 'point-chest',
@@ -689,6 +719,7 @@ export const STORY_SECTIONS = {
             'SWORD_ROUTE_KILLS',
             'SUSIE_NOTICE_SWORD',
             'BIBLIOX_QUEST_PROGRESS_CH3',
+            'BIBLIOX_TALK_COUNT_CH3',
             'OBTAINED_REVIVE_MINT_CH3',
           ],
         },
@@ -1191,6 +1222,8 @@ export const STORY_SECTIONS = {
             'STUDY_SHEET_MUSIC_PROGRESS',
             'CHECKED_GERSON_TABLE_FIRST_SANCTUARY',
             'CHECKED_GERSON_STUDY_SAVE_POINT',
+            'INTERACTED_WITH_FIREPLACE_MURAL',
+            'TALKED_TO_GERSON_ABOUT_MAGIC_AXE',
           ],
         },
         {
@@ -1211,6 +1244,11 @@ export const STORY_SECTIONS = {
             'MONEYFOUNTAIN_DONATION_OVER_100',
             'INTERACTED_WITH_ITEM_FOUNTAIN',
           ],
+        },
+        {
+          id: 'gerson-tea',
+          title: "Gerson's Tea",
+          flags: ['GERSON_TEA_FANCY_A_DRINK'],
         },
         {
           id: 'bookshelf-puzzle',
@@ -1345,7 +1383,12 @@ export const STORY_SECTIONS = {
         {
           id: 'egg-and-moss',
           title: 'Egg & Moss',
-          flags: ['WINDOWS_LOOPED', 'OBTAINED_EGG_CH4', 'MOSS_OUTCOME_CH4'],
+          flags: [
+            'WINDOWS_LOOPED',
+            'OBTAINED_EGG_CH4',
+            'WASHED_HANDS_THERAPY',
+            'MOSS_OUTCOME_CH4',
+          ],
         },
         {
           id: 'gallery',

@@ -10683,9 +10683,8 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.WASHED_HANDS_THERAPY]: {
     displayName: 'Washed hands during therapy',
-    unused: true,
     description:
-      'Used the sink to wash your hands after getting the Egg in chapter 4. Unaccessed as of chapter 4.',
+      'Used the sink to wash your hands after getting the Egg in chapter 4.',
     valueType: 'boolean',
   },
   [FLAGS.GLASS_NOELLE_WHISPERING]: {
