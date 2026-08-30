@@ -80,6 +80,14 @@ const FLAG_BITFIELD_ENTRIES = {
       'Whether the Pink Coin bell in the final Garden platforming room was destroyed.',
     valueType: 'boolean',
   },
+  CASTLE_BOUNCE_PINKCOIN_EARLY: {
+    parent: FLAGS.CASTLE_COLLECTIBLE_FLAGS,
+    index: 0,
+    displayName: 'Early bounce Pink Coin',
+    description:
+      'Whether the bounce room Pink Coin was collected before the Yellow encounter.',
+    valueType: 'boolean',
+  },
   CASTLE_BOUNCE_PINKCOIN: {
     parent: FLAGS.CASTLE_COLLECTIBLE_FLAGS,
     index: 1,
@@ -229,6 +237,34 @@ const FLAG_BITFIELD_ENTRIES = {
       'Whether the Green conversation in the obscured bullets room was seen.',
     valueType: 'boolean',
   },
+  RIGHT_PUZZLE_ORANGE_DOOR: {
+    parent: FLAGS.CASTLE_SIDEPUZZLE_FLAGS,
+    index: 0,
+    displayName: 'Opened Orange Door',
+    description: 'Whether the Orange Door in the right puzzle was opened.',
+    valueType: 'boolean',
+  },
+  RIGHT_PUZZLE_SIGNERY_LEFT: {
+    parent: FLAGS.CASTLE_SIDEPUZZLE_FLAGS,
+    index: 1,
+    displayName: 'Signery fell left',
+    description: 'Whether Signery fell to the left in the right puzzle.',
+    valueType: 'boolean',
+  },
+  RIGHT_PUZZLE_SIGNERY_RIGHT: {
+    parent: FLAGS.CASTLE_SIDEPUZZLE_FLAGS,
+    index: 2,
+    displayName: 'Signery fell right',
+    description: 'Whether Signery fell to the right in the right puzzle.',
+    valueType: 'boolean',
+  },
+  SIDEPUZZLE_SIGNERY_FREED: {
+    parent: FLAGS.CASTLE_SIDEPUZZLE_FLAGS,
+    index: 3,
+    displayName: 'Freed Signery',
+    description: 'Whether Signery was cut free in the side puzzle.',
+    valueType: 'boolean',
+  },
   SIDEPUZZLE_TOP_COINS_UPPER: {
     parent: FLAGS.CASTLE_SIDEPUZZLE_FLAGS,
     index: 4,
@@ -244,12 +280,59 @@ const FLAG_BITFIELD_ENTRIES = {
     description: 'Whether the pink coin in the side puzzle room was collected.',
     valueType: 'boolean',
   },
+  SIDEPUZZLE_ANTISOFTLOCK_PROGRESS: {
+    parent: FLAGS.CASTLE_SIDEPUZZLE_FLAGS,
+    index: 3,
+    width: 2,
+    displayName: 'Anti-softlock conversation progress',
+    description:
+      'Conversation progress shared by the anti-softlock zones in the right and side puzzles.',
+    valueType: 'number',
+    valueRules: { min: 0, max: 3 },
+  },
+  SIDEPUZZLE_ANTISOFTLOCK_COMPLETE: {
+    parent: FLAGS.CASTLE_SIDEPUZZLE_FLAGS,
+    index: 8,
+    displayName: 'Completed anti-softlock conversations',
+    description: 'Whether all four anti-softlock conversations were seen.',
+    valueType: 'boolean',
+  },
+  SIDEPUZZLE_RALSEI_OPTIONAL_COMMENT: {
+    parent: FLAGS.CASTLE_SIDEPUZZLE_FLAGS,
+    index: 9,
+    displayName: 'Ralsei called the puzzle optional',
+    description: 'Whether Ralsei said that the side puzzle seemed optional.',
+    valueType: 'boolean',
+  },
   SIDEPUZZLE_TOP_COINS_LOWER: {
     parent: FLAGS.CASTLE_SIDEPUZZLE_FLAGS,
     index: 10,
     displayName: 'Lower top coins',
     description:
       'Whether the lower group of top coins in the side puzzle room was collected.',
+    valueType: 'boolean',
+  },
+  SIDEPUZZLE_STOOD_ON_RALSEI: {
+    parent: FLAGS.CASTLE_SIDEPUZZLE_FLAGS,
+    index: 14,
+    displayName: 'Stood on Ralsei',
+    description:
+      'Whether Kris stood on Ralsei before collecting the side puzzle Pink Coin.',
+    valueType: 'boolean',
+  },
+  SIDEPUZZLE_SIGNERY_EXPLODED: {
+    parent: FLAGS.CASTLE_SIDEPUZZLE_FLAGS,
+    index: 15,
+    displayName: 'Signery exploded',
+    description: 'Whether Signery exploded in the side puzzle.',
+    valueType: 'boolean',
+  },
+  TRAINROOM_ORANGE_LEFT: {
+    parent: FLAGS.CASTLE_TRAINROOM_FLAGS,
+    index: 1,
+    displayName: 'Orange left the train room',
+    description: 'Whether Orange left after the train room conversation.',
+    unused: true,
     valueType: 'boolean',
   },
   TRAINROOM_PINKCOIN: {
@@ -264,6 +347,56 @@ const FLAG_BITFIELD_ENTRIES = {
     index: 11,
     displayName: 'Coin lantern',
     description: 'Whether the coin lantern in the train room was destroyed.',
+    valueType: 'boolean',
+  },
+  GLOVES_TOWER_ORANGE_DIALOGUE: {
+    parent: FLAGS.CASTLE_GLOVES_TOWER_FLAGS,
+    index: 0,
+    width: 3,
+    displayName: 'Orange dialogue progress',
+    description: "Progress through Orange's dialogue in the gloves tower.",
+    valueType: 'map',
+    valueRules: {
+      map: {
+        0: 'Not started',
+        1: "Gloves aren't easy",
+        2: 'Stand still',
+        3: 'Blue praised the bullets',
+        4: 'Final deflection rant',
+      },
+    },
+  },
+  GLOVES_TOWER_TOP_LANTERNS_DESTROYED: {
+    parent: FLAGS.CASTLE_GLOVES_TOWER_FLAGS,
+    index: 1,
+    width: 3,
+    displayName: 'Top lanterns destroyed',
+    description: 'Number of top lanterns destroyed in the gloves tower.',
+    valueType: 'number',
+    valueRules: { min: 0, max: 4 },
+  },
+  GLOVES_TOWER_ORANGE_PROUD: {
+    parent: FLAGS.CASTLE_GLOVES_TOWER_FLAGS,
+    index: 6,
+    displayName: 'Orange became proud',
+    description:
+      'Whether Orange became proud after the party was hit in the gloves tower.',
+    valueType: 'boolean',
+  },
+  GLOVES_TOWER_FINAL_RANT: {
+    parent: FLAGS.CASTLE_GLOVES_TOWER_FLAGS,
+    index: 7,
+    displayName: 'Orange final deflection rant',
+    description:
+      "Whether destroying all four top lanterns triggered Orange's final deflection rant.",
+    valueType: 'boolean',
+  },
+  GLOVES_TOWER_BROKEN_WALL: {
+    parent: FLAGS.CASTLE_GLOVES_TOWER_FLAGS,
+    index: 8,
+    displayName: 'Broke the tower wall',
+    description:
+      'Whether a deflected glove projectile broke the wall in the gloves tower.',
     valueType: 'boolean',
   },
   GLOVES_TOWER_TOP_LANTERN1: {
@@ -2223,6 +2356,14 @@ const FLAG_BITFIELD_ENTRIES = {
     description: 'Whether the coin in the top challenge room was collected.',
     valueType: 'boolean',
   },
+  TOP_DESCENT_WINDSTRUGGLER: {
+    parent: FLAGS.CASTLE_TOP_CHALLENGE_FLAGS,
+    index: 5,
+    displayName: 'Resolved Windstruggler encounter',
+    description:
+      'Whether the Windstruggler encounter in the top descent was completed.',
+    valueType: 'boolean',
+  },
   SAW_FINAL_STARWALKER: {
     parent: FLAGS.FINAL_STARWALKER_FLAG,
     index: 0,
@@ -2461,6 +2602,14 @@ const FLAG_BITFIELD_ENTRIES = {
       },
     },
   },
+  EASTCLIFF_UMBRELLA_OCTAVE: {
+    parent: FLAGS.EASTCLIFF_COLLECTIBLE_FLAGS,
+    index: 0,
+    displayName: 'Completed umbrella octave',
+    description:
+      'Whether the East cliff umbrellas were struck in ascending pitch order.',
+    valueType: 'boolean',
+  },
   EASTCLIFF_BIT1: {
     parent: FLAGS.EASTCLIFF_COLLECTIBLE_FLAGS,
     index: 1,
@@ -2650,6 +2799,20 @@ const FLAG_BITFIELD_ENTRIES = {
     index: 6,
     displayName: 'Bought FloweryScarf',
     description: 'Whether the FloweryScarf was purchased from the Pink shop.',
+    valueType: 'boolean',
+  },
+  DOG_PLATFORMING_TROLLED: {
+    parent: FLAGS.DOG_PLATFORMING_FLAGS,
+    index: 0,
+    displayName: 'Hanging dog troll',
+    description: 'Whether the hanging dog dropped the party.',
+    valueType: 'boolean',
+  },
+  DOG_PLATFORMING_DISARMED: {
+    parent: FLAGS.DOG_PLATFORMING_FLAGS,
+    index: 1,
+    displayName: 'Dog hooks disarmed',
+    description: 'Whether the dog hooks are disarmed.',
     valueType: 'boolean',
   },
   DOG_PLATFORMING_BELL_LEFT: {
