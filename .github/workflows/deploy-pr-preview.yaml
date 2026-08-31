@@ -26,7 +26,7 @@ jobs:
     steps:
       - name: resolve pull request
         id: pull-request
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             const number = Number(context.payload.inputs.pull_request);
@@ -69,7 +69,7 @@ jobs:
           VITE_DEPLOY_TARGET: preview
 
       - name: upload preview
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: pr-preview
           path: dist
@@ -98,7 +98,7 @@ jobs:
 
     steps:
       - name: download preview
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v8
         with:
           name: pr-preview
           path: ${{ env.BUILD_DIR }}
@@ -115,7 +115,7 @@ jobs:
             --branch=${{ env.PREVIEW_BRANCH }}
 
       - name: report url
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         env:
           DEPLOYMENT_URL: ${{ steps.deploy.outputs['pages-deployment-alias-url'] }}
         with:
