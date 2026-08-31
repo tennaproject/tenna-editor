@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from 'react';
+import { useState } from 'react';
 import { TextInput } from '@components';
 import type { FlagIndex } from '@data';
 import { useSaveFlag } from '@hooks';
@@ -19,7 +19,7 @@ interface FlagRowProps {
   onToggleExpand: (flagIndex: FlagIndex) => void;
 }
 
-function FlagRowComponent({
+export function FlagRow({
   flagIndex,
   name,
   description,
@@ -34,25 +34,22 @@ function FlagRowComponent({
   const hasDetails = !!knownValues;
   const [error, setError] = useState<string | null>(null);
 
-  const handleFlagChange = useCallback(
-    (nextValue: string) => {
-      const numValue = parseFiniteNumberInput(nextValue);
-      if (numValue === null) {
-        setError(t('ui.flags.invalidNumber', 'Invalid number.'));
-        return;
-      }
+  const handleFlagChange = (nextValue: string) => {
+    const numValue = parseFiniteNumberInput(nextValue);
+    if (numValue === null) {
+      setError(t('ui.flags.invalidNumber', 'Invalid number.'));
+      return;
+    }
 
-      setError(null);
-      updateSave((save) => {
-        save.flags[flagIndex] = numValue;
-      });
-    },
-    [flagIndex, t, updateSave],
-  );
+    setError(null);
+    updateSave((save) => {
+      save.flags[flagIndex] = numValue;
+    });
+  };
 
-  const handleToggleExpand = useCallback(() => {
+  const handleToggleExpand = () => {
     onToggleExpand(flagIndex);
-  }, [flagIndex, onToggleExpand]);
+  };
 
   return (
     <div className="hover:bg-surface-2/50">
@@ -129,5 +126,3 @@ function FlagRowComponent({
     </div>
   );
 }
-
-export const FlagRow = memo(FlagRowComponent);

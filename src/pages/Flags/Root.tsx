@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useState } from 'react';
 import { Card, Heading, Page, Section, Select, TextInput } from '@components';
 import type { ChapterIndex, FlagIndex } from '@data';
 import type { SelectItem } from '@components';
@@ -51,69 +51,55 @@ export function FlagsRoot() {
     setCurrentPage(1);
   }
 
-  const allFlags = useMemo(
-    () =>
-      getChapterFlagList(chapter).map((flag) => {
-        const translatedMeta = translateMeta(
-          getFlagTranslationKeyPrefix(flag.index),
-          {
-            displayName: flag.name,
-            description: flag.description,
-            valueRules: { map: flag.knownValues },
-          },
-          t,
-        );
-        const knownValueEntries = translatedMeta.valueRules?.map
-          ? Object.entries(translatedMeta.valueRules.map).sort(
-              ([a], [b]) => Number(a) - Number(b),
-            )
-          : undefined;
+  const allFlags = getChapterFlagList(chapter).map((flag) => {
+    const translatedMeta = translateMeta(
+      getFlagTranslationKeyPrefix(flag.index),
+      {
+        displayName: flag.name,
+        description: flag.description,
+        valueRules: { map: flag.knownValues },
+      },
+      t,
+    );
+    const knownValueEntries = translatedMeta.valueRules?.map
+      ? Object.entries(translatedMeta.valueRules.map).sort(
+          ([a], [b]) => Number(a) - Number(b),
+        )
+      : undefined;
 
-        return {
-          ...flag,
-          description: translatedMeta.description ?? '',
-          knownValues: translatedMeta.valueRules?.map,
-          knownValueEntries,
-          searchText:
-            `${flag.name} ${flag.index} ${translatedMeta.displayName} ${translatedMeta.description ?? ''}`.toLowerCase(),
-        };
-      }),
-    [chapter, t],
-  );
-  const normalizedSearchQuery = useMemo(
-    () => debouncedSearchQuery.toLowerCase().trim(),
-    [debouncedSearchQuery],
-  );
+    return {
+      ...flag,
+      description: translatedMeta.description ?? '',
+      knownValues: translatedMeta.valueRules?.map,
+      knownValueEntries,
+      searchText:
+        `${flag.name} ${flag.index} ${translatedMeta.displayName} ${translatedMeta.description ?? ''}`.toLowerCase(),
+    };
+  });
+  const normalizedSearchQuery = debouncedSearchQuery.toLowerCase().trim();
 
-  const filteredFlags = useMemo(
-    () =>
-      allFlags
-        .filter((flag) => flag.searchText.includes(normalizedSearchQuery))
-        .sort((a, b) => a.index - b.index),
-    [allFlags, normalizedSearchQuery],
-  );
+  const filteredFlags = allFlags
+    .filter((flag) => flag.searchText.includes(normalizedSearchQuery))
+    .sort((a, b) => a.index - b.index);
 
   const totalPages = Math.ceil(filteredFlags.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const paginatedFlags = useMemo(
-    () => filteredFlags.slice(startIndex, endIndex),
-    [filteredFlags, startIndex, endIndex],
-  );
+  const paginatedFlags = filteredFlags.slice(startIndex, endIndex);
 
-  const handleSearchChange = useCallback((value: string) => {
+  const handleSearchChange = (value: string) => {
     setSearchQuery(value);
-  }, []);
+  };
 
-  const handleItemsPerPageChange = useCallback((item: SelectItem | null) => {
+  const handleItemsPerPageChange = (item: SelectItem | null) => {
     if (!item) return;
     setItemsPerPage(item.value as number);
     setCurrentPage(1);
-  }, []);
+  };
 
-  const handleToggleExpandedFlag = useCallback((flagIndex: FlagIndex) => {
+  const handleToggleExpandedFlag = (flagIndex: FlagIndex) => {
     setExpandedFlag((current) => (current === flagIndex ? null : flagIndex));
-  }, []);
+  };
 
   const selectedItemsPerPage =
     ITEMS_PER_PAGE_OPTIONS.find((o) => o.value === itemsPerPage) ??

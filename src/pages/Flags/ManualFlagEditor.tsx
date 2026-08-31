@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import ApplyIcon from '@assets/icons/check.svg?react';
 import { Button, Page, Select, TextInput, type SelectItem } from '@components';
 import type { FlagBitfieldId, FlagBitfieldProperties, FlagIndex } from '@data';
@@ -271,32 +271,18 @@ export function ManualFlagEditor() {
     parsedFlagId !== null && parsedFlagId >= 0 && parsedFlagId < flagCount
       ? (parsedFlagId as FlagIndex)
       : null;
-  const knownBitfields = useMemo(
-    () => (earlyFlagIndex !== null ? getKnownBitfields(earlyFlagIndex) : []),
-    [earlyFlagIndex],
-  );
+  const knownBitfields =
+    earlyFlagIndex !== null ? getKnownBitfields(earlyFlagIndex) : [];
   const isBitfieldFlag = knownBitfields.length > 0;
 
-  const validation = useMemo(
-    () =>
-      validateManualEdit(
-        mode,
-        flagInput,
-        valueInput,
-        fieldIndexInput,
-        fieldWidthInput,
-        flagCount,
-        t,
-      ),
-    [
-      fieldIndexInput,
-      fieldWidthInput,
-      flagCount,
-      flagInput,
-      mode,
-      valueInput,
-      t,
-    ],
+  const validation = validateManualEdit(
+    mode,
+    flagInput,
+    valueInput,
+    fieldIndexInput,
+    fieldWidthInput,
+    flagCount,
+    t,
   );
 
   const currentValue =
@@ -340,14 +326,12 @@ export function ManualFlagEditor() {
       )
     : [];
 
-  const bitfieldSelectItems = useMemo<SelectItem[]>(
-    () =>
-      knownBitfields.map(({ id, bitfield }) => ({
-        id,
-        label: bitfield.displayName,
-        value: id,
-      })),
-    [knownBitfields],
+  const bitfieldSelectItems: SelectItem[] = knownBitfields.map(
+    ({ id, bitfield }) => ({
+      id,
+      label: bitfield.displayName,
+      value: id,
+    }),
   );
 
   const selectedBitfieldItem =
