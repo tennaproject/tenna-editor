@@ -24,6 +24,7 @@ export * from './flag-bitfields';
 export * from './flag-helpers';
 export * from './environment';
 export * from './character-stats';
+export * from './data-packs';
 export * from './base64';
 export * from './joaat';
 export * from './random';

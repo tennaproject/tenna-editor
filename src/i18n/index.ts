@@ -91,6 +91,65 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.settings.importSuccess':
     'Successfully imported {imported} save(s) (skipped {skipped})',
   'ui.settings.importFailedGeneric': 'Failed to import backup file',
+  'ui.settings.dataPacks.errorJson':
+    'Unable to import this pack. Choose a valid JSON file.',
+  'ui.settings.dataPacks.errorRoot':
+    'Unable to import this pack. The JSON root must be an object.',
+  'ui.settings.dataPacks.errorVersion':
+    'Unable to import data-pack version {version}. This editor supports version {supported}.',
+  'ui.settings.dataPacks.errorData':
+    'Unable to import this pack. Data must be an object grouped by type.',
+  'ui.settings.dataPacks.errorEmpty':
+    'Unable to import this pack. Add at least one data entry.',
+  'ui.settings.dataPacks.errorTooManyEntries':
+    'Unable to import this pack. Packs can contain at most {max} entries.',
+  'ui.settings.dataPacks.errorEntry': '{entry} must be an object.',
+  'ui.settings.dataPacks.errorType':
+    'Unable to import this pack. {type} is not a supported data type.',
+  'ui.settings.dataPacks.errorGroup': 'Data group {type} must be an object.',
+  'ui.settings.dataPacks.errorEntryKey':
+    '{entry} is not a valid data-pack key. Use 1 to 64 letters, numbers, or underscores.',
+  'ui.settings.dataPacks.errorEntryId':
+    '{entry} ID must be a whole number of 1 or greater.',
+  'ui.settings.dataPacks.errorDisplayName': '{entry} must have a display name.',
+  'ui.settings.dataPacks.errorDisplayNameLength':
+    '{entry} display name must be {max} characters or fewer.',
+  'ui.settings.dataPacks.errorDescription':
+    '{entry} description must contain text.',
+  'ui.settings.dataPacks.errorDescriptionLength':
+    '{entry} description must be {max} characters or fewer.',
+  'ui.settings.dataPacks.errorAbility': '{entry} ability must contain text.',
+  'ui.settings.dataPacks.errorAbilityLength':
+    '{entry} ability must be {max} characters or fewer.',
+  'ui.settings.dataPacks.errorChapters':
+    '{entry} chapters must be a non-empty list containing chapter numbers 1 through 5.',
+  'ui.settings.dataPacks.errorDuplicate':
+    '{type} defines ID {id} more than once.',
+  'ui.settings.dataPacks.errorPackId':
+    'Unable to import this pack. Add a unique pack ID.',
+  'ui.settings.dataPacks.errorPackName':
+    'Unable to import this pack. Add a pack name.',
+  'ui.settings.dataPacks.errorModVersion': 'The mod version must contain text.',
+  'ui.settings.dataPacks.errorConflict':
+    'Unable to import {pack}. {type} ID {id} is already defined by {conflict}.',
+  'ui.settings.dataPacks.errorStats':
+    '{entry} stats must include whole-number attack, defence, and magic values from -999 to 999.',
+  'ui.settings.dataPacks.errorStatValue':
+    '{entry} {field} must be a whole number from {min} to {max}.',
+  'ui.settings.dataPacks.errorHeal':
+    '{entry} {field} must be a whole number from {min} to {max}.',
+  'ui.settings.dataPacks.errorPercent':
+    '{entry} {field} must be a whole number from {min} to {max}.',
+  'ui.settings.dataPacks.errorCharacters':
+    '{entry} characters must be a non-empty list of character names.',
+  'ui.settings.dataPacks.errorCharacterName':
+    '{entry} characters includes unknown name {name}.',
+  'ui.settings.dataPacks.errorHealByCharacter':
+    '{entry} {field} must be an object of character names to heal values.',
+  'ui.settings.dataPacks.errorHealsParty':
+    '{entry} healsParty must be true or false.',
+  'ui.settings.dataPacks.errorOverworld':
+    '{entry} overworld must be an object of heal values.',
   'ui.flag.numberPlaceholder': 'Enter number...',
   'ui.flag.mapPlaceholder': 'Select value...',
   'ui.nav.about': 'About',
