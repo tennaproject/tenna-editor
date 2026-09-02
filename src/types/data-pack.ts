@@ -1,4 +1,9 @@
-import type { CharacterIndex, EquipmentIconIndex, HealAmounts } from '@data';
+import type {
+  CharacterIndex,
+  EquipmentIconIndex,
+  FlagValueType,
+  HealAmounts,
+} from '@data';
 import type { AbilityValues, EquipmentStats } from './data';
 
 export type DataPackChapter = 1 | 2 | 3 | 4 | 5;
@@ -40,28 +45,63 @@ export interface DataPackEquipmentEntry extends DataPackBaseEntry {
   stats?: EquipmentStats;
   ability?: string;
   characters?: CharacterIndex[];
+  icon?: EquipmentIconIndex;
 }
 
 export interface DataPackSpellEntry extends DataPackBaseEntry {
   characters?: CharacterIndex[];
+  tpCost?: number;
+}
+
+export interface DataPackLightWorldItemEntry extends DataPackBaseEntry {
+  weapon?: boolean;
+  armor?: boolean;
+  attack?: number;
+  defence?: number;
+  heal?: number;
+  darkWorldWeapon?: number;
+  darkWorldArmor?: number;
+}
+
+export interface DataPackFlagValueRules {
+  min?: number;
+  max?: number;
+  allowedValues?: number[];
+  map?: Record<number, string>;
+  unusedValues?: number[];
+  invertedBoolean?: boolean;
+  booleanMap?: {
+    trueValues: number[];
+    falseValues: number[];
+    writeTrue: number;
+    writeFalse: number;
+  };
+}
+
+export interface DataPackFlagEntry extends DataPackBaseEntry {
+  volatile?: boolean;
+  valueType?: FlagValueType;
+  valueRules?: DataPackFlagValueRules;
 }
 
 export type DataPackEntry =
   | DataPackBaseEntry
   | DataPackConsumableEntry
   | DataPackEquipmentEntry
-  | DataPackSpellEntry;
+  | DataPackSpellEntry
+  | DataPackLightWorldItemEntry
+  | DataPackFlagEntry;
 
 export interface DataPackData {
   consumables?: Record<string, DataPackConsumableEntry>;
   keyItems?: Record<string, DataPackBaseEntry>;
   weapons?: Record<string, DataPackEquipmentEntry>;
   armors?: Record<string, DataPackEquipmentEntry>;
-  lightWorldItems?: Record<string, DataPackBaseEntry>;
+  lightWorldItems?: Record<string, DataPackLightWorldItemEntry>;
   phoneContacts?: Record<string, DataPackBaseEntry>;
   spells?: Record<string, DataPackSpellEntry>;
   rooms?: Record<string, DataPackBaseEntry>;
-  flags?: Record<string, DataPackBaseEntry>;
+  flags?: Record<string, DataPackFlagEntry>;
 }
 
 export interface DataPack {

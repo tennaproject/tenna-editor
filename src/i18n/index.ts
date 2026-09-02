@@ -134,11 +134,7 @@ const UI_FALLBACKS: TranslationDictionary = {
     'Unable to import {pack}. {type} ID {id} is already defined by {conflict}.',
   'ui.settings.dataPacks.errorStats':
     '{entry} stats must include whole-number attack, defence, and magic values from -999 to 999.',
-  'ui.settings.dataPacks.errorStatValue':
-    '{entry} {field} must be a whole number from {min} to {max}.',
-  'ui.settings.dataPacks.errorHeal':
-    '{entry} {field} must be a whole number from {min} to {max}.',
-  'ui.settings.dataPacks.errorPercent':
+  'ui.settings.dataPacks.errorIntegerRange':
     '{entry} {field} must be a whole number from {min} to {max}.',
   'ui.settings.dataPacks.errorCharacters':
     '{entry} characters must be a non-empty list of character names.',
@@ -146,10 +142,26 @@ const UI_FALLBACKS: TranslationDictionary = {
     '{entry} characters includes unknown name {name}.',
   'ui.settings.dataPacks.errorHealByCharacter':
     '{entry} {field} must be an object of character names to heal values.',
-  'ui.settings.dataPacks.errorHealsParty':
-    '{entry} healsParty must be true or false.',
   'ui.settings.dataPacks.errorOverworld':
     '{entry} overworld must be an object of heal values.',
+  'ui.settings.dataPacks.errorUnknownField':
+    '{entry} contains unsupported field {field}.',
+  'ui.settings.dataPacks.errorIcon':
+    '{entry} icon must be a valid equipment icon ID.',
+  'ui.settings.dataPacks.errorIntegerList':
+    '{entry} {field} must be a list of whole numbers.',
+  'ui.settings.dataPacks.errorValueRules':
+    '{entry} valueRules must be an object.',
+  'ui.settings.dataPacks.errorInteger':
+    '{entry} {field} must be a whole number.',
+  'ui.settings.dataPacks.errorValueMap':
+    '{entry} valueRules.map must map whole numbers to labels.',
+  'ui.settings.dataPacks.errorBoolean':
+    '{entry} {field} must be true or false.',
+  'ui.settings.dataPacks.errorBooleanMap':
+    '{entry} valueRules.booleanMap is invalid.',
+  'ui.settings.dataPacks.errorValueType':
+    '{entry} valueType must be boolean, number, map, or color.',
   'ui.flag.numberPlaceholder': 'Enter number...',
   'ui.flag.mapPlaceholder': 'Select value...',
   'ui.nav.about': 'About',
