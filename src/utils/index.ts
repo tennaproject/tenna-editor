@@ -25,6 +25,7 @@ export * from './flag-helpers';
 export * from './environment';
 export * from './character-stats';
 export * from './data-packs';
+export * from './resolve-game-data';
 export * from './base64';
 export * from './joaat';
 export * from './random';

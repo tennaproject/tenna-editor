@@ -5,6 +5,7 @@ import type {
   HealAmounts,
 } from '@data';
 import type { AbilityValues, EquipmentStats } from './data';
+import type { SaveSlot } from './save';
 
 export type DataPackChapter = 1 | 2 | 3 | 4 | 5;
 
@@ -149,16 +150,34 @@ export interface SpellEntry extends DataEntry {
   tpCost?: number;
 }
 
+export interface FlagEntry extends DataEntry {
+  volatile?: boolean;
+  valueType?: FlagValueType;
+  valueRules?: Omit<DataPackFlagValueRules, 'unusedValues'> & {
+    unusedValues?: ReadonlySet<number>;
+  };
+}
+
+export interface LightWorldItemEntry extends DataEntry {
+  weapon?: boolean;
+  armor?: boolean;
+  attack?: number;
+  defence?: number;
+  heal?: number;
+  darkWorldWeapon?: number;
+  darkWorldArmor?: number;
+}
+
 export interface GameDataEntryTypes {
   consumables: ConsumableEntry;
   keyItems: DataEntry;
   weapons: EquipmentEntry;
   armors: EquipmentEntry;
-  lightWorldItems: DataEntry;
+  lightWorldItems: LightWorldItemEntry;
   phoneContacts: DataEntry;
   spells: SpellEntry;
   rooms: DataEntry;
-  flags: DataEntry;
+  flags: FlagEntry;
 }
 
 export interface GameDataGroup<T extends DataEntry> {
@@ -168,13 +187,14 @@ export interface GameDataGroup<T extends DataEntry> {
 
 export interface GameData {
   chapter: DataPackChapter;
+  saveSlot: SaveSlot;
   consumables: GameDataGroup<ConsumableEntry>;
   keyItems: GameDataGroup<DataEntry>;
   weapons: GameDataGroup<EquipmentEntry>;
   armors: GameDataGroup<EquipmentEntry>;
-  lightWorldItems: GameDataGroup<DataEntry>;
+  lightWorldItems: GameDataGroup<LightWorldItemEntry>;
   phoneContacts: GameDataGroup<DataEntry>;
   spells: GameDataGroup<SpellEntry>;
   rooms: GameDataGroup<DataEntry>;
-  flags: GameDataGroup<DataEntry>;
+  flags: GameDataGroup<FlagEntry>;
 }
