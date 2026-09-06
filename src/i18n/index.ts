@@ -114,11 +114,10 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.settings.dataPacks.errorDisplayName': '{entry} must have a display name.',
   'ui.settings.dataPacks.errorDisplayNameLength':
     '{entry} display name must be {max} characters or fewer.',
-  'ui.settings.dataPacks.errorDescription':
-    '{entry} description must contain text.',
+  'ui.settings.dataPacks.errorDescription': '{entry} description must be text.',
   'ui.settings.dataPacks.errorDescriptionLength':
     '{entry} description must be {max} characters or fewer.',
-  'ui.settings.dataPacks.errorAbility': '{entry} ability must contain text.',
+  'ui.settings.dataPacks.errorAbility': '{entry} ability must be text.',
   'ui.settings.dataPacks.errorAbilityLength':
     '{entry} ability must be {max} characters or fewer.',
   'ui.settings.dataPacks.errorChapters':
@@ -142,6 +141,8 @@ const UI_FALLBACKS: TranslationDictionary = {
     '{entry} characters includes unknown name {name}.',
   'ui.settings.dataPacks.errorHealByCharacter':
     '{entry} {field} must be an object of character names to heal values.',
+  'ui.settings.dataPacks.errorExtraHeal':
+    '{entry} extraHeal must be an object with host, character, and amount.',
   'ui.settings.dataPacks.errorOverworld':
     '{entry} overworld must be an object of heal values.',
   'ui.settings.dataPacks.errorUnknownField':

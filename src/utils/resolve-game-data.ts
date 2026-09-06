@@ -48,53 +48,26 @@ function toGroup<T extends DataEntry>(entries: T[]): GameDataGroup<T> {
   };
 }
 
-function mergeIdentity<T extends DataEntry>(
+function mergeBaseEntry<T extends DataEntry>(
   existing: T | undefined,
   packEntry: DataPackEntry,
   name: string,
   packId: string,
   overridesBuiltIn: boolean,
-): Pick<
-  DataEntry,
-  | 'id'
-  | 'name'
-  | 'displayName'
-  | 'description'
-  | 'chapters'
-  | 'dataPack'
-  | 'packId'
-  | 'overridesBuiltIn'
-  | 'descriptionFromPack'
-  | 'characters'
-> {
+): T {
   return {
-    id: packEntry.id,
+    ...existing,
+    ...Object.fromEntries(
+      Object.entries(packEntry)
+        .filter(([, value]) => value !== undefined)
+        .map(([key, value]) => [key, value === null ? undefined : value]),
+    ),
     name,
-    displayName: packEntry.displayName,
-    description: packEntry.description ?? existing?.description,
-    chapters: packEntry.chapters ?? existing?.chapters,
     dataPack: true,
     packId,
     overridesBuiltIn,
     descriptionFromPack: packEntry.description !== undefined,
-    characters:
-      'characters' in packEntry && packEntry.characters
-        ? packEntry.characters
-        : existing?.characters,
-  };
-}
-
-function mergeBaseEntry(
-  existing: DataEntry | undefined,
-  packEntry: DataPackEntry,
-  name: string,
-  packId: string,
-  overridesBuiltIn: boolean,
-): DataEntry {
-  return {
-    ...existing,
-    ...mergeIdentity(existing, packEntry, name, packId, overridesBuiltIn),
-  };
+  } as T;
 }
 
 function mergeEquipmentEntry(
@@ -104,25 +77,18 @@ function mergeEquipmentEntry(
   packId: string,
   overridesBuiltIn: boolean,
 ): EquipmentEntry {
-  const identity = mergeIdentity(
+  const entry = mergeBaseEntry(
     existing,
     packEntry,
     name,
     packId,
     overridesBuiltIn,
   );
-  return {
-    ...existing,
-    ...identity,
-    stats: packEntry.stats ?? existing?.stats,
-    ability:
-      packEntry.ability !== undefined ? packEntry.ability : existing?.ability,
-    abilityIndex:
-      packEntry.ability !== undefined ? undefined : existing?.abilityIndex,
-    abilityValues:
-      packEntry.ability !== undefined ? undefined : existing?.abilityValues,
-    icon: packEntry.icon ?? existing?.icon,
-  };
+  if (packEntry.ability !== undefined) {
+    entry.abilityIndex = undefined;
+    entry.abilityValues = undefined;
+  }
+  return entry;
 }
 
 function mergeConsumableEntry(
@@ -132,19 +98,7 @@ function mergeConsumableEntry(
   packId: string,
   overridesBuiltIn: boolean,
 ): ConsumableEntry {
-  return {
-    ...existing,
-    ...mergeIdentity(existing, packEntry, name, packId, overridesBuiltIn),
-    heal: packEntry.heal ?? existing?.heal,
-    healPercent: packEntry.healPercent ?? existing?.healPercent,
-    healByCharacter: packEntry.healByCharacter ?? existing?.healByCharacter,
-    healPercentByCharacter:
-      packEntry.healPercentByCharacter ?? existing?.healPercentByCharacter,
-    tpGain: packEntry.tpGain ?? existing?.tpGain,
-    revivePercent: packEntry.revivePercent ?? existing?.revivePercent,
-    healsParty: packEntry.healsParty ?? existing?.healsParty,
-    overworld: packEntry.overworld ?? existing?.overworld,
-  };
+  return mergeBaseEntry(existing, packEntry, name, packId, overridesBuiltIn);
 }
 
 function mergeSpellEntry(
@@ -155,9 +109,8 @@ function mergeSpellEntry(
   overridesBuiltIn: boolean,
 ): SpellEntry {
   return {
-    ...existing,
-    ...mergeIdentity(existing, packEntry, name, packId, overridesBuiltIn),
-    tpCost: packEntry.tpCost ?? existing?.tpCost,
+    ...mergeBaseEntry(existing, packEntry, name, packId, overridesBuiltIn),
+    overrides: packEntry,
   };
 }
 
@@ -168,26 +121,31 @@ function mergeFlagEntry(
   packId: string,
   overridesBuiltIn: boolean,
 ): FlagEntry {
-  const packRules = packEntry.valueRules;
-  const changesValueType =
+  const entry = mergeBaseEntry(
+    existing,
+    packEntry,
+    name,
+    packId,
+    overridesBuiltIn,
+  );
+  if (packEntry.valueRules !== undefined) {
+    entry.valueRules =
+      packEntry.valueRules === null
+        ? undefined
+        : {
+            ...packEntry.valueRules,
+            unusedValues:
+              packEntry.valueRules.unusedValues === undefined
+                ? undefined
+                : new Set(packEntry.valueRules.unusedValues),
+          };
+  } else if (
     packEntry.valueType !== undefined &&
-    packEntry.valueType !== existing?.valueType;
-  const existingRules = changesValueType ? undefined : existing?.valueRules;
-  return {
-    ...existing,
-    ...mergeIdentity(existing, packEntry, name, packId, overridesBuiltIn),
-    volatile: packEntry.volatile ?? existing?.volatile,
-    valueType: packEntry.valueType ?? existing?.valueType,
-    valueRules: packRules
-      ? {
-          ...existingRules,
-          ...packRules,
-          unusedValues: packRules.unusedValues
-            ? new Set(packRules.unusedValues)
-            : existingRules?.unusedValues,
-        }
-      : existingRules,
-  };
+    packEntry.valueType !== existing?.valueType
+  ) {
+    entry.valueRules = undefined;
+  }
+  return entry;
 }
 
 function mergeLightWorldItemEntry(
@@ -198,16 +156,59 @@ function mergeLightWorldItemEntry(
   overridesBuiltIn: boolean,
 ): LightWorldItemEntry {
   return {
-    ...existing,
-    ...mergeIdentity(existing, packEntry, name, packId, overridesBuiltIn),
-    weapon: packEntry.weapon ?? existing?.weapon,
-    armor: packEntry.armor ?? existing?.armor,
-    attack: packEntry.attack ?? existing?.attack,
-    defence: packEntry.defence ?? existing?.defence,
-    heal: packEntry.heal ?? existing?.heal,
-    darkWorldWeapon: packEntry.darkWorldWeapon ?? existing?.darkWorldWeapon,
-    darkWorldArmor: packEntry.darkWorldArmor ?? existing?.darkWorldArmor,
+    ...mergeBaseEntry(existing, packEntry, name, packId, overridesBuiltIn),
+    overrides: packEntry,
   };
+}
+
+export function resolveSpellEntry(
+  entry: SpellEntry,
+  context: Parameters<
+    NonNullable<
+      NonNullable<ReturnType<typeof spellHelpers.getById>>['getOverrides']
+    >
+  >[0],
+): SpellEntry {
+  const meta =
+    entry.overridesBuiltIn || !entry.dataPack
+      ? resolveChapterMeta(
+          spellHelpers.getById(entry.id as SpellIndex),
+          context,
+        )
+      : undefined;
+  const resolved = { ...entry, ...meta };
+  return entry.overrides
+    ? mergeSpellEntry(
+        resolved,
+        entry.overrides,
+        entry.name,
+        entry.packId!,
+        !!entry.overridesBuiltIn,
+      )
+    : resolved;
+}
+
+export function resolveLightWorldItemEntry(
+  entry: LightWorldItemEntry,
+  context: { chapter: ChapterIndex; items: ConsumableIndex[] },
+): LightWorldItemEntry {
+  const meta =
+    entry.overridesBuiltIn || !entry.dataPack
+      ? resolveChapterMeta(
+          lightWorldItemHelpers.getById(entry.id as LightWorldItemIndex),
+          context,
+        )
+      : undefined;
+  const resolved = { ...entry, ...meta };
+  return entry.overrides
+    ? mergeLightWorldItemEntry(
+        resolved,
+        entry.overrides,
+        entry.name,
+        entry.packId!,
+        !!entry.overridesBuiltIn,
+      )
+    : resolved;
 }
 
 function overlayPacks<T extends DataEntry>(
@@ -230,10 +231,10 @@ function overlayPacks<T extends DataEntry>(
     for (const [name, entry] of Object.entries(pack.data[type] ?? {})) {
       if (entry.chapters && !entry.chapters.includes(chapter)) continue;
       const overridesBuiltIn = builtInIds.has(entry.id);
-      entries.set(
-        entry.id,
-        merge(entries.get(entry.id), entry, name, pack.id, overridesBuiltIn),
-      );
+      entries.set(entry.id, {
+        ...merge(entries.get(entry.id), entry, name, pack.id, overridesBuiltIn),
+        packName: pack.name,
+      });
     }
   }
 

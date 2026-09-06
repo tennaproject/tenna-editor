@@ -128,6 +128,16 @@ function requireText(
   return value.trim();
 }
 
+function requireOptionalText(
+  value: unknown,
+  key: string,
+  fallback: string,
+  values: Record<string, string | number>,
+): string {
+  if (typeof value !== 'string') throw dataPackError(key, fallback, values);
+  return value.trim();
+}
+
 function parseInteger(
   value: unknown,
   entryName: string,
@@ -565,10 +575,10 @@ function parseBaseEntry(
   };
 
   if (source.description !== undefined) {
-    const description = requireText(
+    const description = requireOptionalText(
       source.description,
       'ui.settings.dataPacks.errorDescription',
-      '{entry} description must contain text.',
+      '{entry} description must be text.',
       { entry: name },
     );
     if (description.length > DATA_PACK_MAX_DESCRIPTION) {
@@ -598,10 +608,10 @@ function parseEquipmentEntry(
   }
 
   if (source.ability !== undefined) {
-    const ability = requireText(
+    const ability = requireOptionalText(
       source.ability,
       'ui.settings.dataPacks.errorAbility',
-      '{entry} ability must contain text.',
+      '{entry} ability must be text.',
       { entry: name },
     );
     if (ability.length > DATA_PACK_MAX_ABILITY) {
@@ -679,6 +689,50 @@ function parseConsumableEntry(
       name,
       'overworld',
     );
+  }
+
+  if (source.extraHeal !== undefined) {
+    if (
+      typeof source.extraHeal !== 'object' ||
+      source.extraHeal === null ||
+      Array.isArray(source.extraHeal)
+    ) {
+      throw dataPackError(
+        'ui.settings.dataPacks.errorExtraHeal',
+        '{entry} extraHeal must be an object with host, character, and amount.',
+        { entry: name },
+      );
+    }
+    const extraHeal = source.extraHeal as Record<string, unknown>;
+    requireKnownFields(
+      extraHeal,
+      new Set(['host', 'character', 'amount']),
+      `${name}.extraHeal`,
+    );
+    if (
+      typeof extraHeal.host !== 'string' ||
+      typeof extraHeal.character !== 'string'
+    ) {
+      throw dataPackError(
+        'ui.settings.dataPacks.errorExtraHeal',
+        '{entry} extraHeal must be an object with host, character, and amount.',
+        { entry: name },
+      );
+    }
+    entry.extraHeal = {
+      host: parseCharacterName(extraHeal.host, `${name}.extraHeal.host`),
+      character: parseCharacterName(
+        extraHeal.character,
+        `${name}.extraHeal.character`,
+      ),
+      amount: parseInteger(
+        extraHeal.amount,
+        name,
+        'extraHeal.amount',
+        0,
+        HEAL_MAX,
+      ),
+    };
   }
 
   return entry;
@@ -808,6 +862,7 @@ function getEntryFields(type: DataPackType): Set<string> {
       'revivePercent',
       'healsParty',
       'overworld',
+      'extraHeal',
     ]) {
       fields.add(field);
     }
@@ -847,23 +902,35 @@ function parseDataEntry(
     );
   }
 
-  const source = value as Record<string, unknown>;
-  requireKnownFields(source, getEntryFields(type), name);
-  switch (type) {
-    case 'weapons':
-    case 'armors':
-      return parseEquipmentEntry(source, name);
-    case 'consumables':
-      return parseConsumableEntry(source, name);
-    case 'spells':
-      return parseSpellEntry(source, name);
-    case 'flags':
-      return parseFlagEntry(source, name);
-    case 'lightWorldItems':
-      return parseLightWorldItemEntry(source, name);
-    default:
-      return parseBaseEntry(source, name);
-  }
+  const raw = value as Record<string, unknown>;
+  requireKnownFields(raw, getEntryFields(type), name);
+  const source = { ...raw };
+  const cleared = Object.keys(raw).filter(
+    (field) =>
+      raw[field] === null && !['id', 'displayName', 'chapters'].includes(field),
+  );
+  for (const field of cleared) delete source[field];
+  const entry = (() => {
+    switch (type) {
+      case 'weapons':
+      case 'armors':
+        return parseEquipmentEntry(source, name);
+      case 'consumables':
+        return parseConsumableEntry(source, name);
+      case 'spells':
+        return parseSpellEntry(source, name);
+      case 'flags':
+        return parseFlagEntry(source, name);
+      case 'lightWorldItems':
+        return parseLightWorldItemEntry(source, name);
+      default:
+        return parseBaseEntry(source, name);
+    }
+  })();
+  return Object.assign(
+    entry,
+    Object.fromEntries(cleared.map((field) => [field, null])),
+  );
 }
 
 function parseData(value: unknown): DataPackData {

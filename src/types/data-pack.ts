@@ -20,7 +20,7 @@ export type DataPackType =
   | 'rooms'
   | 'flags';
 
-export interface DataPackBaseEntry {
+interface DataPackBaseEntryFields {
   id: number;
   displayName: string;
   description?: string;
@@ -34,27 +34,32 @@ export interface DataPackHealAmounts {
   healPercentByCharacter?: Partial<Record<CharacterIndex, number>>;
 }
 
-export interface DataPackConsumableEntry
-  extends DataPackBaseEntry, DataPackHealAmounts {
+interface DataPackConsumableEntryFields
+  extends DataPackBaseEntryFields, DataPackHealAmounts {
   tpGain?: number;
   revivePercent?: number;
   healsParty?: boolean;
   overworld?: DataPackHealAmounts;
+  extraHeal?: {
+    host: CharacterIndex;
+    character: CharacterIndex;
+    amount: number;
+  };
 }
 
-export interface DataPackEquipmentEntry extends DataPackBaseEntry {
+interface DataPackEquipmentEntryFields extends DataPackBaseEntryFields {
   stats?: EquipmentStats;
   ability?: string;
   characters?: CharacterIndex[];
   icon?: EquipmentIconIndex;
 }
 
-export interface DataPackSpellEntry extends DataPackBaseEntry {
+interface DataPackSpellEntryFields extends DataPackBaseEntryFields {
   characters?: CharacterIndex[];
   tpCost?: number;
 }
 
-export interface DataPackLightWorldItemEntry extends DataPackBaseEntry {
+interface DataPackLightWorldItemEntryFields extends DataPackBaseEntryFields {
   weapon?: boolean;
   armor?: boolean;
   attack?: number;
@@ -63,6 +68,24 @@ export interface DataPackLightWorldItemEntry extends DataPackBaseEntry {
   darkWorldWeapon?: number;
   darkWorldArmor?: number;
 }
+
+type ClearableEntry<T> = {
+  [K in keyof T]: K extends 'chapters'
+    ? T[K]
+    : undefined extends T[K]
+      ? T[K] | null
+      : T[K];
+};
+
+export type DataPackBaseEntry = ClearableEntry<DataPackBaseEntryFields>;
+export type DataPackConsumableEntry =
+  ClearableEntry<DataPackConsumableEntryFields>;
+export type DataPackEquipmentEntry =
+  ClearableEntry<DataPackEquipmentEntryFields>;
+export type DataPackSpellEntry = ClearableEntry<DataPackSpellEntryFields>;
+export type DataPackLightWorldItemEntry =
+  ClearableEntry<DataPackLightWorldItemEntryFields>;
+export type DataPackFlagEntry = ClearableEntry<DataPackFlagEntryFields>;
 
 export interface DataPackFlagValueRules {
   min?: number;
@@ -79,7 +102,7 @@ export interface DataPackFlagValueRules {
   };
 }
 
-export interface DataPackFlagEntry extends DataPackBaseEntry {
+interface DataPackFlagEntryFields extends DataPackBaseEntryFields {
   volatile?: boolean;
   valueType?: FlagValueType;
   valueRules?: DataPackFlagValueRules;
@@ -121,6 +144,7 @@ export interface DataEntry {
   unused?: boolean;
   dataPack: boolean;
   packId?: string;
+  packName?: string;
   overridesBuiltIn?: boolean;
   descriptionFromPack?: boolean;
   characters?: readonly CharacterIndex[];
@@ -147,6 +171,7 @@ export interface ConsumableEntry extends DataEntry, HealAmounts {
 }
 
 export interface SpellEntry extends DataEntry {
+  overrides?: DataPackSpellEntry;
   tpCost?: number;
 }
 
@@ -159,6 +184,7 @@ export interface FlagEntry extends DataEntry {
 }
 
 export interface LightWorldItemEntry extends DataEntry {
+  overrides?: DataPackLightWorldItemEntry;
   weapon?: boolean;
   armor?: boolean;
   attack?: number;
