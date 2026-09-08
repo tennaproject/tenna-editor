@@ -3,8 +3,10 @@ import { persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 import { STORE_NAMESPACE } from './schema';
 import { createDebouncedJSONStorage } from 'zustand-debounce';
+import type { DataPack } from '@types';
+import { useDataPacks } from './data-packs';
 
-export const UI_VERSION = 10;
+export const UI_VERSION = 11;
 
 export type UiLocale = 'en' | 'ko' | 'it';
 
@@ -240,6 +242,14 @@ export const useUi = create<UiState>()(
           const current = nextState as { ui?: Partial<Ui> };
           if (current.ui?.recruits) {
             current.ui.recruits.showNonRecruitedInCafe ??= false;
+          }
+        }
+
+        if (version < 11) {
+          const current = nextState as { ui?: Ui & { dataPacks?: DataPack[] } };
+          if (current.ui?.dataPacks) {
+            useDataPacks.getState().importLegacy(current.ui.dataPacks);
+            delete current.ui.dataPacks;
           }
         }
 

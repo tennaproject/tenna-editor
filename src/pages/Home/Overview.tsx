@@ -1,3 +1,4 @@
+import { SaveDataPacks } from './SaveDataPacks';
 import { useState } from 'react';
 import DeleteIcon from '@assets/icons/trash.svg?react';
 import CancelIcon from '@assets/icons/close.svg?react';
@@ -342,7 +343,8 @@ export function HomeOverview() {
                     <SaveId />
                     <SaveTimestamp />
                   </div>
-                  <div className="mt-auto flex justify-end pt-3">
+                  <div className="mt-auto flex flex-wrap justify-end gap-2 pt-3">
+                    <SaveDataPacks />
                     <DeleteSave />
                   </div>
                 </div>

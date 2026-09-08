@@ -91,6 +91,20 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.settings.importSuccess':
     'Successfully imported {imported} save(s) (skipped {skipped})',
   'ui.settings.importFailedGeneric': 'Failed to import backup file',
+  'ui.settings.dataPacks.title': 'Mod data packs',
+  'ui.settings.dataPacks.description':
+    'Import packs here, then activate them on a save’s Overview page.',
+  'ui.settings.dataPacks.import': 'Import data pack',
+  'ui.settings.dataPacks.empty': 'No data packs imported.',
+  'ui.settings.dataPacks.imported': 'Imported {name}. Entries: {count}.',
+  'ui.settings.dataPacks.replaced': 'Replaced {name}. Entries: {count}.',
+  'ui.settings.dataPacks.count': 'Entries: {count}',
+  'ui.settings.dataPacks.modVersion': 'Mod version: {version}',
+  'ui.settings.dataPacks.remove': 'Remove pack',
+  'ui.settings.dataPacks.errorGeneric':
+    'Unable to import this data pack. Check the file and try again.',
+  'ui.settings.dataPacks.errorFileSize':
+    'Unable to import this pack. Files must be 1 MB or smaller.',
   'ui.settings.dataPacks.errorJson':
     'Unable to import this pack. Choose a valid JSON file.',
   'ui.settings.dataPacks.errorRoot':
@@ -129,8 +143,6 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.settings.dataPacks.errorPackName':
     'Unable to import this pack. Add a pack name.',
   'ui.settings.dataPacks.errorModVersion': 'The mod version must contain text.',
-  'ui.settings.dataPacks.errorConflict':
-    'Unable to import {pack}. {type} ID {id} is already defined by {conflict}.',
   'ui.settings.dataPacks.errorStats':
     '{entry} stats must include whole-number attack, defence, and magic values from -999 to 999.',
   'ui.settings.dataPacks.errorIntegerRange':
@@ -165,6 +177,21 @@ const UI_FALLBACKS: TranslationDictionary = {
     '{entry} valueType must be boolean, number, map, or color.',
   'ui.flag.numberPlaceholder': 'Enter number...',
   'ui.flag.mapPlaceholder': 'Select value...',
+  'ui.dataPacks.activationConflict':
+    'These packs define the same IDs: {packs}. Deactivate a conflicting pack first.',
+  'ui.dataPacks.noneInstalled':
+    'Import packs in Settings, then activate them for this save.',
+  'ui.dataPacks.missing':
+    'Pack missing. Import it in Settings to restore its catalog data.',
+  'ui.dataPacks.conflict':
+    'Pack inactive because its IDs conflict with another selected pack. Deactivate a conflicting pack to resolve this.',
+  'ui.dataPacks.versionMismatch':
+    'Version differs. Referenced: {expected}. Installed: {installed}.',
+  'ui.dataPacks.unspecifiedVersion': 'Unspecified',
+  'ui.dataPacks.acceptVersion': 'Accept installed version',
+  'ui.dataPacks.title': 'Data packs',
+  'ui.dataPacks.activationDescription':
+    'Choose the packs used by this save. This changes catalog data without changing saved values.',
   'ui.nav.about': 'About',
   'ui.nav.armors': 'Armors',
   'ui.nav.attributions': 'Attributions',

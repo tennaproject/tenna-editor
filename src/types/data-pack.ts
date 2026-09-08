@@ -128,6 +128,11 @@ export interface DataPackData {
   flags?: Record<string, DataPackFlagEntry>;
 }
 
+export interface DataPackReference {
+  id: string;
+  modVersion?: string;
+}
+
 export interface DataPack {
   id: string;
   name: string;
@@ -147,6 +152,7 @@ export interface DataEntry {
   packName?: string;
   overridesBuiltIn?: boolean;
   descriptionFromPack?: boolean;
+  charactersFromPack?: boolean;
   characters?: readonly CharacterIndex[];
 }
 
@@ -168,6 +174,11 @@ export interface ConsumableEntry extends DataEntry, HealAmounts {
     amount: number;
   };
   overworld?: HealAmounts;
+}
+
+export interface KeyItemEntry extends DataEntry {
+  overrides?: DataPackBaseEntry;
+  descriptionValues?: Record<string, string | number>;
 }
 
 export interface SpellEntry extends DataEntry {
@@ -194,16 +205,8 @@ export interface LightWorldItemEntry extends DataEntry {
   darkWorldArmor?: number;
 }
 
-export interface GameDataEntryTypes {
-  consumables: ConsumableEntry;
-  keyItems: DataEntry;
-  weapons: EquipmentEntry;
-  armors: EquipmentEntry;
-  lightWorldItems: LightWorldItemEntry;
-  phoneContacts: DataEntry;
-  spells: SpellEntry;
-  rooms: DataEntry;
-  flags: FlagEntry;
+export interface RoomEntry extends DataEntry {
+  hasSavePoint?: boolean;
 }
 
 export interface GameDataGroup<T extends DataEntry> {
@@ -215,12 +218,12 @@ export interface GameData {
   chapter: DataPackChapter;
   saveSlot: SaveSlot;
   consumables: GameDataGroup<ConsumableEntry>;
-  keyItems: GameDataGroup<DataEntry>;
+  keyItems: GameDataGroup<KeyItemEntry>;
   weapons: GameDataGroup<EquipmentEntry>;
   armors: GameDataGroup<EquipmentEntry>;
   lightWorldItems: GameDataGroup<LightWorldItemEntry>;
   phoneContacts: GameDataGroup<DataEntry>;
   spells: GameDataGroup<SpellEntry>;
-  rooms: GameDataGroup<DataEntry>;
+  rooms: GameDataGroup<RoomEntry>;
   flags: GameDataGroup<FlagEntry>;
 }

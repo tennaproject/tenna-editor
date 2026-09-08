@@ -7,6 +7,7 @@ import {
 } from '@data';
 import type {
   DataPack,
+  DataPackReference,
   DataPackBaseEntry,
   DataPackChapter,
   DataPackConsumableEntry,
@@ -1064,27 +1065,6 @@ export function upsertDataPack(
   nextPack: DataPack,
 ): DataPack[] {
   const remaining = packs.filter((pack) => pack.id !== nextPack.id);
-  for (const type of DATA_PACK_TYPES) {
-    for (const entry of Object.values(nextPack.data[type] ?? {})) {
-      const conflictingPack = remaining.find((pack) =>
-        Object.values(pack.data[type] ?? {}).some(
-          (existing) => existing.id === entry.id,
-        ),
-      );
-      if (conflictingPack) {
-        throw dataPackError(
-          'ui.settings.dataPacks.errorConflict',
-          'Unable to import {pack}. {type} ID {id} is already defined by {conflict}.',
-          {
-            pack: nextPack.name,
-            type,
-            id: entry.id,
-            conflict: conflictingPack.name,
-          },
-        );
-      }
-    }
-  }
   return [...remaining, nextPack].sort((left, right) =>
     left.name.localeCompare(right.name),
   );
@@ -1095,4 +1075,40 @@ export function getDataPackEntryCount(pack: DataPack): number {
     (count, entries) => count + Object.keys(entries ?? {}).length,
     0,
   );
+}
+
+export function resolveDataPackReferences(
+  packs: DataPack[],
+  references: readonly DataPackReference[] = [],
+) {
+  const selected = references.flatMap((reference) => {
+    const pack = packs.find((entry) => entry.id === reference.id);
+    return pack ? [pack] : [];
+  });
+  const conflicts = new Set<string>();
+  for (const type of DATA_PACK_TYPES) {
+    const owners = new Map<number, string>();
+    for (const pack of selected) {
+      for (const entry of Object.values(pack.data[type] ?? {})) {
+        const owner = owners.get(entry.id);
+        if (owner !== undefined) {
+          conflicts.add(owner);
+          conflicts.add(pack.id);
+        } else owners.set(entry.id, pack.id);
+      }
+    }
+  }
+  return {
+    packs: selected.filter((pack) => !conflicts.has(pack.id)),
+    references: references.map((reference) => {
+      const pack = selected.find((entry) => entry.id === reference.id);
+      return {
+        reference,
+        pack,
+        missing: !pack,
+        conflict: conflicts.has(reference.id),
+        versionMismatch: !!pack && reference.modVersion !== pack.modVersion,
+      };
+    }),
+  };
 }

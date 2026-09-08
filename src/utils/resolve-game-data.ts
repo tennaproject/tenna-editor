@@ -1,11 +1,13 @@
 import {
   EQUIPMENT_ABILITIES_META,
   type ChapterIndex,
+  type CharacterIndex,
   type ConsumableIndex,
   type EquipmentAbilityIndex,
   type EquipmentIconIndex,
   type FlagIndex,
   type LightWorldItemIndex,
+  type KeyItemIndex,
   type SpellIndex,
 } from '@data';
 import type {
@@ -25,10 +27,13 @@ import type {
   GameData,
   GameDataGroup,
   LightWorldItemEntry,
+  KeyItemEntry,
+  RoomEntry,
   SaveSlot,
   SpellEntry,
 } from '@types';
 import {
+  characterHelpers,
   armorHelpers,
   consumableHelpers,
   flagHelpers,
@@ -67,6 +72,8 @@ function mergeBaseEntry<T extends DataEntry>(
     packId,
     overridesBuiltIn,
     descriptionFromPack: packEntry.description !== undefined,
+    charactersFromPack:
+      'characters' in packEntry && packEntry.characters !== undefined,
   } as T;
 }
 
@@ -188,6 +195,45 @@ export function resolveSpellEntry(
     : resolved;
 }
 
+export function resolveKeyItemEntry(
+  entry: KeyItemEntry,
+  context: Parameters<
+    NonNullable<ReturnType<typeof keyItemHelpers.getById>['getOverrides']>
+  >[0],
+): KeyItemEntry {
+  const meta =
+    entry.overridesBuiltIn || !entry.dataPack
+      ? resolveChapterMeta(
+          keyItemHelpers.getById(entry.id as KeyItemIndex),
+          context,
+        )
+      : undefined;
+  const resolved = { ...entry, ...meta };
+  return entry.overrides
+    ? mergeBaseEntry(
+        resolved,
+        entry.overrides,
+        entry.name,
+        entry.packId!,
+        !!entry.overridesBuiltIn,
+      )
+    : resolved;
+}
+
+export function isDataEntryAvailable(
+  entry: DataEntry,
+  character: CharacterIndex,
+  allowedOverride?: ReadonlySet<number>,
+): boolean {
+  if (
+    allowedOverride &&
+    !entry.charactersFromPack &&
+    !(entry.dataPack && !entry.overridesBuiltIn)
+  )
+    return allowedOverride.has(entry.id);
+  return !entry.characters || entry.characters.includes(character);
+}
+
 export function resolveLightWorldItemEntry(
   entry: LightWorldItemEntry,
   context: { chapter: ChapterIndex; items: ConsumableIndex[] },
@@ -224,7 +270,30 @@ function overlayPacks<T extends DataEntry>(
     overridesBuiltIn: boolean,
   ) => T,
 ): T[] {
-  const entries = new Map(builtIns.map((entry) => [entry.id, entry]));
+  const restriction =
+    type === 'weapons'
+      ? 'allowedWeapons'
+      : type === 'armors'
+        ? 'allowedArmors'
+        : type === 'spells'
+          ? 'allowedSpells'
+          : undefined;
+  const entries = new Map(
+    builtIns.map((entry) => [
+      entry.id,
+      restriction
+        ? {
+            ...entry,
+            characters: characterHelpers
+              .getAll()
+              .filter((character) =>
+                (character[restriction] as ReadonlySet<number>).has(entry.id),
+              )
+              .map((character) => character.id),
+          }
+        : entry,
+    ]),
+  );
   const builtInIds = new Set(builtIns.map((entry) => entry.id));
 
   for (const pack of packs) {
@@ -475,7 +544,10 @@ export function buildGameData(
     packs,
     'keyItems',
     chapter,
-    mergeBaseEntry,
+    (existing, packEntry, name, packId, overridesBuiltIn): KeyItemEntry => ({
+      ...mergeBaseEntry(existing, packEntry, name, packId, overridesBuiltIn),
+      overrides: packEntry,
+    }),
   );
 
   const lightWorldItems = overlayPacks(
@@ -514,15 +586,17 @@ export function buildGameData(
   );
 
   const rooms = overlayPacks(
-    roomHelpers
-      .getAllNames()
-      .map((name) =>
-        normalizeBase(
-          name,
-          roomHelpers.getIndex(name),
-          roomHelpers.getByName(name),
-        ),
-      ),
+    roomHelpers.getAllNames().map(
+      (name) =>
+        ({
+          ...normalizeBase(
+            name,
+            roomHelpers.getIndex(name),
+            roomHelpers.getByName(name),
+          ),
+          hasSavePoint: roomHelpers.getByName(name)?.hasSavePoint,
+        }) satisfies RoomEntry,
+    ),
     packs,
     'rooms',
     chapter,
