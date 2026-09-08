@@ -1077,6 +1077,49 @@ export function getDataPackEntryCount(pack: DataPack): number {
   );
 }
 
+export function parseDataPackReferences(value: unknown): DataPackReference[] {
+  if (!Array.isArray(value))
+    throw dataPackError(
+      'ui.dataPacks.errorReferences',
+      'Data-pack references must be a list.',
+    );
+  const ids = new Set<string>();
+  return value.map((item: unknown) => {
+    if (typeof item !== 'object' || item === null || Array.isArray(item)) {
+      throw dataPackError(
+        'ui.dataPacks.errorReference',
+        'Each data-pack reference must be an object.',
+      );
+    }
+    const source = item as Record<string, unknown>;
+    requireKnownFields(
+      source,
+      new Set(['id', 'modVersion']),
+      'Data-pack reference',
+    );
+    const id = requireText(
+      source.id,
+      'ui.settings.dataPacks.errorPackId',
+      'Unable to import this pack. Add a unique pack ID.',
+    );
+    if (ids.has(id))
+      throw dataPackError(
+        'ui.dataPacks.errorDuplicateReferences',
+        'Data-pack references contain duplicate IDs.',
+      );
+    ids.add(id);
+    const modVersion =
+      source.modVersion === undefined
+        ? undefined
+        : requireText(
+            source.modVersion,
+            'ui.settings.dataPacks.errorModVersion',
+            'The mod version must contain text.',
+          );
+    return { id, ...(modVersion === undefined ? {} : { modVersion }) };
+  });
+}
+
 export function resolveDataPackReferences(
   packs: DataPack[],
   references: readonly DataPackReference[] = [],
