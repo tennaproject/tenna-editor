@@ -1,3 +1,4 @@
+import { resolveSpellEntry, resolveKeyItemEntry } from './resolve-game-data';
 import {
   ARMORS,
   CONSUMABLES,
@@ -5,27 +6,14 @@ import {
   LIGHTWORLDITEMS,
   PHONECONTACTS,
   WEAPONS,
-  FLAGS_META,
   type ChapterIndex,
   type CharacterIndex,
   type ConsumableIndex,
   type FlagIndex,
   type RoomIndex,
-  type SpellIndex,
 } from '@data';
-import type { SaveBaseline, SaveGamePayload, SaveSlot } from '@types';
-import {
-  armorHelpers,
-  characterHelpers,
-  consumableHelpers,
-  keyItemHelpers,
-  lightWorldItemHelpers,
-  phoneContactHelpers,
-  resolveChapterMeta,
-  roomHelpers,
-  getSpellDisplayName,
-  weaponHelpers,
-} from './data-helpers';
+import type { SaveBaseline, SaveGamePayload, GameData } from '@types';
+import { characterHelpers } from './data-helpers';
 import { getPlotPointLabel } from './plot-point-helpers';
 import { getGameColor } from './get-game-color';
 
@@ -114,8 +102,12 @@ function pushChange(
   changes.push({ path, label, before: beforeStr, after: afterStr });
 }
 
-function formatFlagValue(flag: FlagIndex, value: unknown): string {
-  const meta = FLAGS_META[flag];
+function formatFlagValue(
+  flag: FlagIndex,
+  value: unknown,
+  data: GameData,
+): string {
+  const meta = data.flags.byId.get(flag);
   if (!meta) return formatPrimitive(value);
 
   const raw = value ?? 0;
@@ -143,8 +135,8 @@ function formatFlagValue(flag: FlagIndex, value: unknown): string {
   return formatPrimitive(raw);
 }
 
-function getFlagLabel(flag: FlagIndex): string {
-  const meta = FLAGS_META[flag];
+function getFlagLabel(flag: FlagIndex, data: GameData): string {
+  const meta = data.flags.byId.get(flag);
   if (meta?.displayName) return meta.displayName;
   return `Flag #${flag}`;
 }
@@ -162,7 +154,7 @@ interface ItemNameInputs {
   chapter: ChapterIndex;
   plot: number;
   flags: SaveGamePayload['flags'];
-  saveSlot: SaveSlot;
+  data: GameData;
 }
 
 function diffIndexedArray(
@@ -213,11 +205,11 @@ function diffParty(
 function diffRoom(
   before: SaveGamePayload['room'],
   after: SaveGamePayload['room'],
+  data: GameData,
 ): DiffEntry[] {
   if (before === after) return [];
   const formatRoom = (id: RoomIndex) => {
-    const meta = roomHelpers.getById(id);
-    return meta?.displayName || roomHelpers.getName(id);
+    return data.rooms.byId.get(id)?.displayName ?? `Unknown ${id}`;
   };
   return [
     {
@@ -236,6 +228,7 @@ function diffCharacter(
   chapter: ChapterIndex,
   plot: number,
   flags: SaveGamePayload['flags'],
+  data: GameData,
 ): DiffSection | null {
   const title =
     characterHelpers.getById(charIndex)?.displayName ??
@@ -279,16 +272,14 @@ function diffCharacter(
     if (key === 'weapon') {
       label = 'Weapon';
       const resolveWeapon = (id: number) =>
-        resolveChapterMeta(weaponHelpers.getById(id as never), { chapter })
-          ?.displayName;
+        data.weapons.byId.get(id)?.displayName;
 
       beforeVal = formatItemId(b as number, resolveWeapon, WEAPONS.EMPTY);
       afterVal = formatItemId(a as number, resolveWeapon, WEAPONS.EMPTY);
     } else if (key === 'primaryArmor' || key === 'secondaryArmor') {
       label = key === 'primaryArmor' ? 'Primary armor' : 'Secondary armor';
       const resolveArmor = (id: number) =>
-        resolveChapterMeta(armorHelpers.getById(id as never), { chapter })
-          ?.displayName;
+        data.armors.byId.get(id)?.displayName;
 
       beforeVal = formatItemId(b as number, resolveArmor, ARMORS.EMPTY);
       afterVal = formatItemId(a as number, resolveArmor, ARMORS.EMPTY);
@@ -311,7 +302,18 @@ function diffCharacter(
     'Spell slot',
     before.spells,
     after.spells,
-    (id) => getSpellDisplayName(id as SpellIndex, chapter, plot, flags),
+    (id) => {
+      const entry = data.spells.byId.get(id);
+      return entry
+        ? resolveSpellEntry(entry, {
+            chapter,
+            plot,
+            flags,
+            weapon: after.weapon,
+            armors: [after.primaryArmor, after.secondaryArmor],
+          }).displayName
+        : String(id);
+    },
   );
 
   const statsLen = Math.max(
@@ -344,6 +346,7 @@ function diffCharacters(
   chapter: ChapterIndex,
   plot: number,
   flags: SaveGamePayload['flags'],
+  data: GameData,
 ): DiffSection | null {
   const children: DiffSection[] = [];
   const maxLen = Math.max(before.length, after.length);
@@ -356,6 +359,7 @@ function diffCharacters(
       chapter,
       plot,
       flags,
+      data,
     );
     if (section) children.push(section);
   }
@@ -391,15 +395,12 @@ function diffBattle(
 function diffInventory(
   before: SaveGamePayload['inventory'],
   after: SaveGamePayload['inventory'],
-  { chapter, plot, flags, saveSlot }: ItemNameInputs,
+  { chapter, plot, flags, data }: ItemNameInputs,
 ): DiffSection | null {
   const children: DiffSection[] = [];
 
   const resolveConsumable = (id: number) =>
-    resolveChapterMeta(consumableHelpers.getById(id as never), {
-      chapter,
-      saveSlot,
-    })?.displayName;
+    data.consumables.byId.get(id)?.displayName;
 
   const groups: {
     id: string;
@@ -420,30 +421,26 @@ function diffInventory(
       title: 'Key items',
       key: 'keyItems',
       empty: KEYITEMS.EMPTY,
-      resolveName: (id) =>
-        resolveChapterMeta(keyItemHelpers.getById(id as never), {
-          chapter,
-          plot,
-          flags,
-        })?.displayName,
+      resolveName: (id) => {
+        const entry = data.keyItems.byId.get(id);
+        return entry
+          ? resolveKeyItemEntry(entry, { chapter, plot, flags }).displayName
+          : undefined;
+      },
     },
     {
       id: 'weapons',
       title: 'Weapons',
       key: 'weapons',
       empty: WEAPONS.EMPTY,
-      resolveName: (id) =>
-        resolveChapterMeta(weaponHelpers.getById(id as never), { chapter })
-          ?.displayName,
+      resolveName: (id) => data.weapons.byId.get(id)?.displayName,
     },
     {
       id: 'armors',
       title: 'Armors',
       key: 'armors',
       empty: ARMORS.EMPTY,
-      resolveName: (id) =>
-        resolveChapterMeta(armorHelpers.getById(id as never), { chapter })
-          ?.displayName,
+      resolveName: (id) => data.armors.byId.get(id)?.displayName,
     },
   ];
 
@@ -484,6 +481,7 @@ function diffInventory(
 function diffLightWorld(
   before: SaveGamePayload['lightWorld'],
   after: SaveGamePayload['lightWorld'],
+  data: GameData,
 ): DiffSection | null {
   const changes: DiffEntry[] = [];
   const scalarKeys = [
@@ -520,7 +518,7 @@ function diffLightWorld(
     (id) =>
       formatItemId(
         id,
-        (itemId) => lightWorldItemHelpers.getById(itemId as never)?.displayName,
+        (itemId) => data.lightWorldItems.byId.get(itemId)?.displayName,
         LIGHTWORLDITEMS.EMPTY,
       ),
   );
@@ -535,7 +533,7 @@ function diffLightWorld(
     (id) =>
       formatItemId(
         id,
-        (itemId) => phoneContactHelpers.getById(itemId as never)?.displayName,
+        (itemId) => data.phoneContacts.byId.get(itemId)?.displayName,
         PHONECONTACTS.EMPTY,
       ),
   );
@@ -561,6 +559,7 @@ function diffLightWorld(
 function diffFlags(
   before: SaveGamePayload['flags'],
   after: SaveGamePayload['flags'],
+  data: GameData,
 ): DiffSection | null {
   const changes: DiffEntry[] = [];
   const maxLen = Math.max(before.length, after.length);
@@ -572,9 +571,9 @@ function diffFlags(
     const flag = i as FlagIndex;
     changes.push({
       path: `flags.${i}`,
-      label: getFlagLabel(flag),
-      before: formatFlagValue(flag, b),
-      after: formatFlagValue(flag, a),
+      label: getFlagLabel(flag, data),
+      before: formatFlagValue(flag, b, data),
+      after: formatFlagValue(flag, a, data),
     });
   }
 
@@ -610,7 +609,7 @@ export function computeSaveDiff(
   current: SaveGamePayload,
   baseline: SaveBaseline,
   chapter: ChapterIndex,
-  saveSlot: SaveSlot,
+  data: GameData,
 ): SaveDiffResult {
   const before = baseline.payload;
 
@@ -635,7 +634,7 @@ export function computeSaveDiff(
     pushChange(overviewChanges, String(key), label, before[key], current[key]);
   }
   overviewChanges.push(...diffParty(before.party, current.party));
-  overviewChanges.push(...diffRoom(before.room, current.room));
+  overviewChanges.push(...diffRoom(before.room, current.room, data));
 
   if (overviewChanges.length) {
     sections.push({
@@ -651,6 +650,7 @@ export function computeSaveDiff(
     chapter,
     current.plot,
     current.flags,
+    data,
   );
   if (partySection) sections.push(partySection);
 
@@ -661,17 +661,18 @@ export function computeSaveDiff(
     chapter,
     plot: current.plot,
     flags: current.flags,
-    saveSlot,
+    data,
   });
   if (inventorySection) sections.push(inventorySection);
 
   const lightWorldSection = diffLightWorld(
     before.lightWorld,
     current.lightWorld,
+    data,
   );
   if (lightWorldSection) sections.push(lightWorldSection);
 
-  const flagsSection = diffFlags(before.flags, current.flags);
+  const flagsSection = diffFlags(before.flags, current.flags, data);
   if (flagsSection) sections.push(flagsSection);
 
   const groups: DiffGroup[] = sections.map((section) => ({
