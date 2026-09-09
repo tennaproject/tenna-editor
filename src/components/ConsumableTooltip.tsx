@@ -1,12 +1,8 @@
 import { Fragment, type ReactNode } from 'react';
-import type { CharacterIndex, ConsumableIndex, HealAmounts } from '@data';
-import { useSave } from '@store';
-import {
-  characterHelpers,
-  consumableHelpers,
-  getChapterPartyMembers,
-  resolveChapterMeta,
-} from '@utils/data-helpers';
+import type { CharacterIndex, HealAmounts } from '@data';
+import type { ConsumableEntry } from '@types';
+import { useGameData, useSave } from '@store';
+import { characterHelpers, getChapterPartyMembers } from '@utils/data-helpers';
 import { getCharacterColor } from '@utils/get-character-color';
 import { getWikiUrl } from '@utils/wiki-url';
 import { mergeClass } from '@utils/merge-class';
@@ -21,10 +17,12 @@ import { Tooltip } from './Tooltip';
 import { TooltipHeading } from './TooltipHeading';
 
 interface ConsumableTooltipContentProps {
-  id: ConsumableIndex;
+  entry: ConsumableEntry;
 }
 
-interface ConsumableTooltipProps extends ConsumableTooltipContentProps {
+interface ConsumableTooltipProps {
+  entry?: ConsumableEntry;
+  id?: number;
   children: ReactNode;
   className?: string;
   focusable?: boolean;
@@ -174,22 +172,30 @@ function HealRow({ entries, extraHeal, showAmounts }: HealRowProps) {
 }
 
 export function ConsumableTooltipContent({
-  id,
+  entry,
 }: ConsumableTooltipContentProps) {
   const { t } = useTranslation();
   const chapter = useSave((s) => s.save?.meta.chapter) ?? 1;
-  const saveSlot = useSave((s) => s.save?.meta.slot) ?? 0;
+  const translated =
+    !entry.dataPack || (entry.overridesBuiltIn && !entry.descriptionFromPack)
+      ? translateMeta(
+          getItemTranslationKeyPrefix('consumable', entry.id),
+          {
+            displayName: entry.displayName,
+            description: entry.description,
+          },
+          t,
+        )
+      : undefined;
 
-  const meta = resolveChapterMeta(consumableHelpers.getById(id), {
-    chapter,
-    saveSlot,
-  });
+  const displayName = entry.dataPack
+    ? entry.displayName
+    : (translated?.displayName ?? entry.displayName);
+  const description = entry.descriptionFromPack
+    ? entry.description
+    : (translated?.description ?? entry.description);
 
-  const translated = meta
-    ? translateMeta(getItemTranslationKeyPrefix('consumable', id), meta, t)
-    : undefined;
-
-  if (!meta || !translated) return null;
+  const meta = entry;
 
   const resolveAmount = (
     amounts: HealAmounts | undefined,
@@ -305,8 +311,8 @@ export function ConsumableTooltipContent({
     <div className="flex flex-col gap-2">
       <div className="flex justify-between items-start gap-3">
         <TooltipHeading
-          name={translated.displayName}
-          href={getWikiUrl(meta.displayName)}
+          name={displayName}
+          href={entry.dataPack ? undefined : getWikiUrl(entry.displayName)}
         />
 
         {meta.tpGain !== undefined && (
@@ -341,22 +347,29 @@ export function ConsumableTooltipContent({
       )}
 
       <p className="ui-prose-muted border-t border-divider pt-2 whitespace-pre-line">
-        {translated.description ??
-          t('ui.tooltip.noDescription', '(No description.)')}
+        {description ?? t('ui.tooltip.noDescription', '(No description.)')}
       </p>
     </div>
   );
 }
 
 export function ConsumableTooltip({
+  entry,
   id,
   children,
   className,
   focusable,
 }: ConsumableTooltipProps) {
+  const storeEntry = useGameData((state) =>
+    state.consumables.byId.get(id ?? -1),
+  );
+  const resolved = entry ?? storeEntry;
+
   return (
     <Tooltip
-      content={<ConsumableTooltipContent id={id} />}
+      content={
+        resolved ? <ConsumableTooltipContent entry={resolved} /> : undefined
+      }
       className={className}
       focusable={focusable}
     >

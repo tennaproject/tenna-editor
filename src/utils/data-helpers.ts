@@ -24,13 +24,10 @@ import {
   ENEMIES,
   ENEMIES_META,
   PARTY_MEMBERS,
-  type ArmorIndex,
-  type WeaponIndex,
 } from '@data';
 import type { BaseProperties, WithOverrides } from '@types';
 import type { ChapterIndex } from '../data/chapters';
 import type { FlagIndex, FlagProperties } from '../data/flags';
-import type { SpellIndex } from '../data/spells';
 
 function buildNameById<TIndex extends number, TName extends string>(
   registry: Record<TName, TIndex>,
@@ -64,13 +61,6 @@ function createDataHelpers<
   };
 }
 
-export function formatItemLabel(
-  meta: BaseProperties | undefined,
-  fallback: string,
-) {
-  return meta?.displayName ?? fallback;
-}
-
 export function resolveChapterMeta<
   A extends { chapter: ChapterIndex },
   T extends WithOverrides<T, A>,
@@ -78,37 +68,6 @@ export function resolveChapterMeta<
   if (!meta) return undefined;
 
   return { ...meta, ...meta.getOverrides?.(args) };
-}
-
-export function getStaticSpellDisplayName(spell: SpellIndex) {
-  return spellHelpers.getById(spell)?.displayName ?? String(spell);
-}
-
-export interface SpellEquipment {
-  weapon: WeaponIndex;
-  armors: readonly ArmorIndex[];
-}
-
-const EMPTY_SPELL_EQUIPMENT: SpellEquipment = {
-  weapon: WEAPONS.EMPTY,
-  armors: [],
-};
-
-export function getSpellDisplayName(
-  spell: SpellIndex,
-  chapter: ChapterIndex,
-  plot: number,
-  flags: readonly unknown[],
-  equipment: SpellEquipment = EMPTY_SPELL_EQUIPMENT,
-) {
-  const meta = spellHelpers.getById(spell);
-  const overrides = meta?.getOverrides?.({
-    chapter,
-    plot,
-    flags,
-    ...equipment,
-  });
-  return overrides?.displayName ?? getStaticSpellDisplayName(spell);
 }
 
 // Meta

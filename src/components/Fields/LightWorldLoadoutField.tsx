@@ -6,9 +6,10 @@ import {
   LightWorldItemTooltipContent,
 } from '@components';
 import { type LightWorldItemIndex } from '@data';
-import { useSave } from '@store';
+import type { DataEntry } from '@types';
+import { useGameData, useSave } from '@store';
 import { getLightWorldLoadoutOptions } from '@utils/chapter-options';
-import { chapterHelpers, lightWorldItemHelpers } from '@utils/data-helpers';
+import { chapterHelpers } from '@utils/data-helpers';
 import {
   getItemTranslationKeyPrefix,
   translateMeta,
@@ -27,6 +28,10 @@ interface LightWorldLoadoutFieldProps {
   type: LightWorldLoadoutType;
 }
 
+function isNewPackEntry(entry: DataEntry | undefined) {
+  return !!entry?.dataPack && !entry.overridesBuiltIn;
+}
+
 export function LightWorldLoadoutField({
   id,
   type,
@@ -35,31 +40,39 @@ export function LightWorldLoadoutField({
   const chapter = useSave((s) => s.save?.meta.chapter) ?? 1;
   const current = useSave((s) => s.save?.lightWorld[type]) ?? 0;
   const updateSave = useSave((s) => s.updateSave);
+  const data = useGameData((state) => state.lightWorldItems);
 
   const chapterSet = chapterHelpers.getById(chapter).content.lightWorld
     .items as Set<number>;
 
-  const elementMeta = lightWorldItemHelpers.getById(
-    current as LightWorldItemIndex,
-  );
-  const isExisting = !!(
-    elementMeta && (elementMeta as { displayName?: string }).displayName
-  );
-  const isInChapter = chapterSet.has(current as number);
+  const dataEntry = data.byId.get(current as number);
+  const isExisting = !!dataEntry;
+  const isInChapter =
+    chapterSet.has(current as number) || isNewPackEntry(dataEntry);
   const isValid = isExisting && isInChapter;
 
-  const baseItems = getLightWorldLoadoutOptions(chapter, type).map((item) => ({
-    ...item,
-    tooltip:
-      item.value !== 0 ? (
-        <LightWorldItemTooltipContent id={item.value as LightWorldItemIndex} />
-      ) : undefined,
-    label: translateMeta(
-      getItemTranslationKeyPrefix('lightWorldItem', item.value as number),
-      { displayName: item.label },
-      t,
-    ).displayName,
-  }));
+  const baseItems = getLightWorldLoadoutOptions(chapter, data.entries).map(
+    (item) => {
+      const entry = data.byId.get(item.value as number);
+      return {
+        ...item,
+        tooltip:
+          entry && item.value !== 0 ? (
+            <LightWorldItemTooltipContent id={item.value as number} />
+          ) : undefined,
+        label: entry?.dataPack
+          ? entry.displayName
+          : translateMeta(
+              getItemTranslationKeyPrefix(
+                'lightWorldItem',
+                item.value as number,
+              ),
+              { displayName: item.label },
+              t,
+            ).displayName,
+      };
+    },
+  );
 
   const invalidReasons: InvalidReason[] = [];
   if (!isExisting) invalidReasons.push('unknown');
@@ -71,16 +84,26 @@ export function LightWorldLoadoutField({
       ...baseItems,
       {
         id: `${current}`,
-        label: isExisting
-          ? translateMeta(
-              getItemTranslationKeyPrefix('lightWorldItem', current as number),
-              elementMeta,
-              t,
-            ).displayName
-          : t('ui.common.unknown', 'Unknown'),
+        label: dataEntry?.dataPack
+          ? dataEntry.displayName
+          : dataEntry
+            ? translateMeta(
+                getItemTranslationKeyPrefix(
+                  'lightWorldItem',
+                  current as number,
+                ),
+                { displayName: dataEntry.displayName },
+                t,
+              ).displayName
+            : t('ui.common.unknown', 'Unknown'),
         value: current as number,
         invalidReasons,
-        unused: elementMeta?.unused,
+        unused: dataEntry?.unused,
+        tooltip:
+          dataEntry && current !== 0 ? (
+            <LightWorldItemTooltipContent id={current} />
+          ) : undefined,
+        dataPack: dataEntry?.packName,
       },
     ];
   }
@@ -111,8 +134,8 @@ export function LightWorldLoadoutField({
         items={selectItems}
         className="w-full"
         tooltip={
-          isExisting && current !== 0 ? (
-            <LightWorldItemTooltipContent id={current as LightWorldItemIndex} />
+          dataEntry && current !== 0 ? (
+            <LightWorldItemTooltipContent id={current} />
           ) : undefined
         }
       />
