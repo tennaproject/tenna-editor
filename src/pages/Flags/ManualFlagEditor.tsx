@@ -1,11 +1,17 @@
+import DataPackIcon from '@assets/icons/file-plus.svg?react';
 import { useState } from 'react';
 import ApplyIcon from '@assets/icons/check.svg?react';
-import { Button, Page, Select, TextInput, type SelectItem } from '@components';
-import type { FlagBitfieldId, FlagBitfieldProperties, FlagIndex } from '@data';
-import { useSave } from '@store';
 import {
-  flagHelpers,
-  FLAG_NAMES,
+  Button,
+  Page,
+  Select,
+  TextInput,
+  Tooltip,
+  type SelectItem,
+} from '@components';
+import type { FlagBitfieldId, FlagBitfieldProperties, FlagIndex } from '@data';
+import { useGameData, useSave } from '@store';
+import {
   getFlagBitfieldMaxValue,
   getKnownBitfields,
   mergeClass,
@@ -204,6 +210,7 @@ export function ManualFlagEditor() {
   const updateSave = useSave((s) => s.updateSave);
   const flagCount = useSave((s) => s.save?.flags.length ?? 0);
   const saveFlags = useSave((s) => s.save?.flags);
+  const data = useGameData((state) => state.flags);
 
   const [mode, setMode] = useState<ManualMode>('value');
   const [flagInput, setFlagInput] = useState('');
@@ -317,8 +324,14 @@ export function ManualFlagEditor() {
     validation.flagId < flagCount
       ? (validation.flagId as FlagIndex)
       : null;
-  const meta = flagIndex !== null ? flagHelpers.getById(flagIndex) : undefined;
-  const name = flagIndex !== null ? FLAG_NAMES[flagIndex] : undefined;
+  const dataEntry = flagIndex !== null ? data.byId.get(flagIndex) : undefined;
+  const meta = dataEntry;
+  const name = dataEntry?.name;
+  const packSource = dataEntry?.packName
+    ? formatTranslation(t('ui.common.dataPackSource', 'Data pack: {name}'), {
+        name: dataEntry.packName,
+      })
+    : undefined;
   const isListed = name !== undefined;
   const knownValueEntries = meta?.valueRules?.map
     ? Object.entries(meta.valueRules.map).sort(
@@ -538,13 +551,36 @@ export function ManualFlagEditor() {
               <code className="text-text-1 text-sm select-all">
                 {name ?? `Flag #${flagIndex}`}
               </code>
+              {packSource && (
+                <Tooltip
+                  widthClassName="w-max max-w-3xs"
+                  content={
+                    <span className="flex items-center gap-2 text-xs text-green">
+                      <span className="h-4 w-4 shrink-0">
+                        <DataPackIcon />
+                      </span>
+                      {packSource}
+                    </span>
+                  }
+                  className="shrink-0 self-center"
+                >
+                  <span className="block h-4 w-4 text-green">
+                    <DataPackIcon />
+                  </span>
+                  <span className="sr-only">{packSource}</span>
+                </Tooltip>
+              )}
               <span className="text-text-3 ui-mono-sm">#{flagIndex}</span>
             </div>
-            {meta?.displayName && (
-              <span className="text-text-2">{meta.displayName}</span>
+            {(dataEntry?.displayName ?? meta?.displayName) && (
+              <span className="text-text-2">
+                {dataEntry?.displayName ?? meta?.displayName}
+              </span>
             )}
-            {meta?.description && (
-              <span className="text-text-3">{meta.description}</span>
+            {(dataEntry?.description ?? meta?.description) && (
+              <span className="text-text-3">
+                {dataEntry?.description ?? meta?.description}
+              </span>
             )}
             {!isListed && (
               <span className="ui-prose-muted text-xs">

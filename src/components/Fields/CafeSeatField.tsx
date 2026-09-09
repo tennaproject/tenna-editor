@@ -1,4 +1,5 @@
 import {
+  FlagField,
   HelpTip,
   InlineGroup,
   RecruitImage,
@@ -9,10 +10,9 @@ import {
   type SelectItem,
 } from '@components';
 import type { EnemyIndex, FlagIndex } from '@data';
-import { RECRUIT_UNUSED_VALUES, RECRUITS } from '@data/flags';
-import { useSave, useUi } from '@store';
+import { useGameData, useSave, useUi } from '@store';
 import { useSaveFlag } from '@hooks';
-import { enemyHelpers, flagHelpers } from '@utils/data-helpers';
+import { enemyHelpers } from '@utils/data-helpers';
 import { getRecruitStatus } from '@utils/recruit-status';
 import { getRecruitMediaSrc } from '@utils/recruit-media';
 import {
@@ -54,11 +54,18 @@ export function CafeSeatField({ id, flag }: CafeSeatFieldProps) {
   const showNonRecruitedInCafe = useUi(
     (s) => s.ui.recruits.showNonRecruitedInCafe,
   );
-  const meta = translateMeta(
-    getFlagTranslationKeyPrefix(flag),
-    flagHelpers.getById(flag),
-    t,
-  );
+  const entry = useGameData((state) => state.flags.byId.get(flag))!;
+  const translated = translateMeta(getFlagTranslationKeyPrefix(flag), entry, t);
+
+  const meta = entry.dataPack
+    ? {
+        ...entry,
+        description:
+          entry.descriptionFromPack || !entry.overridesBuiltIn
+            ? entry.description
+            : translated.description,
+      }
+    : translated;
 
   const flagTag = (
     <span className="ui-mono-sm font-normal text-text-3">
@@ -67,19 +74,20 @@ export function CafeSeatField({ id, flag }: CafeSeatFieldProps) {
     </span>
   );
 
-  const selectItems: SelectItem[] = Object.entries(RECRUITS)
+  const selectItems: SelectItem[] = Object.entries(entry.valueRules?.map ?? {})
     .map(([itemValue, label]) => {
       const enemy = Number(itemValue) as EnemyIndex;
 
       return {
         id: itemValue,
-        label: t(
-          `${getFlagTranslationKeyPrefix(flag)}.map.${itemValue}`,
-          label,
-        ),
+        label: entry.dataPack
+          ? label
+          : t(`${getFlagTranslationKeyPrefix(flag)}.map.${itemValue}`, label),
         value: itemValue,
-        unused: RECRUIT_UNUSED_VALUES.has(enemy),
-        tooltip: <RecruitTooltipContent enemy={enemy} />,
+        unused: entry.valueRules?.unusedValues?.has(enemy),
+        tooltip: enemyHelpers.getById(enemy) ? (
+          <RecruitTooltipContent enemy={enemy} />
+        ) : undefined,
       };
     })
     .filter((item) => {
@@ -87,6 +95,7 @@ export function CafeSeatField({ id, flag }: CafeSeatFieldProps) {
       if (enemy === value) return true;
 
       const enemyMeta = enemyHelpers.getById(enemy);
+      if (entry.dataPack && !enemyMeta) return true;
       if (!showNonRecruitableEnemies && !enemyMeta?.recruitable) {
         return false;
       }
@@ -113,6 +122,9 @@ export function CafeSeatField({ id, flag }: CafeSeatFieldProps) {
     currentRecruitCount,
   );
   const isRecruited = currentStatus.key === 'recruited';
+
+  if (entry.valueType !== 'map' || !entry.valueRules?.map)
+    return <FlagField id={id} flag={flag} />;
 
   return (
     <Section id={id} className="gap-2">

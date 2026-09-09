@@ -226,6 +226,7 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.nav.welcome': 'Welcome',
   'ui.common.noOptionsFound': 'No options found',
   'ui.common.unknown': 'Unknown',
+  'ui.common.dataPackSource': 'Data pack: {name}',
   'ui.common.empty': 'Empty',
   'ui.common.invalid': 'Invalid',
   'ui.common.none': 'None',

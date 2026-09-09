@@ -3,8 +3,8 @@ import { Card, Heading, Page, Section, Select, TextInput } from '@components';
 import type { ChapterIndex, FlagIndex } from '@data';
 import type { SelectItem } from '@components';
 import { useDebouncedValue } from '@hooks';
-import { useSave } from '@store';
-import { chapterHelpers, prepareFlagData, type PreparedFlag } from '@utils';
+import { useGameData, useSave } from '@store';
+import { chapterHelpers, getChapterDataEntries, prepareFlagData } from '@utils';
 import { FlagRow } from './FlagRow';
 import { ManualFlagEditor } from './ManualFlagEditor';
 import {
@@ -20,17 +20,6 @@ const ITEMS_PER_PAGE_OPTIONS: SelectItem[] = [
   { id: '200', label: '200', value: 200 },
 ];
 
-const CHAPTER_FLAG_LISTS = new Map<ChapterIndex, PreparedFlag[]>();
-function getChapterFlagList(chapter: ChapterIndex): PreparedFlag[] {
-  const cached = CHAPTER_FLAG_LISTS.get(chapter);
-  if (cached) return cached;
-
-  const chapterFlags = chapterHelpers.getById(chapter).content.flags;
-  const list = Array.from(chapterFlags).map(prepareFlagData);
-  CHAPTER_FLAG_LISTS.set(chapter, list);
-  return list;
-}
-
 export function FlagsRoot() {
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
@@ -42,6 +31,8 @@ export function FlagsRoot() {
 
   const hasSave = useSave((s) => !!s.save);
   const chapter = useSave((s) => s.save?.meta.chapter ?? 1) as ChapterIndex;
+  const flagCount = useSave((s) => s.save?.flags.length ?? 0);
+  const data = useGameData((state) => state.flags);
 
   const debouncedSearchQuery = useDebouncedValue(searchQuery, 200);
   const [prevSearchQuery, setPrevSearchQuery] = useState(debouncedSearchQuery);
@@ -51,31 +42,40 @@ export function FlagsRoot() {
     setCurrentPage(1);
   }
 
-  const allFlags = getChapterFlagList(chapter).map((flag) => {
-    const translatedMeta = translateMeta(
-      getFlagTranslationKeyPrefix(flag.index),
-      {
-        displayName: flag.name,
-        description: flag.description,
-        valueRules: { map: flag.knownValues },
-      },
-      t,
-    );
-    const knownValueEntries = translatedMeta.valueRules?.map
-      ? Object.entries(translatedMeta.valueRules.map).sort(
-          ([a], [b]) => Number(a) - Number(b),
-        )
-      : undefined;
+  const chapterFlags = chapterHelpers.getById(chapter).content.flags;
+  const allFlags = getChapterDataEntries(data.entries, chapterFlags)
+    .filter((entry) => entry.id < flagCount)
+    .map((entry) => {
+      const flag = prepareFlagData(entry.id as FlagIndex);
+      const translatedMeta = translateMeta(
+        getFlagTranslationKeyPrefix(flag.index),
+        {
+          displayName: flag.name,
+          description: flag.description,
+          valueRules: { map: flag.knownValues },
+        },
+        t,
+      );
+      const knownValues = entry.dataPack
+        ? entry.valueRules?.map
+        : translatedMeta.valueRules?.map;
+      const knownValueEntries = knownValues
+        ? Object.entries(knownValues).sort(([a], [b]) => Number(a) - Number(b))
+        : undefined;
 
-    return {
-      ...flag,
-      description: translatedMeta.description ?? '',
-      knownValues: translatedMeta.valueRules?.map,
-      knownValueEntries,
-      searchText:
-        `${flag.name} ${flag.index} ${translatedMeta.displayName} ${translatedMeta.description ?? ''}`.toLowerCase(),
-    };
-  });
+      return {
+        ...flag,
+        name: entry.name,
+        packName: entry.packName,
+        description: entry.dataPack
+          ? (entry.description ?? '')
+          : (translatedMeta.description ?? ''),
+        knownValues,
+        knownValueEntries,
+        searchText:
+          `${entry.name} ${flag.index} ${entry.dataPack ? entry.displayName : translatedMeta.displayName} ${entry.dataPack ? (entry.description ?? '') : (translatedMeta.description ?? '')}`.toLowerCase(),
+      };
+    });
   const normalizedSearchQuery = debouncedSearchQuery.toLowerCase().trim();
 
   const filteredFlags = allFlags
@@ -257,6 +257,7 @@ export function FlagsRoot() {
                         key={flag.index}
                         flagIndex={flag.index}
                         name={flag.name}
+                        packName={flag.packName}
                         description={flag.description}
                         knownValues={flag.knownValues}
                         knownValueEntries={flag.knownValueEntries}
