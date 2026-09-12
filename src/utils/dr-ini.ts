@@ -398,6 +398,7 @@ export function generateDrIni(
   cells: SaveExportCell[],
   baseIni = '',
   date = new Date(),
+  history?: Record<string, number>,
 ): string {
   const sections = parseIni(baseIni);
 
@@ -421,7 +422,7 @@ export function generateDrIni(
 
   const ura = sections.get('URA') ?? new Map<string, string>();
   for (const [key, value] of Object.entries(
-    getExportUraHistory(cells, baseIni),
+    history ?? getExportUraHistory(cells, baseIni),
   )) {
     ura.set(key, formatReal(value));
   }

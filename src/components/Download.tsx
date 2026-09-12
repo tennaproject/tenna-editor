@@ -21,6 +21,7 @@ import {
   ResponsiveTableMobileLabel,
   ResponsiveTableRow,
   type ResponsiveTableSort,
+  ShadowCrystalGrid,
   Page,
 } from '@components';
 import {
@@ -37,11 +38,13 @@ import {
 } from '@services';
 import { getBaselineRevision } from '@utils/save-diff';
 import {
+  buildCellsFromTargets,
   buildPcExportFromTargets,
   buildSwitchExportSet,
   cloneSaveForTarget,
   findDuplicateExportTargets,
 } from '@utils/save-export';
+import { getExportUraHistory } from '@utils/dr-ini';
 import { serializeSave } from '@utils/save-serializer';
 import type { Save, SaveSlot } from '@types';
 import {
@@ -238,6 +241,10 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
     () => new Map(),
   );
 
+  const [historyOverrides, setHistoryOverrides] = useState<{
+    context: string;
+    values: Record<string, number>;
+  }>({ context: '', values: {} });
   const [baseDrIni, setBaseDrIni] = useState('');
   const [baseDrIniName, setBaseDrIniName] = useState('');
 
@@ -264,6 +271,41 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
         sel.completionOverride ?? sel.save.meta.isCompletionSave,
     }));
   const importedDrIni = getImportedDrIni(selectedExportTargets);
+
+  const historyTargets =
+    exportScope === 'set'
+      ? selectedExportTargets
+      : save
+        ? [getSingleExportTarget(save)]
+        : [];
+  const historyImportedIni = getImportedDrIni(historyTargets)?.content ?? '';
+  const historyBaseIni =
+    exportScope === 'set'
+      ? exportMode === 'switch'
+        ? (baseContainer?.['dr.ini'] ?? historyImportedIni)
+        : baseDrIni || historyImportedIni
+      : historyImportedIni;
+  const historyCells = buildCellsFromTargets(historyTargets);
+  const historyContext = JSON.stringify([
+    isOpen,
+    exportScope,
+    exportMode,
+    save?.meta.id,
+    historyBaseIni,
+    historyTargets.map((target) => [
+      target.save.meta.id,
+      target.chapter,
+      target.slot,
+      target.isCompletionSave,
+      getImportedDrIni([target])?.content,
+    ]),
+  ]);
+  const activeHistoryOverrides =
+    historyOverrides.context === historyContext ? historyOverrides.values : {};
+  const exportHistory = {
+    ...getExportUraHistory(historyCells, historyBaseIni),
+    ...(exportScope === 'set' ? activeHistoryOverrides : {}),
+  };
 
   const duplicates = findDuplicateExportTargets(selectedExportTargets);
   const hasDuplicateError = duplicates.length > 0;
@@ -425,11 +467,13 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
         return buildSwitchExportSet(
           selectedExportTargets,
           baseContainer ?? importedBase,
+          exportHistory,
         );
       }
       return buildPcExportFromTargets(
         selectedExportTargets,
         baseDrIni || importedDrIni?.content,
+        exportHistory,
       );
     }
 
@@ -442,13 +486,14 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
           : source?.drIni
             ? { 'dr.ini': source.drIni.content }
             : undefined;
-      return buildSwitchExportSet([target], base);
+      return buildSwitchExportSet([target], base, exportHistory);
     }
 
     return serializeSave(cloneSaveForTarget(target));
   }
 
   function resetExportSettings() {
+    setHistoryOverrides({ context: historyContext, values: {} });
     const activeSave = useSave.getState().save;
     setSelectedSlot((activeSave?.meta.slot ?? 0) as SaveSlot);
     setIsCompletionSave(activeSave?.meta.isCompletionSave ?? false);
@@ -733,7 +778,13 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
         </ModalFooter>
       }
     >
-      <div className="flex flex-wrap items-start gap-4">
+      <div
+        className={
+          exportScope === 'set'
+            ? 'grid w-full grid-cols-[auto_1fr] items-stretch gap-x-4 gap-y-3'
+            : 'flex flex-wrap items-start gap-4'
+        }
+      >
         <div className="w-56 max-w-full">
           <TextLabel>{t('ui.download.exportAs', 'Export as')}</TextLabel>
           <Select
@@ -772,6 +823,20 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
               onSelectionChange={onSlotSelection}
             />
           </div>
+        )}
+        {exportScope === 'set' && (
+          <ShadowCrystalGrid
+            className="row-span-2 h-full justify-self-end"
+            history={exportHistory}
+            overrides={activeHistoryOverrides}
+            onHistoryChange={(chapter, slot, outcome) => {
+              const values = { ...activeHistoryOverrides };
+              const key = `${chapter}_${slot}`;
+              if (outcome === undefined) delete values[key];
+              else values[key] = outcome;
+              setHistoryOverrides({ context: historyContext, values });
+            }}
+          />
         )}
         {exportScope === 'single' && (
           <div>

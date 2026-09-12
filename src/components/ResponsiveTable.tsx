@@ -10,7 +10,7 @@ export interface ResponsiveTableSort {
 }
 
 interface ResponsiveTableProps {
-  layout: 'import-review' | 'export-selection';
+  layout: 'import-review' | 'export-selection' | 'shadow-crystals';
   headers: ResponsiveTableHeader[];
   children: ReactNode;
   className?: string;

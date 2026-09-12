@@ -535,3 +535,42 @@
     grid-template-columns: 2rem minmax(0, 1fr);
   }
 }
+
+.responsive-table[data-layout='shadow-crystals'] {
+  display: flex;
+  width: fit-content;
+  min-height: 0;
+  flex-direction: column;
+  overflow: visible;
+}
+
+.responsive-table[data-layout='shadow-crystals'] .responsive-table-header {
+  display: grid;
+  height: 2rem;
+  flex-shrink: 0;
+  grid-template-columns: repeat(5, minmax(2rem, 1fr));
+  gap: 0;
+  padding: 0;
+}
+
+.responsive-table[data-layout='shadow-crystals'] [role='rowgroup'] {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+}
+
+.responsive-table[data-layout='shadow-crystals'] .responsive-table-row {
+  display: grid;
+  min-height: 2rem;
+  flex: 1;
+  grid-template-columns: repeat(5, minmax(2rem, 1fr));
+  gap: 0;
+  padding: 0;
+}
+
+.responsive-table[data-layout='shadow-crystals'] .responsive-table-row:hover,
+.responsive-table[data-layout='shadow-crystals']
+  .responsive-table-row:focus-within {
+  background-color: transparent;
+}
