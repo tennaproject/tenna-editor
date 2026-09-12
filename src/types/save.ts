@@ -12,7 +12,7 @@ import type {
 } from '@data';
 import type { UUID } from 'crypto';
 
-export const SAVE_SCHEMA = 4;
+export const SAVE_SCHEMA = 5;
 export type SaveFormat = 1 | 2;
 export type SaveSlot = 0 | 1 | 2;
 export type BaselineSource = 'upload' | 'download';
@@ -124,6 +124,7 @@ export interface SaveData<
     isCompletionSave: boolean;
     name: string;
     baseline?: SaveBaseline;
+    importedUraBoss?: number;
     source?: SaveSource;
   };
   playerName: string;
