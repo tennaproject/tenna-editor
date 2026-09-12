@@ -726,7 +726,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
         </Page.Nav>
       }
       variant="workspace"
-      panelClassName="min-w-0 max-w-full h-[min(38rem,calc(100dvh-2rem))]"
+      panelClassName="min-w-0 max-w-full h-[min(48rem,calc(100dvh-2rem))]"
       bodyClassName="gap-6"
       footer={
         <ModalFooter className="flex-row flex-wrap gap-3" aria-live="polite">

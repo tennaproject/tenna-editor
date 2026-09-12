@@ -10,7 +10,7 @@ const MODAL_MIN_WIDTH_CLASS = 'min-w-[min(100%,24rem)]';
 const MODAL_PANEL_BY_VARIANT: Record<ModalVariant, string> = {
   standard: `${MODAL_MIN_WIDTH_CLASS} w-[min(100%,48rem)] h-[min(90vh,30rem)] flex flex-col overflow-hidden p-0`,
   compact: `${MODAL_MIN_WIDTH_CLASS} w-[min(100%,36rem)] sm:w-auto sm:max-w-[min(100%,36rem)] max-h-[min(90vh,28rem)] h-auto flex flex-col overflow-hidden p-0`,
-  workspace: `${MODAL_MIN_WIDTH_CLASS} w-[min(100%,56rem)] h-[min(90vh,38rem)] flex flex-col overflow-hidden p-0`,
+  workspace: `${MODAL_MIN_WIDTH_CLASS} w-[min(100%,56rem)] h-[min(90dvh,48rem)] flex flex-col overflow-hidden p-0`,
 };
 
 interface ModalLayoutProps {
@@ -93,7 +93,7 @@ export function ModalFooter({ children, className }: ModalFooterProps) {
   return (
     <footer
       className={mergeClass(
-        'shrink-0 flex flex-col-reverse gap-2 sm:flex-row sm:items-center sm:justify-end border-t border-border bg-surface-3 px-6 py-4',
+        'shrink-0 flex flex-col-reverse gap-2 sm:flex-row sm:items-center sm:justify-end border-t border-border bg-surface-3 px-6 py-2.5',
         className,
       )}
     >
