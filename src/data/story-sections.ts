@@ -311,7 +311,13 @@ export const STORY_SECTIONS = {
         {
           id: 'home',
           title: 'Home',
-          flags: ['TOOK_AZZY_MONEY'],
+          flags: [
+            'TOOK_AZZY_MONEY',
+            'BEEN_CALLED_NORMAL'
+            'TOLD_MOM_STUDYING'
+            'TOLD_MOM_ORB'
+            'TOLD_VISIT_TOWN'
+          ],
         },
         {
           id: 'castle-town',
