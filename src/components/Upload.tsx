@@ -7,6 +7,7 @@ import RetryIcon from '@assets/icons/reload.svg?react';
 import SelectAllIcon from '@assets/icons/check-double.svg?react';
 import ClearSelectionIcon from '@assets/icons/close-box.svg?react';
 import { extractGamePayload } from '@utils/save-baseline';
+import { getUraBoss } from '@utils/dr-ini';
 import {
   discoverImportCandidates,
   getTrimmedSwitchContainer,
@@ -342,6 +343,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
     save.meta.slot = candidate.slot;
     save.meta.isCompletionSave = candidate.isCompletionSave;
     save.meta.name = candidate.name.trim() || candidate.defaultName;
+    save.meta.importedUraBoss = getUraBoss(save, candidate.chapter);
     save.meta.baseline = {
       capturedAt: new Date(),
       source: 'upload',

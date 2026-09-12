@@ -55,6 +55,7 @@ export function buildCellsFromTargets(
 export function buildPcExportFromTargets(
   targets: SaveExportTarget[],
   baseDrIni = '',
+  history?: Record<string, number>,
 ): Uint8Array {
   const files: Record<string, Uint8Array> = {};
   for (const target of targets) {
@@ -63,7 +64,9 @@ export function buildPcExportFromTargets(
     );
   }
   const cells = buildCellsFromTargets(targets);
-  files['dr.ini'] = strToU8(generateDrIni(cells, baseDrIni));
+  files['dr.ini'] = strToU8(
+    generateDrIni(cells, baseDrIni, undefined, history),
+  );
 
   return zipSync(files);
 }
@@ -71,13 +74,19 @@ export function buildPcExportFromTargets(
 export function buildSwitchExportSet(
   targets: SaveExportTarget[],
   baseContainer?: Record<string, string>,
+  history?: Record<string, number>,
 ): string {
   const container: Record<string, string> = baseContainer
     ? { ...baseContainer }
     : {};
 
   const cells = buildCellsFromTargets(targets);
-  const generatedDrIni = generateDrIni(cells, container['dr.ini'] ?? '');
+  const generatedDrIni = generateDrIni(
+    cells,
+    container['dr.ini'] ?? '',
+    undefined,
+    history,
+  );
   container['dr.ini'] = generatedDrIni
     .replace(/\r\n/g, '\n')
     .replace(/\r/g, '\n')

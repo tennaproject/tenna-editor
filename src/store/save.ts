@@ -4,6 +4,7 @@ import { immer } from 'zustand/middleware/immer';
 import { STORE_NAMESPACE } from './schema';
 import { SAVE_SCHEMA, type BaselineSource, type Save } from '@types';
 import { extractGamePayload } from '@utils';
+import { getImportedUraBoss } from '@utils/dr-ini';
 import { createDebouncedJSONStorage } from 'zustand-debounce';
 import { saveStorage, toast } from '@services';
 import { useHistory } from './history';
@@ -19,7 +20,7 @@ function sync() {
   }, SYNC_DELAY);
 }
 
-export const SAVE_VERSION = 4;
+export const SAVE_VERSION = 5;
 
 function ensureSaveSource(save: Save) {
   save.meta.source ??= {
@@ -135,6 +136,7 @@ export const useSave = create<SaveState>()(
 
           set((state) => {
             if (!state.save) return;
+            state.save.meta.importedUraBoss ??= getImportedUraBoss(state.save);
             state.save.meta.baseline = {
               capturedAt: new Date(),
               source,
@@ -274,6 +276,15 @@ export const useSave = create<SaveState>()(
           saves.forEach((save) => {
             save.meta.schema = SAVE_SCHEMA;
             ensureSaveSource(save);
+          });
+          await saveStorage.migrate(saves);
+        }
+
+        if (version < 5) {
+          const saves = await saveStorage.getAll();
+          saves.forEach((save) => {
+            save.meta.importedUraBoss ??= getImportedUraBoss(save);
+            save.meta.schema = SAVE_SCHEMA;
           });
           await saveStorage.migrate(saves);
         }

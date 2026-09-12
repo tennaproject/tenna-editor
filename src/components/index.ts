@@ -58,3 +58,4 @@ export * from './QrCode';
 export * from './SaveFingerprint';
 export * from './ShareImport';
 export * from './StartFromTemplate';
+export * from './ShadowCrystalGrid';
