@@ -95,7 +95,10 @@ function getInitLang(save: Save): number {
   return Number(save.flags[912]) || 0;
 }
 
-function getUraBoss(save: Save, chapter: ChapterIndex): number {
+export function getUraBoss(
+  save: Pick<Save, 'flags'>,
+  chapter: ChapterIndex,
+): number {
   if (chapter === 1) {
     const jevilFlag = Number(save.flags[241]) || 0;
     if (jevilFlag === 6) return 1;
@@ -116,6 +119,28 @@ function getUraBoss(save: Save, chapter: ChapterIndex): number {
     5: 1908,
   };
   return Number(save.flags[secretBossFlags[chapter] ?? 0]) || 0;
+}
+
+export function getImportedUraBoss(save: Save): number | undefined {
+  if (save.meta.importedUraBoss !== undefined) return save.meta.importedUraBoss;
+  if (save.meta.baseline?.source === 'upload') {
+    return getUraBoss(save.meta.baseline.payload, save.meta.chapter);
+  }
+  const source = getOriginalSlot(save);
+  if (!source) return undefined;
+  const value = getSectionValue(
+    parseIni(source.ini),
+    getIniSectionName(source),
+    'UraBoss',
+  );
+  return value !== null && [0, 1, 2, 3].includes(Number(value))
+    ? Number(value)
+    : undefined;
+}
+
+function wasUraBossEdited(save: Save, chapter: ChapterIndex): boolean {
+  const original = getImportedUraBoss(save);
+  return original !== undefined && original !== getUraBoss(save, chapter);
 }
 
 function isSideBActive(save: Save): boolean {
@@ -216,23 +241,145 @@ function buildEmptySection(chapter: ChapterIndex): IniSection {
   return sectionEntries(values);
 }
 
-function mergeUraSection(
-  sections: Map<string, IniSection>,
+export function getExportUraHistory(
   cells: SaveExportCell[],
-): void {
-  const ura = sections.get('URA') ?? new Map<string, string>();
+  baseIni = '',
+): Record<string, number> {
+  const baseSections = parseIni(baseIni);
+  const ura = baseSections.get('URA');
+  const results: Record<string, number> = {};
+  const imported = new Set<string>();
+  if (ura) {
+    for (const [key, rawValue] of ura.entries()) {
+      const parsed = parseIniValue(rawValue);
+      const previous = parsed === null ? null : Number(parsed);
+      if (previous !== null && [0, 1, 2, 3].includes(previous)) {
+        results[key] = previous;
+        imported.add(key);
+      }
+    }
+  }
   for (const cell of cells) {
     if (!cell.save) continue;
-    const normalizedSlot = cell.rawSlot >= 3 ? cell.rawSlot - 3 : cell.rawSlot;
-    const key = `${cell.chapter}_${normalizedSlot}`;
-    const result = getUraBoss(cell.save, cell.chapter);
-    if (result <= 0) continue;
-
-    const currentResult = Number(parseIniValue(ura.get(key))) || 0;
-    const nextResult = result + currentResult === 3 ? 3 : result;
-    ura.set(key, formatReal(nextResult));
+    const key = `${cell.chapter}_${cell.rawSlot % 3}`;
+    if (!imported.has(key)) {
+      results[key] = (results[key] ?? 0) | getUraBoss(cell.save, cell.chapter);
+    }
   }
-  if (ura.size > 0) sections.set('URA', ura);
+
+  const sourceGroups = new Map<
+    string,
+    {
+      source: NonNullable<ReturnType<typeof getOriginalSlot>>;
+      entries: Array<{ rawSlot: RawSaveSlot; destination: string; save: Save }>;
+    }
+  >();
+  for (const cell of cells) {
+    if (!cell.save) continue;
+    const source = getOriginalSlot(cell.save);
+    if (!source || !source.ini || source.chapter !== cell.chapter) continue;
+    const sourceKey = JSON.stringify([
+      source.ini,
+      source.chapter,
+      source.rawSlot % 3,
+    ]);
+    const group = sourceGroups.get(sourceKey) ?? { source, entries: [] };
+    group.entries.push({
+      rawSlot: source.rawSlot,
+      destination: `${cell.chapter}_${cell.rawSlot % 3}`,
+      save: cell.save,
+    });
+    sourceGroups.set(sourceKey, group);
+  }
+
+  const contributions = new Map<string, number>();
+  const movedSources = new Set<string>();
+  for (const { source, entries } of sourceGroups.values()) {
+    const sourceSections = parseIni(source.ini);
+    const slot = (source.rawSlot % 3) as RawSaveSlot;
+    const from = `${source.chapter}_${slot}`;
+    const rawHistory = getSectionValue(sourceSections, 'URA', from);
+    const history =
+      rawHistory !== null && [0, 1, 2, 3].includes(Number(rawHistory))
+        ? Number(rawHistory)
+        : entries.reduce(
+            (value, entry) => value | getUraBoss(entry.save, source.chapter),
+            0,
+          );
+    const expectedSlots = ([slot, slot + 3] as RawSaveSlot[]).filter(
+      (rawSlot) => {
+        const name = getSectionValue(
+          sourceSections,
+          getIniSectionName({ chapter: source.chapter, rawSlot }),
+          'Name',
+        );
+        return name !== null && name !== '[EMPTY]';
+      },
+    );
+    const sourceSlots = entries.map((entry) => entry.rawSlot);
+    const destinations = new Set(entries.map((entry) => entry.destination));
+    const movesWholeSlot =
+      destinations.size === 1 &&
+      expectedSlots.length > 0 &&
+      expectedSlots.length === sourceSlots.length &&
+      expectedSlots.every(
+        (rawSlot) =>
+          sourceSlots.filter((sourceSlot) => sourceSlot === rawSlot).length ===
+          1,
+      );
+
+    if (!movesWholeSlot) {
+      contributions.set(from, (contributions.get(from) ?? 0) | history);
+      continue;
+    }
+
+    const to = entries[0].destination;
+    if (from !== to && source.ini === baseIni) {
+      movedSources.add(from);
+    }
+    contributions.set(to, (contributions.get(to) ?? 0) | history);
+  }
+
+  for (const from of movedSources) results[from] = 0;
+  for (const [destination, value] of contributions)
+    results[destination] = value;
+
+  const editedDestinations = new Set(
+    cells
+      .filter(
+        (cell): cell is SaveExportCell & { save: Save } =>
+          cell.save !== null && wasUraBossEdited(cell.save, cell.chapter),
+      )
+      .map((cell) => `${cell.chapter}_${cell.rawSlot % 3}`),
+  );
+  for (const destination of editedDestinations) results[destination] = 0;
+  for (const cell of cells) {
+    if (!cell.save) continue;
+    const destination = `${cell.chapter}_${cell.rawSlot % 3}`;
+    if (editedDestinations.has(destination)) {
+      results[destination] |= getUraBoss(cell.save, cell.chapter);
+    }
+  }
+  return results;
+}
+
+function getOriginalSlot(save: Save) {
+  const source = save.meta.source;
+  const fileName =
+    source?.platform === 'switch' ? source.key : source?.fileName;
+  const match = fileName?.match(/(?:^|[/\\])filech([1-5])_([0-5])(?:_b)?$/i);
+  if (!match) return null;
+  const content =
+    source?.platform === 'switch'
+      ? Object.entries(source.container).find(
+          ([key]) => key.toLowerCase() === 'dr.ini',
+        )?.[1]
+      : source?.drIni?.content;
+  return {
+    chapter: Number(match[1]) as ChapterIndex,
+    rawSlot: Number(match[2]) as RawSaveSlot,
+    ini: content ?? '',
+  };
 }
 
 function serializeIni(sections: Map<string, IniSection>): string {
@@ -251,6 +398,7 @@ export function generateDrIni(
   cells: SaveExportCell[],
   baseIni = '',
   date = new Date(),
+  history?: Record<string, number>,
 ): string {
   const sections = parseIni(baseIni);
 
@@ -272,7 +420,13 @@ export function generateDrIni(
     }
   }
 
-  mergeUraSection(sections, cells);
+  const ura = sections.get('URA') ?? new Map<string, string>();
+  for (const [key, value] of Object.entries(
+    history ?? getExportUraHistory(cells, baseIni),
+  )) {
+    ura.set(key, formatReal(value));
+  }
+  sections.set('URA', ura);
   return serializeIni(sections);
 }
 

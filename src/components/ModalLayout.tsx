@@ -10,7 +10,7 @@ const MODAL_MIN_WIDTH_CLASS = 'min-w-[min(100%,24rem)]';
 const MODAL_PANEL_BY_VARIANT: Record<ModalVariant, string> = {
   standard: `${MODAL_MIN_WIDTH_CLASS} w-[min(100%,48rem)] h-[min(90vh,30rem)] flex flex-col overflow-hidden p-0`,
   compact: `${MODAL_MIN_WIDTH_CLASS} w-[min(100%,36rem)] sm:w-auto sm:max-w-[min(100%,36rem)] max-h-[min(90vh,28rem)] h-auto flex flex-col overflow-hidden p-0`,
-  workspace: `${MODAL_MIN_WIDTH_CLASS} w-[min(100%,56rem)] h-[min(90vh,38rem)] flex flex-col overflow-hidden p-0`,
+  workspace: `${MODAL_MIN_WIDTH_CLASS} w-[min(100%,56rem)] h-[min(90dvh,48rem)] flex flex-col overflow-hidden p-0`,
 };
 
 interface ModalLayoutProps {
@@ -18,6 +18,7 @@ interface ModalLayoutProps {
   setOpen: (state: boolean) => void;
   onClose?: () => void;
   title: ReactNode;
+  titleExtra?: ReactNode;
   children: ReactNode;
   footer?: ReactNode;
   variant?: ModalVariant;
@@ -30,6 +31,7 @@ export function ModalLayout({
   setOpen,
   onClose,
   title,
+  titleExtra,
   children,
   footer,
   variant = 'standard',
@@ -54,12 +56,15 @@ export function ModalLayout({
           isCompact ? 'max-h-[min(90vh,28rem)]' : 'min-h-0 h-full',
         )}
       >
-        <div className="shrink-0 px-6 pt-6 pb-4 pr-12">
+        <div className="flex shrink-0 items-center gap-3 px-6 pt-6 pb-4 pr-12">
           {typeof title === 'string' ? (
-            <Heading level={3}>{title}</Heading>
+            <Heading level={3} className="shrink-0">
+              {title}
+            </Heading>
           ) : (
             title
           )}
+          {titleExtra}
         </div>
 
         <div
@@ -88,7 +93,7 @@ export function ModalFooter({ children, className }: ModalFooterProps) {
   return (
     <footer
       className={mergeClass(
-        'shrink-0 flex flex-col-reverse gap-2 sm:flex-row sm:items-center sm:justify-end border-t border-border bg-surface-3 px-6 py-4',
+        'shrink-0 flex flex-col-reverse gap-2 sm:flex-row sm:items-center sm:justify-end border-t border-border bg-surface-3 px-6 py-2.5',
         className,
       )}
     >

@@ -10,7 +10,7 @@ export interface ResponsiveTableSort {
 }
 
 interface ResponsiveTableProps {
-  layout: 'import-review' | 'export-selection';
+  layout: 'import-review' | 'export-selection' | 'shadow-crystals';
   headers: ResponsiveTableHeader[];
   children: ReactNode;
   className?: string;
@@ -70,6 +70,7 @@ export function ResponsiveTable({
           return (
             <div
               role="columnheader"
+              className={header.align === 'center' ? 'text-center' : undefined}
               aria-sort={
                 ariaSort === 'asc'
                   ? 'ascending'
