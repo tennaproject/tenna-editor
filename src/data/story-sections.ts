@@ -313,10 +313,10 @@ export const STORY_SECTIONS = {
           title: 'Home',
           flags: [
             'TOOK_AZZY_MONEY',
-            'BEEN_CALLED_NORMAL'
-            'TOLD_MOM_STUDYING'
-            'TOLD_MOM_ORB'
-            'TOLD_VISIT_TOWN'
+            'BEEN_CALLED_NORMAL',
+            'TOLD_MOM_STUDYING',
+            'TOLD_MOM_ORB',
+            'TOLD_VISIT_TOWN',
           ],
         },
         {
@@ -326,6 +326,10 @@ export const STORY_SECTIONS = {
             'HUGGED_DUMMY_CH2',
             'TOY_DELIVER_PROGRESS',
             'MR_SOCIETY_LEFT',
+            'TOLD_TO_RUN_CH2',
+            'TALKED_TO_SEAM_CH2',
+            'SUSIE_ATE_CAKE',
+            'TOLD_TO_EXPLORE',
           ],
         },
         {
