@@ -70,6 +70,7 @@ export function ResponsiveTable({
           return (
             <div
               role="columnheader"
+              className={header.align === 'center' ? 'text-center' : undefined}
               aria-sort={
                 ariaSort === 'asc'
                   ? 'ascending'

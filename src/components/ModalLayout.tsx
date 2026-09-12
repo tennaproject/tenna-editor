@@ -18,6 +18,7 @@ interface ModalLayoutProps {
   setOpen: (state: boolean) => void;
   onClose?: () => void;
   title: ReactNode;
+  titleExtra?: ReactNode;
   children: ReactNode;
   footer?: ReactNode;
   variant?: ModalVariant;
@@ -30,6 +31,7 @@ export function ModalLayout({
   setOpen,
   onClose,
   title,
+  titleExtra,
   children,
   footer,
   variant = 'standard',
@@ -54,12 +56,15 @@ export function ModalLayout({
           isCompact ? 'max-h-[min(90vh,28rem)]' : 'min-h-0 h-full',
         )}
       >
-        <div className="shrink-0 px-6 pt-6 pb-4 pr-12">
+        <div className="flex shrink-0 items-center gap-3 px-6 pt-6 pb-4 pr-12">
           {typeof title === 'string' ? (
-            <Heading level={3}>{title}</Heading>
+            <Heading level={3} className="shrink-0">
+              {title}
+            </Heading>
           ) : (
             title
           )}
+          {titleExtra}
         </div>
 
         <div

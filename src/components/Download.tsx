@@ -2,10 +2,9 @@ import { useSave } from '@store';
 import ResetIcon from '@assets/icons/reload.svg?react';
 import DownloadIcon from '@assets/icons/download.svg?react';
 import ClearIcon from '@assets/icons/close.svg?react';
-import { useEffect, useState } from 'react';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import FileIcon from '@assets/icons/file.svg?react';
+import { useEffect, useId, useRef, useState } from 'react';
 import {
-  Badge,
   TextLabel,
   TextInput,
   Checkbox,
@@ -22,6 +21,7 @@ import {
   ResponsiveTableMobileLabel,
   ResponsiveTableRow,
   type ResponsiveTableSort,
+  Page,
 } from '@components';
 import {
   exportDraftStorage,
@@ -141,9 +141,80 @@ function getImportedDrIni(targets: SaveExportTarget[]) {
   return undefined;
 }
 
+function BaseSourceField({
+  label,
+  hint,
+  displayName,
+  chooseLabel,
+  hasSelection,
+  accept,
+  onFile,
+  onClear,
+  canClear,
+  clearLabel,
+}: {
+  label: string;
+  hint: string;
+  displayName: string;
+  chooseLabel: string;
+  hasSelection: boolean;
+  accept: string;
+  onFile: (file: File) => void;
+  onClear?: () => void;
+  canClear: boolean;
+  clearLabel: string;
+}) {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  return (
+    <div className="flex w-56 max-w-full flex-col">
+      <TextLabel>{label}</TextLabel>
+      <div className="relative h-10">
+        <button
+          type="button"
+          onClick={() => inputRef.current?.click()}
+          className="flex h-10 w-full items-center gap-2 border border-border bg-surface-3 px-3 pr-9 text-left text-sm hover:bg-surface-3-hover focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-text-3"
+        >
+          <FileIcon className="size-4 shrink-0 text-text-2" />
+          <span
+            className={
+              hasSelection
+                ? 'ui-field-mono min-w-0 truncate text-text-1'
+                : 'min-w-0 truncate text-text-2'
+            }
+          >
+            {hasSelection ? displayName : chooseLabel}
+          </span>
+        </button>
+        {canClear && onClear && (
+          <button
+            type="button"
+            className="absolute right-1 top-1/2 flex size-7 -translate-y-1/2 items-center justify-center text-text-2 hover:text-text-1"
+            onClick={onClear}
+          >
+            <ClearIcon className="size-3.5" />
+            <span className="sr-only">{clearLabel}</span>
+          </button>
+        )}
+        <input
+          ref={inputRef}
+          type="file"
+          accept={accept}
+          className="sr-only"
+          onChange={(event) => {
+            const file = event.target.files?.[0];
+            if (file) onFile(file);
+            event.target.value = '';
+          }}
+        />
+      </div>
+      <p className="ui-prose-muted mt-1 text-xs leading-snug">{hint}</p>
+    </div>
+  );
+}
+
 export function Download({ isOpen, setOpen }: DownloadProps) {
   const { t } = useTranslation();
-  const reducedMotion = useReducedMotion();
 
   const save = useSave((s) => s.save);
   const captureBaseline = useSave((s) => s.captureBaseline);
@@ -175,6 +246,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
   >(undefined);
   const [baseContainerName, setBaseContainerName] = useState('');
   const [hasHydratedExportDraft, setHasHydratedExportDraft] = useState(false);
+  const completionSaveId = useId();
 
   const pcFileName = save
     ? `filech${save.meta.chapter}_${isCompletionSave ? selectedSlot + 3 : selectedSlot}`
@@ -593,25 +665,33 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
     <ModalLayout
       isOpen={isOpen}
       setOpen={setOpen}
-      title={
-        exportScope === 'set'
-          ? t('ui.download.downloadMultipleSaves', 'Download multiple saves')
-          : t('ui.download.downloadSave', 'Download Save')
+      title={t('ui.download.downloadSave', 'Download')}
+      titleExtra={
+        <Page.Nav>
+          <Page.NavItem
+            title={t('ui.download.singleSave', 'Single save')}
+            active={exportScope === 'single'}
+            onClick={() => setExportScope('single')}
+          />
+          <Page.NavItem
+            title={t('ui.download.multipleSaves', 'Multiple saves')}
+            active={exportScope === 'set'}
+            onClick={() => setExportScope('set')}
+          />
+        </Page.Nav>
       }
-      variant={exportScope === 'set' ? 'workspace' : 'standard'}
-      bodyClassName="min-h-0 overflow-hidden gap-5 flex-1"
+      variant="workspace"
+      panelClassName="min-w-0 max-w-full h-[min(38rem,calc(100dvh-2rem))]"
+      bodyClassName="gap-6"
       footer={
-        <ModalFooter
-          className="flex-col gap-3 sm:flex-row sm:justify-between"
-          aria-live="polite"
-        >
-          <InlineGroup className="min-w-0 gap-2 sm:flex-1 sm:mr-4">
+        <ModalFooter className="flex-row flex-wrap gap-3" aria-live="polite">
+          <InlineGroup className="min-w-0 w-full gap-2 lg:w-auto lg:flex-1">
             <span className="text-sm text-text-2 whitespace-nowrap shrink-0">
               {t('ui.download.savesAs', 'Saves as')}
             </span>
             <TextInput
               size="small"
-              className="min-w-0 max-w-72 flex-1"
+              className="min-w-0 flex-1"
               value={displayedFileName}
               onChange={(value) =>
                 setFileNames((previous) => ({
@@ -634,455 +714,356 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
           <Button
             onClick={resetExportSettings}
             variant="secondary"
-            size="lg"
+            size="md"
             icon={<ResetIcon />}
-            className="w-full shrink-0 sm:w-auto"
+            className="min-h-11 flex-1 lg:flex-none"
           >
             {t('ui.download.resetSettings', 'Reset settings')}
           </Button>
           <Button
             onClick={() => void downloadSave()}
             variant="primary"
-            size="lg"
+            size="md"
             icon={<DownloadIcon />}
-            className="w-full shrink-0 sm:w-auto sm:min-w-52"
+            className="min-h-11 flex-1 lg:flex-none"
             disabled={hasExportSetError}
           >
-            {exportScope === 'set'
-              ? t(
-                  'ui.download.downloadMultipleSaves',
-                  'Download multiple saves',
-                )
-              : t('ui.download.downloadSaveFile', 'Download save file')}
+            {t('ui.download.downloadAction', 'Download')}
           </Button>
         </ModalFooter>
       }
     >
-      <div className="relative min-h-0 flex-1">
-        <AnimatePresence initial={false}>
-          <motion.div
-            key={exportScope}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: reducedMotion ? 0 : 0.2 }}
-            className="absolute inset-0 flex min-h-0 flex-col gap-5"
+      <div className="flex flex-wrap items-start gap-4">
+        <div className="w-56 max-w-full">
+          <TextLabel>{t('ui.download.exportAs', 'Export as')}</TextLabel>
+          <Select
+            items={EXPORT_OPTIONS.map((item) => ({
+              ...item,
+              label:
+                item.id === 'pc'
+                  ? t('ui.download.pcSaveFile', 'PC save file')
+                  : t('ui.download.switchContainer', 'Switch container'),
+            }))}
+            placeholder={t(
+              'ui.download.selectExportType',
+              'Select export type',
+            )}
+            className="w-full"
+            selectedItem={
+              EXPORT_OPTIONS.find((option) => option.id === exportMode) ??
+              EXPORT_OPTIONS[0]
+            }
+            defaultSelectedItem={
+              EXPORT_OPTIONS.find((option) => option.id === exportMode) ??
+              EXPORT_OPTIONS[0]
+            }
+            onSelectionChange={onExportModeSelection}
+          />
+        </div>
+        {exportScope === 'single' && (
+          <div className="w-36 max-w-full">
+            <TextLabel>{t('ui.download.inGameSlot', 'In-game slot')}</TextLabel>
+            <Select
+              items={slotOptions}
+              placeholder={t('ui.field.selectSlot', 'Select slot')}
+              className="w-full"
+              selectedItem={slotOptions[selectedSlot]}
+              defaultSelectedItem={slotOptions[selectedSlot]}
+              onSelectionChange={onSlotSelection}
+            />
+          </div>
+        )}
+        {exportScope === 'single' && (
+          <div>
+            <TextLabel htmlFor={completionSaveId}>
+              {t('ui.field.completionSave', 'Completion save')}
+            </TextLabel>
+            <div className="flex h-10 items-center">
+              <Checkbox
+                id={completionSaveId}
+                checked={isCompletionSave}
+                onChange={setIsCompletionSave}
+              />
+            </div>
+          </div>
+        )}
+        {exportScope === 'set' && exportMode === 'pc' && (
+          <BaseSourceField
+            label={t('ui.download.baseDrIni', 'Base dr.ini')}
+            hint={
+              baseDrIniName
+                ? t(
+                    'ui.download.baseDrIniHintOverride',
+                    'Using this file instead of the imported dr.ini.',
+                  )
+                : importedDrIni
+                  ? t(
+                      'ui.download.baseDrIniHintImported',
+                      'Using the dr.ini from an imported save. Click the field to replace it.',
+                    )
+                  : t(
+                      'ui.download.baseDrIniHintNone',
+                      'Optional. Metadata is generated automatically if you skip this.',
+                    )
+            }
+            displayName={baseDrIniName || importedDrIni?.fileName || ''}
+            chooseLabel={t('ui.download.chooseFile', 'Choose file')}
+            hasSelection={Boolean(baseDrIniName || importedDrIni)}
+            accept=".ini,text/plain"
+            onFile={readBaseDrIni}
+            canClear={Boolean(baseDrIniName)}
+            clearLabel={t('ui.download.clearBase', 'Clear base')}
+            onClear={() => {
+              setBaseDrIni('');
+              setBaseDrIniName('');
+            }}
+          />
+        )}
+        {exportScope === 'set' && exportMode === 'switch' && (
+          <BaseSourceField
+            label={t('ui.download.baseContainer', 'Base container')}
+            hint={
+              baseContainerName
+                ? t(
+                    'ui.download.baseContainerHintOverride',
+                    'Using this container instead of the imported metadata.',
+                  )
+                : importedDrIni
+                  ? t(
+                      'ui.download.baseContainerHintImported',
+                      'Using metadata from an imported save. Click the field to replace it.',
+                    )
+                  : t(
+                      'ui.download.baseContainerHintNone',
+                      'Optional. Other container entries are omitted if you skip this.',
+                    )
+            }
+            displayName={baseContainerName || importedDrIni?.fileName || ''}
+            chooseLabel={t('ui.download.chooseContainer', 'Choose container')}
+            hasSelection={Boolean(baseContainerName || importedDrIni)}
+            accept=".sav"
+            onFile={readBaseContainer}
+            canClear={Boolean(baseContainerName)}
+            clearLabel={t('ui.download.clearBase', 'Clear base')}
+            onClear={() => {
+              setBaseContainer(undefined);
+              setBaseContainerName('');
+            }}
+          />
+        )}
+      </div>
+
+      {exportScope === 'set' ? (
+        <div className="flex flex-col gap-2">
+          <TextLabel>{t('ui.download.saveSlots', 'Save slots')}</TextLabel>
+          {hasDuplicateError && (
+            <p
+              role="alert"
+              className="max-h-10 shrink-0 overflow-y-auto text-sm leading-5 text-red"
+            >
+              {formatTranslation(
+                t(
+                  'ui.download.duplicateTargets',
+                  'Conflict: multiple saves target {targets}. Each slot can only contain one save.',
+                ),
+                { targets: duplicates.join(', ') },
+              )}
+            </p>
+          )}
+          <ResponsiveTable
+            layout="export-selection"
+            className="download-save-table w-full overflow-visible shrink-0"
+            ariaLabel={t(
+              'ui.download.downloadMultipleSaves',
+              'Download multiple saves',
+            )}
+            sort={saveTableSort}
+            onSortChange={setSaveTableSort}
+            headers={[
+              { id: 'select' },
+              {
+                id: 'name',
+                content: t('ui.download.name', 'Name'),
+                sortable: true,
+              },
+              {
+                id: 'chapter',
+                content: t('ui.upload.chapter', 'Chapter'),
+                sortable: true,
+                align: 'center',
+              },
+              {
+                id: 'slot',
+                content: t('ui.field.slot', 'Slot'),
+                sortable: true,
+              },
+              {
+                id: 'complete',
+                content: t('ui.field.completionSave', 'Complete'),
+                sortable: true,
+                align: 'center',
+              },
+              {
+                id: 'target',
+                content: t('ui.download.target', 'Target'),
+                sortable: true,
+              },
+              {
+                id: 'source',
+                content: t('ui.download.source', 'Source'),
+                sortable: true,
+                align: 'center',
+              },
+            ]}
           >
-            <div className="shrink-0 flex flex-wrap items-end gap-3">
-              <div className="w-56 max-w-full">
-                <div className="flex items-center justify-between gap-2">
-                  <TextLabel>
-                    {t('ui.download.exportAs', 'Export as')}
-                  </TextLabel>
-                  {exportMode === 'switch' && (
-                    <Badge
-                      tone="yellow"
-                      size="sm"
-                      className="h-5 px-1.5 text-[0.65rem] opacity-80"
-                      title={t(
-                        'ui.download.switchExperimentalNotice',
-                        'Switch export is experimental.',
+            {storedSaves.length === 0 ? (
+              <p className="p-4 text-sm text-text-2 text-center">
+                {t('ui.download.noStoredSaves', 'No stored saves available.')}
+              </p>
+            ) : (
+              displayedStoredSaves.map((storedSave) => {
+                const sel = selections.get(storedSave.meta.id);
+                const isSelected = sel?.selected ?? false;
+                const effectiveSlot = sel?.slotOverride ?? storedSave.meta.slot;
+                const effectiveCompletion =
+                  sel?.completionOverride ?? storedSave.meta.isCompletionSave;
+                const targetKey = getTargetKey({
+                  chapter: storedSave.meta.chapter,
+                  slot: effectiveSlot,
+                  isCompletionSave: effectiveCompletion,
+                });
+                const isDuplicate =
+                  isSelected && duplicates.includes(targetKey);
+                return (
+                  <ResponsiveTableRow
+                    key={storedSave.meta.id}
+                    className={mergeClass(
+                      'max-md:grid-cols-1 max-md:gap-3',
+                      isDuplicate && 'bg-red-soft',
+                    )}
+                  >
+                    <div
+                      className={mergeClass(
+                        'flex justify-start md:justify-center',
                       )}
                     >
-                      {t('ui.download.experimental', 'Experimental')}
-                    </Badge>
-                  )}
-                </div>
-                <Select
-                  items={EXPORT_OPTIONS.map((item) => ({
-                    ...item,
-                    label:
-                      item.id === 'pc'
-                        ? t('ui.download.pcSaveFile', 'PC save file')
-                        : t('ui.download.switchContainer', 'Switch container'),
-                  }))}
-                  placeholder={t(
-                    'ui.download.selectExportType',
-                    'Select export type',
-                  )}
-                  className="w-full"
-                  selectedItem={
-                    EXPORT_OPTIONS.find((option) => option.id === exportMode) ??
-                    EXPORT_OPTIONS[0]
-                  }
-                  defaultSelectedItem={
-                    EXPORT_OPTIONS.find((option) => option.id === exportMode) ??
-                    EXPORT_OPTIONS[0]
-                  }
-                  onSelectionChange={onExportModeSelection}
-                />
-              </div>
-              <div className="flex h-10 items-center">
-                <Checkbox
-                  label={
-                    <span className="inline-flex items-center gap-2">
-                      <span>
-                        {t('ui.download.multipleSaves', 'Multiple saves')}
-                      </span>
-                      {exportScope === 'set' && (
-                        <Badge
-                          tone="yellow"
-                          size="sm"
-                          className="h-5 px-1.5 text-[0.65rem] opacity-80"
-                          title={t(
-                            'ui.download.multipleSavesExperimentalNotice',
-                            'Multiple-save export is experimental.',
-                          )}
-                        >
-                          {t('ui.download.experimental', 'Experimental')}
-                        </Badge>
-                      )}
-                    </span>
-                  }
-                  checked={exportScope === 'set'}
-                  onChange={(checked) =>
-                    setExportScope(checked ? 'set' : 'single')
-                  }
-                />
-              </div>
-              {exportScope === 'set' && exportMode === 'pc' && (
-                <label
-                  className="inline-flex h-10 min-w-0 cursor-pointer items-center gap-2 border border-border bg-surface-3 px-3 text-sm text-text-2 hover:bg-surface-3-hover focus-within:ring-2 focus-within:ring-red/30 focus-within:ring-offset-1"
-                  title={t(
-                    'ui.download.baseDrIniDescription',
-                    'An imported dr.ini is used automatically. Optionally choose another file to override it.',
-                  )}
-                >
-                  <span className="shrink-0">
-                    {t('ui.download.baseDrIni', 'Base dr.ini')}
-                  </span>
-                  <span className="ui-field-mono max-w-40 truncate">
-                    {baseDrIniName ||
-                      importedDrIni?.fileName ||
-                      t('ui.common.none', 'None')}
-                  </span>
-                  <input
-                    type="file"
-                    accept=".ini,text/plain"
-                    className="sr-only"
-                    onChange={(event) => {
-                      const file = event.target.files?.[0];
-                      if (file) readBaseDrIni(file);
-                    }}
-                  />
-                </label>
-              )}
-              {exportScope === 'set' &&
-                exportMode === 'pc' &&
-                baseDrIniName && (
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    icon={<ClearIcon />}
-                    onClick={() => {
-                      setBaseDrIni('');
-                      setBaseDrIniName('');
-                    }}
-                  >
-                    {t('ui.download.clearBase', 'Clear base')}
-                  </Button>
-                )}
-              {exportScope === 'set' && exportMode === 'switch' && (
-                <label
-                  className="inline-flex h-10 min-w-0 cursor-pointer items-center gap-2 border border-border bg-surface-3 px-3 text-sm text-text-2 hover:bg-surface-3-hover focus-within:ring-2 focus-within:ring-red/30 focus-within:ring-offset-1"
-                  title={t(
-                    'ui.download.baseContainerDescription',
-                    'Imported dr.ini metadata is used automatically. Optionally choose a container to preserve other entries.',
-                  )}
-                >
-                  <span className="shrink-0">
-                    {t('ui.download.baseContainer', 'Base container')}
-                  </span>
-                  <span className="ui-field-mono max-w-40 truncate">
-                    {baseContainerName ||
-                      importedDrIni?.fileName ||
-                      t('ui.common.none', 'None')}
-                  </span>
-                  <input
-                    type="file"
-                    accept=".sav"
-                    className="sr-only"
-                    onChange={(event) => {
-                      const file = event.target.files?.[0];
-                      if (file) readBaseContainer(file);
-                    }}
-                  />
-                </label>
-              )}
-              {exportScope === 'set' &&
-                exportMode === 'switch' &&
-                baseContainerName && (
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    icon={<ClearIcon />}
-                    onClick={() => {
-                      setBaseContainer(undefined);
-                      setBaseContainerName('');
-                    }}
-                  >
-                    {t('ui.download.clearBase', 'Clear base')}
-                  </Button>
-                )}
-              {exportScope === 'single' && (
-                <div className="w-36 max-w-full">
-                  <TextLabel>
-                    {t('ui.download.inGameSlot', 'In-game slot')}
-                  </TextLabel>
-                  <Select
-                    items={slotOptions}
-                    placeholder={t('ui.field.selectSlot', 'Select slot')}
-                    className="w-full"
-                    selectedItem={slotOptions[selectedSlot]}
-                    defaultSelectedItem={slotOptions[selectedSlot]}
-                    onSelectionChange={onSlotSelection}
-                  />
-                </div>
-              )}
-              {exportScope === 'single' && (
-                <div className="flex h-10 items-center">
-                  <Checkbox
-                    label={t('ui.field.completionSave', 'Completion save')}
-                    checked={isCompletionSave}
-                    onChange={setIsCompletionSave}
-                  />
-                </div>
-              )}
-            </div>
+                      <Checkbox
+                        ariaLabel={formatTranslation(
+                          t('ui.download.selectNamedSave', 'Select {name}'),
+                          { name: storedSave.meta.name },
+                        )}
+                        checked={isSelected}
+                        onChange={(checked) =>
+                          updateSelection(storedSave.meta.id, {
+                            selected: checked,
+                          })
+                        }
+                      />
+                    </div>
 
-            {exportScope === 'set' ? (
-              <div className="flex flex-col gap-2 min-h-0 flex-1">
-                <TextLabel>
-                  {t('ui.download.saveSlots', 'Save slots')}
-                </TextLabel>
-                {hasDuplicateError && (
-                  <p
-                    role="alert"
-                    className="max-h-10 shrink-0 overflow-y-auto text-sm leading-5 text-red"
-                  >
-                    {formatTranslation(
-                      t(
-                        'ui.download.duplicateTargets',
-                        'Conflict: multiple saves target {targets}. Each slot can only contain one save.',
-                      ),
-                      { targets: duplicates.join(', ') },
-                    )}
-                  </p>
-                )}
-                <ResponsiveTable
-                  layout="export-selection"
-                  className="max-h-[min(50vh,24rem)] flex-1"
-                  ariaLabel={t(
-                    'ui.download.downloadMultipleSaves',
-                    'Download multiple saves',
-                  )}
-                  sort={saveTableSort}
-                  onSortChange={setSaveTableSort}
-                  headers={[
-                    { id: 'select' },
-                    {
-                      id: 'name',
-                      content: t('ui.download.name', 'Name'),
-                      sortable: true,
-                    },
-                    {
-                      id: 'chapter',
-                      content: t('ui.upload.chapter', 'Chapter'),
-                      sortable: true,
-                      align: 'center',
-                    },
-                    {
-                      id: 'slot',
-                      content: t('ui.field.slot', 'Slot'),
-                      sortable: true,
-                    },
-                    {
-                      id: 'complete',
-                      content: t('ui.field.completionSave', 'Complete'),
-                      sortable: true,
-                      align: 'center',
-                    },
-                    {
-                      id: 'target',
-                      content: t('ui.download.target', 'Target'),
-                      sortable: true,
-                    },
-                    {
-                      id: 'source',
-                      content: t('ui.download.source', 'Source'),
-                      sortable: true,
-                      align: 'center',
-                    },
-                  ]}
-                >
-                  {storedSaves.length === 0 ? (
-                    <p className="p-4 text-sm text-text-2 text-center">
-                      {t(
-                        'ui.download.noStoredSaves',
-                        'No stored saves available.',
-                      )}
-                    </p>
-                  ) : (
-                    displayedStoredSaves.map((storedSave) => {
-                      const sel = selections.get(storedSave.meta.id);
-                      const isSelected = sel?.selected ?? false;
-                      const effectiveSlot =
-                        sel?.slotOverride ?? storedSave.meta.slot;
-                      const effectiveCompletion =
-                        sel?.completionOverride ??
-                        storedSave.meta.isCompletionSave;
-                      const targetKey = getTargetKey({
-                        chapter: storedSave.meta.chapter,
-                        slot: effectiveSlot,
-                        isCompletionSave: effectiveCompletion,
-                      });
-                      const isDuplicate =
-                        isSelected && duplicates.includes(targetKey);
-                      return (
-                        <ResponsiveTableRow
-                          key={storedSave.meta.id}
-                          className={isDuplicate ? 'bg-red-soft' : undefined}
-                        >
-                          <div
-                            className={mergeClass(
-                              'flex justify-center',
-                              !isSelected && 'opacity-60',
-                            )}
-                          >
-                            <Checkbox
-                              ariaLabel={formatTranslation(
-                                t(
-                                  'ui.download.selectNamedSave',
-                                  'Select {name}',
-                                ),
-                                { name: storedSave.meta.name },
-                              )}
-                              checked={isSelected}
-                              onChange={(checked) =>
+                    <ResponsiveTableFields>
+                      <div
+                        className={mergeClass(
+                          'break-words text-base font-bold text-text-1 md:truncate md:text-sm md:font-normal',
+                        )}
+                      >
+                        {storedSave.meta.name}
+                      </div>
+
+                      <div
+                        className={mergeClass(
+                          'flex items-center gap-2 md:justify-center',
+                        )}
+                      >
+                        <ResponsiveTableMobileLabel>
+                          {t('ui.upload.chapter', 'Chapter')}
+                        </ResponsiveTableMobileLabel>
+                        <span className="ui-field-mono text-sm text-text-1">
+                          {storedSave.meta.chapter}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        <ResponsiveTableMobileLabel>
+                          {t('ui.field.slot', 'Slot')}
+                        </ResponsiveTableMobileLabel>
+                        <div className="w-36 md:w-full">
+                          <Select
+                            items={slotOptions}
+                            className="w-full h-8 min-h-0"
+                            selectedItem={slotOptions[effectiveSlot]}
+                            defaultSelectedItem={slotOptions[effectiveSlot]}
+                            onSelectionChange={(item) => {
+                              if (item) {
                                 updateSelection(storedSave.meta.id, {
-                                  selected: checked,
-                                })
+                                  slotOverride: (parseInt(item.id, 10) -
+                                    1) as SaveSlot,
+                                });
                               }
-                            />
-                          </div>
+                            }}
+                          />
+                        </div>
+                      </div>
 
-                          <ResponsiveTableFields>
-                            <div
-                              className={mergeClass(
-                                'truncate text-sm font-bold text-text-1 md:font-normal',
-                                !isSelected && 'opacity-60',
-                              )}
-                            >
-                              {storedSave.meta.name}
-                            </div>
+                      <div
+                        className={mergeClass(
+                          'flex items-center gap-2 md:justify-center',
+                        )}
+                      >
+                        <ResponsiveTableMobileLabel>
+                          {t('ui.field.completionSave', 'Complete')}
+                        </ResponsiveTableMobileLabel>
+                        <Checkbox
+                          ariaLabel={`${t(
+                            'ui.field.completionSave',
+                            'Completion save',
+                          )}: ${storedSave.meta.name}`}
+                          checked={effectiveCompletion}
+                          onChange={(checked) =>
+                            updateSelection(storedSave.meta.id, {
+                              completionOverride: checked,
+                            })
+                          }
+                        />
+                      </div>
 
-                            <div
-                              className={mergeClass(
-                                'flex items-center gap-2 md:justify-center',
-                                !isSelected && 'opacity-60',
-                              )}
-                            >
-                              <ResponsiveTableMobileLabel>
-                                {t('ui.upload.chapter', 'Chapter')}
-                              </ResponsiveTableMobileLabel>
-                              <span className="ui-mono-xs text-text-2">
-                                {storedSave.meta.chapter}
-                              </span>
-                            </div>
+                      <div className={mergeClass('flex items-center gap-2')}>
+                        <ResponsiveTableMobileLabel>
+                          {t('ui.download.target', 'Target')}
+                        </ResponsiveTableMobileLabel>
+                        <span className="ui-field-mono text-sm text-text-1">
+                          {targetKey}
+                        </span>
+                      </div>
 
-                            <div className="flex items-center gap-2">
-                              <ResponsiveTableMobileLabel>
-                                {t('ui.field.slot', 'Slot')}
-                              </ResponsiveTableMobileLabel>
-                              <div className="w-36 md:w-full">
-                                <Select
-                                  items={slotOptions}
-                                  className="w-full h-8 min-h-0"
-                                  selectedItem={slotOptions[effectiveSlot]}
-                                  defaultSelectedItem={
-                                    slotOptions[effectiveSlot]
-                                  }
-                                  onSelectionChange={(item) => {
-                                    if (item) {
-                                      updateSelection(storedSave.meta.id, {
-                                        slotOverride: (parseInt(item.id, 10) -
-                                          1) as SaveSlot,
-                                      });
-                                    }
-                                  }}
-                                />
-                              </div>
-                            </div>
-
-                            <div
-                              className={mergeClass(
-                                'flex items-center gap-2 md:justify-center',
-                                !isSelected && 'opacity-60',
-                              )}
-                            >
-                              <ResponsiveTableMobileLabel>
-                                {t('ui.field.completionSave', 'Complete')}
-                              </ResponsiveTableMobileLabel>
-                              <Checkbox
-                                ariaLabel={`${t(
-                                  'ui.field.completionSave',
-                                  'Completion save',
-                                )}: ${storedSave.meta.name}`}
-                                checked={effectiveCompletion}
-                                onChange={(checked) =>
-                                  updateSelection(storedSave.meta.id, {
-                                    completionOverride: checked,
-                                  })
-                                }
-                              />
-                            </div>
-
-                            <div
-                              className={mergeClass(
-                                'flex items-center gap-2',
-                                !isSelected && 'opacity-60',
-                              )}
-                            >
-                              <ResponsiveTableMobileLabel>
-                                {t('ui.download.target', 'Target')}
-                              </ResponsiveTableMobileLabel>
-                              <span className="ui-mono-xs text-text-2">
-                                {targetKey}
-                              </span>
-                            </div>
-
-                            <div
-                              className={mergeClass(
-                                'flex items-center gap-2 md:justify-center',
-                                !isSelected && 'opacity-60',
-                              )}
-                            >
-                              <ResponsiveTableMobileLabel>
-                                {t('ui.download.source', 'Source')}
-                              </ResponsiveTableMobileLabel>
-                              <SaveSourceBadge save={storedSave} />
-                            </div>
-                          </ResponsiveTableFields>
-                        </ResponsiveTableRow>
-                      );
-                    })
-                  )}
-                </ResponsiveTable>
-              </div>
-            ) : save ? (
-              <div className="flex flex-col gap-2 min-h-0 flex-1 overflow-hidden">
-                <TextLabel>
-                  {t(
-                    'ui.download.changesSinceBaseline',
-                    'Changes since last upload or download',
-                  )}
-                </TextLabel>
-                <DownloadChanges key={baselineRevision} fill />
-              </div>
-            ) : null}
-          </motion.div>
-        </AnimatePresence>
-      </div>
+                      <div
+                        className={mergeClass(
+                          'flex items-center gap-2 md:justify-center',
+                        )}
+                      >
+                        <ResponsiveTableMobileLabel>
+                          {t('ui.download.source', 'Source')}
+                        </ResponsiveTableMobileLabel>
+                        <SaveSourceBadge save={storedSave} />
+                      </div>
+                    </ResponsiveTableFields>
+                  </ResponsiveTableRow>
+                );
+              })
+            )}
+          </ResponsiveTable>
+        </div>
+      ) : save ? (
+        <div className="flex flex-col gap-2">
+          <TextLabel>
+            {t(
+              'ui.download.changesSinceBaseline',
+              'Changes since last upload or download',
+            )}
+          </TextLabel>
+          <DownloadChanges key={baselineRevision} />
+        </div>
+      ) : null}
     </ModalLayout>
   );
 }

@@ -173,22 +173,37 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.share.title': 'Share Save',
   'ui.share.defaultName': 'Shared save',
   'ui.header.uploadSave': 'Upload save',
+  'ui.field.chapter': 'Chapter',
+  'ui.download.downloadAction': 'Download',
   'ui.download.baseDrIni': 'Base dr.ini',
-  'ui.download.baseDrIniDescription':
-    'An imported dr.ini is used automatically. Optionally choose another file to override it.',
+  'ui.download.baseDrIniHintNone':
+    'Optional. Metadata is generated automatically if you skip this.',
+  'ui.download.baseDrIniHintImported':
+    'Using the dr.ini from an imported save. Click the field to replace it.',
+  'ui.download.baseDrIniHintOverride':
+    'Using this file instead of the imported dr.ini.',
   'ui.download.baseContainer': 'Base container',
   'ui.download.baseContainerDescription':
-    'Imported dr.ini metadata is used automatically. Optionally choose a container to preserve other entries.',
+    'A Switch container can keep entries you are not exporting. Imported dr.ini metadata is used automatically. Choose another container only if you want to override it.',
+  'ui.download.baseContainerHintNone':
+    'Optional. Other container entries are omitted if you skip this.',
+  'ui.download.baseContainerHintImported':
+    'Using metadata from an imported save. Click the field to replace it.',
+  'ui.download.baseContainerHintOverride':
+    'Using this container instead of the imported metadata.',
   'ui.download.changesSinceBaseline': 'Changes since last upload or download',
   'ui.download.clearBase': 'Clear base',
+  'ui.download.chooseFile': 'Choose file',
+  'ui.download.chooseContainer': 'Choose container',
   'ui.download.downloadMultipleSaves': 'Download multiple saves',
-  'ui.download.downloadSave': 'Download Save',
+  'ui.download.downloadSave': 'Download',
   'ui.download.downloadSaveFile': 'Download save file',
   'ui.download.exportAs': 'Export as',
   'ui.download.exportFailed': 'Could not create the export: {message}',
   'ui.download.exportSaveSet': 'Export Save Set',
   'ui.download.experimental': 'Experimental',
   'ui.download.multipleSaves': 'Multiple saves',
+  'ui.download.singleSave': 'Single save',
   'ui.download.multipleSavesExperimentalNotice':
     'Multiple-save export is experimental.',
   'ui.download.resetSettings': 'Reset settings',
