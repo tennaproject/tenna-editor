@@ -19,6 +19,9 @@ export const CONTRIBUTORS: Contributor[] = [
     url: 'https://github.com/Araraura',
   },
   {
+    displayName: 'cpu-99999999999',
+  },
+  {
     displayName: 'jah-yee',
     login: 'jah-yee',
     url: 'https://github.com/jah-yee',
