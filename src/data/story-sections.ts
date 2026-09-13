@@ -366,7 +366,15 @@ export const STORY_SECTIONS = {
         {
           id: 'cyber-field',
           title: 'Cyber Field',
-          flags: ['OBTAINED_FIRST_GLOW_WRIST', 'OBTAINED_NUBERT_TREASURE'],
+          flags: [
+            'OBTAINED_FIRST_GLOW_WRIST', 
+            'OBTAINED_NUBERT_TREASURE',
+            'READ_CYBERPEDIA',
+            'SOLVED_APPLE_PUZZLE',
+            'TASQUE_RELEASED',
+            'SOLVED_AGREE2ALL_PUZZLE',
+            'TRIGGERED_CYBER_FIELD_TEMP_SAVE',
+         ],
         },
         {
           id: 'shadow-crystal',
@@ -383,17 +391,26 @@ export const STORY_SECTIONS = {
             'OBTAINED_CHESTMARK_2',
             'SOLVED_GIASFCLFEBREBREBEHR_PUZZLE',
             'RECRUITED_HACKER',
-          ],
+         ],
         },
         {
           id: 'sweet-capn-cakes',
           title: "Sweet Cap'n Cakes",
-          flags: ['CD_BAGELS_PURCHASED', 'OBTAINED_TENSION_BIT'],
+          flags: [
+            'CD_BAGELS_PURCHASED', 
+            'OBTAINED_TENSION_BIT',
+            'SAW_SWEET',
+            'SAW_SWEET_CAPN_CAKES_FLYBY',
+          ],
         },
         {
           id: 'virovirokun-room',
           title: 'Virovirokun Room',
-          flags: ['UNLOCKED_MINT_CHEST', 'OBTAINED_THIRD_REVIVE_MINT_CH2'],
+          flags: [
+            'UNLOCKED_MINT_CHEST', 
+            'OBTAINED_THIRD_REVIVE_MINT_CH2',
+            'SOLVED_VIROVIROKUN_DODGE',
+         ],
         },
         {
           id: 'teacup-ride',
@@ -427,7 +444,11 @@ export const STORY_SECTIONS = {
         {
           id: 'cyber-city',
           title: 'Cyber City',
-          flags: ['OBTAINED_PINK_RIBBON', 'OBTAINED_BOUNCE_BLADE'],
+          flags: [
+            'OBTAINED_PINK_RIBBON', 
+            'OBTAINED_BOUNCE_BLADE',
+            'FEDORA_PLUGBOY_WEREWIRED',
+         ],
         },
         {
           id: 'traffic',
