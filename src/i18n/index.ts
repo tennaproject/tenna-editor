@@ -91,15 +91,15 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.settings.importSuccess':
     'Successfully imported {imported} save(s) (skipped {skipped})',
   'ui.settings.importFailedGeneric': 'Failed to import backup file',
-  'ui.settings.dataPacks.title': 'Mod data packs',
+  'ui.settings.dataPacks.title': 'Data packs',
   'ui.settings.dataPacks.description':
-    'Import packs here, then activate them on a save’s Overview page.',
+    'Import data packs here, then activate them on a save’s Overview page.',
   'ui.settings.dataPacks.import': 'Import data pack',
   'ui.settings.dataPacks.empty': 'No data packs imported.',
   'ui.settings.dataPacks.imported': 'Imported {name}. Entries: {count}.',
   'ui.settings.dataPacks.replaced': 'Replaced {name}. Entries: {count}.',
   'ui.settings.dataPacks.count': 'Entries: {count}',
-  'ui.settings.dataPacks.modVersion': 'Mod version: {version}',
+  'ui.settings.dataPacks.modVersion': 'Version: {version}',
   'ui.settings.dataPacks.remove': 'Remove pack',
   'ui.settings.dataPacks.errorGeneric':
     'Unable to import this data pack. Check the file and try again.',
@@ -142,7 +142,8 @@ const UI_FALLBACKS: TranslationDictionary = {
     'Unable to import this pack. Add a unique pack ID.',
   'ui.settings.dataPacks.errorPackName':
     'Unable to import this pack. Add a pack name.',
-  'ui.settings.dataPacks.errorModVersion': 'The mod version must contain text.',
+  'ui.settings.dataPacks.errorModVersion':
+    'The data-pack version must contain text.',
   'ui.settings.dataPacks.errorStats':
     '{entry} stats must include whole-number attack, defence, and magic values from -999 to 999.',
   'ui.settings.dataPacks.errorIntegerRange':

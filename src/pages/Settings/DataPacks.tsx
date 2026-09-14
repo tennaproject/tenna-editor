@@ -75,12 +75,12 @@ export function DataPacks() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex min-w-0 flex-1 flex-col gap-2">
           <Heading level={3}>
-            {t('ui.settings.dataPacks.title', 'Mod data packs')}
+            {t('ui.settings.dataPacks.title', 'Data packs')}
           </Heading>
           <p className="max-w-3xl text-sm text-text-2">
             {t(
               'ui.settings.dataPacks.description',
-              'Import packs here, then activate them on a save’s Overview page.',
+              'Import data packs here, then activate them on a save’s Overview page.',
             )}
           </p>
         </div>
@@ -120,7 +120,7 @@ export function DataPacks() {
                     { count: getDataPackEntryCount(pack) },
                   )}
                   {pack.modVersion
-                    ? ` · ${formatTranslation(
+                    ? ` :: ${formatTranslation(
                         t(
                           'ui.settings.dataPacks.modVersion',
                           'Mod version: {version}',
