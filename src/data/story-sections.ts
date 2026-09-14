@@ -524,8 +524,6 @@ export const STORY_SECTIONS = {
           flags: [
             'OBTAINED_CHAIN_MAIL',
             'OBTAINED_ONE_DOLLAR_CHEST',
-            'STATUE_SINK_PROGRESS',
-            'SWATCHLING_VASE_ROOM_PROGRESS',
             'SOLVED_MANSION_TRAFFIC',
             'FOUND_BASEMENT_SWITCH',
             'FOUND_SHORTCUT_OUT',
