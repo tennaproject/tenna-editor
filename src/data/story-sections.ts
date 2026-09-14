@@ -519,8 +519,8 @@ export const STORY_SECTIONS = {
           flags: ['LANCER_CARED_FOR'],
         },
         {
-          id: 'mansion-halls',
-          title: 'Mansion Halls',
+          id: 'mansion-halls-1f',
+          title: 'Mansion Halls 1f',
           flags: [
             'OBTAINED_CHAIN_MAIL',
             'OBTAINED_ONE_DOLLAR_CHEST',
@@ -530,7 +530,6 @@ export const STORY_SECTIONS = {
             'FOUND_BASEMENT_SWITCH',
             'FOUND_SHORTCUT_OUT',
             'OBTAINED_FOURTH_REVIVE_MINT',
-            'OBTAINED_MANSION_GLOWSHARD',
             'OBTAINED_REVIVE_DUST',
             'SHOVEL_DOOR_OPEN',
             'ACTIVATED_QUEEN_PAINTINGS',
@@ -539,6 +538,20 @@ export const STORY_SECTIONS = {
             'MANSION_VASE_TUTORIAL_PROGRESS',
             'VASE_BALANCING_OUTCOME',
             'TASQUE_MANAGER_RESPONSE',
+          ],
+        },
+        {
+          id: 'mansion-halls-2f',
+          title: 'Mansion Halls 2f',
+          flags: [
+            'OBTAINED_MANSION_GLOWSHARD',
+            'SOLVED_FIRST_SAUCER_PUZZLE',
+            'OPENED_SIDE_A_PAINTING',
+            'OPENED_SIDE_PAINTING_B
+            'SOLVED_SAUCER_SHORTCUT',
+            'MAUSWHEEL_DEFEATED',
+            'DOG_OPENED_DOOR',
+            'DINING_HALL_COMPLETE',
           ],
         },
         {
