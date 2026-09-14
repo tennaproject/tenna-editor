@@ -532,6 +532,13 @@ export const STORY_SECTIONS = {
             'OBTAINED_FOURTH_REVIVE_MINT',
             'OBTAINED_MANSION_GLOWSHARD',
             'OBTAINED_REVIVE_DUST',
+            'SHOVEL_DOOR_OPEN',
+            'ACTIVATED_QUEEN_PAINTINGS',
+            'ACTIVATED_PAINTING_EXIT',
+            'ACTIVATED_MINT_PAINTING',
+            'MANSION_VASE_TUTORIAL_PROGRESS',
+            'VASE_BALANCING_OUTCOME',
+            'TASQUE_MANAGER_RESPONSE',
           ],
         },
         {
