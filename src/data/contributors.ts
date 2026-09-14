@@ -33,6 +33,9 @@ export const CONTRIBUTORS: Contributor[] = [
     url: 'https://github.com/jjezewski',
   },
   {
+    displayName: 'john',
+  },
+  {
     displayName: 'KrisGra',
     login: 'krisgrant',
     url: 'https://github.com/krisgrant',
