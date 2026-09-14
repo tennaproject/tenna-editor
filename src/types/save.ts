@@ -11,6 +11,7 @@ import type {
   WeaponIndex,
 } from '@data';
 import type { UUID } from 'crypto';
+import type { DataPackReference } from './data-pack';
 
 export const SAVE_SCHEMA = 5;
 export type SaveFormat = 1 | 2;
@@ -123,6 +124,7 @@ export interface SaveData<
     slot: SaveSlot;
     isCompletionSave: boolean;
     name: string;
+    dataPacks?: DataPackReference[];
     baseline?: SaveBaseline;
     importedUraBoss?: number;
     source?: SaveSource;

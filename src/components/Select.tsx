@@ -2,11 +2,12 @@ import { useCombobox } from 'downshift';
 import ChevronDownIcon from '@assets/icons/chevron-down.svg?react';
 import InvalidIcon from '@assets/icons/alert.svg?react';
 import UnusedIcon from '@assets/icons/hidden.svg?react';
+import DataPackIcon from '@assets/icons/file-plus.svg?react';
 import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
 import { useCanHover } from '@hooks';
 import { mergeClass } from '@utils/merge-class';
-import { useTranslation } from '../i18n';
+import { formatTranslation, useTranslation } from '../i18n';
 import { Tooltip } from './Tooltip';
 
 export type InvalidReason =
@@ -37,6 +38,7 @@ export interface SelectItem {
   value?: unknown;
   invalidReasons?: InvalidReason[];
   unused?: boolean;
+  dataPack?: string;
   tooltip?: ReactNode;
 }
 
@@ -51,12 +53,18 @@ const ICON_SLOT_CLASS = 'flex h-6 w-8 shrink-0 items-center justify-center';
 interface StatusBadgesProps {
   invalid?: boolean;
   unused?: boolean;
+  dataPack?: string;
   t: (key: string, fallback: string) => string;
 }
 
-function StatusBadges({ invalid, unused, t }: StatusBadgesProps) {
+function StatusBadges({ invalid, unused, dataPack, t }: StatusBadgesProps) {
   const invalidLabel = t('ui.common.invalid', 'Invalid');
   const unusedLabel = t('ui.common.unused', 'Unused');
+  const dataPackLabel = dataPack
+    ? formatTranslation(t('ui.common.dataPackSource', 'Data pack: {name}'), {
+        name: dataPack,
+      })
+    : undefined;
 
   return (
     <>
@@ -72,6 +80,12 @@ function StatusBadges({ invalid, unused, t }: StatusBadgesProps) {
           <span className="sr-only">{unusedLabel}</span>
         </span>
       ) : null}
+      {dataPack ? (
+        <span className="h-5 w-5 shrink-0 text-green">
+          <DataPackIcon />
+          <span className="sr-only">{dataPackLabel}</span>
+        </span>
+      ) : null}
     </>
   );
 }
@@ -79,12 +93,19 @@ function StatusBadges({ invalid, unused, t }: StatusBadgesProps) {
 interface StatusNoteProps {
   invalidReasons?: InvalidReason[];
   unused?: boolean;
+  dataPack?: string;
   t: (key: string, fallback: string) => string;
   divided?: boolean;
 }
 
-function StatusNote({ invalidReasons, unused, t, divided }: StatusNoteProps) {
-  if (!invalidReasons?.length && !unused) return null;
+function StatusNote({
+  invalidReasons,
+  unused,
+  dataPack,
+  t,
+  divided,
+}: StatusNoteProps) {
+  if (!invalidReasons?.length && !unused && !dataPack) return null;
 
   return (
     <div
@@ -116,6 +137,17 @@ function StatusNote({ invalidReasons, unused, t, divided }: StatusNoteProps) {
           {t(
             'ui.common.unusedExplained',
             'Exists in the game files, but is never obtainable',
+          )}
+        </span>
+      ) : null}
+      {dataPack ? (
+        <span className="flex items-center gap-2 text-xs text-green">
+          <span className="h-4 w-4 shrink-0">
+            <DataPackIcon />
+          </span>
+          {formatTranslation(
+            t('ui.common.dataPackSource', 'Data pack: {name}'),
+            { name: dataPack },
           )}
         </span>
       ) : null}
@@ -171,6 +203,10 @@ export function Select({
   const [menuVisible, setMenuVisible] = useState(false);
   const preserveSelectionOnMouseUpRef = useRef(false);
   const selectedLabel = selectedItem?.label ?? defaultSelectedItem?.label ?? '';
+  const selectedStatusCount =
+    Number(!!selectedItem?.invalidReasons?.length) +
+    Number(!!selectedItem?.unused) +
+    Number(!!selectedItem?.dataPack);
   const isShowingSelectedValue = inputValue === selectedLabel;
   useEffect(() => {
     // eslint-disable-next-line @eslint-react/set-state-in-effect
@@ -492,11 +528,11 @@ export function Select({
             className={mergeClass(
               'w-full h-full px-3 pr-10 bg-transparent border-none outline-none placeholder:text-text-2 focus:outline-none focus:ring-1 motion-reduce:transition-colors transition-colors focus:ring-text-3 selection:bg-surface-3',
               selectedItem?.icon && 'pl-13',
-              selectedItem?.invalidReasons?.length && selectedItem?.unused
-                ? 'pr-22'
-                : (selectedItem?.invalidReasons?.length ||
-                    selectedItem?.unused) &&
-                    'pr-16',
+              selectedStatusCount === 3
+                ? 'pr-28'
+                : selectedStatusCount === 2
+                  ? 'pr-22'
+                  : selectedStatusCount === 1 && 'pr-16',
               selectedItem?.label === 'Empty'
                 ? 'text-text-2 selection:text-text-2'
                 : 'text-text-1 selection:text-text-1',
@@ -511,12 +547,15 @@ export function Select({
           <div
             className="absolute right-9 top-1/2 -translate-y-1/2 flex items-center gap-2 pointer-events-none"
             aria-hidden={
-              !selectedItem?.invalidReasons?.length && !selectedItem?.unused
+              !selectedItem?.invalidReasons?.length &&
+              !selectedItem?.unused &&
+              !selectedItem?.dataPack
             }
           >
             <StatusBadges
               invalid={!!selectedItem?.invalidReasons?.length}
               unused={selectedItem?.unused}
+              dataPack={selectedItem?.dataPack}
               t={t}
             />
           </div>
@@ -595,11 +634,16 @@ export function Select({
                     ) : null}
                     <div
                       className="ml-2 flex items-center gap-2"
-                      aria-hidden={!item.invalidReasons?.length && !item.unused}
+                      aria-hidden={
+                        !item.invalidReasons?.length &&
+                        !item.unused &&
+                        !item.dataPack
+                      }
                     >
                       <StatusBadges
                         invalid={!!item.invalidReasons?.length}
                         unused={item.unused}
+                        dataPack={item.dataPack}
                         t={t}
                       />
                     </div>
@@ -614,7 +658,8 @@ export function Select({
       {detailItem &&
       (detailItem.tooltip ||
         detailItem.invalidReasons?.length ||
-        detailItem.unused) ? (
+        detailItem.unused ||
+        detailItem.dataPack) ? (
         <div
           className={mergeClass(
             'absolute z-50',
@@ -637,6 +682,7 @@ export function Select({
             <StatusNote
               invalidReasons={detailItem.invalidReasons}
               unused={detailItem.unused}
+              dataPack={detailItem.dataPack}
               t={t}
               divided={!!detailItem.tooltip}
             />

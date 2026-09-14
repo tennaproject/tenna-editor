@@ -1,9 +1,10 @@
+import { DataPackReferences } from './DataPackReferences';
 import { useState } from 'react';
 import HomeIcon from '@assets/icons/home.svg?react';
 import CancelIcon from '@assets/icons/close.svg?react';
 import AddSaveIcon from '@assets/icons/save.svg?react';
 import { saveStorage, toast } from '@services';
-import { useSave } from '@store';
+import { useDataPacks, useSave } from '@store';
 import type { Save } from '@types';
 import {
   chapterHelpers,
@@ -16,7 +17,8 @@ import {
   parseSave,
   parseShareUrl,
   FINGERPRINT_ASPECT,
-  roomHelpers,
+  buildGameData,
+  resolveDataPackReferences,
   type ShareMeta,
 } from '@utils';
 import {
@@ -92,6 +94,7 @@ function Fingerprint({ save, className }: { save: Save; className?: string }) {
 export function ShareImport() {
   const { t } = useTranslation();
   const setSave = useSave((state) => state.setSave);
+  const packs = useDataPacks((state) => state.packs);
 
   const [isOpen, setIsOpen] = useState(CAPTURED_HASH !== null);
   const [isAdding, setIsAdding] = useState(false);
@@ -105,6 +108,7 @@ export function ShareImport() {
       if (meta) {
         save.meta.chapter = meta.chapter;
         save.meta.slot = meta.slot;
+        save.meta.dataPacks = meta.dataPacks;
         save.meta.isCompletionSave = meta.isCompletionSave;
       } else {
         save.meta.chapter = detectChapter(save).chapter ?? save.meta.chapter;
@@ -186,7 +190,9 @@ export function ShareImport() {
     chapterHelpers.getById(save.meta.chapter),
     t,
   ).displayName;
-  const roomMeta = roomHelpers.getById(save.room);
+  const active = resolveDataPackReferences(packs, save.meta.dataPacks);
+  const data = buildGameData(active.packs, save.meta.chapter, save.meta.slot);
+  const roomMeta = data.rooms.byId.get(save.room);
   const plotLabel = getPlotPointLabel(save.meta.chapter, save.plot);
 
   return (
@@ -260,7 +266,7 @@ export function ShareImport() {
             </Detail>
 
             <Detail label={t('ui.share.room', 'Room')} wrap>
-              {roomMeta?.displayName || save.room}
+              {roomMeta?.displayName ?? save.room}
             </Detail>
             <Detail label={t('ui.share.plot', 'Plot')} wrap>
               {plotLabel || save.plot}
@@ -276,6 +282,7 @@ export function ShareImport() {
             </Detail>
           </div>
 
+          <DataPackReferences references={save.meta.dataPacks} />
           <div className="flex min-h-0 flex-1 flex-col gap-2">
             <TextLabel>
               {t('ui.share.descriptionLabel', 'Description')}

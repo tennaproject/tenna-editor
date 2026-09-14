@@ -1,7 +1,5 @@
 import {
-  ARMORS_META,
   CHARACTERS_META,
-  WEAPONS_META,
   type ArmorIndex,
   type ChapterIndex,
   type CharacterIndex,
@@ -18,35 +16,26 @@ const EQUIPMENT_STAT_SLOT: Record<LoadoutEquipmentType, number> = {
   secondaryArmor: 2,
 };
 
-interface EquipmentProperties {
-  stats: EquipmentStats;
-  getOverrides?: (args: {
-    chapter: ChapterIndex;
-  }) => Partial<EquipmentProperties>;
+export interface ResolvedEquipmentLookup {
+  weapons: ReadonlyMap<number, { stats?: EquipmentStats }>;
+  armors: ReadonlyMap<number, { stats?: EquipmentStats }>;
 }
 
 export function getEquipmentStats(
   type: LoadoutEquipmentType,
   id: WeaponIndex | ArmorIndex,
-  chapter: ChapterIndex,
+  resolved: ResolvedEquipmentLookup,
 ): EquipmentStats | undefined {
-  const meta = (
-    type === 'weapon'
-      ? WEAPONS_META[id as WeaponIndex]
-      : ARMORS_META[id as ArmorIndex]
-  ) as EquipmentProperties | undefined;
-
-  if (!meta) return undefined;
-
-  return meta.getOverrides?.({ chapter }).stats ?? meta.stats;
+  const group = type === 'weapon' ? resolved.weapons : resolved.armors;
+  return group.get(id)?.stats;
 }
 
 export function syncEquipmentStats(
   character: CharacterV1,
   type: LoadoutEquipmentType,
-  chapter: ChapterIndex,
+  resolved: ResolvedEquipmentLookup,
 ) {
-  const stats = getEquipmentStats(type, character[type], chapter);
+  const stats = getEquipmentStats(type, character[type], resolved);
   const storedStats = character.weaponStats[EQUIPMENT_STAT_SLOT[type]];
 
   if (!stats || !storedStats) return false;
@@ -59,11 +48,11 @@ export function syncEquipmentStats(
 
 export function syncAllEquipmentStats(
   character: CharacterV1,
-  chapter: ChapterIndex,
+  resolved: ResolvedEquipmentLookup,
 ) {
-  syncEquipmentStats(character, 'weapon', chapter);
-  syncEquipmentStats(character, 'primaryArmor', chapter);
-  syncEquipmentStats(character, 'secondaryArmor', chapter);
+  syncEquipmentStats(character, 'weapon', resolved);
+  syncEquipmentStats(character, 'primaryArmor', resolved);
+  syncEquipmentStats(character, 'secondaryArmor', resolved);
 }
 
 export function getEffectiveCharacterStats(
@@ -95,6 +84,7 @@ export function resetCharacterCoreStats(
   character: CharacterV1,
   characterId: CharacterIndex,
   chapter: ChapterIndex,
+  resolved: ResolvedEquipmentLookup,
 ) {
   const baseline = CHARACTERS_META[characterId]?.baseStats[chapter];
   if (!baseline) return false;
@@ -102,6 +92,6 @@ export function resetCharacterCoreStats(
   character.attack = baseline.attack;
   character.defence = baseline.defence;
   character.magic = baseline.magic;
-  syncAllEquipmentStats(character, chapter);
+  syncAllEquipmentStats(character, resolved);
   return true;
 }

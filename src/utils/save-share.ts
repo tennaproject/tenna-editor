@@ -1,9 +1,10 @@
-import type { Save, SaveSlot } from '@types';
+import { parseDataPackReferences } from './data-packs';
+import type { Save, SaveSlot, DataPackReference } from '@types';
 import type { ChapterIndex } from '@data';
 import { base64UrlToBytes, bytesToBase64Url, serializeSave } from '@utils';
 import { deflateSync, inflateSync } from 'fflate';
 
-const SHARE_SCHEMA = 1;
+const SHARE_SCHEMA = 2;
 
 const NAME_MAX_ENCODED = 128;
 const AUTHOR_MAX_ENCODED = 96;
@@ -22,6 +23,7 @@ interface ShareOptions {
 }
 
 export interface ShareMeta extends ShareOptions {
+  readonly dataPacks?: DataPackReference[];
   readonly schema: number;
   readonly sharedAt: string;
   readonly name?: string;
@@ -82,6 +84,8 @@ export function createShareUrl(save: Save, options?: ShareOptions): string {
   params.set('sharedAt', new Date().toISOString());
   params.set('chapter', String(save.meta.chapter));
   params.set('slot', String(save.meta.slot));
+  if (save.meta.dataPacks?.length)
+    params.set('dataPacks', JSON.stringify(save.meta.dataPacks));
   if (save.meta.isCompletionSave) params.set('isCompletionSave', 'true');
 
   setOptional(params, 'name', capEncoded(save.meta.name, NAME_MAX_ENCODED));
@@ -100,21 +104,51 @@ export function createShareUrl(save: Save, options?: ShareOptions): string {
 }
 
 function readIndex(value: string | null): number | null {
-  if (value === null) return null;
+  if (value === null || !value.trim()) return null;
   const parsed = Number(value);
   return Number.isInteger(parsed) ? parsed : null;
 }
 
 function readShareMeta(params: URLSearchParams): ShareMeta | undefined {
-  if (readIndex(params.get('schema')) !== SHARE_SCHEMA) return undefined;
+  const version = params.get('schema');
+  const references = params.get('dataPacks');
+  if (version === null) {
+    if (references !== null)
+      throw new ShareError('Data-pack references require share schema 2');
+    return undefined;
+  }
+  if (version !== '1' && version !== '2') {
+    throw new ShareError('Unsupported share schema version');
+  }
+
+  const schema = Number(version);
+  let dataPacks: DataPackReference[] | undefined;
+  if (references !== null) {
+    if (schema !== 2)
+      throw new ShareError('Data-pack references require share schema 2');
+    try {
+      dataPacks = parseDataPackReferences(JSON.parse(references));
+    } catch {
+      throw new ShareError('Data-pack references are malformed');
+    }
+  }
 
   const chapter = readIndex(params.get('chapter'));
   const slot = readIndex(params.get('slot'));
-  if (chapter === null || slot === null) return undefined;
-  if (slot < 0 || slot > 2) return undefined;
+  if (
+    chapter === null ||
+    chapter < 1 ||
+    chapter > 5 ||
+    slot === null ||
+    slot < 0 ||
+    slot > 2
+  ) {
+    throw new ShareError('Share metadata is malformed');
+  }
 
   return {
-    schema: SHARE_SCHEMA,
+    schema,
+    dataPacks,
     sharedAt: params.get('sharedAt') ?? '',
     name: params.get('name') ?? undefined,
     isCompletionSave: params.get('isCompletionSave') === 'true',

@@ -24,7 +24,7 @@ import {
   translateMeta,
   useTranslation,
 } from '../i18n';
-import { useSave } from '@store';
+import { useGameData, useSave } from '@store';
 import { resetCharacterCoreStats } from '@utils';
 
 interface CharacterPageProps {
@@ -53,10 +53,18 @@ export function CharacterPage({
   ).displayName;
   const chapter = useSave((s) => s.save?.meta.chapter) ?? 1;
   const updateSave = useSave((s) => s.updateSave);
+  const weapons = useGameData((state) => state.weapons.byId);
+  const armors = useGameData((state) => state.armors.byId);
+  const equipmentLookup = { weapons, armors };
 
   function resetStats() {
     updateSave((save) => {
-      resetCharacterCoreStats(save.characters[character], character, chapter);
+      resetCharacterCoreStats(
+        save.characters[character],
+        character,
+        chapter,
+        equipmentLookup,
+      );
     });
   }
 

@@ -1,22 +1,19 @@
+import { isDataEntryAvailable } from '@utils/resolve-game-data';
 import type { ReactNode } from 'react';
 import {
   CHARACTERS,
   EQUIPMENT_ABILITIES_META,
-  type ArmorIndex,
   type ChapterIndex,
   type CharacterIndex,
   type EquipmentAbilityIndex,
-  type WeaponIndex,
 } from '@data';
-import type { AbilityValues, EquipmentStats } from '@types';
+import type { AbilityValues, EquipmentEntry, EquipmentStats } from '@types';
 import { useCharacterOverrideInputs } from '@hooks';
-import { useSave } from '@store';
+import { useGameData, useSave } from '@store';
 import {
-  armorHelpers,
   characterHelpers,
   getChapterPartyMembers,
   resolveChapterMeta,
-  weaponHelpers,
 } from '@utils/data-helpers';
 import { getCharacterColor } from '@utils/get-character-color';
 import { WIKI_ABILITIES_URL, getWikiUrl } from '@utils/wiki-url';
@@ -42,7 +39,7 @@ type Translate = (key: string, fallback: string) => string;
 
 function useEquippableBy(
   type: EquipmentType,
-  id: number,
+  entry: EquipmentEntry,
   chapter: ChapterIndex,
 ) {
   const inputs: Record<
@@ -58,12 +55,13 @@ function useEquippableBy(
   return getChapterPartyMembers(chapter).map((character) => {
     const meta = characterHelpers.getById(character);
     const overrides = meta.getOverrides?.(inputs[character]);
-    const allowed: ReadonlySet<number> =
-      type === 'weapon'
-        ? (overrides?.allowedWeapons ?? meta.allowedWeapons)
-        : (overrides?.allowedArmors ?? meta.allowedArmors);
+    const allowed =
+      type === 'weapon' ? overrides?.allowedWeapons : overrides?.allowedArmors;
 
-    return { character, canEquip: allowed.has(id) };
+    return {
+      character,
+      canEquip: isDataEntryAvailable(entry, character, allowed),
+    };
   });
 }
 
@@ -103,11 +101,14 @@ function EquippableRow({ entries, t }: EquippableRowProps) {
 
 interface EquipmentTooltipContentProps {
   type: EquipmentType;
-  id: number;
+  entry: EquipmentEntry;
   compareTo?: EquipmentStats;
 }
 
-interface EquipmentTooltipProps extends EquipmentTooltipContentProps {
+interface EquipmentTooltipProps {
+  type: EquipmentType;
+  entry?: EquipmentEntry;
+  id?: number;
   children: ReactNode;
   className?: string;
   focusable?: boolean;
@@ -160,55 +161,66 @@ function renderDescription(description: string | undefined, t: Translate) {
 
 export function EquipmentTooltipContent({
   type,
-  id,
+  entry,
   compareTo,
 }: EquipmentTooltipContentProps) {
   const { t } = useTranslation();
   const chapter = useSave((s) => s.save?.meta.chapter) ?? 1;
 
-  const baseMeta =
-    type === 'weapon'
-      ? weaponHelpers.getById(id as WeaponIndex)
-      : armorHelpers.getById(id as ArmorIndex);
+  const translated =
+    !entry.dataPack || (entry.overridesBuiltIn && !entry.descriptionFromPack)
+      ? translateMeta(
+          type === 'weapon'
+            ? getWeaponTranslationKeyPrefix(entry.id)
+            : getArmorTranslationKeyPrefix(entry.id),
+          {
+            displayName: entry.displayName,
+            description: entry.description,
+          },
+          t,
+        )
+      : undefined;
 
-  // A chapter can override the stats and the description
-  const meta = resolveChapterMeta(baseMeta, { chapter });
+  const displayName = entry.dataPack
+    ? entry.displayName
+    : (translated?.displayName ?? entry.displayName);
+  const description = entry.descriptionFromPack
+    ? entry.description
+    : (translated?.description ?? entry.description);
 
-  const translated = meta
-    ? translateMeta(
-        type === 'weapon'
-          ? getWeaponTranslationKeyPrefix(id)
-          : getArmorTranslationKeyPrefix(id),
-        meta,
-        t,
-      )
-    : undefined;
+  const ability =
+    entry.abilityIndex !== undefined
+      ? resolveAbility(
+          entry.abilityIndex as EquipmentAbilityIndex,
+          chapter,
+          t,
+          entry.abilityValues,
+        )
+      : entry.ability
+        ? {
+            displayName: entry.ability,
+            meta: undefined,
+            description: undefined,
+          }
+        : undefined;
 
-  const ability = resolveAbility(
-    meta?.ability,
-    chapter,
-    t,
-    meta?.abilityValues,
-  );
-
-  const equippableBy = useEquippableBy(type, id, chapter);
-
-  if (!meta || !translated) return null;
+  const equippableBy = useEquippableBy(type, entry, chapter);
+  const stats = entry.stats ?? { attack: 0, defence: 0, magic: 0 };
 
   return (
     <div className="flex flex-col gap-2">
       <div className="flex min-w-0 items-start gap-3">
         <div className="flex min-w-0 flex-1 flex-col gap-2">
           <TooltipHeading
-            icon={meta.icon}
-            name={translated.displayName}
-            href={getWikiUrl(meta.displayName)}
-            unknownArt={id !== 0}
+            icon={entry.icon}
+            name={displayName}
+            href={entry.dataPack ? undefined : getWikiUrl(entry.displayName)}
+            unknownArt={entry.id !== 0}
           />
 
           {ability ? (
             <InlineGroup className="gap-1">
-              <EquipmentIcon icon={ability.meta.icon} />
+              {ability.meta ? <EquipmentIcon icon={ability.meta.icon} /> : null}
               <span className="text-sm text-text-2">{ability.displayName}</span>
             </InlineGroup>
           ) : (
@@ -220,25 +232,37 @@ export function EquipmentTooltipContent({
 
         <div className="flex shrink-0 flex-col items-end gap-2">
           <EquippableRow entries={equippableBy} t={t} />
-          <EquipmentStatsRow stats={meta.stats} compareTo={compareTo} />
+          <EquipmentStatsRow stats={stats} compareTo={compareTo} />
         </div>
       </div>
 
-      {renderDescription(translated.description, t)}
+      {renderDescription(description, t)}
     </div>
   );
 }
 
 export function EquipmentTooltip({
   type,
+  entry,
   id,
   children,
   className,
   focusable,
 }: EquipmentTooltipProps) {
+  const storeEntry = useGameData((state) =>
+    type === 'weapon'
+      ? state.weapons.byId.get(id ?? -1)
+      : state.armors.byId.get(id ?? -1),
+  );
+  const resolved = entry ?? storeEntry;
+
   return (
     <Tooltip
-      content={<EquipmentTooltipContent type={type} id={id} />}
+      content={
+        resolved ? (
+          <EquipmentTooltipContent type={type} entry={resolved} />
+        ) : undefined
+      }
       className={className}
       focusable={focusable}
     >

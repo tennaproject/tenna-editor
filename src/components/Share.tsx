@@ -3,7 +3,7 @@ import CancelIcon from '@assets/icons/close.svg?react';
 import CopyIcon from '@assets/icons/copy.svg?react';
 import { useDebouncedValue } from '@hooks';
 import { toast } from '@services';
-import { useSave } from '@store';
+import { useGameData, useSave } from '@store';
 import type { Save } from '@types';
 import {
   chapterHelpers,
@@ -12,7 +12,6 @@ import {
   getPlotPointLabel,
   mergeClass,
   FINGERPRINT_ASPECT,
-  roomHelpers,
 } from '@utils';
 import {
   getChapterTranslationKeyPrefix,
@@ -81,6 +80,7 @@ function Fingerprint({ save, className }: { save: Save; className?: string }) {
 export function Share({ isOpen, setOpen }: ShareProps) {
   const { t } = useTranslation();
   const save = useSave((state) => state.save);
+  const rooms = useGameData((state) => state.rooms.byId);
 
   const [author, setAuthor] = useState('');
   const [description, setDescription] = useState('');
@@ -120,7 +120,7 @@ export function Share({ isOpen, setOpen }: ShareProps) {
     chapterHelpers.getById(save.meta.chapter),
     t,
   ).displayName;
-  const roomMeta = roomHelpers.getById(save.room);
+  const roomMeta = rooms.get(save.room);
   const plotLabel = getPlotPointLabel(save.meta.chapter, save.plot);
   const title = save.meta.name || t('ui.share.untitled', 'Untitled save');
 
@@ -195,7 +195,7 @@ export function Share({ isOpen, setOpen }: ShareProps) {
               </Detail>
 
               <Detail label={t('ui.share.room', 'Room')} wrap>
-                {roomMeta?.displayName || save.room}
+                {roomMeta?.displayName ?? save.room}
               </Detail>
               <Detail label={t('ui.share.plot', 'Plot')} wrap>
                 {plotLabel || save.plot}
