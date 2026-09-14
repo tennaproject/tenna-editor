@@ -367,7 +367,7 @@ export const STORY_SECTIONS = {
           id: 'cyber-field',
           title: 'Cyber Field',
           flags: [
-            'OBTAINED_FIRST_GLOW_WRIST', 
+            'OBTAINED_FIRST_GLOW_WRIST',
             'OBTAINED_NUBERT_TREASURE',
             'READ_CYBERPEDIA',
             'SOLVED_APPLE_PUZZLE',
@@ -397,7 +397,7 @@ export const STORY_SECTIONS = {
           id: 'sweet-capn-cakes',
           title: "Sweet Cap'n Cakes",
           flags: [
-            'CD_BAGELS_PURCHASED', 
+            'CD_BAGELS_PURCHASED',
             'OBTAINED_TENSION_BIT',
             'SAW_SWEET',
             'SAW_SWEET_CAPN_CAKES_FLYBY',
@@ -407,7 +407,7 @@ export const STORY_SECTIONS = {
           id: 'virovirokun-room',
           title: 'Virovirokun Room',
           flags: [
-            'UNLOCKED_MINT_CHEST', 
+            'UNLOCKED_MINT_CHEST',
             'OBTAINED_THIRD_REVIVE_MINT_CH2',
             'SOLVED_VIROVIROKUN_DODGE',
           ],
@@ -445,7 +445,7 @@ export const STORY_SECTIONS = {
           id: 'cyber-city',
           title: 'Cyber City',
           flags: [
-            'OBTAINED_PINK_RIBBON', 
+            'OBTAINED_PINK_RIBBON',
             'OBTAINED_BOUNCE_BLADE',
             'FEDORA_PLUGBOY_WEREWIRED',
           ],
