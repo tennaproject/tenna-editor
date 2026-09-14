@@ -374,7 +374,7 @@ export const STORY_SECTIONS = {
             'TASQUE_RELEASED',
             'SOLVED_AGREE2ALL_PUZZLE',
             'TRIGGERED_CYBER_FIELD_TEMP_SAVE',
-         ],
+          ],
         },
         {
           id: 'shadow-crystal',
@@ -391,7 +391,7 @@ export const STORY_SECTIONS = {
             'OBTAINED_CHESTMARK_2',
             'SOLVED_GIASFCLFEBREBREBEHR_PUZZLE',
             'RECRUITED_HACKER',
-         ],
+          ],
         },
         {
           id: 'sweet-capn-cakes',
@@ -410,7 +410,7 @@ export const STORY_SECTIONS = {
             'UNLOCKED_MINT_CHEST', 
             'OBTAINED_THIRD_REVIVE_MINT_CH2',
             'SOLVED_VIROVIROKUN_DODGE',
-         ],
+          ],
         },
         {
           id: 'teacup-ride',
@@ -448,7 +448,7 @@ export const STORY_SECTIONS = {
             'OBTAINED_PINK_RIBBON', 
             'OBTAINED_BOUNCE_BLADE',
             'FEDORA_PLUGBOY_WEREWIRED',
-         ],
+          ],
         },
         {
           id: 'traffic',
