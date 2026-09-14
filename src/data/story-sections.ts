@@ -439,6 +439,8 @@ export const STORY_SECTIONS = {
             'OBTAINED_TRASH_CAN_DARK_CANDY',
             'OBTAINED_TRASH_CAN_20_DOLLARS',
             'OBTAINED_TRASH_CAN_CD_BAGEL',
+            'TRIGGERED_TRASH_ZONE_TEMP_SAVE',
+            'NOELLE_SAW_RALSEI_AND_SUSIE',
           ],
         },
         {
@@ -448,6 +450,11 @@ export const STORY_SECTIONS = {
             'OBTAINED_PINK_RIBBON',
             'OBTAINED_BOUNCE_BLADE',
             'FEDORA_PLUGBOY_WEREWIRED',
+            'WENT_WEIRD_DOOR',
+            'READ_CLEANING_POSTER',
+            'SOLVED_FORCEFIELD_1',
+            'SEEN_STATUE_COUNT',
+            'OBTAINED_SHOE',
           ],
         },
         {
@@ -470,6 +477,17 @@ export const STORY_SECTIONS = {
           ],
         },
         {
+          id: 'mice',
+          title: 'Mice',
+          flags: [
+            'MICE_ATTACK_REASON',
+            'SOLVED_MICE_2',
+            'FIRST_CHEESE_DESTROYED',
+            'APPROACHED_CHEESE_MAZE',
+            'NOELLE_BEAT_FEAR',
+          ],
+        },
+        {
           id: 'cyber-city-trash',
           title: 'Cyber City Trash Cans',
           flags: [
@@ -485,6 +503,8 @@ export const STORY_SECTIONS = {
             'PLUSH_RECIPIENT',
             'EASTER_EGG_FORCEFIELD',
             'BALLOON_TEACUP_EASTER_EGG_PROGRESS',
+            'FINISHED_BIG_FORCEFIELD',
+            'BROKE_BALLOON_CHEESE',
           ],
         },
       ],
@@ -519,6 +539,8 @@ export const STORY_SECTIONS = {
           title: 'Spamton',
           flags: [
             'SPAMTON_QUEST_PROGRESS',
+            'VISITED_SPAMTON',
+            'TALKED_TO_SPAMTON_ABOUT_KNIGHT',
             'HEARD_SPAMTON_DEAL_EXPLANATION',
             'ENTERED_BASEMENT_COUNT',
             'UNLOCKED_EAST_BASEMENT',
