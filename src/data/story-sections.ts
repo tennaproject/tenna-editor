@@ -545,7 +545,7 @@ export const STORY_SECTIONS = {
             'OBTAINED_MANSION_GLOWSHARD',
             'SOLVED_FIRST_SAUCER_PUZZLE',
             'OPENED_SIDE_A_PAINTING',
-            'OPENED_SIDE_PAINTING_B
+            'OPENED_SIDE_PAINTING_B',
             'SOLVED_SAUCER_SHORTCUT',
             'MAUSWHEEL_DEFEATED',
             'DOG_OPENED_DOOR',
