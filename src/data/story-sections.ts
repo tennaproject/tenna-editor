@@ -552,6 +552,23 @@ export const STORY_SECTIONS = {
             'DINING_HALL_COMPLETE',
           ],
         },
+       {
+          id: 'mansion-halls-3f',
+          title: 'Mansion Halls 3f',
+          flags: [
+            'SAW_TOILET_STATUE',
+            'HOUSES_HIT',
+            'SWATCHLING_VASE_ROOM_PROGRESS',
+            'MICE_RECEIVED_20_DOLLARS',
+            'MICE_RECEIVED_1_DOLLAR',
+            'MOUSE_LOTTERY_RESULT_1',
+            'MOUSE_LOTTERY_RESULT_2',
+            'MADE_HIGH_FIVE',
+            'ROUXLS_PIRATE_HAT',
+            'HOUSE_GAME_WINNER',
+            'RALSEI_PHOTO_STATE',
+          ],
+        },
         {
           id: 'spamton',
           title: 'Spamton',
