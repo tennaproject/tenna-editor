@@ -552,7 +552,7 @@ export const STORY_SECTIONS = {
             'DINING_HALL_COMPLETE',
           ],
         },
-       {
+        {
           id: 'mansion-halls-3f',
           title: 'Mansion Halls 3f',
           flags: [
