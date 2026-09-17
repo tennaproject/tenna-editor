@@ -656,7 +656,11 @@ export const STORY_SECTIONS = {
         {
           id: 'police-station',
           title: 'Police Station',
-          flags: ['POLICE_SCENE_PROGRESS', 'CHOCOLATE_RECIPIENT','SUSIE_AVOID_ALPHYS'],
+          flags: [
+            'POLICE_SCENE_PROGRESS',
+            'CHOCOLATE_RECIPIENT',
+            'SUSIE_AVOID_ALPHYS',
+          ],
         },
         {
           id: 'graveyard-and-bunker',
