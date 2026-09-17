@@ -656,7 +656,7 @@ export const STORY_SECTIONS = {
         {
           id: 'police-station',
           title: 'Police Station',
-          flags: ['POLICE_SCENE_PROGRESS', 'CHOCOLATE_RECIPIENT'],
+          flags: ['POLICE_SCENE_PROGRESS', 'CHOCOLATE_RECIPIENT','SUSIE_AVOID_ALPHYS'],
         },
         {
           id: 'graveyard-and-bunker',
@@ -666,12 +666,22 @@ export const STORY_SECTIONS = {
         {
           id: 'sans-store',
           title: "Sans's Store",
-          flags: ['DEPOSITED_EGG_CH2'],
+          flags: ['DEPOSITED_EGG_CH2', 'TALKED_TO_SANS_ABOUT_PAPYRUS'],
+        },
+        {
+          id: 'diner',
+          title: 'Diner',
+          flags: ['SUSIE_AVOID_CATTI'],
         },
         {
           id: 'mettaton',
           title: 'Mettaton',
           flags: ['TALKED_TO_METTATON_CH2'],
+        },
+        {
+          id: 'asgore',
+          title: 'Asgore',
+          flags: ['SAW_EGGS_HUSBAND'],
         },
         {
           id: 'onionsan',
@@ -681,7 +691,7 @@ export const STORY_SECTIONS = {
         {
           id: 'home',
           title: 'Home',
-          flags: ['CALLED_MOM_BUSY'],
+          flags: ['CALLED_MOM_BUSY', 'CALLED_MOM_AFTER_LAB'],
         },
         {
           id: 'violence-stats',
