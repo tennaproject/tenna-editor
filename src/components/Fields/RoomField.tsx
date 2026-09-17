@@ -1,8 +1,7 @@
 import { FieldWrapper, Select, type SelectItem } from '@components';
 import type { RoomIndex } from '@data';
-import { useSave } from '@store';
+import { useGameData, useSave } from '@store';
 import { getChapterRoomOptions } from '@utils/chapter-options';
-import { roomHelpers } from '@utils/data-helpers';
 import {
   getRoomTranslationKeyPrefix,
   translateMeta,
@@ -26,6 +25,7 @@ export function RoomField({
   const room = useSave((s) => s.save?.room) ?? 0;
   const chapter = useSave((s) => s.save?.meta.chapter) || 1;
   const updateSave = useSave((s) => s.updateSave);
+  const data = useGameData((state) => state.rooms);
 
   function onChange(item: SelectItem | null) {
     if (item?.value) {
@@ -33,41 +33,48 @@ export function RoomField({
     }
   }
 
-  const items = getChapterRoomOptions(
+  const items: SelectItem[] = getChapterRoomOptions(
     chapter,
     !!showNonSavepoint,
     !!showDogcheckedRooms,
+    data.entries,
   ).map((item) => ({
     ...item,
-    label: translateMeta(
-      getRoomTranslationKeyPrefix(item.value as number),
-      { displayName: item.label },
-      t,
-    ).displayName,
+    label: item.dataPack
+      ? item.label
+      : translateMeta(
+          getRoomTranslationKeyPrefix(item.value as number),
+          { displayName: item.label },
+          t,
+        ).displayName,
   }));
 
   const isCurrentRoomInList = items.some((item) => item.value === room);
   let selectItems: SelectItem[] = items;
   if (!isCurrentRoomInList && room) {
-    const meta = roomHelpers.getById(room as RoomIndex);
-    const label =
-      meta?.displayName ||
-      roomHelpers.getName(room as RoomIndex) ||
-      `Unknown ${room}`;
-    const translatedLabel = translateMeta(
-      getRoomTranslationKeyPrefix(room),
-      { displayName: label },
-      t,
-    ).displayName;
+    const dataEntry = data.byId.get(room);
+    const label = dataEntry?.displayName ?? `Unknown ${room}`;
+    const translatedLabel = dataEntry?.dataPack
+      ? dataEntry.displayName
+      : translateMeta(
+          getRoomTranslationKeyPrefix(room),
+          { displayName: label },
+          t,
+        ).displayName;
     selectItems = [
       ...items,
       {
         id: room.toString(),
         label: translatedLabel,
         value: room,
-        invalidReasons: meta?.displayName
-          ? ['notInChapter']
-          : ['unknown', 'notInChapter'],
+        tooltip: dataEntry?.dataPack ? dataEntry.description : undefined,
+        dataPack: dataEntry?.packName,
+        invalidReasons:
+          dataEntry?.dataPack && !dataEntry.overridesBuiltIn
+            ? undefined
+            : dataEntry
+              ? ['notInChapter']
+              : ['unknown', 'notInChapter'],
       },
     ];
   }

@@ -5,7 +5,7 @@ import {
 } from '@data';
 import { FLAG_BITFIELDS_META } from '@data/flag-bitfields';
 import { useChapterFlags } from '@contexts';
-import { useSave } from '@store';
+import { useGameData, useSave } from '@store';
 import {
   getFlagBitfieldTranslationKeyPrefix,
   getFlagTranslationKeyPrefix,
@@ -14,7 +14,6 @@ import {
 } from '../../i18n';
 import {
   chapterHelpers,
-  flagHelpers,
   getGameColor,
   mergeClass,
   readFlagBitfield,
@@ -67,9 +66,12 @@ export function FlagField(props: FlagFieldProps) {
   const currentFlagValue = useSave((s) =>
     sourceFlag === undefined ? 0 : (s.save?.flags[sourceFlag] ?? 0),
   ) as IntegerValue;
+  const entry = useGameData((state) =>
+    props.flag === undefined ? undefined : state.flags.byId.get(props.flag),
+  );
   const resolvedField = (() => {
     if (props.flag !== undefined) {
-      const meta = flagHelpers.getById(props.flag);
+      const meta = entry;
       if (!meta) return null;
 
       return {
@@ -112,13 +114,22 @@ export function FlagField(props: FlagFieldProps) {
   if (!resolvedField) return;
 
   const { currentValue, updateValue } = resolvedField;
-  const meta = translateMeta(
+  const translated = translateMeta(
     props.flag !== undefined
       ? getFlagTranslationKeyPrefix(props.flag)
       : getFlagBitfieldTranslationKeyPrefix(props.bitfield),
     resolvedField.meta,
     t,
   );
+  const meta = entry?.dataPack
+    ? {
+        ...entry,
+        description:
+          entry.descriptionFromPack || !entry.overridesBuiltIn
+            ? entry.description
+            : translated.description,
+      }
+    : translated;
   const { valueType, valueRules, displayName, description } = meta;
 
   if (valueType === 'boolean') {

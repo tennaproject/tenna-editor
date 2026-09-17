@@ -1,12 +1,6 @@
 import type { ReactNode } from 'react';
-import type { LightWorldItemIndex } from '@data';
-import { useSave } from '@store';
-import {
-  armorHelpers,
-  lightWorldItemHelpers,
-  resolveChapterMeta,
-  weaponHelpers,
-} from '@utils/data-helpers';
+import { useGameData, useSave } from '@store';
+import { resolveLightWorldItemEntry } from '@utils/resolve-game-data';
 import { getWikiUrl } from '@utils/wiki-url';
 import {
   getArmorTranslationKeyPrefix,
@@ -21,7 +15,7 @@ import { Tooltip } from './Tooltip';
 import { TooltipHeading } from './TooltipHeading';
 
 interface LightWorldItemTooltipContentProps {
-  id: LightWorldItemIndex;
+  id: number;
 }
 
 interface LightWorldItemTooltipProps extends LightWorldItemTooltipContentProps {
@@ -43,18 +37,25 @@ export function LightWorldItemTooltipContent({
   // Some descriptions gain a line once a particular Dark World item exists
   const items = useSave((s) => s.save?.inventory.consumables) ?? [];
 
-  const meta = resolveChapterMeta(lightWorldItemHelpers.getById(id), {
-    chapter,
-    items,
-  });
-
-  if (!meta) return null;
-
-  const translated = translateMeta(
+  const entry = useGameData((state) => state.lightWorldItems.byId.get(id));
+  const weapons = useGameData((state) => state.weapons.byId);
+  const armors = useGameData((state) => state.armors.byId);
+  if (!entry) return null;
+  const meta = resolveLightWorldItemEntry(entry, { chapter, items });
+  const builtInTranslation = translateMeta(
     getItemTranslationKeyPrefix('lightWorldItem', id),
     meta,
     t,
   );
+  const translated = {
+    displayName: entry.dataPack
+      ? meta.displayName
+      : builtInTranslation.displayName,
+    description:
+      entry.descriptionFromPack || (entry.dataPack && !entry.overridesBuiltIn)
+        ? meta.description
+        : builtInTranslation.description,
+  };
 
   const stats = [
     meta.attack !== undefined ? formatStat(meta.attack, 'AT') : undefined,
@@ -63,30 +64,34 @@ export function LightWorldItemTooltipContent({
 
   const darkWorldWeapon =
     meta.darkWorldWeapon !== undefined
-      ? weaponHelpers.getById(meta.darkWorldWeapon)
+      ? weapons.get(meta.darkWorldWeapon)
       : undefined;
   const darkWorldArmor =
     meta.darkWorldArmor !== undefined
-      ? armorHelpers.getById(meta.darkWorldArmor)
+      ? armors.get(meta.darkWorldArmor)
       : undefined;
 
   const darkWorldEquivalent = darkWorldWeapon
     ? {
         icon: darkWorldWeapon.icon,
-        displayName: translateMeta(
-          getWeaponTranslationKeyPrefix(meta.darkWorldWeapon as number),
-          darkWorldWeapon,
-          t,
-        ).displayName,
+        displayName: darkWorldWeapon.dataPack
+          ? darkWorldWeapon.displayName
+          : translateMeta(
+              getWeaponTranslationKeyPrefix(meta.darkWorldWeapon as number),
+              darkWorldWeapon,
+              t,
+            ).displayName,
       }
     : darkWorldArmor
       ? {
           icon: darkWorldArmor.icon,
-          displayName: translateMeta(
-            getArmorTranslationKeyPrefix(meta.darkWorldArmor as number),
-            darkWorldArmor,
-            t,
-          ).displayName,
+          displayName: darkWorldArmor.dataPack
+            ? darkWorldArmor.displayName
+            : translateMeta(
+                getArmorTranslationKeyPrefix(meta.darkWorldArmor as number),
+                darkWorldArmor,
+                t,
+              ).displayName,
         }
       : undefined;
 
@@ -95,7 +100,7 @@ export function LightWorldItemTooltipContent({
       <div className="flex justify-between items-start gap-3">
         <TooltipHeading
           name={translated.displayName}
-          href={getWikiUrl(meta.displayName)}
+          href={entry.dataPack ? undefined : getWikiUrl(meta.displayName)}
         />
 
         {stats.length > 0 && (

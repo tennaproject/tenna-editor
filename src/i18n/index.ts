@@ -91,8 +91,112 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.settings.importSuccess':
     'Successfully imported {imported} save(s) (skipped {skipped})',
   'ui.settings.importFailedGeneric': 'Failed to import backup file',
+  'ui.settings.dataPacks.title': 'Data packs',
+  'ui.settings.dataPacks.description':
+    'Import data packs here, then activate them on a save’s Overview page.',
+  'ui.settings.dataPacks.import': 'Import data pack',
+  'ui.settings.dataPacks.empty': 'No data packs imported.',
+  'ui.settings.dataPacks.imported': 'Imported {name}. Entries: {count}.',
+  'ui.settings.dataPacks.replaced': 'Replaced {name}. Entries: {count}.',
+  'ui.settings.dataPacks.count': 'Entries: {count}',
+  'ui.settings.dataPacks.modVersion': 'Version: {version}',
+  'ui.settings.dataPacks.remove': 'Remove pack',
+  'ui.settings.dataPacks.errorGeneric':
+    'Unable to import this data pack. Check the file and try again.',
+  'ui.settings.dataPacks.errorFileSize':
+    'Unable to import this pack. Files must be 1 MB or smaller.',
+  'ui.settings.dataPacks.errorJson':
+    'Unable to import this pack. Choose a valid JSON file.',
+  'ui.settings.dataPacks.errorRoot':
+    'Unable to import this pack. The JSON root must be an object.',
+  'ui.settings.dataPacks.errorVersion':
+    'Unable to import data-pack version {version}. This editor supports version {supported}.',
+  'ui.settings.dataPacks.errorData':
+    'Unable to import this pack. Data must be an object grouped by type.',
+  'ui.settings.dataPacks.errorEmpty':
+    'Unable to import this pack. Add at least one data entry.',
+  'ui.settings.dataPacks.errorTooManyEntries':
+    'Unable to import this pack. Packs can contain at most {max} entries.',
+  'ui.settings.dataPacks.errorEntry': '{entry} must be an object.',
+  'ui.settings.dataPacks.errorType':
+    'Unable to import this pack. {type} is not a supported data type.',
+  'ui.settings.dataPacks.errorGroup': 'Data group {type} must be an object.',
+  'ui.settings.dataPacks.errorEntryKey':
+    '{entry} is not a valid data-pack key. Use 1 to 64 letters, numbers, or underscores.',
+  'ui.settings.dataPacks.errorEntryId':
+    '{entry} ID must be a whole number of 1 or greater.',
+  'ui.settings.dataPacks.errorDisplayName': '{entry} must have a display name.',
+  'ui.settings.dataPacks.errorDisplayNameLength':
+    '{entry} display name must be {max} characters or fewer.',
+  'ui.settings.dataPacks.errorDescription': '{entry} description must be text.',
+  'ui.settings.dataPacks.errorDescriptionLength':
+    '{entry} description must be {max} characters or fewer.',
+  'ui.settings.dataPacks.errorAbility': '{entry} ability must be text.',
+  'ui.settings.dataPacks.errorAbilityLength':
+    '{entry} ability must be {max} characters or fewer.',
+  'ui.settings.dataPacks.errorChapters':
+    '{entry} chapters must be a non-empty list containing chapter numbers 1 through 5.',
+  'ui.settings.dataPacks.errorDuplicate':
+    '{type} defines ID {id} more than once.',
+  'ui.settings.dataPacks.errorPackId':
+    'Unable to import this pack. Add a unique pack ID.',
+  'ui.settings.dataPacks.errorPackName':
+    'Unable to import this pack. Add a pack name.',
+  'ui.settings.dataPacks.errorModVersion':
+    'The data-pack version must contain text.',
+  'ui.settings.dataPacks.errorStats':
+    '{entry} stats must include whole-number attack, defence, and magic values from -999 to 999.',
+  'ui.settings.dataPacks.errorIntegerRange':
+    '{entry} {field} must be a whole number from {min} to {max}.',
+  'ui.settings.dataPacks.errorCharacters':
+    '{entry} characters must be a non-empty list of character names.',
+  'ui.settings.dataPacks.errorCharacterName':
+    '{entry} characters includes unknown name {name}.',
+  'ui.settings.dataPacks.errorHealByCharacter':
+    '{entry} {field} must be an object of character names to heal values.',
+  'ui.settings.dataPacks.errorExtraHeal':
+    '{entry} extraHeal must be an object with host, character, and amount.',
+  'ui.settings.dataPacks.errorOverworld':
+    '{entry} overworld must be an object of heal values.',
+  'ui.settings.dataPacks.errorUnknownField':
+    '{entry} contains unsupported field {field}.',
+  'ui.settings.dataPacks.errorIcon':
+    '{entry} icon must be a valid equipment icon ID.',
+  'ui.settings.dataPacks.errorIntegerList':
+    '{entry} {field} must be a list of whole numbers.',
+  'ui.settings.dataPacks.errorValueRules':
+    '{entry} valueRules must be an object.',
+  'ui.settings.dataPacks.errorInteger':
+    '{entry} {field} must be a whole number.',
+  'ui.settings.dataPacks.errorValueMap':
+    '{entry} valueRules.map must map whole numbers to labels.',
+  'ui.settings.dataPacks.errorBoolean':
+    '{entry} {field} must be true or false.',
+  'ui.settings.dataPacks.errorBooleanMap':
+    '{entry} valueRules.booleanMap is invalid.',
+  'ui.settings.dataPacks.errorValueType':
+    '{entry} valueType must be boolean, number, map, or color.',
   'ui.flag.numberPlaceholder': 'Enter number...',
   'ui.flag.mapPlaceholder': 'Select value...',
+  'ui.dataPacks.activationConflict':
+    'These packs define the same IDs: {packs}. Deactivate a conflicting pack first.',
+  'ui.dataPacks.noneInstalled':
+    'Import packs in Settings, then activate them for this save.',
+  'ui.dataPacks.missing':
+    'Pack missing. Import it in Settings to restore its catalog data.',
+  'ui.dataPacks.conflict':
+    'Pack inactive because its IDs conflict with another selected pack. Deactivate a conflicting pack to resolve this.',
+  'ui.dataPacks.versionMismatch':
+    'Version differs. Referenced: {expected}. Installed: {installed}.',
+  'ui.dataPacks.unspecifiedVersion': 'Unspecified',
+  'ui.dataPacks.acceptVersion': 'Accept installed version',
+  'ui.dataPacks.title': 'Data packs',
+  'ui.dataPacks.activationDescription':
+    'Choose the packs used by this save.',
+  'ui.dataPacks.errorReferences': 'Data-pack references must be a list.',
+  'ui.dataPacks.errorReference': 'Each data-pack reference must be an object.',
+  'ui.dataPacks.errorDuplicateReferences':
+    'Data-pack references contain duplicate IDs.',
   'ui.nav.about': 'About',
   'ui.nav.armors': 'Armors',
   'ui.nav.attributions': 'Attributions',
@@ -123,6 +227,7 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.nav.welcome': 'Welcome',
   'ui.common.noOptionsFound': 'No options found',
   'ui.common.unknown': 'Unknown',
+  'ui.common.dataPackSource': 'Data pack: {name}',
   'ui.common.empty': 'Empty',
   'ui.common.invalid': 'Invalid',
   'ui.common.none': 'None',
