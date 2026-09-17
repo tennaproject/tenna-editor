@@ -36,7 +36,7 @@ export function SaveDataPacks() {
         <p className="text-sm text-text-2">
           {t(
             'ui.dataPacks.activationDescription',
-            'Choose the packs used by this save. This changes catalog data without changing saved values.',
+            'Choose the packs used by this save.',
           )}
         </p>
         <DataPackReferences

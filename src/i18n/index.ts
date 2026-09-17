@@ -192,7 +192,7 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.dataPacks.acceptVersion': 'Accept installed version',
   'ui.dataPacks.title': 'Data packs',
   'ui.dataPacks.activationDescription':
-    'Choose the packs used by this save. This changes catalog data without changing saved values.',
+    'Choose the packs used by this save.',
   'ui.dataPacks.errorReferences': 'Data-pack references must be a list.',
   'ui.dataPacks.errorReference': 'Each data-pack reference must be an object.',
   'ui.dataPacks.errorDuplicateReferences':
