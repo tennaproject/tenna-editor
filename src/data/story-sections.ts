@@ -519,8 +519,8 @@ export const STORY_SECTIONS = {
           flags: ['LANCER_CARED_FOR'],
         },
         {
-          id: 'mansion-halls-1f',
-          title: 'Mansion Halls 1f',
+          id: 'mansion-floor-1f',
+          title: 'Mansion Floor 1f',
           flags: [
             'OBTAINED_CHAIN_MAIL',
             'OBTAINED_ONE_DOLLAR_CHEST',
@@ -539,8 +539,8 @@ export const STORY_SECTIONS = {
           ],
         },
         {
-          id: 'mansion-halls-2f',
-          title: 'Mansion Halls 2f',
+          id: 'mansion-floor-2f',
+          title: 'Mansion Floor 2f',
           flags: [
             'OBTAINED_MANSION_GLOWSHARD',
             'SOLVED_FIRST_SAUCER_PUZZLE',
@@ -553,8 +553,8 @@ export const STORY_SECTIONS = {
           ],
         },
         {
-          id: 'mansion-halls-3f',
-          title: 'Mansion Halls 3f',
+          id: 'mansion-floor-3f',
+          title: 'Mansion Floor 3f',
           flags: [
             'SAW_TOILET_STATUE',
             'HOUSES_HIT',
@@ -567,6 +567,15 @@ export const STORY_SECTIONS = {
             'ROUXLS_PIRATE_HAT',
             'HOUSE_GAME_WINNER',
             'RALSEI_PHOTO_STATE',
+          ],
+        },
+        {
+          id: 'mansion-rooftop',
+          title: 'Mansion Rooftop',
+          flags: [
+            'FERRIS_WHEEL_SCENE_PROGRESS',
+            'SAW_FERRIS_SCENE',
+            'OBTAINED_NO_RECRUITS',
           ],
         },
         {
@@ -585,11 +594,6 @@ export const STORY_SECTIONS = {
             'TALKED_TO_SPAMTON_BEHIND_BASEMENT_DOOR',
             'SPAMTON_STRESS_RESPONSE',
           ],
-        },
-        {
-          id: 'ralsei-photo',
-          title: "Ralsei's Photo",
-          flags: ['RALSEI_PHOTO_STATE'],
         },
         {
           id: 'rouxls-and-queen',
@@ -632,6 +636,11 @@ export const STORY_SECTIONS = {
             'FAILED_SPAM_CRYSTAL',
             'SEAM_TWO_CRYSTALS_DIALOGUE_PROGRESS',
             'SAW_KING_QUEEN_REUNION',
+            'RETURNED_CASTLE_TOWN',
+            'TOLD_SAVE_TOWN',
+            'TALKED_TO_SWATCH_ABOUT_TOPCHEF',
+            'SEATED_HEAD_HATHY_WITH_WEREWEREWIRE',
+            'CANT_GO_BACK_TIP',
           ],
         },
         {
