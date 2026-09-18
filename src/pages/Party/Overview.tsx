@@ -13,24 +13,16 @@ import {
   Select,
   GlowBar,
 } from '@components';
-import {
-  CHAPTERS,
-  CHARACTERS,
-  type ArmorIndex,
-  type CharacterIndex,
-  type WeaponIndex,
-} from '@data';
+import { CHAPTERS, CHARACTERS, type CharacterIndex } from '@data';
 import { useCharacterOverrideInputs } from '@hooks';
-import { useSave, useUi } from '@store';
+import { useGameData, useSave, useUi } from '@store';
 import {
-  armorHelpers,
   chapterHelpers,
   characterHelpers,
   getEffectiveCharacterStats,
   getPartySlotBaseOptions,
   mergeClass,
   getCharacterColor,
-  weaponHelpers,
 } from '@utils';
 import {
   formatTranslation,
@@ -49,29 +41,30 @@ interface EquipmentRowProps {
 
 function EquipmentRow({ type, id }: EquipmentRowProps) {
   const { t } = useTranslation();
+  const entry = useGameData((state) =>
+    type === 'weapon' ? state.weapons.byId.get(id) : state.armors.byId.get(id),
+  );
 
-  const meta =
-    type === 'weapon'
-      ? weaponHelpers.getById(id as WeaponIndex)
-      : armorHelpers.getById(id as ArmorIndex);
-  const keyPrefix =
-    type === 'weapon'
-      ? getWeaponTranslationKeyPrefix(id)
-      : getArmorTranslationKeyPrefix(id);
-  const displayName = translateMeta(
-    keyPrefix,
-    { displayName: meta?.displayName ?? t('ui.common.unknown', 'Unknown') },
-    t,
-  ).displayName;
+  const displayName = entry?.dataPack
+    ? entry.displayName
+    : translateMeta(
+        type === 'weapon'
+          ? getWeaponTranslationKeyPrefix(id)
+          : getArmorTranslationKeyPrefix(id),
+        {
+          displayName: entry?.displayName ?? t('ui.common.unknown', 'Unknown'),
+        },
+        t,
+      ).displayName;
 
   const isEmpty = id === 0;
 
   const content = (
     <InlineGroup className="gap-1">
-      {meta?.icon !== undefined && (
+      {entry?.icon !== undefined && (
         <EquipmentIcon
           className={mergeClass(isEmpty ? 'text-text-3' : '')}
-          icon={meta.icon}
+          icon={entry.icon}
           unknownArt={!isEmpty}
         />
       )}
@@ -89,7 +82,7 @@ function EquipmentRow({ type, id }: EquipmentRowProps) {
   if (isEmpty) return content;
 
   return (
-    <EquipmentTooltip type={type} id={id}>
+    <EquipmentTooltip type={type} entry={entry} id={id}>
       {content}
     </EquipmentTooltip>
   );

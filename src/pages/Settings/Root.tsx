@@ -24,6 +24,7 @@ import {
   useTranslation,
   type Locale,
 } from '../../i18n';
+import { DataPacks } from './DataPacks';
 
 const LANGUAGE_OPTIONS: SelectItem[] = Object.entries(SUPPORTED_LOCALES)
   .sort(([, a], [, b]) => a.displayName.localeCompare(b.displayName))
@@ -139,6 +140,10 @@ export function SettingsRoot() {
               </Card>
             </Section>
           )}
+
+          <Section id="data-packs">
+            <DataPacks />
+          </Section>
 
           <Section id="backup">
             <Card className="flex flex-col gap-3 p-6">

@@ -1,13 +1,14 @@
 import { ProgressiveMount } from '@components/ProgressiveMount';
 import { useFieldSearch } from '@contexts';
-import type { FlagName } from '@data';
+import { FLAGS, type FlagName } from '@data';
+import type { FlagEntry } from '@types';
+import { useGameData } from '@store';
 import { FLAG_BITFIELDS, FLAG_BITFIELDS_META } from '@data/flag-bitfields';
 import {
   STORY_SECTIONS,
   type StoryChapterNumber,
   type StoryFieldName,
 } from '@data/story-sections';
-import { flagHelpers } from '@utils';
 import { useLocation } from 'react-router-dom';
 import { StoryFlagCluster } from './StoryFlagCluster';
 import { StoryFlagGrid } from './StoryFlagGrid';
@@ -17,11 +18,15 @@ interface StoryChapterSectionsProps {
   chapter: StoryChapterNumber;
 }
 
-function flagMatchesQuery(flag: StoryFieldName, query: string): boolean {
+function flagMatchesQuery(
+  flag: StoryFieldName,
+  query: string,
+  entries: ReadonlyMap<number, FlagEntry>,
+): boolean {
   const meta =
     flag in FLAG_BITFIELDS
       ? FLAG_BITFIELDS_META[FLAG_BITFIELDS[flag as keyof typeof FLAG_BITFIELDS]]
-      : flagHelpers.getByName(flag as FlagName);
+      : entries.get(FLAGS[flag as FlagName]);
   const haystack = `${flag} ${meta?.displayName ?? ''} ${meta?.description ?? ''}`;
   return haystack.toLowerCase().includes(query);
 }
@@ -29,16 +34,21 @@ function flagMatchesQuery(flag: StoryFieldName, query: string): boolean {
 function filterSection(
   section: (typeof STORY_SECTIONS)[StoryChapterNumber][number],
   query: string,
+  entries: ReadonlyMap<number, FlagEntry>,
 ) {
   if ('flags' in section) {
-    const flags = section.flags.filter((flag) => flagMatchesQuery(flag, query));
+    const flags = section.flags.filter((flag) =>
+      flagMatchesQuery(flag, query, entries),
+    );
     return flags.length > 0 ? { ...section, flags } : null;
   }
 
   const clusters = section.clusters
     .map((cluster) => ({
       ...cluster,
-      flags: cluster.flags.filter((flag) => flagMatchesQuery(flag, query)),
+      flags: cluster.flags.filter((flag) =>
+        flagMatchesQuery(flag, query, entries),
+      ),
     }))
     .filter((cluster) => cluster.flags.length > 0);
 
@@ -47,12 +57,13 @@ function filterSection(
 
 export function StoryChapterSections({ chapter }: StoryChapterSectionsProps) {
   const location = useLocation();
+  const entries = useGameData((state) => state.flags.byId);
   const sections = STORY_SECTIONS[chapter];
   const query = useFieldSearch()?.trim().toLowerCase();
 
   const filteredSections = query
     ? sections.flatMap((section) => {
-        const filteredSection = filterSection(section, query);
+        const filteredSection = filterSection(section, query, entries);
         return filteredSection ? [filteredSection] : [];
       })
     : sections;

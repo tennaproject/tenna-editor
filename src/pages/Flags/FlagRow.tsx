@@ -1,5 +1,6 @@
-import { memo, useCallback, useState } from 'react';
-import { TextInput } from '@components';
+import { useState } from 'react';
+import { TextInput, Tooltip } from '@components';
+import DataPackIcon from '@assets/icons/file-plus.svg?react';
 import type { FlagIndex } from '@data';
 import { useSaveFlag } from '@hooks';
 import { useSave } from '@store';
@@ -7,11 +8,12 @@ import { mergeClass } from '@utils';
 import { parseFiniteNumberInput } from '@utils';
 
 import ChevronDownIcon from '@assets/icons/chevron-down.svg?react';
-import { useTranslation } from '../../i18n';
+import { formatTranslation, useTranslation } from '../../i18n';
 
 interface FlagRowProps {
   flagIndex: FlagIndex;
   name: string;
+  packName?: string;
   description: string;
   knownValues?: Record<number, string>;
   knownValueEntries?: readonly [string, string][];
@@ -19,9 +21,10 @@ interface FlagRowProps {
   onToggleExpand: (flagIndex: FlagIndex) => void;
 }
 
-function FlagRowComponent({
+export function FlagRow({
   flagIndex,
   name,
+  packName,
   description,
   knownValues,
   knownValueEntries,
@@ -29,30 +32,32 @@ function FlagRowComponent({
   onToggleExpand,
 }: FlagRowProps) {
   const { t } = useTranslation();
+  const packSource = packName
+    ? formatTranslation(t('ui.common.dataPackSource', 'Data pack: {name}'), {
+        name: packName,
+      })
+    : undefined;
   const updateSave = useSave((s) => s.updateSave);
   const value = Number(useSaveFlag(flagIndex)) || 0;
   const hasDetails = !!knownValues;
   const [error, setError] = useState<string | null>(null);
 
-  const handleFlagChange = useCallback(
-    (nextValue: string) => {
-      const numValue = parseFiniteNumberInput(nextValue);
-      if (numValue === null) {
-        setError(t('ui.flags.invalidNumber', 'Invalid number.'));
-        return;
-      }
+  const handleFlagChange = (nextValue: string) => {
+    const numValue = parseFiniteNumberInput(nextValue);
+    if (numValue === null) {
+      setError(t('ui.flags.invalidNumber', 'Invalid number.'));
+      return;
+    }
 
-      setError(null);
-      updateSave((save) => {
-        save.flags[flagIndex] = numValue;
-      });
-    },
-    [flagIndex, t, updateSave],
-  );
+    setError(null);
+    updateSave((save) => {
+      save.flags[flagIndex] = numValue;
+    });
+  };
 
-  const handleToggleExpand = useCallback(() => {
+  const handleToggleExpand = () => {
     onToggleExpand(flagIndex);
-  }, [flagIndex, onToggleExpand]);
+  };
 
   return (
     <div className="hover:bg-surface-2/50">
@@ -61,10 +66,29 @@ function FlagRowComponent({
           <span className="select-none">#</span>
           <span className="select-all">{flagIndex}</span>
         </span>
-        <div className="min-w-0">
+        <div className="flex min-w-0 items-center gap-2">
           <code className="text-text-1 text-sm select-all truncate block">
             {name}
           </code>
+          {packSource && (
+            <Tooltip
+              widthClassName="w-max max-w-3xs"
+              content={
+                <span className="flex items-center gap-2 text-xs text-green">
+                  <span className="h-4 w-4 shrink-0">
+                    <DataPackIcon />
+                  </span>
+                  {packSource}
+                </span>
+              }
+              className="shrink-0"
+            >
+              <span className="block h-4 w-4 text-green">
+                <DataPackIcon />
+              </span>
+              <span className="sr-only">{packSource}</span>
+            </Tooltip>
+          )}
         </div>
         <div className="hidden sm:block min-w-0">
           {description && (
@@ -129,5 +153,3 @@ function FlagRowComponent({
     </div>
   );
 }
-
-export const FlagRow = memo(FlagRowComponent);

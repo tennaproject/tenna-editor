@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react';
-import type { CharacterIndex, SpellIndex } from '@data';
-import { useSave } from '@store';
-import { resolveChapterMeta, spellHelpers } from '@utils/data-helpers';
+import type { CharacterIndex } from '@data';
+import type { SpellEntry } from '@types';
+import { useGameData, useSave } from '@store';
+import { resolveSpellEntry } from '@utils/resolve-game-data';
 import {
   getSpellTranslationKeyPrefix,
   translateMeta,
@@ -12,18 +13,21 @@ import { getWikiUrl } from '@utils/wiki-url';
 import { TooltipHeading } from './TooltipHeading';
 
 interface SpellTooltipContentProps {
-  spell: SpellIndex;
+  entry: SpellEntry;
   character: CharacterIndex;
 }
 
-interface SpellTooltipProps extends SpellTooltipContentProps {
+interface SpellTooltipProps {
+  entry?: SpellEntry;
+  spell?: number;
+  character: CharacterIndex;
   children: ReactNode;
   className?: string;
   focusable?: boolean;
 }
 
 export function SpellTooltipContent({
-  spell,
+  entry,
   character,
 }: SpellTooltipContentProps) {
   const { t } = useTranslation();
@@ -36,7 +40,7 @@ export function SpellTooltipContent({
   const secondaryArmor =
     useSave((s) => s.save?.characters[character]?.secondaryArmor) ?? 0;
 
-  const meta = resolveChapterMeta(spellHelpers.getById(spell), {
+  const meta = resolveSpellEntry(entry, {
     chapter,
     plot,
     flags,
@@ -44,30 +48,37 @@ export function SpellTooltipContent({
     armors: [primaryArmor, secondaryArmor],
   });
 
-  const translated = meta
-    ? translateMeta(getSpellTranslationKeyPrefix(spell), meta, t)
-    : undefined;
+  const translated =
+    meta &&
+    (!entry.dataPack || (entry.overridesBuiltIn && !entry.descriptionFromPack))
+      ? translateMeta(getSpellTranslationKeyPrefix(entry.id), meta, t)
+      : undefined;
 
-  if (!meta || !translated) return null;
+  const displayName = entry.dataPack
+    ? entry.displayName
+    : (translated?.displayName ?? meta.displayName);
+  const description = entry.descriptionFromPack
+    ? entry.description
+    : (translated?.description ?? meta.description);
+  const tpCost = meta.tpCost;
 
   return (
     <div className="flex flex-col gap-2">
       <div className="flex justify-between items-start gap-3">
         <TooltipHeading
-          name={translated.displayName}
-          href={getWikiUrl(meta.displayName)}
+          name={displayName}
+          href={entry.dataPack ? undefined : getWikiUrl(entry.displayName)}
         />
 
-        {meta.tpCost !== undefined && (
+        {tpCost !== undefined && (
           <span className="text-sm text-yellow whitespace-nowrap">
-            {formatTpCost(meta.tpCost, t)}
+            {formatTpCost(tpCost, t)}
           </span>
         )}
       </div>
 
       <p className="ui-prose-muted border-t border-divider pt-2 whitespace-pre-line">
-        {translated.description ??
-          t('ui.tooltip.noDescription', '(No description.)')}
+        {description ?? t('ui.tooltip.noDescription', '(No description.)')}
       </p>
     </div>
   );
@@ -78,15 +89,23 @@ function formatTpCost(tpCost: number, t: (k: string, f: string) => string) {
 }
 
 export function SpellTooltip({
+  entry,
   spell,
   character,
   children,
   className,
   focusable,
 }: SpellTooltipProps) {
+  const storeEntry = useGameData((state) => state.spells.byId.get(spell ?? -1));
+  const resolved = entry ?? storeEntry;
+
   return (
     <Tooltip
-      content={<SpellTooltipContent spell={spell} character={character} />}
+      content={
+        resolved ? (
+          <SpellTooltipContent entry={resolved} character={character} />
+        ) : undefined
+      }
       className={className}
       focusable={focusable}
     >

@@ -15,6 +15,7 @@ export * from './Grid';
 export * from './Heading';
 export * from './TextLabel';
 export * from './Checkbox';
+export * from './DataPackReferences';
 export * from './InlineGroup';
 export * from './Modal';
 export * from './ModalLayout';

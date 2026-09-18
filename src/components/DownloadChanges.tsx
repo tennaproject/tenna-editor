@@ -1,8 +1,7 @@
-import { useMemo } from 'react';
 import { formatLocalDateTime } from '@utils/format-date';
 import { extractGamePayload } from '@utils/save-baseline';
 import { computeSaveDiff } from '@utils/save-diff';
-import { useSave } from '@store';
+import { useSave, useGameData } from '@store';
 import { mergeClass } from '@utils/merge-class';
 
 interface DownloadChangesProps {
@@ -42,15 +41,16 @@ export function DownloadChanges({
   const save = useSave((s) => s.save);
   const baseline = useSave((s) => s.save?.meta.baseline);
 
-  const diff = useMemo(() => {
-    if (!save || !baseline) return null;
-    return computeSaveDiff(
-      extractGamePayload(save),
-      baseline,
-      save.meta.chapter,
-      save.meta.slot,
-    );
-  }, [save, baseline]);
+  const data = useGameData((state) => state);
+  const diff =
+    save && baseline
+      ? computeSaveDiff(
+          extractGamePayload(save),
+          baseline,
+          save.meta.chapter,
+          data,
+        )
+      : null;
 
   if (!baseline) {
     return (
