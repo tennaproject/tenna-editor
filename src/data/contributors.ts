@@ -20,8 +20,6 @@ export const CONTRIBUTORS: Contributor[] = [
   },
   {
     displayName: 'cpu-99999999999',
-    login: 'cpu-99999999999',
-    url: 'https://github.com/cpu-99999999999',
   },
   {
     displayName: 'jah-yee',
