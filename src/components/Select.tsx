@@ -436,39 +436,25 @@ export function Select({
     const rowTop = row.getBoundingClientRect().top;
     const menuRect = list.getBoundingClientRect();
     const { top: boundaryTop, bottom: boundaryBottom } = boundaryRef.current;
-
-    const maxMenuHeight =
-      parseFloat(getComputedStyle(list).maxHeight) || menuRect.height;
-
-    let capTop: number;
-    let capBottom: number;
-    if (shouldOpenUp) {
-      capBottom = Math.min(
-        menuRect.bottom,
-        boundaryBottom - DETAIL_PANEL_MARGIN,
-      );
-      capTop = Math.max(
-        capBottom - maxMenuHeight,
-        boundaryTop + DETAIL_PANEL_MARGIN,
-      );
-    } else {
-      capTop = Math.max(menuRect.top, boundaryTop + DETAIL_PANEL_MARGIN);
-      capBottom = Math.min(
-        capTop + maxMenuHeight,
-        boundaryBottom - DETAIL_PANEL_MARGIN,
-      );
-    }
+    const capTop = Math.max(menuRect.top, boundaryTop + DETAIL_PANEL_MARGIN);
+    const capBottom = boundaryBottom - DETAIL_PANEL_MARGIN;
+    const menuBottom = Math.min(menuRect.bottom, capBottom);
 
     // scrollHeight skips borders, max-height doesn't
     const naturalHeight = box.scrollHeight + box.clientTop * 2;
+    const fitsMenu = naturalHeight <= menuBottom - capTop + FIT_TOLERANCE_PX;
     const maxHeight = Math.max(
-      Math.ceil(Math.min(naturalHeight, capBottom - capTop + FIT_TOLERANCE_PX)),
+      Math.ceil(
+        Math.min(
+          naturalHeight,
+          (fitsMenu ? menuBottom : capBottom) - capTop + FIT_TOLERANCE_PX,
+        ),
+      ),
       0,
     );
-    const shownHeight = Math.min(naturalHeight, maxHeight);
-
-    let top = Math.min(rowTop, capBottom - shownHeight);
-    top = Math.max(top, capTop);
+    const top = fitsMenu
+      ? Math.max(capTop, Math.min(rowTop, menuBottom - maxHeight))
+      : capTop;
 
     const next = { top: top - containerRect.top, maxHeight };
     // eslint-disable-next-line @eslint-react/set-state-in-effect
@@ -477,7 +463,7 @@ export function Select({
         ? prev
         : next,
     );
-  }, [highlightedIndex, menuVisible, detailItem?.id, shouldOpenUp]);
+  }, [highlightedIndex, menuVisible, detailItem?.id]);
 
   return (
     <div
@@ -577,7 +563,7 @@ export function Select({
       <ul
         {...getMenuProps({ ref: listRef })}
         className={mergeClass(
-          'absolute left-0 z-50 w-full bg-surface-4 border border-border shadow-lg py-1 px-1 max-h-60 overflow-auto duration-200 motion-reduce:transition-none transition-opacity',
+          'absolute left-0 z-50 w-full bg-surface-4 border border-border shadow-lg py-1 px-1 max-h-60 overflow-auto scrollbar-none duration-200 motion-reduce:transition-none transition-opacity',
           shouldOpenUp
             ? 'bottom-full mb-1 origin-bottom'
             : 'top-full mt-1 origin-top',
