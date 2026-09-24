@@ -20,6 +20,7 @@ export function cloneSaveForTarget(target: SaveExportTarget): Save {
       chapter: target.chapter,
       slot: target.slot,
       isCompletionSave: target.isCompletionSave,
+      isSideB: target.isSideB,
     },
   } as Save;
 }
@@ -47,7 +48,10 @@ export function buildCellsFromTargets(
     const cell = cells.find(
       (c) => c.chapter === target.chapter && c.rawSlot === rawSlot,
     );
-    if (cell) cell.save = target.save;
+    // filech5_N and filech5_N_b share one dr.ini section; keep the _b save there
+    if (!cell || (cell.isSideB && !target.isSideB)) continue;
+    cell.save = target.save;
+    cell.isSideB = target.isSideB;
   }
   return cells;
 }

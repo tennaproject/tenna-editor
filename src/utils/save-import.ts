@@ -15,7 +15,7 @@ export const MAX_IMPORT_EXPANDED_SIZE = 256 * 1024 * 1024;
 export const MAX_ARCHIVE_ENTRIES = MAX_IMPORT_ENTRIES;
 export const MAX_ARCHIVE_EXPANDED_SIZE = MAX_IMPORT_EXPANDED_SIZE;
 
-const PC_SAVE_FILE_PATTERN = /^filech([1-5])_([0-5]|9)(?:_b)?$/i;
+const PC_SAVE_FILE_PATTERN = /^filech([1-5])_([0-5]|9)(_b)?$/i;
 const ZIP_FILE_PATTERN = /\.zip$/i;
 
 export interface CollectedUploadFile {
@@ -46,6 +46,7 @@ export interface ImportCandidate {
   chapter: ChapterIndex;
   slot: SaveSlot;
   isCompletionSave: boolean;
+  isSideB: boolean;
   isTemporarySource: boolean;
   platform: 'pc' | 'switch';
   pcDrIni?: PcDrIniSource;
@@ -160,6 +161,7 @@ function isSupportedDiscoveredFile(path: string): boolean {
 function getSlotMetadata(key: string): {
   slot: SaveSlot;
   isCompletionSave: boolean;
+  isSideB: boolean;
   isTemporarySource: boolean;
 } {
   const match = basename(key).match(PC_SAVE_FILE_PATTERN);
@@ -167,22 +169,31 @@ function getSlotMetadata(key: string): {
     return {
       slot: 0,
       isCompletionSave: false,
+      isSideB: false,
       isTemporarySource: false,
     };
   }
   const rawSlot = Number(match[2]);
+  const isSideB = match[3] !== undefined;
   if (rawSlot === 9) {
-    return { slot: 0, isCompletionSave: false, isTemporarySource: true };
+    return {
+      slot: 0,
+      isCompletionSave: false,
+      isSideB: false,
+      isTemporarySource: true,
+    };
   }
   return rawSlot >= 3
     ? {
         slot: (rawSlot - 3) as SaveSlot,
         isCompletionSave: true,
+        isSideB,
         isTemporarySource: false,
       }
     : {
         slot: rawSlot as SaveSlot,
         isCompletionSave: false,
+        isSideB: false,
         isTemporarySource: false,
       };
 }
@@ -196,9 +207,12 @@ function getGeneratedSaveName(
   slot: SaveSlot,
   isCompletionSave: boolean,
   isTemporarySource = false,
+  isSideB = false,
 ): string {
   if (isTemporarySource) return `CH${chapter} Temporary Save`;
-  return `CH${chapter} Slot ${slot + 1}${isCompletionSave ? ' (Completion)' : ''}`;
+  if (!isCompletionSave) return `CH${chapter} Slot ${slot + 1}`;
+  const suffix = isSideB ? ' (Completion, Side B)' : ' (Completion)';
+  return `CH${chapter} Slot ${slot + 1}${suffix}`;
 }
 
 function createCandidate(
@@ -230,6 +244,7 @@ function createCandidate(
         slot.slot,
         slot.isCompletionSave,
         slot.isTemporarySource,
+        slot.isSideB,
       )
     : displayKey;
 
@@ -248,6 +263,7 @@ function createCandidate(
     chapter,
     slot: slot.slot,
     isCompletionSave: slot.isCompletionSave,
+    isSideB: slot.isSideB,
     isTemporarySource: slot.isTemporarySource,
     platform: options?.switchSource ? 'switch' : 'pc',
     pcDrIni: options?.switchSource ? undefined : file.pcDrIni,
@@ -420,6 +436,7 @@ export function refreshImportCandidateNames(
           candidate.slot,
           candidate.isCompletionSave,
           candidate.isTemporarySource,
+          candidate.isSideB,
         )
       : candidate.displayKey;
     return {

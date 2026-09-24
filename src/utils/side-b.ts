@@ -21,7 +21,7 @@ export function isSideBActive(save: Save): boolean {
   return getSideBPhase(save) >= 3;
 }
 
-export function resolveSideBRoute(target: {
+export function resolveSideB(target: {
   save: Save;
   chapter: number;
   isCompletionSave: boolean;
