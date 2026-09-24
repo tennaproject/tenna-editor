@@ -563,6 +563,7 @@ export function Select({
       <ul
         {...getMenuProps({ ref: listRef })}
         className={mergeClass(
+          'absolute left-0 z-50 w-full bg-surface-4 border border-border shadow-lg py-1 px-1 max-h-60 overflow-auto overscroll-contain duration-200 motion-reduce:transition-none transition-opacity',
           'absolute left-0 z-50 w-full bg-surface-4 border border-border shadow-lg py-1 px-1 max-h-60 overflow-auto scrollbar-none duration-200 motion-reduce:transition-none transition-opacity',
           shouldOpenUp
             ? 'bottom-full mb-1 origin-bottom'
@@ -663,7 +664,7 @@ export function Select({
           <div
             ref={detailBoxRef}
             style={{ maxHeight: detailPosition?.maxHeight }}
-            className="overflow-y-auto border border-border bg-surface-3 px-3 py-2 text-left shadow-lg"
+            className="overflow-y-auto overscroll-contain border border-border bg-surface-3 px-3 py-2 text-left shadow-lg"
           >
             <StatusNote
               invalidReasons={detailItem.invalidReasons}
