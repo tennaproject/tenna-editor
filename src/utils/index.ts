@@ -34,6 +34,7 @@ export * from './save-fingerprint';
 export * from './big-integer';
 export * from './dr-ini';
 export * from './save-export-targets';
+export * from './side-b';
 export * from './save-export';
 export * from './save-template';
 export * from './recruit-status';

@@ -2,9 +2,11 @@ import type { ChapterIndex } from '@data';
 import type { Save } from '@types';
 import {
   getIniSectionName,
+  isSideBFileName,
   type RawSaveSlot,
   type SaveExportCell,
 } from './save-export-targets';
+import { isSideBActive } from './side-b';
 
 const GAME_MAKER_DATE_UNIX_EPOCH = 25569;
 const MS_PER_DAY = 86400000;
@@ -143,10 +145,6 @@ function wasUraBossEdited(save: Save, chapter: ChapterIndex): boolean {
   return original !== undefined && original !== getUraBoss(save, chapter);
 }
 
-function isSideBActive(save: Save): boolean {
-  return Number(save.flags[916]) === 0 && Number(save.flags[915]) >= 7;
-}
-
 function sectionEntries(values: Record<string, IniValue>): IniSection {
   const section = new Map<string, string>();
   for (const [key, value] of Object.entries(values)) {
@@ -186,13 +184,15 @@ function buildSaveSection(
     Love: cell.save.lightWorld.level,
     Time: cell.save.time,
     Date: getGameMakerDate(date),
-    Room: cell.save.room,
+    // The Side B ending room has no room id, so the game writes 0 there
+    Room: isSideBFileName(cell) ? 0 : cell.save.room,
     InitLang: getInitLang(cell.save),
     UraBoss: getUraBoss(cell.save, cell.chapter),
     Version: getExistingVersion(baseSections, sectionName),
   };
 
-  if (cell.rawSlot >= 3) {
+  // scr_complete_save_file writes SideB; scr_complete_save_file_b leaves it alone
+  if (cell.rawSlot >= 3 && !isSideBFileName(cell)) {
     values.SideB = isSideBActive(cell.save) ? 1 : 0;
   } else if (baseSections.get(sectionName)?.has('SideB')) {
     values.SideB = getExistingNumber(baseSections, sectionName, 'SideB', 0);
@@ -239,6 +239,21 @@ function buildEmptySection(chapter: ChapterIndex): IniSection {
   if (chapter === 4) values.Ch4Boss = 0;
 
   return sectionEntries(values);
+}
+
+// scr_set_sideb_ini_value, written when the chapter 5 Weird Route ending completes
+function mergeSideBSection(
+  sections: Map<string, IniSection>,
+  cells: SaveExportCell[],
+): void {
+  const hasSideBFile = cells.some(
+    (cell) => cell.save !== null && isSideBFileName(cell),
+  );
+  if (!hasSideBFile) return;
+
+  const sideB = sections.get('side_b') ?? new Map<string, string>();
+  sideB.set('complete', formatReal(1));
+  sections.set('side_b', sideB);
 }
 
 export function getExportUraHistory(
@@ -427,6 +442,7 @@ export function generateDrIni(
     ura.set(key, formatReal(value));
   }
   sections.set('URA', ura);
+  mergeSideBSection(sections, cells);
   return serializeIni(sections);
 }
 
