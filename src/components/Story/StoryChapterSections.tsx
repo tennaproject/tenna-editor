@@ -23,10 +23,16 @@ function flagMatchesQuery(
   query: string,
   entries: ReadonlyMap<number, FlagEntry>,
 ): boolean {
-  const meta =
+  const bitfield =
     flag in FLAG_BITFIELDS
       ? FLAG_BITFIELDS_META[FLAG_BITFIELDS[flag as keyof typeof FLAG_BITFIELDS]]
-      : entries.get(FLAGS[flag as FlagName]);
+      : undefined;
+  const flagId = bitfield ? bitfield.parent : FLAGS[flag as FlagName];
+  const meta = bitfield ?? entries.get(flagId);
+
+  const idQuery = /^#?(\d+)$/.exec(query);
+  if (idQuery) return flagId === Number(idQuery[1]);
+
   const haystack = `${flag} ${meta?.displayName ?? ''} ${meta?.description ?? ''}`;
   return haystack.toLowerCase().includes(query);
 }
