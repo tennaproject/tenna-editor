@@ -123,6 +123,7 @@ export interface SaveData<
     chapter: Chapter;
     slot: SaveSlot;
     isCompletionSave: boolean;
+    isSideB?: boolean;
     name: string;
     dataPacks?: DataPackReference[];
     baseline?: SaveBaseline;

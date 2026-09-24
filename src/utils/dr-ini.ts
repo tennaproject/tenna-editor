@@ -5,6 +5,7 @@ import {
   type RawSaveSlot,
   type SaveExportCell,
 } from './save-export-targets';
+import { isSideBActive } from './side-b';
 
 const GAME_MAKER_DATE_UNIX_EPOCH = 25569;
 const MS_PER_DAY = 86400000;
@@ -141,10 +142,6 @@ export function getImportedUraBoss(save: Save): number | undefined {
 function wasUraBossEdited(save: Save, chapter: ChapterIndex): boolean {
   const original = getImportedUraBoss(save);
   return original !== undefined && original !== getUraBoss(save, chapter);
-}
-
-function isSideBActive(save: Save): boolean {
-  return Number(save.flags[916]) === 0 && Number(save.flags[915]) >= 7;
 }
 
 function sectionEntries(values: Record<string, IniValue>): IniSection {
