@@ -439,6 +439,8 @@ export const STORY_SECTIONS = {
             'OBTAINED_TRASH_CAN_DARK_CANDY',
             'OBTAINED_TRASH_CAN_20_DOLLARS',
             'OBTAINED_TRASH_CAN_CD_BAGEL',
+            'TRIGGERED_TRASH_ZONE_TEMP_SAVE',
+            'NOELLE_SAW_RALSEI_AND_SUSIE',
           ],
         },
         {
@@ -448,6 +450,11 @@ export const STORY_SECTIONS = {
             'OBTAINED_PINK_RIBBON',
             'OBTAINED_BOUNCE_BLADE',
             'FEDORA_PLUGBOY_WEREWIRED',
+            'WENT_WEIRD_DOOR',
+            'READ_CLEANING_POSTER',
+            'SOLVED_FORCEFIELD_1',
+            'SEEN_STATUE_COUNT',
+            'OBTAINED_SHOE',
           ],
         },
         {
@@ -470,6 +477,17 @@ export const STORY_SECTIONS = {
           ],
         },
         {
+          id: 'mice',
+          title: 'Mice',
+          flags: [
+            'MICE_ATTACK_REASON',
+            'SOLVED_MICE_2',
+            'FIRST_CHEESE_DESTROYED',
+            'APPROACHED_CHEESE_MAZE',
+            'NOELLE_BEAT_FEAR',
+          ],
+        },
+        {
           id: 'cyber-city-trash',
           title: 'Cyber City Trash Cans',
           flags: [
@@ -485,6 +503,8 @@ export const STORY_SECTIONS = {
             'PLUSH_RECIPIENT',
             'EASTER_EGG_FORCEFIELD',
             'BALLOON_TEACUP_EASTER_EGG_PROGRESS',
+            'FINISHED_BIG_FORCEFIELD',
+            'BROKE_BALLOON_CHEESE',
           ],
         },
       ],
@@ -499,19 +519,63 @@ export const STORY_SECTIONS = {
           flags: ['LANCER_CARED_FOR'],
         },
         {
-          id: 'mansion-halls',
-          title: 'Mansion Halls',
+          id: 'mansion-floor-1f',
+          title: 'Mansion Floor 1f',
           flags: [
             'OBTAINED_CHAIN_MAIL',
             'OBTAINED_ONE_DOLLAR_CHEST',
-            'STATUE_SINK_PROGRESS',
-            'SWATCHLING_VASE_ROOM_PROGRESS',
             'SOLVED_MANSION_TRAFFIC',
             'FOUND_BASEMENT_SWITCH',
             'FOUND_SHORTCUT_OUT',
             'OBTAINED_FOURTH_REVIVE_MINT',
-            'OBTAINED_MANSION_GLOWSHARD',
             'OBTAINED_REVIVE_DUST',
+            'SHOVEL_DOOR_OPEN',
+            'ACTIVATED_QUEEN_PAINTINGS',
+            'ACTIVATED_PAINTING_EXIT',
+            'ACTIVATED_MINT_PAINTING',
+            'MANSION_VASE_TUTORIAL_PROGRESS',
+            'VASE_BALANCING_OUTCOME',
+            'TASQUE_MANAGER_RESPONSE',
+          ],
+        },
+        {
+          id: 'mansion-floor-2f',
+          title: 'Mansion Floor 2f',
+          flags: [
+            'OBTAINED_MANSION_GLOWSHARD',
+            'SOLVED_FIRST_SAUCER_PUZZLE',
+            'OPENED_SIDE_A_PAINTING',
+            'OPENED_SIDE_PAINTING_B',
+            'SOLVED_SAUCER_SHORTCUT',
+            'MAUSWHEEL_DEFEATED',
+            'DOG_OPENED_DOOR',
+            'DINING_HALL_COMPLETE',
+          ],
+        },
+        {
+          id: 'mansion-floor-3f',
+          title: 'Mansion Floor 3f',
+          flags: [
+            'SAW_TOILET_STATUE',
+            'HOUSES_HIT',
+            'SWATCHLING_VASE_ROOM_PROGRESS',
+            'MICE_RECEIVED_20_DOLLARS',
+            'MICE_RECEIVED_1_DOLLAR',
+            'MOUSE_LOTTERY_RESULT_1',
+            'MOUSE_LOTTERY_RESULT_2',
+            'MADE_HIGH_FIVE',
+            'ROUXLS_PIRATE_HAT',
+            'HOUSE_GAME_WINNER',
+            'RALSEI_PHOTO_STATE',
+          ],
+        },
+        {
+          id: 'mansion-rooftop',
+          title: 'Mansion Rooftop',
+          flags: [
+            'FERRIS_WHEEL_SCENE_PROGRESS',
+            'SAW_FERRIS_SCENE',
+            'OBTAINED_NO_RECRUITS',
           ],
         },
         {
@@ -519,6 +583,8 @@ export const STORY_SECTIONS = {
           title: 'Spamton',
           flags: [
             'SPAMTON_QUEST_PROGRESS',
+            'VISITED_SPAMTON',
+            'TALKED_TO_SPAMTON_ABOUT_KNIGHT',
             'HEARD_SPAMTON_DEAL_EXPLANATION',
             'ENTERED_BASEMENT_COUNT',
             'UNLOCKED_EAST_BASEMENT',
@@ -528,11 +594,6 @@ export const STORY_SECTIONS = {
             'TALKED_TO_SPAMTON_BEHIND_BASEMENT_DOOR',
             'SPAMTON_STRESS_RESPONSE',
           ],
-        },
-        {
-          id: 'ralsei-photo',
-          title: "Ralsei's Photo",
-          flags: ['RALSEI_PHOTO_STATE'],
         },
         {
           id: 'rouxls-and-queen',
@@ -575,6 +636,11 @@ export const STORY_SECTIONS = {
             'FAILED_SPAM_CRYSTAL',
             'SEAM_TWO_CRYSTALS_DIALOGUE_PROGRESS',
             'SAW_KING_QUEEN_REUNION',
+            'RETURNED_CASTLE_TOWN',
+            'TOLD_SAVE_TOWN',
+            'TALKED_TO_SWATCH_ABOUT_TOPCHEF',
+            'SEATED_HEAD_HATHY_WITH_WEREWEREWIRE',
+            'CANT_GO_BACK_TIP',
           ],
         },
         {
@@ -590,7 +656,11 @@ export const STORY_SECTIONS = {
         {
           id: 'police-station',
           title: 'Police Station',
-          flags: ['POLICE_SCENE_PROGRESS', 'CHOCOLATE_RECIPIENT'],
+          flags: [
+            'POLICE_SCENE_PROGRESS',
+            'CHOCOLATE_RECIPIENT',
+            'SUSIE_AVOID_ALPHYS',
+          ],
         },
         {
           id: 'graveyard-and-bunker',
@@ -600,12 +670,22 @@ export const STORY_SECTIONS = {
         {
           id: 'sans-store',
           title: "Sans's Store",
-          flags: ['DEPOSITED_EGG_CH2'],
+          flags: ['DEPOSITED_EGG_CH2', 'TALKED_TO_SANS_ABOUT_PAPYRUS'],
+        },
+        {
+          id: 'diner',
+          title: 'Diner',
+          flags: ['SUSIE_AVOID_CATTI'],
         },
         {
           id: 'mettaton',
           title: 'Mettaton',
           flags: ['TALKED_TO_METTATON_CH2'],
+        },
+        {
+          id: 'asgore',
+          title: 'Asgore',
+          flags: ['SAW_EGGS_HUSBAND'],
         },
         {
           id: 'onionsan',
@@ -615,7 +695,7 @@ export const STORY_SECTIONS = {
         {
           id: 'home',
           title: 'Home',
-          flags: ['CALLED_MOM_BUSY'],
+          flags: ['CALLED_MOM_BUSY', 'CALLED_MOM_AFTER_LAB'],
         },
         {
           id: 'violence-stats',
