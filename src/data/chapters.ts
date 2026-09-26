@@ -132,7 +132,6 @@ const CH1_CONTENT: ChapterContent = {
     ARMORS.IRON_SHACKLE,
     ARMORS.MOUSE_TOKEN,
     ARMORS.JEVILSTAIL,
-    ARMORS.SILVER_CARD,
   ]),
   lightWorld: {
     items: new Set<LightWorldItemIndex>([
@@ -541,6 +540,7 @@ const CH2_CONTENT: ChapterContent = {
   ]),
   armors: new Set<ArmorIndex>([
     ...CH1_CONTENT.armors,
+    ARMORS.SILVER_CARD,
     ARMORS.TWIN_RIBBON,
     ARMORS.GLOW_WRIST,
     ARMORS.CHAIN_MAIL,
