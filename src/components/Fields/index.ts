@@ -7,6 +7,7 @@ export * from './SaveSlotField';
 export * from './SaveNameField';
 export * from './PlayerNameField';
 export * from './SaveIsCompletionSaveField';
+export * from './SaveIsSideBField';
 export * from './PlotField';
 export * from './ItemField';
 export * from './VesselNameField';

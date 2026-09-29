@@ -18,6 +18,7 @@ import {
   SaveNameField,
   InDarkWorldField,
   SaveIsCompletionSaveField,
+  SaveIsSideBField,
   RoomField,
   PlotField,
   Checkbox,
@@ -336,6 +337,7 @@ export function HomeOverview() {
                   <SaveNameField id="save-field" />
                   <SaveSlotField id="save-slot" />
                   <SaveIsCompletionSaveField id="save-is-completion-save" />
+                  <SaveIsSideBField id="save-is-side-b" />
                 </div>
                 <div className="flex flex-1 flex-col">
                   <SaveSource />

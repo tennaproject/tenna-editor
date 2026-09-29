@@ -491,6 +491,7 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.field.armorII': 'Armor II',
   'ui.field.armor': 'Armor',
   'ui.field.completionSave': 'Completion save',
+  'ui.field.sideB': 'Side B save',
   'ui.field.currentRoom': 'Current Room',
   'ui.field.inDarkWorld': 'Currently in Dark World',
   'ui.field.inGameSlot': 'In-game slot',
