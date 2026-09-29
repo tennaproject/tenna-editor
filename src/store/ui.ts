@@ -6,7 +6,7 @@ import { createDebouncedJSONStorage } from 'zustand-debounce';
 import type { DataPack } from '@types';
 import { useDataPacks } from './data-packs';
 
-export const UI_VERSION = 11;
+export const UI_VERSION = 12;
 
 export type UiLocale = 'en' | 'ko' | 'it';
 
@@ -45,6 +45,9 @@ export interface Ui {
   recruits: {
     showNonRecruitableEnemies: boolean;
     showNonRecruitedInCafe: boolean;
+  };
+  sound: {
+    enabled: boolean;
   };
 }
 
@@ -89,6 +92,9 @@ function createDefaultUi(): Ui {
     recruits: {
       showNonRecruitableEnemies: false,
       showNonRecruitedInCafe: false,
+    },
+    sound: {
+      enabled: true,
     },
   };
 }
@@ -250,6 +256,13 @@ export const useUi = create<UiState>()(
           if (current.ui?.dataPacks) {
             useDataPacks.getState().importLegacy(current.ui.dataPacks);
             delete current.ui.dataPacks;
+          }
+        }
+
+        if (version < 12) {
+          const current = nextState as { ui?: Partial<Ui> };
+          if (current.ui) {
+            current.ui.sound ??= createDefaultUi().sound;
           }
         }
 

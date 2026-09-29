@@ -1,5 +1,5 @@
 import { BrowserRouter } from 'react-router-dom';
-import { Suspense, useEffect } from 'react';
+import { Suspense, useEffect, useRef } from 'react';
 
 import { AppRouter } from './router';
 import {
@@ -11,14 +11,18 @@ import {
   ToastContainer,
 } from '@components';
 import { useSave, useUi } from '@store';
-import { getSideBPhase } from '@utils';
+import { getSideBPhase, playSound } from '@utils';
 import { MotionConfig } from 'framer-motion';
 import { translate } from '@i18n';
+import ominousJingle from '@assets/deltarune/sounds/snd_ominous.wav';
+import ominousCancel from '@assets/deltarune/sounds/snd_ominous_cancel.wav';
 
 export function App() {
   const hasInitialized = useSave((s) => s.hasInitialized);
   const locale = useUi((s) => s.ui.locale);
   const sideBPhase = useSave((s) => (s.save ? getSideBPhase(s.save) : 0));
+  const saveId = useSave((s) => s.save?.meta.id);
+  const lastSideBRef = useRef<{ saveId?: string; phase: number } | null>(null);
 
   useEffect(() => {
     document.documentElement.dataset.locale = locale;
@@ -30,6 +34,18 @@ export function App() {
     if (sideBPhase === 0) delete root.dataset.sideB;
     else root.dataset.sideB = sideBPhase >= 3 ? 'full' : 'light';
   }, [sideBPhase]);
+
+  useEffect(() => {
+    if (!hasInitialized) return;
+    const last = lastSideBRef.current;
+    lastSideBRef.current = { saveId, phase: sideBPhase };
+    if (!last) return;
+    if (last.phase === 0 && sideBPhase > 0) {
+      playSound(ominousJingle);
+    } else if (last.saveId === saveId && last.phase > 0 && sideBPhase === 0) {
+      playSound(ominousCancel);
+    }
+  }, [hasInitialized, saveId, sideBPhase]);
 
   if (!hasInitialized) {
     return;

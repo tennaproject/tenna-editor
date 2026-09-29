@@ -77,6 +77,10 @@ const WEAPON_NAMES_BY_ID = getNamesById(WEAPONS);
 const UI_FALLBACKS: TranslationDictionary = {
   'ui.settings.title': 'Settings',
   'ui.settings.general': 'General',
+  'ui.settings.sound': 'Sound',
+  'ui.settings.soundDescription':
+    'Plays sound effects from the game while you edit saves.',
+  'ui.settings.soundEffects': 'Sound effects',
   'ui.settings.enableDeveloperMode': 'Enable developer mode',
   'ui.settings.backupRestore': 'Backup & Restore',
   'ui.settings.backupRestoreDescription':
