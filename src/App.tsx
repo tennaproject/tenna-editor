@@ -11,17 +11,25 @@ import {
   ToastContainer,
 } from '@components';
 import { useSave, useUi } from '@store';
+import { getSideBPhase } from '@utils';
 import { MotionConfig } from 'framer-motion';
 import { translate } from '@i18n';
 
 export function App() {
   const hasInitialized = useSave((s) => s.hasInitialized);
   const locale = useUi((s) => s.ui.locale);
+  const sideBPhase = useSave((s) => (s.save ? getSideBPhase(s.save) : 0));
 
   useEffect(() => {
     document.documentElement.dataset.locale = locale;
     document.documentElement.lang = locale === 'en' ? 'en' : locale;
   }, [locale]);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (sideBPhase === 0) delete root.dataset.sideB;
+    else root.dataset.sideB = sideBPhase >= 3 ? 'full' : 'light';
+  }, [sideBPhase]);
 
   if (!hasInitialized) {
     return;

@@ -25,10 +25,12 @@ import {
   HelpTip,
   SaveSourceBadge,
   SaveFingerprint,
+  Badge,
   PlayerNameField,
 } from '@components';
 import { FLAGS } from '@data';
-import { useSave, useUi } from '@store';
+import { useGameData, useSave, useUi } from '@store';
+import { getSideBPhase } from '@utils';
 import { chapterHelpers } from '@utils/data-helpers';
 import { FINGERPRINT_ASPECT } from '@utils/save-fingerprint';
 import { formatLocalDateTime } from '@utils/format-date';
@@ -36,6 +38,7 @@ import { saveStorage, toast } from '@services';
 import {
   formatTranslation,
   getChapterTranslationKeyPrefix,
+  getFlagTranslationKeyPrefix,
   translateMeta,
   useTranslation,
 } from '../../i18n';
@@ -105,6 +108,32 @@ function SaveSource() {
         {t('ui.home.source', 'Source:')}
       </span>
       <SaveSourceBadge save={save} />
+    </div>
+  );
+}
+
+function SideBStatus() {
+  const { t } = useTranslation();
+  const save = useSave((s) => s.save);
+  const entry = useGameData((s) =>
+    s.flags.byId.get(FLAGS.SNOWGRAVE_ROUTE_PROGRESS),
+  );
+
+  if (!save || getSideBPhase(save) === 0) return null;
+
+  const progress = Number(save.flags[FLAGS.SNOWGRAVE_ROUTE_PROGRESS]) || 0;
+  const step = entry
+    ? translateMeta(
+        getFlagTranslationKeyPrefix(FLAGS.SNOWGRAVE_ROUTE_PROGRESS),
+        entry,
+        t,
+      ).valueRules?.map?.[progress]
+    : undefined;
+
+  return (
+    <div className="mt-2 flex items-center gap-2">
+      <Badge tone="frost">{t('ui.home.sideB', 'SIDE B')}</Badge>
+      {step && <span className="text-sm text-text-2">{step}</span>}
     </div>
   );
 }
@@ -341,6 +370,7 @@ export function HomeOverview() {
                 </div>
                 <div className="flex flex-1 flex-col">
                   <SaveSource />
+                  <SideBStatus />
                   <div className="mt-2">
                     <SaveId />
                     <SaveTimestamp />
