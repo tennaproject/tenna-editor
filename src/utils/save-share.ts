@@ -28,6 +28,7 @@ export interface ShareMeta extends ShareOptions {
   readonly sharedAt: string;
   readonly name?: string;
   readonly isCompletionSave: boolean;
+  readonly isSideB?: boolean;
   readonly chapter: ChapterIndex;
   readonly slot: SaveSlot;
 }
@@ -87,6 +88,9 @@ export function createShareUrl(save: Save, options?: ShareOptions): string {
   if (save.meta.dataPacks?.length)
     params.set('dataPacks', JSON.stringify(save.meta.dataPacks));
   if (save.meta.isCompletionSave) params.set('isCompletionSave', 'true');
+  if (save.meta.isSideB !== undefined) {
+    params.set('isSideB', String(save.meta.isSideB));
+  }
 
   setOptional(params, 'name', capEncoded(save.meta.name, NAME_MAX_ENCODED));
   setOptional(
@@ -107,6 +111,12 @@ function readIndex(value: string | null): number | null {
   if (value === null || !value.trim()) return null;
   const parsed = Number(value);
   return Number.isInteger(parsed) ? parsed : null;
+}
+
+function readOptionalBoolean(value: string | null): boolean | undefined {
+  if (value === 'true') return true;
+  if (value === 'false') return false;
+  return undefined;
 }
 
 function readShareMeta(params: URLSearchParams): ShareMeta | undefined {
@@ -152,6 +162,7 @@ function readShareMeta(params: URLSearchParams): ShareMeta | undefined {
     sharedAt: params.get('sharedAt') ?? '',
     name: params.get('name') ?? undefined,
     isCompletionSave: params.get('isCompletionSave') === 'true',
+    isSideB: readOptionalBoolean(params.get('isSideB')),
     chapter: chapter as ChapterIndex,
     slot: slot as SaveSlot,
     author: params.get('author') ?? undefined,
