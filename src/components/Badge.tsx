@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react';
 import { mergeClass } from '@utils';
 
-export type BadgeTone = 'neutral' | 'red' | 'yellow' | 'green' | 'blue';
+export type BadgeTone =
+  'neutral' | 'red' | 'yellow' | 'green' | 'blue' | 'frost';
 type BadgeSize = 'sm' | 'md';
 
 interface BadgeProps {
@@ -18,6 +19,7 @@ const toneClasses: Record<BadgeTone, string> = {
   yellow: 'border-yellow/40 bg-yellow-soft text-text-1',
   green: 'border-green/40 bg-green-soft text-green',
   blue: 'border-blue/40 bg-blue-soft text-blue',
+  frost: 'border-frost/40 bg-frost-soft text-frost',
 };
 
 const sizeClasses: Record<BadgeSize, string> = {

@@ -342,6 +342,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
     save.meta.chapter = candidate.chapter;
     save.meta.slot = candidate.slot;
     save.meta.isCompletionSave = candidate.isCompletionSave;
+    save.meta.isSideB = candidate.isSideB;
     save.meta.name = candidate.name.trim() || candidate.defaultName;
     save.meta.importedUraBoss = getUraBoss(save, candidate.chapter);
     save.meta.baseline = {

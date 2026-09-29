@@ -109,6 +109,16 @@
   --color-purple-active: #a85aa8;
   --color-purple-soft: #af67af29; /* 16% alpha */
 
+  --color-frost: #9fe0fb; /* snowgrave */
+  --color-frost-hover: #b0e6fc;
+  --color-frost-active: #8ad8fa;
+  --color-frost-soft: #9fe0fb29; /* 16% alpha */
+
+  --color-accent: var(--color-red);
+  --color-accent-hover: var(--color-red-hover);
+  --color-accent-active: var(--color-red-active);
+  --color-on-accent: var(--color-text-1);
+
   --color-danger: var(--color-red);
   --color-danger-hover: var(--color-red-hover);
   --color-success: var(--color-green);
@@ -134,6 +144,18 @@
   --text-7xl: 80px;
   --text-8xl: 112px;
   --text-9xl: 160px;
+}
+
+/* Weird Route saves: phase 1-2 recolor the logo, phase 3+ the whole accent */
+:root[data-side-b] .tenna-logo path {
+  fill: var(--color-frost);
+}
+
+:root[data-side-b='full'] {
+  --color-accent: var(--color-frost);
+  --color-accent-hover: var(--color-frost-hover);
+  --color-accent-active: var(--color-frost-active);
+  --color-on-accent: var(--color-tenna-950);
 }
 
 :root[data-locale='ko'] {

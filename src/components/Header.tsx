@@ -110,7 +110,7 @@ export function Header() {
 
           <InlineGroup className="hidden sm:flex">
             <div className="flex leading-none justify-center items-center">
-              <div className="w-12 h-12 text-text-2">
+              <div className="tenna-logo w-12 h-12 text-text-2">
                 <Tenna />
               </div>
             </div>
