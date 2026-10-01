@@ -7,6 +7,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.15.0] - 2026-10-01
+
+This release adds data packs, new game save templates, Chapter 5 Side B save support, and many more Story flags. It also redesigns the save export flow.
+
+### Added
+
+- Added data packs, which let you load extra game data, such as items from mods, and turn it on per save. ([PR #189](https://github.com/tennaproject/tenna-editor/pull/189))
+- Added new game templates, so you can start from a fresh save for any chapter. Thanks [unendiverse](https://github.com/unendiverse)! ([Issue #98](https://github.com/tennaproject/tenna-editor/issues/98), [PR #170](https://github.com/tennaproject/tenna-editor/pull/170))
+- Added support for Chapter 5 Side B saves. ([PR #201](https://github.com/tennaproject/tenna-editor/pull/201))
+- Added a Story tab search by flag number. Thanks [cpu-99999999999](https://github.com/cpu-99999999999)! ([Issue #197](https://github.com/tennaproject/tenna-editor/issues/197), [PR #199](https://github.com/tennaproject/tenna-editor/pull/199))
+- Added a visual seat picker for the Cafe. ([PR #177](https://github.com/tennaproject/tenna-editor/pull/177))
+- Added more flags to the Story tab, mostly for Chapter 5. Thanks [Frisktaker](https://github.com/Frisktaker) and [cpu-99999999999](https://github.com/cpu-99999999999)! ([Issue #165](https://github.com/tennaproject/tenna-editor/issues/165), [Issue #168](https://github.com/tennaproject/tenna-editor/issues/168), [PR #179](https://github.com/tennaproject/tenna-editor/pull/179), [PR #180](https://github.com/tennaproject/tenna-editor/pull/180), [PR #185](https://github.com/tennaproject/tenna-editor/pull/185), [PR #191](https://github.com/tennaproject/tenna-editor/pull/191), [PR #204](https://github.com/tennaproject/tenna-editor/pull/204))
+- Added editing of the Shadow Crystals shown on the chapter select screen. ([PR #184](https://github.com/tennaproject/tenna-editor/pull/184))
+- Added icons to text buttons. ([PR #169](https://github.com/tennaproject/tenna-editor/pull/169))
+
+### Changed
+
+- Redesigned the save export flow.
+- Made zero and eight easier to tell apart in several places. Thanks [nmotsch789](https://github.com/nmotsch789) for reporting! ([Issue #171](https://github.com/tennaproject/tenna-editor/issues/171), [PR #172](https://github.com/tennaproject/tenna-editor/pull/172))
+- Improved the alignment of tooltips with dropdowns. Thanks [Araraura](https://github.com/Araraura)! ([PR #173](https://github.com/tennaproject/tenna-editor/pull/173), [PR #196](https://github.com/tennaproject/tenna-editor/pull/196))
+
+### Fixed
+
+- Fixed the `[URA]` section of `dr.ini` swapping incorrectly when you rearrange save slots. Thanks [Korzeniewsky](https://github.com/Korzeniewsky) for reporting! ([Issue #183](https://github.com/tennaproject/tenna-editor/issues/183), [PR #184](https://github.com/tennaproject/tenna-editor/pull/184))
+- Removed the Prophecy Maze chest flag from the Story tab and marked it as unused. Thanks [AleMonazo](https://github.com/AleMonazo) for reporting! ([Issue #164](https://github.com/tennaproject/tenna-editor/issues/164), [PR #178](https://github.com/tennaproject/tenna-editor/pull/178))
+- Fixed Silver Card being available in Chapter 1 saves. Thanks [cpu-99999999999](https://github.com/cpu-99999999999) for reporting! ([Issue #202](https://github.com/tennaproject/tenna-editor/issues/202), [PR #203](https://github.com/tennaproject/tenna-editor/pull/203))
+- Fixed a tooltip collapsing when its dropdown was too small. Thanks [Araraura](https://github.com/Araraura)!
+- Fixed dropdown scrolling that also moved the page. ([PR #198](https://github.com/tennaproject/tenna-editor/pull/198))
+
 ## [0.14.0] - 2026-08-24
 
 This release adds save sharing through links and QR codes, unique visual save fingerprints, and more Chapter 5 flags.
