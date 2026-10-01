@@ -110,6 +110,7 @@ export function ShareImport() {
         save.meta.slot = meta.slot;
         save.meta.dataPacks = meta.dataPacks;
         save.meta.isCompletionSave = meta.isCompletionSave;
+        save.meta.isSideB = meta.isSideB;
       } else {
         save.meta.chapter = detectChapter(save).chapter ?? save.meta.chapter;
       }

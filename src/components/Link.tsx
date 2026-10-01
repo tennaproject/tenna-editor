@@ -20,7 +20,7 @@ export function Link({
       href={href}
       target={target}
       className={mergeClass(
-        'text-red hover:text-red-hover underline',
+        'text-accent hover:text-accent-hover underline',
         className,
       )}
     >

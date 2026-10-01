@@ -48,9 +48,11 @@ import { getExportUraHistory } from '@utils/dr-ini';
 import { serializeSave } from '@utils/save-serializer';
 import type { Save, SaveSlot } from '@types';
 import {
+  getPcSaveFileName,
   getTargetKey,
   type SaveExportTarget,
 } from '@utils/save-export-targets';
+import { isSideBActive, resolveSideB } from '@utils/side-b';
 import { parseSwitchSaveContainer } from '@utils/switch-save-container';
 import { formatTranslation, useTranslation } from '../i18n';
 import { mergeClass } from '@utils/merge-class';
@@ -230,6 +232,8 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
   const [isCompletionSave, setIsCompletionSave] = useState(
     save?.meta.isCompletionSave ?? false,
   );
+  // null keeps the checkbox on the save's own flags; a boolean is a per-export override
+  const [sideBOverride, setSideBOverride] = useState<boolean | null>(null);
   const [exportMode, setExportMode] = useState<ExportMode>('pc');
   const [exportScope, setExportScope] = useState<ExportScope>('single');
   const [exportTimestamp] = useState(createExportTimestamp);
@@ -254,22 +258,41 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
   const [baseContainerName, setBaseContainerName] = useState('');
   const [hasHydratedExportDraft, setHasHydratedExportDraft] = useState(false);
   const completionSaveId = useId();
+  const sideBId = useId();
 
+  const canPickSideB = save?.meta.chapter === 5 && isCompletionSave;
+  const isSideB =
+    sideBOverride ??
+    (save ? (save.meta.isSideB ?? isSideBActive(save)) : false);
   const pcFileName = save
-    ? `filech${save.meta.chapter}_${isCompletionSave ? selectedSlot + 3 : selectedSlot}`
+    ? getPcSaveFileName({
+        chapter: save.meta.chapter,
+        slot: selectedSlot,
+        isCompletionSave,
+        isSideB: canPickSideB && isSideB,
+      })
     : '';
 
   const selectedExportTargets: SaveExportTarget[] = Array.from(
     selections.values(),
   )
     .filter((sel) => sel.selected)
-    .map((sel) => ({
-      save: sel.save,
-      chapter: sel.save.meta.chapter,
-      slot: sel.slotOverride ?? sel.save.meta.slot,
-      isCompletionSave:
-        sel.completionOverride ?? sel.save.meta.isCompletionSave,
-    }));
+    .map((sel) => {
+      const chapter = sel.save.meta.chapter;
+      const isCompletion =
+        sel.completionOverride ?? sel.save.meta.isCompletionSave;
+      return {
+        save: sel.save,
+        chapter,
+        slot: sel.slotOverride ?? sel.save.meta.slot,
+        isCompletionSave: isCompletion,
+        isSideB: resolveSideB({
+          save: sel.save,
+          chapter,
+          isCompletionSave: isCompletion,
+        }),
+      };
+    });
   const importedDrIni = getImportedDrIni(selectedExportTargets);
 
   const historyTargets =
@@ -343,6 +366,11 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
       const slot = selection?.slotOverride ?? storedSave.meta.slot;
       const completion =
         selection?.completionOverride ?? storedSave.meta.isCompletionSave;
+      const sideB = resolveSideB({
+        save: storedSave,
+        chapter: storedSave.meta.chapter,
+        isCompletionSave: completion,
+      });
 
       switch (saveTableSort.columnId) {
         case 'name':
@@ -358,6 +386,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
             chapter: storedSave.meta.chapter,
             slot,
             isCompletionSave: completion,
+            isSideB: sideB,
           });
         case 'source':
           return `${storedSave.meta.source?.platform ?? ''}:${storedSave.meta.source?.fileName ?? ''}`.toLocaleLowerCase();
@@ -401,6 +430,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
       chapter: save.meta.chapter,
       slot: selectedSlot,
       isCompletionSave,
+      isSideB: canPickSideB && isSideB,
     };
   }
 
@@ -497,6 +527,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
     const activeSave = useSave.getState().save;
     setSelectedSlot((activeSave?.meta.slot ?? 0) as SaveSlot);
     setIsCompletionSave(activeSave?.meta.isCompletionSave ?? false);
+    setSideBOverride(null);
     setExportMode(
       activeSave?.meta.source?.platform === 'switch' ? 'switch' : 'pc',
     );
@@ -852,6 +883,20 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
             </div>
           </div>
         )}
+        {exportScope === 'single' && canPickSideB && (
+          <div>
+            <TextLabel htmlFor={sideBId}>
+              {t('ui.field.sideB', 'Side B save')}
+            </TextLabel>
+            <div className="flex h-10 items-center">
+              <Checkbox
+                id={sideBId}
+                checked={isSideB}
+                onChange={setSideBOverride}
+              />
+            </div>
+          </div>
+        )}
         {exportScope === 'set' && exportMode === 'pc' && (
           <BaseSourceField
             label={t('ui.download.baseDrIni', 'Base dr.ini')}
@@ -996,6 +1041,11 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
                   chapter: storedSave.meta.chapter,
                   slot: effectiveSlot,
                   isCompletionSave: effectiveCompletion,
+                  isSideB: resolveSideB({
+                    save: storedSave,
+                    chapter: storedSave.meta.chapter,
+                    isCompletionSave: effectiveCompletion,
+                  }),
                 });
                 const isDuplicate =
                   isSelected && duplicates.includes(targetKey);

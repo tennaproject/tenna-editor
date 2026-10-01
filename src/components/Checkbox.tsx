@@ -72,13 +72,13 @@ export function Checkbox({
             flex items-center justify-center
             ${
               currentChecked
-                ? 'bg-red border-red shadow-red/20 hover:bg-red/90 hover:shadow-red/30'
+                ? 'bg-accent border-accent shadow-accent/20 hover:bg-accent/90 hover:shadow-accent/30'
                 : 'bg-surface-3 hover:bg-surface-2 hover:border-border/60'
             }
             ${
               disabled
                 ? 'shadow-none'
-                : 'peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-red/30 peer-focus-visible:ring-offset-1'
+                : 'peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-accent/30 peer-focus-visible:ring-offset-1'
             }
           `}
           aria-hidden
@@ -86,7 +86,7 @@ export function Checkbox({
           {currentChecked ? (
             <svg
               viewBox="0 0 24 24"
-              className="w-3 h-3 stroke-current opacity-100 motion-reduce:transition-none transition-all duration-200 ease-in-out text-white drop-shadow-sm"
+              className="w-3 h-3 stroke-current opacity-100 motion-reduce:transition-none transition-all duration-200 ease-in-out text-on-accent drop-shadow-sm"
               fill="none"
               strokeWidth={3.5}
               strokeLinecap="square"

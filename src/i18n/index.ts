@@ -77,6 +77,10 @@ const WEAPON_NAMES_BY_ID = getNamesById(WEAPONS);
 const UI_FALLBACKS: TranslationDictionary = {
   'ui.settings.title': 'Settings',
   'ui.settings.general': 'General',
+  'ui.settings.sound': 'Sound',
+  'ui.settings.soundDescription':
+    'Plays sound effects from the game while you edit saves.',
+  'ui.settings.soundEffects': 'Sound effects',
   'ui.settings.enableDeveloperMode': 'Enable developer mode',
   'ui.settings.backupRestore': 'Backup & Restore',
   'ui.settings.backupRestoreDescription':
@@ -426,6 +430,7 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.home.showDogcheckedRooms': 'Show dogchecked rooms',
   'ui.home.showRoomsWithoutSavePoint': 'Show rooms without save point',
   'ui.home.source': 'Source:',
+  'ui.home.sideB': 'SIDE B',
   'ui.home.saveFingerprint': 'Unique fingerprint',
   'ui.home.unreversible': 'This action cannot be reversed!',
   'ui.home.welcomeTitle': 'Welcome',
@@ -491,6 +496,7 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.field.armorII': 'Armor II',
   'ui.field.armor': 'Armor',
   'ui.field.completionSave': 'Completion save',
+  'ui.field.sideB': 'Side B save',
   'ui.field.currentRoom': 'Current Room',
   'ui.field.inDarkWorld': 'Currently in Dark World',
   'ui.field.inGameSlot': 'In-game slot',

@@ -53,6 +53,7 @@ function LocaleFlag({ country }: { country: keyof typeof FLAG_ASSETS }) {
 export function SettingsRoot() {
   const { locale, t } = useTranslation();
   const devmode = useUi((s) => s.ui.devmode);
+  const soundEnabled = useUi((s) => s.ui.sound.enabled);
   const updateUi = useUi((s) => s.updateUi);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const selectedLanguage =
@@ -119,6 +120,25 @@ export function SettingsRoot() {
                   if (!item || !isSupportedLocale(item.id)) return;
                   updateUi((ui) => (ui.locale = item.id as Locale));
                 }}
+              />
+            </Card>
+          </Section>
+
+          <Section id="sound">
+            <Card className="flex flex-col gap-3 p-6">
+              <Heading level={3}>{t('ui.settings.sound', 'Sound')}</Heading>
+              <p className="text-text-2 text-sm">
+                {t(
+                  'ui.settings.soundDescription',
+                  'Plays sound effects from the game while you edit saves.',
+                )}
+              </p>
+              <Checkbox
+                label={t('ui.settings.soundEffects', 'Sound effects')}
+                checked={soundEnabled}
+                onChange={(state) =>
+                  updateUi((ui) => (ui.sound.enabled = state))
+                }
               />
             </Card>
           </Section>
