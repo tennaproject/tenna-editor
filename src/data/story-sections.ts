@@ -99,6 +99,11 @@ export const STORY_SECTIONS = {
           ],
         },
         {
+          id: 'thrash-machine',
+          title: 'Thrash Machine',
+          flags: ['MADE_THRASH_MACHINE', 'THRASH_MACHINE_REMATCH_COUNT'],
+        },
+        {
           id: 'ragger',
           title: 'Ragger',
           flags: ['ASKED_ROYAL_COAT_RACK_ABOUT_CHEST', 'OBTAINED_RAGGER'],
@@ -169,6 +174,7 @@ export const STORY_SECTIONS = {
             'JAIL_INTERACTION_COUNT',
             'ATE_MOSS_CH1',
             'OBTAINED_IRON_SHACKLE',
+            'VISITED_JAIL',
           ],
         },
         {
