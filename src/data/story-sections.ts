@@ -519,8 +519,8 @@ export const STORY_SECTIONS = {
           flags: ['LANCER_CARED_FOR'],
         },
         {
-          id: 'mansion-floor-1f',
-          title: 'Mansion Floor 1f',
+          id: 'mansion-1f',
+          title: 'Mansion 1f',
           flags: [
             'OBTAINED_CHAIN_MAIL',
             'OBTAINED_ONE_DOLLAR_CHEST',
@@ -539,8 +539,8 @@ export const STORY_SECTIONS = {
           ],
         },
         {
-          id: 'mansion-floor-2f',
-          title: 'Mansion Floor 2f',
+          id: 'mansion-2f',
+          title: 'Mansion 2f',
           flags: [
             'OBTAINED_MANSION_GLOWSHARD',
             'SOLVED_FIRST_SAUCER_PUZZLE',
@@ -553,11 +553,10 @@ export const STORY_SECTIONS = {
           ],
         },
         {
-          id: 'mansion-floor-3f',
-          title: 'Mansion Floor 3f',
+          id: 'mansion-3f',
+          title: 'Mansion 3f',
           flags: [
             'SAW_TOILET_STATUE',
-            'HOUSES_HIT',
             'SWATCHLING_VASE_ROOM_PROGRESS',
             'MICE_RECEIVED_20_DOLLARS',
             'MICE_RECEIVED_1_DOLLAR',
@@ -565,6 +564,7 @@ export const STORY_SECTIONS = {
             'MOUSE_LOTTERY_RESULT_2',
             'MADE_HIGH_FIVE',
             'ROUXLS_PIRATE_HAT',
+            'STATUE_SINK_PROGRESS',
             'HOUSE_GAME_WINNER',
             'RALSEI_PHOTO_STATE',
           ],
