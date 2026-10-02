@@ -336,7 +336,7 @@ export const STORY_SECTIONS = {
             'TALKED_TO_SEAM_CH2',
             'SUSIE_ATE_CAKE',
             'TOLD_TO_EXPLORE',
-            'OBTAINED_SPINCAKE_CH2'
+            'OBTAINED_SPINCAKE_CH2',
           ],
         },
         {
