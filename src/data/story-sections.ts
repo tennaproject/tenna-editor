@@ -353,8 +353,8 @@ export const STORY_SECTIONS = {
           id: 'seam-and-king',
           title: 'Seam & King',
           flags: [
-            'GAVE_JEVIL_CRYSTAL', 
-            'OBTAINED_JEVIL_HOLE', 
+            'GAVE_JEVIL_CRYSTAL',
+            'OBTAINED_JEVIL_HOLE',
             'KING_JAIL_DIALOGUE_PROGRESS',
           ],
         },
