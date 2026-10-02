@@ -12,23 +12,23 @@ export function SaveSourceBadge({ save, className }: SaveSourceBadgeProps) {
   const platform = save?.meta.source?.platform;
   if (!platform) return null;
 
-  const isSwitch = platform === 'switch';
+  const isConsole = platform === 'console';
 
   return (
     <Badge
-      tone={isSwitch ? 'red' : 'neutral'}
+      tone={isConsole ? 'red' : 'neutral'}
       className={className}
       title={
-        isSwitch
+        isConsole
           ? t(
-              'ui.saveSource.importedSwitch',
+              'ui.saveSource.importedConsole',
               'Imported from an already-exported save container',
             )
           : t('ui.saveSource.importedPc', 'Imported from a PC save file')
       }
     >
-      {isSwitch
-        ? t('ui.saveSource.switch', 'SWITCH')
+      {isConsole
+        ? t('ui.saveSource.console', 'CONSOLE')
         : t('ui.saveSource.pc', 'PC')}
     </Badge>
   );

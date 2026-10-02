@@ -3,7 +3,7 @@ import { browserDatabase, EXPORT_DRAFTS_STORE } from './browser-database';
 
 export const EXPORT_DRAFT_VERSION = 1;
 
-export type ExportMode = 'pc' | 'switch';
+export type ExportMode = 'pc' | 'console';
 export type ExportScope = 'single' | 'set';
 export type ExportFileNameKey = `${ExportMode}-${ExportScope}`;
 export type ExportFileNames = Partial<Record<ExportFileNameKey, string>>;
@@ -34,12 +34,25 @@ export interface ExportDraft {
 
 const DRAFT_KEY = 'default';
 
+function renameSwitchMode(draft: ExportDraft): ExportDraft {
+  if ((draft.mode as string) === 'switch') draft.mode = 'console';
+  draft.fileNames = Object.fromEntries(
+    Object.entries(draft.fileNames).map(([key, name]) => [
+      key.replace(/^switch-/, 'console-'),
+      name,
+    ]),
+  );
+  return draft;
+}
+
 async function get(): Promise<ExportDraft | null> {
   try {
     const db = await browserDatabase;
     const draft = (await db.get(EXPORT_DRAFTS_STORE, DRAFT_KEY)) as
       ExportDraft | undefined;
-    return draft?.version === EXPORT_DRAFT_VERSION ? draft : null;
+    return draft?.version === EXPORT_DRAFT_VERSION
+      ? renameSwitchMode(draft)
+      : null;
   } catch (error) {
     console.error('export-draft-storage: get failed', error);
     return null;

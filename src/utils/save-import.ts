@@ -4,10 +4,10 @@ import { detectChapter } from './detection';
 import { normalizeLegacyRoomId } from './room-id';
 import { parseSave } from './save-parser';
 import {
-  parseSwitchSaveContainer,
-  parseSwitchSaveEntry,
-  type SwitchSaveContainer,
-} from './switch-save-container';
+  parseConsoleSaveContainer,
+  parseConsoleSaveEntry,
+  type ConsoleSaveContainer,
+} from './console-save-container';
 import { strFromU8, unzip, type Unzipped } from 'fflate';
 
 export const MAX_IMPORT_ENTRIES = 1_000;
@@ -25,10 +25,10 @@ export interface CollectedUploadFile {
   sourceKind: 'file' | 'folder';
 }
 
-export interface SwitchImportSource {
+export interface ConsoleImportSource {
   fileName: string;
   entryKey: string;
-  container: SwitchSaveContainer;
+  container: ConsoleSaveContainer;
 }
 
 export interface ImportCandidate {
@@ -48,9 +48,9 @@ export interface ImportCandidate {
   isCompletionSave: boolean;
   isSideB: boolean;
   isTemporarySource: boolean;
-  platform: 'pc' | 'switch';
+  platform: 'pc' | 'console';
   pcDrIni?: PcDrIniSource;
-  switchSource?: SwitchImportSource;
+  consoleSource?: ConsoleImportSource;
 }
 
 export interface ImportDiscoveryResult {
@@ -60,10 +60,10 @@ export interface ImportDiscoveryResult {
   sourceErrors: string[];
 }
 
-export function getTrimmedSwitchContainer(
+export function getTrimmedConsoleContainer(
   candidate: ImportCandidate,
 ): Record<string, string> {
-  const source = candidate.switchSource;
+  const source = candidate.consoleSource;
   if (!source) return {};
   const files: Record<string, string> = {};
   const drIniKey = Object.keys(source.container.files).find(
@@ -221,7 +221,7 @@ function createCandidate(
   error: string | null,
   options?: {
     displayKey?: string;
-    switchSource?: SwitchImportSource;
+    consoleSource?: ConsoleImportSource;
   },
 ): ImportCandidate {
   const displayKey = options?.displayKey ?? file.displayKey;
@@ -265,9 +265,9 @@ function createCandidate(
     isCompletionSave: slot.isCompletionSave,
     isSideB: slot.isSideB,
     isTemporarySource: slot.isTemporarySource,
-    platform: options?.switchSource ? 'switch' : 'pc',
-    pcDrIni: options?.switchSource ? undefined : file.pcDrIni,
-    switchSource: options?.switchSource,
+    platform: options?.consoleSource ? 'console' : 'pc',
+    pcDrIni: options?.consoleSource ? undefined : file.pcDrIni,
+    consoleSource: options?.consoleSource,
   };
 }
 
@@ -462,10 +462,10 @@ export function refreshImportCandidateNames(
 
 function parseVirtualFile(file: VirtualUploadFile): ImportCandidate[] {
   const text = strFromU8(file.content);
-  const container = parseSwitchSaveContainer(text);
+  const container = parseConsoleSaveContainer(text);
   if (container) {
     return container.entries.map((entry, index) => {
-      const switchSource: SwitchImportSource = {
+      const consoleSource: ConsoleImportSource = {
         fileName: file.sourcePath,
         entryKey: entry.key,
         container,
@@ -474,23 +474,23 @@ function parseVirtualFile(file: VirtualUploadFile): ImportCandidate[] {
         return createCandidate(
           { ...file, order: file.order + index / 100_000 },
           null,
-          `Unsupported Switch save entry name: ${entry.key}`,
-          { displayKey: entry.key, switchSource },
+          `Unsupported console save entry name: ${entry.key}`,
+          { displayKey: entry.key, consoleSource },
         );
       }
       try {
         return createCandidate(
           { ...file, order: file.order + index / 100_000 },
-          parseSwitchSaveEntry(container, entry.key),
+          parseConsoleSaveEntry(container, entry.key),
           null,
-          { displayKey: entry.key, switchSource },
+          { displayKey: entry.key, consoleSource },
         );
       } catch (error) {
         return createCandidate(
           { ...file, order: file.order + index / 100_000 },
           null,
           errorMessage(error),
-          { displayKey: entry.key, switchSource },
+          { displayKey: entry.key, consoleSource },
         );
       }
     });
@@ -648,7 +648,7 @@ export async function discoverImportCandidates(
   );
 
   sawDrIni ||= candidates.some((candidate) =>
-    Object.keys(candidate.switchSource?.container.files ?? {}).some(
+    Object.keys(candidate.consoleSource?.container.files ?? {}).some(
       (key) => key.toLowerCase() === 'dr.ini',
     ),
   );

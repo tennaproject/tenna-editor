@@ -10,7 +10,7 @@ import {
   type SaveExportCell,
   type SaveExportTarget,
 } from './save-export-targets';
-import { pcSaveTextToSwitchEntry } from './switch-save-container';
+import { pcSaveTextToConsoleEntry } from './console-save-container';
 
 export function cloneSaveForTarget(target: SaveExportTarget): Save {
   return {
@@ -75,7 +75,7 @@ export function buildPcExportFromTargets(
   return zipSync(files);
 }
 
-export function buildSwitchExportSet(
+export function buildConsoleExportSet(
   targets: SaveExportTarget[],
   baseContainer?: Record<string, string>,
   history?: Record<string, number>,
@@ -98,7 +98,7 @@ export function buildSwitchExportSet(
 
   for (const target of targets) {
     const key = getTargetKey(target);
-    container[key] = pcSaveTextToSwitchEntry(
+    container[key] = pcSaveTextToConsoleEntry(
       key,
       serializeSave(cloneSaveForTarget(target)),
     );
