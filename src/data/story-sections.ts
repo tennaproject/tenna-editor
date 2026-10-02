@@ -336,6 +336,7 @@ export const STORY_SECTIONS = {
             'TALKED_TO_SEAM_CH2',
             'SUSIE_ATE_CAKE',
             'TOLD_TO_EXPLORE',
+            'OBTAINED_SPINCAKE_CH2'
           ],
         },
         {
@@ -351,7 +352,7 @@ export const STORY_SECTIONS = {
         {
           id: 'seam-and-king',
           title: 'Seam & King',
-          flags: ['GAVE_JEVIL_CRYSTAL', 'KING_JAIL_DIALOGUE_PROGRESS'],
+          flags: ['GAVE_JEVIL_CRYSTAL', 'OBTAINED_JEVIL_HOLE', 'KING_JAIL_DIALOGUE_PROGRESS'],
         },
         {
           id: 'town-south',
@@ -395,6 +396,7 @@ export const STORY_SECTIONS = {
             'OBTAINED_CHESTMARK',
             'OBTAINED_SECOND_GLOW_WRIST',
             'OBTAINED_CHESTMARK_2',
+            'CHESTMARK_OPENED',
             'SOLVED_GIASFCLFEBREBREBEHR_PUZZLE',
             'RECRUITED_HACKER',
           ],
@@ -447,6 +449,7 @@ export const STORY_SECTIONS = {
             'OBTAINED_TRASH_CAN_CD_BAGEL',
             'TRIGGERED_TRASH_ZONE_TEMP_SAVE',
             'NOELLE_SAW_RALSEI_AND_SUSIE',
+            'TOLD_WRONGWAY',
           ],
         },
         {
@@ -461,6 +464,9 @@ export const STORY_SECTIONS = {
             'SOLVED_FORCEFIELD_1',
             'SEEN_STATUE_COUNT',
             'OBTAINED_SHOE',
+            'NOELLE_RELATIONSHIP_RESPONSE',
+            'INTERACTED_WITH_FERRIS_POSTER',
+            'TALKED_TO_DATING_SHOES_ADDISON',
           ],
         },
         {
@@ -491,6 +497,7 @@ export const STORY_SECTIONS = {
             'FIRST_CHEESE_DESTROYED',
             'APPROACHED_CHEESE_MAZE',
             'NOELLE_BEAT_FEAR',
+            'DESTROYED_CHEESE_ALONE',
           ],
         },
         {
@@ -596,6 +603,7 @@ export const STORY_SECTIONS = {
             'UNLOCKED_EAST_BASEMENT',
             'PUT_DISK_MANNEQUIN',
             'OBTAINED_DEALMAKER',
+            'SPAMTON_NO_ROOM',
             'OBTAINED_SPAMTON_REWARD',
             'TALKED_TO_SPAMTON_BEHIND_BASEMENT_DOOR',
             'SPAMTON_STRESS_RESPONSE',
@@ -627,7 +635,15 @@ export const STORY_SECTIONS = {
         {
           id: 'weird-route',
           title: 'Weird Route',
-          flags: ['SNOWGRAVE_ROUTE_PROGRESS', 'SNOWGRAVE_FAIL', 'ICESHOCKS'],
+          flags: [
+            'SNOWGRAVE_ROUTE_PROGRESS', 
+            'SNOWGRAVE_FAIL', 
+            'ICESHOCKS',
+            'FROZEN_CHICKEN',
+            'MANSION_THIRD_FLOOR_SHORTCUT_UNLOCKED',
+            'RIDE_WITH_ME',
+            'DEFEATED_SNOWGRAVE_NEO',
+          ],
         },
       ],
     },
