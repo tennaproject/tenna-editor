@@ -87,6 +87,7 @@ I put a lot of effort into making the layout look distinct and directly inspired
 - [@Araraura](https://github.com/Araraura)
 - cpu-99999999999
 - [@jah-yee](https://github.com/jah-yee)
+- [@jimmy-fun-fact](https://github.com/jimmy-fun-fact)
 - [@jjezewski](https://github.com/jjezewski) - creator & maintainer
 - john
 - [@krisgrant](https://github.com/krisgrant)

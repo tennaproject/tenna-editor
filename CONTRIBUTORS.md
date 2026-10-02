@@ -6,6 +6,7 @@
 - [Araraura](https://github.com/Araraura)
 - cpu-99999999999
 - [jah-yee](https://github.com/jah-yee)
+- [jimmy-fun-fact](https://github.com/jimmy-fun-fact)
 - [jjezewski](https://github.com/jjezewski) - creator & maintainer
 - john
 - [KrisGra](https://github.com/krisgrant)

@@ -27,6 +27,11 @@ export const CONTRIBUTORS: Contributor[] = [
     url: 'https://github.com/jah-yee',
   },
   {
+    displayName: 'jimmy-fun-fact',
+    login: 'jimmy-fun-fact',
+    url: 'https://github.com/jimmy-fun-fact',
+  },
+  {
     displayName: 'jjezewski',
     login: 'jjezewski',
     note: 'creator & maintainer',
