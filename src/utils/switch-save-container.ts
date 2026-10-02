@@ -120,6 +120,14 @@ function readUint32(bytes: Uint8Array, offset: number): number {
   ).getUint32(offset, true);
 }
 
+function readBigInt64(bytes: Uint8Array, offset: number): bigint {
+  return new DataView(
+    bytes.buffer,
+    bytes.byteOffset,
+    bytes.byteLength,
+  ).getBigInt64(offset, true);
+}
+
 function readFloat64(bytes: Uint8Array, offset: number): number {
   return new DataView(
     bytes.buffer,
@@ -203,11 +211,17 @@ function decodeDsList(hex: string): string[] {
     const tag = readUint32(bytes, position);
     position += 4;
 
-    if (tag === 0 || tag === 10 || tag === 13) {
+    if (tag === 0 || tag === 13) {
       if (position + 8 > bytes.length) {
         throw new Error(`Truncated DS-list real at item ${i}`);
       }
       values.push(normalizeNumber(readFloat64(bytes, position)));
+      position += 8;
+    } else if (tag === 10) {
+      if (position + 8 > bytes.length) {
+        throw new Error(`Truncated DS-list real at item ${i}`);
+      }
+      values.push(normalizeNumber(Number(readBigInt64(bytes, position))));
       position += 8;
     } else if (tag === 1) {
       if (position + 4 > bytes.length) {
