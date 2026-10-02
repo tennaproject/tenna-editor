@@ -636,8 +636,8 @@ export const STORY_SECTIONS = {
           id: 'weird-route',
           title: 'Weird Route',
           flags: [
-            'SNOWGRAVE_ROUTE_PROGRESS', 
-            'SNOWGRAVE_FAIL', 
+            'SNOWGRAVE_ROUTE_PROGRESS',
+            'SNOWGRAVE_FAIL',
             'ICESHOCKS',
             'FROZEN_CHICKEN',
             'MANSION_THIRD_FLOOR_SHORTCUT_UNLOCKED',
