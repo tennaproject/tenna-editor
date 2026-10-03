@@ -693,7 +693,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
               {t('ui.download.source', 'Source')}
             </ResponsiveTableMobileLabel>
             <Badge
-              tone={candidate.platform === 'console' ? 'red' : 'neutral'}
+              tone={candidate.platform === 'console' ? 'purple' : 'neutral'}
               size="sm"
             >
               {candidate.platform.toUpperCase()}

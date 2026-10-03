@@ -16,7 +16,7 @@ export function SaveSourceBadge({ save, className }: SaveSourceBadgeProps) {
 
   return (
     <Badge
-      tone={isConsole ? 'red' : 'neutral'}
+      tone={isConsole ? 'purple' : 'neutral'}
       className={className}
       title={
         isConsole
