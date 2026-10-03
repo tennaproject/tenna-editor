@@ -10,7 +10,7 @@ import { extractGamePayload } from '@utils/save-baseline';
 import { getUraBoss } from '@utils/dr-ini';
 import {
   discoverImportCandidates,
-  getTrimmedSwitchContainer,
+  getTrimmedConsoleContainer,
   refreshImportCandidateNames,
   type CollectedUploadFile,
   type ImportCandidate,
@@ -168,7 +168,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
           return Number(candidate.isCompletionSave);
         case 'source':
           return `${candidate.platform}:${
-            candidate.platform === 'switch'
+            candidate.platform === 'console'
               ? candidate.displayKey
               : candidate.sourcePath
           }`.toLocaleLowerCase();
@@ -351,12 +351,12 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
       payload: extractGamePayload(save),
     };
 
-    if (candidate.switchSource) {
+    if (candidate.consoleSource) {
       save.meta.source = {
-        platform: 'switch',
-        fileName: candidate.switchSource.fileName,
-        key: candidate.switchSource.entryKey,
-        container: getTrimmedSwitchContainer(candidate),
+        platform: 'console',
+        fileName: candidate.consoleSource.fileName,
+        key: candidate.consoleSource.entryKey,
+        container: getTrimmedConsoleContainer(candidate),
       };
     } else {
       save.meta.source = {
@@ -538,11 +538,11 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
       chapterOptions.find((item) => item.value === candidate.chapter) ??
       chapterOptions[0];
     const displayedSource =
-      candidate.platform === 'switch'
+      candidate.platform === 'console'
         ? candidate.displayKey
         : candidate.sourcePath;
     const sourceTitle =
-      candidate.platform === 'switch'
+      candidate.platform === 'console'
         ? `${candidate.sourcePath}: ${candidate.displayKey}`
         : candidate.sourcePath;
 
@@ -693,7 +693,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
               {t('ui.download.source', 'Source')}
             </ResponsiveTableMobileLabel>
             <Badge
-              tone={candidate.platform === 'switch' ? 'red' : 'neutral'}
+              tone={candidate.platform === 'console' ? 'purple' : 'neutral'}
               size="sm"
             >
               {candidate.platform.toUpperCase()}

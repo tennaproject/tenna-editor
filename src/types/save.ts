@@ -13,7 +13,7 @@ import type {
 import type { UUID } from 'crypto';
 import type { DataPackReference } from './data-pack';
 
-export const SAVE_SCHEMA = 5;
+export const SAVE_SCHEMA = 6;
 export type SaveFormat = 1 | 2;
 export type SaveSlot = 0 | 1 | 2;
 export type BaselineSource = 'upload' | 'download';
@@ -29,14 +29,14 @@ export interface PcSaveSource {
   drIni?: PcDrIniSource;
 }
 
-export interface SwitchSaveSource {
-  platform: 'switch';
+export interface ConsoleSaveSource {
+  platform: 'console';
   fileName: string;
   key: string;
   container: Record<string, string>;
 }
 
-export type SaveSource = PcSaveSource | SwitchSaveSource;
+export type SaveSource = PcSaveSource | ConsoleSaveSource;
 
 export interface WeaponStats {
   attack: number;

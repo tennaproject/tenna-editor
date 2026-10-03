@@ -40,7 +40,7 @@ import { getBaselineRevision } from '@utils/save-diff';
 import {
   buildCellsFromTargets,
   buildPcExportFromTargets,
-  buildSwitchExportSet,
+  buildConsoleExportSet,
   cloneSaveForTarget,
   findDuplicateExportTargets,
 } from '@utils/save-export';
@@ -53,7 +53,7 @@ import {
   type SaveExportTarget,
 } from '@utils/save-export-targets';
 import { isSideBActive, resolveSideB } from '@utils/side-b';
-import { parseSwitchSaveContainer } from '@utils/switch-save-container';
+import { parseConsoleSaveContainer } from '@utils/console-save-container';
 import { formatTranslation, useTranslation } from '../i18n';
 import { mergeClass } from '@utils/merge-class';
 
@@ -65,7 +65,7 @@ const SLOT_OPTIONS: SelectItem[] = [
 
 const EXPORT_OPTIONS: SelectItem[] = [
   { id: 'pc', label: 'PC save file', value: 'pc' },
-  { id: 'switch', label: 'Switch container', value: 'switch' },
+  { id: 'console', label: 'Console container', value: 'console' },
 ] as const;
 
 interface SaveSelection {
@@ -131,7 +131,7 @@ function getImportedDrIni(targets: SaveExportTarget[]) {
   for (const target of targets) {
     const source = target.save.meta.source;
     if (source?.platform === 'pc' && source.drIni) return source.drIni;
-    if (source?.platform === 'switch') {
+    if (source?.platform === 'console') {
       const drIniKey = Object.keys(source.container).find(
         (key) => key.toLowerCase() === 'dr.ini',
       );
@@ -304,7 +304,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
   const historyImportedIni = getImportedDrIni(historyTargets)?.content ?? '';
   const historyBaseIni =
     exportScope === 'set'
-      ? exportMode === 'switch'
+      ? exportMode === 'console'
         ? (baseContainer?.['dr.ini'] ?? historyImportedIni)
         : baseDrIni || historyImportedIni
       : historyImportedIni;
@@ -339,10 +339,10 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
 
   const defaultFileName =
     exportScope === 'set'
-      ? exportMode === 'switch'
+      ? exportMode === 'console'
         ? 'deltarune.sav'
         : `tenna-saves-${exportTimestamp}.zip`
-      : exportMode === 'switch'
+      : exportMode === 'console'
         ? 'deltarune.sav'
         : pcFileName;
   const fileNameKey: ExportFileNameKey = `${exportMode}-${exportScope}`;
@@ -419,7 +419,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
   }
 
   function onExportModeSelection(item: SelectItem | null) {
-    if (item?.value === 'pc' || item?.value === 'switch') {
+    if (item?.value === 'pc' || item?.value === 'console') {
       setExportMode(item.value);
     }
   }
@@ -462,15 +462,15 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
     reader.onload = () => {
       const content = String(reader.result ?? '');
       try {
-        const parsed = parseSwitchSaveContainer(content);
+        const parsed = parseConsoleSaveContainer(content);
         if (parsed) {
           setBaseContainer(parsed.files);
           setBaseContainerName(file.name);
         } else {
           toast(
             t(
-              'ui.upload.invalidSwitchContainer',
-              'Invalid Switch container file',
+              'ui.upload.invalidConsoleContainer',
+              'Invalid console container file',
             ),
             'error',
           );
@@ -478,8 +478,8 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
       } catch {
         toast(
           t(
-            'ui.upload.invalidSwitchContainer',
-            'Invalid Switch container file',
+            'ui.upload.invalidConsoleContainer',
+            'Invalid console container file',
           ),
           'error',
         );
@@ -490,11 +490,11 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
 
   function getDownloadPayload(save: Save): string | Uint8Array {
     if (exportScope === 'set') {
-      if (exportMode === 'switch') {
+      if (exportMode === 'console') {
         const importedBase = importedDrIni
           ? { 'dr.ini': importedDrIni.content }
           : undefined;
-        return buildSwitchExportSet(
+        return buildConsoleExportSet(
           selectedExportTargets,
           baseContainer ?? importedBase,
           exportHistory,
@@ -508,15 +508,15 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
     }
 
     const target = getSingleExportTarget(save);
-    if (exportMode === 'switch') {
+    if (exportMode === 'console') {
       const source = save.meta.source;
       const base =
-        source?.platform === 'switch'
+        source?.platform === 'console'
           ? source.container
           : source?.drIni
             ? { 'dr.ini': source.drIni.content }
             : undefined;
-      return buildSwitchExportSet([target], base, exportHistory);
+      return buildConsoleExportSet([target], base, exportHistory);
     }
 
     return serializeSave(cloneSaveForTarget(target));
@@ -529,7 +529,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
     setIsCompletionSave(activeSave?.meta.isCompletionSave ?? false);
     setSideBOverride(null);
     setExportMode(
-      activeSave?.meta.source?.platform === 'switch' ? 'switch' : 'pc',
+      activeSave?.meta.source?.platform === 'console' ? 'console' : 'pc',
     );
     setExportScope('single');
     setFileNames({});
@@ -651,7 +651,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
         setSelectedSlot((activeSave?.meta.slot ?? 0) as SaveSlot);
         setIsCompletionSave(activeSave?.meta.isCompletionSave ?? false);
         setExportMode(
-          activeSave?.meta.source?.platform === 'switch' ? 'switch' : 'pc',
+          activeSave?.meta.source?.platform === 'console' ? 'console' : 'pc',
         );
         setSelections(
           buildSelections(sortedSaves, undefined, activeSave?.meta.id),
@@ -824,7 +824,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
               label:
                 item.id === 'pc'
                   ? t('ui.download.pcSaveFile', 'PC save file')
-                  : t('ui.download.switchContainer', 'Switch container'),
+                  : t('ui.download.consoleContainer', 'Console container'),
             }))}
             placeholder={t(
               'ui.download.selectExportType',
@@ -929,7 +929,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
             }}
           />
         )}
-        {exportScope === 'set' && exportMode === 'switch' && (
+        {exportScope === 'set' && exportMode === 'console' && (
           <BaseSourceField
             label={t('ui.download.baseContainer', 'Base container')}
             hint={

@@ -381,11 +381,11 @@ export function getExportUraHistory(
 function getOriginalSlot(save: Save) {
   const source = save.meta.source;
   const fileName =
-    source?.platform === 'switch' ? source.key : source?.fileName;
+    source?.platform === 'console' ? source.key : source?.fileName;
   const match = fileName?.match(/(?:^|[/\\])filech([1-5])_([0-5])(?:_b)?$/i);
   if (!match) return null;
   const content =
-    source?.platform === 'switch'
+    source?.platform === 'console'
       ? Object.entries(source.container).find(
           ([key]) => key.toLowerCase() === 'dr.ini',
         )?.[1]
