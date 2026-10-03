@@ -7,7 +7,7 @@ const FILECH_PATTERN = /^filech(\d+)_(\d+)(?:_b)?$/;
 const DS_LIST_HEADER = '2F010000';
 const DS_LIST_HEADERS = new Set(['2E010000', DS_LIST_HEADER]);
 
-interface SwitchSaveLayout {
+interface ConsoleSaveLayout {
   chapter: number;
   characters: number;
   weaponStatFields: number;
@@ -15,7 +15,7 @@ interface SwitchSaveLayout {
   inventoryMode: 1 | 2;
 }
 
-export interface SwitchSaveEntry {
+export interface ConsoleSaveEntry {
   key: string;
   chapter: number;
   slot: number;
@@ -23,12 +23,12 @@ export interface SwitchSaveEntry {
   lineCount: number;
 }
 
-export interface SwitchSaveContainer {
-  entries: SwitchSaveEntry[];
+export interface ConsoleSaveContainer {
+  entries: ConsoleSaveEntry[];
   files: Record<string, string>;
 }
 
-class SwitchLineCursor {
+class ConsoleLineCursor {
   private position = 0;
   private readonly lines: string[];
 
@@ -39,7 +39,7 @@ class SwitchLineCursor {
   take(): string {
     if (this.position >= this.lines.length) {
       throw new Error(
-        `Unexpected end of switch save at line ${this.position + 1}`,
+        `Unexpected end of console save at line ${this.position + 1}`,
       );
     }
     const value = this.lines[this.position];
@@ -69,7 +69,7 @@ function splitSaveLines(text: string): string[] {
   return lines;
 }
 
-function splitPcSaveLinesForSwitch(text: string): string[] {
+function splitPcSaveLinesForConsole(text: string): string[] {
   return splitSaveLines(text).map((line, index) => {
     return index <= 6 ? line : line.trim();
   });
@@ -79,19 +79,19 @@ function joinPcLines(lines: string[]): string {
   return `${lines.join('\n')}\n`;
 }
 
-function joinSwitchLines(lines: string[]): string {
+function joinConsoleLines(lines: string[]): string {
   return lines.join('\r\n');
 }
 
-function detectLayout(key: string): SwitchSaveLayout {
+function detectLayout(key: string): ConsoleSaveLayout {
   const match = key.toLowerCase().match(FILECH_PATTERN);
   if (!match) {
-    throw new Error(`Invalid switch save key: ${key}`);
+    throw new Error(`Invalid console save key: ${key}`);
   }
 
   const chapter = Number(match[1]);
   if (!Number.isInteger(chapter) || chapter < 1 || chapter > 5) {
-    throw new Error(`Unsupported Switch save chapter: ${chapter}`);
+    throw new Error(`Unsupported console save chapter: ${chapter}`);
   }
   if (chapter === 1) {
     return {
@@ -279,9 +279,9 @@ function valueAt(values: string[], index: number): string {
   return values[index] ?? '0';
 }
 
-export function parseSwitchSaveContainer(
+export function parseConsoleSaveContainer(
   content: string,
-): SwitchSaveContainer | null {
+): ConsoleSaveContainer | null {
   let parsed: unknown;
   try {
     parsed = JSON.parse(normalizeContainerText(content));
@@ -294,7 +294,7 @@ export function parseSwitchSaveContainer(
   }
 
   const files: Record<string, string> = {};
-  const entries: SwitchSaveEntry[] = [];
+  const entries: ConsoleSaveEntry[] = [];
 
   for (const [key, value] of Object.entries(parsed)) {
     if (typeof value !== 'string') continue;
@@ -318,9 +318,9 @@ export function parseSwitchSaveContainer(
   return { files, entries };
 }
 
-export function switchEntryToPcSaveText(key: string, entry: string): string {
+export function consoleEntryToPcSaveText(key: string, entry: string): string {
   const layout = detectLayout(key);
-  const src = new SwitchLineCursor(splitSaveLines(entry));
+  const src = new ConsoleLineCursor(splitSaveLines(entry));
   const out: string[] = [];
 
   out.push(src.take());
@@ -381,15 +381,15 @@ export function switchEntryToPcSaveText(key: string, entry: string): string {
   out.push(src.take());
   out.push(src.take());
   if (src.remaining > 0) {
-    throw new Error(`Switch save had ${src.remaining} unread lines`);
+    throw new Error(`Console save had ${src.remaining} unread lines`);
   }
 
   return joinPcLines(out);
 }
 
-export function pcSaveTextToSwitchEntry(key: string, text: string): string {
+export function pcSaveTextToConsoleEntry(key: string, text: string): string {
   const layout = detectLayout(key);
-  const src = new SwitchLineCursor(splitPcSaveLinesForSwitch(text));
+  const src = new ConsoleLineCursor(splitPcSaveLinesForConsole(text));
   const out: string[] = [];
 
   out.push(src.take());
@@ -472,18 +472,18 @@ export function pcSaveTextToSwitchEntry(key: string, text: string): string {
     throw new Error(`PC save had ${src.remaining} unread lines`);
   }
 
-  return joinSwitchLines(out);
+  return joinConsoleLines(out);
 }
 
-export function parseSwitchSaveEntry(
-  container: SwitchSaveContainer,
+export function parseConsoleSaveEntry(
+  container: ConsoleSaveContainer,
   entryKey: string,
 ): Save {
   const entry = container.files[entryKey];
   if (typeof entry !== 'string') {
-    throw new Error(`Switch container does not include ${entryKey}`);
+    throw new Error(`Console container does not include ${entryKey}`);
   }
-  const save = parseSave(switchEntryToPcSaveText(entryKey, entry));
+  const save = parseSave(consoleEntryToPcSaveText(entryKey, entry));
   save.room = normalizeLegacyRoomId(
     save.room,
     detectLayout(entryKey).chapter as ChapterIndex,

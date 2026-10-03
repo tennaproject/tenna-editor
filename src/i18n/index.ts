@@ -305,8 +305,6 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.download.baseDrIniHintOverride':
     'Using this file instead of the imported dr.ini.',
   'ui.download.baseContainer': 'Base container',
-  'ui.download.baseContainerDescription':
-    'A Switch container can keep entries you are not exporting. Imported dr.ini metadata is used automatically. Choose another container only if you want to override it.',
   'ui.download.baseContainerHintNone':
     'Optional. Other container entries are omitted if you skip this.',
   'ui.download.baseContainerHintImported':
@@ -337,12 +335,7 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.download.fileName': 'Download file name',
   'ui.download.selectExportType': 'Select export type',
   'ui.download.selectNamedSave': 'Select {name}',
-  'ui.download.selectAtLeastOneSwitchSave':
-    'Select at least one save for Switch export.',
-  'ui.download.selectAtLeastOneSwitchSaveForSet':
-    'Select at least one save for Switch export set',
-  'ui.download.switchContainer': 'Switch container',
-  'ui.download.switchExperimentalNotice': 'Switch export is experimental.',
+  'ui.download.consoleContainer': 'Console container',
   'ui.download.noSaveLoadedCurrently': 'There is no save loaded currently',
   'ui.download.noStoredSaves': 'No stored saves available.',
   'ui.download.loadSavesFailed': 'Stored saves could not be loaded.',
@@ -355,7 +348,6 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.upload.chooseFilesArchives': 'Choose files or archives',
   'ui.upload.chooseFolder': 'Choose folder',
   'ui.upload.chooseInputInstead': 'or choose what to import',
-  'ui.upload.chooseSwitchSave': 'Choose Switch Save',
   'ui.upload.clearSelection': 'Clear selection',
   'ui.upload.confirmChapter': 'Confirm Chapter',
   'ui.upload.containedSave': 'Contained save',
@@ -381,8 +373,6 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.upload.selectCandidate': 'Select {name}',
   'ui.upload.selectChapter': 'Select chapter',
   'ui.upload.selectSave': 'Select save',
-  'ui.upload.switchContainerChooseEntry':
-    'This Switch container includes multiple save entries. Choose one to edit.',
   'ui.upload.tooManyFolderFiles':
     'The selected folder contains more than {count} files or folders. Choose a smaller folder or ZIP only the saves you want to import.',
   'ui.upload.uploadFailed': 'Upload Failed',
@@ -457,9 +447,9 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.home.deltaportNoteSuffix': 'your saves are located at',
   'ui.home.compatibility': 'Compatibility',
   'ui.home.compatibilityDescription':
-    'Tenna Editor is compatible with DELTARUNE Chapter 1-5 save files from PC platforms and already-exported Switch save containers. Chapter 5 support includes editor data for recruits, rooms, items, weapons, and armors. Dedicated flags and plot points are not mapped yet.',
-  'ui.home.switchCompatibilityDescription':
-    'Switch save containers are experimental and require an already-exported {fileName}. Tenna Editor cannot extract or restore saves on hardware.',
+    'Tenna Editor is compatible with DELTARUNE Chapter 1-5 save files from PC platforms and already-exported console save containers. Chapter 5 support includes editor data for recruits, rooms, items, weapons, and armors. Dedicated flags and plot points are not mapped yet.',
+  'ui.home.consoleCompatibilityDescription':
+    'Console save containers (Nintendo Switch, PS4, PS5) are experimental and require an already-exported {fileName}. Tenna Editor cannot extract or restore saves on hardware.',
   'ui.home.platformPcWindows': 'PC (Windows)',
   'ui.home.platformMac': 'Mac',
   'ui.home.platformLinuxProton': 'Linux (through Steam Proton)',
@@ -678,10 +668,10 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.about.websiteLabel': 'Website: {website}',
   'ui.placeholder.loadingHeadline': 'MIKE, the BOARD, please!',
   'ui.placeholder.underConstruction': 'This tab is under construction',
-  'ui.saveSource.importedSwitch':
+  'ui.saveSource.importedConsole':
     'Imported from an already-exported save container',
   'ui.saveSource.importedPc': 'Imported from a PC save file',
-  'ui.saveSource.switch': 'SWITCH',
+  'ui.saveSource.console': 'CONSOLE',
   'ui.saveSource.pc': 'PC',
 };
 

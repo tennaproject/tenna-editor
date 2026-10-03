@@ -8,7 +8,7 @@ export * from './line-cursor';
 export * from './save-parser';
 export * from './save-serializer';
 export * from './room-id';
-export * from './switch-save-container';
+export * from './console-save-container';
 export * from './merge-class';
 export * from './wiki-url';
 export * from './get-character-color';

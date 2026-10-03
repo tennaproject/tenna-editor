@@ -20,7 +20,7 @@ function sync() {
   }, SYNC_DELAY);
 }
 
-export const SAVE_VERSION = 5;
+export const SAVE_VERSION = 6;
 
 function ensureSaveSource(save: Save) {
   save.meta.source ??= {
@@ -284,6 +284,16 @@ export const useSave = create<SaveState>()(
           const saves = await saveStorage.getAll();
           saves.forEach((save) => {
             save.meta.importedUraBoss ??= getImportedUraBoss(save);
+            save.meta.schema = SAVE_SCHEMA;
+          });
+          await saveStorage.migrate(saves);
+        }
+
+        if (version < 6) {
+          const saves = await saveStorage.getAll();
+          saves.forEach((save) => {
+            const source = save.meta.source as { platform: string } | undefined;
+            if (source?.platform === 'switch') source.platform = 'console';
             save.meta.schema = SAVE_SCHEMA;
           });
           await saveStorage.migrate(saves);
