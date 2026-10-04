@@ -30,7 +30,7 @@ export const STORY_SECTIONS = {
       id: 'beginning-to-forest',
       title: 'Beginning to Forest',
       clusters: [
-      {
+        {
           id: 'emenies',
           title: 'Emenies',
           flags: [
