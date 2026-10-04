@@ -31,29 +31,6 @@ export const STORY_SECTIONS = {
       title: 'Beginning to Forest',
       clusters: [
         {
-          id: 'emenies',
-          title: 'Emenies',
-          flags: [
-            'RUDINN_FIGHT_COUNT',
-            'RUDINN_VIOLENCES',
-            'RUDINN_HIT_BY_SUSIE_COUNT',
-            'HATHY_VIOLENCES',
-            'HATHY_HIT_BY_SUSIE_COUNT',
-            'PONMAN_FIGHT_COUNT',
-            'FOUGHT_RABBICK',
-            'FOUGHT_BLOXER',
-            'FOUGHT_RUDINN_RANGER',
-            'SUSIE_COMPLIMENT_COUNT',
-            'FOUGHT_HATHYX',
-            'SUSIE_FLIRT_COUNT',
-          ],
-        },
-        {
-          id: 'light-world',
-          title: 'light world',
-          flags: ['RAN_IN_SCHOOL'],
-        },
-        {
           id: 'dark-world-entrance',
           title: 'Dark World Entrance',
           flags: ['DARK_AREA_MOVEMENT_CHOICE', 'SOLVED_EYE_PUZZLE'],
