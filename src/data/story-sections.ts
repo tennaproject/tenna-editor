@@ -32,7 +32,7 @@ export const STORY_SECTIONS = {
       clusters: [
         {
           id: 'emenies',
-          title: 'Emenies',
+          title: 'emenies',
           flags: [
             'RUDINN_FIGHT_COUNT',
             'RUDINN_VIOLENCES',
