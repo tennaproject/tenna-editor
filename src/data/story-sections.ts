@@ -642,6 +642,7 @@ export const STORY_SECTIONS = {
           flags: [
             'SNOWGRAVE_ROUTE_PROGRESS',
             'SNOWGRAVE_FAIL',
+            'STOLEN_BAGELS',
             'ICESHOCKS',
             'FROZEN_CHICKEN',
             'MANSION_THIRD_FLOOR_SHORTCUT_UNLOCKED',
