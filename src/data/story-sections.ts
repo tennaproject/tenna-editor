@@ -544,6 +544,7 @@ export const STORY_SECTIONS = {
             'SOLVED_MANSION_TRAFFIC',
             'FOUND_BASEMENT_SWITCH',
             'FOUND_SHORTCUT_OUT',
+            'FOUND_TASQUE_SWITCH',
             'OBTAINED_FOURTH_REVIVE_MINT',
             'OBTAINED_REVIVE_DUST',
             'SHOVEL_DOOR_OPEN',
