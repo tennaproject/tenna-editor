@@ -236,7 +236,11 @@ export const STORY_SECTIONS = {
         {
           id: 'hospital',
           title: 'Hospital',
-          flags: ['RUDY_DIALOGUE_PROGRESS_CH1', 'USED_RUDY_SINK_CH1'],
+          flags: [
+            'RUDY_DIALOGUE_PROGRESS_CH1',
+            'USED_RUDY_SINK_CH1',
+            'KEPT_NOELLE_WATCH_AFTER_CH2',
+          ],
         },
         {
           id: 'librarby',
