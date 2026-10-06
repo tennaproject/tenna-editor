@@ -44,6 +44,8 @@ export const STORY_SECTIONS = {
             'FOUGHT_BLOXER',
             'FOUGHT_RUDINN_RANGER',
             'SUSIE_COMPLIMENT_COUNT',
+            'FOUGHT_HATHYX',
+            'SUSIE_FLIRT_COUNT',
           ],
         }
         {
