@@ -116,11 +116,7 @@ export const STORY_SECTIONS = {
         {
           id: 'clover',
           title: 'Clover',
-          flags: [
-            'SOLVED_CLOVER_PUZZLE',
-            'CLOVER_VIOLENCE',
-            'TALKED_TO_ALL_CLOVER_HEADS',
-          ],
+          flags: ['SOLVED_CLOVER_PUZZLE', 'CLOVER_VIOLENCE'],
         },
         {
           id: 'bake-sale',
