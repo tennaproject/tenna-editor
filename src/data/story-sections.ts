@@ -116,7 +116,11 @@ export const STORY_SECTIONS = {
         {
           id: 'clover',
           title: 'Clover',
-          flags: ['SOLVED_CLOVER_PUZZLE', 'CLOVER_VIOLENCE'],
+          flags: [
+            'SOLVED_CLOVER_PUZZLE',
+            'CLOVER_VIOLENCE',
+            'TALKED_TO_ALL_CLOVER_HEADS',
+          ],
         },
         {
           id: 'bake-sale',
@@ -1263,6 +1267,7 @@ export const STORY_SECTIONS = {
             'KEPT_NOELLE_WAITING',
             'CHECKED_NOELLE_BROWSING_HISTORY',
             'FOUND_CAT_PETTERZ_4',
+            'KEPT_NOELLE_WATCH_AFTER_CH2',
             'TOOK_NOELLE_DESK_PENCIL',
             'USED_TREAT_CATCHER_WITH_SUSIE_AND_NOELLE',
             'MADE_NOISE_IN_NOELLE_HOUSE_COUNT',
