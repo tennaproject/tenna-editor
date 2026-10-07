@@ -243,7 +243,6 @@ export const STORY_SECTIONS = {
           flags: [
             'RUDY_DIALOGUE_PROGRESS_CH1',
             'USED_RUDY_SINK_CH1',
-            'KEPT_NOELLE_WATCH_AFTER_CH2',
           ],
         },
         {
