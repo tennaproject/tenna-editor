@@ -98,6 +98,10 @@ export default defineConfig({
     port: 4545,
   },
   build: {
+    assetsInlineLimit: (filePath) =>
+      /assets[/\\]deltarune[/\\]recruits[/\\]/.test(filePath)
+        ? false
+        : undefined,
     rolldownOptions: {
       output: {
         chunkFileNames: 'assets/chunk-[name]-[hash].js',
