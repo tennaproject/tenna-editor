@@ -13,7 +13,7 @@ import {
 } from '@components';
 import { exportAllSaves, importAllSaves } from '@utils';
 import { toast } from '@services';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import FlagKr from '@assets/flags/flag-kr.png';
 import FlagUs from '@assets/flags/flag-us.png';
 import FlagIt from '@assets/flags/flag-it.png';
@@ -21,18 +21,24 @@ import {
   SUPPORTED_LOCALES,
   getLocaleTranslationStats,
   isSupportedLocale,
+  loadAllLocales,
+  loadLocale,
   useTranslation,
   type Locale,
 } from '../../i18n';
 import { DataPacks } from './DataPacks';
 
-const LANGUAGE_OPTIONS: SelectItem[] = Object.entries(SUPPORTED_LOCALES)
-  .sort(([, a], [, b]) => a.displayName.localeCompare(b.displayName))
-  .map(([id, locale]) => ({
-    id,
-    icon: <LocaleFlag country={locale.flag} />,
-    label: `${locale.displayName} (${getLocaleTranslationStats(id as Locale).percentage}%)`,
-  }));
+function getLanguageOptions(showStats: boolean): SelectItem[] {
+  return Object.entries(SUPPORTED_LOCALES)
+    .sort(([, a], [, b]) => a.displayName.localeCompare(b.displayName))
+    .map(([id, locale]) => ({
+      id,
+      icon: <LocaleFlag country={locale.flag} />,
+      label: showStats
+        ? `${locale.displayName} (${getLocaleTranslationStats(id as Locale).percentage}%)`
+        : locale.displayName,
+    }));
+}
 
 const FLAG_ASSETS = {
   us: FlagUs,
@@ -56,8 +62,14 @@ export function SettingsRoot() {
   const soundEnabled = useUi((s) => s.ui.sound.enabled);
   const updateUi = useUi((s) => s.updateUi);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [localesLoaded, setLocalesLoaded] = useState(false);
+  const languageOptions = getLanguageOptions(localesLoaded);
   const selectedLanguage =
-    LANGUAGE_OPTIONS.find((item) => item.id === locale) ?? LANGUAGE_OPTIONS[0];
+    languageOptions.find((item) => item.id === locale) ?? languageOptions[0];
+
+  useEffect(() => {
+    void loadAllLocales().then(() => setLocalesLoaded(true));
+  }, []);
 
   const handleImport = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -109,7 +121,7 @@ export function SettingsRoot() {
                 )}
               </p>
               <Select
-                items={LANGUAGE_OPTIONS}
+                items={languageOptions}
                 placeholder={t(
                   'ui.settings.languagePlaceholder',
                   'Select language...',
@@ -118,7 +130,10 @@ export function SettingsRoot() {
                 defaultSelectedItem={selectedLanguage}
                 onSelectionChange={(item) => {
                   if (!item || !isSupportedLocale(item.id)) return;
-                  updateUi((ui) => (ui.locale = item.id as Locale));
+                  const nextLocale = item.id;
+                  void loadLocale(nextLocale).then(() =>
+                    updateUi((ui) => (ui.locale = nextLocale)),
+                  );
                 }}
               />
             </Card>
