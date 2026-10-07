@@ -99,6 +99,12 @@ function createDefaultUi(): Ui {
   };
 }
 
+let resolveUiHydration: () => void;
+
+export const uiHydration = new Promise<void>((resolve) => {
+  resolveUiHydration = resolve;
+});
+
 export const useUi = create<UiState>()(
   persist(
     immer((set) => ({
@@ -117,6 +123,7 @@ export const useUi = create<UiState>()(
       partialize: (state) => ({
         ui: state.ui,
       }),
+      onRehydrateStorage: () => () => resolveUiHydration(),
       version: UI_VERSION,
       migrate: (state, version) => {
         let nextState = state;

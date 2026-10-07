@@ -30,8 +30,6 @@ import {
   FLAG_BITFIELDS_META,
   type FlagBitfieldId,
 } from '@data';
-import ko from './locales/ko.json';
-import it from './locales/it.json';
 
 export const SUPPORTED_LOCALES = {
   en: {
@@ -53,10 +51,17 @@ export type Locale = UiLocale;
 type TranslationDictionary = Record<string, string>;
 type TranslationValues = Record<string, string | number>;
 
-const TRANSLATIONS: Record<Exclude<Locale, 'en'>, TranslationDictionary> = {
-  ko,
-  it,
+type LoadableLocale = Exclude<Locale, 'en'>;
+
+const LOCALE_LOADERS: Record<
+  LoadableLocale,
+  () => Promise<{ default: TranslationDictionary }>
+> = {
+  ko: () => import('./locales/ko.json'),
+  it: () => import('./locales/it.json'),
 };
+
+const TRANSLATIONS: Partial<Record<LoadableLocale, TranslationDictionary>> = {};
 
 const FLAG_NAMES_BY_ID = Object.fromEntries(
   Object.entries(FLAGS).map(([name, id]) => [id, name]),
@@ -791,7 +796,18 @@ export function translate(
   locale: Locale = useUi.getState().ui.locale,
 ) {
   if (locale === 'en') return fallback;
-  return TRANSLATIONS[locale][key] ?? fallback;
+  return TRANSLATIONS[locale]?.[key] ?? fallback;
+}
+
+export async function loadLocale(locale: Locale) {
+  if (locale === 'en' || TRANSLATIONS[locale]) return;
+  TRANSLATIONS[locale] = (await LOCALE_LOADERS[locale]()).default;
+}
+
+export function loadAllLocales() {
+  return Promise.all(
+    (Object.keys(LOCALE_LOADERS) as LoadableLocale[]).map(loadLocale),
+  );
 }
 
 export function formatTranslation(template: string, values: TranslationValues) {
@@ -926,7 +942,7 @@ export function getLocaleTranslationStats(locale: Locale) {
   const total = Object.keys(SOURCE_TRANSLATIONS).length;
   if (locale === 'en') return { translated: total, total, percentage: 100 };
 
-  const dictionary = TRANSLATIONS[locale];
+  const dictionary = TRANSLATIONS[locale] ?? {};
   const translated = Object.entries(SOURCE_TRANSLATIONS).filter(
     ([key, fallback]) =>
       dictionary[key] !== undefined &&
