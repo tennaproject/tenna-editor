@@ -682,7 +682,6 @@ export const STORY_SECTIONS = {
           flags: [
             'SAW_HOSPITAL_SCENE',
             'INTERACTED_WITH_SINK_CH2',
-            'KEPT_NOELLE_WATCH_AFTER_CH2',
           ],
         },
         {
