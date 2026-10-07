@@ -679,10 +679,7 @@ export const STORY_SECTIONS = {
         {
           id: 'hospital',
           title: 'Hospital',
-          flags: [
-            'SAW_HOSPITAL_SCENE',
-            'INTERACTED_WITH_SINK_CH2',
-          ],
+          flags: ['SAW_HOSPITAL_SCENE', 'INTERACTED_WITH_SINK_CH2'],
         },
         {
           id: 'police-station',
