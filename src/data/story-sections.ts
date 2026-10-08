@@ -1125,7 +1125,7 @@ export const STORY_SECTIONS = {
             'SWORDROUTE_EVICT',
             'FOUND_SHADOWTEASE',
             'SHADOWTEASE_EYES',
-            'SHADOWTEASE_GRIN'
+            'SHADOWTEASE_GRIN',
             'OBTAINED_SHADOWMANTLE',
             'DEFEATED_MANTLE',
             'S_RANK_RETURN_3',
