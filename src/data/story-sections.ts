@@ -889,7 +889,7 @@ export const STORY_SECTIONS = {
           flags: [
             'SWORD_ROUTE_PROGRESS',
             'SWORD_ROUTE_KILLS',
-            'SUSIE_NOTICE_SWORD',            
+            'SUSIE_NOTICE_SWORD',
             'RAMB_BACKSTAGE_DIALOGUE_PROGRESS',
             'ENTERED_ICE_PALACE',
             'ICE_KEY_FAIL',
