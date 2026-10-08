@@ -836,11 +836,7 @@ export const STORY_SECTIONS = {
         {
           id: 'racing',
           title: 'Racing',
-          flags: [
-            'TRIED_RACING',
-            'PLAYED_RACING_COUNT',
-            'WON_RACING',
-          ],
+          flags: ['TRIED_RACING', 'PLAYED_RACING_COUNT', 'WON_RACING'],
         },
         {
           id: 's-rank',
@@ -923,11 +919,7 @@ export const STORY_SECTIONS = {
         {
           id: 'lancer',
           title: 'Lancer',
-          flags: [
-            'OBTAINED_LANCER_NAME_Q',
-            'LANCER_TV_NAME',
-            'LANCER_COST',
-          ],
+          flags: ['OBTAINED_LANCER_NAME_Q', 'LANCER_TV_NAME', 'LANCER_COST'],
         },
         {
           id: 'photo-hunt',
@@ -995,11 +987,7 @@ export const STORY_SECTIONS = {
         {
           id: 's-rank',
           title: 'S-Rank',
-          flags: [
-            'COUNTERFEIT_S_2',
-            'OBTAINED_IN_S_RANK_2',
-            'S_RANK_RETURN_2',
-          ],
+          flags: ['COUNTERFEIT_S_2', 'OBTAINED_IN_S_RANK_2', 'S_RANK_RETURN_2'],
         },
         {
           id: 'sword-route-part-2',
