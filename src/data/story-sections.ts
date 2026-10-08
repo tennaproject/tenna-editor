@@ -1000,7 +1000,7 @@ export const STORY_SECTIONS = {
             'OBTAINED_IN_S_RANK_2',
             'S_RANK_RETURN_2',
           ],
-        }
+        },
         {
           id: 'sword-route-part-2',
           title: 'Sword Route Part 2',
