@@ -913,9 +913,9 @@ export const STORY_SECTIONS = {
           flags: [
             'TENNA_BOARD_ABSENT',
             'CONTROL_UNJUMBLE',
-            'RANK_BOARD_2', 
+            'RANK_BOARD_2',
             'BOARD_2_BATTLES',
-            'RAISE_BAT_HISCORE', 
+            'RAISE_BAT_HISCORE',
             'RAISE_BAT_HIRANK',
             'RHYTHM_GAME_LOSSES',
           ],
@@ -926,7 +926,7 @@ export const STORY_SECTIONS = {
           flags: [
             'OBTAINED_LANCER_NAME_Q',
             'LANCER_TV_NAME',
-            'LANCER_COST', 
+            'LANCER_COST',
           ],
         },
         {
@@ -964,7 +964,7 @@ export const STORY_SECTIONS = {
           id: 'board-2-reward',
           title: 'Board 2 Reward',
           flags: ['OBTAINED_RAMB_BOARD_REWARD_2'],
-        },   
+        },
         {
           id: 'parental-lock-conversation',
           title: 'Parental Lock Conversation',
