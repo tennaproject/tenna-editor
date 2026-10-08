@@ -1096,7 +1096,7 @@ export const STORY_SECTIONS = {
             'PRE_EGG_BLOCK_STATE',
             'BIBLIOX_QUEST_PROGRESS_CH3',
             'SOLVED_NOWHERE_BLOCK_PUZZLE',
-            'SAW_NOWHERE_PREREQUISITE_BOARD
+            'SAW_NOWHERE_PREREQUISITE_BOARD',
           ],
         },
         {
