@@ -2537,8 +2537,9 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.TALKED_TO_ALL_CLOVER_HEADS]: {
     displayName: 'Talked to all Clover faces',
+    unused: true,
     description:
-      'Set when talking to all of Clover before her fight. Alters her dialogue.',
+      'Unused, set when talking to all of Clover before her fight. Alters her dialogue.',
     valueType: 'boolean',
   },
   [FLAGS.SOLVED_DARK_PUZZLE]: {
