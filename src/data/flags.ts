@@ -3183,8 +3183,8 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.FOUND_TASQUE_SWITCH]: {
     displayName: 'Found the Tasque-maze switch',
-    description:
     unused: true,
+    description:
       'Whether you found the switch that controls the faint hint in the Tasque maze. Unused.',
     valueType: 'boolean',
   },
