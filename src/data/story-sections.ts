@@ -377,7 +377,6 @@ export const STORY_SECTIONS = {
             'OBTAINED_FIRST_GLOW_WRIST',
             'OBTAINED_NUBERT_TREASURE',
             'READ_CYBERPEDIA',
-            'FOUND_TASQUE_SWITCH',
             'SOLVED_APPLE_PUZZLE',
             'TASQUE_RELEASED',
             'SOLVED_AGREE2ALL_PUZZLE',
