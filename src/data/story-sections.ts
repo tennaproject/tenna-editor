@@ -741,6 +741,7 @@ export const STORY_SECTIONS = {
             'SUSIE_HEAL_PRACTICE_COUNT',
             'COUCH_SKIP_CH3',
             'COUCH_WALKAWAY_CH3',
+            'ZAPPER_SNEEZED',
           ],
         },
         {
@@ -778,6 +779,25 @@ export const STORY_SECTIONS = {
       title: 'Board 1 to Green Room',
       clusters: [
         {
+          id: 'board-1',
+          title: 'Board 1',
+          flags: [
+            'POINTS_CH3',
+            'COOKING_BEST_SCORE',
+            'COOKING_BEST_RANK',
+            'FAVORITE_WEATHER_ATTACK',
+            'TINY_PYRAMID_STATE',
+            'TENNA_MAILROOM_PROGRESS',
+            'TENNA_FALLING_OBJECT_NAME',
+            'RANK_BOARD_1',
+            'OBTAINED_RAMB_BOARD_REWARD_1',
+            'OBTAINED_POWER_CROISSANT',
+            'BOARD_1_BATTLES',
+            'SHADOWGUNNER_PHOTOS',
+            'DRANK_OASIS',
+          ],
+        },
+        {
           id: 'board-keys',
           title: 'Board Keys',
           flags: ['BOARD_KEY_COUNT'],
@@ -788,24 +808,13 @@ export const STORY_SECTIONS = {
           flags: ['OVERWORLD_QUIZ_1', 'OVERWORLD_QUIZ_2', 'OVERWORLD_QUIZ_3'],
         },
         {
-          id: 'secret-mailroom',
-          title: 'Secret Mailroom',
-          flags: ['TENNA_MAILROOM_PROGRESS'],
-        },
-        {
           id: 'party-stats',
           title: 'Party Stats',
-          flags: ['PLUCKED_GRASS_COUNT', 'CARRIED_RALSEI_COUNT'],
-        },
-        {
-          id: 'board-1-progress',
-          title: 'Board 1 Progress',
           flags: [
-            'POINTS_CH3',
-            'COOKING_BEST_SCORE',
-            'COOKING_BEST_RANK',
-            'RANK_BOARD_1',
-            'OBTAINED_RAMB_BOARD_REWARD_1',
+            'PLUCKED_GRASS_COUNT',
+            'COOKING_LOSSES_COUNT',
+            'CARRIED_RALSEI_COUNT',
+            'QUIZ_RIGHT_ANSWERS',
           ],
         },
       ],
@@ -821,6 +830,27 @@ export const STORY_SECTIONS = {
             'C_RANK_WATERCOOLER_ENCOUNTER_OUTCOME',
             'OBTAINED_COOLER_CRATER',
             'OBTAINED_CURTAIN_SABER10',
+            'COOLER_BEG_COUNT',
+          ],
+        },
+        {
+          id: 'racing',
+          title: 'Racing',
+          flags: [
+            'TRIED_RACING',
+            'PLAYED_RACING_COUNT',
+            'WON_RACING',
+          ],
+        },
+        {
+          id: 's-rank',
+          title: 'S-Rank',
+          flags: [
+            'DROPPED_S_RANK_ROOM_STAR',
+            'ENTERED_CHANGING_ROOM',
+            'COUNTERFEIT_S_1',
+            'OBTAINED_IN_S_RANK_1',
+            'S_RANK_ROOM_ANSWER',
           ],
         },
         {
@@ -830,7 +860,14 @@ export const STORY_SECTIONS = {
             'UNLOCKED_SUSIEZILLA',
             'SUSIEZILLA_HIGH_SCORE',
             'SUSIEZILLA_HIGH_RANK',
+            'SUSIEZILLA_RESULT',
+            'SUSIEZILLA_LOSS_COUNT',
           ],
+        },
+        {
+          id: 'lancer-and-ramb',
+          title: 'Lancer And Ramb',
+          flags: ['TALKED_TO_LANCER_IN_GREEN_ROOM', 'TALKED_TO_RAMB'],
         },
         {
           id: 'ball-machine',
@@ -852,11 +889,17 @@ export const STORY_SECTIONS = {
           flags: [
             'SWORD_ROUTE_PROGRESS',
             'SWORD_ROUTE_KILLS',
-            'SUSIE_NOTICE_SWORD',
-            'BIBLIOX_QUEST_PROGRESS_CH3',
-            'BIBLIOX_TALK_COUNT_CH3',
-            'OBTAINED_REVIVE_MINT_CH3',
+            'SUSIE_NOTICE_SWORD',            
+            'RAMB_BACKSTAGE_DIALOGUE_PROGRESS',
+            'ENTERED_ICE_PALACE',
+            'ICE_KEY_FAIL',
+            'ODD_CONTROLLER_PROGRESS',
           ],
+        },
+        {
+          id: 'tenna',
+          title: 'Tenna',
+          flags: ['SUSIE_TENNA_CHAT_1'],
         },
       ],
     },
@@ -864,6 +907,28 @@ export const STORY_SECTIONS = {
       id: 'board-2-to-green-room',
       title: 'Board 2 to Green Room',
       clusters: [
+        {
+          id: 'board-2',
+          title: 'Board 2',
+          flags: [
+            'TENNA_BOARD_ABSENT',
+            'CONTROL_UNJUMBLE',
+            'RANK_BOARD_2', 
+            'BOARD_2_BATTLES',
+            'RAISE_BAT_HISCORE', 
+            'RAISE_BAT_HIRANK',
+            'RHYTHM_GAME_LOSSES',
+          ],
+        },
+        {
+          id: 'lancer',
+          title: 'Lancer',
+          flags: [
+            'OBTAINED_LANCER_NAME_Q',
+            'LANCER_TV_NAME',
+            'LANCER_COST', 
+          ],
+        },
         {
           id: 'photo-hunt',
           title: 'Photo Hunt',
@@ -889,11 +954,6 @@ export const STORY_SECTIONS = {
             'LAWNMOWER_SCORE',
           ],
         },
-        {
-          id: 'board-2-progress',
-          title: 'Board 2 Progress',
-          flags: ['RANK_BOARD_2', 'RAISE_BAT_HISCORE', 'RAISE_BAT_HIRANK'],
-        },
       ],
     },
     {
@@ -904,11 +964,17 @@ export const STORY_SECTIONS = {
           id: 'board-2-reward',
           title: 'Board 2 Reward',
           flags: ['OBTAINED_RAMB_BOARD_REWARD_2'],
-        },
+        },   
         {
           id: 'parental-lock-conversation',
           title: 'Parental Lock Conversation',
           flags: [
+            'ENTERED_PARENT_0',
+            'PARENT_LOCK_1_SCENE',
+            'PARENT_LOCK_1',
+            'PARENT_LOCK_2',
+            'PARENT_LOCK_1_START',
+            'PARENT_LOCK_2_START',
             'PARENTAL_LOCK_CONCERN_TARGET',
             'SUSIE_REASSURANCE',
             'RALSEI_REASSURANCE',
@@ -917,14 +983,33 @@ export const STORY_SECTIONS = {
           ],
         },
         {
+          id: 'guard-zapper',
+          title: 'Guard Zapper',
+          flags: ['GUARD_ZAPPER_BUTTONS', 'GUARD_ZAPPER_FOUGHT'],
+        },
+        {
           id: 'gacha-room',
           title: 'Gacha Room',
           flags: ['OBTAINED_1225_ROOM'],
         },
         {
+          id: 's-rank',
+          title: 'S-Rank',
+          flags: [
+            'COUNTERFEIT_S_2',
+            'OBTAINED_IN_S_RANK_2',
+            'S_RANK_RETURN_2',
+          ],
+        }
+        {
           id: 'sword-route-part-2',
           title: 'Sword Route Part 2',
           flags: ['ENTERED_COLDPLACE'],
+        },
+        {
+          id: 'tenna',
+          title: 'Tenna',
+          flags: ['KRIS_TENNA_CHAT'],
         },
       ],
     },
@@ -937,9 +1022,28 @@ export const STORY_SECTIONS = {
           title: 'TV World',
           flags: [
             'LANCER_CONTROL_NUM',
-            'SECOND_WATERCOOLER_ENCOUNTER_OUTCOME',
             'SECOND_RIBBICK_ENCOUNTER_OUTCOME',
             'JAILED_CHEATER',
+            'OBTAINED_CROWD_TREASURE',
+            'ADMITTED_CHEAT_COUNT',
+          ],
+        },
+        {
+          id: 'water-cooler',
+          title: 'Water Cooler',
+          flags: [
+            'COOLER_AVOID_NUM_COUNT',
+            'SECOND_WATERCOOLER_ENCOUNTER_OUTCOME',
+            'INTERACTED_WITH_CURTAIN_COOLER',
+            'COOLER_2_FLIRT',
+            'OBTAINED_CROWD_TREASURE',
+            'FOUND_MAZE_CROWD',
+            'UNLOCKED_STEALTH',
+            'SNEAKING_FAST',
+            'FOUND_TRASH_SWITCH',
+            'STARTED_COWBOY_GAME',
+            'HORSE_RALSEI',
+            'DEFEATED_DOOM_SHADOWMAN',
           ],
         },
         {
@@ -961,6 +1065,9 @@ export const STORY_SECTIONS = {
             'BONUS_ZONE_POINTS_3',
             'BONUS_ZONE_POINTS_4',
             'PIPPINS_BONUS_STOLE',
+            'TENNA_PIPIS_STATE',
+            'PIPIS_SOUNDS',
+            'SAW_SPAMTENNA_SCENE',
           ],
         },
         {
@@ -979,12 +1086,17 @@ export const STORY_SECTIONS = {
           ],
         },
         {
-          id: 'egg-room',
-          title: 'Egg & One Point',
+          id: 'egg-quest',
+          title: 'Egg Sequesnce & One Point',
           flags: [
             'OBTAINED_EGG_CH3',
             'OBTAINED_ONE_POINT',
+            'BIBLIOX_TALK_COUNT_CH3',
+            'OBTAINED_REVIVE_MINT_CH3',
             'PRE_EGG_BLOCK_STATE',
+            'BIBLIOX_QUEST_PROGRESS_CH3',
+            'SOLVED_NOWHERE_BLOCK_PUZZLE',
+            'SAW_NOWHERE_PREREQUISITE_BOARD
           ],
         },
         {
@@ -1010,15 +1122,26 @@ export const STORY_SECTIONS = {
           title: 'Sword Route Finale',
           flags: [
             'SWORDROUTE_SODA',
+            'SWORDROUTE_EVICT',
+            'FOUND_SHADOWTEASE',
+            'SHADOWTEASE_EYES',
+            'SHADOWTEASE_GRIN'
             'OBTAINED_SHADOWMANTLE',
             'DEFEATED_MANTLE',
+            'S_RANK_RETURN_3',
           ],
+        },
+        {
+          id: 'ramb',
+          title: 'Ramb',
+          flags: ['AT_MAGIC_GAIN_COUNT_CH3', 'LEVEL_UP_COUNT_CH3'],
         },
         {
           id: 'rouxls-and-tenna',
           title: 'Rouxls & Tenna',
           flags: [
             'ROUXLS_WEATHER_ENCOUNTER_OUTCOME',
+            'ROUXLS_SNACKS_CH3',
             'TENNA_ENCOUNTER_OUTCOME',
           ],
         },
