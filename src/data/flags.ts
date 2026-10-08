@@ -3195,7 +3195,7 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.FOUND_MAZE_SWITCH]: {
     displayName: 'Found the old maze switch',
-    unused: true
+    unused: true,
     description: 
       'Whether you found the old variant of the Tasque-maze switch. Unused.',
     valueType: 'boolean',
