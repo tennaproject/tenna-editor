@@ -3184,7 +3184,8 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   [FLAGS.FOUND_TASQUE_SWITCH]: {
     displayName: 'Found the Tasque-maze switch',
     description:
-      'Whether you found the switch that controls the faint hint in the Tasque maze.',
+    unused: true,
+      'Whether you found the switch that controls the faint hint in the Tasque maze. Unused.',
     valueType: 'boolean',
   },
   [FLAGS.SAW_FERRIS_SCENE]: {
@@ -3194,7 +3195,9 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.FOUND_MAZE_SWITCH]: {
     displayName: 'Found the old maze switch',
-    description: 'Whether you found the old variant of the Tasque-maze switch.',
+    unused: true
+    description: 
+      'Whether you found the old variant of the Tasque-maze switch. Unused.',
     valueType: 'boolean',
   },
   [FLAGS.SOLVED_AGREE2ALL_PUZZLE]: {
@@ -3958,7 +3961,6 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.RIDE_WITH_ME]: {
     displayName: 'Ride With Me',
-    unused: true,
     description: "Whether you said 'Noelle will ride with me' on Snowgrave.",
     valueType: 'boolean',
   },
