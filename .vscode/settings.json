@@ -10,8 +10,4 @@
   "editor.codeActionsOnSave": [
     "source.formatDocument",
     "source.fixAll.eslint"
-  ],
-  "githubPullRequests.ignoredPullRequestBranches": [
-    "main"
-  ],
 }
