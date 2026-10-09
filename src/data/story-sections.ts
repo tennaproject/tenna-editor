@@ -873,7 +873,11 @@ export const STORY_SECTIONS = {
         {
           id: 'weather-duo',
           title: 'Weather Duo',
-          flags: ['ELNINA_GREEN_ROOM_RESPONSE', 'LANINO_GREEN_ROOM_RESPONSE', 'FAVORITE_WEATHER_ATTACK'],
+          flags: [
+            'ELNINA_GREEN_ROOM_RESPONSE',
+            'LANINO_GREEN_ROOM_RESPONSE',
+            'FAVORITE_WEATHER_ATTACK',
+          ],
         },
         {
           id: 'racing',
@@ -908,7 +912,11 @@ export const STORY_SECTIONS = {
         {
           id: 'lancer-and-ramb',
           title: 'Lancer And Ramb',
-          flags: ['TALKED_TO_LANCER_IN_GREEN_ROOM', 'TALKED_TO_RAMB','OBTAINED_RAMB_BOARD_REWARD_1'],
+          flags: [
+            'TALKED_TO_LANCER_IN_GREEN_ROOM',
+            'TALKED_TO_RAMB',
+            'OBTAINED_RAMB_BOARD_REWARD_1',
+          ],
         },
         {
           id: 'ball-machine',
@@ -938,7 +946,7 @@ export const STORY_SECTIONS = {
         {
           id: 'tenna',
           title: 'Tenna',
-          flags: ['SUSIE_TENNA_CHAT_1','TENNA_OPINION_SUSIE'],
+          flags: ['SUSIE_TENNA_CHAT_1', 'TENNA_OPINION_SUSIE'],
         },
       ],
     },
@@ -1004,7 +1012,6 @@ export const STORY_SECTIONS = {
           id: 'parental-lock-conversation',
           title: 'Parental Lock Conversation',
           flags: [
-            
             'ENTERED_PARENT_0',
             'PARENT_LOCK_1_SCENE',
             'PARENT_LOCK_1_CLOSE_COUNT',
@@ -1027,7 +1034,11 @@ export const STORY_SECTIONS = {
         {
           id: 'guard-zapper',
           title: 'Guard Zapper',
-          flags: ['GUARD_ZAPPER_BUTTONS', 'GUARD_ZAPPER_FOUGHT', 'RAL_SUSPECT_ZAPPER'],
+          flags: [
+            'GUARD_ZAPPER_BUTTONS',
+            'GUARD_ZAPPER_FOUGHT',
+            'RAL_SUSPECT_ZAPPER',
+          ],
         },
         {
           id: 'gacha-room',
@@ -1042,7 +1053,12 @@ export const STORY_SECTIONS = {
         {
           id: 'sword-route-part-2',
           title: 'Sword Route Part 2',
-          flags: ['ENTERED_COLDPLACE', 'MOVED_RAMB_AFTER_ROUND_2', 'ENTERED_ICE_PALACE', 'ICE_KEY_FAIL'],
+          flags: [
+            'ENTERED_COLDPLACE',
+            'MOVED_RAMB_AFTER_ROUND_2',
+            'ENTERED_ICE_PALACE',
+            'ICE_KEY_FAIL',
+          ],
         },
         {
           id: 'tenna',
@@ -1080,7 +1096,7 @@ export const STORY_SECTIONS = {
         },
         {
           id: 'lancer-room',
-          title: "Lancer Room",
+          title: 'Lancer Room',
           flags: ['LANCER_CONTROL_NUM', 'OBTAINED_100_DIG', 'STONE_LANCER_CH3'],
         },
         {
