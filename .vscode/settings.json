@@ -10,4 +10,5 @@
   "editor.codeActionsOnSave": [
     "source.formatDocument",
     "source.fixAll.eslint"
-}
+  ]
+    }
