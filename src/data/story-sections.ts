@@ -1084,7 +1084,6 @@ export const STORY_SECTIONS = {
             'JAILED_CHEATER',
             'TENNA_MAD_AT_STAFF',
             'SAW_RAMB_QUIT_SCENE',
-            'OBTAINED_CROWD_TREASURE',
             'ADMITTED_CHEAT_COUNT',
             'OBTAINED_CROWD_TREASURE',
             'FOUND_MAZE_CROWD',
