@@ -1152,7 +1152,7 @@ export const STORY_SECTIONS = {
         },
         {
           id: 'egg-sequence',
-          title: 'Egg Sequesnce & One Point',
+          title: 'Egg Sequence & One Point',
           flags: [
             'OBTAINED_EGG_CH3',
             'OBTAINED_ONE_POINT',
