@@ -1067,7 +1067,7 @@ export const STORY_SECTIONS = {
         },
         {
           id: 'tenna-chat-2',
-          title: 'Tenna chat 2',
+          title: 'Tenna Chat 2',
           flags: ['SUSIE_TENNA_CHAT_2', 'KRIS_TENNA_CHAT'],
         },
       ],
