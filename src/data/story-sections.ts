@@ -31,6 +31,11 @@ export const STORY_SECTIONS = {
       title: 'Beginning to Forest',
       clusters: [
         {
+          id: 'light-world',
+          title: 'Light World',
+          flags: ['RAN_IN_SCHOOL'],
+        },
+        {
           id: 'dark-world-entrance',
           title: 'Dark World Entrance',
           flags: ['DARK_AREA_MOVEMENT_CHOICE', 'SOLVED_EYE_PUZZLE'],
@@ -300,7 +305,11 @@ export const STORY_SECTIONS = {
         {
           id: 'home',
           title: 'Home',
-          flags: ['HOME_RETURN_COUNT_CH1', 'TORIEL_CALL_COUNT'],
+          flags: [
+            'HOME_RETURN_COUNT_CH1',
+            'TORIEL_CALL_COUNT',
+            'CALLED_TORIEL_FROM_HOME',
+          ],
         },
       ],
     },
@@ -311,13 +320,14 @@ export const STORY_SECTIONS = {
       title: 'Light World to Cyber Field',
       clusters: [
         {
-          id: 'home',
-          title: 'Home',
+          id: 'light-world',
+          title: 'Light World',
           flags: [
             'TOOK_AZZY_MONEY',
             'BEEN_CALLED_NORMAL',
             'TOLD_MOM_STUDYING',
             'TOLD_MOM_ORB',
+            'JUNKBALL_DROPPED',
             'TOLD_VISIT_TOWN',
           ],
         },
@@ -377,7 +387,6 @@ export const STORY_SECTIONS = {
             'OBTAINED_FIRST_GLOW_WRIST',
             'OBTAINED_NUBERT_TREASURE',
             'READ_CYBERPEDIA',
-            'FOUND_TASQUE_SWITCH',
             'SOLVED_APPLE_PUZZLE',
             'TASQUE_RELEASED',
             'SOLVED_AGREE2ALL_PUZZLE',
@@ -463,6 +472,7 @@ export const STORY_SECTIONS = {
             'WENT_WEIRD_DOOR',
             'READ_CLEANING_POSTER',
             'SOLVED_FORCEFIELD_1',
+            'OBTAINED_CD_BAGEL_CHEST',
             'SEEN_STATUE_COUNT',
             'OBTAINED_SHOE',
             'NOELLE_RELATIONSHIP_RESPONSE',
@@ -577,7 +587,6 @@ export const STORY_SECTIONS = {
             'MOUSE_LOTTERY_RESULT_1',
             'MOUSE_LOTTERY_RESULT_2',
             'MADE_HIGH_FIVE',
-            'ROUXLS_PIRATE_HAT',
             'STATUE_SINK_PROGRESS',
             'HOUSE_GAME_WINNER',
             'RALSEI_PHOTO_STATE',
@@ -641,10 +650,12 @@ export const STORY_SECTIONS = {
             'SNOWGRAVE_FAIL',
             'STOLEN_BAGELS',
             'ICESHOCKS',
+            'FAILED_SNOWGRAVE_WITHOUT_THORN_RING',
             'FROZEN_CHICKEN',
             'MANSION_THIRD_FLOOR_SHORTCUT_UNLOCKED',
             'RIDE_WITH_ME',
             'DEFEATED_SNOWGRAVE_NEO',
+            'CREEPY_STEPS',
           ],
         },
       ],
@@ -726,6 +737,11 @@ export const STORY_SECTIONS = {
           title: 'Violence Stats',
           flags: ['AT_MAGIC_GAIN_COUNT_CH2', 'LEVEL_UP_COUNT_CH2'],
         },
+        {
+          id: 'ending',
+          title: 'Ending',
+          flags: ['FESTIVAL_COMPANION_RESPONSE'],
+        },
       ],
     },
   ],
@@ -738,10 +754,21 @@ export const STORY_SECTIONS = {
           id: 'couch-cliffs',
           title: 'Couch Cliffs',
           flags: [
+            'RUN_REMINDER_CH3',
+            'SECOND_RUN_REMINDER_CH3',
             'SUSIE_HEAL_PRACTICE_COUNT',
             'COUCH_SKIP_CH3',
             'COUCH_WALKAWAY_CH3',
+            'ZAPPER_SNEEZED',
+            'TALKED_TO_RALSEI_AT_EYE_PUZZLE',
+            'TALKED_TO_SUSIE_AT_EYE_PUZZLE',
+            'COMPLETED_RALSEI_SUSIE_FESTIVAL_TALK',
           ],
+        },
+        {
+          id: 'ralsei-equip-cheer',
+          title: 'Ralsei Equip Cheer',
+          flags: ['RAL_CHEER_EQUIP_COUNT'],
         },
         {
           id: 'shadow-crystal',
@@ -769,7 +796,16 @@ export const STORY_SECTIONS = {
             'GAMESHOW_NAME_1_BACKUP',
             'GAMESHOW_NAME_2_BACKUP',
             'GAMESHOW_NAME_3_BACKUP',
+            'POINTS_FROM_BATTLE',
+            'POINTS_SPENT',
+            'BOARD_LOSSES',
+            'LAST_MINIGAME_POINTS',
           ],
+        },
+        {
+          id: 'z-rank',
+          title: 'Z-rank',
+          flags: ['Z_RANK_UNLOCK', 'MANHOLE_ACTIVATION_CH3'],
         },
       ],
     },
@@ -777,6 +813,33 @@ export const STORY_SECTIONS = {
       id: 'board-1-to-green-room',
       title: 'Board 1 to Green Room',
       clusters: [
+        {
+          id: 'board-1',
+          title: 'Board 1',
+          flags: [
+            'POINTS_CH3',
+            'OBTAINED_ROUXLS_BLOCK',
+            'TINY_PYRAMID_STATE',
+            'TENNA_MAILROOM_PROGRESS',
+            'TENNA_FALLING_OBJECT_NAME',
+            'RANK_BOARD_1',
+            'CANT_GRAB_RALSEI',
+            'OBTAINED_POWER_CROISSANT',
+            'BOARD_1_BATTLES',
+            'SHADOWGUNNER_PHOTOS',
+            'DRANK_OASIS',
+          ],
+        },
+        {
+          id: 'cooking',
+          title: 'Cooking',
+          flags: [
+            'COOKING_BEST_SCORE',
+            'COOKING_BEST_RANK',
+            'BEST_FOOD_STACK',
+            'PHASER_CANNONS',
+          ],
+        },
         {
           id: 'board-keys',
           title: 'Board Keys',
@@ -788,24 +851,13 @@ export const STORY_SECTIONS = {
           flags: ['OVERWORLD_QUIZ_1', 'OVERWORLD_QUIZ_2', 'OVERWORLD_QUIZ_3'],
         },
         {
-          id: 'secret-mailroom',
-          title: 'Secret Mailroom',
-          flags: ['TENNA_MAILROOM_PROGRESS'],
-        },
-        {
           id: 'party-stats',
           title: 'Party Stats',
-          flags: ['PLUCKED_GRASS_COUNT', 'CARRIED_RALSEI_COUNT'],
-        },
-        {
-          id: 'board-1-progress',
-          title: 'Board 1 Progress',
           flags: [
-            'POINTS_CH3',
-            'COOKING_BEST_SCORE',
-            'COOKING_BEST_RANK',
-            'RANK_BOARD_1',
-            'OBTAINED_RAMB_BOARD_REWARD_1',
+            'PLUCKED_GRASS_COUNT',
+            'COOKING_LOSSES_COUNT',
+            'CARRIED_RALSEI_COUNT',
+            'QUIZ_RIGHT_ANSWERS',
           ],
         },
       ],
@@ -821,6 +873,32 @@ export const STORY_SECTIONS = {
             'C_RANK_WATERCOOLER_ENCOUNTER_OUTCOME',
             'OBTAINED_COOLER_CRATER',
             'OBTAINED_CURTAIN_SABER10',
+            'COOLER_BEG_COUNT',
+          ],
+        },
+        {
+          id: 'weather-duo',
+          title: 'Weather Duo',
+          flags: [
+            'ELNINA_GREEN_ROOM_RESPONSE',
+            'LANINO_GREEN_ROOM_RESPONSE',
+            'FAVORITE_WEATHER_ATTACK',
+          ],
+        },
+        {
+          id: 'racing',
+          title: 'Racing',
+          flags: ['TRIED_RACING', 'PLAYED_RACING_COUNT', 'WON_RACING'],
+        },
+        {
+          id: 's-rank',
+          title: 'S-Rank',
+          flags: [
+            'DROPPED_S_RANK_ROOM_STAR',
+            'ENTERED_CHANGING_ROOM',
+            'COUNTERFEIT_S_1',
+            'OBTAINED_IN_S_RANK_1',
+            'S_RANK_ROOM_ANSWER',
           ],
         },
         {
@@ -828,8 +906,22 @@ export const STORY_SECTIONS = {
           title: 'Susiezilla',
           flags: [
             'UNLOCKED_SUSIEZILLA',
+            'SAW_SUSIEZILLA_INTRO',
             'SUSIEZILLA_HIGH_SCORE',
             'SUSIEZILLA_HIGH_RANK',
+            'SUSIEZILLA_RESULT',
+            'SUSIEZILLA_LOSS_COUNT',
+            'SUSIEZILLA_BEST_TIME',
+            'COMPLETED_SUSIEZILLA',
+          ],
+        },
+        {
+          id: 'lancer-and-ramb',
+          title: 'Lancer And Ramb',
+          flags: [
+            'TALKED_TO_LANCER_IN_GREEN_ROOM',
+            'TALKED_TO_RAMB',
+            'OBTAINED_RAMB_BOARD_REWARD_1',
           ],
         },
         {
@@ -853,10 +945,14 @@ export const STORY_SECTIONS = {
             'SWORD_ROUTE_PROGRESS',
             'SWORD_ROUTE_KILLS',
             'SUSIE_NOTICE_SWORD',
-            'BIBLIOX_QUEST_PROGRESS_CH3',
-            'BIBLIOX_TALK_COUNT_CH3',
-            'OBTAINED_REVIVE_MINT_CH3',
+            'RAMB_BACKSTAGE_DIALOGUE_PROGRESS',
+            'ODD_CONTROLLER_PROGRESS',
           ],
+        },
+        {
+          id: 'tenna',
+          title: 'Tenna',
+          flags: ['SUSIE_TENNA_CHAT_1', 'TENNA_OPINION_SUSIE'],
         },
       ],
     },
@@ -864,6 +960,24 @@ export const STORY_SECTIONS = {
       id: 'board-2-to-green-room',
       title: 'Board 2 to Green Room',
       clusters: [
+        {
+          id: 'board-2',
+          title: 'Board 2',
+          flags: [
+            'TENNA_BOARD_ABSENT',
+            'CONTROL_UNJUMBLE',
+            'RANK_BOARD_2',
+            'BOARD_2_BATTLES',
+            'RAISE_BAT_HISCORE',
+            'RAISE_BAT_HIRANK',
+            'RHYTHM_GAME_LOSSES',
+          ],
+        },
+        {
+          id: 'lancer',
+          title: 'Lancer',
+          flags: ['OBTAINED_LANCER_NAME_Q', 'LANCER_TV_NAME', 'LANCER_COST'],
+        },
         {
           id: 'photo-hunt',
           title: 'Photo Hunt',
@@ -889,11 +1003,6 @@ export const STORY_SECTIONS = {
             'LAWNMOWER_SCORE',
           ],
         },
-        {
-          id: 'board-2-progress',
-          title: 'Board 2 Progress',
-          flags: ['RANK_BOARD_2', 'RAISE_BAT_HISCORE', 'RAISE_BAT_HIRANK'],
-        },
       ],
     },
     {
@@ -909,11 +1018,32 @@ export const STORY_SECTIONS = {
           id: 'parental-lock-conversation',
           title: 'Parental Lock Conversation',
           flags: [
+            'ENTERED_PARENT_0',
+            'PARENT_LOCK_1_SCENE',
+            'PARENT_LOCK_1_CLOSE_COUNT',
+            'PARENT_LOCK_1',
+            'PARENT_LOCK_2',
+            'PARENT_LOCK_1_START',
+            'PARENT_LOCK_2_START',
+            'PARENT_LOCK_3_DONE',
+            'PARENT_LOCK_3_USED',
+            'OBTAINED_PARENTAL_LOCK_CAMERA',
+            'NUM_PARENT_PHOTOS',
             'PARENTAL_LOCK_CONCERN_TARGET',
             'SUSIE_REASSURANCE',
             'RALSEI_REASSURANCE',
             'ICECREAM_FOR_SUSIE',
             'FESTIVAL_RAL_WHOELSE',
+            'RALSEI_FACE_THOUGHTS',
+          ],
+        },
+        {
+          id: 'guard-zapper',
+          title: 'Guard Zapper',
+          flags: [
+            'GUARD_ZAPPER_BUTTONS',
+            'GUARD_ZAPPER_FOUGHT',
+            'RAL_SUSPECT_ZAPPER',
           ],
         },
         {
@@ -922,9 +1052,24 @@ export const STORY_SECTIONS = {
           flags: ['OBTAINED_1225_ROOM'],
         },
         {
+          id: 's-rank-2',
+          title: 'S-Rank 2',
+          flags: ['COUNTERFEIT_S_2', 'OBTAINED_IN_S_RANK_2', 'S_RANK_RETURN_2'],
+        },
+        {
           id: 'sword-route-part-2',
           title: 'Sword Route Part 2',
-          flags: ['ENTERED_COLDPLACE'],
+          flags: [
+            'ENTERED_COLDPLACE',
+            'MOVED_RAMB_AFTER_ROUND_2',
+            'ENTERED_ICE_PALACE',
+            'ICE_KEY_FAIL',
+          ],
+        },
+        {
+          id: 'tenna-chat-2',
+          title: 'Tenna Chat 2',
+          flags: ['SUSIE_TENNA_CHAT_2', 'KRIS_TENNA_CHAT'],
         },
       ],
     },
@@ -936,10 +1081,35 @@ export const STORY_SECTIONS = {
           id: 'tv-world',
           title: 'TV World',
           flags: [
-            'LANCER_CONTROL_NUM',
-            'SECOND_WATERCOOLER_ENCOUNTER_OUTCOME',
             'SECOND_RIBBICK_ENCOUNTER_OUTCOME',
             'JAILED_CHEATER',
+            'TENNA_MAD_AT_STAFF',
+            'SAW_RAMB_QUIT_SCENE',
+            'ADMITTED_CHEAT_COUNT',
+            'OBTAINED_CROWD_TREASURE',
+            'FOUND_MAZE_CROWD',
+            'ZAPPER_JAIL_2',
+            'FOUND_TRASH_SWITCH',
+            'STARTED_COWBOY_GAME',
+            'STARTED_COWBOY_GAME_2',
+            'HORSE_RALSEI',
+            'HAY_RESPONSE',
+            'DEFEATED_DOOM_SHADOWMAN',
+          ],
+        },
+        {
+          id: 'lancer-room',
+          title: 'Lancer Room',
+          flags: ['LANCER_CONTROL_NUM', 'OBTAINED_100_DIG', 'STONE_LANCER_CH3'],
+        },
+        {
+          id: 'water-cooler',
+          title: 'Water Cooler',
+          flags: [
+            'COOLER_AVOID_NUM_COUNT',
+            'SECOND_WATERCOOLER_ENCOUNTER_OUTCOME',
+            'INTERACTED_WITH_CURTAIN_COOLER',
+            'COOLER_2_FLIRT',
           ],
         },
         {
@@ -961,6 +1131,9 @@ export const STORY_SECTIONS = {
             'BONUS_ZONE_POINTS_3',
             'BONUS_ZONE_POINTS_4',
             'PIPPINS_BONUS_STOLE',
+            'TENNA_PIPIS_STATE',
+            'PIPIS_SOUNDS',
+            'SAW_SPAMTENNA_SCENE',
           ],
         },
         {
@@ -979,18 +1152,25 @@ export const STORY_SECTIONS = {
           ],
         },
         {
-          id: 'egg-room',
-          title: 'Egg & One Point',
+          id: 'egg-sequence',
+          title: 'Egg Sequence & One Point',
           flags: [
             'OBTAINED_EGG_CH3',
             'OBTAINED_ONE_POINT',
+            'BIBLIOX_TALK_COUNT_CH3',
+            'OBTAINED_REVIVE_MINT_CH3',
             'PRE_EGG_BLOCK_STATE',
+            'BIBLIOX_QUEST_PROGRESS_CH3',
+            'SOLVED_NOWHERE_BLOCK_PUZZLE',
+            'SAW_NOWHERE_PREREQUISITE_BOARD',
           ],
         },
         {
           id: 'sneak-mission',
           title: 'Sneak Mission',
           flags: [
+            'UNLOCKED_STEALTH',
+            'SNEAKING_FAST',
             'OVERWORLD_QUIZ_4',
             'OVERWORLD_QUIZ_5',
             'OVERWORLD_QUIZ_6',
@@ -1006,19 +1186,38 @@ export const STORY_SECTIONS = {
       title: 'Green Room to Ending',
       clusters: [
         {
+          id: 'green-room',
+          title: 'Green Room',
+          flags: ['TALKED_TO_JAILED_PIPPINS', 'CHECK_RECRUITS_CH3'],
+        },
+        {
           id: 'sword-route-finale',
           title: 'Sword Route Finale',
           flags: [
+            'MOVED_RAMB_TO_FINAL_GAME',
+            'RAMB_PETRIFICATION_LORE_PROGRESS',
+            'MINI_ATTACK_SUSIE',
             'SWORDROUTE_SODA',
+            'SWORDROUTE_EVICT',
+            'FOUND_SHADOWTEASE',
+            'SHADOWTEASE_EYES',
+            'SHADOWTEASE_GRIN',
             'OBTAINED_SHADOWMANTLE',
             'DEFEATED_MANTLE',
+            'S_RANK_RETURN_3',
           ],
+        },
+        {
+          id: 'ramb-fountain-explanation',
+          title: 'Ramb Fountain Explanation',
+          flags: ['HEARD_RAMB_FOUNTAIN_EXPLANATION'],
         },
         {
           id: 'rouxls-and-tenna',
           title: 'Rouxls & Tenna',
           flags: [
             'ROUXLS_WEATHER_ENCOUNTER_OUTCOME',
+            'ROUXLS_SNACKS_CH3',
             'TENNA_ENCOUNTER_OUTCOME',
           ],
         },
@@ -1029,6 +1228,7 @@ export const STORY_SECTIONS = {
             'KNIGHT_BATTLE_OUTCOME_CH3',
             'ALMOST_BEAT_KNIGHT',
             'KNIGHT_DEATHS_COUNT',
+            'GLASS_FAILED_CH3',
           ],
         },
         {
@@ -1053,28 +1253,34 @@ export const STORY_SECTIONS = {
           id: 'kris-room',
           title: "Kris's Room",
           flags: [
+            'CHECKED_KRIS_ROOM_SAVE_POINT',
             'SHOWED_FAMILY_PHOTO_TO_SUSIE',
             'SHOWED_ASRIEL_PHOTO_TO_SUSIE',
             'OPENED_DRAGON_BOOK_DRAWER_FOR_SUSIE',
             'CLEANED_KRIS_ROOM_STAIN',
             'TOOK_ASRIEL_DRAWER_MONEY_CH4',
             'INTERACTED_WITH_CHAIRIEL_SUSIE',
+            'KRIS_SUSIE_LOCKED_OUT',
           ],
         },
         {
           id: 'school',
           title: 'School',
-          flags: ['TEMMIE_SONG_LINE'],
+          flags: ['TEMMIE_SONG_LINE', 'CHECKED_BERDLY_DESK_WITH_EGGS'],
         },
         {
-          id: 'susies-healing',
-          title: "Susie's Healing",
-          flags: ['SUSIE_HEAL_PRACTICE_COUNT'],
+          id: 'susie',
+          title: 'Susie',
+          flags: [
+            'SUSIE_HEAL_PRACTICE_COUNT',
+            'SAW_SUSIE_SCARE_DOOR_KID_SCENE',
+          ],
         },
         {
           id: 'church-service',
           title: 'Church Service',
           flags: [
+            'COMPLETED_CHURCH_STICKER_FIGHT',
             'TALKED_TO_RUDY_ABOUT_ASGORE',
             'ASKED_ALVIN_ABOUT_SHELTER',
             'PRAISED_ALVINS_SERMON',
@@ -1085,6 +1291,12 @@ export const STORY_SECTIONS = {
             'ALPHYS_SHELTER_REASON',
             'ALPHYS_UNDYNE_CHURCH_RESPONSE',
             'FIRST_ADDED_JUICE',
+            'SLEPT_THROUGH_SERVICE',
+            'WHAT_YOU_DID_DURING_SERVICE',
+            'WHY_WE_SHOULD_ENTER_CHURCH',
+            'TALKED_TO_CATTI_ABOUT_SUSIE_IN_CHURCH',
+            'TALKED_TO_RUDY_AT_CHURCH_WEIRD_ROUTE',
+            'HEARD_TORIEL_POST_CHURCH_INVITATION',
           ],
         },
         {
@@ -1094,6 +1306,8 @@ export const STORY_SECTIONS = {
             'CHURCH_CLUES_GATHERED',
             'OBTAINED_NOELLE_CLUE',
             'OBTAINED_ALPHYS_CLUE',
+            'INTERACTED_WITH_CHURCH_CHOIR_DOOR',
+            'INTERACTED_WITH_CHURCH_OFFICE_DOOR',
             'INTERACTED_WITH_CHURCH_CUPBOARD',
             'INTERACTED_WITH_CHURCH_BOOKS',
             'INTERACTED_WITH_CHURCH_CANDLES',
@@ -1110,17 +1324,26 @@ export const STORY_SECTIONS = {
             'INTRODUCED_SUSIE_TO_RUDY_AFTER_CHURCH',
             'BROUGHT_SUSIE_TO_RUDY_AFTER_CHURCH',
             'USED_RUDY_SINK_CH4',
+            'KEPT_NOELLE_WATCH_AFTER_CH2',
             'INTERACTED_WITH_RUDY_FLOWERS_CH4',
             'VISITED_BERDLY_IN_HOSPITAL_CH4',
             'SAW_SUSIE_POST_BERDLY_VISIT_SCENE',
+            'SUSIE_BERDLY_HOSPITAL_WEIRD_ROUTE_PROGRESS',
+            'TURNED_UP_BERDLY_HOSPITAL_HEATER',
+            'CHANGED_BERDLY_HOSPITAL_WATER_BOTTLE',
           ],
         },
         {
           id: 'castle-town',
           title: 'Castle Town',
           flags: [
+            'WHO_EATS_THE_CAKE',
             'COMPLETED_CASTLE_TOWN_RETURN_SCENE_CH4',
+            'TOOK_SHADOW_CRYSTAL_IN_CLIFF',
+            'TALKED_TO_NUBERT_CH4',
+            'TALKED_TO_RUDINN_CH4',
             'SAW_EMPTY_RALSEI_ROOM',
+            'RALSEI_DESIRES_RESPONSE',
             'HEARD_RALSEI_PLUSH_DIALOGUE',
             'SAW_LANCER_ROOM_RENOVATION_SCENE',
             'TALKED_TO_KING_ABOUT_KNIGHT',
@@ -1140,6 +1363,14 @@ export const STORY_SECTIONS = {
           flags: [
             'WEATHER_DUO_DOJO_OUTCOME',
             'TALKED_TO_JIGSAW_JOE_IN_LOVE_DOJO',
+          ],
+        },
+        {
+          id: 'librarby',
+          title: 'Librarby',
+          flags: [
+            'DISCUSSED_PLANS_WITH_BERDLY_AT_LIBRARBY',
+            'TALKED_TO_BERDLY_AT_LIBRARBY',
           ],
         },
         {
@@ -1188,6 +1419,7 @@ export const STORY_SECTIONS = {
           flags: [
             'TALKED_TO_MALIUS_ABOUT_NEW_FUSIONS',
             'TALKED_TO_MALIUS_CH4',
+            'SELECTED_MALIUS_LEAVE_OPTION',
             'TALKED_TO_TOPCHEF_CH4',
             'TALKED_TO_SWATCH_IN_CAFE',
             'CASTLE_TOWN_ADDISON_LINEUP',
@@ -1199,6 +1431,7 @@ export const STORY_SECTIONS = {
           flags: [
             'COMPLETED_DINER_SCENE_WITH_SUSIE',
             'DREW_SUSIE_AT_DINER',
+            'WROTE_IN_DINER_CORNER',
             'DINER_PAYMENT_REFUSED',
             'SAW_EGG_MAN_IN_DINER',
           ],
@@ -1206,7 +1439,11 @@ export const STORY_SECTIONS = {
         {
           id: 'ice-e-pizza',
           title: "ICE-E's P'E'ZZA",
-          flags: ['ASKED_BURGERPANTS_TO_CONTINUE', 'BURGERPANTS_DATE_PROGRESS'],
+          flags: [
+            'ASKED_BURGERPANTS_TO_CONTINUE',
+            'BURGERPANTS_DATE_PROGRESS',
+            'EAVESDROPPED_BLUE_BUNNY',
+          ],
         },
         {
           id: 'sans-store',
@@ -1253,14 +1490,19 @@ export const STORY_SECTIONS = {
           flags: [
             'HOLIDAY_GATE_STATE',
             'KEPT_NOELLE_WAITING',
+            'HEARD_NOELLE_SANTA_EXPLANATION',
+            'HEARD_NOELLE_DEAD_SANTA_COMMENT',
+            'HEARD_NOELLE_CACTUS_COMMENT',
             'CHECKED_NOELLE_BROWSING_HISTORY',
             'FOUND_CAT_PETTERZ_4',
             'KEPT_NOELLE_WATCH_AFTER_CH2',
             'TOOK_NOELLE_DESK_PENCIL',
             'USED_TREAT_CATCHER_WITH_SUSIE_AND_NOELLE',
+            'SUSIE_BASEMENT_DIALOGUE_LINE',
             'MADE_NOISE_IN_NOELLE_HOUSE_COUNT',
             'SEARCHED_DESS_BELONGINGS',
             'GLASS_NOELLE_WHISPERING',
+            'FINISHED_NOELLE_HOUSE_WEIRD',
           ],
         },
         {
@@ -1298,6 +1540,7 @@ export const STORY_SECTIONS = {
             'NOELLE_SLAPPED_KRIS_WEIRD_ROUTE',
             'HOMETOWN_WEIRD_CUTSCENE_PROGRESS',
             'KRIS_NOELLE_ESCAPE_WEIRD_ABORT',
+            'WEIRD_ROUTE_FAIL_CH4',
           ],
         },
         {
@@ -1319,6 +1562,7 @@ export const STORY_SECTIONS = {
           title: 'First Sanctuary Intro',
           flags: [
             'CHAIR_SKIP_CH4',
+            'RUN_REMINDER_CH4',
             'TRIGGERED_FIRST_SANCTUARY_INTRO_TEMP_SAVE',
             'CHECKED_FIRST_SANCTUARY_PROPHECY_SAVE_POINT',
             'SPLATTED_NEXT_TO_RALSEI',
@@ -1354,12 +1598,17 @@ export const STORY_SECTIONS = {
             'TALKED_TO_GERSON_IN_STUDY',
             'ASKED_GERSON_ABOUT_HIS_WORK_BEFORE_JACKENSTEIN',
             'ASKED_GERSON_ABOUT_KNIGHT_BEFORE_JACKENSTEIN',
+            'ASKED_GERSON_ABOUT_HIS_WORK_AFTER_JACKENSTEIN',
+            'ASKED_GERSON_ABOUT_HIS_WORK_AFTER_SHEET_MUSIC',
+            'ASKED_GERSON_ABOUT_KNIGHT_AFTER_SHEET_MUSIC',
             'SUSIE_COPIED_WALL_NOTES',
             'STUDY_SHEET_MUSIC_PROGRESS',
+            'GERSON_RECRUITED_GUEIS',
             'CHECKED_GERSON_TABLE_FIRST_SANCTUARY',
             'CHECKED_GERSON_STUDY_SAVE_POINT',
             'INTERACTED_WITH_FIREPLACE_MURAL',
             'TALKED_TO_GERSON_ABOUT_MAGIC_AXE',
+            'GERSON_LEFT_ROOM_WITHOUT_OTHERS',
           ],
         },
         {
@@ -1384,7 +1633,12 @@ export const STORY_SECTIONS = {
         {
           id: 'gerson-tea',
           title: "Gerson's Tea",
-          flags: ['GERSON_TEA_FANCY_A_DRINK'],
+          flags: [
+            'GERSON_TEA_FANCY_A_DRINK',
+            'GERSON_TEA_DRINK_IT',
+            'GERSON_TEA_ARE_YOU_SURE',
+            'GERSON_TEA_FINISHED',
+          ],
         },
         {
           id: 'bookshelf-puzzle',
@@ -1420,6 +1674,8 @@ export const STORY_SECTIONS = {
             'JACKENSTEIN_CUTSCENE_PROGRESS',
             'TALKED_TO_JACKENSTEIN_IN_STUDY',
             'CAN_CLIMB',
+            'SAW_JACKENSTEIN_TRUE_FACE',
+            'PUMPKIN_PROGRESS',
           ],
         },
         {
@@ -1444,6 +1700,7 @@ export const STORY_SECTIONS = {
           flags: [
             'ACTIVATED_TRUE_CLIMB_LEFT_SHORTCUT',
             'ACTIVATED_TRUE_CLIMB_RIGHT_SHORTCUT',
+            'INTERACTED_WITH_CUPSTACK_LIFT',
             'OBTAINED_JACKENSTEIN_CHEST',
           ],
         },
@@ -1456,6 +1713,20 @@ export const STORY_SECTIONS = {
             'HOLY_WATERCOOLER_ENCOUNTER_OUTCOME',
             'SECOND_MIZZLE_ENCOUNTER_OUTCOME',
             'SOLVED_GOLDEN_PIANO',
+          ],
+        },
+        {
+          id: 'knight-prophecy',
+          title: 'Knight Prophecy',
+          flags: ['BROKE_KNIGHT_PROPHECY'],
+        },
+        {
+          id: 'organ',
+          title: 'organ',
+          flags: [
+            'PLAYED_MEGALOVANIA',
+            'THOUGHT_ABOUT_KNIGHT',
+            'THOUGHT_ABOUT_NOELLE_WEIRD_ROUTE',
           ],
         },
         {
@@ -1494,7 +1765,11 @@ export const STORY_SECTIONS = {
         {
           id: 'susie-backstory',
           title: "Susie's Backstory",
-          flags: ['LISTENED_SUSIE_PIANO_STORY'],
+          flags: [
+            'LISTENED_SUSIE_PIANO_STORY',
+            'INTERACTED_WITH_GERSON_REMAINS',
+            'WILL_KRIS_PLAY_AGAIN',
+          ],
         },
       ],
     },
@@ -1517,6 +1792,11 @@ export const STORY_SECTIONS = {
           flags: ['OBTAINED_MONEYFOUNTAIN_CHEST', 'STEEL_ENCOUNTER_OUTCOME'],
         },
         {
+          id: 'northwest-connector-save-point',
+          title: 'Northwest Connector Save Point',
+          flags: ['INTERACTED_WITH_NORTHWEST_CONNECTOR_SAVE_POINT'],
+        },
+        {
           id: 'egg-and-moss',
           title: 'Egg & Moss',
           flags: [
@@ -1525,6 +1805,11 @@ export const STORY_SECTIONS = {
             'WASHED_HANDS_THERAPY',
             'MOSS_OUTCOME_CH4',
           ],
+        },
+        {
+          id: 'bellroom',
+          title: 'Bellroom',
+          flags: ['SUSIE_BELLROOM_PROGRESS'],
         },
         {
           id: 'gallery',
@@ -1541,6 +1826,20 @@ export const STORY_SECTIONS = {
             'RIGHT_PIANO_PIECE_SHELF_2_Y',
             'STOLE_PILLOW_FOR_RALSEI',
             'OPENED_RIGHT_PIANO_PIECE_CHEST',
+            'BREAKABLE_BOOKSHELVES_STATE',
+          ],
+        },
+        {
+          id: 'spawn-cloud',
+          title: 'Spawn cloud',
+          flags: ['SPAWN_CLOUD_DEATH_COUNT'],
+        },
+        {
+          id: 'abandoned-gerson-study',
+          title: 'Gerson study',
+          flags: [
+            'CHECKED_GERSON_TABLE_SECOND_SANCTUARY',
+            'RHAPSOTEA_EXTRA_DOLLARS',
           ],
         },
         {
@@ -1567,7 +1866,10 @@ export const STORY_SECTIONS = {
         {
           id: 'third-sanctuary-entry',
           title: 'Third Sanctuary Entrance',
-          flags: ['STARTED_THIRD_SANCTUARY_MUSIC'],
+          flags: [
+            'STARTED_THIRD_SANCTUARY_MUSIC',
+            'CHECKED_THIRD_SANCTUARY_MUSIC_SAVE_POINT',
+          ],
         },
         {
           id: 'hidden-prophecies',
@@ -1575,6 +1877,7 @@ export const STORY_SECTIONS = {
           flags: [
             'THIRD_SANCTUARY_MISSED_SOMETHING_RESPONSE',
             'OBTAINED_MINORLEGEND_CHEST',
+            'RETURNED_SECOND_JOCKINGTON_PROPHECY',
           ],
         },
         {
@@ -1596,6 +1899,16 @@ export const STORY_SECTIONS = {
             'PURIFIED_COUNT',
             'SLAIN_COUNT',
           ],
+        },
+        {
+          id: 'cup-stack',
+          title: 'Cup Stack',
+          flags: ['TALKED_TO_CUP_STACK_DURING_FINAL_CLIMB'],
+        },
+        {
+          id: 'gerson-table',
+          title: 'Gerson Table',
+          flags: ['CHECKED_GERSON_TABLE_THIRD_SANCTUARY'],
         },
         {
           id: 'backtrack',
@@ -1622,9 +1935,12 @@ export const STORY_SECTIONS = {
           ],
         },
         {
-          id: 'hometown-ending',
-          title: 'Hometown Ending',
+          id: 'ending',
+          title: 'Ending',
           flags: [
+            'RALSEI_BLOODY_FACE',
+            'SHOULD_CHECK_ON_RALSEI',
+            'RAIN_STATE',
             'CHECKED_GERSON_GRAVE_WITH_SUSIE',
             'CHECKED_SHELTER_WITH_SUSIE',
             'CHECKED_SHELTER_PANEL',
@@ -1634,6 +1950,7 @@ export const STORY_SECTIONS = {
             'CHECKED_LAKE_TABLE_AFTER_RAIN',
             'LAKE_SITTING_SCENE_PROGRESS',
             'LAKE_CUTSCENE_PROGRESS_CH4',
+            'LAKE_CONVERSATION_RESPONSE',
           ],
         },
         {
