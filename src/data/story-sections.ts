@@ -765,6 +765,11 @@ export const STORY_SECTIONS = {
           ],
         },
         {
+          id: 'ralsei-equip-cheer',
+          title: 'Ralsei Equip Cheer',
+          flags: ['RAL_CHEER_EQUIP_COUNT'],
+        },
+        {
           id: 'shadow-crystal',
           title: 'Shadow Crystal',
           flags: ['SHADOW_HOME', 'SHADOW_FAILED_CH3'],
@@ -1046,8 +1051,8 @@ export const STORY_SECTIONS = {
           flags: ['OBTAINED_1225_ROOM'],
         },
         {
-          id: 's-rank',
-          title: 'S-Rank',
+          id: 's-rank-2',
+          title: 'S-Rank 2',
           flags: ['COUNTERFEIT_S_2', 'OBTAINED_IN_S_RANK_2', 'S_RANK_RETURN_2'],
         },
         {
@@ -1061,8 +1066,8 @@ export const STORY_SECTIONS = {
           ],
         },
         {
-          id: 'tenna',
-          title: 'Tenna',
+          id: 'tenna-chat-2',
+          title: 'Tenna chat 2',
           flags: ['SUSIE_TENNA_CHAT_2', 'KRIS_TENNA_CHAT'],
         },
       ],
@@ -1084,8 +1089,6 @@ export const STORY_SECTIONS = {
             'OBTAINED_CROWD_TREASURE',
             'FOUND_MAZE_CROWD',
             'ZAPPER_JAIL_2',
-            'UNLOCKED_STEALTH',
-            'SNEAKING_FAST',
             'FOUND_TRASH_SWITCH',
             'STARTED_COWBOY_GAME',
             'STARTED_COWBOY_GAME_2',
@@ -1166,6 +1169,8 @@ export const STORY_SECTIONS = {
           id: 'sneak-mission',
           title: 'Sneak Mission',
           flags: [
+            'UNLOCKED_STEALTH',
+            'SNEAKING_FAST',
             'OVERWORLD_QUIZ_4',
             'OVERWORLD_QUIZ_5',
             'OVERWORLD_QUIZ_6',
@@ -1182,7 +1187,7 @@ export const STORY_SECTIONS = {
       clusters: [
         {
           id: 'green-room',
-          title: 'Green room',
+          title: 'Green Room',
           flags: ['TALKED_TO_JAILED_PIPPINS', 'CHECK_RECRUITS_CH3'],
         },
         {
@@ -1203,8 +1208,8 @@ export const STORY_SECTIONS = {
           ],
         },
         {
-          id: 'ramb',
-          title: 'Ramb',
+          id: 'ramb-fountain-explanation',
+          title: 'Ramb Fountain Explanation',
           flags: ['HEARD_RAMB_FOUNTAIN_EXPLANATION'],
         },
         {
@@ -1235,11 +1240,6 @@ export const STORY_SECTIONS = {
           id: 'goulden-son',
           title: 'Goulden Son',
           flags: ['GOULDEN_SON_TALE', 'GOULDEN_SON_DESTINATION'],
-        },
-        {
-          id: 'ralsei',
-          title: 'Ralsei',
-          flags: ['RAL_CHEER_EQUIP_COUNT'],
         },
       ],
     },
