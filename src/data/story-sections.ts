@@ -1709,7 +1709,7 @@ export const STORY_SECTIONS = {
           id: 'knight-prophecy',
           title: "Knight Prophecy",
           flags: ['BROKE_KNIGHT_PROPHECY'],
-        }
+        },
         {
           id: 'organ',
           title: "organ",
