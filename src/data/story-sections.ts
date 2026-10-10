@@ -1271,7 +1271,10 @@ export const STORY_SECTIONS = {
         {
           id: 'susie',
           title: 'Susie',
-          flags: ['SUSIE_HEAL_PRACTICE_COUNT', 'SAW_SUSIE_SCARE_DOOR_KID_SCENE'],
+          flags: [
+            'SUSIE_HEAL_PRACTICE_COUNT',
+            'SAW_SUSIE_SCARE_DOOR_KID_SCENE',
+          ],
         },
         {
           id: 'church-service',
@@ -1365,7 +1368,10 @@ export const STORY_SECTIONS = {
         {
           id: 'librarby',
           title: 'Librarby',
-          flags: ['DISCUSSED_PLANS_WITH_BERDLY_AT_LIBRARBY', 'TALKED_TO_BERDLY_AT_LIBRARBY'],
+          flags: [
+            'DISCUSSED_PLANS_WITH_BERDLY_AT_LIBRARBY',
+            'TALKED_TO_BERDLY_AT_LIBRARBY',
+          ],
         },
         {
           id: 'rhythm-games',
@@ -1433,7 +1439,11 @@ export const STORY_SECTIONS = {
         {
           id: 'ice-e-pizza',
           title: "ICE-E's P'E'ZZA",
-          flags: ['ASKED_BURGERPANTS_TO_CONTINUE', 'BURGERPANTS_DATE_PROGRESS', 'EAVESDROPPED_BLUE_BUNNY'],
+          flags: [
+            'ASKED_BURGERPANTS_TO_CONTINUE',
+            'BURGERPANTS_DATE_PROGRESS',
+            'EAVESDROPPED_BLUE_BUNNY',
+          ],
         },
         {
           id: 'sans-store',
@@ -1707,13 +1717,17 @@ export const STORY_SECTIONS = {
         },
         {
           id: 'knight-prophecy',
-          title: "Knight Prophecy",
+          title: 'Knight Prophecy',
           flags: ['BROKE_KNIGHT_PROPHECY'],
         },
         {
           id: 'organ',
-          title: "organ",
-          flags: ['PLAYED_MEGALOVANIA', 'THOUGHT_ABOUT_KNIGHT', 'THOUGHT_ABOUT_NOELLE_WEIRD_ROUTE'],
+          title: 'organ',
+          flags: [
+            'PLAYED_MEGALOVANIA',
+            'THOUGHT_ABOUT_KNIGHT',
+            'THOUGHT_ABOUT_NOELLE_WEIRD_ROUTE',
+          ],
         },
         {
           id: 'gerson-battle',
@@ -1751,7 +1765,11 @@ export const STORY_SECTIONS = {
         {
           id: 'susie-backstory',
           title: "Susie's Backstory",
-          flags: ['LISTENED_SUSIE_PIANO_STORY', 'INTERACTED_WITH_GERSON_REMAINS', 'WILL_KRIS_PLAY_AGAIN'],
+          flags: [
+            'LISTENED_SUSIE_PIANO_STORY',
+            'INTERACTED_WITH_GERSON_REMAINS',
+            'WILL_KRIS_PLAY_AGAIN',
+          ],
         },
       ],
     },
@@ -1819,7 +1837,10 @@ export const STORY_SECTIONS = {
         {
           id: 'abandoned-gerson-study',
           title: 'Gerson study',
-          flags: ['CHECKED_GERSON_TABLE_SECOND_SANCTUARY', 'RHAPSOTEA_EXTRA_DOLLARS'],
+          flags: [
+            'CHECKED_GERSON_TABLE_SECOND_SANCTUARY',
+            'RHAPSOTEA_EXTRA_DOLLARS',
+          ],
         },
         {
           id: 'second-sanctuary-exit',
@@ -1845,7 +1866,10 @@ export const STORY_SECTIONS = {
         {
           id: 'third-sanctuary-entry',
           title: 'Third Sanctuary Entrance',
-          flags: ['STARTED_THIRD_SANCTUARY_MUSIC', 'CHECKED_THIRD_SANCTUARY_MUSIC_SAVE_POINT'],
+          flags: [
+            'STARTED_THIRD_SANCTUARY_MUSIC',
+            'CHECKED_THIRD_SANCTUARY_MUSIC_SAVE_POINT',
+          ],
         },
         {
           id: 'hidden-prophecies',
