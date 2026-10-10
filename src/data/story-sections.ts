@@ -320,7 +320,7 @@ export const STORY_SECTIONS = {
       title: 'Light World to Cyber Field',
       clusters: [
         {
-          id: 'light-word',
+          id: 'light-world',
           title: 'Light World',
           flags: [
             'TOOK_AZZY_MONEY',
@@ -1151,7 +1151,7 @@ export const STORY_SECTIONS = {
           ],
         },
         {
-          id: 'egg-sequesnce',
+          id: 'egg-sequence',
           title: 'Egg Sequesnce & One Point',
           flags: [
             'OBTAINED_EGG_CH3',
