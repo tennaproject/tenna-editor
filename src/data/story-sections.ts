@@ -1820,7 +1820,7 @@ export const STORY_SECTIONS = {
           id: 'abandoned-gerson-study',
           title: 'Gerson study',
           flags: ['CHECKED_GERSON_TABLE_SECOND_SANCTUARY', 'RHAPSOTEA_EXTRA_DOLLARS'],
-        }
+        },
         {
           id: 'second-sanctuary-exit',
           title: 'Second Sanctuary Exit',
