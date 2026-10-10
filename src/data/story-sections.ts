@@ -1583,7 +1583,7 @@ export const STORY_SECTIONS = {
         },
         {
           id: 'gerson-study',
-          title: 'Gerson's Study',
+          title: "Gerson's Study",
           flags: [
             'TALKED_TO_GERSON_IN_STUDY',
             'ASKED_GERSON_ABOUT_HIS_WORK_BEFORE_JACKENSTEIN',
