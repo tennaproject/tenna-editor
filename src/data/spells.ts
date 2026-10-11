@@ -19,6 +19,8 @@ export const SPELLS = {
   SUSIE_HEAL: 11,
   REVIVE_SONG: 12,
   SCYTHEMARE: 13,
+  TRIO_HEAL: 17,
+  BULK_UP: 18,
 } as const;
 
 export type SpellIndex = (typeof SPELLS)[keyof typeof SPELLS];
@@ -233,6 +235,17 @@ export const SPELLS_META: Record<SpellIndex, SpellProperties> = {
       if (armors.includes(ARMORS.O_GLOVE)) {
         return { tpCost: 20 };
       }
+
+        [SPELLS.TRIO_HEAL]: {
+    displayName: 'Trio Heal',
+    description: 'Heals the party.',
+    tpCost: 64,
+  },
+  [SPELLS.BULK_UP]: {
+    displayName: 'Bulk Up',
+    description: 'Raises Attack and Magic for one ally.',
+    tpCost: 32,
+  },
 
       return {};
     },
