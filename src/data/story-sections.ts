@@ -1393,6 +1393,7 @@ export const STORY_SECTIONS = {
             'UNLOCKED_MIKE_ZONE_DOOR',
             'ENTERED_MIKE_ZONE_ACCOMPANIED',
             'PET_FIRST_MIKE_STATUE',
+            'DIDNT_PET_FIRST_MIKE_STATUE',
             'MIKE_STATUES_STATE',
             'SAVED_TERRIFIED_MAUS',
             'PET_CHEST_MIKE_STATUE',
