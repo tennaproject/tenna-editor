@@ -38,7 +38,11 @@ export const STORY_SECTIONS = {
         {
           id: 'dark-world-entrance',
           title: 'Dark World Entrance',
-          flags: ['DARK_AREA_MOVEMENT_CHOICE', 'SOLVED_EYE_PUZZLE', 'OBTAINED_GLOWSHARD'],
+          flags: [
+            'DARK_AREA_MOVEMENT_CHOICE',
+            'SOLVED_EYE_PUZZLE',
+            'OBTAINED_GLOWSHARD',
+          ],
         },
         {
           id: 'training-dummy',
