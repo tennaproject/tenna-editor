@@ -38,7 +38,7 @@ export const STORY_SECTIONS = {
         {
           id: 'dark-world-entrance',
           title: 'Dark World Entrance',
-          flags: ['DARK_AREA_MOVEMENT_CHOICE', 'SOLVED_EYE_PUZZLE'],
+          flags: ['DARK_AREA_MOVEMENT_CHOICE', 'SOLVED_EYE_PUZZLE', 'OBTAINED_GLOWSHARD'],
         },
         {
           id: 'training-dummy',
@@ -58,7 +58,6 @@ export const STORY_SECTIONS = {
           id: 'field',
           title: 'Field',
           flags: [
-            'OBTAINED_GLOWSHARD',
             'SAW_FIELD_SONG',
             'INTERACTED_WITH_SALSA',
             'LANCER_PRE_HATHY_DIALOGUE',
