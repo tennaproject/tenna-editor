@@ -2120,7 +2120,10 @@ export const STORY_SECTIONS = {
         {
           id: 'glass',
           title: 'glass',
-          flags: ['USED_GLASS_AT_TORIELS_HOUSE_CH5', 'USED_GLASS_AT_FESTIVAL_CH5'],
+          flags: [
+            'USED_GLASS_AT_TORIELS_HOUSE_CH5',
+            'USED_GLASS_AT_FESTIVAL_CH5',
+          ],
         },
         {
           id: 'weird-route',
@@ -2840,7 +2843,7 @@ export const STORY_SECTIONS = {
             'USED_FLOWERY_HAIR_CLIP_AFTER_GAME_OVER',
             'HEARD_SUSIE_FLOWERY_IDEA',
             'TIMES_HURT_FLOWERY',
-            'FLOWERYFIGHT_ATTEMPTS', 
+            'FLOWERYFIGHT_ATTEMPTS',
             'FLOWERY_LOSS_COUNT',
             'FLOWERYFIGHT_ENDED',
           ],
@@ -2853,17 +2856,17 @@ export const STORY_SECTIONS = {
       flags: ['AT_MAGIC_GAIN_COUNT_CH5', 'LEVEL_UP_COUNT_CH5'],
     },
     {
-          id: 'ending',
-          title: 'Ending',
-          flags: [
-            'FLOWERY_FINAL_BLOW_OUTCOME',
-            'INTERACTED_WITH_DESTROYED_FLOWERY',
-            'TALKED_TO_ASGORE_ABOUT_KRIS_AT_FOUNTAIN',
-            'TALKED_TO_ASGORE_ABOUT_SUSIE_AT_FOUNTAIN',
-            'TALKED_TO_ASGORE_ABOUT_RALSEI_AT_FOUNTAIN',
-            'WALKED_SUSIE_HOME_CONVO',
-          ],
-        },
+      id: 'ending',
+      title: 'Ending',
+      flags: [
+        'FLOWERY_FINAL_BLOW_OUTCOME',
+        'INTERACTED_WITH_DESTROYED_FLOWERY',
+        'TALKED_TO_ASGORE_ABOUT_KRIS_AT_FOUNTAIN',
+        'TALKED_TO_ASGORE_ABOUT_SUSIE_AT_FOUNTAIN',
+        'TALKED_TO_ASGORE_ABOUT_RALSEI_AT_FOUNTAIN',
+        'WALKED_SUSIE_HOME_CONVO',
+      ],
+    },
     {
       id: 'all-flags-ch5',
       title: 'All other flags',
