@@ -221,6 +221,13 @@ function diffRoom(
   ];
 }
 
+const EQUIPMENT_BONUS_LABELS = [
+  'Weapon bonus',
+  'Armor 1 bonus',
+  'Armor 2 bonus',
+  'Unused bonus slot',
+];
+
 function diffCharacter(
   charIndex: CharacterIndex,
   before: SaveGamePayload['characters'][number] | undefined,
@@ -330,7 +337,7 @@ function diffCharacter(
       pushChange(
         changes,
         `characters.${charIndex}.weaponStats.${i}.${String(statKey)}`,
-        `Weapon style ${i + 1} — ${String(statKey)}`,
+        `${EQUIPMENT_BONUS_LABELS[i]} - ${String(statKey)}`,
         bStats[statKey],
         aStats[statKey],
       );
