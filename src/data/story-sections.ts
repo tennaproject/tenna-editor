@@ -1992,7 +1992,7 @@ export const STORY_SECTIONS = {
           ],
         },
         {
-          id: 'festival',
+          id: 'festival-flags',
           title: 'Festival',
           flags: [
             'HOMETOWN_FESTIVAL_STATE',
@@ -2150,7 +2150,7 @@ export const STORY_SECTIONS = {
       title: 'Castle Town',
       clusters: [
         {
-          id: 'castle-town',
+          id: 'castle-town-flags',
           title: 'Castle Town',
           flags: [
             'OBTAINED_SPINCAKE_CH5',
