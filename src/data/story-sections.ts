@@ -2645,19 +2645,6 @@ export const STORY_SECTIONS = {
           ],
         },
         {
-          id: 'twirlflower',
-          title: 'Twirlflower',
-          flags: [
-            'CLIFF_TWIRLFLOWER_SUSIE_COMMENT',
-            'CLIFF_TWIRLFLOWER_BELL_LOWER_LEFT',
-            'CLIFF_TWIRLFLOWER_BELL_LOWER_RIGHT',
-            'CLIFF_TWIRLFLOWER_BELL_UPPER',
-            'CLIFF_TWIRLFLOWER_SETH_AQUA_BATTLE',
-            'CLIFF_TWIRLFLOWER_WIND_BELL',
-            'CLIFF_TWIRLFLOWER_BELL_BUNCH',
-          ],
-        },
-        {
           id: 'other',
           title: 'Other',
           flags: [
@@ -2667,6 +2654,13 @@ export const STORY_SECTIONS = {
             'SHI_NOTANENEMY_ENCOUNTER_OUTCOME',
             'FOUND_SECRET_BUNNY_NETSKIE',
             'COLLECTED_ALL_CLIFF_ITEMS',
+            'CLIFF_TWIRLFLOWER_SUSIE_COMMENT',
+            'CLIFF_TWIRLFLOWER_BELL_LOWER_LEFT',
+            'CLIFF_TWIRLFLOWER_BELL_LOWER_RIGHT',
+            'CLIFF_TWIRLFLOWER_BELL_UPPER',
+            'CLIFF_TWIRLFLOWER_SETH_AQUA_BATTLE',
+            'CLIFF_TWIRLFLOWER_WIND_BELL',
+            'CLIFF_TWIRLFLOWER_BELL_BUNCH',
           ],
         },
         {
@@ -2865,7 +2859,7 @@ export const STORY_SECTIONS = {
         },
         {
           id: 'gloves-tower',
-          title: 'Gloves Tower and Train Room',
+          title: 'Gloves Tower',
           flags: [
             'GLOVES_TOWER_ORANGE_DIALOGUE',
             'GLOVES_TOWER_TOP_LANTERNS_DESTROYED',
@@ -2881,6 +2875,12 @@ export const STORY_SECTIONS = {
             'GLOVES_TOWER_TOWER_LANTERN_MIDDLE',
             'GLOVES_TOWER_TOWER_LANTERN_NEAR_BOTTOM',
             'GLOVES_TOWER_TOWER_LANTERN_BOTTOM',
+          ],
+        },
+        {
+          id: 'train-room',
+          title: 'Train Room',
+          flags: [
             'TRAINROOM_ORANGE_LEFT',
             'TRAINROOM_PINKCOIN',
             'TRAINROOM_COIN_LANTERN',
@@ -3068,8 +3068,8 @@ export const STORY_SECTIONS = {
           ],
         },
         {
-          id: 'flowery-battle',
-          title: 'Flowery Boss Fight',
+          id: 'last-room',
+          title: 'Last Room & Boss Fight',
           flags: [
             'SHORTCUT_LAST_ROOM',
             'FLOWERY_PRE_FIGHT_TRIGGER',
