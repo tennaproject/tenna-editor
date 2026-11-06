@@ -86,6 +86,7 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.settings.soundDescription':
     'Plays sound effects from the game while you edit saves.',
   'ui.settings.soundEffects': 'Sound effects',
+  'ui.settings.mods': 'Mods',
   'ui.settings.enableDeveloperMode': 'Enable developer mode',
   'ui.settings.backupRestore': 'Backup & Restore',
   'ui.settings.backupRestoreDescription':

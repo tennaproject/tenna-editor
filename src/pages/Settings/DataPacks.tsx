@@ -1,5 +1,5 @@
 import UploadIcon from '@assets/icons/upload.svg?react';
-import { Button, Card, Heading } from '@components';
+import { Button, Heading } from '@components';
 import { toast } from '@services';
 import { useDataPacks } from '@store';
 import {
@@ -71,10 +71,10 @@ export function DataPacks() {
   }
 
   return (
-    <Card className="flex flex-col gap-4 p-6">
+    <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex min-w-0 flex-1 flex-col gap-2">
-          <Heading level={3}>
+          <Heading level={4}>
             {t('ui.settings.dataPacks.title', 'Data packs')}
           </Heading>
           <p className="max-w-3xl text-sm text-text-2">
@@ -141,6 +141,6 @@ export function DataPacks() {
           ))}
         </ul>
       )}
-    </Card>
+    </div>
   );
 }

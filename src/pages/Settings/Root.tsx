@@ -158,6 +158,15 @@ export function SettingsRoot() {
             </Card>
           </Section>
 
+          <Section id="mods">
+            <Card className="flex flex-col gap-6 p-6">
+              <Heading level={3}>{t('ui.settings.mods', 'Mods')}</Heading>
+              <Section id="data-packs">
+                <DataPacks />
+              </Section>
+            </Card>
+          </Section>
+
           {import.meta.env.VITE_DEVTOOLS_TAB === 'true' && (
             <Section id="general">
               <Card className="flex flex-col gap-3 p-6">
@@ -175,10 +184,6 @@ export function SettingsRoot() {
               </Card>
             </Section>
           )}
-
-          <Section id="data-packs">
-            <DataPacks />
-          </Section>
 
           <Section id="backup">
             <Card className="flex flex-col gap-3 p-6">
