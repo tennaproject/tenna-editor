@@ -2257,7 +2257,6 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.RAN_IN_SCHOOL]: {
     displayName: 'Ran to Susie at school',
-    unused: true,
     description:
       'Whether you ran to Susie in the Chapter 1 school scene. Unaccessed.',
     valueType: 'boolean',
@@ -3829,7 +3828,6 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.FESTIVAL_COMPANION_RESPONSE]: {
     displayName: 'Fave Party Member 2',
-    unused: true,
     description:
       'Who you told Susie you would take to the festival in the Chapter 2 end cutscene. Unaccessed.',
     valueType: 'map',
@@ -3958,7 +3956,6 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.RIDE_WITH_ME]: {
     displayName: 'Ride With Me',
-    unused: true,
     description: "Whether you said 'Noelle will ride with me' on Snowgrave.",
     valueType: 'boolean',
   },
@@ -4022,7 +4019,6 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.JUNKBALL_DROPPED]: {
     displayName: 'Dropped the junk ball',
-    unused: true,
     description:
       'Whether you dropped the Ball of Junk at any point. Unaccessed.',
     valueType: 'boolean',
@@ -4932,7 +4928,6 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.COMPLETED_CHURCH_STICKER_FIGHT]: {
     displayName: 'Completed the church sticker fight',
-    unused: true,
     description:
       'Viewed the cutscene of Kris and Susie placing stickers on each other at the church. Unaccessed as of chapter 4.',
     valueType: 'boolean',
@@ -4949,7 +4944,6 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.WROTE_IN_DINER_CORNER]: {
     displayName: 'Wrote in the diner window',
-    unused: true,
     description:
       'Wrote something in the corner during the diner cutscene. Unaccessed as of chapter 4.',
     valueType: 'boolean',
@@ -5029,7 +5023,6 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.LAKE_CONVERSATION_RESPONSE]: {
     displayName: 'Beach festival reply',
-    unused: true,
     description:
       "Which option you picked when asked to say what's on your mind or nothing at the lake. Unaccessed as of chapter 4.",
     valueType: 'map',
@@ -5760,14 +5753,12 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.THOUGHT_ABOUT_KNIGHT]: {
     displayName: 'Knight daydream rest',
-    unused: true,
     description:
       'Viewed the cutscene of Kris thinking about the Knight. Unaccessed as of chapter 4.',
     valueType: 'boolean',
   },
   [FLAGS.THOUGHT_ABOUT_NOELLE_WEIRD_ROUTE]: {
     displayName: 'Drip vision rest',
-    unused: true,
     description:
       'Viewed the cutscene of Kris thinking about Noelle in the Weird Route. Unaccessed as of chapter 4.',
     valueType: 'boolean',
@@ -5795,7 +5786,6 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.SAW_JACKENSTEIN_TRUE_FACE]: {
     displayName: "Saw Jackenstein's true face",
-    unused: true,
     description:
       "Saw Jackenstein's true face after defeating him. Unaccessed as of chapter 4.",
     valueType: 'boolean',
@@ -5842,7 +5832,6 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.RALSEI_DESIRES_RESPONSE]: {
     displayName: 'Ralsei room apology',
-    unused: true,
     description:
       'What you answered to Ralsei asking you if a Darkner should be starting to develop his own desires. Unaccessed as of chapter 4.',
     valueType: 'map',
@@ -6356,7 +6345,6 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.FAILED_SNOWGRAVE_WITHOUT_THORN_RING]: {
     displayName: 'Forgot Ring',
-    unused: true,
     description:
       'Whether you failed the Snowgrave route because of not having the Thorn Ring at Berdly. Unaccessed.',
     valueType: 'boolean',
@@ -6588,7 +6576,6 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.SAW_NOWHERE_PREREQUISITE_BOARD]: {
     displayName: 'Saw the Nowhere prerequisite board',
-    unused: true,
     description:
       "Whether you saw the board that's a prerequisite for solving Nowhere. Unaccessed.",
     valueType: 'boolean',
@@ -7003,7 +6990,6 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.OBTAINED_LANCER_NAME_Q]: {
     displayName: 'Saw the Lancer-name question',
-    unused: true,
     description:
       "Whether you've faced the question of Tenna forgetting Lancer's name. Unaccessed.",
     valueType: 'boolean',
@@ -9945,7 +9931,6 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.WHO_EATS_THE_CAKE]: {
     displayName: 'Who eats the cake?',
-    unused: true,
     description:
       'What you said to Ralsei after he said he never had cake before during his tea party. Unaccessed as of chapter 4.',
     valueType: 'map',
@@ -10033,7 +10018,6 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.FINISHED_NOELLE_HOUSE_WEIRD]: {
     displayName: 'Saw the Noelle-house Weird Route cutscene',
-    unused: true,
     description:
       "Viewed the cutscene after coming out of the Noelle's house during the Weird Route. Unaccessed as of chapter 4.",
     valueType: 'boolean',
@@ -10074,7 +10058,6 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.SLEPT_THROUGH_SERVICE]: {
     displayName: 'Church sermon choice A',
-    unused: true,
     description:
       'Whether you chose to sleep through service at church. Unaccessed as of chapter 4.',
     valueType: 'map',
@@ -10088,7 +10071,6 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.WHAT_YOU_DID_DURING_SERVICE]: {
     displayName: 'Church sermon choice B',
-    unused: true,
     description:
       'What you chose to do during service at church. Unaccessed as of chapter 4.',
     valueType: 'map',
@@ -10225,7 +10207,6 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.WHY_WE_SHOULD_ENTER_CHURCH]: {
     displayName: 'Why We Should Enter Church',
-    unused: true,
     description:
       "What you said to Susie after she suggested waiting outside the church's Dark World. Unaccessed as of chapter 4.",
     valueType: 'map',
@@ -10878,7 +10859,6 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.WEIRD_ROUTE_FAIL_CH4]: {
     displayName: 'Weird Route Fail',
-    unused: true,
     description:
       'Aborted the Weird Route during chapter 4. Unaccessed as of chapter 4.',
     valueType: 'boolean',
@@ -10988,7 +10968,6 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
   },
   [FLAGS.DIDNT_PET_FIRST_MIKE_STATUE]: {
     displayName: 'Didnt Pet First Mike Statue',
-    unused: true,
     description:
       'Whether you chose not to pet the first statue in the Mike zone when prompted. Unaccessed as of chapter 4.',
     valueType: 'map',
