@@ -1,7 +1,7 @@
 import type { SaveSlot } from '@types';
 import { browserDatabase, EXPORT_DRAFTS_STORE } from './browser-database';
 
-export const EXPORT_DRAFT_VERSION = 1;
+export const EXPORT_DRAFT_VERSION = 2;
 
 export type ExportMode = 'pc' | 'console';
 export type ExportScope = 'single' | 'set';
@@ -18,6 +18,7 @@ export interface ExportDraft {
   version: typeof EXPORT_DRAFT_VERSION;
   mode: ExportMode;
   scope: ExportScope;
+  saveId?: string;
   selectedSlot: SaveSlot;
   isCompletionSave: boolean;
   fileNames: ExportFileNames;
@@ -48,11 +49,19 @@ function renameSwitchMode(draft: ExportDraft): ExportDraft {
 async function get(): Promise<ExportDraft | null> {
   try {
     const db = await browserDatabase;
-    const draft = (await db.get(EXPORT_DRAFTS_STORE, DRAFT_KEY)) as
-      ExportDraft | undefined;
-    return draft?.version === EXPORT_DRAFT_VERSION
-      ? renameSwitchMode(draft)
-      : null;
+    const stored = (await db.get(EXPORT_DRAFTS_STORE, DRAFT_KEY)) as
+      | ExportDraft
+      | (Omit<ExportDraft, 'version' | 'saveId'> & { version: 1 })
+      | undefined;
+    if (!stored) return null;
+    // v1 drafts have no saveId, so their single-save slot is taken from the save
+    const draft: ExportDraft | null =
+      stored.version === 1
+        ? { ...stored, version: EXPORT_DRAFT_VERSION }
+        : stored.version === EXPORT_DRAFT_VERSION
+          ? stored
+          : null;
+    return draft ? renameSwitchMode(draft) : null;
   } catch (error) {
     console.error('export-draft-storage: get failed', error);
     return null;

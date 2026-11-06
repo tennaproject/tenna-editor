@@ -54,7 +54,7 @@ import {
 } from '@utils/save-export-targets';
 import { isSideBActive, resolveSideB } from '@utils/side-b';
 import { parseConsoleSaveContainer } from '@utils/console-save-container';
-import { formatTranslation, useTranslation } from '../i18n';
+import { formatTranslation, useTranslation } from '@i18n';
 import { mergeClass } from '@utils/merge-class';
 
 const SLOT_OPTIONS: SelectItem[] = [
@@ -234,6 +234,9 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
   );
   // null keeps the checkbox on the save's own flags; a boolean is a per-export override
   const [sideBOverride, setSideBOverride] = useState<boolean | null>(null);
+  const [singleSaveId, setSingleSaveId] = useState<string | undefined>(
+    save?.meta.id,
+  );
   const [exportMode, setExportMode] = useState<ExportMode>('pc');
   const [exportScope, setExportScope] = useState<ExportScope>('single');
   const [exportTimestamp] = useState(createExportTimestamp);
@@ -259,6 +262,18 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
   const [hasHydratedExportDraft, setHasHydratedExportDraft] = useState(false);
   const completionSaveId = useId();
   const sideBId = useId();
+
+  if (
+    isOpen &&
+    hasHydratedExportDraft &&
+    save &&
+    save.meta.id !== singleSaveId
+  ) {
+    setSingleSaveId(save.meta.id);
+    setSelectedSlot(save.meta.slot as SaveSlot);
+    setIsCompletionSave(save.meta.isCompletionSave);
+    setSideBOverride(null);
+  }
 
   const canPickSideB = save?.meta.chapter === 5 && isCompletionSave;
   const isSideB =
@@ -525,6 +540,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
   function resetExportSettings() {
     setHistoryOverrides({ context: historyContext, values: {} });
     const activeSave = useSave.getState().save;
+    setSingleSaveId(activeSave?.meta.id);
     setSelectedSlot((activeSave?.meta.slot ?? 0) as SaveSlot);
     setIsCompletionSave(activeSave?.meta.isCompletionSave ?? false);
     setSideBOverride(null);
@@ -635,6 +651,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
       setStoredSaves(sortedSaves);
 
       if (draft) {
+        setSingleSaveId(draft.saveId);
         setSelectedSlot(draft.selectedSlot);
         setIsCompletionSave(draft.isCompletionSave);
         setExportMode(draft.mode);
@@ -648,6 +665,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
         setBaseContainer(draft.baseContainer?.files);
         setBaseContainerName(draft.baseContainer?.name ?? '');
       } else {
+        setSingleSaveId(activeSave?.meta.id);
         setSelectedSlot((activeSave?.meta.slot ?? 0) as SaveSlot);
         setIsCompletionSave(activeSave?.meta.isCompletionSave ?? false);
         setExportMode(
@@ -674,6 +692,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
       version: EXPORT_DRAFT_VERSION,
       mode: exportMode,
       scope: exportScope,
+      saveId: singleSaveId,
       selectedSlot,
       isCompletionSave,
       fileNames,
@@ -699,6 +718,7 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
     isCompletionSave,
     selectedSlot,
     selections,
+    singleSaveId,
   ]);
 
   useEffect(() => {
