@@ -3,6 +3,7 @@ import type { Save, SaveSlot, DataPackReference } from '@types';
 import type { ChapterIndex } from '@data';
 import { base64UrlToBytes, bytesToBase64Url, serializeSave } from '@utils';
 import { deflateSync, inflateSync } from 'fflate';
+import { MAX_SAVE_SLOT } from './save-export-targets';
 
 const SHARE_SCHEMA = 2;
 
@@ -151,7 +152,7 @@ function readShareMeta(params: URLSearchParams): ShareMeta | undefined {
     chapter > 5 ||
     slot === null ||
     slot < 0 ||
-    slot > 2
+    slot > MAX_SAVE_SLOT
   ) {
     throw new ShareError('Share metadata is malformed');
   }

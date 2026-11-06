@@ -6,6 +6,7 @@ import {
   getPcSaveFileName,
   getTargetKey,
   getRawSaveSlot,
+  getSaveBatch,
   type RawSaveSlot,
   type SaveExportCell,
   type SaveExportTarget,
@@ -45,11 +46,19 @@ export function buildCellsFromTargets(
   const cells = getAllDrIniCells();
   for (const target of targets) {
     const rawSlot = getRawSaveSlot(target) as RawSaveSlot;
-    const cell = cells.find(
-      (c) => c.chapter === target.chapter && c.rawSlot === rawSlot,
+    const batch = getSaveBatch(target);
+    let cell = cells.find(
+      (c) =>
+        c.chapter === target.chapter &&
+        c.rawSlot === rawSlot &&
+        (c.batch ?? 0) === batch,
     );
+    if (!cell) {
+      cell = { chapter: target.chapter, rawSlot, batch, save: null };
+      cells.push(cell);
+    }
     // filech5_N and filech5_N_b share one dr.ini section; keep the _b save there
-    if (!cell || (cell.isSideB && !target.isSideB)) continue;
+    if (cell.isSideB && !target.isSideB) continue;
     cell.save = target.save;
     cell.isSideB = target.isSideB;
   }
