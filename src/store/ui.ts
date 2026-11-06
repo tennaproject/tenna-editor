@@ -6,7 +6,7 @@ import { createDebouncedJSONStorage } from 'zustand-debounce';
 import type { DataPack } from '@types';
 import { useDataPacks } from './data-packs';
 
-export const UI_VERSION = 12;
+export const UI_VERSION = 13;
 
 export type UiLocale = 'en' | 'ko' | 'it';
 
@@ -48,6 +48,9 @@ export interface Ui {
   };
   sound: {
     enabled: boolean;
+  };
+  mods: {
+    betterSaves: boolean;
   };
 }
 
@@ -95,6 +98,9 @@ function createDefaultUi(): Ui {
     },
     sound: {
       enabled: true,
+    },
+    mods: {
+      betterSaves: false,
     },
   };
 }
@@ -270,6 +276,13 @@ export const useUi = create<UiState>()(
           const current = nextState as { ui?: Partial<Ui> };
           if (current.ui) {
             current.ui.sound ??= createDefaultUi().sound;
+          }
+        }
+
+        if (version < 13) {
+          const current = nextState as { ui?: Partial<Ui> };
+          if (current.ui) {
+            current.ui.mods ??= createDefaultUi().mods;
           }
         }
 
