@@ -146,11 +146,6 @@ export const STORY_SECTIONS = {
           flags: ['OBTAINED_DANCER_REVIVE_MINT', 'OBTAINED_BROKEN_KEY_B'],
         },
         {
-          id: 'rouxls-puzzles',
-          title: "Rouxls's Puzzles",
-          flags: ['SOLVED_FIRST_ROUXLS_PUZZLE', 'SOLVED_SECOND_ROUXLS_PUZZLE'],
-        },
-        {
           id: 'k-round',
           title: 'K. Round',
           flags: ['CHECKED_K_ROUND'],
@@ -218,6 +213,11 @@ export const STORY_SECTIONS = {
             'TALKED_TO_HATHY',
             'SUMMONED_BLUH_CHEST',
           ],
+        },
+        {
+          id: 'rouxls-puzzles',
+          title: "Rouxls's Puzzles",
+          flags: ['SOLVED_FIRST_ROUXLS_PUZZLE', 'SOLVED_SECOND_ROUXLS_PUZZLE'],
         },
         {
           id: 'king',
