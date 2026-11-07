@@ -63,7 +63,6 @@ export const STORY_SECTIONS = {
           title: 'Field',
           flags: [
             'SAW_FIELD_SONG',
-            'INTERACTED_WITH_SALSA',
             'LANCER_PRE_HATHY_DIALOGUE',
             'DARK_CANDY_TREE_1_TAKEN',
             'OBTAINED_BROKEN_CAKE_PIECE',
@@ -110,6 +109,11 @@ export const STORY_SECTIONS = {
           id: 'thrash-machine',
           title: 'Thrash Machine',
           flags: ['MADE_THRASH_MACHINE', 'THRASH_MACHINE_REMATCH_COUNT'],
+        },
+        {
+          id: 'salsa',
+          title: 'Salsa',
+          flags: ['INTERACTED_WITH_SALSA',],
         },
         {
           id: 'ragger',
