@@ -335,7 +335,6 @@ export const STORY_SECTIONS = {
             'TOLD_MOM_STUDYING',
             'TOLD_MOM_ORB',
             'JUNKBALL_DROPPED',
-            'TOLD_VISIT_TOWN',
           ],
         },
         {
@@ -675,6 +674,7 @@ export const STORY_SECTIONS = {
           id: 'castle-town-return',
           title: 'Castle Town Return',
           flags: [
+            'TOLD_VISIT_TOWN',
             'FAILED_SPAM_CRYSTAL',
             'SEAM_TWO_CRYSTALS_DIALOGUE_PROGRESS',
             'SAW_KING_QUEEN_REUNION',
@@ -2799,6 +2799,7 @@ export const STORY_SECTIONS = {
           id: 'left-wing',
           title: 'Left Wing',
           flags: [
+            'MISTOOK_ONSEN_WALL_FOR_STAIRS',
             'CASTLE_LEFT_PLOT',
             'SHINOBEETLE_ENCOUNTER_OUTCOME',
             'LEFTCASTLE_SHINOBEETLE_FLOWERYDOLLARS',
@@ -3108,7 +3109,6 @@ export const STORY_SECTIONS = {
       id: 'all-flags-ch5',
       title: 'All other flags',
       flags: [
-        'MISTOOK_ONSEN_WALL_FOR_STAIRS',
         'PLATCONTROLS_HIGHLIGHTED',
         'PETAL_FEATHER_CONTROLS',
         'PLATFORMER_CAMERA_DISTANCE',
