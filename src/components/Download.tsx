@@ -16,6 +16,7 @@ import {
   ModalLayout,
   ModalFooter,
   SaveSourceBadge,
+  SaveSlotSelect,
   ResponsiveTable,
   ResponsiveTableFields,
   ResponsiveTableMobileLabel,
@@ -56,12 +57,6 @@ import { isSideBActive, resolveSideB } from '@utils/side-b';
 import { parseConsoleSaveContainer } from '@utils/console-save-container';
 import { formatTranslation, useTranslation } from '../i18n';
 import { mergeClass } from '@utils/merge-class';
-
-const SLOT_OPTIONS: SelectItem[] = [
-  { id: '1', label: 'Slot 1' },
-  { id: '2', label: 'Slot 2' },
-  { id: '3', label: 'Slot 3' },
-] as const;
 
 const EXPORT_OPTIONS: SelectItem[] = [
   { id: 'pc', label: 'PC save file', value: 'pc' },
@@ -351,11 +346,6 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
     : defaultFileName;
   const fileName = displayedFileName.trim() || defaultFileName;
 
-  const slotOptions = SLOT_OPTIONS.map((item, index) => ({
-    ...item,
-    label: `${t('ui.field.slot', 'Slot')} ${index + 1}`,
-  }));
-
   const displayedStoredSaves = getDisplayedStoredSaves();
 
   function getDisplayedStoredSaves(): Save[] {
@@ -412,10 +402,8 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
       .map(({ storedSave }) => storedSave);
   }
 
-  function onSlotSelection(item: SelectItem | null) {
-    if (item) {
-      setSelectedSlot((parseInt(item.id, 10) - 1) as SaveSlot);
-    }
+  function onSlotSelection(slot: SaveSlot) {
+    setSelectedSlot(slot);
   }
 
   function onExportModeSelection(item: SelectItem | null) {
@@ -845,13 +833,10 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
         {exportScope === 'single' && (
           <div className="w-36 max-w-full">
             <TextLabel>{t('ui.download.inGameSlot', 'In-game slot')}</TextLabel>
-            <Select
-              items={slotOptions}
-              placeholder={t('ui.field.selectSlot', 'Select slot')}
+            <SaveSlotSelect
+              value={selectedSlot}
               className="w-full"
-              selectedItem={slotOptions[selectedSlot]}
-              defaultSelectedItem={slotOptions[selectedSlot]}
-              onSelectionChange={onSlotSelection}
+              onChange={onSlotSelection}
             />
           </div>
         )}
@@ -1103,19 +1088,15 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
                           {t('ui.field.slot', 'Slot')}
                         </ResponsiveTableMobileLabel>
                         <div className="w-36 md:w-full">
-                          <Select
-                            items={slotOptions}
-                            className="w-full h-8 min-h-0"
-                            selectedItem={slotOptions[effectiveSlot]}
-                            defaultSelectedItem={slotOptions[effectiveSlot]}
-                            onSelectionChange={(item) => {
-                              if (item) {
-                                updateSelection(storedSave.meta.id, {
-                                  slotOverride: (parseInt(item.id, 10) -
-                                    1) as SaveSlot,
-                                });
-                              }
-                            }}
+                          <SaveSlotSelect
+                            value={effectiveSlot}
+                            compact
+                            className="w-full"
+                            onChange={(slot) =>
+                              updateSelection(storedSave.meta.id, {
+                                slotOverride: slot,
+                              })
+                            }
                           />
                         </div>
                       </div>
