@@ -113,7 +113,7 @@ export const STORY_SECTIONS = {
         {
           id: 'salsa',
           title: 'Salsa',
-          flags: ['INTERACTED_WITH_SALSA',],
+          flags: ['INTERACTED_WITH_SALSA'],
         },
         {
           id: 'ragger',
