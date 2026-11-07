@@ -2,6 +2,7 @@ import type { ChapterIndex } from '@data';
 import type { Save } from '@types';
 import {
   getIniSectionName,
+  getUraKey,
   isSideBFileName,
   type RawSaveSlot,
   type SaveExportCell,
@@ -64,7 +65,7 @@ function parseIni(content: string): Map<string, IniSection> {
     const line = rawLine.trim();
     if (!line) continue;
 
-    const sectionMatch = line.match(/^\[([^\]]+)\]$/);
+    const sectionMatch = line.match(/^\[([^\]]+)]$/);
     if (sectionMatch) {
       currentSection =
         sections.get(sectionMatch[1]) ?? new Map<string, string>();
@@ -276,7 +277,7 @@ export function getExportUraHistory(
   }
   for (const cell of cells) {
     if (!cell.save) continue;
-    const key = `${cell.chapter}_${cell.rawSlot % 3}`;
+    const key = getUraKey(cell);
     if (!imported.has(key)) {
       results[key] = (results[key] ?? 0) | getUraBoss(cell.save, cell.chapter);
     }
@@ -297,11 +298,12 @@ export function getExportUraHistory(
       source.ini,
       source.chapter,
       source.rawSlot % 3,
+      source.batch,
     ]);
     const group = sourceGroups.get(sourceKey) ?? { source, entries: [] };
     group.entries.push({
       rawSlot: source.rawSlot,
-      destination: `${cell.chapter}_${cell.rawSlot % 3}`,
+      destination: getUraKey(cell),
       save: cell.save,
     });
     sourceGroups.set(sourceKey, group);
@@ -312,7 +314,7 @@ export function getExportUraHistory(
   for (const { source, entries } of sourceGroups.values()) {
     const sourceSections = parseIni(source.ini);
     const slot = (source.rawSlot % 3) as RawSaveSlot;
-    const from = `${source.chapter}_${slot}`;
+    const from = getUraKey(source);
     const rawHistory = getSectionValue(sourceSections, 'URA', from);
     const history =
       rawHistory !== null && [0, 1, 2, 3].includes(Number(rawHistory))
@@ -325,7 +327,11 @@ export function getExportUraHistory(
       (rawSlot) => {
         const name = getSectionValue(
           sourceSections,
-          getIniSectionName({ chapter: source.chapter, rawSlot }),
+          getIniSectionName({
+            chapter: source.chapter,
+            rawSlot,
+            batch: source.batch,
+          }),
           'Name',
         );
         return name !== null && name !== '[EMPTY]';
@@ -365,12 +371,12 @@ export function getExportUraHistory(
         (cell): cell is SaveExportCell & { save: Save } =>
           cell.save !== null && wasUraBossEdited(cell.save, cell.chapter),
       )
-      .map((cell) => `${cell.chapter}_${cell.rawSlot % 3}`),
+      .map((cell) => getUraKey(cell)),
   );
   for (const destination of editedDestinations) results[destination] = 0;
   for (const cell of cells) {
     if (!cell.save) continue;
-    const destination = `${cell.chapter}_${cell.rawSlot % 3}`;
+    const destination = getUraKey(cell);
     if (editedDestinations.has(destination)) {
       results[destination] |= getUraBoss(cell.save, cell.chapter);
     }
@@ -382,7 +388,9 @@ function getOriginalSlot(save: Save) {
   const source = save.meta.source;
   const fileName =
     source?.platform === 'console' ? source.key : source?.fileName;
-  const match = fileName?.match(/(?:^|[/\\])filech([1-5])_([0-5])(?:_b)?$/i);
+  const match = fileName?.match(
+    /(?:^|[/\\])filech([1-5])_([0-5])(?:_([1-9]\d{0,2}))?(?:_b)?$/i,
+  );
   if (!match) return null;
   const content =
     source?.platform === 'console'
@@ -393,6 +401,7 @@ function getOriginalSlot(save: Save) {
   return {
     chapter: Number(match[1]) as ChapterIndex,
     rawSlot: Number(match[2]) as RawSaveSlot,
+    batch: Number(match[3] ?? 0),
     ini: content ?? '',
   };
 }

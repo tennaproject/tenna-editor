@@ -517,15 +517,16 @@ export const CONSUMABLES_META: Record<ConsumableIndex, ConsumableProperties> = {
     description:
       'A TV-shaped premade meal. It even has\na giant crumb of your favorite pie.',
     heal: 100,
+    // BetterSaves cycles this text with filechoice % 3
     getOverrides: ({ saveSlot }) => {
-      if (saveSlot === 1) {
+      if (saveSlot % 3 === 1) {
         return {
           description:
             "A TV-shaped premade meal. The TV's pointy\nnose is used as a cone for the ice cream.",
         };
       }
 
-      if (saveSlot === 2) {
+      if (saveSlot % 3 === 2) {
         return {
           description:
             'A TV-shaped premade meal. Unfortunately,\nthe vegan steak seems to be a normal shape.',

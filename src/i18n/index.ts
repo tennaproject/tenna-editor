@@ -86,6 +86,10 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.settings.soundDescription':
     'Plays sound effects from the game while you edit saves.',
   'ui.settings.soundEffects': 'Sound effects',
+  'ui.settings.mods': 'Mods',
+  'ui.settings.betterSaves': 'Allow slots 4 and above',
+  'ui.settings.betterSavesDescription':
+    'For the BetterSaves mod, which adds more save slots. The unmodded game does not read slots 4 and above.',
   'ui.settings.enableDeveloperMode': 'Enable developer mode',
   'ui.settings.backupRestore': 'Backup & Restore',
   'ui.settings.backupRestoreDescription':

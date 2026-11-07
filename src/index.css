@@ -549,13 +549,13 @@
     .responsive-table-header {
     grid-template-columns:
       2rem minmax(8rem, 1fr) 3rem 7rem
-      5rem 7rem 4rem;
+      5rem 8rem 4rem;
   }
   .download-save-table[data-layout='export-selection']
     .responsive-table-fields {
     grid-template-columns:
       minmax(8rem, 1fr) 3rem 7rem
-      5rem 7rem 4rem;
+      5rem 8rem 4rem;
   }
   .download-save-table .responsive-table-row {
     grid-template-columns: 2rem minmax(0, 1fr);

@@ -28,6 +28,7 @@ import {
   Button,
   type SelectItem,
   Select,
+  SaveSlotSelect,
   FileInput,
   ModalLayout,
   ModalFooter,
@@ -52,12 +53,6 @@ const CHAPTER_OPTIONS: SelectItem[] = [
   { id: '3', label: 'Chapter 3 (Late Night)', value: 3 },
   { id: '4', label: 'Chapter 4 (Prophecy)', value: 4 },
   { id: '5', label: 'Chapter 5 (Festival Day)', value: 5 },
-];
-
-const SLOT_OPTIONS: SelectItem[] = [
-  { id: '1', label: 'Slot 1', value: 0 },
-  { id: '2', label: 'Slot 2', value: 1 },
-  { id: '3', label: 'Slot 3', value: 2 },
 ];
 
 const STAGE_TITLES: Record<UploadStage, string> = {
@@ -142,11 +137,6 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
     label: `${t('ui.upload.chapter', 'Chapter')} 1`,
     value: 1,
   };
-  const slotOptions = SLOT_OPTIONS.map((item, index) => ({
-    ...item,
-    label: `${t('ui.field.slot', 'Slot')} ${index + 1}`,
-  }));
-
   const selectedCandidates = candidates.filter(
     (candidate) =>
       candidate.selected && candidate.save && candidate.error === null,
@@ -642,19 +632,11 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
                 <ResponsiveTableMobileLabel>
                   {t('ui.field.slot', 'Slot')}
                 </ResponsiveTableMobileLabel>
-                <Select
-                  items={slotOptions}
-                  selectedItem={slotOptions[candidate.slot]}
-                  defaultSelectedItem={slotOptions[candidate.slot]}
-                  className="h-8 min-h-0 w-36 md:w-full"
-                  onSelectionChange={(item) => {
-                    if (item) {
-                      const slot = item.value as SaveSlot;
-                      updateCandidate(candidate.id, {
-                        slot,
-                      });
-                    }
-                  }}
+                <SaveSlotSelect
+                  value={candidate.slot}
+                  compact
+                  className="w-36 md:w-full"
+                  onChange={(slot) => updateCandidate(candidate.id, { slot })}
                 />
               </div>
 
@@ -958,22 +940,12 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
                 <TextLabel>
                   {t('ui.field.inGameSlot', 'In-game slot')}
                 </TextLabel>
-                <Select
-                  items={slotOptions}
-                  placeholder={t('ui.field.selectSlot', 'Select slot')}
+                <SaveSlotSelect
+                  value={selectedSlot}
                   className="w-full"
-                  selectedItem={slotOptions[selectedSlot]}
-                  defaultSelectedItem={slotOptions[selectedSlot]}
-                  onSelectionChange={(item) => {
-                    if (item) {
-                      const slot = item.value as SaveSlot;
-                      setSelectedSlot(slot);
-                      updateSingleTarget(
-                        selectedChapter,
-                        slot,
-                        isCompletionSave,
-                      );
-                    }
+                  onChange={(slot) => {
+                    setSelectedSlot(slot);
+                    updateSingleTarget(selectedChapter, slot, isCompletionSave);
                   }}
                 />
               </div>
