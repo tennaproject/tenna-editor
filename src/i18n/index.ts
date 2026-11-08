@@ -90,6 +90,11 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.settings.betterSaves': 'Allow slots 4 and above',
   'ui.settings.betterSavesDescription':
     'For the BetterSaves mod, which adds more save slots. The unmodded game does not read slots 4 and above.',
+  'ui.upload.betterSavesTitle': 'BetterSaves Detected',
+  'ui.upload.betterSavesQuestion':
+    'Some of these saves are in slot 4 or above. Only the BetterSaves mod uses these slots. Do you use BetterSaves?',
+  'ui.upload.betterSavesNoAnswer':
+    'If you answer No, these saves move to slots 1 to 3.',
   'ui.settings.enableDeveloperMode': 'Enable developer mode',
   'ui.settings.backupRestore': 'Backup & Restore',
   'ui.settings.backupRestoreDescription':
@@ -393,6 +398,8 @@ const UI_FALLBACKS: TranslationDictionary = {
     'This cannot be changed after the save is uploaded.',
   'ui.common.back': 'Back',
   'ui.common.next': 'Next',
+  'ui.common.yes': 'Yes',
+  'ui.common.no': 'No',
   'ui.common.tryAgain': 'Try again',
   'ui.common.cancel': 'Cancel',
   'ui.common.close': 'Close',
