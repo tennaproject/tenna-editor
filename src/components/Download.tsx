@@ -51,6 +51,7 @@ import type { Save, SaveSlot } from '@types';
 import {
   getPcSaveFileName,
   getTargetKey,
+  isBetterSavesSlot,
   type SaveExportTarget,
 } from '@utils/save-export-targets';
 import { isSideBActive, resolveSideB } from '@utils/side-b';
@@ -296,6 +297,9 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
       : save
         ? [getSingleExportTarget(save)]
         : [];
+  const usesBetterSaves = historyTargets.some((target) =>
+    isBetterSavesSlot(target.slot),
+  );
   const historyImportedIni = getImportedDrIni(historyTargets)?.content ?? '';
   const historyBaseIni =
     exportScope === 'set'
@@ -947,6 +951,15 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
           />
         )}
       </div>
+
+      {usesBetterSaves && (
+        <p className="text-sm text-text-2">
+          {t(
+            'ui.download.betterSavesNote',
+            'Slots 4 and above need the BetterSaves mod. The game only lists a slot when every slot before it has a save.',
+          )}
+        </p>
+      )}
 
       {exportScope === 'set' ? (
         <div className="flex flex-col gap-2">

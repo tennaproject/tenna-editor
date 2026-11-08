@@ -54,7 +54,6 @@ export function SaveSlotSelect({
       value={value + 1}
       min={1}
       max={MAX_SAVE_SLOT + 1}
-      fullWidth
       className={mergeClass(compact && '[&_input]:h-8', className)}
       placeholder={t('ui.field.slot', 'Slot')}
       onChange={(slot) => onChange(slot - 1)}

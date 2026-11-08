@@ -95,6 +95,8 @@ const UI_FALLBACKS: TranslationDictionary = {
     'Some of these saves are in slot 4 or above. Only the BetterSaves mod uses these slots. Do you use BetterSaves?',
   'ui.upload.betterSavesNoAnswer':
     'If you answer No, these saves move to slots 1 to 3.',
+  'ui.download.betterSavesNote':
+    'Slots 4 and above need the BetterSaves mod. The game only lists a slot when every slot before it has a save.',
   'ui.settings.enableDeveloperMode': 'Enable developer mode',
   'ui.settings.backupRestore': 'Backup & Restore',
   'ui.settings.backupRestoreDescription':
