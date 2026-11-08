@@ -940,7 +940,6 @@ export const STORY_SECTIONS = {
           flags: [
             'SWORD_ROUTE_PROGRESS',
             'SWORD_ROUTE_KILLS',
-            'SUSIE_NOTICE_SWORD',
             'RAMB_BACKSTAGE_DIALOGUE_PROGRESS',
             'ODD_CONTROLLER_PROGRESS',
             'FOUND_SHADOWTEASE',
@@ -1015,6 +1014,7 @@ export const STORY_SECTIONS = {
           id: 'parental-lock-conversation',
           title: 'Parental Lock Conversation',
           flags: [
+            'SUSIE_NOTICE_SWORD',
             'ENTERED_PARENT_0',
             'PARENT_LOCK_1_SCENE',
             'PARENT_LOCK_1_CLOSE_COUNT',
