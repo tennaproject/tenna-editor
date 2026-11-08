@@ -392,6 +392,7 @@ export const STORY_SECTIONS = {
           flags: [
             'OBTAINED_FIRST_GLOW_WRIST',
             'OBTAINED_NUBERT_TREASURE',
+            'FEDORA_PLUGBOY_WEREWIRED',
             'READ_CYBERPEDIA',
             'SOLVED_APPLE_PUZZLE',
             'TASQUE_RELEASED',
@@ -474,7 +475,6 @@ export const STORY_SECTIONS = {
           flags: [
             'OBTAINED_PINK_RIBBON',
             'OBTAINED_BOUNCE_BLADE',
-            'FEDORA_PLUGBOY_WEREWIRED',
             'WENT_WEIRD_DOOR',
             'READ_CLEANING_POSTER',
             'SOLVED_FORCEFIELD_1',
