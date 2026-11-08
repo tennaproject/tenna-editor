@@ -28,6 +28,7 @@ export * from './PageContentSpinner';
 export * from './DownloadChanges';
 export * from './SaveSelector';
 export * from './SaveSourceBadge';
+export * from './SaveSlotSelect';
 export * from './Badge';
 export * from './Fields';
 export * from './Vessel';

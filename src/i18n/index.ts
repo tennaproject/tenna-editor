@@ -86,6 +86,17 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.settings.soundDescription':
     'Plays sound effects from the game while you edit saves.',
   'ui.settings.soundEffects': 'Sound effects',
+  'ui.settings.mods': 'Mods',
+  'ui.settings.betterSaves': 'Allow slots 4 and above',
+  'ui.settings.betterSavesDescription':
+    'For the BetterSaves mod, which adds more save slots. The unmodded game does not read slots 4 and above.',
+  'ui.upload.betterSavesTitle': 'BetterSaves Detected',
+  'ui.upload.betterSavesQuestion':
+    'Some of these saves are in slot 4 or above. Only the BetterSaves mod uses these slots. Do you use BetterSaves?',
+  'ui.upload.betterSavesNoAnswer':
+    'If you answer No, these saves move to slots 1 to 3.',
+  'ui.download.betterSavesNote':
+    'Slots 4 and above need the BetterSaves mod. The game only lists a slot when every slot before it has a save.',
   'ui.settings.enableDeveloperMode': 'Enable developer mode',
   'ui.settings.backupRestore': 'Backup & Restore',
   'ui.settings.backupRestoreDescription':
@@ -389,6 +400,8 @@ const UI_FALLBACKS: TranslationDictionary = {
     'This cannot be changed after the save is uploaded.',
   'ui.common.back': 'Back',
   'ui.common.next': 'Next',
+  'ui.common.yes': 'Yes',
+  'ui.common.no': 'No',
   'ui.common.tryAgain': 'Try again',
   'ui.common.cancel': 'Cancel',
   'ui.common.close': 'Close',
