@@ -788,11 +788,6 @@ export const STORY_SECTIONS = {
           flags: ['POINT_CHEST_STATE'],
         },
         {
-          id: 'starwalker',
-          title: 'Original Starwalker',
-          flags: ['TALKED_TO_STARWALKER_CH3'],
-        },
-        {
           id: 'tennas-gameshow',
           title: "Tenna's Game Show",
           flags: [
@@ -1084,6 +1079,11 @@ export const STORY_SECTIONS = {
       id: 'tv-world-to-green-room',
       title: 'TV World to Green Room',
       clusters: [
+        {
+          id: 'starwalker',
+          title: 'Original Starwalker',
+          flags: ['TALKED_TO_STARWALKER_CH3'],
+        },
         {
           id: 'tv-world',
           title: 'TV World',
