@@ -820,8 +820,6 @@ export const STORY_SECTIONS = {
           title: 'Board 1',
           flags: [
             'POINTS_CH3',
-            'OBTAINED_ROUXLS_BLOCK',
-            'TINY_PYRAMID_STATE',
             'TENNA_MAILROOM_PROGRESS',
             'TENNA_FALLING_OBJECT_NAME',
             'RANK_BOARD_1',
@@ -968,6 +966,8 @@ export const STORY_SECTIONS = {
           flags: [
             'TENNA_BOARD_ABSENT',
             'CONTROL_UNJUMBLE',
+            'OBTAINED_ROUXLS_BLOCK',
+            'TINY_PYRAMID_STATE',
             'RANK_BOARD_2',
             'BOARD_2_BATTLES',
             'RAISE_BAT_HISCORE',
