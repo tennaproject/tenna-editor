@@ -826,6 +826,7 @@ export const STORY_SECTIONS = {
             'CANT_GRAB_RALSEI',
             'OBTAINED_POWER_CROISSANT',
             'BOARD_1_BATTLES',
+            'OBTAINED_LANCER_NAME_Q',
             'SHADOWGUNNER_PHOTOS',
             'DRANK_OASIS',
           ],
@@ -844,11 +845,6 @@ export const STORY_SECTIONS = {
           id: 'board-keys',
           title: 'Board Keys',
           flags: ['BOARD_KEY_COUNT'],
-        },
-        {
-          id: 'quizzes',
-          title: 'Quizzes',
-          flags: ['OVERWORLD_QUIZ_1', 'OVERWORLD_QUIZ_2', 'OVERWORLD_QUIZ_3'],
         },
         {
           id: 'party-stats',
@@ -955,7 +951,7 @@ export const STORY_SECTIONS = {
         {
           id: 'tenna',
           title: 'Tenna',
-          flags: ['SUSIE_TENNA_CHAT_1', 'TENNA_OPINION_SUSIE'],
+          flags: ['SUSIE_TENNA_CHAT_1'],
         },
       ],
     },
@@ -981,7 +977,7 @@ export const STORY_SECTIONS = {
         {
           id: 'lancer',
           title: 'Lancer',
-          flags: ['OBTAINED_LANCER_NAME_Q', 'LANCER_TV_NAME', 'LANCER_COST'],
+          flags: ['LANCER_TV_NAME', 'LANCER_COST'],
         },
         {
           id: 'photo-hunt',
@@ -1002,11 +998,7 @@ export const STORY_SECTIONS = {
         {
           id: 'river-and-islands',
           title: 'River & Secret Islands',
-          flags: [
-            'FOUND_ISLAND_TENNA',
-            'LAWNMOWER_BEAT_PAPER',
-            'LAWNMOWER_SCORE',
-          ],
+          flags: ['FOUND_ISLAND_TENNA'],
         },
       ],
     },
@@ -1074,7 +1066,7 @@ export const STORY_SECTIONS = {
         {
           id: 'tenna-chat-2',
           title: 'Tenna Chat 2',
-          flags: ['SUSIE_TENNA_CHAT_2', 'KRIS_TENNA_CHAT'],
+          flags: ['SUSIE_TENNA_CHAT_2', 'KRIS_TENNA_CHAT', 'TENNA_OPINION_SUSIE'],
         },
       ],
     },
@@ -1105,7 +1097,14 @@ export const STORY_SECTIONS = {
             'HORSE_RALSEI',
             'HAY_RESPONSE',
             'DEFEATED_DOOM_SHADOWMAN',
+            'LAWNMOWER_BEAT_PAPER',
+            'LAWNMOWER_SCORE',
           ],
+        },
+        {
+          id: 'quizzes',
+          title: 'Quizzes',
+          flags: ['OVERWORLD_QUIZ_1', 'OVERWORLD_QUIZ_2', 'OVERWORLD_QUIZ_3'],
         },
         {
           id: 'lancer-room',
