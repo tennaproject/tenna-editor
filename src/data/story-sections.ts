@@ -1102,6 +1102,11 @@ export const STORY_SECTIONS = {
           ],
         },
         {
+          id: 'goulden-son',
+          title: 'Goulden Son',
+          flags: ['GOULDEN_SON_TALE', 'GOULDEN_SON_DESTINATION'],
+        },
+        {
           id: 'quizzes',
           title: 'Quizzes',
           flags: ['OVERWORLD_QUIZ_1', 'OVERWORLD_QUIZ_2', 'OVERWORLD_QUIZ_3'],
@@ -1241,11 +1246,6 @@ export const STORY_SECTIONS = {
           id: 'violence-stats',
           title: 'Violence Stats',
           flags: ['AT_MAGIC_GAIN_COUNT_CH3', 'LEVEL_UP_COUNT_CH3'],
-        },
-        {
-          id: 'goulden-son',
-          title: 'Goulden Son',
-          flags: ['GOULDEN_SON_TALE', 'GOULDEN_SON_DESTINATION'],
         },
       ],
     },
