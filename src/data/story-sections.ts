@@ -1564,8 +1564,8 @@ export const STORY_SECTIONS = {
       ],
     },
     {
-      id: 'dark-sanctuary-1-to-2',
-      title: 'Dark Sanctuary Part 1 to Dark Sanctuary Part 2',
+      id: 'dark-sanctuary-to-second-sanctuary',
+      title: 'Dark Sanctuary To Second sanctuary',
       clusters: [
         {
           id: 'sanctuary-intro',
@@ -1600,6 +1600,11 @@ export const STORY_SECTIONS = {
             'DARK_MAZE_BOTTOM_HINT_REVEALED',
             'DARK_MAZE_TOP_HINT_REVEALED',
           ],
+        },
+        {
+          id: 'northwest-connector-save-point',
+          title: 'Northwest Connector Save Point',
+          flags: ['INTERACTED_WITH_NORTHWEST_CONNECTOR_SAVE_POINT'],
         },
         {
           id: 'gerson-study',
@@ -1698,12 +1703,6 @@ export const STORY_SECTIONS = {
           title: 'Couch Cushion',
           flags: ['TOLD_RALSEI_TO_SIT'],
         },
-      ],
-    },
-    {
-      id: 'dark-sanctuary-2-to-second-sanctuary',
-      title: 'Dark Sanctuary Part 2 to Second Sanctuary',
-      clusters: [
         {
           id: 'climbing-room',
           title: 'Climbing Room',
@@ -1800,11 +1799,6 @@ export const STORY_SECTIONS = {
           id: 'money-fountain',
           title: 'Fountain Chest',
           flags: ['OBTAINED_MONEYFOUNTAIN_CHEST', 'STEEL_ENCOUNTER_OUTCOME'],
-        },
-        {
-          id: 'northwest-connector-save-point',
-          title: 'Northwest Connector Save Point',
-          flags: ['INTERACTED_WITH_NORTHWEST_CONNECTOR_SAVE_POINT'],
         },
         {
           id: 'egg-and-moss',
