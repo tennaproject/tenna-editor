@@ -60,6 +60,7 @@ export function SettingsRoot() {
   const { locale, t } = useTranslation();
   const devmode = useUi((s) => s.ui.devmode);
   const soundEnabled = useUi((s) => s.ui.sound.enabled);
+  const betterSaves = useUi((s) => s.ui.mods.betterSaves);
   const updateUi = useUi((s) => s.updateUi);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [localesLoaded, setLocalesLoaded] = useState(false);
@@ -158,6 +159,34 @@ export function SettingsRoot() {
             </Card>
           </Section>
 
+          <Section id="mods">
+            <Card className="flex flex-col gap-6 p-6">
+              <Heading level={3}>{t('ui.settings.mods', 'Mods')}</Heading>
+              <Section id="bettersaves" className="flex flex-col gap-3">
+                <Heading level={4}>BetterSaves</Heading>
+                <p className="text-text-2 text-sm">
+                  {t(
+                    'ui.settings.betterSavesDescription',
+                    'For the BetterSaves mod, which adds more save slots. The unmodded game does not read slots 4 and above.',
+                  )}
+                </p>
+                <Checkbox
+                  label={t(
+                    'ui.settings.betterSaves',
+                    'Allow slots 4 and above',
+                  )}
+                  checked={betterSaves}
+                  onChange={(state) =>
+                    updateUi((ui) => (ui.mods.betterSaves = state))
+                  }
+                />
+              </Section>
+              <Section id="data-packs" className="border-t border-divider pt-6">
+                <DataPacks />
+              </Section>
+            </Card>
+          </Section>
+
           {import.meta.env.VITE_DEVTOOLS_TAB === 'true' && (
             <Section id="general">
               <Card className="flex flex-col gap-3 p-6">
@@ -175,10 +204,6 @@ export function SettingsRoot() {
               </Card>
             </Section>
           )}
-
-          <Section id="data-packs">
-            <DataPacks />
-          </Section>
 
           <Section id="backup">
             <Card className="flex flex-col gap-3 p-6">

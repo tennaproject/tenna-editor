@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.16.0] - 2026-11-08
+
+This release adds support for BetterSaves mod saves, more console save support, and many more Story flags for every chapter.
+
+### Added
+
+- Added support for saves from the BetterSaves mod, including slots above 3. Saves are detected on upload, and a setting turns on the extra slots for all saves. Thanks [AccursedBird1](https://github.com/AccursedBird1) for the request! ([Issue #223](https://github.com/tennaproject/tenna-editor/issues/223), [PR #225](https://github.com/tennaproject/tenna-editor/pull/225))
+- Added support for 64-bit integer values in console save containers, which many Chapter 5 flags use. Thanks [jimmy-fun-fact](https://github.com/jimmy-fun-fact)! ([PR #207](https://github.com/tennaproject/tenna-editor/pull/207))
+- Added more flags and bitfields to the Story tab for all chapters. Thanks [cpu-99999999999](https://github.com/cpu-99999999999)! ([Issue #220](https://github.com/tennaproject/tenna-editor/issues/220), [PR #210](https://github.com/tennaproject/tenna-editor/pull/210), [PR #219](https://github.com/tennaproject/tenna-editor/pull/219))
+
+### Changed
+
+- Renamed Switch saves to console saves, since Nintendo Switch, PS4, and PS5 saves share the same format. Console saves now show a purple badge. ([PR #208](https://github.com/tennaproject/tenna-editor/pull/208))
+- Moved data packs under a new Mods section in Settings. ([PR #225](https://github.com/tennaproject/tenna-editor/pull/225))
+- Made the editor load faster. Translations now load only when you pick a language. ([PR #211](https://github.com/tennaproject/tenna-editor/pull/211))
+
+### Fixed
+
+- Fixed the export dialog reusing the slot from a previously exported save. ([PR #224](https://github.com/tennaproject/tenna-editor/pull/224))
+- Fixed the labels for equipment bonus changes in the save diff. ([PR #221](https://github.com/tennaproject/tenna-editor/pull/221))
+- Removed the Clover heads flag from the Story tab, because it cannot be set in game. Thanks [cpu-99999999999](https://github.com/cpu-99999999999) for reporting! ([Issue #212](https://github.com/tennaproject/tenna-editor/issues/212), [PR #210](https://github.com/tennaproject/tenna-editor/pull/210))
+
 ## [0.15.0] - 2026-10-01
 
 This release adds data packs, new game save templates, Chapter 5 Side B save support, and many more Story flags. It also redesigns the save export flow.

@@ -15,7 +15,8 @@ import type { DataPackReference } from './data-pack';
 
 export const SAVE_SCHEMA = 6;
 export type SaveFormat = 1 | 2;
-export type SaveSlot = 0 | 1 | 2;
+// Slots 3 and up only exist with BetterSaves
+export type SaveSlot = number;
 export type BaselineSource = 'upload' | 'download';
 
 export interface PcDrIniSource {

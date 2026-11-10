@@ -2,6 +2,7 @@ import type { ChapterIndex } from '@data';
 import type { PcDrIniSource, Save, SaveSlot } from '@types';
 import { detectChapter } from './detection';
 import { normalizeLegacyRoomId } from './room-id';
+import { getSlotFromFile } from './save-export-targets';
 import { parseSave } from './save-parser';
 import {
   parseConsoleSaveContainer,
@@ -15,7 +16,9 @@ export const MAX_IMPORT_EXPANDED_SIZE = 256 * 1024 * 1024;
 export const MAX_ARCHIVE_ENTRIES = MAX_IMPORT_ENTRIES;
 export const MAX_ARCHIVE_EXPANDED_SIZE = MAX_IMPORT_EXPANDED_SIZE;
 
-const PC_SAVE_FILE_PATTERN = /^filech([1-5])_([0-5]|9)(_b)?$/i;
+// BetterSaves names slots past the third filechN_M_<batch>
+const PC_SAVE_FILE_PATTERN =
+  /^filech([1-5])_(?:([0-5])(?:_([1-9]\d{0,2}))?|9)(_b)?$/i;
 const ZIP_FILE_PATTERN = /\.zip$/i;
 
 export interface CollectedUploadFile {
@@ -173,9 +176,8 @@ function getSlotMetadata(key: string): {
       isTemporarySource: false,
     };
   }
-  const rawSlot = Number(match[2]);
-  const isSideB = match[3] !== undefined;
-  if (rawSlot === 9) {
+  const isSideB = match[4] !== undefined;
+  if (match[2] === undefined) {
     return {
       slot: 0,
       isCompletionSave: false,
@@ -183,19 +185,14 @@ function getSlotMetadata(key: string): {
       isTemporarySource: true,
     };
   }
-  return rawSlot >= 3
-    ? {
-        slot: (rawSlot - 3) as SaveSlot,
-        isCompletionSave: true,
-        isSideB,
-        isTemporarySource: false,
-      }
-    : {
-        slot: rawSlot as SaveSlot,
-        isCompletionSave: false,
-        isSideB: false,
-        isTemporarySource: false,
-      };
+  const rawSlot = Number(match[2]);
+  const isCompletionSave = rawSlot >= 3;
+  return {
+    slot: getSlotFromFile(rawSlot, Number(match[3] ?? 0)),
+    isCompletionSave,
+    isSideB: isCompletionSave && isSideB,
+    isTemporarySource: false,
+  };
 }
 
 function errorMessage(error: unknown): string {

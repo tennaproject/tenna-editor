@@ -28,6 +28,7 @@ import {
   Button,
   type SelectItem,
   Select,
+  SaveSlotSelect,
   FileInput,
   ModalLayout,
   ModalFooter,
@@ -46,6 +47,10 @@ import {
 } from '../i18n';
 import { chapterHelpers } from '@utils/data-helpers';
 import { mergeClass } from '@utils/merge-class';
+import {
+  isBetterSavesSlot,
+  VANILLA_SLOT_COUNT,
+} from '@utils/save-export-targets';
 
 const CHAPTER_OPTIONS: SelectItem[] = [
   { id: '2', label: `Chapter 2 (A Cyber's World)`, value: 2 },
@@ -54,18 +59,13 @@ const CHAPTER_OPTIONS: SelectItem[] = [
   { id: '5', label: 'Chapter 5 (Festival Day)', value: 5 },
 ];
 
-const SLOT_OPTIONS: SelectItem[] = [
-  { id: '1', label: 'Slot 1', value: 0 },
-  { id: '2', label: 'Slot 2', value: 1 },
-  { id: '3', label: 'Slot 3', value: 2 },
-];
-
 const STAGE_TITLES: Record<UploadStage, string> = {
   idle: 'Upload Saves',
   processing: 'Reading Saves',
   review: 'Review Saves',
   chapter: 'Confirm Chapter',
   settings: 'Save Settings',
+  bettersaves: 'BetterSaves Detected',
   error: 'Upload Failed',
 };
 
@@ -75,6 +75,7 @@ const STAGE_TITLE_KEYS: Record<UploadStage, string> = {
   review: 'ui.upload.reviewSaves',
   chapter: 'ui.upload.confirmChapter',
   settings: 'ui.upload.saveSettings',
+  bettersaves: 'ui.upload.betterSavesTitle',
   error: 'ui.upload.uploadFailed',
 };
 
@@ -84,7 +85,13 @@ interface UploadProps {
 }
 
 type UploadStage =
-  'idle' | 'processing' | 'review' | 'chapter' | 'settings' | 'error';
+  | 'idle'
+  | 'processing'
+  | 'review'
+  | 'chapter'
+  | 'settings'
+  | 'bettersaves'
+  | 'error';
 
 interface DiscoverySummary {
   sawDrIni: boolean;
@@ -99,6 +106,7 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
   const saveNow = useSave((state) => state.saveNow);
   const activeSaveName = useSave((state) => state.save?.meta.name);
   const updateUi = useUi((state) => state.updateUi);
+  const betterSavesEnabled = useUi((state) => state.ui.mods.betterSaves);
 
   const [uploadStage, setUploadStage] = useState<UploadStage>('idle');
   const [previousUploadStage, setPreviousUploadStage] =
@@ -142,11 +150,6 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
     label: `${t('ui.upload.chapter', 'Chapter')} 1`,
     value: 1,
   };
-  const slotOptions = SLOT_OPTIONS.map((item, index) => ({
-    ...item,
-    label: `${t('ui.field.slot', 'Slot')} ${index + 1}`,
-  }));
-
   const selectedCandidates = candidates.filter(
     (candidate) =>
       candidate.selected && candidate.save && candidate.error === null,
@@ -259,10 +262,8 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
         return;
       }
 
-      const onlyCandidate = result.candidates[0];
-      const isSingleSave = result.candidates.length === 1;
-
-      if (isSingleSave) {
+      if (result.candidates.length === 1) {
+        const onlyCandidate = result.candidates[0];
         if (!onlyCandidate.save || onlyCandidate.error) {
           setUploadError(
             onlyCandidate.error ??
@@ -274,12 +275,22 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
           setUploadStage('error');
           return;
         }
-        prepareSingleCandidate(onlyCandidate);
-        return;
       }
 
       setCandidates(result.candidates);
-      setUploadStage('review');
+      if (
+        !betterSavesEnabled &&
+        result.candidates.some(
+          (candidate) =>
+            candidate.save &&
+            !candidate.error &&
+            isBetterSavesSlot(candidate.slot),
+        )
+      ) {
+        changeStage('bettersaves');
+        return;
+      }
+      continueWithCandidates(result.candidates);
     } catch (error) {
       setUploadError(
         error instanceof Error
@@ -291,6 +302,32 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
       );
       setUploadStage('error');
     }
+  }
+
+  function continueWithCandidates(discovered: ImportCandidate[]) {
+    if (discovered.length === 1) {
+      prepareSingleCandidate(discovered[0]);
+      return;
+    }
+    setCandidates(discovered);
+    changeStage('review');
+  }
+
+  function answerBetterSaves(usesBetterSaves: boolean) {
+    if (usesBetterSaves) {
+      updateUi((ui) => (ui.mods.betterSaves = true));
+      continueWithCandidates(candidates);
+      return;
+    }
+    continueWithCandidates(
+      refreshImportCandidateNames(
+        candidates.map((candidate) => ({
+          ...candidate,
+          slot: candidate.slot % VANILLA_SLOT_COUNT,
+        })),
+        reservedSaveNames,
+      ),
+    );
   }
 
   function closeUpload() {
@@ -513,6 +550,36 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
             </Button>
           </ModalFooter>
         );
+      case 'bettersaves':
+        return (
+          <ModalFooter>
+            <Button
+              onClick={() => changeStage('idle')}
+              variant="secondary"
+              icon={<BackIcon />}
+            >
+              {t('ui.common.back', 'Back')}
+            </Button>
+            <div className="flex w-full gap-2 sm:w-auto">
+              <Button
+                onClick={() => answerBetterSaves(false)}
+                variant="secondary"
+                size="lg"
+                className="flex-1 sm:min-w-32"
+              >
+                {t('ui.common.no', 'No')}
+              </Button>
+              <Button
+                onClick={() => answerBetterSaves(true)}
+                variant="primary"
+                size="lg"
+                className="flex-1 sm:min-w-32"
+              >
+                {t('ui.common.yes', 'Yes')}
+              </Button>
+            </div>
+          </ModalFooter>
+        );
       case 'error':
         return (
           <ModalFooter>
@@ -642,19 +709,11 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
                 <ResponsiveTableMobileLabel>
                   {t('ui.field.slot', 'Slot')}
                 </ResponsiveTableMobileLabel>
-                <Select
-                  items={slotOptions}
-                  selectedItem={slotOptions[candidate.slot]}
-                  defaultSelectedItem={slotOptions[candidate.slot]}
-                  className="h-8 min-h-0 w-36 md:w-full"
-                  onSelectionChange={(item) => {
-                    if (item) {
-                      const slot = item.value as SaveSlot;
-                      updateCandidate(candidate.id, {
-                        slot,
-                      });
-                    }
-                  }}
+                <SaveSlotSelect
+                  value={candidate.slot}
+                  compact
+                  className="w-36 md:w-full"
+                  onChange={(slot) => updateCandidate(candidate.id, { slot })}
                 />
               </div>
 
@@ -954,26 +1013,16 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
                   }}
                 />
               </div>
-              <div>
+              <div className="w-36 max-w-full">
                 <TextLabel>
                   {t('ui.field.inGameSlot', 'In-game slot')}
                 </TextLabel>
-                <Select
-                  items={slotOptions}
-                  placeholder={t('ui.field.selectSlot', 'Select slot')}
+                <SaveSlotSelect
+                  value={selectedSlot}
                   className="w-full"
-                  selectedItem={slotOptions[selectedSlot]}
-                  defaultSelectedItem={slotOptions[selectedSlot]}
-                  onSelectionChange={(item) => {
-                    if (item) {
-                      const slot = item.value as SaveSlot;
-                      setSelectedSlot(slot);
-                      updateSingleTarget(
-                        selectedChapter,
-                        slot,
-                        isCompletionSave,
-                      );
-                    }
+                  onChange={(slot) => {
+                    setSelectedSlot(slot);
+                    updateSingleTarget(selectedChapter, slot, isCompletionSave);
                   }}
                 />
               </div>
@@ -985,6 +1034,30 @@ export function Upload({ isOpen, setOpen }: UploadProps) {
                   updateSingleTarget(selectedChapter, selectedSlot, completion);
                 }}
               />
+            </motion.div>
+          )}
+
+          {uploadStage === 'bettersaves' && (
+            <motion.div
+              key="bettersaves"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={transition}
+              className="absolute inset-0 flex max-w-md flex-col gap-4"
+            >
+              <p className="ui-prose-muted">
+                {t(
+                  'ui.upload.betterSavesQuestion',
+                  'Some of these saves are in slot 4 or above. Only the BetterSaves mod uses these slots. Do you use BetterSaves?',
+                )}
+              </p>
+              <p className="ui-prose-muted">
+                {t(
+                  'ui.upload.betterSavesNoAnswer',
+                  'If you answer No, these saves move to slots 1 to 3.',
+                )}
+              </p>
             </motion.div>
           )}
 
