@@ -1362,7 +1362,6 @@ export const STORY_SECTIONS = {
             'CHECKED_SHELTER_PANEL',
             'CHECKED_LAKE_TABLE_BEFORE_RAIN',
             'LAKE_CUTSCENE_PROGRESS_CH4',
-            'LAKE_CONVERSATION_RESPONSE',
           ],
         },
         {
@@ -1965,6 +1964,7 @@ export const STORY_SECTIONS = {
             'KNOCKED_EAST_DOOR_END_CH4',
             'CHECKED_LAKE_TABLE_AFTER_RAIN',
             'LAKE_SITTING_SCENE_PROGRESS',
+            'LAKE_CONVERSATION_RESPONSE',
           ],
         },
         {
