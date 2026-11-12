@@ -7,7 +7,7 @@ import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
 import { useCanHover } from '@hooks';
 import { mergeClass } from '@utils/merge-class';
-import { formatTranslation, useTranslation } from '../i18n';
+import { formatTranslation, useTranslation } from '@i18n';
 import { Tooltip } from './Tooltip';
 
 export type InvalidReason =
@@ -165,6 +165,7 @@ interface SelectProps {
   className?: string;
   strict?: boolean;
   tooltip?: ReactNode;
+  compactDetail?: boolean;
 }
 
 export function Select({
@@ -177,6 +178,7 @@ export function Select({
   className = '',
   strict = true,
   tooltip,
+  compactDetail = false,
 }: SelectProps) {
   const { t } = useTranslation();
   const canHover = useCanHover();
@@ -650,7 +652,9 @@ export function Select({
         <div
           className={mergeClass(
             'absolute z-50',
-            detailItem.tooltip ? DETAIL_PANEL_CLASS : 'w-max max-w-3xs',
+            detailItem.tooltip && !compactDetail
+              ? DETAIL_PANEL_CLASS
+              : 'w-max max-w-3xs',
             detailOnLeft ? 'right-full pr-2' : 'left-full pl-2',
           )}
           style={{
