@@ -63,7 +63,6 @@ export const STORY_SECTIONS = {
           title: 'Field',
           flags: [
             'SAW_FIELD_SONG',
-            'INTERACTED_WITH_SALSA',
             'LANCER_PRE_HATHY_DIALOGUE',
             'DARK_CANDY_TREE_1_TAKEN',
             'OBTAINED_BROKEN_CAKE_PIECE',
@@ -112,6 +111,11 @@ export const STORY_SECTIONS = {
           flags: ['MADE_THRASH_MACHINE', 'THRASH_MACHINE_REMATCH_COUNT'],
         },
         {
+          id: 'salsa',
+          title: 'Salsa',
+          flags: ['INTERACTED_WITH_SALSA'],
+        },
+        {
           id: 'ragger',
           title: 'Ragger',
           flags: ['ASKED_ROYAL_COAT_RACK_ABOUT_CHEST', 'OBTAINED_RAGGER'],
@@ -140,11 +144,6 @@ export const STORY_SECTIONS = {
           id: 'scissor-dancer-room',
           title: 'Scissor Dancer Room',
           flags: ['OBTAINED_DANCER_REVIVE_MINT', 'OBTAINED_BROKEN_KEY_B'],
-        },
-        {
-          id: 'rouxls-puzzles',
-          title: "Rouxls's Puzzles",
-          flags: ['SOLVED_FIRST_ROUXLS_PUZZLE', 'SOLVED_SECOND_ROUXLS_PUZZLE'],
         },
         {
           id: 'k-round',
@@ -214,6 +213,11 @@ export const STORY_SECTIONS = {
             'TALKED_TO_HATHY',
             'SUMMONED_BLUH_CHEST',
           ],
+        },
+        {
+          id: 'rouxls-puzzles',
+          title: "Rouxls's Puzzles",
+          flags: ['SOLVED_FIRST_ROUXLS_PUZZLE', 'SOLVED_SECOND_ROUXLS_PUZZLE'],
         },
         {
           id: 'king',
@@ -331,7 +335,6 @@ export const STORY_SECTIONS = {
             'TOLD_MOM_STUDYING',
             'TOLD_MOM_ORB',
             'JUNKBALL_DROPPED',
-            'TOLD_VISIT_TOWN',
           ],
         },
         {
@@ -389,6 +392,7 @@ export const STORY_SECTIONS = {
           flags: [
             'OBTAINED_FIRST_GLOW_WRIST',
             'OBTAINED_NUBERT_TREASURE',
+            'FEDORA_PLUGBOY_WEREWIRED',
             'READ_CYBERPEDIA',
             'SOLVED_APPLE_PUZZLE',
             'TASQUE_RELEASED',
@@ -471,7 +475,6 @@ export const STORY_SECTIONS = {
           flags: [
             'OBTAINED_PINK_RIBBON',
             'OBTAINED_BOUNCE_BLADE',
-            'FEDORA_PLUGBOY_WEREWIRED',
             'WENT_WEIRD_DOOR',
             'READ_CLEANING_POSTER',
             'SOLVED_FORCEFIELD_1',
@@ -671,6 +674,7 @@ export const STORY_SECTIONS = {
           id: 'castle-town-return',
           title: 'Castle Town Return',
           flags: [
+            'TOLD_VISIT_TOWN',
             'FAILED_SPAM_CRYSTAL',
             'SEAM_TWO_CRYSTALS_DIALOGUE_PROGRESS',
             'SAW_KING_QUEEN_REUNION',
@@ -784,11 +788,6 @@ export const STORY_SECTIONS = {
           flags: ['POINT_CHEST_STATE'],
         },
         {
-          id: 'starwalker',
-          title: 'Original Starwalker',
-          flags: ['TALKED_TO_STARWALKER_CH3'],
-        },
-        {
           id: 'tennas-gameshow',
           title: "Tenna's Game Show",
           flags: [
@@ -821,14 +820,13 @@ export const STORY_SECTIONS = {
           title: 'Board 1',
           flags: [
             'POINTS_CH3',
-            'OBTAINED_ROUXLS_BLOCK',
-            'TINY_PYRAMID_STATE',
             'TENNA_MAILROOM_PROGRESS',
             'TENNA_FALLING_OBJECT_NAME',
             'RANK_BOARD_1',
             'CANT_GRAB_RALSEI',
             'OBTAINED_POWER_CROISSANT',
             'BOARD_1_BATTLES',
+            'OBTAINED_LANCER_NAME_Q',
             'SHADOWGUNNER_PHOTOS',
             'DRANK_OASIS',
           ],
@@ -847,11 +845,6 @@ export const STORY_SECTIONS = {
           id: 'board-keys',
           title: 'Board Keys',
           flags: ['BOARD_KEY_COUNT'],
-        },
-        {
-          id: 'quizzes',
-          title: 'Quizzes',
-          flags: ['OVERWORLD_QUIZ_1', 'OVERWORLD_QUIZ_2', 'OVERWORLD_QUIZ_3'],
         },
         {
           id: 'party-stats',
@@ -947,15 +940,17 @@ export const STORY_SECTIONS = {
           flags: [
             'SWORD_ROUTE_PROGRESS',
             'SWORD_ROUTE_KILLS',
-            'SUSIE_NOTICE_SWORD',
             'RAMB_BACKSTAGE_DIALOGUE_PROGRESS',
             'ODD_CONTROLLER_PROGRESS',
+            'FOUND_SHADOWTEASE',
+            'SHADOWTEASE_EYES',
+            'SHADOWTEASE_GRIN',
           ],
         },
         {
           id: 'tenna',
           title: 'Tenna',
-          flags: ['SUSIE_TENNA_CHAT_1', 'TENNA_OPINION_SUSIE'],
+          flags: ['SUSIE_TENNA_CHAT_1'],
         },
       ],
     },
@@ -969,6 +964,8 @@ export const STORY_SECTIONS = {
           flags: [
             'TENNA_BOARD_ABSENT',
             'CONTROL_UNJUMBLE',
+            'OBTAINED_ROUXLS_BLOCK',
+            'TINY_PYRAMID_STATE',
             'RANK_BOARD_2',
             'BOARD_2_BATTLES',
             'RAISE_BAT_HISCORE',
@@ -979,7 +976,7 @@ export const STORY_SECTIONS = {
         {
           id: 'lancer',
           title: 'Lancer',
-          flags: ['OBTAINED_LANCER_NAME_Q', 'LANCER_TV_NAME', 'LANCER_COST'],
+          flags: ['LANCER_TV_NAME', 'LANCER_COST'],
         },
         {
           id: 'photo-hunt',
@@ -1000,11 +997,7 @@ export const STORY_SECTIONS = {
         {
           id: 'river-and-islands',
           title: 'River & Secret Islands',
-          flags: [
-            'FOUND_ISLAND_TENNA',
-            'LAWNMOWER_BEAT_PAPER',
-            'LAWNMOWER_SCORE',
-          ],
+          flags: ['FOUND_ISLAND_TENNA'],
         },
       ],
     },
@@ -1021,6 +1014,7 @@ export const STORY_SECTIONS = {
           id: 'parental-lock-conversation',
           title: 'Parental Lock Conversation',
           flags: [
+            'SUSIE_NOTICE_SWORD',
             'ENTERED_PARENT_0',
             'PARENT_LOCK_1_SCENE',
             'PARENT_LOCK_1_CLOSE_COUNT',
@@ -1072,7 +1066,11 @@ export const STORY_SECTIONS = {
         {
           id: 'tenna-chat-2',
           title: 'Tenna Chat 2',
-          flags: ['SUSIE_TENNA_CHAT_2', 'KRIS_TENNA_CHAT'],
+          flags: [
+            'SUSIE_TENNA_CHAT_2',
+            'KRIS_TENNA_CHAT',
+            'TENNA_OPINION_SUSIE',
+          ],
         },
       ],
     },
@@ -1080,6 +1078,11 @@ export const STORY_SECTIONS = {
       id: 'tv-world-to-green-room',
       title: 'TV World to Green Room',
       clusters: [
+        {
+          id: 'starwalker',
+          title: 'Original Starwalker',
+          flags: ['TALKED_TO_STARWALKER_CH3'],
+        },
         {
           id: 'tv-world',
           title: 'TV World',
@@ -1098,7 +1101,19 @@ export const STORY_SECTIONS = {
             'HORSE_RALSEI',
             'HAY_RESPONSE',
             'DEFEATED_DOOM_SHADOWMAN',
+            'LAWNMOWER_BEAT_PAPER',
+            'LAWNMOWER_SCORE',
           ],
+        },
+        {
+          id: 'goulden-son',
+          title: 'Goulden Son',
+          flags: ['GOULDEN_SON_TALE', 'GOULDEN_SON_DESTINATION'],
+        },
+        {
+          id: 'quizzes',
+          title: 'Quizzes',
+          flags: ['OVERWORLD_QUIZ_1', 'OVERWORLD_QUIZ_2', 'OVERWORLD_QUIZ_3'],
         },
         {
           id: 'lancer-room',
@@ -1202,9 +1217,6 @@ export const STORY_SECTIONS = {
             'MINI_ATTACK_SUSIE',
             'SWORDROUTE_SODA',
             'SWORDROUTE_EVICT',
-            'FOUND_SHADOWTEASE',
-            'SHADOWTEASE_EYES',
-            'SHADOWTEASE_GRIN',
             'OBTAINED_SHADOWMANTLE',
             'DEFEATED_MANTLE',
             'S_RANK_RETURN_3',
@@ -1238,11 +1250,6 @@ export const STORY_SECTIONS = {
           id: 'violence-stats',
           title: 'Violence Stats',
           flags: ['AT_MAGIC_GAIN_COUNT_CH3', 'LEVEL_UP_COUNT_CH3'],
-        },
-        {
-          id: 'goulden-son',
-          title: 'Goulden Son',
-          flags: ['GOULDEN_SON_TALE', 'GOULDEN_SON_DESTINATION'],
         },
       ],
     },
@@ -1311,13 +1318,7 @@ export const STORY_SECTIONS = {
             'OBTAINED_ALPHYS_CLUE',
             'INTERACTED_WITH_CHURCH_CHOIR_DOOR',
             'INTERACTED_WITH_CHURCH_OFFICE_DOOR',
-            'INTERACTED_WITH_CHURCH_CUPBOARD',
-            'INTERACTED_WITH_CHURCH_BOOKS',
             'INTERACTED_WITH_CHURCH_CANDLES',
-            'INTERACTED_WITH_CHURCH_BOOKSHELF',
-            'WHO_KRIS_PRAYED_FOR',
-            'WHAT_CANDLES_ARE_FOR',
-            'OPENED_CHURCH_CLOSET',
           ],
         },
         {
@@ -1352,6 +1353,15 @@ export const STORY_SECTIONS = {
             'SAW_TENNA_ENTERTAIN_KING_SCENE',
             'SAW_QUEEN_DRINKING_SCENE',
             'SUSIE_CARRIED_LANCER',
+          ],
+        },
+        {
+          id: 'lake',
+          title: 'Lake & Shelter',
+          flags: [
+            'CHECKED_SHELTER_PANEL',
+            'CHECKED_LAKE_TABLE_BEFORE_RAIN',
+            'LAKE_CUTSCENE_PROGRESS_CH4',
           ],
         },
         {
@@ -1557,8 +1567,8 @@ export const STORY_SECTIONS = {
       ],
     },
     {
-      id: 'dark-sanctuary-1-to-2',
-      title: 'Dark Sanctuary Part 1 to Dark Sanctuary Part 2',
+      id: 'dark-sanctuary-to-second-sanctuary',
+      title: 'Dark Sanctuary To Second sanctuary',
       clusters: [
         {
           id: 'sanctuary-intro',
@@ -1593,6 +1603,11 @@ export const STORY_SECTIONS = {
             'DARK_MAZE_BOTTOM_HINT_REVEALED',
             'DARK_MAZE_TOP_HINT_REVEALED',
           ],
+        },
+        {
+          id: 'northwest-connector-save-point',
+          title: 'Northwest Connector Save Point',
+          flags: ['INTERACTED_WITH_NORTHWEST_CONNECTOR_SAVE_POINT'],
         },
         {
           id: 'gerson-study',
@@ -1691,12 +1706,6 @@ export const STORY_SECTIONS = {
           title: 'Couch Cushion',
           flags: ['TOLD_RALSEI_TO_SIT'],
         },
-      ],
-    },
-    {
-      id: 'dark-sanctuary-2-to-second-sanctuary',
-      title: 'Dark Sanctuary Part 2 to Second Sanctuary',
-      clusters: [
         {
           id: 'climbing-room',
           title: 'Climbing Room',
@@ -1705,6 +1714,18 @@ export const STORY_SECTIONS = {
             'ACTIVATED_TRUE_CLIMB_RIGHT_SHORTCUT',
             'INTERACTED_WITH_CUPSTACK_LIFT',
             'OBTAINED_JACKENSTEIN_CHEST',
+          ],
+        },
+        {
+          id: 'right-piano-room',
+          title: 'Right Piano Room',
+          flags: [
+            'RIGHT_PIANO_PIECE_SHELF_1_X',
+            'RIGHT_PIANO_PIECE_SHELF_1_Y',
+            'RIGHT_PIANO_PIECE_SHELF_2_X',
+            'RIGHT_PIANO_PIECE_SHELF_2_Y',
+            'STOLE_PILLOW_FOR_RALSEI',
+            'OPENED_RIGHT_PIANO_PIECE_CHEST',
           ],
         },
         {
@@ -1725,7 +1746,7 @@ export const STORY_SECTIONS = {
         },
         {
           id: 'organ',
-          title: 'organ',
+          title: 'Organ',
           flags: [
             'PLAYED_MEGALOVANIA',
             'THOUGHT_ABOUT_KNIGHT',
@@ -1745,15 +1766,6 @@ export const STORY_SECTIONS = {
           ],
         },
         {
-          id: 'sound-of-justice',
-          title: 'Sound of Justice',
-          flags: [
-            'SOUND_OF_JUSTICE_ATTEMPT_COUNT',
-            'SOUND_OF_JUSTICE_SUSIE_ENCOUNTER_OUTCOME',
-            'SOUND_OF_JUSTICE_KRIS_ENCOUNTER_OUTCOME',
-          ],
-        },
-        {
           id: 'second-sanctuary-entry',
           title: 'Second Sanctuary Entrance',
           flags: [
@@ -1769,6 +1781,12 @@ export const STORY_SECTIONS = {
           id: 'susie-backstory',
           title: "Susie's Backstory",
           flags: [
+            'INTERACTED_WITH_CHURCH_CUPBOARD',
+            'INTERACTED_WITH_CHURCH_BOOKS',
+            'INTERACTED_WITH_CHURCH_BOOKSHELF',
+            'WHO_KRIS_PRAYED_FOR',
+            'WHAT_CANDLES_ARE_FOR',
+            'OPENED_CHURCH_CLOSET',
             'LISTENED_SUSIE_PIANO_STORY',
             'INTERACTED_WITH_GERSON_REMAINS',
             'WILL_KRIS_PLAY_AGAIN',
@@ -1795,11 +1813,6 @@ export const STORY_SECTIONS = {
           flags: ['OBTAINED_MONEYFOUNTAIN_CHEST', 'STEEL_ENCOUNTER_OUTCOME'],
         },
         {
-          id: 'northwest-connector-save-point',
-          title: 'Northwest Connector Save Point',
-          flags: ['INTERACTED_WITH_NORTHWEST_CONNECTOR_SAVE_POINT'],
-        },
-        {
           id: 'egg-and-moss',
           title: 'Egg & Moss',
           flags: [
@@ -1820,19 +1833,6 @@ export const STORY_SECTIONS = {
           flags: ['OBTAINED_GALLERY_CHEST'],
         },
         {
-          id: 'right-piano-room',
-          title: 'Right Piano Room',
-          flags: [
-            'RIGHT_PIANO_PIECE_SHELF_1_X',
-            'RIGHT_PIANO_PIECE_SHELF_1_Y',
-            'RIGHT_PIANO_PIECE_SHELF_2_X',
-            'RIGHT_PIANO_PIECE_SHELF_2_Y',
-            'STOLE_PILLOW_FOR_RALSEI',
-            'OPENED_RIGHT_PIANO_PIECE_CHEST',
-            'BREAKABLE_BOOKSHELVES_STATE',
-          ],
-        },
-        {
           id: 'spawn-cloud',
           title: 'Spawn cloud',
           flags: ['SPAWN_CLOUD_DEATH_COUNT'],
@@ -1843,6 +1843,20 @@ export const STORY_SECTIONS = {
           flags: [
             'CHECKED_GERSON_TABLE_SECOND_SANCTUARY',
             'RHAPSOTEA_EXTRA_DOLLARS',
+          ],
+        },
+        {
+          id: 'breakable-bookshelves',
+          title: 'Breakable Bookshelves',
+          flags: ['BREAKABLE_BOOKSHELVES_STATE']
+        },
+        {
+          id: 'sound-of-justice',
+          title: 'Sound of Justice',
+          flags: [
+            'SOUND_OF_JUSTICE_ATTEMPT_COUNT',
+            'SOUND_OF_JUSTICE_SUSIE_ENCOUNTER_OUTCOME',
+            'SOUND_OF_JUSTICE_KRIS_ENCOUNTER_OUTCOME',
           ],
         },
         {
@@ -1894,16 +1908,6 @@ export const STORY_SECTIONS = {
           flags: ['WAFER_ROOM_STATE', 'OBTAINED_TREASURE_CHEST'],
         },
         {
-          id: 'titan',
-          title: 'Titan',
-          flags: [
-            'TITAN_ATTEMPT_COUNT',
-            'TITAN_SPAWN_ENCOUNTER_OUTCOME',
-            'PURIFIED_COUNT',
-            'SLAIN_COUNT',
-          ],
-        },
-        {
           id: 'cup-stack',
           title: 'Cup Stack',
           flags: ['TALKED_TO_CUP_STACK_DURING_FINAL_CLIMB'],
@@ -1938,6 +1942,16 @@ export const STORY_SECTIONS = {
           ],
         },
         {
+          id: 'titan',
+          title: 'Titan',
+          flags: [
+            'TITAN_ATTEMPT_COUNT',
+            'TITAN_SPAWN_ENCOUNTER_OUTCOME',
+            'PURIFIED_COUNT',
+            'SLAIN_COUNT',
+          ],
+        },
+        {
           id: 'ending',
           title: 'Ending',
           flags: [
@@ -1946,13 +1960,10 @@ export const STORY_SECTIONS = {
             'RAIN_STATE',
             'CHECKED_GERSON_GRAVE_WITH_SUSIE',
             'CHECKED_SHELTER_WITH_SUSIE',
-            'CHECKED_SHELTER_PANEL',
             'TRIED_TO_ENTER_SCHOOL_END_CH4',
             'KNOCKED_EAST_DOOR_END_CH4',
-            'CHECKED_LAKE_TABLE_BEFORE_RAIN',
             'CHECKED_LAKE_TABLE_AFTER_RAIN',
             'LAKE_SITTING_SCENE_PROGRESS',
-            'LAKE_CUTSCENE_PROGRESS_CH4',
             'LAKE_CONVERSATION_RESPONSE',
           ],
         },
@@ -2795,6 +2806,7 @@ export const STORY_SECTIONS = {
           id: 'left-wing',
           title: 'Left Wing',
           flags: [
+            'MISTOOK_ONSEN_WALL_FOR_STAIRS',
             'CASTLE_LEFT_PLOT',
             'SHINOBEETLE_ENCOUNTER_OUTCOME',
             'LEFTCASTLE_SHINOBEETLE_FLOWERYDOLLARS',
@@ -3104,7 +3116,6 @@ export const STORY_SECTIONS = {
       id: 'all-flags-ch5',
       title: 'All other flags',
       flags: [
-        'MISTOOK_ONSEN_WALL_FOR_STAIRS',
         'PLATCONTROLS_HIGHLIGHTED',
         'PETAL_FEATHER_CONTROLS',
         'PLATFORMER_CAMERA_DISTANCE',
