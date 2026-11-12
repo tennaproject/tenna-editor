@@ -1318,13 +1318,7 @@ export const STORY_SECTIONS = {
             'OBTAINED_ALPHYS_CLUE',
             'INTERACTED_WITH_CHURCH_CHOIR_DOOR',
             'INTERACTED_WITH_CHURCH_OFFICE_DOOR',
-            'INTERACTED_WITH_CHURCH_CUPBOARD',
-            'INTERACTED_WITH_CHURCH_BOOKS',
             'INTERACTED_WITH_CHURCH_CANDLES',
-            'INTERACTED_WITH_CHURCH_BOOKSHELF',
-            'WHO_KRIS_PRAYED_FOR',
-            'WHAT_CANDLES_ARE_FOR',
-            'OPENED_CHURCH_CLOSET',
           ],
         },
         {
@@ -1359,6 +1353,16 @@ export const STORY_SECTIONS = {
             'SAW_TENNA_ENTERTAIN_KING_SCENE',
             'SAW_QUEEN_DRINKING_SCENE',
             'SUSIE_CARRIED_LANCER',
+          ],
+        },
+        {
+          id: 'lake',
+          title: 'Lake & Shelter',
+          flags: [
+            'CHECKED_SHELTER_PANEL',
+            'CHECKED_LAKE_TABLE_BEFORE_RAIN',
+            'LAKE_CUTSCENE_PROGRESS_CH4',
+            'LAKE_CONVERSATION_RESPONSE',
           ],
         },
         {
@@ -1714,6 +1718,18 @@ export const STORY_SECTIONS = {
           ],
         },
         {
+          id: 'right-piano-room',
+          title: 'Right Piano Room',
+          flags: [
+            'RIGHT_PIANO_PIECE_SHELF_1_X',
+            'RIGHT_PIANO_PIECE_SHELF_1_Y',
+            'RIGHT_PIANO_PIECE_SHELF_2_X',
+            'RIGHT_PIANO_PIECE_SHELF_2_Y',
+            'STOLE_PILLOW_FOR_RALSEI',
+            'OPENED_RIGHT_PIANO_PIECE_CHEST',
+          ],
+        },
+        {
           id: 'golden-tune',
           title: 'Golden Tune & Miss Mizzle',
           flags: [
@@ -1731,7 +1747,7 @@ export const STORY_SECTIONS = {
         },
         {
           id: 'organ',
-          title: 'organ',
+          title: 'Organ',
           flags: [
             'PLAYED_MEGALOVANIA',
             'THOUGHT_ABOUT_KNIGHT',
@@ -1766,6 +1782,12 @@ export const STORY_SECTIONS = {
           id: 'susie-backstory',
           title: "Susie's Backstory",
           flags: [
+            'INTERACTED_WITH_CHURCH_CUPBOARD',
+            'INTERACTED_WITH_CHURCH_BOOKS',
+            'INTERACTED_WITH_CHURCH_BOOKSHELF',
+            'WHO_KRIS_PRAYED_FOR',
+            'WHAT_CANDLES_ARE_FOR',
+            'OPENED_CHURCH_CLOSET',
             'LISTENED_SUSIE_PIANO_STORY',
             'INTERACTED_WITH_GERSON_REMAINS',
             'WILL_KRIS_PLAY_AGAIN',
@@ -1812,19 +1834,6 @@ export const STORY_SECTIONS = {
           flags: ['OBTAINED_GALLERY_CHEST'],
         },
         {
-          id: 'right-piano-room',
-          title: 'Right Piano Room',
-          flags: [
-            'RIGHT_PIANO_PIECE_SHELF_1_X',
-            'RIGHT_PIANO_PIECE_SHELF_1_Y',
-            'RIGHT_PIANO_PIECE_SHELF_2_X',
-            'RIGHT_PIANO_PIECE_SHELF_2_Y',
-            'STOLE_PILLOW_FOR_RALSEI',
-            'OPENED_RIGHT_PIANO_PIECE_CHEST',
-            'BREAKABLE_BOOKSHELVES_STATE',
-          ],
-        },
-        {
           id: 'spawn-cloud',
           title: 'Spawn cloud',
           flags: ['SPAWN_CLOUD_DEATH_COUNT'],
@@ -1836,6 +1845,11 @@ export const STORY_SECTIONS = {
             'CHECKED_GERSON_TABLE_SECOND_SANCTUARY',
             'RHAPSOTEA_EXTRA_DOLLARS',
           ],
+        },
+        {
+          id: 'breakable-bookshelves',
+          title: 'Breakable Bookshelves',
+          flags: ['BREAKABLE_BOOKSHELVES_STATE']
         },
         {
           id: 'sound-of-justice',
@@ -1895,16 +1909,6 @@ export const STORY_SECTIONS = {
           flags: ['WAFER_ROOM_STATE', 'OBTAINED_TREASURE_CHEST'],
         },
         {
-          id: 'titan',
-          title: 'Titan',
-          flags: [
-            'TITAN_ATTEMPT_COUNT',
-            'TITAN_SPAWN_ENCOUNTER_OUTCOME',
-            'PURIFIED_COUNT',
-            'SLAIN_COUNT',
-          ],
-        },
-        {
           id: 'cup-stack',
           title: 'Cup Stack',
           flags: ['TALKED_TO_CUP_STACK_DURING_FINAL_CLIMB'],
@@ -1939,6 +1943,16 @@ export const STORY_SECTIONS = {
           ],
         },
         {
+          id: 'titan',
+          title: 'Titan',
+          flags: [
+            'TITAN_ATTEMPT_COUNT',
+            'TITAN_SPAWN_ENCOUNTER_OUTCOME',
+            'PURIFIED_COUNT',
+            'SLAIN_COUNT',
+          ],
+        },
+        {
           id: 'ending',
           title: 'Ending',
           flags: [
@@ -1947,14 +1961,10 @@ export const STORY_SECTIONS = {
             'RAIN_STATE',
             'CHECKED_GERSON_GRAVE_WITH_SUSIE',
             'CHECKED_SHELTER_WITH_SUSIE',
-            'CHECKED_SHELTER_PANEL',
             'TRIED_TO_ENTER_SCHOOL_END_CH4',
             'KNOCKED_EAST_DOOR_END_CH4',
-            'CHECKED_LAKE_TABLE_BEFORE_RAIN',
             'CHECKED_LAKE_TABLE_AFTER_RAIN',
             'LAKE_SITTING_SCENE_PROGRESS',
-            'LAKE_CUTSCENE_PROGRESS_CH4',
-            'LAKE_CONVERSATION_RESPONSE',
           ],
         },
         {
