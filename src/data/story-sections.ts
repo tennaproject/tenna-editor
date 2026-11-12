@@ -1751,15 +1751,6 @@ export const STORY_SECTIONS = {
           ],
         },
         {
-          id: 'sound-of-justice',
-          title: 'Sound of Justice',
-          flags: [
-            'SOUND_OF_JUSTICE_ATTEMPT_COUNT',
-            'SOUND_OF_JUSTICE_SUSIE_ENCOUNTER_OUTCOME',
-            'SOUND_OF_JUSTICE_KRIS_ENCOUNTER_OUTCOME',
-          ],
-        },
-        {
           id: 'second-sanctuary-entry',
           title: 'Second Sanctuary Entrance',
           flags: [
@@ -1844,6 +1835,15 @@ export const STORY_SECTIONS = {
           flags: [
             'CHECKED_GERSON_TABLE_SECOND_SANCTUARY',
             'RHAPSOTEA_EXTRA_DOLLARS',
+          ],
+        },
+        {
+          id: 'sound-of-justice',
+          title: 'Sound of Justice',
+          flags: [
+            'SOUND_OF_JUSTICE_ATTEMPT_COUNT',
+            'SOUND_OF_JUSTICE_SUSIE_ENCOUNTER_OUTCOME',
+            'SOUND_OF_JUSTICE_KRIS_ENCOUNTER_OUTCOME',
           ],
         },
         {
