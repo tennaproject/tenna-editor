@@ -3,6 +3,8 @@ import {
   Card,
   Heading,
   Vessel,
+  VesselPartTooltip,
+  ThrashMachinePartTooltip,
   ThrashMachine,
   VesselNameField,
   type VesselHeadIndex,
@@ -17,7 +19,7 @@ import {
 } from '@components';
 import { FLAGS } from '@data';
 import { useSaveFlag } from '@hooks';
-import { useTranslation } from '../../i18n';
+import { useTranslation } from '@i18n';
 
 function VesselSection() {
   const { t } = useTranslation();
@@ -41,9 +43,30 @@ function VesselSection() {
               />
             </div>
 
-            <StoryFlagField id="vessel-head" flag={FLAGS.VESSEL_HEAD} />
-            <StoryFlagField id="vessel-body" flag={FLAGS.VESSEL_BODY} />
-            <StoryFlagField id="vessel-legs" flag={FLAGS.VESSEL_LEGS} />
+            <StoryFlagField
+              id="vessel-head"
+              flag={FLAGS.VESSEL_HEAD}
+              compactOptionTooltip
+              optionTooltip={(value, label) => (
+                <VesselPartTooltip part="head" index={value} name={label} />
+              )}
+            />
+            <StoryFlagField
+              id="vessel-body"
+              flag={FLAGS.VESSEL_BODY}
+              compactOptionTooltip
+              optionTooltip={(value, label) => (
+                <VesselPartTooltip part="body" index={value} name={label} />
+              )}
+            />
+            <StoryFlagField
+              id="vessel-legs"
+              flag={FLAGS.VESSEL_LEGS}
+              compactOptionTooltip
+              optionTooltip={(value, label) => (
+                <VesselPartTooltip part="legs" index={value} name={label} />
+              )}
+            />
           </div>
           <div className="flex-1 flex flex-col gap-3">
             <StoryFlagField id="vessel-food" flag={FLAGS.VESSEL_FOOD} />
@@ -90,14 +113,44 @@ function ThrashMachineSection() {
             <StoryFlagField
               id="thrash-machine-head"
               flag={FLAGS.THRASH_MACHINE_HEAD}
+              compactOptionTooltip
+              optionTooltip={(value, label) =>
+                value >= 0 && (
+                  <ThrashMachinePartTooltip
+                    part="head"
+                    index={value}
+                    name={label}
+                  />
+                )
+              }
             />
             <StoryFlagField
               id="thrash-machine-body"
               flag={FLAGS.THRASH_MACHINE_BODY}
+              compactOptionTooltip
+              optionTooltip={(value, label) =>
+                value >= 0 && (
+                  <ThrashMachinePartTooltip
+                    part="body"
+                    index={value}
+                    name={label}
+                  />
+                )
+              }
             />
             <StoryFlagField
               id="thrash-machine-shoe"
               flag={FLAGS.THRASH_MACHINE_SHOE}
+              compactOptionTooltip
+              optionTooltip={(value, label) =>
+                value >= 0 && (
+                  <ThrashMachinePartTooltip
+                    part="shoe"
+                    index={value}
+                    name={label}
+                  />
+                )
+              }
             />
           </div>
           <div className="flex-1 flex flex-col gap-3">
