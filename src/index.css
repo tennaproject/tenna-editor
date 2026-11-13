@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 
+@custom-variant short (@media (width >= 64rem) and (height < 840px));
+
 @theme {
   --color-tenna: oklch(24.169% 0.02276 288.39);
   --color-tenna-50: oklch(46.914% 0.05537 297.73);

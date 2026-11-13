@@ -49,7 +49,6 @@ export * from './RecruitTooltip';
 export * from './Tooltip';
 export * from './TooltipHeading';
 export * from './FieldWrapper';
-export * from './FitToViewport';
 export * from './InventoryPage';
 export * from './Link';
 export * from './ProgressiveMount';

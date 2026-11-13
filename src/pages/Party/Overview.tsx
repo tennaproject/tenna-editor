@@ -5,7 +5,6 @@ import {
   EquipmentIcon,
   EquipmentStatsRow,
   EquipmentTooltip,
-  FitToViewport,
   Heading,
   HelpTip,
   InlineGroup,
@@ -86,6 +85,10 @@ function EquipmentRow({ type, id }: EquipmentRowProps) {
       {content}
     </EquipmentTooltip>
   );
+}
+
+function Spacer() {
+  return <div className="flex-1 min-h-9 lg:min-h-3 max-h-9" />;
 }
 
 interface CharacterCardProps {
@@ -229,17 +232,17 @@ function CharacterCard({
   return (
     <Section
       id={`slot${slot}`}
-      className="flex flex-col min-h-[450px] w-full lg:h-full lg:max-h-[900px]"
+      className="flex flex-col min-h-[450px] w-full lg:max-h-[900px]"
     >
       <Card className="flex flex-col flex-1">
-        <div className="flex flex-col flex-1 items-center gap-4 py-6 lg:py-10">
+        <div className="flex flex-col flex-1 items-center py-6">
           <div className="flex flex-col justify-center items-center gap-2">
             <Heading level={1}>{slot + 1}</Heading>
             <Heading level={5}>{t('ui.party.member', 'MEMBER')}</Heading>
             {isExisting && isInChapter && (
               <span
                 className={mergeClass(
-                  'inline-flex h-24 w-24 shrink-0 items-center justify-center',
+                  'inline-flex h-24 w-24 short:h-16 short:w-16 shrink-0 items-center justify-center',
                   color.text,
                 )}
                 aria-hidden
@@ -252,68 +255,66 @@ function CharacterCard({
             </Heading>
           </div>
 
-          <div className="-mt-2 flex flex-col items-center gap-9">
-            <div className="flex flex-col items-center gap-1">
-              <Heading
-                level={4}
-                className={mergeClass(hidden ? 'invisible' : '')}
-              >
-                {formatTranslation(t('ui.party.level', 'LV{level}'), {
-                  level: characterMeta.lv,
-                })}{' '}
-                {titleName}
-              </Heading>
-              <p className="text-text-2 text-sm text-center max-w-xs">
-                {titleDescription}
-              </p>
-            </div>
-
-            <div
+          <div className="mt-2 flex flex-col items-center gap-1">
+            <Heading
+              level={4}
               className={mergeClass(hidden ? 'invisible' : '')}
-              aria-hidden={hidden}
             >
-              <EquipmentStatsRow
-                stats={{
-                  attack: stats?.attack ?? 0,
-                  defence: stats?.defence ?? 0,
-                  magic: stats?.magic ?? 0,
-                }}
-              />
-            </div>
-
-            <div
-              className={mergeClass(
-                'flex flex-col items-start gap-1',
-                hidden ? 'invisible' : '',
-              )}
-              aria-hidden={hidden}
-            >
-              <EquipmentRow type="weapon" id={savedCharacter?.weapon ?? 0} />
-              <EquipmentRow
-                type="armor"
-                id={savedCharacter?.primaryArmor ?? 0}
-              />
-              <EquipmentRow
-                type="armor"
-                id={savedCharacter?.secondaryArmor ?? 0}
-              />
-            </div>
-
-            <span
-              className={mergeClass(
-                'text-lg text-text-2',
-                hidden ? 'invisible' : '',
-              )}
-              aria-hidden={hidden}
-            >
-              {t('ui.stats.hp', 'HP')}
-              {': '}
-              {savedCharacter?.health} / {savedCharacter?.maxHealth}
-            </span>
+              {formatTranslation(t('ui.party.level', 'LV{level}'), {
+                level: characterMeta.lv,
+              })}{' '}
+              {titleName}
+            </Heading>
+            <p className="text-text-2 text-sm text-center max-w-xs short:hidden">
+              {titleDescription}
+            </p>
           </div>
+          <Spacer />
+
+          <div
+            className={mergeClass(hidden ? 'invisible' : '')}
+            aria-hidden={hidden}
+          >
+            <EquipmentStatsRow
+              stats={{
+                attack: stats?.attack ?? 0,
+                defence: stats?.defence ?? 0,
+                magic: stats?.magic ?? 0,
+              }}
+            />
+          </div>
+          <Spacer />
+
+          <div
+            className={mergeClass(
+              'flex flex-col items-start gap-1',
+              hidden ? 'invisible' : '',
+            )}
+            aria-hidden={hidden}
+          >
+            <EquipmentRow type="weapon" id={savedCharacter?.weapon ?? 0} />
+            <EquipmentRow type="armor" id={savedCharacter?.primaryArmor ?? 0} />
+            <EquipmentRow
+              type="armor"
+              id={savedCharacter?.secondaryArmor ?? 0}
+            />
+          </div>
+          <Spacer />
+
+          <span
+            className={mergeClass(
+              'text-lg text-text-2',
+              hidden ? 'invisible' : '',
+            )}
+            aria-hidden={hidden}
+          >
+            {t('ui.stats.hp', 'HP')}
+            {': '}
+            {savedCharacter?.health} / {savedCharacter?.maxHealth}
+          </span>
 
           <Select
-            className="mt-auto"
+            className="mt-auto pt-4"
             label={formatTranslation(t('ui.party.slot', 'Slot {slot}'), {
               slot: slot + 1,
             })}
@@ -345,7 +346,7 @@ export function PartyOverview() {
   if (!party) return null;
 
   return (
-    <FitToViewport className="page">
+    <div className="page lg:grow short:pb-6">
       <InlineGroup>
         <Checkbox
           label={t(
@@ -394,6 +395,6 @@ export function PartyOverview() {
           allowNonStandardParty={allowNonStandardParty}
         />
       </div>
-    </FitToViewport>
+    </div>
   );
 }
