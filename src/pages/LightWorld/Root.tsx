@@ -26,35 +26,37 @@ export function LightWorldRoot() {
     <Page>
       <Page.TopBar title={t('ui.nav.lightWorld', 'Light World')} />
       <Page.Content>
-        <div className="page">
-          <div className="flex flex-col lg:flex-row gap-3 lg:items-stretch">
+        <div className="page lg:grow short:pb-6">
+          <div className="flex flex-col lg:flex-row gap-3 lg:flex-1 lg:items-stretch">
             <Section id="main" className="flex min-h-fit flex-1 flex-col">
               <Card className="flex flex-col justify-between flex-1">
-                <div className="flex flex-col">
+                <div className="flex flex-1 flex-col">
                   <Section
                     id="main-title"
-                    className="flex flex-col items-center border-b border-divider px-2 py-4"
+                    className="flex flex-col items-center border-b border-divider px-2 py-4 lg:flex-row lg:justify-center lg:gap-4 short:py-2"
                   >
-                    <Heading level={4} className="uppercase my-1">
-                      {t('ui.nav.lightWorld', 'Light World')}
-                    </Heading>
                     <span
                       className={mergeClass(
-                        'inline-flex h-24 w-24 shrink-0 items-center justify-center',
+                        'inline-flex h-24 w-24 lg:h-20 lg:w-20 short:h-16 short:w-16 shrink-0 items-center justify-center',
                         THEME.text,
                       )}
                       aria-hidden
                     >
                       <KrisIcon className="h-full w-full" />
                     </span>
-                    <Heading
-                      level={2}
-                      className={mergeClass('uppercase', THEME.text)}
-                    >
-                      Kris
-                    </Heading>
+                    <div className="flex flex-col items-center lg:items-start">
+                      <Heading level={4} className="uppercase my-1">
+                        {t('ui.nav.lightWorld', 'Light World')}
+                      </Heading>
+                      <Heading
+                        level={2}
+                        className={mergeClass('uppercase', THEME.text)}
+                      >
+                        Kris
+                      </Heading>
+                    </div>
                   </Section>
-                  <div className="flex flex-col gap-12 px-6 py-6">
+                  <div className="flex flex-1 flex-col px-6 py-6 short:py-4">
                     <Section
                       id="health"
                       className="flex justify-between items-end w-full"
@@ -65,13 +67,14 @@ export function LightWorldRoot() {
                       </span>
                       <LightWorldStatsField type="maxHealth" id="max-health" />
                     </Section>
+                    <div className="flex-1 min-h-12 lg:min-h-3 max-h-12" />
                     <Section id="stats" className="grid grid-cols-2 gap-4">
                       <LightWorldStatsField type="level" id="level" />
                       <LightWorldStatsField type="experience" id="experience" />
                       <LightWorldStatsField type="attack" id="attack" />
                       <LightWorldStatsField type="defence" id="defence" />
                     </Section>
-
+                    <div className="flex-1 min-h-12 lg:min-h-3 max-h-12" />
                     <div className="flex flex-col gap-4">
                       <LightWorldLoadoutField type="weapon" id="weapon" />
                       <LightWorldLoadoutField type="armor" id="armor" />
