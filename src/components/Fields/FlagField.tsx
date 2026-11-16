@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import {
   type FlagBitfieldId,
   type FlagIndex,
@@ -11,7 +12,7 @@ import {
   getFlagTranslationKeyPrefix,
   translateMeta,
   useTranslation,
-} from '../../i18n';
+} from '@i18n';
 import {
   chapterHelpers,
   getGameColor,
@@ -38,6 +39,8 @@ import {
 interface FlagFieldBaseProps {
   id?: string;
   className?: string;
+  optionTooltip?: (value: number, label: string) => ReactNode;
+  compactOptionTooltip?: boolean;
 }
 
 type FlagFieldProps = FlagFieldBaseProps &
@@ -193,6 +196,7 @@ export function FlagField(props: FlagFieldProps) {
           label,
           value,
           unused: valueRules.unusedValues?.has(Number(value)),
+          tooltip: props.optionTooltip?.(Number(value), label),
         });
       });
 
@@ -216,6 +220,7 @@ export function FlagField(props: FlagFieldProps) {
         >
           <Select
             items={orderedItems}
+            compactDetail={props.compactOptionTooltip}
             placeholder={t('ui.flag.mapPlaceholder', 'Select value...')}
             label={description}
             defaultSelectedItem={selectedItem}

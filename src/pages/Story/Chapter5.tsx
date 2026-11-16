@@ -6,6 +6,7 @@ import {
   StoryChapterSections,
   StoryFlagField,
   ThrashFit,
+  ThrashFitPartTooltip,
   type ThrashFitHairIndex,
   type ThrashFitHatIndex,
   type ThrashFitPantsIndex,
@@ -14,14 +15,14 @@ import {
 } from '@components';
 import { FLAGS } from '@data';
 import { useSaveFlag } from '@hooks';
-import { useTranslation } from '../../i18n';
+import { useTranslation } from '@i18n';
 
 const THRASH_FIT_FIELDS = [
-  ['thrash-fit-hair', FLAGS.THRASH_FIT_HAIR],
-  ['thrash-fit-shirt', FLAGS.THRASH_FIT_SHIRT],
-  ['thrash-fit-pants', FLAGS.THRASH_FIT_PANTS],
-  ['thrash-fit-hat', FLAGS.THRASH_FIT_HAT],
-  ['thrash-fit-shoes', FLAGS.THRASH_FIT_SHOES],
+  ['thrash-fit-hair', FLAGS.THRASH_FIT_HAIR, 'hair'],
+  ['thrash-fit-shirt', FLAGS.THRASH_FIT_SHIRT, 'shirt'],
+  ['thrash-fit-pants', FLAGS.THRASH_FIT_PANTS, 'pants'],
+  ['thrash-fit-hat', FLAGS.THRASH_FIT_HAT, 'hat'],
+  ['thrash-fit-shoes', FLAGS.THRASH_FIT_SHOES, 'shoes'],
 ] as const;
 
 function ThrashFitSection() {
@@ -50,8 +51,22 @@ function ThrashFitSection() {
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 content-start">
-            {THRASH_FIT_FIELDS.map(([id, flag]) => (
-              <StoryFlagField key={id} id={id} flag={flag} />
+            {THRASH_FIT_FIELDS.map(([id, flag, part]) => (
+              <StoryFlagField
+                key={id}
+                id={id}
+                flag={flag}
+                compactOptionTooltip
+                optionTooltip={(value, label) =>
+                  !(part === 'hat' && value === 0) && (
+                    <ThrashFitPartTooltip
+                      part={part}
+                      index={value}
+                      name={label}
+                    />
+                  )
+                }
+              />
             ))}
           </div>
         </div>
