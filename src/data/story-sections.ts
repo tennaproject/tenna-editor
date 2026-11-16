@@ -1848,7 +1848,7 @@ export const STORY_SECTIONS = {
         {
           id: 'breakable-bookshelves',
           title: 'Breakable Bookshelves',
-          flags: ['BREAKABLE_BOOKSHELVES_STATE']
+          flags: ['BREAKABLE_BOOKSHELVES_STATE'],
         },
         {
           id: 'sound-of-justice',
