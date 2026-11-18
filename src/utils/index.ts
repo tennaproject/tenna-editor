@@ -24,6 +24,7 @@ export * from './flag-bitfields';
 export * from './flag-helpers';
 export * from './environment';
 export * from './character-stats';
+export * from './character-flavor-stats';
 export * from './data-packs';
 export * from './resolve-game-data';
 export * from './base64';

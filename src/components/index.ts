@@ -35,6 +35,7 @@ export * from './Fields';
 export * from './Vessel';
 export * from './ThrashMachine';
 export * from './ThrashFit';
+export * from './CharacterFlavorStats';
 export * from './CharacterHeader';
 export * from './CharacterPage';
 export * from './EquipmentIcon';
