@@ -270,6 +270,7 @@ export function HomeOverview() {
             )}
           />
           <HelpTip
+            variant="warning"
             title={t(
               'ui.home.showRoomsWithoutSavePoint',
               'Show rooms without save point',
@@ -291,6 +292,7 @@ export function HomeOverview() {
             label={t('ui.home.showDogcheckedRooms', 'Show dogchecked rooms')}
           />
           <HelpTip
+            variant="warning"
             title={t('ui.home.showDogcheckedRooms', 'Show dogchecked rooms')}
           >
             <p>
@@ -311,6 +313,7 @@ export function HomeOverview() {
             )}
           />
           <HelpTip
+            variant="warning"
             title={t(
               'ui.home.allowManualPlotEntry',
               'Allow manual plot point entry',

@@ -359,6 +359,7 @@ export function PartyOverview() {
           }
         />
         <HelpTip
+          variant="warning"
           title={t(
             'ui.party.allowNonStandardParty',
             'Allow non-standard party combinations',
