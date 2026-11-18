@@ -32,25 +32,25 @@ function ThrashMachineHead({ index, colorIndex }: ThrashMachineHeadProps) {
     <>
       {index === 0 && (
         <ThrashMachineHead0
-          className={mergeClass(baseClasses, 'bottom-19 left-0 w-32')}
+          className={mergeClass(baseClasses, 'bottom-19 left-0 w-[125px]')}
           color={color}
         />
       )}
       {index === 1 && (
         <ThrashMachineHead1
-          className={mergeClass(baseClasses, 'bottom-19 left-0 w-32')}
+          className={mergeClass(baseClasses, 'bottom-19 left-0 w-[135px]')}
           color={color}
         />
       )}
       {index === 2 && (
         <ThrashMachineHead2
-          className={mergeClass(baseClasses, 'bottom-19 left-3 w-32')}
+          className={mergeClass(baseClasses, 'bottom-19 left-3 w-[130px]')}
           color={color}
         />
       )}
       {index === 3 && (
         <ThrashMachineHead3
-          className={mergeClass(baseClasses, 'bottom-18 left-5 w-29')}
+          className={mergeClass(baseClasses, 'bottom-18 left-5 w-[115px]')}
           color={color}
         />
       )}
@@ -64,7 +64,7 @@ interface ThrashMachineBodyProps {
 }
 
 function ThrashMachineBody({ index, colorIndex }: ThrashMachineBodyProps) {
-  const baseClasses = 'absolute z-[2] w-53';
+  const baseClasses = 'absolute z-[2] w-[210px]';
   const color = getGameColor(colorIndex);
   return (
     <>
@@ -102,7 +102,7 @@ interface ThrashMachineShoeProps {
 }
 
 function ThrashMachineShoe({ index, colorIndex }: ThrashMachineShoeProps) {
-  const baseClasses = 'absolute w-43';
+  const baseClasses = 'absolute w-[170px]';
   const color = getGameColor(colorIndex);
   return (
     <>
