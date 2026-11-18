@@ -393,7 +393,15 @@ export function Select({
 
     const spaceBelow = boundaryBottom - rect.bottom;
     const spaceAbove = rect.top - boundaryTop;
-    setShouldOpenUp(spaceBelow < 250 && spaceAbove > spaceBelow);
+    const menuStyle = listRef.current && getComputedStyle(listRef.current);
+    const menuHeight = menuStyle
+      ? parseFloat(menuStyle.maxHeight) +
+        Math.max(
+          parseFloat(menuStyle.marginTop),
+          parseFloat(menuStyle.marginBottom),
+        )
+      : 0;
+    setShouldOpenUp(spaceBelow < menuHeight && spaceAbove > spaceBelow);
 
     const spaceRight = window.innerWidth - rect.right;
     setDetailOnLeft(spaceRight < DETAIL_PANEL_WIDTH && rect.left > spaceRight);
