@@ -22,6 +22,7 @@ export * from './ModalLayout';
 export * from './HelpTip';
 export * from './Select';
 export * from './GlowBar';
+export * from './HealthBar';
 export * from './Loading';
 export * from './LastSubtabTracker';
 export * from './PageContentSpinner';

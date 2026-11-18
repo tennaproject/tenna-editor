@@ -11,6 +11,7 @@ import {
   Section,
   Select,
   GlowBar,
+  HealthBar,
 } from '@components';
 import { CHAPTERS, CHARACTERS, type CharacterIndex } from '@data';
 import { useCharacterOverrideInputs } from '@hooks';
@@ -300,17 +301,25 @@ function CharacterCard({
           </div>
           <Spacer />
 
-          <span
+          <div
             className={mergeClass(
-              'text-lg text-text-2',
+              'flex w-full max-w-48 flex-col items-center gap-2',
               hidden ? 'invisible' : '',
             )}
             aria-hidden={hidden}
           >
-            {t('ui.stats.hp', 'HP')}
-            {': '}
-            {savedCharacter?.health} / {savedCharacter?.maxHealth}
-          </span>
+            <span className="text-lg text-text-2">
+              {t('ui.stats.hp', 'HP')}
+              {': '}
+              {savedCharacter?.health} / {savedCharacter?.maxHealth}
+            </span>
+            <HealthBar
+              health={savedCharacter?.health ?? 0}
+              maxHealth={savedCharacter?.maxHealth ?? 0}
+              bg={color.bg}
+              className="w-full"
+            />
+          </div>
 
           <Select
             className="mt-auto pt-4"
