@@ -20,14 +20,14 @@ export function GlowBar({
     >
       <div
         className={mergeClass(
-          'w-full h-1 shadow-2xl relative z-10',
+          'w-full h-1 shadow-2xl/20 relative z-10',
           bg,
           shadow,
         )}
       />
       <div
         className="absolute left-0 right-0 h-1 pointer-events-none"
-        style={{ filter: 'blur(8px)', opacity: 0.6 }}
+        style={{ filter: 'blur(8px)', opacity: 0.2 }}
       >
         <div className={mergeClass('w-full h-1', bg)} />
       </div>

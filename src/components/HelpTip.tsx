@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect, type ReactNode } from 'react';
 import LightbulbIcon from '@assets/icons/lightbulb-on.svg?react';
+import WarningIcon from '@assets/icons/warning-box.svg?react';
 import { ModalLayout } from './ModalLayout';
 import { useTranslation } from '../i18n';
 
@@ -7,9 +8,15 @@ interface HelpTipProps {
   title?: string;
   titleExtra?: ReactNode;
   children?: ReactNode;
+  variant?: 'help' | 'warning';
 }
 
-export function HelpTip({ title, titleExtra, children }: HelpTipProps) {
+export function HelpTip({
+  title,
+  titleExtra,
+  children,
+  variant = 'help',
+}: HelpTipProps) {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [isSuppressed, setIsSuppressed] = useState(false);
@@ -55,7 +62,7 @@ export function HelpTip({ title, titleExtra, children }: HelpTipProps) {
         <span
           className={`${isOpen ? 'text-text-1' : 'text-text-2'} hover:text-text-1 focus-visible:text-text-1 motion-reduce:transition-none transition-all duration-200 ease-in-out flex-1 inline-flex items-center justify-center`}
         >
-          <LightbulbIcon />
+          {variant === 'warning' ? <WarningIcon /> : <LightbulbIcon />}
         </span>
       </button>
 

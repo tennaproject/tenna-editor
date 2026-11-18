@@ -1,15 +1,14 @@
 import type { ReactNode } from 'react';
 import ResetIcon from '@assets/icons/reload.svg?react';
-import { type CharacterIndex } from '@data';
 import DividerIcon from '@assets/icons/minus.svg?react';
+import { type CharacterIndex } from '@data';
 import { characterHelpers } from '@utils/data-helpers';
 import { getCharacterColor } from '@utils/get-character-color';
 import {
-  Card,
   Button,
   Checkbox,
-  GlowBar,
   Heading,
+  HealthBar,
   HelpTip,
   InlineGroup,
   Section,
@@ -52,6 +51,9 @@ export function CharacterPage({
     t,
   ).displayName;
   const chapter = useSave((s) => s.save?.meta.chapter) ?? 1;
+  const health = useSave((s) => s.save?.characters[character].health) ?? 0;
+  const maxHealth =
+    useSave((s) => s.save?.characters[character].maxHealth) ?? 0;
   const updateSave = useSave((s) => s.updateSave);
   const weapons = useGameData((state) => state.weapons.byId);
   const armors = useGameData((state) => state.armors.byId);
@@ -69,7 +71,7 @@ export function CharacterPage({
   }
 
   return (
-    <div className="page">
+    <div className="page xl:flex-initial xl:min-h-0 short:pb-6">
       <div className="flex flex-col gap-2 lg:flex-row lg:gap-5 ">
         <InlineGroup>
           <Checkbox
@@ -115,116 +117,115 @@ export function CharacterPage({
         </InlineGroup>
       </div>
 
-      <div className="flex flex-col gap-3 lg:flex-row lg:items-stretch">
-        <Section
-          id="main"
-          className="flex min-h-fit flex-none flex-col lg:min-h-175 lg:flex-1"
-        >
-          <Card className="flex flex-col justify-between flex-1">
-            <div className="flex flex-col">
-              <CharacterHeader character={character} icon={icon} />
-              <div className="flex flex-col gap-6 px-6 py-6">
-                <Section
-                  id="health"
-                  className="flex justify-between items-end w-full"
-                >
-                  <StatsField
-                    id="current-health"
-                    character={character}
-                    type="health"
-                  />
-                  <span className="h-5 w-5 mb-3 mx-3 text-text-2">
-                    <DividerIcon />
-                  </span>
-                  <StatsField
-                    id="max-health"
-                    character={character}
-                    type="maxHealth"
-                  />
-                </Section>
-                <Section id="stats" className="flex w-full flex-col gap-3">
-                  <div className="flex w-full items-end justify-between gap-3">
-                    <StatsField
-                      id={'stats-attack'}
-                      character={character}
-                      type="attack"
-                    />
-                    <StatsField
-                      id={'stats-defence'}
-                      character={character}
-                      type="defence"
-                    />
-                    <StatsField
-                      id={'stats-magic'}
-                      character={character}
-                      type="magic"
-                    />
-                  </div>
-                  <div className="flex justify-end">
-                    <Button onClick={resetStats} size="sm" icon={<ResetIcon />}>
-                      {t('ui.party.resetStats', 'Reset stats')}
-                    </Button>
-                  </div>
-                </Section>
-                <Section id="loadout" className="flex flex-col gap-3">
-                  <LoadoutField
-                    id="weapon"
-                    character={character}
-                    allowAllElements={allowAllElements}
-                    recalculateStats={!preserveCustomStats}
-                    type="weapon"
-                  />
-                  <LoadoutField
-                    id="primary-armor"
-                    character={character}
-                    allowAllElements={allowAllElements}
-                    recalculateStats={!preserveCustomStats}
-                    type="primaryArmor"
-                  />
-                  <LoadoutField
-                    id="secondary-armor"
-                    character={character}
-                    allowAllElements={allowAllElements}
-                    recalculateStats={!preserveCustomStats}
-                    type="secondaryArmor"
-                  />
-                </Section>
-              </div>
+      <Section id="main" className="flex flex-col xl:flex-1 squeeze:min-h-0">
+        <div className="grid flex-1 gap-3 squeeze:min-h-0 lg:grid-cols-2 xl:grid-cols-3 xl:grid-rows-[auto_repeat(4,auto_minmax(0.75rem,2.25rem))] xl:[@media(height<780px)]:grid-rows-[auto_repeat(4,auto_0.75rem)]">
+          <CharacterHeader character={character} icon={icon} />
+          <div className="grid gap-y-3 border border-border shadow shadow-surface-1/50 px-6 py-6 lg:row-span-4 lg:grid-rows-subgrid xl:row-span-8 xl:gap-y-0 xl:pt-4 xl:pb-4">
+            <div className="flex items-center justify-between self-start xl:row-span-2">
+              <Heading level={4}>{t('ui.party.stats', 'Stats')}</Heading>
+              <Button onClick={resetStats} size="sm" icon={<ResetIcon />}>
+                {t('ui.party.resetStats', 'Reset stats')}
+              </Button>
             </div>
-
-            <GlowBar bg={color.bg} shadow={color.shadow} />
-          </Card>
-        </Section>
-
-        <Section
-          id="spells"
-          className="flex min-h-fit flex-none lg:min-h-175 lg:flex-6/16"
-        >
-          <Card className="flex flex-1 flex-col gap-3 p-6">
-            <Heading level={3}>{t('ui.party.spells', 'Spells')}</Heading>
-            <div className="text-text-2">
-              <p>
-                {t(
-                  'ui.party.unobtainableSpellsWarning',
-                  'Some of the spells are unobtainable in game. They are often unfinished, broken and can cause issues.',
-                )}
-              </p>
-            </div>
-
-            <div className="w-full grid lg:grid-cols-2 gap-4 lg:px-6 mt-8">
-              {SPELL_SLOTS.map((slot) => (
-                <SpellField
-                  id={`spell-slot${slot}`}
-                  key={slot}
-                  slot={slot}
-                  character={character}
-                  allowAllItems={allowAllElements}
-                />
-              ))}
-            </div>
-          </Card>
-        </Section>
-      </div>
+            <Section
+              id="health"
+              className="grid grid-cols-[1fr_1.25rem_1fr] items-end gap-x-3 self-start xl:row-span-2"
+            >
+              <StatsField
+                id="current-health"
+                character={character}
+                type="health"
+              />
+              <span className="mb-3 h-5 w-5 text-text-2">
+                <DividerIcon />
+              </span>
+              <StatsField
+                id="max-health"
+                character={character}
+                type="maxHealth"
+              />
+              <HealthBar
+                health={health}
+                maxHealth={maxHealth}
+                bg={color.bg}
+                className="col-span-3 mt-3"
+              />
+            </Section>
+            <Section
+              id="stats"
+              className="grid grid-cols-3 gap-x-3 self-start xl:row-span-2"
+            >
+              <StatsField
+                id={'stats-attack'}
+                character={character}
+                type="attack"
+              />
+              <StatsField
+                id={'stats-defence'}
+                character={character}
+                type="defence"
+              />
+              <StatsField
+                id={'stats-magic'}
+                character={character}
+                type="magic"
+              />
+            </Section>
+          </div>
+          <Section
+            id="loadout"
+            className="grid gap-y-3 border border-border shadow shadow-surface-1/50 px-6 py-6 lg:row-span-4 lg:grid-rows-subgrid xl:row-span-8 xl:gap-y-0 xl:pt-4 xl:pb-4 xl:*:row-span-2 xl:*:self-start"
+          >
+            <Heading level={4}>{t('ui.party.equipment', 'Equipment')}</Heading>
+            <LoadoutField
+              id="weapon"
+              character={character}
+              allowAllElements={allowAllElements}
+              recalculateStats={!preserveCustomStats}
+              type="weapon"
+            />
+            <LoadoutField
+              id="primary-armor"
+              character={character}
+              allowAllElements={allowAllElements}
+              recalculateStats={!preserveCustomStats}
+              type="primaryArmor"
+            />
+            <LoadoutField
+              id="secondary-armor"
+              character={character}
+              allowAllElements={allowAllElements}
+              recalculateStats={!preserveCustomStats}
+              type="secondaryArmor"
+            />
+          </Section>
+          <Section
+            id="spells"
+            className="grid gap-x-4 gap-y-3 border border-border shadow shadow-surface-1/50 px-6 py-6 lg:col-span-2 lg:grid-cols-2 xl:col-span-1 xl:row-span-8 xl:grid-rows-subgrid xl:gap-y-0 xl:pt-4 xl:pb-4 xl:*:row-span-2 xl:*:self-start"
+          >
+            <InlineGroup className="lg:col-span-2">
+              <Heading level={4}>{t('ui.party.spells', 'Spells')}</Heading>
+              <HelpTip title={t('ui.party.spells', 'Spells')} variant="warning">
+                <p>
+                  {t(
+                    'ui.party.unobtainableSpellsWarning',
+                    'Some of the spells are unobtainable in game. They are often unfinished, broken and can cause issues.',
+                  )}
+                </p>
+              </HelpTip>
+            </InlineGroup>
+            {SPELL_SLOTS.map((slot) => (
+              <SpellField
+                id={`spell-slot${slot}`}
+                key={slot}
+                slot={slot}
+                character={character}
+                allowAllItems={allowAllElements}
+              />
+            ))}
+          </Section>
+        </div>
+      </Section>
     </div>
   );
 }

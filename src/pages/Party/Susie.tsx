@@ -18,7 +18,7 @@ export function PartySusie() {
       icon={
         <span
           className={mergeClass(
-            'inline-flex h-24 w-24 shrink-0 items-center justify-center',
+            'inline-flex h-22 w-22 short:h-15 short:w-15 shrink-0 items-center justify-center',
             color.text,
           )}
         >
