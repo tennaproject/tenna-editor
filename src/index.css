@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 
 @custom-variant short (@media (width >= 64rem) and (height < 840px));
+@custom-variant squeeze (@media (width >= 64rem) and (height >= 780px));
 
 @theme {
   --color-tenna: oklch(24.169% 0.02276 288.39);

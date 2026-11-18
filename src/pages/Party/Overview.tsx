@@ -88,7 +88,9 @@ function EquipmentRow({ type, id }: EquipmentRowProps) {
 }
 
 function Spacer() {
-  return <div className="flex-1 min-h-9 lg:min-h-3 max-h-9" />;
+  return (
+    <div className="shrink-1 basis-9 min-h-9 lg:min-h-3 lg:[@media(height<780px)]:basis-3" />
+  );
 }
 
 interface CharacterCardProps {
@@ -230,12 +232,9 @@ function CharacterCard({
   const hidden = !character || !isExisting;
 
   return (
-    <Section
-      id={`slot${slot}`}
-      className="flex flex-col min-h-[450px] w-full lg:max-h-[900px]"
-    >
-      <Card className="flex flex-col flex-1">
-        <div className="flex flex-col flex-1 items-center py-6">
+    <Section id={`slot${slot}`} className="flex flex-col min-h-[450px] w-full">
+      <Card className="flex flex-col flex-1 squeeze:min-h-0">
+        <div className="flex flex-col flex-1 items-center pt-6 pb-10 squeeze:min-h-0">
           <div className="flex flex-col justify-center items-center gap-2">
             <Heading level={1}>{slot + 1}</Heading>
             <Heading level={5}>{t('ui.party.member', 'MEMBER')}</Heading>
@@ -346,7 +345,7 @@ export function PartyOverview() {
   if (!party) return null;
 
   return (
-    <div className="page lg:grow short:pb-6">
+    <div className="page lg:flex-initial lg:min-h-0 short:pb-6">
       <InlineGroup>
         <Checkbox
           label={t(
@@ -379,7 +378,7 @@ export function PartyOverview() {
           </p>
         </HelpTip>
       </InlineGroup>
-      <div className="flex flex-col lg:flex-row gap-3 lg:flex-1">
+      <div className="flex flex-col lg:flex-row gap-3 lg:flex-1 squeeze:min-h-0">
         <CharacterCard
           slot={0}
           character={party[0]}
