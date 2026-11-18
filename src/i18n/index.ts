@@ -472,8 +472,6 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.home.platformMac': 'Mac',
   'ui.home.platformLinuxProton': 'Linux (through Steam Proton)',
   'ui.lightWorld.items': 'Items',
-  'ui.lightWorld.itemsDescription':
-    'This inventory applies to Light World only.',
   'ui.lightWorld.phoneContacts': 'Phone Contacts',
   'ui.party.allowNonStandardParty': 'Allow non-standard party combinations',
   'ui.party.allowNonStandardPartyDescription':
