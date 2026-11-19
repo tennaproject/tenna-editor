@@ -169,7 +169,7 @@
   "ui.home.deltaportUnofficial": "un porting nativo non ufficiale per Linux",
   "ui.home.deltaportNoteSuffix": "i tuoi salvataggi si trovano in",
   "ui.home.compatibility": "Compatibilità",
-  "ui.home.compatibilityDescription": "Tenna Editor è compatibile con i file di salvataggio di DELTARUNE Capitolo 1-5 provenienti da piattaforme PC e contenitori di salvataggio console già esportati. Il supporto per il Capitolo 5 include dati modificabili relativi a reclute, stanze, oggetti, armi e armature. Le flags e i punti trama non sono ancora stati mappati.",
+  "ui.home.compatibilityDescription": "Tenna Editor è compatibile con i file di salvataggio di DELTARUNE Capitolo 1-5 provenienti da piattaforme PC e contenitori di salvataggio console già esportati.",
   "ui.home.consoleCompatibilityDescription": "I contenitori di salvataggio console (Nintendo Switch, PS4, PS5) sono sperimentali e richiedono un {fileName} già esportato. Tenna Editor non è in grado di estrarre o ripristinare salvataggi su hardware.",
   "ui.home.platformPcWindows": "PC (Windows)",
   "ui.home.platformMac": "Mac",
