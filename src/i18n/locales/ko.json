@@ -6212,7 +6212,7 @@
   "ui.home.whereToFindSaves": "세이브 파일은 어디에 있나요?",
   "ui.home.saveLocationsIntro": "델타룬 세이브 파일은 일반적으로 다음 경로에 있습니다:",
   "ui.home.compatibility": "호환성",
-  "ui.home.compatibilityDescription": "테나 에디터는 PC 플랫폼의 델타룬 챕터 1-5 세이브 파일 및 이미 추출된 콘솔 세이브 컨테이너와 호환됩니다. 챕터 5에는 영입, 방, 아이템, 무기 및 방어구 편집 데이터가 포함되어 있습니다. 전용 플래그와 스토리 진행도는 아직 매핑되지 않았습니다.",
+  "ui.home.compatibilityDescription": "테나 에디터는 PC 플랫폼의 델타룬 챕터 1-5 세이브 파일 및 이미 추출된 콘솔 세이브 컨테이너와 호환됩니다.",
   "ui.home.consoleCompatibilityDescription": "콘솔(Nintendo Switch, PS4, PS5) 세이브 컨테이너는 실험적이며 이미 추출된 {fileName} 파일이 필요합니다. 테나 에디터는 기기에서 세이브를 직접 추출하거나 복원할 수 없습니다.",
   "ui.home.platformPcWindows": "PC 윈도우)",
   "ui.home.platformMac": "맥",

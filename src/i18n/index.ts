@@ -465,7 +465,7 @@ const UI_FALLBACKS: TranslationDictionary = {
   'ui.home.deltaportNoteSuffix': 'your saves are located at',
   'ui.home.compatibility': 'Compatibility',
   'ui.home.compatibilityDescription':
-    'Tenna Editor is compatible with DELTARUNE Chapter 1-5 save files from PC platforms and already-exported console save containers. Chapter 5 support includes editor data for recruits, rooms, items, weapons, and armors. Dedicated flags and plot points are not mapped yet.',
+    'Tenna Editor is compatible with DELTARUNE Chapter 1-5 save files from PC platforms and already-exported console save containers.',
   'ui.home.consoleCompatibilityDescription':
     'Console save containers (Nintendo Switch, PS4, PS5) are experimental and require an already-exported {fileName}. Tenna Editor cannot extract or restore saves on hardware.',
   'ui.home.platformPcWindows': 'PC (Windows)',
