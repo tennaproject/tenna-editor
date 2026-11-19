@@ -5,7 +5,8 @@ export const EXPORT_DRAFT_VERSION = 2;
 
 export type ExportMode = 'pc' | 'console';
 export type ExportScope = 'single' | 'set';
-export type ExportFileNameKey = `${ExportMode}-${ExportScope}`;
+export type ExportFileNameKey =
+  `${ExportMode}-set` | `${ExportMode}-single:${string}`;
 export type ExportFileNames = Partial<Record<ExportFileNameKey, string>>;
 
 export interface ExportDraftSelection {
