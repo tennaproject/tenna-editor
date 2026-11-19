@@ -359,7 +359,10 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
       : exportMode === 'console'
         ? 'deltarune.sav'
         : pcFileName;
-  const fileNameKey: ExportFileNameKey = `${exportMode}-${exportScope}`;
+  const fileNameKey: ExportFileNameKey =
+    exportScope === 'single'
+      ? `${exportMode}-single:${save?.meta.id ?? ''}:${pcFileName}`
+      : `${exportMode}-set`;
   const displayedFileName = Object.hasOwn(fileNames, fileNameKey)
     ? (fileNames[fileNameKey] ?? '')
     : defaultFileName;
@@ -782,15 +785,21 @@ export function Download({ isOpen, setOpen }: DownloadProps) {
               className="min-w-0 flex-1"
               value={displayedFileName}
               onChange={(value) =>
-                setFileNames((previous) => ({
-                  ...previous,
-                  [fileNameKey]: value,
-                }))
+                setFileNames((previous) => {
+                  const next = Object.fromEntries(
+                    Object.entries(previous).filter(
+                      ([key]) => !key.startsWith(`${exportMode}-single`),
+                    ),
+                  );
+                  return { ...next, [fileNameKey]: value };
+                })
               }
               onBlur={() => {
                 const value = fileNames[fileNameKey]?.trim();
                 setFileNames((previous) => {
-                  if (value) return { ...previous, [fileNameKey]: value };
+                  if (value && value !== defaultFileName) {
+                    return { ...previous, [fileNameKey]: value };
+                  }
                   const next = { ...previous };
                   delete next[fileNameKey];
                   return next;
