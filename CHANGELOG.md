@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.17.0] - 2026-11-19
+
+This release redesigns the Party and Light World pages, adding sprite previews to the Vessel, Thrash Machine, and Thrash Fit dropdowns. Previous designs didn't work well with the addition of more features. I am also looking to improve the UI in future releases.
+
+### Added
+
+- Added sprite previews to the Vessel, Thrash Machine, and Thrash Fit part dropdowns on the Story tab. ([PR #229](https://github.com/tennaproject/tenna-editor/pull/229))
+- Added HP bars to the Party overview cards and flavor stats, such as Guts and Kindness, to character pages. ([PR #232](https://github.com/tennaproject/tenna-editor/pull/232))
+
+### Changed
+
+- Redesigned the Party and Light World pages so they fit the window without scrolling. ([PR #232](https://github.com/tennaproject/tenna-editor/pull/232))
+- Dropdowns now open upward when the list does not fit below. ([PR #232](https://github.com/tennaproject/tenna-editor/pull/232))
+
+### Fixed
+
+- Fixed custom export file names carrying over to other saves and slots. Custom names are now kept per save and slot. ([PR #234](https://github.com/tennaproject/tenna-editor/pull/234))
+- Fixed blurry Thrash Machine sprites. ([PR #231](https://github.com/tennaproject/tenna-editor/pull/231))
+
 ## [0.16.0] - 2026-11-08
 
 This release adds support for BetterSaves mod saves, more console save support, and many more Story flags for every chapter.
