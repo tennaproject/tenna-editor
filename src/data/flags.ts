@@ -6243,9 +6243,9 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     },
   },
   [FLAGS.OBTAINED_EGG_CH1]: {
-    displayName: 'Got the egg',
+    displayName: 'Got the Ch. 1 egg',
     description:
-      'Set when entering Chapter 2 if you had or deposited the Chapter 1 egg, but not if you dropped it. Maybe. It checks the key item.',
+      "Set when Chapter 2 starts if you had the Chapter 1 egg, either as a key item, in Asgore's fridge, or in the Light World inventory.",
     valueType: 'boolean',
   },
   [FLAGS.LANGUAGE_NAME]: {
@@ -10803,23 +10803,27 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     valueType: 'boolean',
   },
   [FLAGS.OBTAINED_SHADOW_CRYSTAL_CH1]: {
-    displayName: 'Got the Shadow Crystal',
-    description: 'Obtained the Shadow Crystal from Jevil in Chapter 1.',
+    displayName: 'Ch. 1 Shadow Crystal',
+    description:
+      'Set when Chapter 4 or 5 starts if you beat Jevil in Chapter 1, or when you take it from the cliff west of Castle Town in those chapters.',
     valueType: 'boolean',
   },
   [FLAGS.OBTAINED_SHADOW_CRYSTAL_CH2]: {
-    displayName: 'Got the Shadow Crystal',
-    description: 'Obtained the Shadow Crystal from Spamton NEO in Chapter 2.',
+    displayName: 'Ch. 2 Shadow Crystal',
+    description:
+      'Set when Chapter 4 or 5 starts if you beat Spamton NEO in Chapter 2, or when you take it from the cliff west of Castle Town in those chapters.',
     valueType: 'boolean',
   },
   [FLAGS.OBTAINED_SHADOW_CRYSTAL_CH3]: {
-    displayName: 'Got the Shadow Crystal',
-    description: 'Obtained the Shadow Crystal from the Knight in Chapter 3.',
+    displayName: 'Ch. 3 Shadow Crystal',
+    description:
+      'Set when Chapter 4 or 5 starts if you beat the Knight in Chapter 3, or when you take it from the cliff west of Castle Town in those chapters.',
     valueType: 'boolean',
   },
   [FLAGS.OBTAINED_SHADOW_CRYSTAL_CH4]: {
-    displayName: 'Got the Shadow Crystal',
-    description: 'Obtained the Shadow Crystal from Gerson in Chapter 4.',
+    displayName: 'Ch. 4 Shadow Crystal',
+    description:
+      'Obtained the Shadow Crystal from Gerson in Chapter 4. Also set when Chapter 5 starts if you beat him.',
     valueType: 'boolean',
   },
   [FLAGS.TALKED_TO_CUP_STACK_DURING_FINAL_CLIMB]: {
@@ -12522,7 +12526,7 @@ export const FLAGS_META: Partial<Record<FlagIndex, FlagProperties>> = {
     },
   },
   [FLAGS.OBTAINED_SHADOW_CRYSTAL_CH5]: {
-    displayName: 'Got the Shadow Crystal',
+    displayName: 'Ch. 5 Shadow Crystal',
     description: 'Obtained the Shadow Crystal from Pink in Chapter 5.',
     valueType: 'boolean',
   },
