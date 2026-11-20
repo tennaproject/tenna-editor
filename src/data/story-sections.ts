@@ -159,11 +159,7 @@ export const STORY_SECTIONS = {
         {
           id: 'starwalker-room',
           title: 'Starwalker Room',
-          flags: [
-            'TALKED_TO_STARWALKER_CH1',
-            'EGG_ROOM_PROGRESS_CH1',
-            'OBTAINED_EGG_CH1',
-          ],
+          flags: ['TALKED_TO_STARWALKER_CH1', 'EGG_ROOM_PROGRESS_CH1'],
         },
       ],
     },
@@ -491,7 +487,11 @@ export const STORY_SECTIONS = {
         {
           id: 'egg-room',
           title: 'Egg Room',
-          flags: ['EGG_ROOM_PROGRESS_CH2', 'OBTAINED_EGG_CH2'],
+          flags: [
+            'OBTAINED_EGG_CH1',
+            'EGG_ROOM_PROGRESS_CH2',
+            'OBTAINED_EGG_CH2',
+          ],
         },
         {
           id: 'moss',
@@ -1253,6 +1253,15 @@ export const STORY_SECTIONS = {
       title: 'Light World to Dark Sanctuary',
       clusters: [
         {
+          id: 'earlier-chapters',
+          title: 'Earlier Chapters',
+          flags: [
+            'OBTAINED_SHADOW_CRYSTAL_CH1',
+            'OBTAINED_SHADOW_CRYSTAL_CH2',
+            'OBTAINED_SHADOW_CRYSTAL_CH3',
+          ],
+        },
+        {
           id: 'kris-room',
           title: "Kris's Room",
           flags: [
@@ -1740,6 +1749,7 @@ export const STORY_SECTIONS = {
             'HAMMER_OF_JUSTICE_ATTEMPT_COUNT',
             'DEFEATED_HAMMER_OF_JUSTICE',
             'JUSTICE_AXE_REWARD_STATE',
+            'OBTAINED_SHADOW_CRYSTAL_CH4',
             'SUSIE_LEARNED_BETTER_HEAL',
             'TALKED_TO_GERSON_AFTER_BATTLE',
           ],
@@ -1969,6 +1979,16 @@ export const STORY_SECTIONS = {
       id: 'festival',
       title: 'Light World/Festival',
       clusters: [
+        {
+          id: 'earlier-chapters',
+          title: 'Earlier Chapters',
+          flags: [
+            'OBTAINED_SHADOW_CRYSTAL_CH1',
+            'OBTAINED_SHADOW_CRYSTAL_CH2',
+            'OBTAINED_SHADOW_CRYSTAL_CH3',
+            'OBTAINED_SHADOW_CRYSTAL_CH4',
+          ],
+        },
         {
           id: 'pre-festival',
           title: 'Pre-Festival',
